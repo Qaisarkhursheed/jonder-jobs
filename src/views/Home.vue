@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <auth-wrap img="1">
+      <auth-welcome />
+    </auth-wrap>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import AuthWrap from "../components/auth/AuthWrap.vue";
+import AuthWelcome from "../components/auth/AuthWelcome.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    AuthWrap,
+    AuthWelcome
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  height: 100%;
+}
+</style>

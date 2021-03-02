@@ -1,4 +1,4 @@
-# jonder
+# Jonder
 
 ## Project setup
 ```
