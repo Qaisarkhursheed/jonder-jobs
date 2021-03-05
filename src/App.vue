@@ -1,14 +1,17 @@
 <template>
   <v-app>
     <div id="nav">
-      <v-container fluid no-gutters class='pa-0'>
+      <v-container fluid no-gutters class="pa-0">
         <v-row no-gutters>
-          <v-col class='pa-3'></v-col>
-          <v-col class='pa-3 pt-12 d-flex justify-center'>
+          <v-col class="pa-3"></v-col>
+          <v-col
+            style="background-color: white"
+            class="pa-3 pt-12 d-flex justify-center"
+          >
             <router-link to="/">
               <v-img
                 :src="require('@/assets/jonder_blue.png')"
-                max-width='128px'
+                max-width="128px"
               ></v-img>
             </router-link>
           </v-col>
@@ -21,7 +24,7 @@
 
 <style lang="scss">
 html {
-  overflow: hidden!important;
+  overflow: hidden !important;
 }
 
 #app {
