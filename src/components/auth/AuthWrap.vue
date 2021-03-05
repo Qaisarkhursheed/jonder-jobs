@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid no-gutters class="fill-height pa-0">
+  <v-container fluid no-gutters class="main-wrap fill-height pa-0">
     <v-row no-gutters class="full-h">
       <!-- Left half -->
-      <v-col style="position: relative;">
+      <v-col class="full-h" style="position: relative;">
         <div
           class="hero-image d-flex justify-content-center align-center"
           :style="{
@@ -18,8 +18,8 @@
         </v-overlay>
       </v-col>
       <!-- Right half -->
-      <v-col>
-        <div class="auth-wrap d-flex justify-center align-center pt-16">
+      <v-col class="full-h">
+        <div class="auth-wrap d-flex justify-center align-center">
           <slot></slot>
         </div>
       </v-col>
@@ -35,6 +35,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-wrap {
+  height: 100vh;
+}
+
 .hero-image {
   background-size: cover;
   background-position: center;
@@ -46,5 +50,8 @@ export default {
 .auth-wrap {
   height: 100%;
   padding: 30px;
+  padding-top: 180px;
+  padding-bottom: 60px;
+  overflow: auto;
 }
 </style>

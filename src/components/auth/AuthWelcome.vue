@@ -1,28 +1,33 @@
 <template>
-    <v-container class='auth-welcome-wrap align-center' fluid no-gutters>
-        <jonder-title>
-            Morbi at venenatis.
-        </jonder-title>
+  <v-container class="auth-welcome-wrap align-center" fluid no-gutters>
+    <jonder-title>
+      Morbi at venenatis.
+    </jonder-title>
 
-        <p class='mb-15'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.</p>
+    <p class="mb-15">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
+      felis eu libero.
+    </p>
 
-        <v-btn color="primary" class='full-w mt-15'>Jetzt durchstarten</v-btn>
-    </v-container>
+    <router-link to="/login">
+      <v-btn color="primary" class="full-w mt-15">Jetzt durchstarten</v-btn>
+    </router-link>
+  </v-container>
 </template>
 
 <script>
 import JonderTitle from "@/components/parts/JonderTitle.vue";
 
 export default {
-    name: "AuthWelcome",
-    components: {
-        JonderTitle
-    }
+  name: "AuthWelcome",
+  components: {
+    JonderTitle
+  }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .auth-welcome-wrap {
-    width: 60%;
+  width: 60%;
 }
 </style>
