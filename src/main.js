@@ -8,9 +8,11 @@ import axios from "axios";
 Vue.config.productionTip = false;
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE;
-const token = localStorage.getItem('user-token');
+
+const token = localStorage.getItem("user-token");
+
 if (token) {
-  axios.defaults.headers.common["Authorization"] = token;
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 }
 
 new Vue({
