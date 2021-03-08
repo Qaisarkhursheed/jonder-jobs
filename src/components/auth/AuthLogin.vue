@@ -7,6 +7,15 @@
     <v-btn outlined color="primary" class="full-w mt-4">Continue with Google</v-btn>
     <v-btn color="primary" class="full-w mt-4">Continue with Facebook</v-btn>
 
+    <v-alert
+      v-if="message.show"
+      class="mt-4"
+      text
+      type="error"
+    >
+      {{ this.message.text }}
+    </v-alert>
+
     <div class="mt-10">
       <p class="text-caption text-left">Oder via Email einloggen</p>
 
@@ -35,11 +44,13 @@
           label="Ich stimme der Datenschutzerklärung zu."
           v-model="formData.privacy"
         ></v-checkbox>
+
+        <v-btn type="submit" color="primary" class="full-w">Loggen Sie</v-btn>
       </form>
     </div>
 
     <router-link to="/register">
-      <v-btn color="primary" class="full-w mt-15">Kostenlos registrieren</v-btn>
+      <v-btn color="primary" class="full-w mt-5">Kostenlos registrieren</v-btn>
     </router-link>
   </v-container>
 </template>
@@ -55,6 +66,10 @@ export default {
   },
   data() {
     return {
+      message: {
+        show: false,
+        text: ""
+      },
       formData: {
         email: "",
         password: "",
@@ -72,9 +87,14 @@ export default {
     }),
 
     async handleLogin() {
-      await this.login(this.formData);
-      console.log("Login");
-      this.$router.replace({ name: "Home" });
+      this.response = await this.login(this.formData);
+
+      if (this.response.success) {
+        this.$router.replace({ name: "Homescreen" });
+      } else {
+        this.message.show = true;
+        this.message.text = this.response.message[0];
+      }
     }
 }
 };

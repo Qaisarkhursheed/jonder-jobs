@@ -55,24 +55,34 @@ export default {
 
     SET_MESSAGE(state, value) {
       state.message = value;
-    },
+    }
   },
 
   actions: {
     async login({ dispatch }, credentials) {
-      await axios.get("/csrf-cookie");
-      await axios.post("/login", credentials)
+      let response = {};
+
+      await axios
+        .post("/login", credentials)
         .then(resp => {
           const token = resp.data.token;
+          const user = JSON.stringify(resp.data.user);
           localStorage.setItem("user-token", token);
+          localStorage.setItem("user", user);
           axios.defaults.headers.common["Authorization"] = token;
+
+          response = resp.data;
         })
         .catch(err => {
           console.log("Login error:", err);
           localStorage.removeItem("user-token");
+          localStorage.removeItem("user");
+
+          response = err.response.data;
         });
 
-      return dispatch("me");
+      dispatch("me");
+      return response;
     },
 
     async register({ commit }, data) {
@@ -104,8 +114,10 @@ export default {
     async logout({ dispatch }) {
       await axios.post("/logout").then(() => {
         localStorage.removeItem("user-token");
+        localStorage.removeItem("user");
         delete axios.defaults.headers.common["Authorization"];
       });
+
       return dispatch("me");
     },
 
@@ -123,7 +135,7 @@ export default {
 
     me({ commit }) {
       return axios
-        .get("/auth-user")
+        .get("/me")
         .then(response => {
           commit("SET_AUTHENTICATED", true);
           commit("SET_USER", response.data);
