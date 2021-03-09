@@ -1,11 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
+
+// Components
 import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import Dashboard from "../views/Dashboard";
 import Protected from "../views/Protected";
-import store from "@/store";
+import ManualOnboarding from "../views/auth/ManualOnboarding";
 
 Vue.use(VueRouter);
 
@@ -35,6 +38,14 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/onboarding",
+    name: "ManualOnboarding",
+    component: ManualOnboarding,
     meta: {
       guest: true
     }
