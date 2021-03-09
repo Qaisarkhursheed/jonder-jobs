@@ -19,7 +19,7 @@
       </v-col>
       <!-- Right half -->
       <v-col class="full-h">
-        <div class="auth-wrap d-flex justify-center align-center">
+        <div class="auth-wrap d-flex flex-column justify-center align-center">
           <slot></slot>
         </div>
       </v-col>
