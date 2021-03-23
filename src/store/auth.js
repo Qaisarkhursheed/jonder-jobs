@@ -69,7 +69,7 @@ export default {
           const user = JSON.stringify(resp.data.user);
           localStorage.setItem("user-token", token);
           localStorage.setItem("user", user);
-          axios.defaults.headers.common["Authorization"] = token;
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
           response = resp.data;
         })

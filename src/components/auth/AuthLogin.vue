@@ -93,7 +93,7 @@ export default {
         this.$router.replace({ name: "Homescreen" });
       } else {
         this.message.show = true;
-        this.message.text = this.response.message[0];
+        this.message.text = this.response.message || "Wrong credentials";
       }
     }
 }
