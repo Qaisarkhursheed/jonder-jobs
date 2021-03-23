@@ -8,17 +8,16 @@
           :style="{
             backgroundImage: 'url(' + require('@/assets/' + img + '.png') + ')'
           }"
-        >
-        </div>
+        ></div>
         <v-overlay :absolute="true" :value="true">
-          <v-img 
+          <v-img
             :src="require('@/assets/jonder_white.png')"
-            max-width='212'
+            max-width="212"
           ></v-img>
         </v-overlay>
       </v-col>
       <!-- Right half -->
-      <v-col class="full-h">
+      <v-col class="full-h" style="position: relative">
         <div class="auth-wrap d-flex flex-column justify-center align-center">
           <slot></slot>
         </div>
@@ -50,7 +49,7 @@ export default {
 .auth-wrap {
   height: 100%;
   padding: 30px;
-  padding-top: 180px;
+  padding-top: 150px;
   padding-bottom: 60px;
   overflow: auto;
 }
