@@ -30,6 +30,7 @@ $primary-dark: #A94438;
 $primary-medium: #F5DBD6;
 $primary-light: #FBF0EE;
 $primary-blue: #1976d2;
+$primary-blue-dark: #0253B3;
 
 //secondary
 $green: #32BE4A;
@@ -42,6 +43,7 @@ $yellow: #FFD260;
 $dark-grey: #222222;
 $medium-grey: #999999;
 $light-grey: #E5E5E5;
+$lighter-grey: #f6f6f7;
 
 // 3. Typography
 // -------------
@@ -70,6 +72,11 @@ h4, .h4 {
     font-weight: 700;
 }
 
+h5, .h5 {
+    size: 16px;
+    font-weight: 700;
+}
+
 //body
 
 .text-large { font-size: 17px!important; }
@@ -79,6 +86,11 @@ h4, .h4 {
 .text-weight-bold { font-weight: 700!important; }
 .text-weight-medium { font-weight: 500!important; }
 .text-weight-regular { font-weight: normal!important; }
+
+.text-color-primary-blue-dark { color: $primary-blue-dark !important; }
+
+.border-right-gray { border-right: 1px solid $light-grey !important; }
+.border-right-blue-dark-thick { border-right: 4px solid $primary-blue-dark !important; }
 
 // 4. Buttons
 // ----------
@@ -92,7 +104,7 @@ h4, .h4 {
     font-weight: 700;
     cursor: pointer;
     text-align: center;
-    
+
     &.primary {
         color: white;
         background-color: $primary;
@@ -120,6 +132,38 @@ h4, .h4 {
         &.disabled, &:disabled {
             opacity: .5;
             cursor: default;
+        }
+    }
+
+    &.dark-blue {
+        &.fill {
+            color: $primary-light;
+            background-color: $primary-blue-dark;
+            border-color: $primary-blue-dark;
+
+            &.active, &:active {
+                background-color: $primary-blue;
+            }
+
+            &.disabled, &:disabled {
+                opacity: .5;
+                cursor: default;
+            }
+        }
+
+        &.outline {
+            color: $primary-blue-dark;
+            background-color: white;
+            border-color: $primary-blue-dark;
+
+            &.active, &:active {
+                background-color: $primary-light;
+            }
+
+            &.disabled, &:disabled {
+                opacity: .5;
+                cursor: default;
+            }
         }
     }
 
@@ -189,3 +233,17 @@ label {
 
 .full-h { height: 100%!important; }
 .full-w { width: 100%!important; }
+
+.bg-light-gray {
+    background: $lighter-grey;
+}
+
+// 6. Mixins
+// ---------
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
