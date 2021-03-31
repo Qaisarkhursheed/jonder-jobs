@@ -12,8 +12,8 @@ module.exports = {
   ],
 
   devServer: {
-    host: 'app.jonder.test',
-    port: 81,
+    host: 'localhost',
+    port: 8081,
     https: false
   }
 };

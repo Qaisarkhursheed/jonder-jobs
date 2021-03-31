@@ -90,7 +90,7 @@ export default {
       this.response = await this.login(this.formData);
 
       if (this.response.success) {
-        this.$router.replace({ name: "Homescreen" });
+        this.$router.replace({ name: "Dashboard" });
       } else {
         this.message.show = true;
         this.message.text = this.response.message || "Wrong credentials";
