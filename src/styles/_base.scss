@@ -30,6 +30,7 @@ $primary-dark: #A94438;
 $primary-medium: #F5DBD6;
 $primary-light: #FBF0EE;
 $primary-blue: #1976d2;
+$primary-blue-light: #E3F2FB;
 $primary-blue-dark: #0253B3;
 
 //secondary
@@ -90,7 +91,12 @@ h5, .h5 {
 .text-color-primary-blue-dark { color: $primary-blue-dark !important; }
 
 .border-right-gray { border-right: 1px solid $light-grey !important; }
+.border-top-gray { border-top: 1px solid $light-grey !important; }
 .border-right-blue-dark-thick { border-right: 4px solid $primary-blue-dark !important; }
+
+.pull-right {
+    float: right;
+}
 
 // 4. Buttons
 // ----------
@@ -169,6 +175,24 @@ h5, .h5 {
 
     &:hover {
         text-decoration: none;
+    }
+}
+
+.v-btn {
+    &.light-blue {
+        color: $primary-blue-dark !important;
+        background-color: $primary-blue-light !important;
+        border-color: $primary-blue-light !important;
+
+        &.active, &:active {
+            color: $primary-blue-light !important;
+            background-color: $primary-blue !important;
+        }
+
+        &.disabled, &:disabled {
+            opacity: .5;
+            cursor: default;
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid class="full-h">
-    <v-row class="full-h">
+  <v-container fluid class="full-h pa-0">
+    <v-row class="full-h ma-0">
       <v-col cols="3" class="full-h">
         <nav class="dashboard-navigation">
           <router-link to="/" class="logo">
@@ -88,7 +88,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.v-application--wrap {
+  height: 100vh;
+}
 .dashboard-navigation {
   padding: 0 0 0 50px;
   box-shadow: 8px 0 34px 0 #000000 3%;
