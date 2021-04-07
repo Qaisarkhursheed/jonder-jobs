@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="full-h pa-0">
+  <v-container fluid class="full-h pa-0" v-if="user">
     <v-row class="full-h ma-0">
       <v-col cols="3" class="full-h">
         <nav class="dashboard-navigation">
@@ -7,38 +7,26 @@
             <v-img :src="require('@/assets/jonder_blue.png')" max-width="128px" />
           </router-link>
           <router-link to="/dashboard">
-            <v-img
-              :src="require('@/assets/icons/menu.svg')"
-              max-width="20"
-            ></v-img>
+            <v-icon>mdi-view-dashboard-outline</v-icon>
             <span>Dashboard</span>
           </router-link>
           <router-link to="/chat">
-            <v-img
-              :src="require('@/assets/icons/chat.svg')"
-              max-width="20"
-            ></v-img>
+            <v-icon>mdi-message-outline</v-icon>
             <span>Chat</span>
           </router-link>
           <router-link to="/product-pricing">
-            <v-img
-              :src="require('@/assets/icons/pricing.svg')"
-              max-width="20"
-            ></v-img>
+            <v-icon>mdi-currency-usd</v-icon>
             <span>Product Pricing</span>
           </router-link>
           <router-link to="/profile">
-            <v-img
-              :src="require('@/assets/icons/profile.svg')"
-              max-width="20"
-            ></v-img>
+            <v-icon>mdi-account-outline</v-icon>
             <span>Profile</span>
           </router-link>
         </nav>
       </v-col>
-      <v-col cols="9" class="full-h bg-light-gray layout-content">
-        <v-container fluid>
-          <v-row>
+      <v-col cols="9" class="full-h bg-light-gray">
+        <v-container fluid class="d-flex flex-column full-h">
+          <v-row class="flex-shrink-0 flex-grow-0">
             <v-col cols="6">
               <form class="dashboard-search" action="#" @submit.prevent="handleSearch">
                 <v-text-field
@@ -48,27 +36,29 @@
                   placeholder="Suche"
                   background-color="white"
                   hide-details="auto"
+                  append-icon="mdi-magnify"
                   v-model="searchString"
                 ></v-text-field>
-                <v-img
-                  class="dashboard-search-submit"
-                  :src="require('@/assets/icons/search.svg')"
-                ></v-img>
               </form>
             </v-col>
             <v-col cols="6" class="text-right">
               <div class="dashboard-avatar">
-                <span class="name">Joe Smith</span>
+                <span class="name">{{ getUserFullName }}</span>
                 <v-avatar
                   color="primary"
                   size="38"
                 >
-                  <span class="white--text headline">JS</span>
+                  <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
+                  <span class="white--text headline" v-else>{{ getUserInitials }}</span>
                 </v-avatar>
               </div>
             </v-col>
           </v-row>
-          <slot />
+          <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1">
+            <v-col cols="12">
+              <slot />
+            </v-col>
+          </v-row>
         </v-container>
       </v-col>
     </v-row>
@@ -76,10 +66,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     searchString: ""
   }),
+  computed: {
+    ...mapGetters("auth", ["user", "getUserFullName", "getUserInitials"])
+  },
   methods: {
     handleSearch() {
       console.log("Handle search");
@@ -92,7 +87,7 @@ export default {
 .v-application--wrap {
   height: 100vh;
 }
-.dashboard-navigation {
+.v-application .dashboard-navigation {
   padding: 0 0 0 50px;
   box-shadow: 8px 0 34px 0 #000000 3%;
 
@@ -105,22 +100,36 @@ export default {
     text-align: left;
     clear: both;
     color: $medium-grey;
+    text-decoration: none;
     @include clearfix;
 
     &.logo {
       margin-bottom: 30px;
     }
 
-    .v-image, span {
+    span, .v-icon {
       float: left;
+      display: inline-block;
+      height: 20px;
+      line-height: 22px;
     }
 
-    .v-image {
+    .v-icon {
       margin-right: 10px;
+      line-height: 20px;
     }
 
     &:hover, &.router-link-active {
-      color: $primary-blue-dark;
+      &, span, .v-icon {
+        color: $primary-blue-dark;
+        text-decoration: none;
+      }
+    }
+
+    &.router-link-active {
+      span {
+        font-weight: bold;
+      }
     }
   }
 }
