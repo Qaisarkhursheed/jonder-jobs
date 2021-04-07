@@ -6,9 +6,10 @@ import store from "@/store";
 import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
-import Dashboard from "../views/Dashboard";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
+import Dashboard from "../views/Dashboard";
+import Profile from "../views/Profile";
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,15 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+      isAdmin: false
+    }
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
     meta: {
       requiresAuth: true,
       isAdmin: false

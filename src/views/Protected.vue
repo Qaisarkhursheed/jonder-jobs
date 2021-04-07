@@ -1,10 +1,14 @@
 <template>
-  <div>Protected</div>
+  <auth-layout>
+    <div>Protected</div>
+  </auth-layout>
 </template>
 
 <script>
+import AuthLayout from "@/layouts/AuthLayout";
 export default {
-  name: "Protected"
+  name: "Protected",
+  components: { AuthLayout }
 }
 </script>
 

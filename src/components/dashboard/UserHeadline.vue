@@ -24,8 +24,6 @@
 
 <style lang="scss" scoped>
 .dashboard-user-headline {
-  margin-top: 20px;
-
   .user-details {
     font-size: 15px;
     line-height: 20px;

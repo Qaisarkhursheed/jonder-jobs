@@ -17,30 +17,28 @@ export default {
 
     user(state) {
       if (state.user) {
-        return state.user.data.user;
+        return state.user;
       }
 
       return null;
     },
 
-    // Dummy user data
-    dummyUser() {
-      return {
-        name: "Mirza Masic",
-        photo:
-          "https://cdn-images-1.medium.com/fit/c/100/100/2*EcZb9cndrhTF7_d74dv2Fg.png",
-        company: "Company GbmH",
-        social: [
-          { network: "facebook", url: "https://facbook.com" },
-          { network: "instagram", url: "https://instagram.com" },
-          { network: "linkedin", url: "https://linkedin.com" }
-        ],
-        contact: [
-          { name: "Mobil", value: "221 85485278", type: "tel" },
-          { name: "Arbeit", value: "221 85485278", type: "tel" },
-          { name: "E-Mail", value: "email@email.com", type: "mailto" }
-        ]
-      };
+    getUserFullName(state) {
+      if (state.user) {
+        return state.user.first_name + " " + state.user.last_name;
+      }
+
+      return null;
+    },
+
+    getUserInitials(state) {
+      let initials = "";
+      if (state.user) {
+        if (state.user.first_name) initials += state.user.first_name.charAt(0);
+        if (state.user.last_name) initials += state.user.last_name.charAt(0);
+      }
+
+      return initials;
     }
   },
 
@@ -143,6 +141,8 @@ export default {
         .catch(() => {
           commit("SET_AUTHENTICATED", false);
           commit("SET_USER", null);
+          localStorage.removeItem("user-token");
+          localStorage.removeItem("user");
         });
     }
   }

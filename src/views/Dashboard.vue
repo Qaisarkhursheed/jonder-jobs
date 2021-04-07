@@ -1,11 +1,13 @@
 <template>
-  <div class="dashboard-holder">
-    <user-headline />
-    <user-stats />
-    <user-messages />
-    <user-notes />
-    <company-list />
-  </div>
+  <dashboard-layout>
+    <div class="dashboard-holder">
+      <user-headline />
+      <user-stats />
+      <user-messages />
+      <user-notes />
+      <company-list />
+    </div>
+  </dashboard-layout>
 </template>
 
 <script>
@@ -14,9 +16,11 @@ import UserStats from "@/components/dashboard/UserStats";
 import UserMessages from "@/components/dashboard/UserMessages";
 import UserNotes from "@/components/dashboard/UserNotes";
 import CompanyList from "@/components/dashboard/CompanyList";
+import DashboardLayout from "@/layouts/DashboardLayout";
+
 export default {
   name: "Dashboard",
-  components: { CompanyList, UserNotes, UserMessages, UserStats, UserHeadline }
+  components: { DashboardLayout, CompanyList, UserNotes, UserMessages, UserStats, UserHeadline }
 };
 </script>
 
