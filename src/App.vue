@@ -7,7 +7,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("auth/me");
+    this.$store.dispatch("user/me");
   }
 };
 </script>

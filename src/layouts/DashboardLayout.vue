@@ -3,8 +3,11 @@
     <v-row class="full-h ma-0">
       <v-col cols="3" class="full-h">
         <nav class="dashboard-navigation">
-          <router-link to="/" class="logo">
-            <v-img :src="require('@/assets/jonder_blue.png')" max-width="128px" />
+          <router-link to="/dashboard" class="logo">
+            <v-img
+              :src="require('@/assets/jonder_blue.png')"
+              max-width="128px"
+            />
           </router-link>
           <router-link to="/dashboard">
             <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -28,7 +31,11 @@
         <v-container fluid class="d-flex flex-column full-h">
           <v-row class="flex-shrink-0 flex-grow-0">
             <v-col cols="6">
-              <form class="dashboard-search" action="#" @submit.prevent="handleSearch">
+              <form
+                class="dashboard-search"
+                action="#"
+                @submit.prevent="handleSearch"
+              >
                 <v-text-field
                   type="search"
                   outlined
@@ -44,12 +51,14 @@
             <v-col cols="6" class="text-right">
               <div class="dashboard-avatar">
                 <span class="name">{{ getUserFullName }}</span>
-                <v-avatar
-                  color="primary"
-                  size="38"
-                >
-                  <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-                  <span class="white--text headline" v-else>{{ getUserInitials }}</span>
+                <v-avatar color="primary" size="38">
+                  <v-img
+                    :src="user.profile_img"
+                    v-if="user.profile_img"
+                  ></v-img>
+                  <span class="white--text headline" v-else>{{
+                    getUserInitials
+                  }}</span>
                 </v-avatar>
               </div>
             </v-col>
@@ -73,7 +82,7 @@ export default {
     searchString: ""
   }),
   computed: {
-    ...mapGetters("auth", ["user", "getUserFullName", "getUserInitials"])
+    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
   },
   methods: {
     handleSearch() {
@@ -89,7 +98,6 @@ export default {
 }
 .v-application .dashboard-navigation {
   padding: 0 0 0 50px;
-  box-shadow: 8px 0 34px 0 #000000 3%;
 
   a {
     display: block;
@@ -107,7 +115,8 @@ export default {
       margin-bottom: 30px;
     }
 
-    span, .v-icon {
+    span,
+    .v-icon {
       float: left;
       display: inline-block;
       height: 20px;
@@ -119,8 +128,11 @@ export default {
       line-height: 20px;
     }
 
-    &:hover, &.router-link-active {
-      &, span, .v-icon {
+    &:hover,
+    &.router-link-active {
+      &,
+      span,
+      .v-icon {
         color: $primary-blue-dark;
         text-decoration: none;
       }

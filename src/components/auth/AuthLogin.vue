@@ -4,15 +4,12 @@
       Loggen Sie sich in Ihren Jonder Account ein
     </jonder-title>
 
-    <v-btn outlined color="primary" class="full-w mt-4">Continue with Google</v-btn>
+    <v-btn outlined color="primary" class="full-w mt-4"
+      >Continue with Google</v-btn
+    >
     <v-btn color="primary" class="full-w mt-4">Continue with Facebook</v-btn>
 
-    <v-alert
-      v-if="message.show"
-      class="mt-4"
-      text
-      type="error"
-    >
+    <v-alert v-if="message.show" class="mt-4" text type="error">
       {{ this.message.text }}
     </v-alert>
 
@@ -96,7 +93,7 @@ export default {
         this.message.text = this.response.message || "Wrong credentials";
       }
     }
-}
+  }
 };
 </script>
 

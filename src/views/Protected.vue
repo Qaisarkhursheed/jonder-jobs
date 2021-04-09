@@ -9,7 +9,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 export default {
   name: "Protected",
   components: { AuthLayout }
-}
+};
 </script>
 
 <style></style>

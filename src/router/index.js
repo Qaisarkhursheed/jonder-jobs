@@ -10,6 +10,7 @@ import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
 import Dashboard from "../views/Dashboard";
 import Profile from "../views/Profile";
+import EditNotepad from "../views/EditNotepad";
 
 Vue.use(VueRouter);
 
@@ -55,6 +56,19 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+      isAdmin: false
+    }
+  },
+  {
+    path: "/notepad",
+    redirect: "/dashboard"
+  },
+  {
+    path: "/notepad/:id",
+    name: "Notepad",
+    component: EditNotepad,
     meta: {
       requiresAuth: true,
       isAdmin: false
