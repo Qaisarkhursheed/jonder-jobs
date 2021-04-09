@@ -6,39 +6,12 @@ export default {
   state: {
     token: localStorage.getItem("user-token") || "",
     authenticated: false,
-    user: null,
     message: null
   },
 
   getters: {
     authenticated(state) {
       return state.authenticated;
-    },
-
-    user(state) {
-      if (state.user) {
-        return state.user;
-      }
-
-      return null;
-    },
-
-    getUserFullName(state) {
-      if (state.user) {
-        return state.user.first_name + " " + state.user.last_name;
-      }
-
-      return null;
-    },
-
-    getUserInitials(state) {
-      let initials = "";
-      if (state.user) {
-        if (state.user.first_name) initials += state.user.first_name.charAt(0);
-        if (state.user.last_name) initials += state.user.last_name.charAt(0);
-      }
-
-      return initials;
     }
   },
 
@@ -47,17 +20,13 @@ export default {
       state.authenticated = value;
     },
 
-    SET_USER(state, value) {
-      state.user = value;
-    },
-
     SET_MESSAGE(state, value) {
       state.message = value;
     }
   },
 
   actions: {
-    async login({ dispatch }, credentials) {
+    async login({ dispatch, commit }, credentials) {
       let response = {};
 
       await axios
@@ -68,18 +37,18 @@ export default {
           localStorage.setItem("user-token", token);
           localStorage.setItem("user", user);
           axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-
+          commit("SET_AUTHENTICATED", true);
           response = resp.data;
         })
         .catch(err => {
           console.log("Login error:", err);
           localStorage.removeItem("user-token");
           localStorage.removeItem("user");
-
+          commit("SET_AUTHENTICATED", false);
           response = err.response.data;
         });
 
-      dispatch("me");
+      dispatch("user/me", null, { root: true });
       return response;
     },
 
@@ -109,14 +78,15 @@ export default {
         });
     },
 
-    async logout({ dispatch }) {
+    async logout({ dispatch, commit }) {
       await axios.post("/logout").then(() => {
         localStorage.removeItem("user-token");
         localStorage.removeItem("user");
         delete axios.defaults.headers.common["Authorization"];
+        commit("SET_AUTHENTICATED", false);
       });
 
-      return dispatch("me");
+      return dispatch("user/me", null, { root: true });
     },
 
     async facebooklogin() {
@@ -129,21 +99,6 @@ export default {
       await axios.get("/login/google").catch(err => {
         console.log("Google login error:", err);
       });
-    },
-
-    me({ commit }) {
-      return axios
-        .get("/me")
-        .then(response => {
-          commit("SET_AUTHENTICATED", true);
-          commit("SET_USER", response.data);
-        })
-        .catch(() => {
-          commit("SET_AUTHENTICATED", false);
-          commit("SET_USER", null);
-          localStorage.removeItem("user-token");
-          localStorage.removeItem("user");
-        });
     }
   }
 };

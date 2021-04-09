@@ -4,7 +4,7 @@
       <div class="user-info d-flex flex-row align-center">
         <div class="user-details flex-grow-1 flex-shrink-1">
           Hello,
-          <strong>Joe Smith</strong>
+          <strong>{{ getUserFullName }}</strong>
         </div>
         <div class="image flex-grow-0 flex-shrink-0">
           <v-img :src="require('@/assets/icons/equal-rights.svg')"></v-img>
@@ -15,12 +15,26 @@
       <v-card elevation="0" class="text-weight-bold">
         <v-card-text>
           <span class="text-weight-bold">My status</span>
-          <span class="text-weight-bold text-color-primary-blue-dark float-right">Employed</span>
+          <span
+            class="text-weight-bold text-color-primary-blue-dark float-right"
+          >
+            {{ isUserEmployed ? "Employed" : "Unemployed" }}
+          </span>
         </v-card-text>
       </v-card>
     </v-col>
   </v-row>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters("user", ["getUserFullName", "isUserEmployed"])
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .dashboard-user-headline {

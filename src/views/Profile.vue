@@ -1,8 +1,6 @@
 <template>
   <dashboard-layout v-if="user">
-    <v-card
-      class="profile-holder"
-    >
+    <v-card class="profile-holder">
       <div class="pa-8">
         <v-row>
           <v-col cols="6">
@@ -13,10 +11,14 @@
                 class="flex-grow-0 flex-shrink-0"
               >
                 <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-                <span class="white--text headline" v-else>{{ getUserInitials }}</span>
+                <span class="white--text headline" v-else>{{
+                  getUserInitials
+                }}</span>
               </v-avatar>
               <div class="flex-grow-1 flex-shrink-1 pl-2">
-                <div class="heading text-color-primary-blue-dark">{{ getUserFullName }}</div>
+                <div class="heading text-color-primary-blue-dark">
+                  {{ getUserFullName }}
+                </div>
                 <div>
                   <v-icon>mdi-map-marker</v-icon>
                   <span>Berlin</span>
@@ -25,7 +27,13 @@
             </div>
           </v-col>
           <v-col cols="6" class="text-right">
-            <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate">Save</v-btn>
+            <v-btn
+              depressed
+              color="primary"
+              class="pl-8 pr-8"
+              @click="handleUpdate"
+              >Save</v-btn
+            >
           </v-col>
         </v-row>
 
@@ -74,7 +82,7 @@
               flat
               hide-details
               background-color="white"
-              v-model="formData.job_title"
+              v-model="formData.current_position"
             ></v-text-field>
           </v-col>
           <v-col cols="6">
@@ -88,7 +96,7 @@
               flat
               hide-details
               background-color="white"
-              v-model="formData.work_experience"
+              v-model="formData.work_radius"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -119,7 +127,7 @@
               flat
               hide-details
               background-color="white"
-              v-model="formData.education"
+              v-model="formData.your_qualification"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -135,18 +143,14 @@
               flat
               hide-details
               background-color="white"
-              v-model="formData.about_me"
+              v-model="formData.describe_yourself"
             ></v-textarea>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="12">
-            <v-card
-              outlined
-              flat
-              class="border-blue-dark card-link"
-            >
+            <v-card outlined flat class="border-blue-dark card-link">
               <a class="card-link-btn">
                 <v-icon>mdi-link</v-icon>
               </a>
@@ -165,37 +169,49 @@
 
 <script>
 import DashboardLayout from "@/layouts/DashboardLayout";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Profile",
   components: { DashboardLayout },
   data: () => ({
     formData: {
+      email: "",
       first_name: "",
       last_name: "",
-      job_title: "",
-      work_experience: "",
+      current_position: "",
+      work_radius: "",
       looking_for: "",
-      education: "",
-      about_me: ""
+      your_qualification: "",
+      describe_yourself: ""
     },
     rules: [
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
     ]
   }),
+  created() {
+    this.resetFormData(this.user);
+  },
   computed: {
-    ...mapGetters("auth", ["user", "getUserFullName", "getUserInitials"])
+    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
   },
   methods: {
+    ...mapActions("user", ["updateUser"]),
     resetFormData(user) {
-      console.log("resetFormData", user);
+      if (!user) return;
+      this.formData.email = user.email;
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
+      this.formData.current_position = user.current_position;
+      this.formData.work_radius = user.work_radius;
+      this.formData.looking_for = user.looking_for;
+      this.formData.your_qualification = user.your_qualification;
+      this.formData.describe_yourself = user.describe_yourself;
     },
     handleUpdate() {
       console.log("Update", this.formData);
+      this.updateUser(this.formData);
     }
   },
   watch: {
@@ -208,7 +224,8 @@ export default {
 
 <style lang="scss">
 .profile-holder {
-  box-shadow: 8px 0px 34px rgba(0, 0, 0, 0.03) !important;
+  box-shadow: 8px 0 34px rgba(0, 0, 0, 0.03) !important;
+  background-color: #fdfeff !important;
 
   .card-link {
     overflow: hidden;

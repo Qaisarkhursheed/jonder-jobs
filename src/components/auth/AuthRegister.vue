@@ -5,7 +5,8 @@
     </jonder-title>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
+      felis eu libero.
     </p>
 
     <div>
@@ -137,7 +138,7 @@ export default {
       console.log("Register");
       this.$router.replace({ name: "Home" });
     }
-}
+  }
 };
 </script>
 

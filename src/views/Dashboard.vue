@@ -1,10 +1,10 @@
 <template>
-  <dashboard-layout>
+  <dashboard-layout v-if="user">
     <div class="dashboard-holder">
       <user-headline />
-      <user-stats />
+      <user-stats v-if="userStats" />
       <user-messages />
-      <user-notes />
+      <user-notes v-if="notepad" />
       <company-list />
     </div>
   </dashboard-layout>
@@ -17,14 +17,40 @@ import UserMessages from "@/components/dashboard/UserMessages";
 import UserNotes from "@/components/dashboard/UserNotes";
 import CompanyList from "@/components/dashboard/CompanyList";
 import DashboardLayout from "@/layouts/DashboardLayout";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Dashboard",
-  components: { DashboardLayout, CompanyList, UserNotes, UserMessages, UserStats, UserHeadline }
+  created() {
+    this.getUserStats();
+    this.getAllNotepads();
+    this.getCompanyViewed();
+  },
+  computed: {
+    ...mapGetters("user", ["user"]),
+    ...mapGetters("stats", ["userStats"]),
+    ...mapGetters("notepad", ["notepad"])
+  },
+  methods: {
+    ...mapActions("notepad", ["getAllNotepads"]),
+    ...mapActions("stats", ["getUserStats", "getCompanyViewed"])
+  },
+  components: {
+    DashboardLayout,
+    CompanyList,
+    UserNotes,
+    UserMessages,
+    UserStats,
+    UserHeadline
+  }
 };
 </script>
 
 <style lang="scss">
+.dashboard-holder {
+  position: relative;
+}
+
 .short-message {
   overflow: hidden;
   text-overflow: ellipsis;
