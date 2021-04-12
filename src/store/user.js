@@ -48,7 +48,8 @@ export default {
   },
 
   actions: {
-    me({ commit }) {
+    me({ state, commit }) {
+      if (state.user) return;
       return axios
         .get("/me")
         .then(response => {

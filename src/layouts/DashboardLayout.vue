@@ -63,11 +63,7 @@
               </div>
             </v-col>
           </v-row>
-          <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1">
-            <v-col cols="12">
-              <slot />
-            </v-col>
-          </v-row>
+          <slot />
         </v-container>
       </v-col>
     </v-row>

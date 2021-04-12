@@ -26,7 +26,7 @@ export default {
   },
 
   actions: {
-    async login({ dispatch, commit }, credentials) {
+    async login({ commit }, credentials) {
       let response = {};
 
       await axios
@@ -48,7 +48,6 @@ export default {
           response = err.response.data;
         });
 
-      dispatch("user/me", null, { root: true });
       return response;
     },
 

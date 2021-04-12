@@ -4,14 +4,6 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  created() {
-    this.$store.dispatch("user/me");
-  }
-};
-</script>
-
 <style lang="scss">
 html {
   overflow: hidden !important;
