@@ -11,6 +11,7 @@ import ManualOnboarding from "../views/auth/ManualOnboarding";
 import Dashboard from "../views/Dashboard";
 import Profile from "../views/Profile";
 import EditNotepad from "../views/EditNotepad";
+import Chat from "@/views/Chat";
 
 Vue.use(VueRouter);
 
@@ -84,6 +85,15 @@ const routes = [
     }
   },
   {
+    path: "/chat",
+    name: "Chat",
+    component: Chat,
+    meta: {
+      requiresAuth: true,
+      isAdmin: false
+    }
+  },
+  {
     path: "/protected",
     name: "Protected",
     component: Protected,
@@ -108,6 +118,7 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath }
       });
     } else {
+      store.dispatch("user/me");
       let user = JSON.parse(localStorage.getItem("user"));
 
       if (to.matched.some(record => record.meta.isAdmin)) {

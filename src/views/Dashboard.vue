@@ -1,12 +1,16 @@
 <template>
   <dashboard-layout v-if="user">
-    <div class="dashboard-holder">
-      <user-headline />
-      <user-stats v-if="userStats" />
-      <user-messages />
-      <user-notes v-if="notepad" />
-      <company-list />
-    </div>
+    <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1">
+      <v-col cols="12">
+        <div class="dashboard-holder">
+          <user-headline />
+          <user-stats v-if="userStats" />
+          <user-messages />
+          <user-notes v-if="notepad" />
+          <company-list />
+        </div>
+      </v-col>
+    </v-row>
   </dashboard-layout>
 </template>
 
