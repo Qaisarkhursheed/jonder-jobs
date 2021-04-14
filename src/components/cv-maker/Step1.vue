@@ -88,13 +88,7 @@
     </v-row>
     <v-row>
       <v-col cols="4">
-        <v-btn
-          depressed
-          block
-          outlined
-          color="primary"
-          large
-        >
+        <v-btn depressed block outlined color="primary" large>
           Cancel
         </v-btn>
       </v-col>

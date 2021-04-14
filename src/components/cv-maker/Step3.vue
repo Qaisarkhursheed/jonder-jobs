@@ -101,7 +101,9 @@
     <v-row>
       <v-col cols="12">
         <label class="text-color-primary-blue-dark">
-          <v-icon class="text-color-primary-blue-dark">mdi-cards-playing-outline</v-icon>
+          <v-icon class="text-color-primary-blue-dark"
+            >mdi-cards-playing-outline</v-icon
+          >
           Interessen
         </label>
         <v-text-field
@@ -119,13 +121,7 @@
 
     <v-row>
       <v-col cols="4">
-        <v-btn
-          depressed
-          block
-          outlined
-          color="primary"
-          large
-        >
+        <v-btn depressed block outlined color="primary" large>
           Cancel
         </v-btn>
       </v-col>
@@ -148,5 +144,5 @@
 import StepHeader from "@/components/cv-maker/StepHeader";
 export default {
   components: { StepHeader }
-}
+};
 </script>

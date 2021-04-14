@@ -85,7 +85,6 @@ const routes = [
       },
       {
         path: "profile",
-        name: "ProfileWrap",
         component: ProfileWrap,
         meta: {
           requiresAuth: true,
@@ -115,6 +114,15 @@ const routes = [
       {
         path: "chat",
         name: "Chat",
+        component: Chat,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "chat/:id/:type",
+        name: "ChatDetail",
         component: Chat,
         meta: {
           requiresAuth: true,

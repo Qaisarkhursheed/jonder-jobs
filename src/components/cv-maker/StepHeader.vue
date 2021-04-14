@@ -4,21 +4,30 @@
       <v-icon v-if="activeStep >= 1">mdi-check</v-icon>
     </div>
     <div class="step-header-divider">
-      <span v-if="activeStep >= 1" :style="{width: activeStep === 1 ? '50%' : '100%'}"></span>
+      <span
+        v-if="activeStep >= 1"
+        :style="{ width: activeStep === 1 ? '50%' : '100%' }"
+      ></span>
     </div>
 
     <div class="step-header-item" :class="{ active: activeStep >= 2 }">
       <v-icon v-if="activeStep >= 2">mdi-check</v-icon>
     </div>
     <div class="step-header-divider">
-      <span v-if="activeStep >= 2" :style="{width: activeStep === 2 ? '50%' : '100%'}"></span>
+      <span
+        v-if="activeStep >= 2"
+        :style="{ width: activeStep === 2 ? '50%' : '100%' }"
+      ></span>
     </div>
 
     <div class="step-header-item" :class="{ active: activeStep >= 3 }">
       <v-icon v-if="activeStep >= 3">mdi-check</v-icon>
     </div>
     <div class="step-header-divider">
-      <span v-if="activeStep >= 3" :style="{width: activeStep === 3 ? '50%' : '100%'}"></span>
+      <span
+        v-if="activeStep >= 3"
+        :style="{ width: activeStep === 3 ? '50%' : '100%' }"
+      ></span>
     </div>
 
     <div class="step-header-item" :class="{ active: activeStep >= 4 }">
@@ -56,10 +65,9 @@ export default {
       font-size: 16px;
     }
 
-    &.active{
+    &.active {
       background-color: $primary-blue-dark;
       border-color: $primary-blue-dark;
-
     }
   }
   .step-header-divider {

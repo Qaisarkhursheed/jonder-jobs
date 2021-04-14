@@ -4,7 +4,7 @@
       <div class="dashboard-holder">
         <user-headline />
         <user-stats v-if="userStats" />
-        <user-messages />
+        <user-messages v-if="conversations" :messages="conversations" />
         <user-notes v-if="notepad" />
         <company-list />
       </div>
@@ -26,15 +26,18 @@ export default {
     this.getUserStats();
     this.getAllNotepads();
     this.getCompanyViewed();
+    this.getAllConversations({ limit: 2 });
   },
   computed: {
     ...mapGetters("user", ["user"]),
     ...mapGetters("stats", ["userStats"]),
-    ...mapGetters("notepad", ["notepad"])
+    ...mapGetters("notepad", ["notepad"]),
+    ...mapGetters("chat", ["conversations"])
   },
   methods: {
     ...mapActions("notepad", ["getAllNotepads"]),
-    ...mapActions("stats", ["getUserStats", "getCompanyViewed"])
+    ...mapActions("stats", ["getUserStats", "getCompanyViewed"]),
+    ...mapActions("chat", ["getAllConversations"])
   },
   components: {
     CompanyList,

@@ -3,18 +3,11 @@
     <v-row>
       <v-col cols="6">
         <div class="d-flex align-center">
-          <v-avatar
-            color="primary"
-            size="58"
-            class="flex-grow-0 flex-shrink-0"
-          >
-            <v-img
-              :src="user.profile_img"
-              v-if="user.profile_img"
-            ></v-img>
+          <v-avatar color="primary" size="58" class="flex-grow-0 flex-shrink-0">
+            <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
             <span class="white--text headline" v-else>{{
-                getUserInitials
-              }}</span>
+              getUserInitials
+            }}</span>
           </v-avatar>
           <div class="flex-grow-1 flex-shrink-1 pl-2">
             <div class="heading text-color-primary-blue-dark">
@@ -28,12 +21,8 @@
         </div>
       </v-col>
       <v-col cols="6" class="text-right">
-        <v-btn
-          depressed
-          color="primary"
-          class="pl-8 pr-8"
-          @click="handleUpdate"
-        >Save
+        <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
+          >Save
         </v-btn>
       </v-col>
     </v-row>
