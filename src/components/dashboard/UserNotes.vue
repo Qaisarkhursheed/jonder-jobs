@@ -15,7 +15,11 @@
             <div class="short-message">{{ note.content }}</div>
           </div>
           <div class="flex-grow-0 flex-shrink-0">
-            <router-link :to="'/notepad/' + note.id" class="pull-right">
+            <router-link
+              :to="{ path: 'notepad/' + note.id }"
+              append
+              class="pull-right"
+            >
               <v-icon>mdi-pencil-outline</v-icon>
             </router-link>
           </div>

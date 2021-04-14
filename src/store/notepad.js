@@ -58,7 +58,7 @@ export default {
     },
 
     updateNotepad({ state }, notepadData) {
-      return axios.put("/notepad/" + state.notepadDetails.id, notepadData);
+      axios.put("/notepad/" + state.notepadDetails.id, notepadData);
     },
 
     deleteNotepad(context, notepadId) {

@@ -3,7 +3,7 @@
     <v-list subheader class="pb-0">
       <v-list-item-group v-model="selectedItem" color="primary">
         <template v-for="(chat, index) in recent">
-          <v-list-item :key="chat.title" @click="$emit('clicked')">
+          <v-list-item :key="`id-${chat.id}`" @click="$emit('clicked')">
             <v-list-item-avatar>
               <v-img :alt="`${chat.title} avatar`" :src="chat.avatar"></v-img>
             </v-list-item-avatar>
@@ -33,43 +33,51 @@ export default {
     selectedItem: null,
     recent: [
       {
+        id: 1,
         active: true,
         avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
         title: "Jason Oner",
         content: "Chat content"
       },
       {
+        id: 2,
         active: true,
         avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
         title: "Mike Carlson",
         content: "Chat content"
       },
       {
+        id: 3,
         avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
         title: "Cindy Baker",
         content: "Chat content"
       },
       {
+        id: 4,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Ali Connors",
         content: "Chat content"
       },
       {
+        id: 5,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Ali Connors",
         content: "Chat content"
       },
       {
+        id: 6,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Ali Connors",
         content: "Chat content"
       },
       {
+        id: 7,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Ali Connors",
         content: "Chat content"
       },
       {
+        id: 8,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Ali Connors",
         content: "Chat content"
