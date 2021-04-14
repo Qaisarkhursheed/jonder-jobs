@@ -41,7 +41,6 @@ export default {
           response = resp.data;
         })
         .catch(err => {
-          console.log("Login error:", err);
           localStorage.removeItem("user-token");
           localStorage.removeItem("user");
           commit("SET_AUTHENTICATED", false);

@@ -97,11 +97,13 @@
           <v-divider></v-divider>
           <div class="d-flex">
             <strong class="flex-grow-1">Gesamtsumme</strong>
-            <strong class="text-right text-color-primary-blue-dark">$11,88</strong>
+            <strong class="text-right text-color-primary-blue-dark"
+              >$11,88</strong
+            >
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn  block color="dark-blue">Jetzt bezahien</v-btn>
+          <v-btn block color="dark-blue">Jetzt bezahien</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>

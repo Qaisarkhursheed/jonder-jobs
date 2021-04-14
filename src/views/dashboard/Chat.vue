@@ -5,83 +5,51 @@
         <h2 class="text-color-primary-blue-dark mb-4 flex-shrink-0 flex-grow-0">
           Nachrichten
         </h2>
-        <chat-asside
-          class="flex-grow-1 flex-shrink-1 overflow-list"
-          @clicked="setActiveMessages"
-        />
+        <chat-asside class="flex-grow-1 flex-shrink-1 overflow-list" />
       </v-col>
       <v-col cols="8" class="full-h">
-        <chat-messages v-if="messages" :messages="messages" />
+        <chat-messages
+          v-if="selectedConversation && conversationDetails"
+          :messages="selectedConversation"
+          :conversation-details="conversationDetails"
+        />
+        <!--@show-profile="showProfile = true"-->
       </v-col>
     </v-row>
+    <user-preview
+      v-if="showProfile"
+      :user-id="conversationDetails.user_id"
+      @hide-profile="showProfile = false"
+    />
   </div>
 </template>
 
 <script>
 import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
+import { mapActions, mapGetters } from "vuex";
+import UserPreview from "@/components/parts/UserPreview";
 
 export default {
   name: "Chat",
+  created() {
+    this.init();
+  },
   data: () => ({
-    messages: null
+    messages: null,
+    showProfile: null
   }),
   methods: {
-    setActiveMessages() {
-      this.messages = [
-        {
-          id: 1,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:30",
-          isMy: false
-        },
-        {
-          id: 2,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:35",
-          isMy: false
-        },
-        {
-          id: 3,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:40",
-          isMy: true
-        },
-        {
-          id: 4,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:40",
-          isMy: true
-        },
-        {
-          id: 5,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:40",
-          isMy: false
-        },
-        {
-          id: 6,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:40",
-          isMy: true
-        },
-        {
-          id: 7,
-          content:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing sed diam nonumy eirmod tempor invidunt ut.",
-          time: "10:40",
-          isMy: false
-        }
-      ];
+    ...mapActions("chat", ["getAllConversations", "addPlaceholderMessage"]),
+    async init() {
+      await this.getAllConversations();
+      if (this.$route.params.type === "new" && this.$route.params.id)
+        this.addPlaceholderMessage(this.$route.params.id);
     }
   },
+  computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
   components: {
+    UserPreview,
     ChatMessages,
     ChatAsside
   }

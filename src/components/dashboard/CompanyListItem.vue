@@ -39,7 +39,7 @@
 
     <div class="pa-4 mt-4 border-top-gray">{{ company.about_company }}</div>
 
-    <v-btn block tile color="light-blue">
+    <v-btn @click="sendMessage" block tile color="light-blue">
       Message
     </v-btn>
   </v-card>
@@ -51,6 +51,11 @@ export default {
     company: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    sendMessage() {
+      this.$router.push("/dashboard/chat/" + this.company.id + "/new");
     }
   }
 };

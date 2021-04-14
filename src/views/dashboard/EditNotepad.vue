@@ -13,9 +13,8 @@
             color="primary"
             class="pl-8 pr-8"
             @click="handleUpdate"
-          >Save
-          </v-btn
-          >
+            >Save
+          </v-btn>
         </v-col>
       </v-row>
 
