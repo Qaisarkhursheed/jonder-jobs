@@ -1,16 +1,12 @@
 <template>
   <div class="pa-8">
     <v-card-title class="pl-0 pt-0">
-      <step-header :active-step="1" />
+      <step-header :active-step="2" />
     </v-card-title>
     <v-card-subtitle>
       <div class="step-header-detail pb-2">
-        <v-icon>mdi-office-building</v-icon>
-        <span>Bildung & Qualifikationen</span>
-      </div>
-      <div class="step-header-description">
-        <div>Bildung Lore ipsum</div>
-        <div class="date">September 2019. - Oktobar 2020.</div>
+        <v-icon>mdi-briefcase-outline</v-icon>
+        <span>Arbeitserfahrung</span>
       </div>
     </v-card-subtitle>
     <v-row>
@@ -104,17 +100,20 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">Profile</label>
-        <v-textarea
+        <label class="text-color-primary-blue-dark">
+          <v-icon class="text-color-primary-blue-dark">mdi-cards-playing-outline</v-icon>
+          Interessen
+        </label>
+        <v-text-field
           dense
           type="text"
-          label="Beschreibung"
+          label="Hobby"
           outlined
           solo
           flat
           hide-details
           background-color="white"
-        ></v-textarea>
+        ></v-text-field>
       </v-col>
     </v-row>
 
