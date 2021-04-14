@@ -8,10 +8,14 @@ import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
-import Dashboard from "../views/Dashboard";
-import Profile from "../views/Profile";
-import EditNotepad from "../views/EditNotepad";
-import Chat from "@/views/Chat";
+import DashboardWrap from "../views/Dashboard";
+import Dashboard from "../views/dashboard/Dashboard";
+import ProfileWrap from "../views/dashboard/ProfileWrap";
+import Profile from "../views/dashboard/profile/Profile";
+import EditNotepad from "../views/dashboard/EditNotepad";
+import Chat from "../views/dashboard/Chat";
+import ProductPricing from "../views/dashboard/ProductPricing";
+import CvMaker from "../views/dashboard/profile/CvMaker";
 
 Vue.use(VueRouter);
 
@@ -55,43 +59,78 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    component: DashboardWrap,
     meta: {
       requiresAuth: true,
       isAdmin: false
-    }
-  },
-  {
-    path: "/notepad",
-    redirect: "/dashboard"
-  },
-  {
-    path: "/notepad/:id",
-    name: "Notepad",
-    component: EditNotepad,
-    meta: {
-      requiresAuth: true,
-      isAdmin: false
-    }
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    component: Profile,
-    meta: {
-      requiresAuth: true,
-      isAdmin: false
-    }
-  },
-  {
-    path: "/chat",
-    name: "Chat",
-    component: Chat,
-    meta: {
-      requiresAuth: true,
-      isAdmin: false
-    }
+    },
+    children: [
+      {
+        path: "",
+        name: "Dashboard",
+        component: Dashboard,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "notepad/:id",
+        name: "Notepad",
+        component: EditNotepad,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "profile",
+        name: "ProfileWrap",
+        component: ProfileWrap,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        },
+        children: [
+          {
+            path: "",
+            name: "Profile",
+            component: Profile,
+            meta: {
+              requiresAuth: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "cv-maker",
+            name: "CvMaker",
+            component: CvMaker,
+            meta: {
+              requiresAuth: true,
+              isAdmin: false
+            }
+          }
+        ]
+      },
+      {
+        path: "chat",
+        name: "Chat",
+        component: Chat,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "product-pricing",
+        name: "ProductPricing",
+        component: ProductPricing,
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      }
+    ]
   },
   {
     path: "/protected",
@@ -101,6 +140,11 @@ const routes = [
       requiresAuth: true,
       isAdmin: true
     }
+  },
+  {
+    // will match everything
+    path: "*",
+    redirect: "/home"
   }
 ];
 

@@ -13,15 +13,15 @@
             <v-icon>mdi-view-dashboard-outline</v-icon>
             <span>Dashboard</span>
           </router-link>
-          <router-link to="/chat">
+          <router-link to="/dashboard/chat">
             <v-icon>mdi-message-outline</v-icon>
             <span>Chat</span>
           </router-link>
-          <router-link to="/product-pricing">
+          <router-link to="/dashboard/product-pricing">
             <v-icon>mdi-currency-usd</v-icon>
             <span>Product Pricing</span>
           </router-link>
-          <router-link to="/profile">
+          <router-link to="/dashboard/profile">
             <v-icon>mdi-account-outline</v-icon>
             <span>Profile</span>
           </router-link>
@@ -125,7 +125,7 @@ export default {
     }
 
     &:hover,
-    &.router-link-active {
+    &.router-link-exact-active {
       &,
       span,
       .v-icon {
@@ -134,7 +134,7 @@ export default {
       }
     }
 
-    &.router-link-active {
+    &.router-link-exact-active {
       span {
         font-weight: bold;
       }

@@ -1,28 +1,23 @@
 <template>
-  <dashboard-layout>
-    <div class="chat-holder flex-grow-1 flex-shrink-1">
-      <v-row class="mt-0 mb-0 full-h">
-        <v-col cols="4" class="d-flex flex-column full-h">
-          <h2
-            class="text-color-primary-blue-dark mb-4 flex-shrink-0 flex-grow-0"
-          >
-            Nachrichten
-          </h2>
-          <chat-asside
-            class="flex-grow-1 flex-shrink-1 overflow-list"
-            @clicked="setActiveMessages"
-          />
-        </v-col>
-        <v-col cols="8" class="full-h">
-          <chat-messages v-if="messages" :messages="messages" />
-        </v-col>
-      </v-row>
-    </div>
-  </dashboard-layout>
+  <div class="chat-holder flex-grow-1 flex-shrink-1 mt-4">
+    <v-row class="mt-0 mb-0 full-h">
+      <v-col cols="4" class="d-flex flex-column full-h">
+        <h2 class="text-color-primary-blue-dark mb-4 flex-shrink-0 flex-grow-0">
+          Nachrichten
+        </h2>
+        <chat-asside
+          class="flex-grow-1 flex-shrink-1 overflow-list"
+          @clicked="setActiveMessages"
+        />
+      </v-col>
+      <v-col cols="8" class="full-h">
+        <chat-messages v-if="messages" :messages="messages" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
-import DashboardLayout from "@/layouts/DashboardLayout";
 import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
 
@@ -88,8 +83,7 @@ export default {
   },
   components: {
     ChatMessages,
-    ChatAsside,
-    DashboardLayout
+    ChatAsside
   }
 };
 </script>

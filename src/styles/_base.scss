@@ -181,6 +181,8 @@ h5, .h5 {
 }
 
 .v-btn {
+    text-transform: none !important;
+
     &.light-blue {
         color: $primary-blue-dark !important;
         background-color: $primary-blue-light !important;
@@ -189,6 +191,21 @@ h5, .h5 {
         &.active, &:active {
             color: $primary-blue-light !important;
             background-color: $primary-blue !important;
+        }
+
+        &.disabled, &:disabled {
+            opacity: .5;
+            cursor: default;
+        }
+    }
+    &.dark-blue {
+        color: #fff !important;
+        background-color: $primary-blue-dark !important;
+        border-color: $primary-blue-dark !important;
+
+        &.active, &:active {
+            color: #fff !important;
+            background-color: $primary-blue-dark !important;
         }
 
         &.disabled, &:disabled {
