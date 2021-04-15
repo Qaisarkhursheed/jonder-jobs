@@ -2,9 +2,9 @@
   <v-list-item :key="`id-${conversation.user_id}`" @click="open">
     <v-list-item-avatar color="primary" class="text-center">
       <v-img
-        v-if="conversation.avatar"
+        v-if="conversation.profile_img"
         :alt="`${conversation.user_name} avatar`"
-        :src="conversation.avatar"
+        :src="conversation.profile_img"
       ></v-img>
       <span class="white--text full-w text-center d-block">{{
         getInitials(conversation)

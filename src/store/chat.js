@@ -6,7 +6,7 @@ export default {
 
   state: {
     conversations: null,
-    conversationDetails: { user_id: null, user_name: null, unread_messages: 0 },
+    conversationDetails: { user_id: null, user_name: null, unread_messages: 0, profile_img: null },
     selectedConversation: null
   },
 
@@ -47,6 +47,7 @@ export default {
       state.conversationDetails.user_id = value.user_id;
       state.conversationDetails.user_name = value.user_name;
       state.conversationDetails.unread_messages = value.unread_messages;
+      state.conversationDetails.profile_img = value.profile_img;
     }
   },
 

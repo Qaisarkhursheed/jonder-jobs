@@ -2,8 +2,15 @@
   <v-card flat class="messages-holder full-h d-flex flex-column">
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-2">
       <v-list-item class="grow">
-        <v-list-item-avatar @click="$emit('show-profile')">
-          <v-img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'"></v-img>
+        <v-list-item-avatar color="blue" @click="$emit('show-profile')">
+          <v-img
+            v-if="conversationDetails.profile_img"
+            :alt="`${conversationDetails.user_name} avatar`"
+            :src="conversationDetails.profile_img"
+          ></v-img>
+          <span class="white--text full-w text-center d-block" v-else>{{
+              getInitials(conversationDetails)
+            }}</span>
         </v-list-item-avatar>
 
         <v-list-item-content @click="$emit('show-profile')">
@@ -108,6 +115,12 @@ export default {
       });
       this.newMessage = "";
       this.loading = false;
+    },
+    getInitials(conversation) {
+      return (
+        conversation.user_name.charAt(0) +
+        conversation.user_name.split(" ")[1].charAt(0)
+      );
     }
   },
   watch: {
