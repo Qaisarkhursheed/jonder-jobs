@@ -34,17 +34,32 @@ export default {
   name: "Chat",
   created() {
     this.init();
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   data: () => ({
     messages: null,
-    showProfile: null
+    showProfile: null,
+    polling: null
   }),
   methods: {
-    ...mapActions("chat", ["getAllConversations", "addPlaceholderMessage"]),
+    ...mapActions("chat", [
+      "getAllConversations",
+      "addPlaceholderMessage",
+      "getSingleConversation"
+    ]),
     async init() {
       await this.getAllConversations();
       if (this.$route.params.type === "new" && this.$route.params.id)
         this.addPlaceholderMessage(this.$route.params.id);
+    },
+    pollData() {
+      this.polling = setInterval(() => {
+        this.getAllConversations();
+        if (this.conversationDetails && this.conversationDetails.user_id) this.getSingleConversation({ id: this.conversationDetails.user_id });
+      }, 30000);
     }
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),

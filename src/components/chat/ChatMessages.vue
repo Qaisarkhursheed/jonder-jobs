@@ -111,6 +111,11 @@ export default {
       this.newMessage = "";
       this.loading = false;
     }
+  },
+  watch: {
+    messages() {
+      this.scrollToBottom();
+    }
   }
 };
 </script>
