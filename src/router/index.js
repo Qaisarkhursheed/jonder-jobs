@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import store from "@/store";
 
 // Components
-import Home from "../views/Home.vue";
+import Landing from "../views/Landing.vue";
+// import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import Protected from "../views/Protected";
@@ -23,7 +24,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Landing,
+    meta: {
+      guest: true
+    }
   },
   {
     path: "/login",
