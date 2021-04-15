@@ -188,11 +188,12 @@ router.beforeEach((to, from, next) => {
           store.dispatch("auth/logout");
 
           next({ name: "Home" });
+        } else {
+          next();
         }
-        next();
       }
     }
-  } else if (to.matched.some(record => record.meta.guest)) {
+  } else if (to.matched.some(record => record.name === "Login" || record.name === "Register")) {
     if (localStorage.getItem("user-token") == null) {
       next();
     } else {

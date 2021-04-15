@@ -51,15 +51,27 @@
             <v-col cols="6" class="text-right">
               <div class="dashboard-avatar">
                 <span class="name">{{ getUserFullName }}</span>
-                <v-avatar color="primary" size="38">
-                  <v-img
-                    :src="user.profile_img"
-                    v-if="user.profile_img"
-                  ></v-img>
-                  <span class="white--text headline" v-else>{{
-                    getUserInitials
-                  }}</span>
-                </v-avatar>
+                <v-menu offset-y>
+                  <template v-slot:activator="{ on }">
+                    <v-avatar color="primary" size="38" v-on="on">
+                      <v-img
+                        :src="user.profile_img"
+                        v-if="user.profile_img"
+                      ></v-img>
+                      <span class="white--text headline" v-else>{{
+                          getUserInitials
+                        }}</span>
+                    </v-avatar>
+                  </template>
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-title @click="navigateTo('/dashboard/profile')">Profile</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-title @click="navigateTo('/logout')">Logout</v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
               </div>
             </v-col>
           </v-row>
@@ -83,6 +95,9 @@ export default {
   methods: {
     handleSearch() {
       console.log("Handle search");
+    },
+    navigateTo(url) {
+      this.$router.push(url);
     }
   }
 };
@@ -92,6 +107,7 @@ export default {
 .v-application--wrap {
   height: 100vh;
 }
+
 .v-application .dashboard-navigation {
   padding: 0 0 0 50px;
 
@@ -162,6 +178,7 @@ export default {
     margin-right: 10px;
   }
 }
+
 .layout-content {
   overflow: auto;
 }
