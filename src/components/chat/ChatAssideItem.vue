@@ -7,8 +7,8 @@
         :src="conversation.avatar"
       ></v-img>
       <span class="white--text full-w text-center d-block">{{
-          getInitials(conversation)
-        }}</span>
+        getInitials(conversation)
+      }}</span>
     </v-list-item-avatar>
 
     <v-list-item-content>
@@ -49,7 +49,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions("chat", ["getSingleConversation", "seenMessage"]),
+    ...mapActions("chat", [
+      "getAllConversations",
+      "getSingleConversation",
+      "seenMessage"
+    ]),
     ...mapMutations("chat", ["SET_CONVERSATION_DETAILS"]),
     getInitials(conversation) {
       return (
@@ -74,8 +78,11 @@ export default {
     async open() {
       this.$emit("loading", true);
       this.SET_CONVERSATION_DETAILS(this.conversation);
+      if (this.getUnreadCount > 0) {
+        await this.seenMessage(this.conversation.user_id);
+        this.getAllConversations();
+      }
       await this.getSingleConversation({ id: this.conversation.user_id });
-      if (this.getUnreadCount > 0) this.seenMessage(this.conversation.user_id);
       this.$emit("refresh", false);
       this.$emit("loading", false);
     }

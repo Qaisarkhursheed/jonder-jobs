@@ -6,7 +6,7 @@ export default {
 
   state: {
     conversations: null,
-    conversationDetails: { user_id: null, user_name: null },
+    conversationDetails: { user_id: null, user_name: null, unread_messages: 0 },
     selectedConversation: null
   },
 
@@ -25,7 +25,9 @@ export default {
     unreadMessages: state => {
       return id => {
         const conversation = state.conversations.find(i => i.user_id === id);
-        return conversation && conversation.unread_messages ? conversation.unread_messages : 0
+        return conversation && conversation.unread_messages
+          ? conversation.unread_messages
+          : 0;
       };
     }
   },
@@ -44,6 +46,7 @@ export default {
     SET_CONVERSATION_DETAILS(state, value) {
       state.conversationDetails.user_id = value.user_id;
       state.conversationDetails.user_name = value.user_name;
+      state.conversationDetails.unread_messages = value.unread_messages;
     }
   },
 

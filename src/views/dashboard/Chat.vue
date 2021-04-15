@@ -48,17 +48,23 @@ export default {
     ...mapActions("chat", [
       "getAllConversations",
       "addPlaceholderMessage",
-      "getSingleConversation"
+      "getSingleConversation",
+      "seenMessage"
     ]),
     async init() {
       await this.getAllConversations();
       if (this.$route.params.type === "new" && this.$route.params.id)
         this.addPlaceholderMessage(this.$route.params.id);
     },
-    pollData() {
-      this.polling = setInterval(() => {
+    async pollData() {
+      this.polling = setInterval(async () => {
         this.getAllConversations();
-        if (this.conversationDetails && this.conversationDetails.user_id) this.getSingleConversation({ id: this.conversationDetails.user_id });
+        if (this.conversationDetails && this.conversationDetails.user_id) {
+          if (this.conversationDetails.unread_messages > 0)
+            await this.seenMessage(this.conversationDetails.user_id);
+          this.getSingleConversation({ id: this.conversationDetails.user_id });
+          this.getAllConversations();
+        }
       }, 30000);
     }
   },
