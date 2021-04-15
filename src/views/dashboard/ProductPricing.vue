@@ -70,7 +70,7 @@
           </v-row>
           <div>
             <v-switch
-              v-model="creditcard"
+              v-model="paymentDetails.save_details"
               inset
               hide-details
               label="Karteninformationen speichern"
@@ -117,7 +117,8 @@ export default {
       card_number: "",
       card_name: "",
       card_expiration: "",
-      card_cvv: ""
+      card_cvv: "",
+      save_details: false
     }
   })
 };

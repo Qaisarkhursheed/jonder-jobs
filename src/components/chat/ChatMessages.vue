@@ -8,8 +8,9 @@
 
         <v-list-item-content @click="$emit('show-profile')">
           <v-list-item-title>{{
-            conversationDetails.user_name
-          }}</v-list-item-title>
+              conversationDetails.user_name
+            }}
+          </v-list-item-title>
           <!--<v-list-item-subtitle>Online now</v-list-item-subtitle>-->
         </v-list-item-content>
 
@@ -60,10 +61,11 @@
         rows="3"
         auto-grow
         v-model="newMessage"
-        >Message
+      >Message
       </v-textarea>
       <v-icon v-if="!loading" @click="send" class="message-type-new-send"
-        >mdi-send-outline</v-icon
+      >mdi-send-outline
+      </v-icon
       >
     </v-card-actions>
   </v-card>
@@ -94,7 +96,11 @@ export default {
     ...mapActions("chat", ["sendMessage", "getSingleConversation"]),
     scrollToBottom() {
       const messageListDiv = document.getElementById("messageList");
-      messageListDiv.scrollTop = messageListDiv.scrollHeight;
+      if (messageListDiv) {
+        setTimeout(() => {
+          messageListDiv.scrollTop = messageListDiv.scrollHeight;
+        });
+      }
     },
     async send() {
       this.loading = true;

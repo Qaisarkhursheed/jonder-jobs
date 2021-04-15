@@ -7,8 +7,8 @@
         :src="conversation.avatar"
       ></v-img>
       <span class="white--text full-w text-center d-block">{{
-        getInitials(conversation)
-      }}</span>
+          getInitials(conversation)
+        }}</span>
     </v-list-item-avatar>
 
     <v-list-item-content>
@@ -66,9 +66,7 @@ export default {
         : "";
     },
     updateUnread(ids) {
-      for (let id of ids) {
-        this.seenMessage(id);
-      }
+      if (ids && ids.length > 0) this.seenMessage(this.conversation.user_id);
     },
     checkUrl() {
       if (
