@@ -44,11 +44,8 @@ export default {
   },
   computed: {
     ...mapGetters("chat", ["unreadMessages"]),
-    getUnread() {
-      return this.unreadMessages(this.conversation.user_id);
-    },
     getUnreadCount() {
-      return this.getUnread.length;
+      return this.unreadMessages(this.conversation.user_id);
     }
   },
   methods: {
@@ -65,9 +62,6 @@ export default {
         ? conversation.messages[0].message.substring(0, 200)
         : "";
     },
-    updateUnread(ids) {
-      if (ids && ids.length > 0) this.seenMessage(this.conversation.user_id);
-    },
     checkUrl() {
       if (
         this.$route.params.id &&
@@ -81,7 +75,7 @@ export default {
       this.$emit("loading", true);
       this.SET_CONVERSATION_DETAILS(this.conversation);
       await this.getSingleConversation({ id: this.conversation.user_id });
-      this.updateUnread(this.getUnread);
+      if (this.getUnreadCount > 0) this.seenMessage(this.conversation.user_id);
       this.$emit("refresh", false);
       this.$emit("loading", false);
     }

@@ -22,18 +22,12 @@ export default {
     conversationDetails(state) {
       return state.conversationDetails;
     },
-    unreadMessages: () => () => []
-    // unreadMessages: state => {
-    //   return id => {
-    //     const conversation = state.conversations.find(i => i.user_id === id);
-    //     const messages = conversation ? conversation.messages : null;
-    //     return messages
-    //       ? messages
-    //           .filter(i => i.message_seen === 0 && i.send_by === i.user_id)
-    //           .map(i => i.id)
-    //       : [];
-    //   };
-    // }
+    unreadMessages: state => {
+      return id => {
+        const conversation = state.conversations.find(i => i.user_id === id);
+        return conversation && conversation.unread_messages ? conversation.unread_messages : 0
+      };
+    }
   },
 
   mutations: {
