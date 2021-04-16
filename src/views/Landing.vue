@@ -15,8 +15,9 @@
           </router-link>
         </v-col>
         <v-col cols="6" class="links">
-          <a class="text-color-primary-blue-dark"><strong>FAQ</strong></a>
-          <router-link to="/register" class="button dark-blue fill">Registrieren</router-link>
+          <a class="txt-link text-color-primary-blue-dark">FAQ</a>
+          <router-link to="/register" class="txt-link text-color-primary-blue-dark">Registrieren</router-link>
+          <router-link to="/login" class="button dark-blue fill">Log in</router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -142,8 +143,9 @@
             </router-link>
           </v-col>
           <v-col cols="6" class="links">
-            <a class="text-color-primary-blue-dark"><strong>FAQ</strong></a>
-            <router-link to="/register" class="button dark-blue fill">Registrieren</router-link>
+            <a class="txt-link text-color-primary-blue-dark">FAQ</a>
+            <router-link to="/register" class="txt-link text-color-primary-blue-dark">Registrieren</router-link>
+            <router-link to="/login" class="button dark-blue fill">Log in</router-link>
           </v-col>
         </v-row>
       </v-container>
@@ -181,8 +183,11 @@
 
     .links {
       text-align: right;
-      a {
-        margin-left: 20px;
+
+      .txt-link {
+        margin-right: 20px;
+        font-weight: bold;
+        text-decoration: none;
       }
     }
   }

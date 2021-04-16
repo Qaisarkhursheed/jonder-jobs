@@ -29,24 +29,24 @@
       </v-col>
       <v-col cols="9" class="full-h bg-light-gray">
         <v-container fluid class="d-flex flex-column full-h">
-          <v-row class="flex-shrink-0 flex-grow-0">
+          <v-row class="flex-shrink-0 flex-grow-0 search-holder">
             <v-col cols="6">
-              <form
-                class="dashboard-search"
-                action="#"
-                @submit.prevent="handleSearch"
-              >
-                <v-text-field
-                  type="search"
-                  outlined
-                  dense
-                  placeholder="Suche"
-                  background-color="white"
-                  hide-details="auto"
-                  append-icon="mdi-magnify"
-                  v-model="searchString"
-                ></v-text-field>
-              </form>
+              <v-autocomplete
+                v-model="searchString"
+                :loading="searchLoading"
+                :items="searchItems"
+                :search-input.sync="search"
+                cache-items
+                flat
+                dense
+                outlined
+                hide-no-data
+                hide-details
+                label="Suche"
+                append-icon="mdi-magnify"
+                item-text="name"
+                item-value="id"
+              ></v-autocomplete>
             </v-col>
             <v-col cols="6" class="text-right">
               <div class="dashboard-avatar">
@@ -83,21 +83,40 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import debounce from "lodash.debounce";
 
 export default {
   data: () => ({
-    searchString: ""
+    searchString: null,
+    searchLoading: false,
+    searchItems: [],
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
   },
   methods: {
-    handleSearch() {
-      console.log("Handle search");
-    },
+    ...mapActions("user", ["searchUsers"]),
+    handleSearch: debounce(async function(val) {
+      this.searchItems = await this.searchUsers(val);
+      this.searchLoading = false;
+    }, 2000),
     navigateTo(url) {
       this.$router.push(url);
+    }
+  },
+  watch: {
+    search(val) {
+      this.searchLoading = true;
+      if (val && val !== this.searchString) this.handleSearch(val);
+    },
+    searchString(val) {
+      if (val) {
+        this.search = null;
+        this.searchString = null;
+        this.$router.push("/dashboard/profile/view/" + val);
+      }
     }
   }
 };
@@ -181,5 +200,9 @@ export default {
 
 .layout-content {
   overflow: auto;
+}
+
+.search-holder .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
+  transform: rotate(0) !important;
 }
 </style>

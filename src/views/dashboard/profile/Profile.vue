@@ -13,9 +13,9 @@
             <div class="heading text-color-primary-blue-dark">
               {{ getUserFullName }}
             </div>
-            <div>
+            <div v-if="user.address">
               <v-icon>mdi-map-marker</v-icon>
-              <span>Berlin</span>
+              <span>{{ user.address }}</span>
             </div>
           </div>
         </div>

@@ -76,15 +76,14 @@ export default {
         });
     },
 
-    async logout({ dispatch, commit }) {
-      await axios.post("/logout").then(() => {
+    logout({ commit }) {
+      return axios.post("/logout").then(() => {
         localStorage.removeItem("user-token");
         localStorage.removeItem("user");
         delete axios.defaults.headers.common["Authorization"];
         commit("SET_AUTHENTICATED", false);
+        this.reset();
       });
-
-      return dispatch("user/me", null, { root: true });
     },
 
     async facebooklogin() {

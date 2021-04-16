@@ -6,7 +6,7 @@
         :alt="`${conversation.user_name} avatar`"
         :src="conversation.profile_img"
       ></v-img>
-      <span class="white--text full-w text-center d-block">{{
+      <span class="white--text full-w text-center d-block" v-else>{{
         getInitials(conversation)
       }}</span>
     </v-list-item-avatar>
