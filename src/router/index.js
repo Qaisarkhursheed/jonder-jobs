@@ -13,6 +13,7 @@ import DashboardWrap from "../views/Dashboard";
 import Dashboard from "../views/dashboard/Dashboard";
 import ProfileWrap from "../views/dashboard/ProfileWrap";
 import Profile from "../views/dashboard/profile/Profile";
+import ProfileView from "../views/dashboard/profile/ProfileView";
 import EditNotepad from "../views/dashboard/EditNotepad";
 import Chat from "../views/dashboard/Chat";
 import ProductPricing from "../views/dashboard/ProductPricing";
@@ -99,6 +100,15 @@ const routes = [
             path: "",
             name: "Profile",
             component: Profile,
+            meta: {
+              requiresAuth: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "view/:id",
+            name: "ProfileView",
+            component: ProfileView,
             meta: {
               requiresAuth: true,
               isAdmin: false

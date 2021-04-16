@@ -3,7 +3,13 @@
     <v-row>
       <v-col class="pl-4">
         <span class="text-color-primary-blue-dark">Notepad</span>
-        <v-btn color="primary" class="pull-right" outlined small>New +</v-btn>
+        <router-link
+          :to="{ path: 'notepad/new' }"
+          append
+          class="pull-right"
+        >
+          <v-btn color="primary" class="pull-right" outlined small>New +</v-btn>
+        </router-link>
       </v-col>
     </v-row>
 
