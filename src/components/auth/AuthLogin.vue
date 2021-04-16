@@ -37,10 +37,10 @@
           v-model="formData.password"
         ></v-text-field>
 
-        <v-checkbox
-          label="Ich stimme der Datenschutzerklärung zu."
-          v-model="formData.privacy"
-        ></v-checkbox>
+<!--        <v-checkbox-->
+<!--          label="Ich stimme der Datenschutzerklärung zu."-->
+<!--          v-model="formData.privacy"-->
+<!--        ></v-checkbox>-->
 
         <v-btn type="submit" color="primary" class="full-w">Loggen Sie</v-btn>
       </form>
