@@ -1,5 +1,9 @@
 <template>
-  <v-container class="auth-register-wrap align-center" fluid no-gutters>
+  <v-container
+    class="auth-register-wrap justify-content-center align-center"
+    fluid
+    no-gutters
+  >
     <jonder-title>
       Morbi at venenatis.
     </jonder-title>
