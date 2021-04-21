@@ -13,6 +13,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.email"
         ></v-text-field>
       </v-col>
       <v-col cols="6">
@@ -26,6 +27,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.phone"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -42,6 +44,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.street_address"
         ></v-text-field>
       </v-col>
       <v-col cols="6">
@@ -57,6 +60,7 @@
               flat
               hide-details
               background-color="white"
+              v-model="day"
             ></v-text-field>
           </div>
           <div class="flex-grow-1 flex-shrink-1 pl-4 pr-4">
@@ -69,6 +73,7 @@
               flat
               hide-details
               background-color="white"
+              v-model="month"
             ></v-text-field>
           </div>
           <div class="flex-grow-0 flex-shrink-0" style="width: 110px">
@@ -81,6 +86,7 @@
               flat
               hide-details
               background-color="white"
+              v-model="year"
             ></v-text-field>
           </div>
         </div>
@@ -99,7 +105,8 @@
           block
           color="dark-blue"
           large
-          @click="$emit('confirm')"
+          :disabled="!isValid"
+          @click="nextStep"
         >
           Confirm
         </v-btn>
@@ -107,3 +114,55 @@
     </v-row>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  data: () => ({
+    day: "",
+    month: "",
+    year: ""
+  }),
+  computed: {
+    isValid() {
+      return (
+        this.value.email.length > 0 &&
+        this.value.phone.length > 0 &&
+        this.value.street_address.length > 0 &&
+        this.value.birthday.length > 0
+      );
+    }
+  },
+  methods: {
+    nextStep() {
+      if (this.isValid) this.$emit("confirm");
+    },
+    updateDate() {
+      if (this.day && this.month && this.year) {
+        const birthDay = this.year + "-" + this.month + "-" + this.day;
+        console.log(birthDay);
+        this.$emit("input", {
+          ...this.value,
+          birthday: birthDay
+        });
+      }
+    }
+  },
+  watch: {
+    day(newVal) {
+      if (newVal) this.updateDate();
+    },
+    month(newVal) {
+      if (newVal) this.updateDate();
+    },
+    year(newVal) {
+      if (newVal) this.updateDate();
+    }
+  }
+};
+</script>

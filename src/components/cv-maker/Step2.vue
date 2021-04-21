@@ -24,6 +24,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.graduation_degree"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -39,6 +40,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.education_city"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -54,6 +56,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.education_institute"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -64,12 +67,14 @@
         <v-text-field
           dense
           type="text"
-          label="September 2018"
+          label="YYYY-MM-DD"
           outlined
           solo
           flat
           hide-details
           background-color="white"
+          :rules="[dateValidator(value.education_start_date)]"
+          v-model="value.education_start_date"
         ></v-text-field>
       </v-col>
       <v-col cols="6">
@@ -77,12 +82,14 @@
         <v-text-field
           dense
           type="text"
-          label="September 2020"
+          label="YYYY-MM-DD"
           outlined
           solo
           flat
           hide-details
           background-color="white"
+          :rules="[dateValidator(value.education_end_date)]"
+          v-model="value.education_end_date"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -98,6 +105,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.education_description"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -114,14 +122,22 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.profile_description"
         ></v-textarea>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="4">
-        <v-btn depressed block outlined color="primary" large>
-          Cancel
+        <v-btn
+          depressed
+          block
+          outlined
+          color="primary"
+          large
+          @click="$emit('back')"
+        >
+          Back
         </v-btn>
       </v-col>
       <v-col cols="4"></v-col>
@@ -131,7 +147,8 @@
           block
           color="dark-blue"
           large
-          @click="$emit('confirm')"
+          :disabled="!isValid"
+          @click="nextStep"
         >
           Confirm
         </v-btn>
@@ -142,6 +159,33 @@
 <script>
 import StepHeader from "@/components/cv-maker/StepHeader";
 export default {
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    isValid() {
+      return (
+        this.value.graduation_degree.length > 0 &&
+        this.value.education_city.length > 0 &&
+        this.value.education_institute.length > 0 &&
+        this.value.education_start_date.length > 0 &&
+        this.value.education_end_date.length > 0 &&
+        this.value.education_description.length > 0 &&
+        this.value.profile_description.length > 0
+      );
+    }
+  },
+  methods: {
+    nextStep() {
+      if (this.isValid) this.$emit("confirm");
+    },
+    dateValidator(date) {
+      return /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(date);
+    }
+  },
   components: { StepHeader }
 };
 </script>

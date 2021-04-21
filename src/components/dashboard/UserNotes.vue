@@ -24,7 +24,7 @@
             <router-link
               :to="{ path: 'notepad/' + note.id }"
               append
-              class="pull-right"
+              class="pull-right text-color-primary-blue-dark"
             >
               <v-icon>mdi-pencil-outline</v-icon>
             </router-link>

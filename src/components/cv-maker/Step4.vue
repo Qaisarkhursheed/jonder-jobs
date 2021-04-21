@@ -21,6 +21,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.referenc_company_name"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -36,6 +37,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.referenc_contact_person"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -51,6 +53,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.referenc_phone"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -66,6 +69,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.referenc_email"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -87,6 +91,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.competence"
         ></v-text-field>
       </v-col>
       <v-col cols="12">
@@ -99,6 +104,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.competence_level"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -118,6 +124,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.language"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -133,14 +140,22 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.language_level"
         ></v-text-field>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="4">
-        <v-btn depressed block outlined color="primary" large>
-          Cancel
+        <v-btn
+          depressed
+          block
+          outlined
+          color="primary"
+          large
+          @click="$emit('back')"
+        >
+          Back
         </v-btn>
       </v-col>
       <v-col cols="4"></v-col>
@@ -150,7 +165,8 @@
           block
           color="dark-blue"
           large
-          @click="$emit('confirm')"
+          :disabled="!isValid"
+          @click="nextStep"
         >
           Confirm
         </v-btn>
@@ -161,6 +177,31 @@
 <script>
 import StepHeader from "@/components/cv-maker/StepHeader";
 export default {
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    isValid() {
+      return (
+        this.value.referenc_company_name.length > 0 &&
+        this.value.referenc_contact_person.length > 0 &&
+        this.value.referenc_phone.length > 0 &&
+        this.value.referenc_email.length > 0 &&
+        this.value.competence.length > 0 &&
+        this.value.competence_level.length > 0 &&
+        this.value.language.length > 0 &&
+        this.value.language_level.length > 0
+      );
+    }
+  },
+  methods: {
+    nextStep() {
+      if (this.isValid) this.$emit("confirm");
+    }
+  },
   components: { StepHeader }
 };
 </script>
