@@ -1,5 +1,11 @@
 <template>
-  <component :is="`step${cvMakerStep}`" @confirm="goToStep" />
+  <component
+    :is="`step${cvMakerStep}`"
+    v-model="cvDetails"
+    @confirm="goToStep"
+    @back="goBack"
+    @save="saveCV"
+  />
 </template>
 
 <script>
@@ -8,10 +14,46 @@ import Step2 from "../../../components/cv-maker/Step2";
 import Step3 from "../../../components/cv-maker/Step3";
 import Step4 from "../../../components/cv-maker/Step4";
 import Step5 from "../../../components/cv-maker/Step5";
+import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
-    cvMakerStep: 1
+    cvMakerStep: 1,
+    cvDetails: {
+      email: "mateozuro@gmail.com",
+      phone: "0921826111",
+      street_address: "Misina 5",
+      birthday: "1993-03-10",
+      graduation_degree: "High school",
+      education_city: "Split",
+      education_institute: "GOGSS",
+      education_start_date: "1993-03-01",
+      education_end_date: "1993-03-10",
+      education_description: "education_description",
+      profile_description: "profile_description",
+      job_title: "Dev",
+      job_city: "Split",
+      job_employer: "Juzni pol",
+      job_start_date: "1993-03-10",
+      job_end_date: "1993-03-20",
+      experience_description: "Javascript",
+      hobby: "Auto/Moto",
+      referenc_company_name: "Juzni pol",
+      referenc_contact_person: "Ivan",
+      referenc_phone: "98765432",
+      referenc_email: "ivan@ivan.co",
+      competence: "Javascript",
+      competence_level: "10",
+      language: "English",
+      language_level: "10",
+      my_company_name: "Juzni pol",
+      my_contact_person: "Ivan",
+      my_referenc_phone: "12345678",
+      my_referenc_email: "ivan@ivan.co",
+      achievements_description: "achievements_description",
+      publications_description: "publications_description",
+      user_id: ""
+    }
   }),
   components: {
     Step1,
@@ -20,11 +62,25 @@ export default {
     Step4,
     Step5
   },
+  computed: mapGetters("user", ["user"]),
   methods: {
     goToStep() {
       this.cvMakerStep++;
+      this.scrollToTop();
+    },
+    goBack() {
+      this.cvMakerStep--;
+      this.scrollToTop();
+    },
+    scrollToTop() {
       const layoutDiv = document.getElementsByClassName("layout-content");
       if (layoutDiv && layoutDiv[0]) layoutDiv[0].scrollTop = 0;
+    },
+    saveCV() {
+      this.cvDetails.user_id = this.user.id;
+      this.$store.dispatch("user/saveCv", this.cvDetails).then(res => {
+        if (res.data.success) this.$router.push("/dashboard/profile");
+      });
     }
   }
 };

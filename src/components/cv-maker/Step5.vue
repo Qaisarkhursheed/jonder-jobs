@@ -25,6 +25,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.my_company_name"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -40,6 +41,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.my_contact_person"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -55,6 +57,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.my_referenc_phone"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -70,6 +73,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.my_referenc_email"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -91,6 +95,7 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.achievements_description"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -112,13 +117,21 @@
           flat
           hide-details
           background-color="white"
+          v-model="value.publications_description"
         ></v-textarea>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="4">
-        <v-btn depressed block outlined color="primary" large>
+        <v-btn
+          depressed
+          block
+          outlined
+          color="primary"
+          large
+          @click="$emit('back')"
+        >
           Back
         </v-btn>
       </v-col>
@@ -129,7 +142,8 @@
           block
           color="dark-blue"
           large
-          @click="$emit('confirm')"
+          :disabled="!isValid"
+          @click="nextStep"
         >
           Finish
         </v-btn>
@@ -140,6 +154,29 @@
 <script>
 import StepHeader from "@/components/cv-maker/StepHeader";
 export default {
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    isValid() {
+      return (
+        this.value.my_company_name.length > 0 &&
+        this.value.my_contact_person.length > 0 &&
+        this.value.my_referenc_phone.length > 0 &&
+        this.value.my_referenc_email.length > 0 &&
+        this.value.achievements_description.length > 0 &&
+        this.value.publications_description.length > 0
+      );
+    }
+  },
+  methods: {
+    nextStep() {
+      if (this.isValid) this.$emit("save");
+    }
+  },
   components: { StepHeader }
 };
 </script>

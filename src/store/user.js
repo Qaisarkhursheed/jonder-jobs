@@ -127,6 +127,10 @@ export default {
           console.error("Error getting search results: ", err);
           return [];
         });
+    },
+
+    saveCv(context, payload) {
+      return axios.post("/cv_store", payload);
     }
   }
 };

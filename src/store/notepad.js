@@ -30,7 +30,7 @@ export default {
 
   actions: {
     getAllNotepads({ commit }, params) {
-      if (!params) params = { offset: 0, limit: 2 };
+      if (!params) params = { offset: 0, limit: 20 };
       return axios
         .get("/notepad/" + params.offset + "/" + params.limit)
         .then(response => {
