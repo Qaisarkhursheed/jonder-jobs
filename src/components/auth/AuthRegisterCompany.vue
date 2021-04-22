@@ -18,7 +18,7 @@
       type="error"
       :icon="false"
     >
-      Please correct marked fields.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.
     </v-alert>
 
     <div>
@@ -191,9 +191,9 @@ export default {
     }),
 
     async handleRegister() {
-      this.showValidationMessage = false;
       this.validationErrors = {};
-      if (!this.$refs.form.validate()) {
+      await this.$refs.form.validate();
+      if (!this.isValid) {
         this.showValidationMessage = true;
         this.$emit("changeImage");
         return false;

@@ -1,6 +1,6 @@
 <template>
-  <auth-wrap img="1">
-    <auth-register />
+  <auth-wrap :img="img">
+    <auth-register @changeImage="changeImage" />
   </auth-wrap>
 </template>
 
@@ -12,6 +12,14 @@ export default {
   components: {
     AuthWrap,
     AuthRegister
+  },
+  data: () => ({
+    img: 1
+  }),
+  methods: {
+    changeImage() {
+      this.img = 2;
+    }
   }
 };
 </script>

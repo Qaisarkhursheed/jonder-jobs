@@ -8,98 +8,149 @@
       Morbi at venenatis.
     </jonder-title>
 
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
-      felis eu libero.
-    </p>
+    <v-row class="mb-1">
+      <v-col cols="12">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
+        ultricies felis eu libero.
+      </v-col>
+    </v-row>
+
+    <v-alert
+      v-if="showValidationMessage && !isValid"
+      text
+      prominent
+      type="error"
+      :icon="false"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.
+    </v-alert>
 
     <div>
-      <form class="auth-form" action="#" @submit.prevent="handleRegister">
-        <v-text-field
-          dense
-          label="Vorname"
-          :rules="rules"
-          type="text"
-          outlined
-          background-color="white"
-          v-model="formData.first_name"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          label="Nachname"
-          :rules="rules"
-          type="text"
-          outlined
-          background-color="white"
-          v-model="formData.last_name"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          label="Email Addresse"
-          :rules="rules"
-          type="email"
-          outlined
-          background-color="white"
-          v-model="formData.email"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          label="Passwort"
-          type="password"
-          :rules="rules"
-          outlined
-          background-color="white"
-          v-model="formData.password"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          label="Repeat Passwort"
-          type="password"
-          :rules="[
-            formData.password === formData.password_confirmation ||
-              'Passwort muss übereinstimmen',
-            rules[0]
-          ]"
-          outlined
-          background-color="white"
-          v-model="formData.password_confirmation"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          label="Telefonnummer"
-          type="number"
-          :rules="rules"
-          outlined
-          background-color="white"
-          v-model="formData.phone"
-        ></v-text-field>
-
-        <p class="caption text-left">
-          Du bist bereits Mitglied?
-          <router-link to="/login">Hier einloggen</router-link>
-        </p>
-
-        <v-checkbox
-          label="Möchten Sie, dass wir Ihren Namen anzeigen?"
-          hide-details="auto"
-          v-model="formData.show_name"
-        ></v-checkbox>
-
-        <v-checkbox
-          label="Möchten Sie, dass wir Ihren Standort anzeigen?"
-          hide-details="auto"
-          v-model="formData.show_location"
-        ></v-checkbox>
-
-        <v-btn type="submit" color="primary" class="full-w mt-5">
-          Kostenlos registrieren
-        </v-btn>
-      </form>
+      <v-form
+        ref="form"
+        class="auth-form"
+        action="#"
+        v-model="isValid"
+        @submit.prevent="handleRegister"
+      >
+        <v-row>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Vorname"
+              :rules="rules"
+              type="text"
+              outlined
+              background-color="white"
+              v-model="formData.first_name"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Nachname"
+              :rules="rules"
+              type="text"
+              outlined
+              background-color="white"
+              v-model="formData.last_name"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Email Addresse"
+              :rules="[!validationErrors.email || 'Email exists', ...rules]"
+              type="text"
+              outlined
+              background-color="white"
+              v-model="formData.email"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Passwort"
+              :rules="rules"
+              type="password"
+              outlined
+              background-color="white"
+              v-model="formData.password"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Repeat Passwort"
+              :rules="[
+                formData.password === formData.password_confirmation ||
+                  'Passwort muss übereinstimmen',
+                rules[0]
+              ]"
+              type="password"
+              outlined
+              background-color="white"
+              v-model="formData.password_confirmation"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
+              label="Telefonnummer"
+              :rules="[
+                formData.phone.match(
+                  /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .\-–\/]?)([\d]+))/
+                )
+                  ? true
+                  : 'Invalid phone'
+              ]"
+              type="text"
+              outlined
+              background-color="white"
+              v-model="formData.phone"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <div class="caption text-left">
+              Du bist bereits Mitglied?
+              <router-link to="/login">Hier einloggen</router-link>
+            </div>
+            <v-checkbox
+              label="Möchten Sie, dass wir Ihren Namen anzeigen?"
+              hide-details="auto"
+              v-model="formData.show_name"
+            ></v-checkbox>
+            <v-checkbox
+              label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+              hide-details="auto"
+              v-model="formData.show_location"
+            ></v-checkbox>
+          </v-col>
+          <v-col cols="12">
+            <v-btn type="submit" color="primary" class="full-w" large>
+              Kostenlos registrieren
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
     </div>
   </v-container>
 </template>
@@ -129,7 +180,10 @@ export default {
       rules: [
         value => !!value || "Required.",
         value => (value && value.length >= 3) || "Min 3 characters"
-      ]
+      ],
+      showValidationMessage: false,
+      validationErrors: {},
+      isValid: false
     };
   },
   methods: {
@@ -138,9 +192,24 @@ export default {
     }),
 
     async handleRegister() {
-      await this.register(this.formData);
-      console.log("Register");
-      this.$router.replace({ name: "Home" });
+      this.validationErrors = {};
+      await this.$refs.form.validate();
+      if (!this.isValid) {
+        this.showValidationMessage = true;
+        this.$emit("changeImage");
+        return false;
+      }
+
+      let response = await this.register(this.formData);
+      
+      if (response.success) {
+        this.$router.replace({ name: "ManualOnboarding" });
+      } else {
+        this.validationErrors = response.message;
+        this.showValidationMessage = true;
+        this.$refs.form.validate();
+        this.$emit("changeImage");
+      }
     }
   }
 };
