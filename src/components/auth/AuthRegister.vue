@@ -135,8 +135,7 @@ export default {
 
     async handleRegister() {
       await this.register(this.formData);
-      console.log("Register");
-      this.$router.replace({ name: "Home" });
+      this.$router.replace({ name: "Login" });
     }
   }
 };
