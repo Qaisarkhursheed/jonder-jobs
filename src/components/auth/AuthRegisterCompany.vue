@@ -190,24 +190,25 @@ export default {
       register: "auth/register"
     }),
 
-    handleRegister() {
+    async handleRegister() {
       this.showValidationMessage = false;
+      this.validationErrors = {};
       if (!this.$refs.form.validate()) {
         this.showValidationMessage = true;
         this.$emit("changeImage");
         return false;
       }
-
-      this.register(this.formData)
-        .then(() => {
-          this.$router.replace({ name: "Home" });
-        })
-        .catch(errors => {
-          this.validationErrors = errors;
-          this.showValidationMessage = true;
-          this.$refs.form.validate();
-          this.$emit("changeImage");
-        });
+      
+      let response = await this.register(this.formData);
+      
+      if (response.success) {
+        this.$router.replace({ name: "ManualOnboardingCompany" });
+      } else {
+        this.validationErrors = response.message;
+        this.showValidationMessage = true;
+        this.$refs.form.validate();
+        this.$emit("changeImage");
+      }
     }
   }
 };

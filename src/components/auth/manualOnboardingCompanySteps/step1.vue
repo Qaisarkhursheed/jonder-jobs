@@ -36,7 +36,10 @@
           <label>About company</label>
           <v-textarea
             v-model="formData.about_company"
-            :rules="rules"
+            :rules="[
+              !!formData.about_company || 'Required.',
+              (formData.about_company && formData.about_company.length >= 6) || 'Min 6 characters'
+            ]"
             dense
             label="About company"
             outlined

@@ -2,7 +2,7 @@
   <div class="auth-moc-wrap d-flex flex-column justify-center full-h">
     <v-alert text color="info">
       <h2 class="text-h5 primary--text mt-2">
-        Hallo John Doe!
+        Hallo {{ getUserFullName }}!
       </h2>
       <p class="body-1 mt-3">
         Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices
@@ -46,6 +46,7 @@ import Step1 from "@/components/auth/manualOnboardingCompanySteps/step1.vue";
 import Step2 from "@/components/auth/manualOnboardingCompanySteps/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingCompanySteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingCompanySteps/step4.vue";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: "AuthManualOnboardingCompany",
@@ -58,30 +59,40 @@ export default {
   data: () => ({
     currentStep: 1,
     maxSteps: 4,
-    form: {
+    formData: {
+      // profile_img: null,
       company: "",
       jobs: "",
-      aboutCompany: ""
+      about_company: "",
+      role_in_company: "",
+      company_employees: "",
+      department: ""
     }
   }),
   methods: {
+    ...mapActions("user", ["postOnboardingCompany"]),
+
     prevStep() {
       this.currentStep !== 1 ? this.currentStep-- : this.currentStep;
     },
     nextStep(submittedForm) {
-      this.form = { ...this.form, ...submittedForm };
+      this.formData = { ...this.formData, ...submittedForm };
 
       if (this.currentStep === 4) {
-        this.handleRegister();
+        this.handleOnboarding();
       } else {
         this.currentStep !== this.maxSteps
           ? this.currentStep++
           : this.currentStep;
       }
     },
-    handleRegister() {
-      // TODO:
+    async handleOnboarding() {
+      await this.postOnboardingCompany(this.formData);
+      this.$router.replace({ name: "Dashboard" });
     }
+  },
+  computed: {
+    ...mapGetters("user", ["getUserFullName"])
   }
 };
 </script>

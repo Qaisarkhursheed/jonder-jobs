@@ -68,7 +68,7 @@ const routes = [{
     name: "ManualOnboarding",
     component: ManualOnboarding,
     meta: {
-      guest: true
+      requiresAuth: true,
     }
   },
   {
@@ -76,7 +76,7 @@ const routes = [{
     name: "ManualOnboardingCompany",
     component: ManualOnboardingCompany,
     meta: {
-      guest: true
+      requiresAuth: true,
     }
   },
   {

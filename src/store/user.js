@@ -88,6 +88,20 @@ export default {
         });
     },
 
+    postOnboardingCompany({ commit }, data) {
+      console.log(data);
+      return axios
+        .post("/company/onboarding", data)
+        .then(resp => {
+          if (resp.data.success && resp.data.user) {
+            commit("SET_USER", resp.data.user);
+          }
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+
     getUser({ commit }, userId) {
       return axios
         .get("/users/" + userId)
@@ -138,10 +152,8 @@ export default {
 const transformSearchResult = (user, dispatch) => {
   dispatch("stats/updateSearchView", user.id, { root: true });
   return {
-    name:
-      user.role === "user"
-        ? user.first_name + " " + user.last_name
-        : user.company,
+    name: user.role === "user" ?
+      user.first_name + " " + user.last_name : user.company,
     id: user.id
   };
 };
