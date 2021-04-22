@@ -5,7 +5,8 @@
     </jonder-title>
 
     <v-btn outlined color="primary" class="full-w mt-4"
-      >Continue with Google</v-btn
+    >Continue with Google
+    </v-btn
     >
     <v-btn color="primary" class="full-w mt-4">Continue with Facebook</v-btn>
 
@@ -35,12 +36,13 @@
           background-color="white"
           hide-details="auto"
           v-model="formData.password"
+          class="mb-6"
         ></v-text-field>
 
-        <v-checkbox
-          label="Ich stimme der Datenschutzerklärung zu."
-          v-model="formData.privacy"
-        ></v-checkbox>
+        <!--        <v-checkbox-->
+        <!--          label="Ich stimme der Datenschutzerklärung zu."-->
+        <!--          v-model="formData.privacy"-->
+        <!--        ></v-checkbox>-->
 
         <v-btn type="submit" color="primary" class="full-w">Loggen Sie</v-btn>
       </form>
@@ -87,7 +89,9 @@ export default {
       this.response = await this.login(this.formData);
 
       if (this.response.success) {
-        this.$router.replace({ name: "Dashboard" });
+        if (this.response.onboarding_status)
+          this.$router.replace({ name: "Dashboard" });
+        else this.$router.replace({ name: "ManualOnboarding" });
       } else {
         this.message.show = true;
         this.message.text = this.response.message || "Wrong credentials";

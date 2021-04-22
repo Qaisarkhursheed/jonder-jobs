@@ -1,80 +1,55 @@
 <template>
-  <v-card flat>
+  <v-card class="chat-conversations" flat>
     <v-list subheader class="pb-0">
-      <v-list-item-group v-model="selectedItem" color="primary">
-        <template v-for="(chat, index) in recent">
-          <v-list-item :key="chat.title" @click="$emit('clicked')">
-            <v-list-item-avatar>
-              <v-img :alt="`${chat.title} avatar`" :src="chat.avatar"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="chat.title"></v-list-item-title>
-              <v-list-item-subtitle
-                v-text="chat.content"
-              ></v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-icon class="flex-column text-right">
-              <div><small>18:30</small></div>
-              <v-badge color="blue" content="6" inline></v-badge>
-            </v-list-item-icon>
-          </v-list-item>
-          <v-divider v-if="index < recent.length - 1" :key="index"></v-divider>
+      <v-list-item-group color="primary">
+        <template v-for="(conversation, index) in conversations">
+          <chat-asside-item
+            :key="conversation.user_id"
+            :conversation="conversation"
+            @loading="loading = $event"
+            @reload="refreshConversations"
+          />
+          <v-divider
+            v-if="index < conversations.length - 1"
+            :key="index"
+          ></v-divider>
         </template>
       </v-list-item-group>
     </v-list>
+    <div class="overlay" v-if="loading"></div>
   </v-card>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import ChatAssideItem from "@/components/chat/ChatAssideItem";
+
 export default {
+  components: { ChatAssideItem },
   data: () => ({
-    selectedItem: null,
-    recent: [
-      {
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Jason Oner",
-        content: "Chat content"
-      },
-      {
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title: "Mike Carlson",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Cindy Baker",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Ali Connors",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Ali Connors",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Ali Connors",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Ali Connors",
-        content: "Chat content"
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Ali Connors",
-        content: "Chat content"
-      }
-    ]
-  })
+    loading: false
+  }),
+  computed: mapGetters("chat", ["conversations"]),
+  methods: {
+    refreshConversations() {
+      this.$store.dispatch("chat/getAllConversations");
+    }
+  }
 };
 </script>
+
+<style lang="scss">
+.chat-conversations {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+  }
+}
+</style>

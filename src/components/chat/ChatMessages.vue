@@ -2,13 +2,22 @@
   <v-card flat class="messages-holder full-h d-flex flex-column">
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-2">
       <v-list-item class="grow">
-        <v-list-item-avatar>
-          <v-img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'"></v-img>
+        <v-list-item-avatar color="blue" @click="$emit('show-profile')">
+          <v-img
+            v-if="conversationDetails.profile_img"
+            :alt="`${conversationDetails.user_name} avatar`"
+            :src="conversationDetails.profile_img"
+          ></v-img>
+          <span class="white--text full-w text-center d-block" v-else>{{
+              getInitials(conversationDetails)
+            }}</span>
         </v-list-item-avatar>
 
-        <v-list-item-content>
-          <v-list-item-title>Jason Oner</v-list-item-title>
-          <v-list-item-subtitle>Online now</v-list-item-subtitle>
+        <v-list-item-content @click="$emit('show-profile')">
+          <v-list-item-title
+            >{{ conversationDetails.user_name }}
+          </v-list-item-title>
+          <!--<v-list-item-subtitle>Online now</v-list-item-subtitle>-->
         </v-list-item-content>
 
         <v-row align="center" justify="end">
@@ -28,19 +37,19 @@
       <div
         v-for="msg in messages"
         :key="msg.id"
-        :class="{ 'text-right': msg.isMy }"
+        :class="{ 'text-right': msg.send_by === msg.user_id }"
       >
         <v-card
           flat
           class="message rounded-lg"
           :class="[
-            { 'my-message': msg.isMy },
-            [msg.isMy ? 'rounded-tr-0' : 'rounded-tl-0']
+            { 'my-message': msg.send_by === msg.user_id },
+            [msg.send_by === msg.user_id ? 'rounded-tr-0' : 'rounded-tl-0']
           ]"
         >
           <v-card-text>
-            <div v-text="msg.content"></div>
-            <div><small v-text="msg.time"></small></div>
+            <div v-text="msg.message"></div>
+            <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
           </v-card-text>
         </v-card>
       </div>
@@ -57,28 +66,66 @@
         background-color="white"
         rows="3"
         auto-grow
-        >Message</v-textarea
-      >
-      <v-icon class="message-type-new-send">mdi-send-outline</v-icon>
+        v-model="newMessage"
+        >Message
+      </v-textarea>
+      <v-icon v-if="!loading" @click="send" class="message-type-new-send"
+        >mdi-send-outline
+      </v-icon>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     messages: {
       type: Array,
       required: true
+    },
+    conversationDetails: {
+      type: Object,
+      required: true
     }
   },
+  data: () => ({
+    newMessage: "",
+    loading: false
+  }),
   mounted() {
     this.scrollToBottom();
   },
   methods: {
+    ...mapActions("chat", ["sendMessage", "getSingleConversation"]),
     scrollToBottom() {
       const messageListDiv = document.getElementById("messageList");
-      messageListDiv.scrollTop = messageListDiv.scrollHeight;
+      if (messageListDiv) {
+        setTimeout(() => {
+          messageListDiv.scrollTop = messageListDiv.scrollHeight;
+        });
+      }
+    },
+    async send() {
+      this.loading = true;
+      await this.sendMessage({
+        send_to: this.conversationDetails.user_id,
+        message: this.newMessage
+      });
+      this.newMessage = "";
+      this.loading = false;
+    },
+    getInitials(conversation) {
+      return (
+        conversation.user_name.charAt(0) +
+        conversation.user_name.split(" ")[1].charAt(0)
+      );
+    }
+  },
+  watch: {
+    messages() {
+      this.scrollToBottom();
     }
   }
 };
@@ -102,12 +149,15 @@ export default {
 
 .message-type-new {
   position: relative;
+
   label {
     top: 10px !important;
   }
+
   fieldset {
     border-color: #d4d4d4 !important;
   }
+
   .message-type-new-send {
     position: absolute;
     bottom: 36px;
