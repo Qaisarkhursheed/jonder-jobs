@@ -99,6 +99,7 @@ export default {
   },
   methods: {
     ...mapActions("chat", ["sendMessage", "getSingleConversation"]),
+    ...mapActions("stats", ["updateMessageYou"]),
     scrollToBottom() {
       const messageListDiv = document.getElementById("messageList");
       if (messageListDiv) {
@@ -113,6 +114,7 @@ export default {
         send_to: this.conversationDetails.user_id,
         message: this.newMessage
       });
+      this.updateMessageYou(this.conversationDetails.user_id);
       this.newMessage = "";
       this.loading = false;
     },

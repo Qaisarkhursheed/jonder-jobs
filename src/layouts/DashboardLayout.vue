@@ -109,13 +109,16 @@ export default {
   watch: {
     search(val) {
       this.searchLoading = true;
-      if (val && val !== this.searchString) this.handleSearch(val);
+      if (val && val.trim().length > 0 && val !== this.searchString)
+        this.handleSearch(val);
     },
     searchString(val) {
       if (val) {
-        this.search = null;
-        this.searchString = null;
         this.$router.push("/dashboard/profile/view/" + val);
+        setTimeout(() => {
+          this.search = null;
+          this.searchString = null;
+        });
       }
     }
   }

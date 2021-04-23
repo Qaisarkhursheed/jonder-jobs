@@ -69,8 +69,9 @@ export default {
   methods: {
     init() {
       if (this.$route.params.id) {
-        this.$store.dispatch("user/getUser", this.$route.params.id);
-        this.$store.dispatch("stats/updateProfileView", this.$route.params.id);
+        const userId = parseInt(this.$route.params.id);
+        this.$store.dispatch("user/getUser", userId);
+        this.$store.dispatch("stats/updateProfileView", userId);
       } else this.$router.push("/dashboard");
     }
   },

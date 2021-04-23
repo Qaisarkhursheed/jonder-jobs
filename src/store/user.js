@@ -107,6 +107,7 @@ export default {
         .get("/users/" + userId)
         .then(resp => {
           if (resp.data) commit("SET_USER_DETAILS", resp.data);
+          return resp;
         })
         .catch(err => {
           console.error("Error getting user details:", err);

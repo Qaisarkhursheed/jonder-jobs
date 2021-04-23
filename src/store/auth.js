@@ -5,7 +5,7 @@ export default {
 
   state: {
     token: localStorage.getItem("user-token") || "",
-    authenticated: false,
+    authenticated: localStorage.getItem("user-token") !== null,
     message: null
   },
 
