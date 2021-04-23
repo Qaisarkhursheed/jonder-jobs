@@ -61,7 +61,7 @@
               <div class="promo-content">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et, felis nisl vitae amet netus quis netus. Ornare phasellus eget aenean sed sit. Nulla posuere arcu ullamcorper turpis pretium placerat enim. In dui est lobortis ornare integer mattis mi feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim nulla non
                 <div class="promo-actions">
-                  <router-link to="/register" class="button dark-blue fill">Registrieren</router-link>
+                  <router-link to="/register-company" class="button dark-blue fill">Registrieren</router-link>
                 </div>
               </div>
             </div>

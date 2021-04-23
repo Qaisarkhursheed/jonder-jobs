@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    class="auth-register-wrap justify-content-center align-center"
-    fluid
-    no-gutters
-  >
+  <v-container class="auth-register-wrap align-center" fluid no-gutters>
     <jonder-title>
       Morbi at venenatis.
     </jonder-title>
@@ -30,8 +26,8 @@
         ref="form"
         class="auth-form"
         action="#"
-        v-model="isValid"
         @submit.prevent="handleRegister"
+        v-model="isValid"
       >
         <v-row>
           <v-col cols="12">
@@ -65,9 +61,23 @@
           <v-col cols="12">
             <v-text-field
               dense
+              label="Name der Firma"
+              :rules="rules"
+              type="text"
+              outlined
+              background-color="white"
+              v-model="formData.company"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
               label="Email Addresse"
               :rules="[!validationErrors.email || 'Email exists', ...rules]"
-              type="text"
+              type="email"
               outlined
               background-color="white"
               v-model="formData.email"
@@ -79,9 +89,29 @@
           <v-col cols="12">
             <v-text-field
               dense
+              label="Telefonnummer"
+              type="text"
+              :rules="[
+                formData.phone.match(
+                  /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .\-–\/]?)([\d]+))/
+                )
+                  ? true
+                  : 'Invalid phone'
+              ]"
+              outlined
+              background-color="white"
+              v-model="formData.phone"
+              hide-details
+              solo
+              flat
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              dense
               label="Passwort"
-              :rules="rules"
               type="password"
+              :rules="rules"
               outlined
               background-color="white"
               v-model="formData.password"
@@ -94,35 +124,15 @@
             <v-text-field
               dense
               label="Repeat Passwort"
+              type="password"
               :rules="[
                 formData.password === formData.password_confirmation ||
                   'Passwort muss übereinstimmen',
                 rules[0]
               ]"
-              type="password"
               outlined
               background-color="white"
               v-model="formData.password_confirmation"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Telefonnummer"
-              :rules="[
-                formData.phone.match(
-                  /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .\-–\/]?)([\d]+))/
-                )
-                  ? true
-                  : 'Invalid phone'
-              ]"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.phone"
               hide-details
               solo
               flat
@@ -133,16 +143,6 @@
               Du bist bereits Mitglied?
               <router-link to="/login">Hier einloggen</router-link>
             </div>
-            <v-checkbox
-              label="Möchten Sie, dass wir Ihren Namen anzeigen?"
-              hide-details="auto"
-              v-model="formData.show_name"
-            ></v-checkbox>
-            <v-checkbox
-              label="Möchten Sie, dass wir Ihren Standort anzeigen?"
-              hide-details="auto"
-              v-model="formData.show_location"
-            ></v-checkbox>
           </v-col>
           <v-col cols="12">
             <v-btn type="submit" color="primary" class="full-w" large>
@@ -160,7 +160,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
 
 export default {
-  name: "AuthRegister",
+  name: "AuthRegisterCompany",
   components: {
     JonderTitle
   },
@@ -173,17 +173,16 @@ export default {
         password: "",
         password_confirmation: "",
         phone: "",
-        show_name: false,
-        show_location: false,
-        role: "user"
+        company: "",
+        role: "company"
       },
       rules: [
         value => !!value || "Required.",
         value => (value && value.length >= 3) || "Min 3 characters"
       ],
+      isValid: false,
       showValidationMessage: false,
-      validationErrors: {},
-      isValid: false
+      validationErrors: {}
     };
   },
   methods: {
@@ -199,11 +198,11 @@ export default {
         this.$emit("changeImage");
         return false;
       }
-
+      
       let response = await this.register(this.formData);
       
       if (response.success) {
-        this.$router.replace({ name: "ManualOnboarding" });
+        this.$router.replace({ name: "ManualOnboardingCompany" });
       } else {
         this.validationErrors = response.message;
         this.showValidationMessage = true;

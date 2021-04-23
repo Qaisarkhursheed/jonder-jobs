@@ -91,7 +91,10 @@ export default {
       if (this.response.success) {
         if (this.response.onboarding_status)
           this.$router.replace({ name: "Dashboard" });
-        else this.$router.replace({ name: "ManualOnboarding" });
+        else if(this.response.user.role === "user")
+          this.$router.replace({ name: "ManualOnboarding" });
+        else if(this.response.user.role === "company")
+          this.$router.replace({ name: "ManualOnboardingCompany" });
       } else {
         this.message.show = true;
         this.message.text = this.response.message || "Wrong credentials";

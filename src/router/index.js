@@ -7,8 +7,10 @@ import Landing from "../views/Landing.vue";
 // import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
+import RegisterCompany from "../views/auth/RegisterCompany";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
+import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
 import DashboardWrap from "../views/Dashboard";
 import Dashboard from "../views/dashboard/Dashboard";
 import ProfileWrap from "../views/dashboard/ProfileWrap";
@@ -21,8 +23,7 @@ import CvMaker from "../views/dashboard/profile/CvMaker";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Home",
     component: Landing,
@@ -55,11 +56,27 @@ const routes = [
     }
   },
   {
+    path: "/register-company",
+    name: "RegisterCompany",
+    component: RegisterCompany,
+    meta: {
+      guest: true
+    }
+  },
+  {
     path: "/onboarding",
     name: "ManualOnboarding",
     component: ManualOnboarding,
     meta: {
-      guest: true
+      requiresAuth: true,
+    }
+  },
+  {
+    path: "/onboarding-company",
+    name: "ManualOnboardingCompany",
+    component: ManualOnboardingCompany,
+    meta: {
+      requiresAuth: true,
     }
   },
   {
@@ -69,8 +86,7 @@ const routes = [
       requiresAuth: true,
       isAdmin: false
     },
-    children: [
-      {
+    children: [{
         path: "",
         name: "Dashboard",
         component: Dashboard,
@@ -95,8 +111,7 @@ const routes = [
           requiresAuth: true,
           isAdmin: false
         },
-        children: [
-          {
+        children: [{
             path: "",
             name: "Profile",
             component: Profile,

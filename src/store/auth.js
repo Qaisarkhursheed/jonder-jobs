@@ -51,16 +51,28 @@ export default {
     },
 
     async register({ commit }, data) {
-      await axios
-        .post("/register", data)
-        .then(() => {
-          commit("SET_MESSAGE", "User registered");
+      let response = {};
+
+      await axios.post("/register", data)
+        .then(resp => {
+          if (resp.data.success && resp.data.user) {
+            const token = resp.data.token;
+            const user = JSON.stringify(resp.data.user);
+            localStorage.setItem("user-token", token);
+            localStorage.setItem("user", user);
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+            commit("SET_AUTHENTICATED", true);
+          }
+          response = resp.data;
         })
         .catch(err => {
-          console.log("Register error:", err);
-
-          commit("SET_MESSAGE", "Register error");
+          localStorage.removeItem("user-token");
+          localStorage.removeItem("user");
+          commit("SET_AUTHENTICATED", false);
+          response = err.response.data;
         });
+
+      return response;
     },
 
     async forgotpass({ commit }, data) {

@@ -18,8 +18,16 @@
       </v-col>
       <!-- Right half -->
       <v-col class="full-h" style="position: relative">
-        <div class="auth-wrap d-flex flex-column justify-center align-center">
-          <slot></slot>
+        <div class="auth-wrap">
+          <div class="auth-logo d-flex flex-column justify-center align-center">
+            <v-img
+              :src="require('@/assets/jonder_blue.png')"
+              max-width="128px"
+            ></v-img>
+          </div>
+          <div class="auth-form d-flex flex-column justify-center align-center">
+            <slot></slot>
+          </div>
         </div>
       </v-col>
     </v-row>
@@ -49,8 +57,12 @@ export default {
 .auth-wrap {
   height: 100%;
   padding: 30px;
-  padding-top: 150px;
-  padding-bottom: 60px;
   overflow: auto;
+  .auth-logo {
+    height: 40px;
+  }
+  .auth-form {
+    height: calc(100% - 40px);
+  }
 }
 </style>

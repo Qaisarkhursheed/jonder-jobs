@@ -1,17 +1,17 @@
 <template>
   <auth-wrap :img="img">
-    <auth-register @changeImage="changeImage" />
+    <auth-register-company @changeImage="changeImage" />
   </auth-wrap>
 </template>
 
 <script>
 import AuthWrap from "@/components/auth/AuthWrap.vue";
-import AuthRegister from "@/components/auth/AuthRegister";
+import AuthRegisterCompany from "@/components/auth/AuthRegisterCompany";
 
 export default {
   components: {
     AuthWrap,
-    AuthRegister
+    AuthRegisterCompany
   },
   data: () => ({
     img: 1
