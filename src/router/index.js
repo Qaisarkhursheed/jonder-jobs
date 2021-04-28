@@ -21,6 +21,13 @@ import Chat from "../views/dashboard/Chat";
 import ProductPricing from "../views/dashboard/ProductPricing";
 import CvMaker from "../views/dashboard/profile/CvMaker";
 
+// Company base view
+import CompanyLayout from "@/layouts/CompanyLayout";
+import CompanyDashboard from "@/views/company/Dashboard";
+import CompanySearch from "@/views/company/Search";
+import CompanyProfile from "@/views/company/Profile";
+
+
 Vue.use(VueRouter);
 
 const routes = [{
@@ -165,6 +172,40 @@ const routes = [{
         meta: {
           requiresAuth: true,
           isAdmin: false
+        }
+      }
+    ]
+  },
+  {
+    path: "/company-dashboard",
+    name: "CompanyDashboard",
+    component: CompanyLayout,
+    meta: {
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: "",
+        name: "CompanyDashboard",
+        component: CompanyDashboard,
+        meta: {
+          requiresAuth: true,
+        }
+      },
+      {
+        path: "profile",
+        name: "CompanyProfile",
+        component: CompanyProfile,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "search",
+        name: "CompanySearch",
+        component: CompanySearch,
+        meta: {
+          requiresAuth: true
         }
       }
     ]
