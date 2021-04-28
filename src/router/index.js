@@ -26,6 +26,8 @@ import CompanyLayout from "@/layouts/CompanyLayout";
 import CompanyDashboard from "@/views/company/Dashboard";
 import CompanySearch from "@/views/company/Search";
 import CompanyProfile from "@/views/company/Profile";
+import CompanyProducts from "@/views/company/Products";
+import CompanyInbox from "@/views/company/Inbox";
 
 
 Vue.use(VueRouter);
@@ -178,7 +180,6 @@ const routes = [{
   },
   {
     path: "/company-dashboard",
-    name: "CompanyDashboard",
     component: CompanyLayout,
     meta: {
       requiresAuth: true
@@ -201,9 +202,25 @@ const routes = [{
         }
       },
       {
+        path: "products",
+        name: "CompanyProducts",
+        component: CompanyProducts,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: "search",
         name: "CompanySearch",
         component: CompanySearch,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "inbox",
+        name: "CompanyInbox",
+        component: CompanyInbox,
         meta: {
           requiresAuth: true
         }
