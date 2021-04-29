@@ -15,7 +15,7 @@
                 color="primary"
                 class="pl-8 pr-8"
                 @click="handleUpdate"
-              >Save
+                >Save
               </v-btn>
             </v-col>
           </v-row>
@@ -106,6 +106,6 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 10;
-  background: rgba(255, 255, 255, .6);
+  background: rgba(255, 255, 255, 0.6);
 }
 </style>

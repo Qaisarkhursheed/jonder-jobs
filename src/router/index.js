@@ -23,7 +23,8 @@ import CvMaker from "../views/dashboard/profile/CvMaker";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     name: "Home",
     component: Landing,
@@ -68,7 +69,7 @@ const routes = [{
     name: "ManualOnboarding",
     component: ManualOnboarding,
     meta: {
-      requiresAuth: true,
+      requiresAuth: true
     }
   },
   {
@@ -76,7 +77,7 @@ const routes = [{
     name: "ManualOnboardingCompany",
     component: ManualOnboardingCompany,
     meta: {
-      requiresAuth: true,
+      requiresAuth: true
     }
   },
   {
@@ -86,7 +87,8 @@ const routes = [{
       requiresAuth: true,
       isAdmin: false
     },
-    children: [{
+    children: [
+      {
         path: "",
         name: "Dashboard",
         component: Dashboard,
@@ -111,7 +113,8 @@ const routes = [{
           requiresAuth: true,
           isAdmin: false
         },
-        children: [{
+        children: [
+          {
             path: "",
             name: "Profile",
             component: Profile,
@@ -191,7 +194,7 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user-token") == null) {
       next({
@@ -199,8 +202,7 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath }
       });
     } else {
-      store.dispatch("user/me");
-      let user = JSON.parse(localStorage.getItem("user"));
+      let user = await store.dispatch("user/me");
 
       if (to.matched.some(record => record.meta.isAdmin)) {
         if (user.role === "admin") {
@@ -218,7 +220,11 @@ router.beforeEach((to, from, next) => {
         }
       }
     }
-  } else if (to.matched.some(record => record.name === "Login" || record.name === "Register")) {
+  } else if (
+    to.matched.some(
+      record => record.name === "Login" || record.name === "Register"
+    )
+  ) {
     if (localStorage.getItem("user-token") == null) {
       next();
     } else {

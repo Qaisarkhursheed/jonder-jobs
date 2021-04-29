@@ -38,7 +38,8 @@
             v-model="formData.about_company"
             :rules="[
               !!formData.about_company || 'Required.',
-              (formData.about_company && formData.about_company.length >= 6) || 'Min 6 characters'
+              (formData.about_company && formData.about_company.length >= 6) ||
+                'Min 6 characters'
             ]"
             dense
             label="About company"

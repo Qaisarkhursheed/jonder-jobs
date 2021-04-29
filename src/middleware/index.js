@@ -6,10 +6,8 @@ axios.defaults.baseURL = process.env.VUE_APP_API_BASE;
 axios.interceptors.request.use(
   config => {
     const token = localStorage.getItem("user-token");
-    config.headers = {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json"
-    };
+    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Accept = "application/json";
     return config;
   },
   error => {

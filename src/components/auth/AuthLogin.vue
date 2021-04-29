@@ -5,9 +5,8 @@
     </jonder-title>
 
     <v-btn outlined color="primary" class="full-w mt-4"
-    >Continue with Google
-    </v-btn
-    >
+      >Continue with Google
+    </v-btn>
     <v-btn color="primary" class="full-w mt-4">Continue with Facebook</v-btn>
 
     <v-alert v-if="message.show" class="mt-4" text type="error">
@@ -91,9 +90,9 @@ export default {
       if (this.response.success) {
         if (this.response.onboarding_status)
           this.$router.replace({ name: "Dashboard" });
-        else if(this.response.user.role === "user")
+        else if (this.response.user.role === "user")
           this.$router.replace({ name: "ManualOnboarding" });
-        else if(this.response.user.role === "company")
+        else if (this.response.user.role === "company")
           this.$router.replace({ name: "ManualOnboardingCompany" });
       } else {
         this.message.show = true;

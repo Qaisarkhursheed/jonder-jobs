@@ -56,8 +56,10 @@ export default {
     userDetailsInitials(state) {
       let initials = "";
       if (state.userDetails) {
-        if (state.userDetails.first_name) initials += state.userDetails.first_name.charAt(0);
-        if (state.userDetails.last_name) initials += state.userDetails.last_name.charAt(0);
+        if (state.userDetails.first_name)
+          initials += state.userDetails.first_name.charAt(0);
+        if (state.userDetails.last_name)
+          initials += state.userDetails.last_name.charAt(0);
       }
 
       return initials;
@@ -75,11 +77,15 @@ export default {
 
   actions: {
     me({ state, commit }) {
-      if (state.user) return;
+      if (state.user) {
+        return new Promise(resolve => resolve(state.user));
+      }
+
       return axios
         .get("/me")
         .then(response => {
           commit("SET_USER", response.data);
+          return response.data;
         })
         .catch(() => {
           commit("SET_USER", null);
@@ -89,13 +95,30 @@ export default {
     },
 
     postOnboardingCompany({ commit }, data) {
-      console.log(data);
       return axios
         .post("/company/onboarding", data)
         .then(resp => {
           if (resp.data.success && resp.data.user) {
             commit("SET_USER", resp.data.user);
           }
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+
+    postOnboardingUser({ commit }, data) {
+      let formData = new FormData();
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
+      return axios
+        .post("/user/onboarding", formData)
+        .then(resp => {
+          if (resp.data.success && resp.data.user) {
+            commit("SET_USER", resp.data.user);
+          }
+          return resp.data.success;
         })
         .catch(err => {
           console.error("Update user error:", err);
@@ -132,7 +155,8 @@ export default {
     },
 
     searchUsers({ dispatch }, payload) {
-      return axios.get("/search/0/10?data=" + payload)
+      return axios
+        .get("/search/0/10?data=" + payload)
         .then(res => {
           if (res.data.success)
             return res.data.data.map(i => transformSearchResult(i, dispatch));
@@ -153,8 +177,10 @@ export default {
 const transformSearchResult = (user, dispatch) => {
   dispatch("stats/updateSearchView", user.id, { root: true });
   return {
-    name: user.role === "user" ?
-      user.first_name + " " + user.last_name : user.company,
+    name:
+      user.role === "user"
+        ? user.first_name + " " + user.last_name
+        : user.company,
     id: user.id
   };
 };
