@@ -4,10 +4,13 @@
       <v-col cols="6">
         <div class="d-flex align-center">
           <v-avatar color="primary" size="58" class="flex-grow-0 flex-shrink-0">
-            <v-img :src="userDetails.profile_img" v-if="userDetails.profile_img"></v-img>
+            <v-img
+              :src="userDetails.profile_img"
+              v-if="userDetails.profile_img"
+            ></v-img>
             <span class="white--text headline" v-else>{{
-                userDetailsInitials
-              }}</span>
+              userDetailsInitials
+            }}</span>
           </v-avatar>
           <div class="flex-grow-1 flex-shrink-1 pl-2">
             <div class="heading text-color-primary-blue-dark">

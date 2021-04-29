@@ -16,8 +16,14 @@
         </v-col>
         <v-col cols="6" class="links">
           <a class="txt-link text-color-primary-blue-dark">FAQ</a>
-          <router-link to="/register" class="txt-link text-color-primary-blue-dark">Registrieren</router-link>
-          <router-link to="/login" class="button dark-blue fill">Log in</router-link>
+          <router-link
+            to="/register"
+            class="txt-link text-color-primary-blue-dark"
+            >Registrieren</router-link
+          >
+          <router-link to="/login" class="button dark-blue fill"
+            >Log in</router-link
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -25,10 +31,11 @@
     <v-row class="landing-hero">
       <v-col cols="7" class="box">
         <div class="inner">
-          <h1>Lorem ipsum dolor sit amet </h1>
+          <h1>Lorem ipsum dolor sit amet</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui venenatis, neque, massa odio vitae diam.
-            Odio risus in aliquet morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
+            venenatis, neque, massa odio vitae diam. Odio risus in aliquet morbi
+            nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
           </p>
         </div>
       </v-col>
@@ -43,10 +50,11 @@
         </v-col>
         <v-col cols="6" class="box">
           <div class="inner">
-            <h1>Lorem ipsum dolor sit amet </h1>
+            <h1>Lorem ipsum dolor sit amet</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui venenatis, neque, massa odio vitae diam.
-              Odio risus in aliquet morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui venenatis, neque, massa odio vitae diam. Odio risus in aliquet
+              morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
           </div>
         </v-col>
@@ -55,13 +63,25 @@
       <v-row class="landing-promo-blocks">
         <v-col cols="6" class="promo-block-container">
           <div class="promo-block">
-            <v-img class="promo-block-bg" :src="require('@/assets/landing/company.png')" />
+            <v-img
+              class="promo-block-bg"
+              :src="require('@/assets/landing/company.png')"
+            />
             <div class="promo-block-content-holder">
-              <div class="promo-header">Unternehmen </div>
+              <div class="promo-header">Unternehmen</div>
               <div class="promo-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et, felis nisl vitae amet netus quis netus. Ornare phasellus eget aenean sed sit. Nulla posuere arcu ullamcorper turpis pretium placerat enim. In dui est lobortis ornare integer mattis mi feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim nulla non
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et,
+                felis nisl vitae amet netus quis netus. Ornare phasellus eget
+                aenean sed sit. Nulla posuere arcu ullamcorper turpis pretium
+                placerat enim. In dui est lobortis ornare integer mattis mi
+                feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim
+                nulla non
                 <div class="promo-actions">
-                  <router-link to="/register-company" class="button dark-blue fill">Registrieren</router-link>
+                  <router-link
+                    to="/register-company"
+                    class="button dark-blue fill"
+                    >Registrieren</router-link
+                  >
                 </div>
               </div>
             </div>
@@ -69,13 +89,23 @@
         </v-col>
         <v-col cols="6" class="promo-block-container">
           <div class="promo-block">
-            <v-img class="promo-block-bg" :src="require('@/assets/landing/employee.png')" />
+            <v-img
+              class="promo-block-bg"
+              :src="require('@/assets/landing/employee.png')"
+            />
             <div class="promo-block-content-holder">
-              <div class="promo-header">Mitarbeiter </div>
+              <div class="promo-header">Mitarbeiter</div>
               <div class="promo-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et, felis nisl vitae amet netus quis netus. Ornare phasellus eget aenean sed sit. Nulla posuere arcu ullamcorper turpis pretium placerat enim. In dui est lobortis ornare integer mattis mi feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim nulla non
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et,
+                felis nisl vitae amet netus quis netus. Ornare phasellus eget
+                aenean sed sit. Nulla posuere arcu ullamcorper turpis pretium
+                placerat enim. In dui est lobortis ornare integer mattis mi
+                feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim
+                nulla non
                 <div class="promo-actions">
-                  <router-link to="/register" class="button dark-blue fill">Registrieren</router-link>
+                  <router-link to="/register" class="button dark-blue fill"
+                    >Registrieren</router-link
+                  >
                 </div>
               </div>
             </div>
@@ -86,10 +116,11 @@
       <v-row class="landing-section-with-image">
         <v-col cols="6" class="box">
           <div class="inner">
-            <h1>Lorem ipsum dolor sit amet </h1>
+            <h1>Lorem ipsum dolor sit amet</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui venenatis, neque, massa odio vitae diam.
-              Odio risus in aliquet morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui venenatis, neque, massa odio vitae diam. Odio risus in aliquet
+              morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
           </div>
         </v-col>
@@ -144,8 +175,14 @@
           </v-col>
           <v-col cols="6" class="links">
             <a class="txt-link text-color-primary-blue-dark">FAQ</a>
-            <router-link to="/register" class="txt-link text-color-primary-blue-dark">Registrieren</router-link>
-            <router-link to="/login" class="button dark-blue fill">Log in</router-link>
+            <router-link
+              to="/register"
+              class="txt-link text-color-primary-blue-dark"
+              >Registrieren</router-link
+            >
+            <router-link to="/login" class="button dark-blue fill"
+              >Log in</router-link
+            >
           </v-col>
         </v-row>
       </v-container>
@@ -158,7 +195,7 @@
   position: relative;
   height: 100%;
   overflow: auto;
-  background: #EFF2F4;
+  background: #eff2f4;
 
   .button {
     text-decoration: none;
@@ -195,7 +232,7 @@
   .landing-hero {
     min-height: 740px;
     .box {
-      background: rgba(2, 83, 179, .8);
+      background: rgba(2, 83, 179, 0.8);
       padding: 42px;
       height: 540px;
       color: white;
@@ -257,12 +294,12 @@
       .promo-block-content-holder {
         position: relative;
         z-index: 10;
-        background: rgba(0,0,0,.6);
+        background: rgba(0, 0, 0, 0.6);
         color: white;
       }
 
       .promo-header {
-        background: rgba(2, 83, 179, .8);
+        background: rgba(2, 83, 179, 0.8);
         font-size: 32px;
         font-weight: 700;
         padding: 38px 57px;
@@ -276,7 +313,9 @@
       .promo-actions {
         margin-top: 40px;
 
-        .button {display: inline-block}
+        .button {
+          display: inline-block;
+        }
       }
     }
   }

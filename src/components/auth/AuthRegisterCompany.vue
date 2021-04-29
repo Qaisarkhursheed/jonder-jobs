@@ -18,7 +18,8 @@
       type="error"
       :icon="false"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
+      felis eu libero.
     </v-alert>
 
     <div>
@@ -198,9 +199,9 @@ export default {
         this.$emit("changeImage");
         return false;
       }
-      
+
       let response = await this.register(this.formData);
-      
+
       if (response.success) {
         this.$router.replace({ name: "ManualOnboardingCompany" });
       } else {

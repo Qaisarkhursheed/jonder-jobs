@@ -1,9 +1,7 @@
 <template>
   <div class="auth-moc-wrap d-flex flex-column justify-center full-h">
     <v-alert text color="info">
-      <h2 class="text-h5 primary--text mt-2">
-        Hallo {{ getUserFullName }}!
-      </h2>
+      <h2 class="text-h5 primary--text mt-2">Hallo {{ getUserFullName }}!</h2>
       <p class="body-1 mt-3">
         Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices
         tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci.
@@ -46,7 +44,7 @@ import Step1 from "@/components/auth/manualOnboardingCompanySteps/step1.vue";
 import Step2 from "@/components/auth/manualOnboardingCompanySteps/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingCompanySteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingCompanySteps/step4.vue";
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "AuthManualOnboardingCompany",

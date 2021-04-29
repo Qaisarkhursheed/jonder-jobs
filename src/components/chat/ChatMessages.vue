@@ -9,8 +9,8 @@
             :src="conversationDetails.profile_img"
           ></v-img>
           <span class="white--text full-w text-center d-block" v-else>{{
-              getInitials(conversationDetails)
-            }}</span>
+            getInitials(conversationDetails)
+          }}</span>
         </v-list-item-avatar>
 
         <v-list-item-content @click="$emit('show-profile')">

@@ -6,7 +6,10 @@ export default {
   state: {
     token: localStorage.getItem("user-token") || "",
     authenticated: localStorage.getItem("user-token") !== null,
-    message: null
+    message: null,
+    onBoardingCompleted: localStorage.getItem("onboarding-status")
+      ? JSON.parse(localStorage.getItem("onboarding-status"))
+      : false
   },
 
   getters: {
@@ -18,6 +21,9 @@ export default {
   mutations: {
     SET_AUTHENTICATED(state, value) {
       state.authenticated = value;
+    },
+    SET_ONBOARDING_STATUS(state, value) {
+      state.onBoardingCompleted = value;
     },
 
     SET_MESSAGE(state, value) {
@@ -36,8 +42,13 @@ export default {
           const user = JSON.stringify(resp.data.user);
           localStorage.setItem("user-token", token);
           localStorage.setItem("user", user);
+          localStorage.setItem(
+            "onboarding-status",
+            resp.data.onboarding_status
+          );
           axios.defaults.headers.common["Authorization"] = "Bearer " + token;
           commit("SET_AUTHENTICATED", true);
+          commit("SET_ONBOARDING_STATUS", resp.data.onboarding_status);
           response = resp.data;
         })
         .catch(err => {
@@ -53,7 +64,8 @@ export default {
     async register({ commit }, data) {
       let response = {};
 
-      await axios.post("/register", data)
+      await axios
+        .post("/register", data)
         .then(resp => {
           if (resp.data.success && resp.data.user) {
             const token = resp.data.token;

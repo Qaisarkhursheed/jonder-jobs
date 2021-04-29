@@ -6,7 +6,12 @@ export default {
 
   state: {
     conversations: null,
-    conversationDetails: { user_id: null, user_name: null, unread_messages: 0, profile_img: null },
+    conversationDetails: {
+      user_id: null,
+      user_name: null,
+      unread_messages: 0,
+      profile_img: null
+    },
     selectedConversation: null
   },
 

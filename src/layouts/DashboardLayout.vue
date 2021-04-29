@@ -15,16 +15,24 @@
           </router-link>
           <router-link to="/dashboard/chat">
             <v-icon>mdi-message-outline</v-icon>
-            <span>Chat</span>
+            <span>Nachrichten</span>
           </router-link>
           <router-link to="/dashboard/product-pricing">
             <v-icon>mdi-currency-usd</v-icon>
-            <span>Product Pricing</span>
+            <span>Preise</span>
           </router-link>
-          <router-link to="/dashboard/profile">
+          <router-link to="/dashboard/profile" class="with-submenu">
             <v-icon>mdi-account-outline</v-icon>
             <span>Profile</span>
           </router-link>
+          <div class="submenu">
+            <router-link to="/dashboard/profile">Persönliche Daten</router-link>
+            <router-link to="/dashboard/profile">Qualifikationen</router-link>
+            <router-link to="/dashboard/profile">Aktuelle Position</router-link>
+            <router-link to="/onboarding">Onboarding</router-link>
+            <router-link to="/dashboard/profile/cv-maker">CV Maker</router-link>
+            <router-link to="/dashboard/profile">Zahlung</router-link>
+          </div>
         </nav>
       </v-col>
       <v-col cols="9" class="full-h bg-light-gray">
@@ -59,16 +67,21 @@
                         v-if="user.profile_img"
                       ></v-img>
                       <span class="white--text headline" v-else>{{
-                          getUserInitials
-                        }}</span>
+                        getUserInitials
+                      }}</span>
                     </v-avatar>
                   </template>
                   <v-list>
                     <v-list-item>
-                      <v-list-item-title @click="navigateTo('/dashboard/profile')">Profile</v-list-item-title>
+                      <v-list-item-title
+                        @click="navigateTo('/dashboard/profile')"
+                        >Profile</v-list-item-title
+                      >
                     </v-list-item>
                     <v-list-item>
-                      <v-list-item-title @click="navigateTo('/logout')">Logout</v-list-item-title>
+                      <v-list-item-title @click="navigateTo('/logout')"
+                        >Logout</v-list-item-title
+                      >
                     </v-list-item>
                   </v-list>
                 </v-menu>
@@ -145,6 +158,10 @@ export default {
     text-decoration: none;
     @include clearfix;
 
+    &.with-submenu {
+      margin-bottom: 10px;
+    }
+
     &.logo {
       margin-bottom: 30px;
     }
@@ -178,6 +195,15 @@ export default {
       }
     }
   }
+
+  .submenu {
+    padding-left: 34px;
+
+    a {
+      padding: 4px 0;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 .dashboard-search {
@@ -205,7 +231,10 @@ export default {
   overflow: auto;
 }
 
-.search-holder .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
+.search-holder
+  .v-select.v-select--is-menu-active
+  .v-input__icon--append
+  .v-icon {
   transform: rotate(0) !important;
 }
 </style>
