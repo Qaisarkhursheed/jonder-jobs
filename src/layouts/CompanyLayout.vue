@@ -31,7 +31,7 @@
         </nav>
       </v-col>
       <v-col cols="9" class="full-h bg-light-gray">
-        <v-container fluid class="d-flex flex-column full-h">
+        <v-container fluid class="d-flex flex-column full-h pl-13 pr-13">
           <v-row class="flex-shrink-0 flex-grow-0 search-holder">
             <v-col cols="6">
               <!-- <v-autocomplete
@@ -84,10 +84,10 @@
               </div>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-              <router-view></router-view>
-            </v-col>
+          <v-row style="overflow: auto;">
+            <v-container>
+                <router-view></router-view>
+            </v-container>
           </v-row>
         </v-container>
           
