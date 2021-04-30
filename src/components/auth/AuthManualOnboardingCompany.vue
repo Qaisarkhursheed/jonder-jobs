@@ -86,6 +86,7 @@ export default {
     },
     async handleOnboarding() {
       await this.postOnboardingCompany(this.formData);
+      localStorage.setItem("onboarding-status", "false");
       this.$router.replace({ name: "Dashboard" });
     }
   },

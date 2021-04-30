@@ -95,11 +95,13 @@ export default {
   },
   methods: {
     populateData() {
-      if (this.value.document) this.document = { name: this.value.document };
-      if (this.value.resume) this.resume = { name: this.value.resume };
-      if (this.value.qualifications)
+      if (this.value.document && this.value.document.length > 0)
+        this.document = { name: this.value.document };
+      if (this.value.resume && this.value.resume.length > 0)
+        this.resume = { name: this.value.resume };
+      if (this.value.qualifications && this.value.qualifications.length > 0)
         this.qualifications = { name: this.value.qualifications };
-      if (this.value.profile_img)
+      if (this.value.profile_img && this.value.profile_img.length > 0)
         this.profile = { name: this.value.profile_img };
     }
   },

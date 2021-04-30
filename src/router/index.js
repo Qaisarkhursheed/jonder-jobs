@@ -28,6 +28,8 @@ import CompanySearch from "@/views/company/Search";
 import CompanyProfile from "@/views/company/Profile";
 import CompanyProducts from "@/views/company/Products";
 import CompanyInbox from "@/views/company/Inbox";
+import Qualifications from "@/views/dashboard/profile/Qualifications";
+import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 
 
 Vue.use(VueRouter);
@@ -149,6 +151,28 @@ const routes = [
               requiresAuth: true,
               isAdmin: false
             }
+          },
+          {
+            path: "qualifications",
+            name: "Qualifications",
+            component: Qualifications,
+            meta: {
+              requiresAuth: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "actual-position",
+            name: "ActualPosition",
+            component: ActualPosition,
+            meta: {
+              requiresAuth: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "*",
+            redirect: "/dashboard/profile"
           }
         ]
       },
@@ -178,6 +202,10 @@ const routes = [
           requiresAuth: true,
           isAdmin: false
         }
+      },
+      {
+        path: "*",
+        redirect: "/dashboard"
       }
     ]
   },

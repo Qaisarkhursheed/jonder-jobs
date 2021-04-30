@@ -214,6 +214,42 @@ h5, .h5 {
         }
     }
 }
+.stars-btn {
+    max-width: 70px;
+    height: 40px !important;
+    padding: 0 !important;
+    text-align: center;
+
+    .v-btn__content {
+        width: 100%;
+        flex-flow: row wrap;
+
+        .v-icon {
+            font-size: 20px;
+        }
+    }
+
+    &.senior {
+        .v-btn__content {
+            .v-icon {
+                font-size: 28px;
+                &:first-child,
+                &:last-child {
+                    font-size: 16px;
+                    margin: 0 -4px;
+                }
+            }
+        }
+    }
+
+    &.advanced {
+        .v-btn__content {
+            .v-icon {
+                margin: -2px 2px;
+            }
+        }
+    }
+}
 
 .v-text-field.v-text-field--solo .v-label {
     top: 10px;

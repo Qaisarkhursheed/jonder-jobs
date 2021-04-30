@@ -24,7 +24,7 @@
           flat
           hide-details
           background-color="white"
-          v-model="formData.first_name"
+          v-model="formData.work_experience"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -42,7 +42,7 @@
           flat
           hide-details
           background-color="white"
-          v-model="formData.last_name"
+          v-model="formData.your_qualification"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -59,7 +59,7 @@
           flat
           hide-details
           background-color="white"
-          v-model="formData.current_position"
+          v-model="formData.looking_for"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -104,13 +104,9 @@ export default {
   name: "Qualifications",
   data: () => ({
     formData: {
-      email: "",
-      first_name: "",
-      last_name: "",
-      current_position: "",
-      work_radius: "",
-      looking_for: "",
+      work_experience: "",
       your_qualification: "",
+      looking_for: "",
       describe_yourself: ""
     },
     rules: [
@@ -128,13 +124,9 @@ export default {
     ...mapActions("user", ["updateUser"]),
     resetFormData(user) {
       if (!user) return;
-      this.formData.email = user.email;
-      this.formData.first_name = user.first_name;
-      this.formData.last_name = user.last_name;
-      this.formData.current_position = user.current_position;
-      this.formData.work_radius = user.work_radius;
-      this.formData.looking_for = user.looking_for;
+      this.formData.work_experience = user.work_experience;
       this.formData.your_qualification = user.your_qualification;
+      this.formData.looking_for = user.looking_for;
       this.formData.describe_yourself = user.describe_yourself;
     },
     handleUpdate() {
