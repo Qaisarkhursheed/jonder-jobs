@@ -72,6 +72,7 @@ export default {
             const user = JSON.stringify(resp.data.user);
             localStorage.setItem("user-token", token);
             localStorage.setItem("user", user);
+            localStorage.setItem("onboarding-status", "false");
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             commit("SET_AUTHENTICATED", true);
           }
@@ -80,6 +81,7 @@ export default {
         .catch(err => {
           localStorage.removeItem("user-token");
           localStorage.removeItem("user");
+          localStorage.removeItem("onboarding-status");
           commit("SET_AUTHENTICATED", false);
           response = err.response.data;
         });
@@ -104,6 +106,7 @@ export default {
       return axios.post("/logout").then(() => {
         localStorage.removeItem("user-token");
         localStorage.removeItem("user");
+        localStorage.removeItem("onboarding-status");
         delete axios.defaults.headers.common["Authorization"];
         commit("SET_AUTHENTICATED", false);
         this.reset();

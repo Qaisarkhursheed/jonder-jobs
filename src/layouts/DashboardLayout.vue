@@ -27,11 +27,11 @@
           </router-link>
           <div class="submenu">
             <router-link to="/dashboard/profile">Persönliche Daten</router-link>
-            <router-link to="/dashboard/profile">Qualifikationen</router-link>
-            <router-link to="/dashboard/profile">Aktuelle Position</router-link>
+            <router-link to="/dashboard/profile/qualifications">Qualifikationen</router-link>
+            <router-link to="/dashboard/profile/actual-position">Aktuelle Position</router-link>
             <router-link to="/onboarding">Onboarding</router-link>
             <router-link to="/dashboard/profile/cv-maker">CV Maker</router-link>
-            <router-link to="/dashboard/profile">Zahlung</router-link>
+<!--            <router-link to="/dashboard/profile">Zahlung</router-link>-->
           </div>
         </nav>
       </v-col>

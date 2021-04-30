@@ -112,7 +112,7 @@ export default {
     }
   }),
   created() {
-    this.populateData(this.user)
+    this.populateData(this.user);
   },
   computed: {
     ...mapGetters("user", ["user"]),
@@ -120,18 +120,18 @@ export default {
       if (this.saveInProgress) return true;
       if (this.e1 === 2) {
         return !(
-          this.formData.working_in.length > 0 &&
-          this.formData.current_position.length > 0 &&
-          this.formData.branche.length > 0 &&
-          this.formData.address.length > 0 &&
-          this.formData.address_to_work.length > 0 &&
-          this.formData.describe_yourself.length > 0
+          this.formData.working_in && this.formData.working_in.length > 0 &&
+          this.formData.current_position && this.formData.current_position.length > 0 &&
+          this.formData.branche && this.formData.branche.length > 0 &&
+          this.formData.address && this.formData.address.length > 0 &&
+          this.formData.address_to_work && this.formData.address_to_work.length > 0 &&
+          this.formData.describe_yourself && this.formData.describe_yourself.length > 0
         );
       } else if (this.e1 === 3) {
         return !(
-          this.formData.dream_job.length > 0 &&
-          this.formData.monthly_salary > 0 &&
-          this.formData.ready_for_work.length > 0
+          this.formData.dream_job && this.formData.dream_job.length > 0 &&
+          this.formData.monthly_salary && this.formData.monthly_salary > 0 &&
+          this.formData.ready_for_work && this.formData.ready_for_work.length > 0
         );
       } else if (this.e1 === 4) {
         return !(
@@ -150,7 +150,8 @@ export default {
       console.log("populateData", user);
       if (user) {
         Object.keys(user).forEach(key => {
-          this.formData[key] = user[key];
+          // eslint-disable-next-line no-prototype-builtins
+          if(this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
       }
     },
@@ -169,7 +170,10 @@ export default {
       this.saveInProgress = true;
       const resp = await this.postOnboardingUser(this.formData);
       this.saveInProgress = false;
-      if (resp) this.$router.replace("/dashboard/profile");
+      if (resp) {
+        localStorage.setItem("onboarding-status", "false");
+        this.$router.replace("/dashboard/profile");
+      }
     }
   }
 };
@@ -179,7 +183,7 @@ export default {
 .mo-back-button {
   position: absolute;
   top: 57px;
-  left: 20%;
+  left: 30px;
   z-index: 100;
 }
 
