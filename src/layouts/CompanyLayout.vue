@@ -85,7 +85,7 @@
             </v-col>
           </v-row>
           <v-row style="overflow: auto;">
-            <v-container>
+            <v-container fluid=true class="company">
                 <router-view></router-view>
             </v-container>
           </v-row>
@@ -103,3 +103,9 @@ export default {
 };
 
 </script>
+
+<style lang="scss">
+  .company {
+    font-family: $open-sans;
+  }
+</style>

@@ -18,7 +18,7 @@
 $roboto: 'Roboto', sans-serif;
 
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 $open-sans: 'Open Sans', sans-serif;
 
 body {
@@ -27,7 +27,6 @@ body {
 
 // 2. Colors
 // ---------
-
 //primary
 $primary: #C15143;
 $primary-dark: #A94438;
@@ -54,6 +53,9 @@ $lighter-grey: #f6f6f7;
 $status-request: #F5980C;
 $status-negotiation: #0253B3;
 $status-call: #018D28;
+
+$slider-thumb-size: 22px;
+$slider-track-width: 22px;
 
 // 3. Typography
 // -------------
@@ -264,6 +266,14 @@ h5, .h5 {
     top: 10px;
 }
 
+// overwrite input outline only form company 
+.company .v-text-field--outlined fieldset {
+    border-color: #D4D4D4;
+}
+
+.theme--light.v-input input, .theme--light.v-input textarea {
+    color: #9EA0A5;
+}
 // 5. Inputs
 // ---------
 
