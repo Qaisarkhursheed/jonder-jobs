@@ -1,5 +1,12 @@
 <template>
-  <div></div>
+  <v-row class="d-flex">
+    <v-col cols="6">
+      <v-card class="stats-card" flat>f</v-card>
+    </v-col>
+    <v-col cols="6">
+      <v-card class="stats-card" flat>f</v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -13,5 +20,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .stats-card {
+    height: 346px;
+    width: 100%;
+  }
 </style>

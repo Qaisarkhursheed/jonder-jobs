@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ProfileInformation />
-    <ProfileMap />
+    <ProfileInformation class="mb-10"/>
+    <ProfileMap class="mb-10"/>
     <ProfileStatistic />
   </div>
 </template>
