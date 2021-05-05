@@ -7,15 +7,34 @@
       </div>
     </v-row>
     <v-row class="mb-16">
-      <v-col cols="5">
+      <v-col cols="4">
         <div class="hd pb-7">Profile Views</div>
-        <v-card flat
+        <v-card class="rounded-lg"
+                flat
+                height="240px">
+        </v-card>
+      </v-col>
+      <v-col cols="8">
+        <div class="hd pb-7">People Reach</div>
+        <v-card class="rounded-lg"
+                flat 
+                height="240px">
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row class="mb-16">
+      <v-col cols="5">
+        <div class="hd pb-7">Anwendungen</div>
+        <v-card class="rounded-lg"
+                flat
                 height="240px">
         </v-card>
       </v-col>
       <v-col cols="7">
-        <div class="hd pb-7">People Reach</div>
-        <v-card flat 
+        <div class="hd pb-7">Jährliche Aktivität</div>
+        <v-card class="rounded-lg"
+                flat 
                 height="240px">
         </v-card>
       </v-col>
