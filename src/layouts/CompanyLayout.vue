@@ -85,7 +85,7 @@
             </v-col>
           </v-row>
           <v-row style="overflow: auto;">
-            <v-container fluid=true class="company">
+            <v-container :fluid="true" class="company">
                 <router-view></router-view>
             </v-container>
           </v-row>

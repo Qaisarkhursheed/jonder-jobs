@@ -13,6 +13,7 @@
 // 1. Base
 // -------
 
+@import 'variables';
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
 $roboto: 'Roboto', sans-serif;
@@ -54,8 +55,6 @@ $status-request: #F5980C;
 $status-negotiation: #0253B3;
 $status-call: #018D28;
 
-$slider-thumb-size: 22px;
-$slider-track-width: 22px;
 
 // 3. Typography
 // -------------
@@ -270,7 +269,18 @@ h5, .h5 {
 .company .v-text-field--outlined fieldset {
     border-color: #D4D4D4;
 }
-
+.company {
+    .products-payment-method {
+        .v-input--radio-group--column .v-input--radio-group__input {
+            flex-direction: row;
+        }
+        .v-input--selection-controls__input {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+        }
+    }
+}
 .theme--light.v-input input, .theme--light.v-input textarea {
     color: #9EA0A5;
 }
