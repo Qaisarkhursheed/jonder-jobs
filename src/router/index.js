@@ -26,6 +26,7 @@ import CompanyLayout from "@/layouts/CompanyLayout";
 import CompanyDashboard from "@/views/company/Dashboard";
 import CompanySearch from "@/views/company/Search";
 import CompanyProfile from "@/views/company/Profile";
+import CompanyProfileEdit from "@/views/company/ProfileEdit";
 import CompanyProducts from "@/views/company/Products";
 import CompanyInbox from "@/views/company/Inbox";
 import Qualifications from "@/views/dashboard/profile/Qualifications";
@@ -228,6 +229,14 @@ const routes = [
         path: "profile",
         name: "CompanyProfile",
         component: CompanyProfile,
+        meta: {
+          requiresAuth: true
+        },
+      },
+      {
+        path: "profile/edit",
+        name: "CompanyProfileEdit",
+        component: CompanyProfileEdit,
         meta: {
           requiresAuth: true
         }
