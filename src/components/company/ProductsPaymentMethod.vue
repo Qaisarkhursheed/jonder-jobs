@@ -9,6 +9,7 @@
                class="pa-4"
                flat>
           <v-radio class="method-card"
+                   active-class="active"
                    :value="method">
             <template v-slot:label>
               <div style="margin: 0 auto;">
@@ -59,6 +60,10 @@ export default {
     height: 78px;
     border-radius: 10px;
     background: #fff;
+  }
+  .active {
+    transition: filter 0.3s;
+    filter: drop-shadow(0px 4px 23px rgba(2, 83, 179, 0.2));
   }
   .heading {
     font-weight: 600;
