@@ -1,5 +1,9 @@
 <template>
   <v-card class="profile-edit-form rounded-lg pl-10 pr-10 pt-10 pb-10" flat>
+    <ProfileEditDialog :active="dialog.active"
+                       :type="dialog.type"
+                       @close="dialogAction">
+    </ProfileEditDialog>
     <v-card-title class="header pa-0 pb-7">
       Edit Profile
     </v-card-title>
@@ -149,7 +153,8 @@
           style="border-radius: 10px;"
           elevation="1"
           color="#0253B3"
-          dark>
+          dark
+          @click="cancel">
           Cancel
         </v-btn>
       </v-col>
@@ -160,7 +165,8 @@
           style="border-radius: 10px;"
           elevation="1"
           color="#0253B3"
-          dark>
+          dark
+          @click="confirm">
           Confirm
         </v-btn>
       </v-col>
@@ -170,12 +176,22 @@
 
 <script>
 
+import ProfileEditDialog from '@/components/company/ProfileEditDialog';
+
 export default {
   name: 'ProfileEditForm',
+
+  components: {
+    ProfileEditDialog
+  },
 
   // Populate form data with server data 
   data() {
     return {
+      dialog: {
+        type: '',
+        active: false,
+      },
       form: {
         employees: {
           label: 'How many employees your company have ?',
@@ -218,12 +234,21 @@ export default {
       // if it's needed
     },
     confirm() {
-      // api call, redirect
+      // api call, show dialog, redirect on closed
+      this.dialog.type = 'ok';
+      this.dialog.active = true;
       console.log('confirm');
     },
     cancel() {
-      // redirect
+      this.dialog.type = 'warning';
+      this.dialog.active = true;
       console.log('cancel');
+    },
+    dialogAction() {
+      this.dialog.active = false;
+      setTimeout(() => {
+        this.dialog.type = '';
+      }, 500);
     }
   }
 };
