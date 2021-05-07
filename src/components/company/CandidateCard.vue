@@ -1,5 +1,6 @@
 <template>
-  <v-card flat
+  <v-card :to="{name: 'CompanyUser', id: 1}"
+          flat
           class="candidate-card pa-6 pb-5 rounded-lg"
           :class="`${type}-border`">
     <v-card-text class="d-flex pa-0">

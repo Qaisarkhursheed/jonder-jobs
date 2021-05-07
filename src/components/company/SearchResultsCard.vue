@@ -1,5 +1,7 @@
 <template>
-  <v-card class="candidate-card rounded-lg" flat>
+  <v-card :to="{name: 'CompanyUser', id: 1}"
+          :hover="true"
+          class="candidate-card rounded-lg" flat>
     <v-card-text class="d-flex pa-0 pa-6 pb-5">
       <v-img
         :lazy-src="require('@/assets/candidate.png')"

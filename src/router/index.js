@@ -25,6 +25,7 @@ import CvMaker from "../views/dashboard/profile/CvMaker";
 import CompanyLayout from "@/layouts/CompanyLayout";
 import CompanyDashboard from "@/views/company/Dashboard";
 import CompanySearch from "@/views/company/Search";
+import CompanyUser from "@/views/company/User";
 import CompanyProfile from "@/views/company/Profile";
 import CompanyProfileEdit from "@/views/company/ProfileEdit";
 import CompanyProducts from "@/views/company/Products";
@@ -255,6 +256,14 @@ const routes = [
         component: CompanySearch,
         meta: {
           requiresAuth: true
+        },
+      },
+      {
+        path: "user",
+        name: "CompanyUser",
+        component: CompanyUser,
+        meta: {
+          requiresAuth: true,
         }
       },
       {
