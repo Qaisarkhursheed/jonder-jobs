@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-holder flex-grow-1 flex-shrink-1 mt-4">
+  <div class="chat-holder flex-grow-1 flex-shrink-1 mt-4 full-h">
     <v-row class="mt-0 mb-0 full-h">
       <v-col cols="4" class="d-flex flex-column full-h">
         <h2 class="text-color-primary-blue-dark mb-4 flex-shrink-0 flex-grow-0">

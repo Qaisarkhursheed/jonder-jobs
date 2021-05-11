@@ -29,7 +29,7 @@ import CompanyUser from "@/views/company/User";
 import CompanyProfile from "@/views/company/Profile";
 import CompanyProfileEdit from "@/views/company/ProfileEdit";
 import CompanyProducts from "@/views/company/Products";
-import CompanyInbox from "@/views/company/Inbox";
+// import CompanyInbox from "@/views/company/Inbox";
 import Qualifications from "@/views/dashboard/profile/Qualifications";
 import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 
@@ -269,7 +269,7 @@ const routes = [
       {
         path: "inbox",
         name: "CompanyInbox",
-        component: CompanyInbox,
+        component: Chat,
         meta: {
           requiresAuth: true
         }

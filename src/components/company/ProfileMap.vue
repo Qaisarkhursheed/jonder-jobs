@@ -1,19 +1,13 @@
 <template>
-  <v-card class="profile-map rounded-lg" flat>
-  </v-card>
+  <jonder-map/>
 </template>
 
 <script>
+import JonderMap from "@/components/parts/JonderMap";
 
 export default {
-  name: 'ProfileMap'
-};
-
-</script>
-
-<style lang="scss" scoped>
-  .profile-map {
-    height: 300px;
-    width: 100%;
+  components: {
+    JonderMap,
   }
-</style>
+}
+</script>
