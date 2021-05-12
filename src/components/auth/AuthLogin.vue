@@ -87,13 +87,19 @@ export default {
     async handleLogin() {
       this.response = await this.login(this.formData);
 
-      if (this.response.success) {
-        if (this.response.onboarding_status)
+      if (this.response) {
+        if (this.response.onboarding_status && this.response.user.role === "user") {
           this.$router.replace({ name: "Dashboard" });
-        else if (this.response.user.role === "user")
+        }
+        else if (this.response.onboarding_status && this.response.user.role === "company") {
+          this.$router.replace({ name: 'CompanyDashboard' });
+        }
+        else if (this.response.user.role === "user") {
           this.$router.replace({ name: "ManualOnboarding" });
-        else if (this.response.user.role === "company")
+        }
+        else if (this.response.user.role === "company") {
           this.$router.replace({ name: "ManualOnboardingCompany" });
+        }
       } else {
         this.message.show = true;
         this.message.text = this.response.message || "Wrong credentials";
