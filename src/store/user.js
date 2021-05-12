@@ -153,7 +153,18 @@ export default {
           console.error("Update user error:", err);
         });
     },
-
+    updateCompanyUser({ commit }, details) {
+      return axios
+        .post('/user', details)
+        .then(resp => {
+          if (resp.data.success && resp.data.user) {
+            commit('SET_USER', resp.data.user);
+          }
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
     searchUsers({ dispatch }, payload) {
       return axios
         .get("/search/0/10?data=" + payload)

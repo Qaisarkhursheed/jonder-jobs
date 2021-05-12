@@ -13,13 +13,13 @@
           </v-img>
           <div class="pl-4 d-flex align-self-center">
             <div class="company-name pb-1 d-flex align-center">
-              My Company
+              {{user.company}}
             </div>
           </div>
         </div>
         <div>
           <v-card-text class="about pa-0 pr-8 pb-9">
-            {{profile.about.value}}
+            {{user.about_company}}
           </v-card-text>
         </div>
         <div>
@@ -32,7 +32,7 @@
           </div>
           <div class="pl-4">
             <div class="profile-info-label">{{profile.email.label}}</div>
-            <div class="profile-info-value">{{profile.email.value}}</div>
+            <div class="profile-info-value">{{user.email}}</div>
           </div>
         </div>
 
@@ -44,7 +44,7 @@
           </div>
           <div class="pl-4">
             <div class="profile-info-label">{{profile.address.label}}</div>
-            <div class="profile-info-value">{{profile.address.value}}</div>
+            <div class="profile-info-value">{{user.address}}</div>
           </div>
         </div>
 
@@ -56,32 +56,21 @@
           </div>
           <div class="pl-4">
             <div class="profile-info-label">{{profile.radius.label}}</div>
-            <div class="profile-info-value">{{profile.radius.value}}</div>
+            <div class="profile-info-value">{{user.work_radius}}</div>
           </div>
         </div>
-        
-        <!-- <div class="field-wrap d-flex mb-3 align-center">
-          <div class="icon-wrap">
-            <v-icon color="#0253B3">
-              mdi-star-outline
-            </v-icon>
-          </div>
-          <div class="pl-4">
-            <div class="profile-info-label">{{profile.profesionsim.label}}</div>
-            <div class="profile-info-value">{{profile.profesionsim.value}}</div>
-          </div>
-        </div> -->
+
         </div>
       </v-col>
       <v-col cols="6">
         <div class="no-gutters pa-0 ma-0 mb-7">
           <label class="d-block">Looking for</label>
-          <div class="button-box mr-3 font-weight-bold text-color-primary-blue-dark">
-            Developers
+
+          <div class="button-box mr-3 mb-2 font-weight-bold text-color-primary-blue-dark"
+               v-for="(item, i) in lookingfor" :key="i">
+            {{item}}
           </div>
-          <div class="button-box font-weight-bold text-color-primary-blue-dark">
-            Designers
-          </div>
+          
         </div>
         <div class="pb-5">
           <label>{{profile.employees.label}}</label>
@@ -94,9 +83,10 @@
             outlined
             flat
             dense
+            disabled
             solo
             background-color="#fff"
-            v-model="profile.employees.value">
+            v-model="user.company_employees">
           </v-text-field>
         </div>
         <div class="pb-5">
@@ -111,8 +101,9 @@
             flat
             dense
             solo
+            disabled
             background-color="#fff"
-            v-model="profile.industry.value">
+            v-model="user.department">
           </v-text-field>
         </div>
         <div class="d-flex justify-end pt-12">
@@ -133,48 +124,47 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex";
+
 export default {
+  
   name: 'ProfileInformation',
+
   data() {
     return {
       profile: {
-        fullname: {
-          label: '',
-          value: 'Marko Kraemer'
-        },
-        profession: {
-          label: '',
-          value: 'My Profession'
-        },
         about: {
           label: '',
-          value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et'
+          value: ''
         },
         email: {
           label: 'E-mail address',
-          value: 'onuryilmaz@hotmail.com'
+          value: ''
         },
         address: {
           label: 'City and address',
-          value: 'New York, Central Park'
+          value: ''
         },
         radius: {
           label: 'Work Radius',
-          value: '50km'
-        },
-        profesionsim: {
-          label: 'Profesionsim',
-          value: 'Junior'
+          value: ''
         },
         employees: {
           label: 'How many employees your company have ?',
-          value: '10-99 employees'
+          value: ''
         },
         industry: {
           label: 'Which industry are you in?',
-          value: 'Engeneering'
+          value: ''
         },
       }
+    }
+  },
+  computed: {
+    ...mapGetters('user', ['user']),
+    lookingfor() {
+      return this.user.looking_for.split(',');
     }
   }
 };

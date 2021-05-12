@@ -176,6 +176,7 @@
 
 <script>
 
+import { mapActions, mapGetters } from "vuex";
 import ProfileEditDialog from '@/components/company/ProfileEditDialog';
 
 export default {
@@ -185,7 +186,6 @@ export default {
     ProfileEditDialog
   },
 
-  // Populate form data with server data 
   data() {
     return {
       dialog: {
@@ -195,37 +195,46 @@ export default {
       form: {
         employees: {
           label: 'How many employees your company have ?',
-          value: '10-99 employees'
+          value: ''
         },
         industry: {
           label: 'Which industry are you in?',
-          value: 'Engeneering'
+          value: ''
         },
         lookingfor: {
           label: 'Looking for',
-          value: ['Developers', 'Designers', 'DevOps', 'Manager', 'Ceo']
+          value: []
         },
         about: {
           label: 'About company',
-          value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut '
+          value: ''
         },
         email: {
           label: 'E-mail Adresse',
-          value: 'onuryilmaz@hotmail.com'
+          value: ''
         },
         address: {
           label: 'City and Address',
-          value: 'New York, Central Park'
+          value: ''
         },
         radius: {
           label: 'Work Radius',
-          value: '50'
+          value: ''
         }
       }
     }
   },
-
+  mounted() {
+    this.form.employees.value = this.user.company_employees;
+    this.form.industry.value = this.user.department;
+    this.form.about.value = this.user.about_company;
+    this.form.email.value = this.user.email;
+    this.form.address.value = this.user.address;
+    this.form.radius.value = this.user.work_radius;
+    this.form.lookingfor.value = this.user.looking_for.split(',');
+  },
   methods: {
+    ...mapActions('user', ['updateCompanyUser']),
     chipRemove(chip) {
       const index = this.form.lookingfor.value.indexOf(chip);
       this.form.lookingfor.value.splice(index, 1);
@@ -234,22 +243,37 @@ export default {
       // if it's needed
     },
     confirm() {
-      // api call, show dialog, redirect on closed
-      this.dialog.type = 'ok';
-      this.dialog.active = true;
-      console.log('confirm');
+      this.updateCompanyUser({
+        email: this.form.email.value,
+        address: this.form.address.value,
+        about_company: this.form.about.value,
+        company_employees: this.form.employees.value,
+        work_radius: this.form.radius.value,
+        department: this.form.industry.value,
+        looking_for: this.form.lookingfor.value.join(", ")
+      }).then(() => {
+        this.dialog.type = 'ok';
+        this.dialog.active = true;
+      });
     },
     cancel() {
       this.dialog.type = 'warning';
       this.dialog.active = true;
-      console.log('cancel');
     },
-    dialogAction() {
-      this.dialog.active = false;
-      setTimeout(() => {
-        this.dialog.type = '';
-      }, 500);
+    dialogAction(type) {
+      if(type === 'save') {
+        this.confirm();
+      } else {
+        this.dialog.active = false;
+        setTimeout(() => {
+          this.dialog.type = '';
+        }, 500);
+      }
     }
+  },
+
+  computed: {
+    ...mapGetters('user', ['user']),
   }
 };
 
