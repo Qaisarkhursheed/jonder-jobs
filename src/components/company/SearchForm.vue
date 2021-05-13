@@ -8,19 +8,16 @@
 
     <label>Looking for</label>
     <v-row class="search-selection no-gutters pt-1">
-      <v-col class="trainee d-flex justify-center align-center">
-        <div>Trainee</div>
+      <v-col class="d-flex justify-center align-center"
+             :class="{ active: item === lookingfor.selected }"
+             v-for="(item, i) in lookingfor.options" :key="i"
+             @click="selectLookingfor(item)">
+        <div>{{item.label}}</div>
       </v-col>
-      <v-col class="fulltime justify-center d-flex align-center">
-        <div>Full time</div>
-      </v-col>
-      <v-col class="freelance justify-center d-flex align-center">
-        <div>Freelance</div>
-        </v-col>
     </v-row>
 
     <v-row class="search-form-fields no-gutters pb-5">
-      <v-col v-for="(field, i) in formFields" :key="i"
+      <v-col v-for="(field, i) in form" :key="i"
              cols="4"
              class="pb-6"
              :class="[ (i+1)%3==0 ? 'pr-0': 'pr-5' ]"> 
@@ -29,7 +26,6 @@
                       style="height: 50px;"
                       height="100%"
                       type="text"
-                      :label="field.label"
                       outlined
                       flat
                       dense
@@ -40,7 +36,7 @@
       </v-col>
     </v-row>
 
-    <SearchFormSlider/>
+    <SearchFormSlider @selected="(value) => {this.radius.value = value}"/>
 
     <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
       <v-col cols="8">
@@ -54,13 +50,14 @@
           Save filter
         </v-btn>
         <v-btn class="ml-8 font-weight-bold"
+               @click="search"
                height="54px"
                width="45%"
                elevation="1"
                style="border-radius: 10px;"
                color="#0253B3"
                dark>
-          Button (155 results)
+            {{searchCountLabel}}
         </v-btn>
       </v-col>
 
@@ -76,6 +73,7 @@
 
 <script>
 
+import axios from 'axios';
 import SearchFormSlider from '@/components/company/SearchFormSlider';
 
 export default {
@@ -87,33 +85,87 @@ export default {
 
   data() {
     return {
-      formFields: [
-        {
+      form: {
+        jobtitle: {
           label: 'Job title',
           value: ''
         },
-        {
+        school: {
           label: 'School graduation',
           value: ''
         },
-        {
+        education: {
           label: 'JEducation / Study',
           value: '', 
         },
-        {
+        branche: {
           label: 'Industry of the profession',
           value: '', 
         },
-        {
+        salary: {
           label: 'Salary',
           value: '', 
         },
-        {
+        experience: {
           label: 'Work experience necessary',
           value: '', 
-        }
-      ],
-      locationRadius: 1,
+        },
+      },
+      lookingfor: {
+        selected: false,
+        options: [
+          {
+            label: 'Trainee',
+            value: 'trainee'
+          },
+          {
+            label: 'Full time',
+            value: 'full time'
+          },
+          {
+            label: 'Freelance',
+            value: 'freelance'
+          }
+        ]
+      },
+      radius: {
+        label: 'Radius',
+        value: 1
+      },
+      searchCount: ''
+    }
+  },
+
+  methods: {
+    formatData() {
+      return {
+        looking_for: this.lookingfor.selected.value || 'dummy',
+        work_experience: this.form.experience.value || 'dummy',
+        job_title: this.form.jobtitle.value || 'dummy',
+        school: this.form.school.value || 'dummy',
+        education: this.form.education.value || 'dummy',
+        branche: this.form.branche.value || 'dummy',
+        monthly_salary: this.form.salary.value || 'dummy',
+        working_radius: `${this.radius.value} KM` || '20'
+      }
+    },
+    search() {
+      axios.post('/company/search/', this.formatData())
+      .then((res) => {
+        this.searchCount = res.data.users.length;
+        this.$emit('searchResults', res.data.users);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    },
+    selectLookingfor(item) {
+      this.lookingfor.selected = item;
+    }
+  },
+  computed: {
+    searchCountLabel() {
+      return this.searchCount ? `Search (${this.searchCount} results)`: 'Search';
     }
   }
 };
@@ -126,32 +178,35 @@ export default {
   }
   .search-selection {
     height: 86px;
+
+    > div {
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      border: 1px solid #D4D4D4;
+
+      &.active {
+        border: 1px solid #737373;
+        transition: border 0.5s;
+      }
+    }
+    > div:nth-child(1) {
+      background: #FCF7CD;
+      color: #9F900B;
+    }
+    > div:nth-child(2) {
+      background: #CFFCD9;
+      color: #018D28;
+    }
+    > div:nth-child(3) {
+      background: #E3E6FB;
+      color: #031594;
+    }
   }
   .search-title {
     font-weight: 600;
     font-size: 24px;
     color: #3E3E47;
-  }
-  .trainee {
-    background: #FCF7CD;
-    border: 1px solid #D4D4D4;
-    font-size: 16px;
-    font-weight: 700;
-    color: #9F900B;
-  }
-  .fulltime {
-    background: #CFFCD9;
-    border: 1px solid #D4D4D4;
-    font-size: 16px;
-    font-weight: 700;
-    color: #018D28;
-  }
-  .freelance {
-    background: #E3E6FB;
-    border: 1px solid #D4D4D4;
-    font-size: 16px;
-    font-weight: 700;
-    color: #031594;
   }
   label {
     font-size: 16px;

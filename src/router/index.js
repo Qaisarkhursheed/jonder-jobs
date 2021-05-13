@@ -259,9 +259,10 @@ const routes = [
         },
       },
       {
-        path: "user",
+        path: "user/:id",
         name: "CompanyUser",
         component: CompanyUser,
+        props: true,
         meta: {
           requiresAuth: true,
         }

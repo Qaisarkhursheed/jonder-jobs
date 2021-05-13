@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="{name: 'CompanyUser', id: 1}"
+  <v-card :to="{name: 'CompanyUser', params: {id: candidate.id}}"
           :hover="true"
           class="candidate-card rounded-lg" flat>
     <v-card-text class="d-flex pa-0 pa-6 pb-5">
@@ -13,7 +13,7 @@
       </v-img>
       <div class="pl-4">
         <div class="name font-weight-bold pb-1">
-          {{candidate.name}}
+          {{candidate.first_name}} {{candidate.last_name}}
         </div>
         <div class="job pb-1">
           <v-icon size="18px"
@@ -29,7 +29,7 @@
                   color="#C4C6C9">
             mdi-map-marker-outline
           </v-icon>
-          {{candidate.location}}
+          {{candidate.address}}
         </div>
       </div>
     </v-card-text>
@@ -49,7 +49,7 @@
           mdi-domain
         </v-icon>
         <span class="label pr-2">Schulabschluss</span>
-        <span class="value">{{candidate.schulabschluss}}</span>
+        <span class="value">{{candidate.training_studies}}</span>
       </div>
       <div class="pb-4">
         <v-icon class="pr-3"
@@ -57,18 +57,18 @@
           mdi-school
         </v-icon>
         <span class="label pr-2">Ausbildung</span>
-        <span class="value">{{candidate.ausbildung}}</span>
+        <span class="value">{{candidate.your_qualification}}</span>
       </div>
 
     </v-card-text>
 
     <v-card-text class="job-info d-flex">
       <v-col cols="6" class="experience">
-        <div class="value">{{candidate.berufserfahrung}}</div>
+        <div class="value">{{candidate.work_experience}}</div>
         <div class="label">Berufserfahrung</div>
       </v-col>
       <v-col cols="6" class="wage">
-        <div class="value">{{candidate.gehalt}}</div>
+        <div class="value">{{candidate.monthly_salary}}</div>
         <div class="label">Gehalt</div>
       </v-col>
     </v-card-text>

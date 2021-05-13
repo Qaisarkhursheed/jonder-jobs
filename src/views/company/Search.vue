@@ -2,9 +2,11 @@
   <div>
     <!--<SearchHeader />-->
     <SearchForm class="mb-10"
+                @searchResults="setResults"
                 @toggleAdvanced="toggle()"/>
     <SearchFormAdvanced :active="advancedSearch"/>
-    <SearchResults class="mt-10"/>
+    <SearchResults class="mt-10"
+                   :results="searchResults"/>
   </div>
 </template>
 
@@ -28,12 +30,16 @@ export default {
   data() {
     return {
       advancedSearch: false,
+      searchResults: [],
     }
   },
 
   methods: {
     toggle() {
       this.advancedSearch = !this.advancedSearch;
+    },
+    setResults(results) {
+      this.searchResults = results;
     }
   }
 };

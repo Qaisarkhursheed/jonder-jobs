@@ -7,6 +7,7 @@
       <v-slider class="align-center"
                 v-model="slider"
                 hide-details="true"
+                @mouseup="selected"
                 :max="max"
                 :min="min"
                 style="height: 38px;"
@@ -37,6 +38,11 @@ export default {
       slider: 200,
       min: 10,
       max: 2000
+    }
+  },
+  methods: {
+    selected() {
+      this.$emit('selected', this.slider);
     }
   }
 };

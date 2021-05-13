@@ -94,31 +94,39 @@
 
 <script>
 
+import axios from 'axios';
+
 export default {
   name: 'UserOverview',
+
+  props: {
+    id: {
+      type: [String, Number]
+    }
+  },
 
   data() {
     return {
       profile: {
         fullname: {
           label: '',
-          value: 'Marko Kraemer'
+          value: ''
+        },
+        email: {
+          label: 'E-mail address',
+          value: ''
+        },
+        address: {
+          label: 'City and address',
+          value: ''
+        },
+         about: {
+          label: '',
+          value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et'
         },
         profession: {
           label: '',
           value: 'My Profession'
-        },
-        about: {
-          label: '',
-          value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et'
-        },
-        email: {
-          label: 'E-mail address',
-          value: 'onuryilmaz@hotmail.com'
-        },
-        address: {
-          label: 'City and address',
-          value: 'New York, Central Park'
         },
         radius: {
           label: 'Work Radius',
@@ -129,6 +137,25 @@ export default {
           value: 'Junior'
         }
       }
+    }
+  },
+  mounted() {
+    this.getUser();
+  },
+  methods: {
+    getUser() {
+      axios.get(`/users/${this.$route.params.id}`)
+           .then((res) => {
+               this.populateData(res.data);
+           })
+           .catch();
+    },
+    populateData(user) {
+      this.profile.fullname.value = `${user.first_name} ${user.last_name}`;
+      this.profile.email.value = user.email;
+      this.profile.address.value = user.address;
+      this.profile.radius.value = user.work_radius;
+      this.profile.profesionsim.value = user.work_experience;
     }
   }
 };

@@ -23,42 +23,12 @@ export default {
     SearchResultsCard
   },
 
-  data() {
-    return {
-      results: [
-        {
-          name: 'Victoria Anderson',
-          job: 'Bauleiter Hochbau',
-          location: 'Berlin',
-          branche: 'Bauwesen',
-          schulabschluss: 'Abitur',
-          ausbildung: 'Kaufmann für Bürokommunikation',
-          berufserfahrung: '10 Jahre',
-          gehalt: '6.300,00€'
-        },
-        {
-          name: 'Victoria Anderson',
-          job: 'Bauleiter Hochbau',
-          location: 'Viewnna',
-          branche: 'Bauwesen',
-          schulabschluss: 'Abitur',
-          ausbildung: 'Kaufmann für Bürokommunikation',
-          berufserfahrung: '2 Jahre',
-          gehalt: '3.300,00€'
-        },
-        {
-          name: 'Victoria Anderson',
-          job: 'Bauleiter Hochbau',
-          location: 'Stuttgart',
-          branche: 'Bauwesen',
-          schulabschluss: 'Abitur',
-          ausbildung: 'Kaufmann für Bürokommunikation',
-          berufserfahrung: '4 Jahre',
-          gehalt: '4.000,00€'
-        },
-      ]
+  props: {
+    results: {
+      type: Array
     }
-  }
+  },
+
 };
 
 </script>
