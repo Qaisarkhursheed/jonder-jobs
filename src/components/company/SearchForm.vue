@@ -7,6 +7,7 @@
     </v-card-title>
 
     <label>Looking for</label>
+
     <v-row class="search-selection no-gutters pt-1">
       <v-col class="d-flex justify-center align-center"
              :class="{ active: item === lookingfor.selected }"
@@ -16,25 +17,33 @@
       </v-col>
     </v-row>
 
-    <v-row class="search-form-fields no-gutters pb-5">
-      <v-col v-for="(field, i) in form" :key="i"
-             cols="4"
-             class="pb-6"
-             :class="[ (i+1)%3==0 ? 'pr-0': 'pr-5' ]"> 
-        <label>{{field.label}}</label>
-        <v-text-field class="rounded-lg"
-                      style="height: 50px;"
-                      height="100%"
-                      type="text"
-                      outlined
-                      flat
-                      dense
-                      solo
-                      background-color="#fff"
-                      v-model="field.value">
-        </v-text-field>
-      </v-col>
-    </v-row>
+    <v-form ref="form"
+            v-model="validForm"
+            action="#"
+            class="pt-2">
+
+      <v-row class="search-form-fields no-gutters pb-5">
+          <v-col v-for="(field, i) in form" :key="i"
+                cols="4"
+                class="pb-6"
+                :class="[ (i+1)%3==0 ? 'pr-0': 'pr-5' ]"> 
+            <label>{{field.label}}</label>
+            <v-text-field class="rounded-lg"
+                          :rules="[() => !!field.value || 'This field is required']"
+                          style="height: 50px;"
+                          height="100%"
+                          type="text"
+                          outlined
+                          flat
+                          dense
+                          solo
+                          background-color="#fff"
+                          v-model="field.value">
+            </v-text-field>
+          </v-col>
+      </v-row>
+      
+    </v-form>
 
     <SearchFormSlider @selected="(value) => {this.radius.value = value}"/>
 
@@ -50,13 +59,13 @@
           Save filter
         </v-btn>
         <v-btn class="ml-8 font-weight-bold"
-               @click="search"
                height="54px"
                width="45%"
                elevation="1"
                style="border-radius: 10px;"
                color="#0253B3"
-               dark>
+               dark
+               @click="handleSearch">
             {{searchCountLabel}}
         </v-btn>
       </v-col>
@@ -132,22 +141,27 @@ export default {
         label: 'Radius',
         value: 1
       },
-      searchCount: ''
+      searchCount: '',
+      validForm: false
     }
   },
 
   methods: {
     formatData() {
       return {
-        looking_for: this.lookingfor.selected.value || 'dummy',
-        work_experience: this.form.experience.value || 'dummy',
-        job_title: this.form.jobtitle.value || 'dummy',
-        school: this.form.school.value || 'dummy',
-        education: this.form.education.value || 'dummy',
-        branche: this.form.branche.value || 'dummy',
-        monthly_salary: this.form.salary.value || 'dummy',
+        looking_for: this.lookingfor.selected.value || 'trainee',
+        work_experience: this.form.experience.value,
+        job_title: this.form.jobtitle.value,
+        school: this.form.school.value,
+        education: this.form.education.value,
+        branche: this.form.branche.value,
+        monthly_salary: this.form.salary.value,
         working_radius: `${this.radius.value} KM` || '20'
       }
+    },
+    async handleSearch() {
+      await this.$refs.form.validate();
+      if (this.validForm) this.search()
     },
     search() {
       axios.post('/company/search/', this.formatData())
@@ -161,7 +175,7 @@ export default {
     },
     selectLookingfor(item) {
       this.lookingfor.selected = item;
-    }
+    },
   },
   computed: {
     searchCountLabel() {
