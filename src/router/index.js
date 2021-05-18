@@ -271,6 +271,7 @@ const routes = [
         path: "inbox",
         name: "CompanyInbox",
         component: Chat,
+        props: true,
         meta: {
           requiresAuth: true
         }

@@ -72,7 +72,9 @@ export default {
         parseInt(this.$route.params.id) === parseInt(this.conversation.user_id)
       ) {
         this.open();
-        this.$router.replace("/dashboard/chat");
+        if (!this.$route.params.company) {
+          this.$router.replace("/dashboard/chat");
+        }
       }
     },
     async open() {

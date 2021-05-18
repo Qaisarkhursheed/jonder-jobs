@@ -27,6 +27,7 @@
         </v-card-text>
         <v-card-actions class="no-gutters pa-0 ma-0">
           <v-btn class="font-weight-bold text-color-primary-blue-dark"
+                 @click="startConversation"
                  height="54px"
                  style="border-radius: 10px;"
                  elevation="0"
@@ -156,6 +157,9 @@ export default {
       this.profile.address.value = user.address;
       this.profile.radius.value = user.work_radius;
       this.profile.profesionsim.value = user.work_experience;
+    },
+    startConversation() {
+      this.$router.push({ name: 'CompanyInbox', params: { id: this.$route.params.id, type: 'new', company: true} });
     }
   }
 };
