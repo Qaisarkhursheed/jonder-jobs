@@ -96,6 +96,7 @@
 <script>
 
 import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'UserOverview',
@@ -142,8 +143,10 @@ export default {
   },
   mounted() {
     this.getUser();
+    this.addUserProfileView({user_id: this.$route.params.id});
   },
   methods: {
+    ...mapActions('user', ['addUserProfileView']),
     getUser() {
       axios.get(`/users/${this.$route.params.id}`)
            .then((res) => {

@@ -179,6 +179,13 @@ export default {
         });
     },
 
+    addUserProfileView(context, payload) {
+      return axios
+        .post('stats/profile', payload)
+        .then(() => {
+          'Yupiii'
+        })
+    },
     saveCv(context, payload) {
       return axios.post("/cv_store", payload);
     }
