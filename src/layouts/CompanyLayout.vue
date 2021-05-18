@@ -32,58 +32,7 @@
       </v-col>
       <v-col cols="9" class="full-h bg-light-gray">
         <v-container fluid class="d-flex flex-column full-h pl-13 pr-13">
-          <v-row class="flex-shrink-0 flex-grow-0 search-holder">
-            <v-col cols="6">
-              <!-- <v-autocomplete
-                v-model="searchString"
-                :loading="searchLoading"
-                :items="searchItems"
-                :search-input.sync="search"
-                cache-items
-                flat
-                dense
-                outlined
-                hide-no-data
-                hide-details
-                label="Suche"
-                append-icon="mdi-magnify"
-                item-text="name"
-                item-value="id" 
-              ></v-autocomplete> -->
-              <v-autocomplete flat
-                              dense
-                              outlined
-                              label="Suche"
-                              append-icon="mdi-magnify">
-              </v-autocomplete>
-            </v-col>
-            <v-col cols="6" class="text-right">
-              <div class="dashboard-avatar">
-                <!--<span class="name">{{ getUserFullName }}</span>-->
-                <v-menu offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-avatar color="primary" size="38" v-on="on">
-                      <!--<v-img
-                        :src="user.profile_img"
-                        v-if="user.profile_img"
-                      ></v-img>
-                      <span class="white--text headline" v-else>{{
-                          getUserInitials
-                        }}</span>-->
-                    </v-avatar>
-                  </template>
-                  <!--<v-list>
-                    <v-list-item>
-                      <v-list-item-title @click="navigateTo('/dashboard/profile')">Profile</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-title @click="navigateTo('/logout')">Logout</v-list-item-title>
-                    </v-list-item>
-                  </v-list>-->
-                </v-menu>
-              </div>
-            </v-col>
-          </v-row>
+          <DashboardHeader />
           <v-row style="overflow: auto;">
             <v-container :fluid="true" class="company">
                 <router-view></router-view>
@@ -98,8 +47,14 @@
 
 <script>
 
+import DashboardHeader from '@/components/company/DashboardHeader';
+
 export default {
   name: 'CompanyLayout',
+
+  components: {
+    DashboardHeader
+  }
 };
 
 </script>
