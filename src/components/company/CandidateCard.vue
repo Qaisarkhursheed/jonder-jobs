@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="{name: 'CompanyUser', id: 1}"
+  <v-card :to="{name: 'CompanyUser', params: {id: candidate.id}}"
           flat
           class="candidate-card pa-6 pb-5 rounded-lg"
           :class="`${type}-border`">
@@ -14,7 +14,7 @@
       </v-img>
       <div class="pl-4">
         <div class="name font-weight-bold pb-1">
-          {{candidate.name}}
+          {{candidate.first_name}} {{candidate.last_name}}
         </div>
         <div class="job pb-1">
           <v-icon size="18px"
@@ -22,7 +22,7 @@
             mdi-briefcase-outline
           </v-icon>
           <span class="text-color-primary-blue-dark">
-            {{candidate.job}}
+            {{candidate.branche}}
           </span>
         </div>
         <div class="location">
@@ -30,7 +30,7 @@
                   color="#C4C6C9">
             mdi-map-marker-outline
           </v-icon>
-          {{candidate.location}}
+          {{candidate.address_to_work}}
         </div>
       </div>
     </v-card-text>

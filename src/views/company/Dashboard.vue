@@ -64,7 +64,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="(list, i) in candidates" :key="i">
+      <v-col v-for="(list, i) in userInteractions" :key="i">
         <CandidateList :list="list"/>
       </v-col>
     </v-row>
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CandidateList from "@/components/company/CandidateList";
 import JonderChart from "@/components/parts/JonderChart";
 
@@ -241,6 +242,16 @@ export default {
         }
       }
     }
+  },
+  created() {
+    this.fetchUserInteractions();
+  },
+  methods: {
+    ...mapActions('company', ['fetchUserInteractions']),
+  },
+
+  computed: {
+    ...mapGetters('company', ['userInteractions'])
   }
 }
 

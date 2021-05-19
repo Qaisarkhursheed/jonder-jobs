@@ -5,8 +5,8 @@
       {{list.type}}
     </div>
     <div class="list pt-6">
-      <div class="item mb-3" v-for="(item, i) in list.items" :key="i">
-        <CandidateCard :candidate="item"
+      <div class="item mb-3" v-for="(user, i) in list.users" :key="i">
+        <CandidateCard :candidate="user"
                        :type="list.type"/>
       </div>
     </div>

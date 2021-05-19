@@ -6,6 +6,7 @@ import user from "./user";
 import stats from "./stats";
 import notepad from "./notepad";
 import chat from "./chat";
+import company from "./company"
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default createStore(Vuex.Store, {
     user,
     stats,
     notepad,
-    chat
+    chat,
+    company
   }
 });
