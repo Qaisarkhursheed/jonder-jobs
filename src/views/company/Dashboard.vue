@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="peopleReach && profileViews">
     <v-row class="heading ma-0 mb-10 flex-column">
       <div>Hello,</div>
       <div class="text-color-primary-blue-dark font-weight-bold">
@@ -27,7 +27,7 @@
                 height="240px">
           <jonder-chart
               :options="options"
-              :data="profileViewsData"
+              :data="peopleReachData"
               :type="'line'"
               :uid="'peopleReach'"
           />
@@ -104,23 +104,6 @@ export default {
         responsive: true,
         maintainAspectRatio: false
       },
-      profileViewsData: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June"
-        ],
-        datasets: [
-          {
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
-            data: [0, 10, 5, 2, 20, 30, 45]
-          }
-        ]
-      },
       pieData: {
         labels: [
           'Red',
@@ -170,88 +153,45 @@ export default {
           borderWidth: 1
         }],
       },
-      candidates: {
-        0: {
-          type: 'request',
-          items: [
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: true,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-          ]
-        },
-        1: {
-          type: 'negotiation',
-          items: [
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: true,
-            },
-          ]
-        },
-        2: {
-          type: 'call',
-          items: [
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: true,
-            },
-            {
-              name: 'Victoria Anderson',
-              location: 'Berlin',
-              job: 'UI/UX Designer',
-              note: false,
-            },
-          ]
-        }
-      }
     }
   },
   created() {
+    this.fetchPeopleReach();
+    this.fetchProfileViews();
     this.fetchUserInteractions();
   },
   methods: {
-    ...mapActions('company', ['fetchUserInteractions']),
+    ...mapActions('company', ['fetchUserInteractions',
+                              'fetchPeopleReach',
+                              'fetchProfileViews']),
+    formatForCharts(data, prop) {
+      let obj = {
+        labels: [],
+        datasets: [{
+          backgroundColor: "rgb(166, 206, 227)",
+          borderColor: "rgb(166, 206, 227)",
+          data: []
+        }]
+      };
+      data.forEach(element => {
+        obj.labels.push(element[prop]);
+        obj.datasets[0].data.push(element.count);
+      });
+
+      return obj;
+    }
   },
 
   computed: {
-    ...mapGetters('company', ['userInteractions'])
+    ...mapGetters('company', ['userInteractions',
+                              'peopleReach',
+                              'profileViews']),
+    peopleReachData() {
+        return this.formatForCharts(this.peopleReach, 'dayname');
+     },
+     profileViewsData() {
+        return this.formatForCharts(this.profileViews, 'monthname');
+     }
   }
 }
 

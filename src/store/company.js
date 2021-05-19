@@ -6,11 +6,19 @@ export default {
   state: {
     // Request, negotiate, call
     userInteractions: null,
+    peopleReach: null,
+    profileViews: null
   },
 
   getters: {
     userInteractions(state) {
       return state.userInteractions;
+    },
+    peopleReach(state) {
+      return state.peopleReach;
+    },
+    profileViews(state) {
+      return state.profileViews;
     }
   },
 
@@ -30,6 +38,12 @@ export default {
           users: value.call_users
         }
       };
+    },
+    SET_PEOPLE_REACH(state, value) {
+      state.peopleReach = value;
+    },
+    SET_PROFILE_VIEWS(state, value) {
+      state.profileViews = value;
     }
   },
   actions: {
@@ -43,6 +57,24 @@ export default {
         })
         .catch(err => {
           console.log(err);
+        })
+    },
+    fetchPeopleReach({ commit }) {
+      return axios
+        .get('/stats/company/people/reach')
+        .then((res) => {
+          if (res.data.success) {
+            commit('SET_PEOPLE_REACH', res.data.people_reach);
+          }
+        })
+    },
+    fetchProfileViews({ commit }) {
+      return axios
+        .get('/stats/company/profile/views')
+        .then((res) => {
+          if(res.data.success) {
+            commit('SET_PROFILE_VIEWS', res.data.profile_views)
+          }
         })
     }
   }
