@@ -3,7 +3,7 @@
     <v-row class="heading ma-0 mb-10 flex-column">
       <div>Hello,</div>
       <div class="text-color-primary-blue-dark font-weight-bold">
-        John Doe
+        {{getUserFullName}}
       </div>
     </v-row>
     <v-row class="mb-16">
@@ -186,6 +186,7 @@ export default {
     ...mapGetters('company', ['userInteractions',
                               'peopleReach',
                               'profileViews']),
+    ...mapGetters('user', ['getUserFullName']),
     peopleReachData() {
         return this.formatForCharts(this.peopleReach, 'dayname');
      },
