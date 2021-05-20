@@ -1,5 +1,5 @@
 <template>
-  <v-row class="flex-shrink-0 flex-grow-0 search-holder">
+  <v-row class="search-holder flex-shrink-0 flex-grow-0 pb-2">
     <v-col cols="6">
       <v-autocomplete
         v-model="searchString"
@@ -102,3 +102,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .searc-holder {
+    background: #f6f6f7;
+    z-index: 1111;
+  }
+</style>

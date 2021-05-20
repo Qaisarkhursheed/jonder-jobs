@@ -31,10 +31,10 @@
         </nav>
       </v-col>
       <v-col cols="9" class="full-h bg-light-gray">
-        <v-container fluid class="d-flex flex-column full-h pl-13 pr-13">
-          <DashboardHeader />
+        <v-container fluid class="d-flex flex-column full-h">
+            <DashboardHeader class="pl-10 pr-10"/>
           <v-row style="overflow: auto;">
-            <v-container :fluid="true" class="company">
+            <v-container :fluid="true" class="company pl-13 pr-13">
                 <router-view></router-view>
             </v-container>
           </v-row>
