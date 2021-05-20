@@ -254,6 +254,7 @@ export default {
       }).then(() => {
         this.dialog.type = 'ok';
         this.dialog.active = true;
+        this.$router.push({name: 'CompanyProfile'});
       });
     },
     cancel() {
