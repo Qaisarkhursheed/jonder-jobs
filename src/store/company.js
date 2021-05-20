@@ -7,7 +7,11 @@ export default {
     // Request, negotiate, call
     userInteractions: null,
     peopleReach: null,
-    profileViews: null
+    profileViews: null,
+    companyInteractions: {
+      yearlyActivity: null,
+      interactions: null
+    }
   },
 
   getters: {
@@ -19,6 +23,12 @@ export default {
     },
     profileViews(state) {
       return state.profileViews;
+    },
+    companyInteractions(state) {
+      return state.companyInteractions.interactions;
+    },
+    companyInteractionsYearly(state) {
+      return state.companyInteractions.yearlyActivity;
     }
   },
 
@@ -44,6 +54,10 @@ export default {
     },
     SET_PROFILE_VIEWS(state, value) {
       state.profileViews = value;
+    },
+    SET_COMPANY_INTERACTIONS(state, value) {
+      state.companyInteractions.yearlyActivity = value.yearly_activity;
+      state.companyInteractions.interactions = value.interactions;
     }
   },
   actions: {
@@ -74,6 +88,15 @@ export default {
         .then((res) => {
           if(res.data.success) {
             commit('SET_PROFILE_VIEWS', res.data.profile_views)
+          }
+        })
+    },
+    fetchCompanyInteractions({ commit }) {
+      return axios
+        .get('/stats/company/interactions')
+        .then((res) => {
+          if(res.data.success) {
+            commit('SET_COMPANY_INTERACTIONS', res.data)
           }
         })
     }
