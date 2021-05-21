@@ -20,7 +20,7 @@
     </v-col>
     <v-col cols="6" class="text-right">
       <div class="dashboard-avatar">
-        <span class="name">{{ getUserFullName }}</span>
+        <span class="name">{{ user.company }}</span>
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
             <v-avatar color="primary" size="38" v-on="on">
@@ -70,7 +70,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
+    ...mapGetters("user", ["user", "getUserInitials"])
   },
 
   methods: {

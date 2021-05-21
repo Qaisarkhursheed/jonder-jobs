@@ -3,7 +3,7 @@
     <v-row class="heading ma-0 mb-10 flex-column">
       <div>Hello,</div>
       <div class="text-color-primary-blue-dark font-weight-bold">
-        {{getUserFullName}}
+        {{user.company}}
       </div>
     </v-row>
     <DashboardStats/>
@@ -37,7 +37,7 @@ export default {
 
   computed: {
     ...mapGetters('company', ['userInteractions']),
-    ...mapGetters('user', ['getUserFullName']),
+    ...mapGetters('user', ['user']),
   }
 }
 

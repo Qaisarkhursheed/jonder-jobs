@@ -99,6 +99,15 @@ export default {
             commit('SET_COMPANY_INTERACTIONS', res.data)
           }
         })
+    },
+    // move to notepad probably later
+    addUserNote(context, payload) {
+      return axios
+        .post('/notepad/user/description', payload)
+    },
+    fetchUserNotes(context, user_id) {
+      return axios
+        .get(`/notepad/user/description/${user_id}`)
     }
   }
 };
