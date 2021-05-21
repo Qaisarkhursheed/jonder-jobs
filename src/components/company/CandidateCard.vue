@@ -41,7 +41,7 @@
         <v-icon class="text-color-primary-blue-dark">mdi-pencil-outline</v-icon>
         <span>Hinweis</span>
       </span>
-      <span class="note-input pl-4" v-if="notingActive">
+      <span class="note-input pl-4 pb-4" v-if="notingActive">
         <v-textarea
           no-resize
           height="60px"
@@ -59,7 +59,7 @@
           Save
         </v-btn>
       </span>
-      <div class="notes-list align-self-start pl-4 pt-4">
+      <div class="notes-list align-self-start pl-4">
         <!-- <span v-for="(note, i ) in notes" :key="i"> -->
         <span>
           {{notes.content}}
