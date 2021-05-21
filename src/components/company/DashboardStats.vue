@@ -2,7 +2,7 @@
   <div class="dashboard-statistics" v-if="loaded">
     <v-row class="mb-16">
       <v-col cols="4">
-        <div class="hd pb-7">Profile Views</div>
+        <div class="heading pb-7">Profile Views</div>
         <v-card class="rounded-lg pa-2"
                 flat
                 height="240px">
@@ -15,7 +15,7 @@
         </v-card>
       </v-col>
       <v-col cols="8">
-        <div class="hd pb-7">People Reach</div>
+        <div class="heading pb-7">People Reach</div>
         <v-card class="rounded-lg pa-2"
                 flat 
                 height="240px">
@@ -31,7 +31,7 @@
 
     <v-row class="mb-16">
       <v-col cols="5">
-        <div class="hd pb-7">Anwendungen</div>
+        <div class="heading pb-7">Anwendungen</div>
         <v-card class="rounded-lg pa-2"
                 flat
                 height="240px">
@@ -44,7 +44,7 @@
         </v-card>
       </v-col>
       <v-col cols="7">
-        <div class="hd pb-7">Jährliche Aktivität</div>
+        <div class="heading pb-7">Jährliche Aktivität</div>
         <v-card class="rounded-lg pa-2"
                 flat 
                 height="240px">
@@ -169,3 +169,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .heading {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #82858C;
+  }
+</style>
