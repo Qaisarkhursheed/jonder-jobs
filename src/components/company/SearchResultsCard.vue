@@ -40,7 +40,9 @@
                   color="#C5C6C9">
             mdi-hexagon-multiple-outline
           </v-icon>
-          <span class="label pr-2">Branche</span>
+          <span class="label pr-2">
+            {{ $t('company.search.branch') }}
+          </span>
           <span class="value">{{candidate.branche}}</span>
         </div>
         <div class="pb-4">
@@ -48,7 +50,9 @@
                   color="#C5C6C9">
             mdi-domain
           </v-icon>
-          <span class="label pr-2">Schulabschluss</span>
+          <span class="label pr-2">
+            {{ $t('company.search.graduation') }}
+          </span>
           <span class="value">{{candidate.training_studies}}</span>
         </div>
         <div class="pb-4">
@@ -56,7 +60,9 @@
                   color="#C5C6C9">
             mdi-school
           </v-icon>
-          <span class="label pr-2">Ausbildung</span>
+          <span class="label pr-2">
+            {{ $t('company.search.education') }}
+          </span>
           <span class="value">{{candidate.your_qualification}}</span>
         </div>
 
@@ -76,7 +82,7 @@
     <v-card-actions @click="startConversation"
                     class="actions d-flex pa-0 pl-6 text-color-primary-blue-dark font-weight-bold"
                     style="background: #E3F2FB; height: 67px;">
-      In Kontakt treten
+      {{ $t('company.search.contact') }}
     </v-card-actions>
   </v-card>
 </template>
