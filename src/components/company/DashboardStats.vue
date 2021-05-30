@@ -2,7 +2,9 @@
   <div class="dashboard-statistics" v-if="loaded">
     <v-row class="mb-16">
       <v-col cols="4">
-        <div class="heading pb-7">Profile Views</div>
+        <div class="heading pb-7">
+          {{ $t('company.dashboard.profileViews') }}
+        </div>
         <v-card class="rounded-lg pa-2"
                 flat
                 height="240px">
@@ -15,7 +17,9 @@
         </v-card>
       </v-col>
       <v-col cols="8">
-        <div class="heading pb-7">People Reach</div>
+        <div class="heading pb-7">
+          {{ $t('company.dashboard.peopleReach') }}
+        </div>
         <v-card class="rounded-lg pa-2"
                 flat 
                 height="240px">
@@ -31,7 +35,9 @@
 
     <v-row class="mb-16">
       <v-col cols="5">
-        <div class="heading pb-7">Anwendungen</div>
+        <div class="heading pb-7">
+          {{ $t('company.dashboard.applications') }}
+        </div>
         <v-card class="rounded-lg pa-2"
                 flat
                 height="240px">
@@ -44,7 +50,9 @@
         </v-card>
       </v-col>
       <v-col cols="7">
-        <div class="heading pb-7">Jährliche Aktivität</div>
+        <div class="heading pb-7">
+          {{ $t('company.dashboard.yearlyActivity') }}
+        </div>
         <v-card class="rounded-lg pa-2"
                 flat 
                 height="240px">
@@ -116,7 +124,7 @@ export default {
         }]
       };
       data.forEach(element => {
-        obj.labels.push(element[prop]);
+        obj.labels.push(this.$t(`general.${element[prop].toLowerCase()}`));
         obj.datasets[0].data.push(element.count);
       });
 
@@ -143,9 +151,12 @@ export default {
     companyInteractionsData() {
       return {
         labels: [
-          'Requests',
-          'Negotiations',
-          'Call'
+          this.$t('company.dashboard.request'),
+          this.$t('company.dashboard.negotiation'),
+          this.$t('company.dashboard.call'),
+          // 'Requests',
+          // 'Negotiations',
+          // 'Call'
         ],
         datasets: [{
           data: [

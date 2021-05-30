@@ -2,7 +2,7 @@
   <div class="candidate-list">
     <div class="title text-capitalize font-weight-bold"
          :class="`${list.type}`">
-      {{list.type}}
+      {{ $t(`company.dashboard.${list.type}`) }}
     </div>
     <div class="list pt-6">
       <div class="item mb-3" v-for="(user, i) in list.users" :key="i">

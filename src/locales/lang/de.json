@@ -80,6 +80,7 @@
     "typeMessage": "Geben Sie eine Nachricht ein",
     "cancel":  "Stornieren",
     "confirm": "Bestätigen",
-    "logout": "Ausloggen"
+    "logout": "Ausloggen",
+    "save": "Speichern"
   }
 }

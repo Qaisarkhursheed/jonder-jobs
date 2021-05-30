@@ -80,6 +80,7 @@
     "typeMessage": "Type a message",
     "cancel":  "Cancel",
     "confirm": "Confirm",
-    "logout": "Logout"
+    "logout": "Logout",
+    "save": "Save"
   }
 }
