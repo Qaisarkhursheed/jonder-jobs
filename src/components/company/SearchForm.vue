@@ -97,27 +97,27 @@ export default {
     return {
       form: {
         jobtitle: {
-          label: 'Job title',
+          label: this.$t('company.search.jobTitle'),
           value: ''
         },
         school: {
-          label: 'School graduation',
+          label: this.$t('company.search.schoolGraduation'),
           value: ''
         },
         education: {
-          label: 'JEducation / Study',
+          label: this.$t('company.search.education'),
           value: '', 
         },
         branche: {
-          label: 'Industry of the profession',
+          label: this.$t('company.search.industry'),
           value: '', 
         },
         salary: {
-          label: 'Salary',
+          label: this.$t('company.search.salary'),
           value: '', 
         },
         experience: {
-          label: 'Work experience necessary',
+          label: this.$t('company.search.experience'),
           value: '', 
         },
       },
