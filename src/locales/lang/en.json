@@ -49,7 +49,7 @@
       "howManyEmployees": "How many employees your company have ?",
       "whichIndustry": "Which industry are you in ?",
       "aboutCompany": "About company",
-      "edit": "Edit"
+      "editProfile": "Edit Profile"
     }
   },
   "general": {
@@ -81,6 +81,10 @@
     "cancel":  "Cancel",
     "confirm": "Confirm",
     "logout": "Logout",
-    "save": "Save"
+    "save": "Save",
+    "edit": "Edit",
+    "ok": "OK",
+    "modalConfirm": "Are you sure you don't want to save changes ?",
+    "modalSuccess": "Your changes have been saved successfully !"
   }
 }

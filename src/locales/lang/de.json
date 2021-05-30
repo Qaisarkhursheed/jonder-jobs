@@ -49,7 +49,7 @@
       "howManyEmployees": "Wie viele Mitarbeiter hat Ihr Unternehmen ?",
       "whichIndustry": "In welcher Branche bist du ?",
       "aboutCompany": "über das Unternehmen",
-      "edit": "bearbeiten"
+      "editProfile": "Profil Bearbeiten"
     }
   },
   "general": {
@@ -81,6 +81,10 @@
     "cancel":  "Stornieren",
     "confirm": "Bestätigen",
     "logout": "Ausloggen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "ok": "OK",
+    "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
+    "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !"
   }
 }

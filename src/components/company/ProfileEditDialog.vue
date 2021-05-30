@@ -16,7 +16,9 @@
                 </v-icon>
               </div>
               <div class="message pl-12 pr-12 pt-5 pb-3 text-justify">
-                <span>Your changes have been saved successfully!</span>
+                <span>
+                  {{ $t('general.modalSuccess') }}
+                </span>
               </div>
             </v-card-text>
             <v-divider></v-divider>
@@ -26,7 +28,7 @@
                     color="#0253B3"
                     text
                     @click="close('ok')">
-                OK
+                {{ $t('general.ok') }}
               </v-btn>
             </v-card-actions>
           </template>
@@ -39,7 +41,9 @@
                 </v-icon>
               </div>
               <div class="message pl-12 pr-12 pt-5 pb-3 text-justify">
-                <span>Are you sure you don't want to save changes?</span>
+                <span>
+                  {{ $t('general.modalConfirm') }}
+                </span>
               </div>
             </v-card-text>
             <v-divider></v-divider>
@@ -49,14 +53,14 @@
                     color="#999"
                     text
                     @click="close('abort')">
-                Cancel
+                {{ $t('general.cancel') }}
               </v-btn>
               <v-btn class="action-btn ma-0 pa-0 pb-7 pt-7"
                     width="50%"
                     color="#0253B3"
                     text
                     @click="close('save')">
-                Save
+                {{ $t('general.save') }}
               </v-btn>
             </v-card-actions>
           </template>
