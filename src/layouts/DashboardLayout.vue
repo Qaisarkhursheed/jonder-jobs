@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="full-h pa-0" v-if="user">
     <v-row class="full-h ma-0">
-      <v-col cols="3" class="full-h">
+      <v-col cols="3" class="full-h ">
         <nav class="dashboard-navigation">
           <router-link to="/dashboard" class="logo">
             <v-img

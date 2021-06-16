@@ -4,13 +4,13 @@
       <step-header :active-step="4" />
     </v-card-title>
     <v-card-subtitle>
-      <div class="step-header-description">
+      <div class="step-header-description font-weight-bold">
         <h3>Meine Erfahrungen</h3>
       </div>
     </v-card-subtitle>
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-outline</v-icon
           >
@@ -19,7 +19,7 @@
         <v-text-field
           dense
           type="text"
-          label="Name des Unternehmens"
+          placeholder="Name des Unternehmens"
           outlined
           solo
           flat
@@ -35,7 +35,7 @@
         <v-text-field
           dense
           type="text"
-          label="Kontaktperson"
+          placeholder="Kontaktperson"
           outlined
           solo
           flat
@@ -51,7 +51,7 @@
         <v-text-field
           dense
           type="text"
-          label="Telefonnummer"
+          placeholder="Telefonnummer"
           outlined
           solo
           flat
@@ -67,7 +67,7 @@
         <v-text-field
           dense
           type="email"
-          label="E-mail adresse"
+          placeholder="E-mail adresse"
           outlined
           solo
           flat
@@ -80,7 +80,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-group-outline</v-icon
           >
@@ -89,7 +89,7 @@
         <v-textarea
           dense
           type="text"
-          label="Beschreibung"
+          placeholder="Beschreibung"
           outlined
           solo
           flat
@@ -102,7 +102,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-share-variant-outline</v-icon
           >
@@ -111,7 +111,7 @@
         <v-textarea
           dense
           type="text"
-          label="Beschreibung"
+          placeholder="Beschreibung"
           outlined
           solo
           flat
@@ -131,6 +131,7 @@
           color="primary"
           large
           @click="$emit('back')"
+          class="font-weight-bold"
         >
           Back
         </v-btn>
@@ -144,6 +145,7 @@
           large
           :disabled="!isValid"
           @click="nextStep"
+          class="font-weight-bold"
         >
           Finish
         </v-btn>

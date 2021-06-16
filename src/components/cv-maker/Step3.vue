@@ -14,7 +14,7 @@
         <v-text-field
           dense
           type="text"
-          label="Stellenbezeichnung"
+          placeholder="Stellenbezeichnung"
           outlined
           solo
           flat
@@ -30,7 +30,7 @@
         <v-text-field
           dense
           type="text"
-          label="Stadt"
+          placeholder="Stadt"
           outlined
           solo
           flat
@@ -46,7 +46,7 @@
         <v-text-field
           dense
           type="text"
-          label="Arbeitgeber"
+          placeholder="Arbeitgeber"
           outlined
           solo
           flat
@@ -59,11 +59,11 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Begindatum</label>
+        <label class="font-weight-bold">Begindatum</label>
         <v-text-field
           dense
           type="text"
-          label="September 2018"
+          placeholder="September 2018"
           outlined
           solo
           flat
@@ -74,11 +74,11 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Enddatum</label>
+        <label class="font-weight-bold">Enddatum</label>
         <v-text-field
           dense
           type="text"
-          label="September 2020"
+          placeholder="September 2020"
           outlined
           solo
           flat
@@ -95,7 +95,7 @@
         <v-textarea
           dense
           type="text"
-          label="Beschreibung"
+          placeholder="Beschreibung"
           outlined
           solo
           flat
@@ -108,7 +108,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-cards-playing-outline</v-icon
           >
@@ -117,7 +117,7 @@
         <v-text-field
           dense
           type="text"
-          label="Hobby"
+          placeholder="Hobby"
           outlined
           solo
           flat
@@ -137,6 +137,7 @@
           color="primary"
           large
           @click="$emit('back')"
+          class="font-weight-bold"
         >
           Back
         </v-btn>
@@ -150,8 +151,9 @@
           large
           :disabled="!isValid"
           @click="nextStep"
+          class="font-weight-bold"
         >
-          Confirm
+          Nachester Schritt
         </v-btn>
       </v-col>
     </v-row>

@@ -1,13 +1,13 @@
 <template>
-  <div class="pa-8">
+  <div class="pa-10">
     <v-card-title class="pl-0 pt-0">Personliche Daten</v-card-title>
     <v-row>
       <v-col cols="6">
-        <label>E-mail Adresse</label>
+        <label class="font-weight-bold">E-mail Adresse</label>
         <v-text-field
           dense
           type="email"
-          label="E-mail Adresse"
+          placeholder="Text"
           outlined
           solo
           flat
@@ -17,11 +17,11 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Telefonnummer</label>
+        <label class="font-weight-bold">Telefonnummer</label>
         <v-text-field
           dense
           type="text"
-          label="Telefonnummer"
+          placeholder="Text"
           outlined
           solo
           flat
@@ -34,11 +34,11 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Adresse</label>
+        <label class="font-weight-bold">Adresse</label>
         <v-text-field
           dense
           type="address"
-          label="Adresse"
+          placeholder="Text"
           outlined
           solo
           flat
@@ -48,13 +48,13 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Geburtsdatum</label>
+        <label class="font-weight-bold">Geburtsdatum</label>
         <div class="form-group d-flex">
           <div class="flex-grow-0 flex-shrink-0" style="width: 110px">
             <v-text-field
               dense
               type="number"
-              label="Tag"
+              placeholder="Tag"
               outlined
               solo
               flat
@@ -67,7 +67,7 @@
             <v-text-field
               dense
               type="text"
-              label="Monat"
+              placeholder="Monat"
               outlined
               solo
               flat
@@ -80,7 +80,7 @@
             <v-text-field
               dense
               type="number"
-              label="Jahre"
+              placeholder="Jahre"
               outlined
               solo
               flat
@@ -92,14 +92,20 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="4">
-        <v-btn depressed block outlined color="primary" large>
+    <v-sheet class="d-flex justify-space-between mt-6">
+      <v-sheet width="300">
+        <v-btn
+          depressed
+          block
+          outlined
+          color="primary"
+          large
+          class="font-weight-bold"
+        >
           Cancel
         </v-btn>
-      </v-col>
-      <v-col cols="4"></v-col>
-      <v-col cols="4">
+      </v-sheet>
+      <v-sheet width="300">
         <v-btn
           depressed
           block
@@ -107,11 +113,12 @@
           large
           :disabled="!isValid"
           @click="nextStep"
+          class="font-weight-bold"
         >
           Confirm
         </v-btn>
-      </v-col>
-    </v-row>
+      </v-sheet>
+    </v-sheet>
   </div>
 </template>
 

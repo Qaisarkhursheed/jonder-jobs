@@ -1,147 +1,117 @@
 <template>
   <div class="mo-step-2">
-    <p class="text-center">Erzahl uns etwas uber dich!</p>
+    <v-sheet class="px-12">
+      <p class="text-center font-weight-bold text-h6">
+        Erzahl uns etwas uber dich!
+      </p>
 
-    <div class="mt-6">
-      <v-text-field
+      <div class="mt-6">
+        <p class="text-left font-weight-bold">Wie alt bist Du?</p>
+        <v-text-field
           dense
-          label="Wo iarbeitest du aktuell?"
+          placeholder="TT / MM / JJJ"
           type="text"
           outlined
           background-color="white"
           :rules="rules"
           v-model="value.working_in"
-      ></v-text-field>
+        ></v-text-field>
+        <p class="text-left font-weight-bold">
+          Welches Geschlecht beschreibt Dich am besten?
+        </p>
+        <v-row class="pb-5">
+          <v-col>
+            <v-card>
+              <v-btn
+                class="pa-6"
+                block
+                @click="value.describe_yourself = 'Weiblich'"
+                v-bind="{ outlined: value.describe_yourself !== 'Weiblich' }"
+                color="primary"
+              >
+                Weiblich
+              </v-btn>
+            </v-card>
+          </v-col>
 
-      <v-text-field
+          <v-col>
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.describe_yourself = 'Männlich'"
+                v-bind="{ outlined: value.describe_yourself !== 'Männlich' }"
+                color="primary"
+                >Männlich
+              </v-btn>
+            </v-card>
+          </v-col>
+
+          <v-col>
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.describe_yourself = 'Divers'"
+                v-bind="{ outlined: value.describe_yourself !== 'Divers' }"
+                color="primary"
+                >Divers
+              </v-btn>
+            </v-card>
+          </v-col>
+        </v-row>
+        <p class="text-left font-weight-bold">Hast Du eine Behinderung?</p>
+        <v-text-field
           dense
-          label="Was ist deine aktuelle Position?"
+          placeholder="Lorem ipsum"
           type="text"
           outlined
           background-color="white"
           :rules="rules"
           v-model="value.current_position"
-      ></v-text-field>
-
-      <v-text-field
+        ></v-text-field>
+        <p class="text-left font-weight-bold">Wo wohnst Du aktuell? *</p>
+        <v-text-field
           dense
-          label="I welchen Branchen arbeitest du?"
+          placeholder="Lorem Ipsum (Maps city selection)"
           type="text"
           outlined
           background-color="white"
           :rules="rules"
           v-model="value.branche"
-      ></v-text-field>
-
-      <v-text-field
-          dense
-          label="Wo wohnst du?"
-          type="text"
+        ></v-text-field>
+        <p class="text-left font-weight-bold">
+          Erzähle uns von Deinen Hobbies!
+        </p>
+        <v-textarea
           outlined
+          type="text"
+          placeholder="Lorem ipsum"
           background-color="white"
           :rules="rules"
           v-model="value.address"
-      ></v-text-field>
+          height="80"
+        ></v-textarea>
 
-      <v-text-field
-          dense
-          label="In welchem Radius warst du bereit Deinen neuen Job auszuuben?"
+        <p class="text-left font-weight-bold">Erzähle uns etwas über Dich! *</p>
+        <v-textarea
+          height="80"
+          placeholder="Lorem ipsum"
           type="text"
           outlined
           background-color="white"
           :rules="rules"
           v-model="value.address_to_work"
-      ></v-text-field>
-
-      <p class="text-left">Was beschreibt dich am besten?</p>
-      <v-row>
-        <v-col>
-          <div class="text-center">
-            <v-btn
-                @click="value.describe_yourself = 'Beginner'"
-                v-bind="{ outlined: value.describe_yourself !== 'Beginner' }"
-                color="primary"
-                class="stars-btn"
-            >
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
-          </div>
-
-          <p class="text-center caption mt-1">Beginner</p>
-        </v-col>
-
-        <v-col>
-          <div class="text-center">
-            <v-btn
-                @click="value.describe_yourself = 'Junior'"
-                v-bind="{ outlined: value.describe_yourself !== 'Junior' }"
-                color="primary"
-                class="stars-btn"
-            >
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
-          </div>
-
-          <p class="text-center caption mt-1">Junior</p>
-        </v-col>
-
-        <v-col>
-          <div class="text-center">
-            <v-btn
-                @click="value.describe_yourself = 'Senior'"
-                v-bind="{ outlined: value.describe_yourself !== 'Senior' }"
-                color="primary"
-                class="stars-btn senior"
-            >
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
-          </div>
-
-          <p class="text-center caption mt-1">Senior</p>
-        </v-col>
-
-        <v-col>
-          <div class="text-center">
-            <v-btn
-                @click="value.describe_yourself = 'Advanced'"
-                v-bind="{ outlined: value.describe_yourself !== 'Advanced' }"
-                color="primary"
-                class="stars-btn advanced"
-            >
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
-          </div>
-
-          <p class="text-center caption mt-1">Advanced</p>
-        </v-col>
-      </v-row>
-    </div>
+        ></v-textarea>
+        <v-btn
+          @click="nextScreen"
+          color="primary"
+          class="full-w mt-4 font-weight-medium "
+        >
+          Weiter
+        </v-btn>
+      </div>
+    </v-sheet>
   </div>
 </template>
 
@@ -152,8 +122,10 @@ export default {
     value: {
       type: Object,
       required: true
-    }
+    },
+    nextScreen: Function
   },
+
   data: () => ({
     rules: [value => !!value || "Required."]
   })

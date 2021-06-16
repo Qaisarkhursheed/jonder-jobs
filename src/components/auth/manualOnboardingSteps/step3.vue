@@ -1,98 +1,178 @@
 <template>
   <div class="mo-step-3">
-    <p class="text-center">Zeig uns was du willst</p>
+    <v-sheet class="px-12">
+      <p class="text-center font-weight-bold text-h6">
+        Welche Ausbildung hast Du genossen?
+      </p>
 
-    <div class="mt-6">
-      <v-text-field
-        dense
-        label="Was ist deine Wunschbranche? "
-        type="text"
-        outlined
-        background-color="white"
-      ></v-text-field>
-
-      <v-text-field
-        dense
-        label="Was ist dein Wunschberuf?"
-        type="text"
-        outlined
-        background-color="white"
-        :rules="rules"
-        v-model="value.dream_job"
-      ></v-text-field>
-
-      <p class="text-left">Monatliche Brutto Gehaltsvorstellung?</p>
-
-      <v-row>
-        <v-col cols="2">
-          <div class="mo-step-3__salary pa-2 font-weight-bold caption">
-            {{ value.monthly_salary }}k
-          </div>
-        </v-col>
-        <v-col cols="10">
-          <v-slider
-            v-model="value.monthly_salary"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            min="0"
-            max="100"
-            :rules="rules"
-          ></v-slider>
-        </v-col>
-      </v-row>
-
-      <p class="text-left">Was beschreibt dich am besten?</p>
-      <v-row>
-        <v-col>
-          <v-btn
-            @click="value.ready_for_work = '1-3'"
-            v-bind="{ outlined: value.ready_for_work !== '1-3' }"
-            color="primary"
-          >
-            1-3
-          </v-btn>
-
-          <p class="text-center caption mt-1">Per month</p>
-        </v-col>
-
-        <v-col>
-          <v-btn
-            @click="value.ready_for_work = '3-6'"
-            v-bind="{ outlined: value.ready_for_work !== '3-6' }"
-            color="primary"
-          >
-            3-6
-          </v-btn>
-
-          <p class="text-center caption mt-1">Per month</p>
-        </v-col>
-
-        <v-col>
-          <v-btn
-            @click="value.ready_for_work = '6-12'"
-            v-bind="{ outlined: value.ready_for_work !== '6-12' }"
-            color="primary"
-          >
-            6-12
-          </v-btn>
-
-          <p class="text-center caption mt-1">Per month</p>
-        </v-col>
-
-        <v-col>
-          <v-btn
-            @click="value.ready_for_work = '12+'"
-            v-bind="{ outlined: value.ready_for_work !== '12+' }"
-            color="primary"
-          >
-            12+
-          </v-btn>
-
-          <p class="text-center caption mt-1">Per month</p>
-        </v-col>
-      </v-row>
-    </div>
+      <div class="mt-10">
+        <p class="text-left font-weight-bold">
+          Was ist Dein höchster bisher erreichter Schulabschluss?
+        </p>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Kein Schulabschluss'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Kein Schulabschluss'
+                }"
+                color="primary"
+              >
+                Kein Schulabschluss
+              </v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Hauptschulabschluss'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Hauptschulabschluss'
+                }"
+                color="primary"
+              >
+                Hauptschulabschluss
+              </v-btn></v-card
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Mittlere Reife'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Mittlere Reife'
+                }"
+                color="primary"
+                >Mittlere Reife
+              </v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Fachhochschulreife'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Fachhochschulreife'
+                }"
+                color="primary"
+              >
+                Fachhochschulreife
+              </v-btn></v-card
+            >
+          </v-col>
+        </v-row>
+        <v-row class="mb-2">
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Abitur'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Abitur'
+                }"
+                color="primary"
+              >
+                Abitur
+              </v-btn>
+            </v-card>
+          </v-col>
+        </v-row>
+        <p class="text-left font-weight-bold">
+          Was ist Dein höchster bisher erreichter Schulabschluss?
+        </p>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Kein Studium'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Kein Studium'
+                }"
+                color="primary"
+              >
+                Kein Studium
+              </v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Aktuell Student'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Aktuell Student'
+                }"
+                color="primary"
+              >
+                Aktuell Student
+              </v-btn></v-card
+            >
+          </v-col>
+        </v-row>
+        <v-row class="mb-2">
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Bachelor Abschluss'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Bachelor Abschluss'
+                }"
+                color="primary"
+                >Bachelor Abschluss
+              </v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = 'Master Abschluss'"
+                v-bind="{
+                  outlined: value.ready_for_work !== 'Master Abschluss'
+                }"
+                color="primary"
+                >Master Abschluss
+              </v-btn></v-card
+            >
+          </v-col>
+        </v-row>
+        <p class="text-left font-weight-bold">
+          Deine Hochschule oder Universität?
+        </p>
+        <v-text-field
+          dense
+          placeholder="Lorem Ipsum"
+          type="text"
+          outlined
+          background-color="white"
+        ></v-text-field>
+      </div>
+      <v-btn
+        @click="nextScreen"
+        color="primary"
+        class="full-w mt-4 font-weight-medium "
+      >
+        Weiter
+      </v-btn>
+    </v-sheet>
   </div>
 </template>
 
@@ -103,7 +183,8 @@ export default {
     value: {
       type: Object,
       required: true
-    }
+    },
+    nextScreen: Function
   },
   data: () => ({
     rules: [value => !!value || "Required."]

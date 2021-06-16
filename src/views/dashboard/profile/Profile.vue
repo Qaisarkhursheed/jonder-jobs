@@ -10,7 +10,9 @@
             }}</span>
           </v-avatar>
           <div class="flex-grow-1 flex-shrink-1 pl-2">
-            <div class="heading text-color-primary-blue-dark">
+            <div
+              class="heading text-color-primary-blue-dark font-weight-bold ml-2 mb-2"
+            >
               {{ getUserFullName }}
             </div>
             <div v-if="user.address">
@@ -29,10 +31,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>First name</label>
+        <label class="font-weight-bold">First name</label>
         <v-text-field
           dense
-          label="First name"
+          placeholder="First name"
           :rules="rules"
           type="text"
           outlined
@@ -44,10 +46,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Last name</label>
+        <label class="font-weight-bold">Last name</label>
         <v-text-field
           dense
-          label="Last name"
+          placeholder="Last name"
           :rules="rules"
           type="text"
           outlined
@@ -62,10 +64,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Job title</label>
+        <label class="font-weight-bold">Job title</label>
         <v-text-field
           dense
-          label="Job title"
+          placeholder="Job title"
           type="text"
           outlined
           solo
@@ -76,10 +78,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Work experience</label>
+        <label class="font-weight-bold">Work experience</label>
         <v-text-field
           dense
-          label="Work experience"
+          placeholder="Work experience"
           type="text"
           outlined
           solo
@@ -93,10 +95,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Looking for</label>
+        <label class="font-weight-bold">Looking for</label>
         <v-text-field
           dense
-          label="Looking for"
+          placeholder="Looking for"
           type="text"
           outlined
           solo
@@ -107,10 +109,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Education</label>
+        <label class="font-weight-bold">Education</label>
         <v-text-field
           dense
-          label="Education"
+          placeholder="Education"
           type="text"
           outlined
           solo
@@ -124,10 +126,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>About me</label>
+        <label class="font-weight-bold">About me</label>
         <v-textarea
           dense
-          label="About me"
+          placeholder="About me"
           outlined
           solo
           flat
@@ -144,8 +146,11 @@
           <a class="card-link-btn">
             <v-icon>mdi-link</v-icon>
           </a>
-          <v-card-title class="pb-0">Lorem ipsum</v-card-title>
-          <v-card-text>Lorem ipsum dolor sit amet</v-card-text>
+          <v-card-title class="pb-0 font-weight-bold">Lorem ipsum</v-card-title>
+          <v-card-text
+            >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, lorem
+            ipsum dolor sit amet, consetetur sadipscing elitr..</v-card-text
+          >
           <v-card-actions class="border-top-blue-dark pa-4 pt-1 pb-1">
             <strong class="text-color-primary-blue-dark">$9.99</strong>
           </v-card-actions>
