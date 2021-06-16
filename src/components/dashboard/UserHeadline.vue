@@ -3,7 +3,7 @@
     <v-col cols="6">
       <div class="user-info d-flex flex-row align-center">
         <div class="user-details flex-grow-1 flex-shrink-1">
-          Hello,
+          {{ $t('user.dashboard.hello') }},
           <strong>{{ getUserFullName }}</strong>
         </div>
         <div class="image flex-grow-0 flex-shrink-0">
@@ -14,7 +14,9 @@
     <v-col cols="6">
       <v-card elevation="0" class="text-weight-bold">
         <v-card-text>
-          <span class="text-weight-bold">My status</span>
+          <span class="text-weight-bold">
+            {{ $t('user.dashboard.myStatus') }}
+          </span>
           <span
             class="text-weight-bold text-color-primary-blue-dark float-right"
           >

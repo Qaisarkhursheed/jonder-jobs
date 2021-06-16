@@ -1,12 +1,16 @@
 <template>
   <v-card flat class="mt-4 pa-3">
     <v-row>
-      <v-col cols="6" class="pl-4"
-        ><span class="text-color-primary-blue-dark">Replies</span></v-col
-      >
-      <v-col cols="5" class="text-right"
-        ><span class="text-color-primary-blue-dark">Message</span></v-col
-      >
+      <v-col cols="6" class="pl-4">
+        <span class="text-color-primary-blue-dark">
+          {{ $t('user.dashboard.replies') }}
+        </span>
+      </v-col>
+      <v-col cols="5" class="text-right">
+        <span class="text-color-primary-blue-dark">
+          {{ $t('user.dashboard.message') }}
+        </span>
+      </v-col>
       <v-col cols="1"></v-col>
     </v-row>
 
@@ -30,7 +34,7 @@
     <v-row>
       <v-col class="text-center pt-6">
         <router-link to="/dashboard/chat" class="text-color-primary-blue-dark"
-          >See more</router-link
+          >{{ $t('user.dashboard.seeMore') }}</router-link
         >
       </v-col>
     </v-row>

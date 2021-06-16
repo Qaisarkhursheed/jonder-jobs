@@ -1,5 +1,4 @@
 {
-  "user": {},
   "company": {
     "dashboard": {
       "dashboard": "Dashboard",
@@ -50,6 +49,37 @@
       "whichIndustry": "Which industry are you in ?",
       "aboutCompany": "About company",
       "editProfile": "Edit Profile"
+    }
+  },
+  "user": {
+    "dashboard": {
+      "dashboard": "Dashboard",
+      "messages": "Messages",
+      "price": "Price",
+      "profile": "Profile",
+      "personalData": "Personal data",
+      "qualifications": "Qualifications",
+      "actualPosition": "Actual position",
+      "onboarding": "Onboarding",
+      "cvMaker": "CV Maker",
+      "yourStatistics": "Your statistics",
+      "searchAppearances": "Search appearances",
+      "messagedYou": "Who messaged you",
+      "whoViewedProfile": "Who viewed your profile",
+      "seeMore": "See more",
+      "beFeaturedOnSearch": "Be featured on search",
+      "forOneDay": "For One day",
+      "forTwoDays": "For Two days",
+      "buy": "Buy",
+      "notepad": "Notepad",
+      "new": "New",
+      "replies": "Replies",
+      "message": "Message",
+      "hello": "Hello",
+      "myStatus": "My status",
+      "education": "Education",
+      "employee": "Employee",
+      "branch": "Branch"
     }
   },
   "general": {

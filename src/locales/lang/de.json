@@ -52,6 +52,37 @@
       "editProfile": "Profil Bearbeiten"
     }
   },
+  "user": {
+    "dashboard": {
+      "dashboard": "Dashboard",
+      "messages": "Nachrichten",
+      "price": "Preise",
+      "profile": "Profile",
+      "personalData": "Persönliche Daten",
+      "qualifications": "Qualifikationen",
+      "actualPosition": "Aktuelle Position",
+      "onboarding": "Onboarding",
+      "cvMaker": "CV Maker",
+      "yourStatistics": "Deine Statistik",
+      "searchAppearances": "Aufftrite suchen",
+      "messagedYou": "habe dir eine Nachricht geschickt",
+      "whoViewedProfile": "Wer hat gesehen dein Profil",
+      "seeMore": "Mehr sehen",
+      "beFeaturedOnSearch": "In der Suche erscheinen",
+      "forOneDay": "Für einen Tag",
+      "forTwoDays": "Für zwei Tage",
+      "buy": "Kaufen",
+      "notepad": "Notizblock",
+      "new": "Neu",
+      "replies": "Antwortet",
+      "message": "Nachricht",
+      "hello": "Hallo",
+      "myStatus": "Mein status",
+      "education": "Ausbildung",
+      "employee": "Mitarbeiter",
+      "branch": "Branche"
+    }
+  },
   "general": {
     "search": "Suche",
     "dashboard": "Dashboard",
@@ -85,6 +116,7 @@
     "edit": "Bearbeiten",
     "ok": "OK",
     "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
-    "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !"
+    "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !",
+    "seeMore": ""
   }
 }

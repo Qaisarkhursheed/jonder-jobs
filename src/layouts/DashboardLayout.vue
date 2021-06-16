@@ -11,26 +11,36 @@
           </router-link>
           <router-link to="/dashboard">
             <v-icon>mdi-view-dashboard-outline</v-icon>
-            <span>Dashboard</span>
+            <span>{{ $t('user.dashboard.dashboard') }}</span>
           </router-link>
           <router-link to="/dashboard/chat">
             <v-icon>mdi-message-outline</v-icon>
-            <span>Nachrichten</span>
+            <span>{{ $t('user.dashboard.messages') }}</span>
           </router-link>
           <router-link to="/dashboard/product-pricing">
             <v-icon>mdi-currency-usd</v-icon>
-            <span>Preise</span>
+            <span>{{ $t('user.dashboard.price') }}</span>
           </router-link>
           <router-link to="/dashboard/profile" class="with-submenu">
             <v-icon>mdi-account-outline</v-icon>
-            <span>Profile</span>
+            <span>{{ $t('user.dashboard.profile') }}</span>
           </router-link>
           <div class="submenu">
-            <router-link to="/dashboard/profile">Persönliche Daten</router-link>
-            <router-link to="/dashboard/profile/qualifications">Qualifikationen</router-link>
-            <router-link to="/dashboard/profile/actual-position">Aktuelle Position</router-link>
-            <router-link to="/onboarding">Onboarding</router-link>
-            <router-link to="/dashboard/profile/cv-maker">CV Maker</router-link>
+            <router-link to="/dashboard/profile">
+              {{ $t('user.dashboard.personalData') }}
+            </router-link>
+            <router-link to="/dashboard/profile/qualifications">
+              {{ $t('user.dashboard.qualifications') }}
+            </router-link>
+            <router-link to="/dashboard/profile/actual-position">
+              {{ $t('user.dashboard.actualPosition') }}
+            </router-link>
+            <router-link to="/onboarding">
+              {{ $t('user.dashboard.onboarding') }}
+            </router-link>
+            <router-link to="/dashboard/profile/cv-maker">
+              {{ $t('user.dashboard.cvMaker') }}
+            </router-link>
 <!--            <router-link to="/dashboard/profile">Zahlung</router-link>-->
           </div>
         </nav>
@@ -75,12 +85,16 @@
                     <v-list-item>
                       <v-list-item-title
                         @click="navigateTo('/dashboard/profile')"
-                        >Profile</v-list-item-title
+                        >
+                          {{ $t('general.profile') }}
+                        </v-list-item-title
                       >
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-title @click="navigateTo('/logout')"
-                        >Logout</v-list-item-title
+                        >
+                        {{ $t('general.logout') }}
+                        </v-list-item-title
                       >
                     </v-list-item>
                   </v-list>
