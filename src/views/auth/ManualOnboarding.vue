@@ -1,11 +1,11 @@
 <template>
   <auth-wrap :img="e1 + 1">
-    <v-icon v-if="e1 > 1" class="mo-back-button" @click="prevStep">
+    <v-icon v-if="e1 > 1 && e1 < 5" class="mo-back-button" @click="prevStep">
       mdi-arrow-left
     </v-icon>
 
     <div
-      class="d-flex flex-column justify-space-between align-center full-h"
+      class="d-flex flex-column justify-space-between align-center full-h mt-10"
       style="width: 70%"
     >
       <v-stepper
@@ -27,6 +27,10 @@
           <v-divider></v-divider>
 
           <v-stepper-step step="4" :complete="complete(4)"></v-stepper-step>
+
+          <v-divider></v-divider>
+
+          <v-stepper-step step="5" :complete="complete(5)"></v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items class="mo-stepper-items">
@@ -34,39 +38,41 @@
             class="px-0 mo-stepper-items__step-content"
             step="1"
           >
-            <step-1 v-model="formData" />
+            <step-1 :nextScreen="nextStep" v-model="formData" />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="2"
           >
-            <step-2 v-model="formData" />
+            <step-2 :nextScreen="nextStep" v-model="formData" />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="3"
           >
-            <step-3 v-model="formData" />
+            <step-3 :nextScreen="nextStep" v-model="formData" />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="4"
           >
-            <step-4 v-model="formData" />
+            <step-4 :nextScreen="nextStep" v-model="formData" />
+          </v-stepper-content>
+          <v-stepper-content
+            class="px-0 mo-stepper-items__step-content"
+            step="5"
+          >
+            <step-5
+              :prevScreen="prevStep"
+              :nextScreen="nextStep"
+              v-model="formData"
+            />
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
-
-      <v-btn
-        color="primary"
-        class="full-w"
-        :disabled="isDisabled"
-        @click="nextStep"
-        >Weiter
-      </v-btn>
     </div>
   </auth-wrap>
 </template>
@@ -78,6 +84,7 @@ import Step1 from "@/components/auth/manualOnboardingSteps/step1.vue";
 import Step2 from "@/components/auth/manualOnboardingSteps/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingSteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingSteps/step4.vue";
+import Step5 from "@/components/auth/manualOnboardingSteps/step5.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -87,7 +94,11 @@ export default {
     Step1,
     Step2,
     Step3,
-    Step4
+    Step4,
+    Step5
+  },
+  props: {
+    isBtnVisible: Boolean
   },
   data: () => ({
     saveInProgress: false,
@@ -120,18 +131,27 @@ export default {
       if (this.saveInProgress) return true;
       if (this.e1 === 2) {
         return !(
-          this.formData.working_in && this.formData.working_in.length > 0 &&
-          this.formData.current_position && this.formData.current_position.length > 0 &&
-          this.formData.branche && this.formData.branche.length > 0 &&
-          this.formData.address && this.formData.address.length > 0 &&
-          this.formData.address_to_work && this.formData.address_to_work.length > 0 &&
-          this.formData.describe_yourself && this.formData.describe_yourself.length > 0
+          this.formData.working_in &&
+          this.formData.working_in.length > 0 &&
+          this.formData.current_position &&
+          this.formData.current_position.length > 0 &&
+          this.formData.branche &&
+          this.formData.branche.length > 0 &&
+          this.formData.address &&
+          this.formData.address.length > 0 &&
+          this.formData.address_to_work &&
+          this.formData.address_to_work.length > 0 &&
+          this.formData.describe_yourself &&
+          this.formData.describe_yourself.length > 0
         );
       } else if (this.e1 === 3) {
         return !(
-          this.formData.dream_job && this.formData.dream_job.length > 0 &&
-          this.formData.monthly_salary && this.formData.monthly_salary > 0 &&
-          this.formData.ready_for_work && this.formData.ready_for_work.length > 0
+          this.formData.dream_job &&
+          this.formData.dream_job.length > 0 &&
+          this.formData.monthly_salary &&
+          this.formData.monthly_salary > 0 &&
+          this.formData.ready_for_work &&
+          this.formData.ready_for_work.length > 0
         );
       } else if (this.e1 === 4) {
         return !(
@@ -140,7 +160,15 @@ export default {
           this.formData.profile_img &&
           this.formData.resume
         );
+      } else if (this.e1 === 5) {
+        return !(
+          this.formData.document &&
+          this.formData.qualifications &&
+          this.formData.profile_img &&
+          this.formData.resume
+        );
       }
+
       return false;
     }
   },
@@ -151,7 +179,7 @@ export default {
       if (user) {
         Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
-          if(this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
+          if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
       }
     },
@@ -160,7 +188,7 @@ export default {
     },
     nextStep() {
       if (this.isDisabled) return;
-      if (this.e1 < 4) this.e1++;
+      if (this.e1 < 5) this.e1++;
       else this.saveOnboarding();
     },
     complete(step) {
@@ -182,11 +210,16 @@ export default {
 <style scoped lang="scss">
 .mo-back-button {
   position: absolute;
-  top: 57px;
-  left: 30px;
+  top: 40px;
+  left: 215px;
   z-index: 100;
 }
-
+.step-five-back-button {
+  position: absolute;
+  bottom: 245px;
+  left: 215px;
+  z-index: 100;
+}
 .mo-stepper-items {
   overflow: auto;
 }

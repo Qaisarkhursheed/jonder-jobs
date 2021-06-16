@@ -2,21 +2,23 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>Was mochtest du an dienem profil bearbeiten?</h4>
+        <p class="text-h6 font-weight-bold">
+          Was mochtest du an dienem profil bearbeiten?
+        </p>
       </v-col>
-      <v-col cols="6" class="text-right">
+      <!-- <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
           >Speichern
         </v-btn>
-      </v-col>
+      </v-col> -->
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>Wo arbeitest du aktuell?</label>
+        <label class="font-weight-bold">Wo arbeitest du aktuell?</label>
         <v-text-field
           dense
-          label="Wo arbeitest du aktuell"
+          placeholder="Text"
           :rules="rules"
           type="text"
           outlined
@@ -31,10 +33,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Was ist deine aktuelle Position?</label>
+        <label class="font-weight-bold">Was ist deine aktuelle Position?</label>
         <v-text-field
           dense
-          label="Was ist deine aktuelle Position?"
+          placeholder="Text"
           :rules="rules"
           type="text"
           outlined
@@ -49,10 +51,28 @@
 
     <v-row>
       <v-col cols="12">
-        <label>In welchen Branchen arbeitest du?</label>
+        <label class="font-weight-bold"
+          >In welchen Branchen arbeitest du?</label
+        >
         <v-text-field
           dense
-          label="In welchen Branchen arbeitest du"
+          placeholder="Text"
+          type="text"
+          outlined
+          solo
+          flat
+          hide-details
+          background-color="white"
+          v-model="formData.branche"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <label class="font-weight-bold">Wo wohnst du?</label>
+        <v-text-field
+          dense
+          placeholder="Text"
           type="text"
           outlined
           solo
@@ -66,10 +86,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Arbeitsumgebung</label>
+        <label class="font-weight-bold">Work Radius</label>
         <v-text-field
           dense
-          label="Arbeitsumgebung"
+          placeholder="Text"
           type="text"
           outlined
           solo
@@ -80,16 +100,18 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Was beschreibt dich am besten?</label>
+        <label class="font-weight-bold ml-8"
+          >Was beschreibt dich am besten?</label
+        >
 
         <v-row>
           <v-col>
             <div class="text-center">
               <v-btn
-                  @click="formData.describe_yourself = 'Beginner'"
-                  v-bind="{ outlined: formData.describe_yourself !== 'Beginner' }"
-                  color="primary"
-                  class="stars-btn"
+                @click="formData.describe_yourself = 'Beginner'"
+                v-bind="{ outlined: formData.describe_yourself !== 'Beginner' }"
+                color="primary"
+                class="stars-btn"
               >
                 <v-icon>
                   mdi-star
@@ -97,16 +119,16 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1">Beginner</p>
+            <p class="text-center caption font-weight-bold mt-1">Beginner</p>
           </v-col>
 
           <v-col>
             <div class="text-center">
               <v-btn
-                  @click="formData.describe_yourself = 'Junior'"
-                  v-bind="{ outlined: formData.describe_yourself !== 'Junior' }"
-                  color="primary"
-                  class="stars-btn"
+                @click="formData.describe_yourself = 'Junior'"
+                v-bind="{ outlined: formData.describe_yourself !== 'Junior' }"
+                color="primary"
+                class="stars-btn"
               >
                 <v-icon>
                   mdi-star
@@ -117,16 +139,16 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1">Junior</p>
+            <p class="text-center caption font-weight-bold mt-1">Junior</p>
           </v-col>
 
           <v-col>
             <div class="text-center">
               <v-btn
-                  @click="formData.describe_yourself = 'Senior'"
-                  v-bind="{ outlined: formData.describe_yourself !== 'Senior' }"
-                  color="primary"
-                  class="stars-btn senior"
+                @click="formData.describe_yourself = 'Senior'"
+                v-bind="{ outlined: formData.describe_yourself !== 'Senior' }"
+                color="primary"
+                class="stars-btn senior"
               >
                 <v-icon>
                   mdi-star
@@ -140,16 +162,16 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1">Senior</p>
+            <p class="text-center caption mt-1 font-weight-bold">Senior</p>
           </v-col>
 
           <v-col>
             <div class="text-center">
               <v-btn
-                  @click="formData.describe_yourself = 'Advanced'"
-                  v-bind="{ outlined: formData.describe_yourself !== 'Advanced' }"
-                  color="primary"
-                  class="stars-btn advanced"
+                @click="formData.describe_yourself = 'Advanced'"
+                v-bind="{ outlined: formData.describe_yourself !== 'Advanced' }"
+                color="primary"
+                class="stars-btn advanced"
               >
                 <v-icon>
                   mdi-star
@@ -166,24 +188,60 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1">Advanced</p>
+            <p class="text-center caption mt-1 font-weight-bold">Advanced</p>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
-
     <v-row>
-      <v-col cols="12">
-        <v-card outlined flat class="border-blue-dark card-link">
-          <a class="card-link-btn">
-            <v-icon>mdi-link</v-icon>
-          </a>
-          <v-card-title class="pb-0">Lorem ipsum</v-card-title>
-          <v-card-text>Lorem ipsum dolor sit amet</v-card-text>
-          <v-card-actions class="border-top-blue-dark pa-4 pt-1 pb-1">
-            <strong class="text-color-primary-blue-dark">$9.99</strong>
-          </v-card-actions>
+      <v-col md="6">
+        <v-card>
+          <v-dialog v-model="dialog" persistent max-width="310">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="primary" outlined v-bind="attrs" v-on="on" block>
+                Cancel
+              </v-btn>
+            </template>
+            <v-card height="280">
+              <p class="pt-5 text-center">
+                <v-icon color="red" size="100" class="border-special"
+                  >mdi-alert-outline</v-icon
+                >
+              </p>
+              <v-card-text
+                class="pt-2 text-center text-subtitle-1 font-weight-bold black--text"
+                >Are you sure you don't want to save changes?</v-card-text
+              >
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-row>
+                  <v-col md="6" class="text-center">
+                    <v-btn text @click="dialog = false">
+                      Cancel
+                    </v-btn></v-col
+                  >
+                  <v-col md="6" class="text-center">
+                    <v-btn
+                      color="primary"
+                      text
+                      @click="dialog = false"
+                      class="font-weight-bold"
+                    >
+                      Save
+                    </v-btn></v-col
+                  >
+                </v-row>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card>
+      </v-col>
+      <v-col md="6">
+        <v-card>
+          <v-btn block color="primary" @click="handleUpdate"
+            >Confirm</v-btn
+          ></v-card
+        >
       </v-col>
     </v-row>
   </div>
@@ -195,6 +253,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Qualifications",
   data: () => ({
+    dialog: false,
     formData: {
       working_in: "",
       current_position: "",

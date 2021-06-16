@@ -18,7 +18,7 @@
         <v-text-field
           dense
           type="text"
-          label="Abschluss"
+          placeholder="Abschluss"
           outlined
           solo
           flat
@@ -34,7 +34,7 @@
         <v-text-field
           dense
           type="text"
-          label="Stadt"
+          placeholder="Stadt"
           outlined
           solo
           flat
@@ -50,7 +50,7 @@
         <v-text-field
           dense
           type="text"
-          label="Institut"
+          placeholder="Institut"
           outlined
           solo
           flat
@@ -63,11 +63,11 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Begindatum</label>
+        <label class="font-weight-bold">Begindatum</label>
         <v-text-field
           dense
           type="text"
-          label="YYYY-MM-DD"
+          placeholder="September 2020"
           outlined
           solo
           flat
@@ -78,11 +78,11 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Enddatum</label>
+        <label class="font-weight-bold">Enddatum</label>
         <v-text-field
           dense
           type="text"
-          label="YYYY-MM-DD"
+          placeholder="September 2020"
           outlined
           solo
           flat
@@ -99,7 +99,7 @@
         <v-textarea
           dense
           type="text"
-          label="Beschreibung"
+          placeholder="Beschreibung"
           outlined
           solo
           flat
@@ -112,11 +112,13 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">Profile</label>
+        <label class="text-color-primary-blue-dark font-weight-bold"
+          >Profile</label
+        >
         <v-textarea
           dense
           type="text"
-          label="Beschreibung"
+          placeholder="Beschreibung"
           outlined
           solo
           flat
@@ -136,6 +138,7 @@
           color="primary"
           large
           @click="$emit('back')"
+          class="font-weight-bold"
         >
           Back
         </v-btn>
@@ -149,6 +152,7 @@
           large
           :disabled="!isValid"
           @click="nextStep"
+          class="font-weight-bold"
         >
           Confirm
         </v-btn>

@@ -2,10 +2,14 @@
   <v-card flat class="mt-4 pa-3">
     <v-row>
       <v-col cols="6" class="pl-4"
-        ><span class="text-color-primary-blue-dark">Replies</span></v-col
+        ><span class="text-color-primary-blue-dark font-weight-bold"
+          >Replies</span
+        ></v-col
       >
       <v-col cols="5" class="text-right"
-        ><span class="text-color-primary-blue-dark">Message</span></v-col
+        ><span class="text-color-primary-blue-dark font-weight-bold"
+          >Message</span
+        ></v-col
       >
       <v-col cols="1"></v-col>
     </v-row>

@@ -2,7 +2,7 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>Was mochtest du an dienem profil bearbeiten?</h4>
+        <p class="text-h6 font-weight-bold">Deine Qualifikationen</p>
       </v-col>
       <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
@@ -13,10 +13,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Zeig uns was du kannst</label>
+        <label class="font-weight-bold">Erzähle uns was du kannst!</label>
         <v-text-field
           dense
-          label="Zeig uns was du kannst"
+          placeholder="Text"
           :rules="rules"
           type="text"
           outlined
@@ -31,10 +31,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Zeig uns deine Qualifikationen</label>
+        <label class="font-weight-bold">Zeig uns deine Qualifikationen</label>
         <v-text-field
           dense
-          label="Zeig uns deine Qualifikationen"
+          placeholder="Text"
           :rules="rules"
           type="text"
           outlined
@@ -49,10 +49,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Zeig uns was du willst</label>
+        <label class="font-weight-bold">Erzähle</label>
         <v-text-field
           dense
-          label="Zeig uns was du willst"
+          placeholder="Text"
           type="text"
           outlined
           solo
@@ -66,10 +66,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Erzähl uns etwas über dich!</label>
+        <label class="font-weight-bold">Erzähl uns etwas über dich!</label>
         <v-textarea
           dense
-          label="Erzähl uns etwas über dich!"
+          placeholder="Text"
           outlined
           solo
           flat
@@ -86,8 +86,11 @@
           <a class="card-link-btn">
             <v-icon>mdi-link</v-icon>
           </a>
-          <v-card-title class="pb-0">Lorem ipsum</v-card-title>
-          <v-card-text>Lorem ipsum dolor sit amet</v-card-text>
+          <v-card-title class="pb-0 font-weight-bold">Lorem ipsum</v-card-title>
+          <v-card-text
+            >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, lorem
+            ipsum dolor sit amet, consetetur sadipscing elitr..</v-card-text
+          >
           <v-card-actions class="border-top-blue-dark pa-4 pt-1 pb-1">
             <strong class="text-color-primary-blue-dark">$9.99</strong>
           </v-card-actions>

@@ -1,77 +1,127 @@
 <template>
-  <div class="mo-step-4">
-    <p class="text-center">Zeig uns deine Qualifikationen..</p>
+  <div class="mo-step-3">
+    <v-sheet class="px-12">
+      <p class="text-center font-weight-bold text-h6">Zeig uns was du willst</p>
 
-    <div class="mt-6">
-      <v-file-input
-        v-model="document"
-        placeholder="Dokument hochladen"
-        multiple
-        dense
-        outlined
-        prepend-icon=""
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
-        accept=".doc, .docx, .pdf, .jpg, .png, .txt"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+      <div class="mt-6">
+        <p class="text-left font-weight-bold">Was ist deine Wunschbranche?</p>
+        <v-text-field
+          dense
+          placeholder="Lorem Ipsum"
+          type="text"
+          outlined
+          background-color="white"
+        ></v-text-field>
+        <p class="text-left font-weight-bold">Was ist dein Wunschberuf?</p>
+        <v-text-field
+          dense
+          type="text"
+          outlined
+          background-color="white"
+          :rules="rules"
+          v-model="value.dream_job"
+        ></v-text-field>
 
-      <v-file-input
-        v-model="qualifications"
-        placeholder="Qualifikationen hochladen"
-        multiple
-        dense
-        outlined
-        prepend-icon=""
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+        <p class="text-left font-weight-bold">
+          Monatliche Brutto Gehaltsvorstellung?
+        </p>
 
-      <v-file-input
-        v-model="resume"
-        placeholder="Lebenslauf hochladen"
-        multiple
-        dense
-        outlined
-        prepend-icon=""
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+        <v-row>
+          <v-col cols="2">
+            <div
+              class="mo-step-3__salary pa-4 font-weight-bold caption text-center"
+            >
+              {{ value.monthly_salary }}k
+            </div>
+          </v-col>
+          <v-col cols="10" class="pt-5">
+            <v-slider
+              v-model="value.monthly_salary"
+              track-color="grey"
+              color="primary"
+              always-dirty
+              min="0"
+              max="100"
+              :rules="rules"
+            ></v-slider>
+          </v-col>
+        </v-row>
 
-      <v-file-input
-        v-model="profile"
-        placeholder="Profile img"
-        multiple
-        dense
-        outlined
-        prepend-icon=""
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
-    </div>
+        <p class="text-left font-weight-bold">Was beschreibt dich am besten?</p>
+        <v-row>
+          <v-col class="text-center">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = '1-3'"
+                v-bind="{ outlined: value.ready_for_work !== '1-3' }"
+                color="primary"
+              >
+                1-3
+              </v-btn></v-card
+            >
+
+            <p class="text-center font-weight-bold caption mt-1">Per month</p>
+          </v-col>
+
+          <v-col class="text-center">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = '3-6'"
+                v-bind="{ outlined: value.ready_for_work !== '3-6' }"
+                color="primary"
+              >
+                3-6
+              </v-btn></v-card
+            >
+
+            <p class="text-center font-weight-bold caption mt-1">Per month</p>
+          </v-col>
+
+          <v-col class="text-center">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6"
+                @click="value.ready_for_work = '6-12'"
+                v-bind="{ outlined: value.ready_for_work !== '6-12' }"
+                color="primary"
+              >
+                6-12
+              </v-btn></v-card
+            >
+
+            <p class="text-center font-weight-bold caption mt-1">Per month</p>
+          </v-col>
+
+          <v-col class="text-center">
+            <v-card>
+              <v-btn
+                block
+                class="pa-6 text-center"
+                @click="value.ready_for_work = '12+'"
+                v-bind="{ outlined: value.ready_for_work !== '12+' }"
+                color="primary"
+              >
+                12+
+              </v-btn></v-card
+            >
+
+            <p class="text-center caption font-weight-bold mt-1">Per month</p>
+          </v-col>
+        </v-row>
+        <v-btn
+          @click="nextScreen"
+          color="primary"
+          class="full-w mt-4 font-weight-medium "
+        >
+          Abschließen
+        </v-btn>
+      </div>
+    </v-sheet>
   </div>
 </template>
 
@@ -82,68 +132,21 @@ export default {
     value: {
       type: Object,
       required: true
-    }
+    },
+    nextScreen: Function
   },
   data: () => ({
-    document: null,
-    resume: null,
-    qualifications: null,
-    profile: null
-  }),
-  created() {
-    this.populateData();
-  },
-  methods: {
-    populateData() {
-      if (this.value.document && this.value.document.length > 0)
-        this.document = { name: this.value.document };
-      if (this.value.resume && this.value.resume.length > 0)
-        this.resume = { name: this.value.resume };
-      if (this.value.qualifications && this.value.qualifications.length > 0)
-        this.qualifications = { name: this.value.qualifications };
-      if (this.value.profile_img && this.value.profile_img.length > 0)
-        this.profile = { name: this.value.profile_img };
-    }
-  },
-  watch: {
-    document(val) {
-      console.log(val);
-      this.$emit("input", {
-        ...this.value,
-        document: val[0]
-      });
-    },
-    resume(val) {
-      this.$emit("input", {
-        ...this.value,
-        resume: val[0]
-      });
-    },
-    qualifications(val) {
-      this.$emit("input", {
-        ...this.value,
-        qualifications: val[0]
-      });
-    },
-    profile(val) {
-      this.$emit("input", {
-        ...this.value,
-        profile_img: val[0]
-      });
-    }
-  }
+    rules: [value => !!value || "Required."]
+  })
 };
 </script>
 
 <style scoped lang="scss">
-.mo-step-4 {
-  &__upload-btn {
-    border-style: dashed;
-  }
-
-  &__btn-icon {
-    position: absolute;
-    left: 5px;
+.mo-step-3 {
+  &__salary {
+    border: solid 1px $primary-blue;
+    border-radius: 4px;
+    color: $primary-blue;
   }
 }
 </style>

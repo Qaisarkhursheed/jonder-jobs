@@ -6,7 +6,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-outline</v-icon
           >
@@ -15,7 +15,7 @@
         <v-text-field
           dense
           type="text"
-          label="Name des Unternehmens"
+          placeholder="Name des Unternehmens"
           outlined
           solo
           flat
@@ -31,7 +31,7 @@
         <v-text-field
           dense
           type="text"
-          label="Kontaktperson"
+          placeholder="Kontaktperson"
           outlined
           solo
           flat
@@ -47,7 +47,7 @@
         <v-text-field
           dense
           type="text"
-          label="Telefonnummer"
+          placeholder="Telefonnummer"
           outlined
           solo
           flat
@@ -63,7 +63,7 @@
         <v-text-field
           dense
           type="email"
-          label="E-mail adresse"
+          placeholder="E-mail adresse"
           outlined
           solo
           flat
@@ -76,7 +76,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-check-outline</v-icon
           >
@@ -85,7 +85,7 @@
         <v-text-field
           dense
           type="text"
-          label="Kompetenz"
+          placeholder="Kompetenz"
           outlined
           solo
           flat
@@ -98,7 +98,7 @@
         <v-text-field
           dense
           type="text"
-          label="Niveau"
+          placeholder="Niveau"
           outlined
           solo
           flat
@@ -111,14 +111,14 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="text-color-primary-blue-dark">
+        <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark">mdi-earth</v-icon>
           Sprachen
         </label>
         <v-text-field
           dense
           type="text"
-          label="Sprache"
+          placeholder="Sprache"
           outlined
           solo
           flat
@@ -134,7 +134,7 @@
         <v-text-field
           dense
           type="text"
-          label="Niveau"
+          placeholder="Niveau"
           outlined
           solo
           flat
@@ -154,6 +154,7 @@
           color="primary"
           large
           @click="$emit('back')"
+          class="font-weight-bold"
         >
           Back
         </v-btn>
@@ -167,8 +168,9 @@
           large
           :disabled="!isValid"
           @click="nextStep"
+          class="font-weight-bold"
         >
-          Confirm
+          Nachester Schritt
         </v-btn>
       </v-col>
     </v-row>
