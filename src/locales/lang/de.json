@@ -81,6 +81,25 @@
       "education": "Ausbildung",
       "employee": "Mitarbeiter",
       "branch": "Branche"
+    },
+    "profile": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "jobTitle": "Berufsbezeichnung",
+      "workExperience": "Berufserfahrung",
+      "lookingFor": "Auf der Suche nach",
+      "education": "Ausbildung",
+      "aboutMe": "Uber mich",
+      "editProfileHeading": "Was mochtest du an dienem profil bearbeiten ?",
+      "whatCanYouDo": "Zeig uns was du kannst",
+      "showUsQualifications": "Zeig uns deine Qualifikationen",
+      "showUsWhatYouWant": "Zeig uns was du willst",
+      "tellUsAboutYou": "Erzähl uns etwas über dich!",
+      "currentWork": "Wo arbeitest du aktuell?",
+      "currentPosition": "Was ist deine aktuelle Position?",
+      "whichBranch": "In welchen Branchen arbeitest du?",
+      "workingEnvironment": "Arbeitsumgebung",
+      "whatDescribesYou": "Was beschreibt dich am besten?"
     }
   },
   "general": {

@@ -80,6 +80,27 @@
       "education": "Education",
       "employee": "Employee",
       "branch": "Branch"
+    },
+    "profile": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "jobTitle": "Job title",
+      "workExperience": "Work experience",
+      "lookingFor": "Looking for",
+      "education": "Education",
+      "aboutMe": "About me",
+      "editProfileHeading": "What would you like to edit on your profile ?",
+      "whatCanYouDo": "Show us what you can do",
+      "showUsQualifications": "Show us your qualifications",
+      "showUsWhatYouWant": "Show us what you want",
+      "tellUsAboutYou": "Tell us something about yourself",
+      "currentWork": "Where are you currently working?",
+      "currentPosition": "What is your current position?",
+      "whichBranch": "Which industries do you work in?",
+      "workingEnvironment": "Working environment",
+      "whatDescribesYou": "What describes you best?"
+
+
     }
   },
   "general": {

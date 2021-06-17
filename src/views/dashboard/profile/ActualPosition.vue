@@ -2,21 +2,21 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>Was mochtest du an dienem profil bearbeiten?</h4>
+        <h4>{{ $t('user.profile.editProfileHeading') }}</h4>
       </v-col>
       <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >Speichern
+          >{{ $t('general.save') }}
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>Wo arbeitest du aktuell?</label>
+        <label>{{ $t('user.profile.currentWork') }}</label>
         <v-text-field
           dense
-          label="Wo arbeitest du aktuell"
+          :label="$t('user.profile.currentWork')"
           :rules="rules"
           type="text"
           outlined
@@ -31,10 +31,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>Was ist deine aktuelle Position?</label>
+        <label>{{ $t('user.profile.currentPosition') }}</label>
         <v-text-field
           dense
-          label="Was ist deine aktuelle Position?"
+          :label="$t('user.profile.currentPosition')"
           :rules="rules"
           type="text"
           outlined
@@ -49,10 +49,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>In welchen Branchen arbeitest du?</label>
+        <label>{{ $t('user.profile.whichBranch') }}</label>
         <v-text-field
           dense
-          label="In welchen Branchen arbeitest du"
+          :label="$t('user.profile.whichBranch')"
           type="text"
           outlined
           solo
@@ -66,10 +66,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>Arbeitsumgebung</label>
+        <label>{{ $t('user.profile.workingEnvironment') }}</label>
         <v-text-field
           dense
-          label="Arbeitsumgebung"
+          :label="$t('user.profile.workingEnvironment')"
           type="text"
           outlined
           solo
@@ -80,7 +80,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>Was beschreibt dich am besten?</label>
+        <label>{{ $t('user.profile.whatDescribesYou') }}</label>
 
         <v-row>
           <v-col>
