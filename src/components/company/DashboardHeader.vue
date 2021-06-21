@@ -18,7 +18,10 @@
         item-value="id"
       ></v-autocomplete>
     </v-col>
-    <v-col cols="6" class="text-right">
+    <v-col cols="2">
+      <LangSwitcher />
+    </v-col>
+    <v-col cols="4" class="text-right">
       <div class="dashboard-avatar">
         <span class="name">{{ user.company }}</span>
         <v-menu offset-y>
@@ -55,10 +58,15 @@
 <script>
 
 import { mapActions, mapGetters } from "vuex";
+import LangSwitcher from '@/components/LangSwitcher';
 import debounce from "lodash.debounce";
 
 export default {
   name: 'DashboardHeader',
+
+  components: {
+    LangSwitcher,
+  },
 
   data() {
     return {

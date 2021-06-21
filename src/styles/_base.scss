@@ -290,6 +290,12 @@ h5, .h5 {
 .theme--light.v-input input, .theme--light.v-input textarea {
     color: #9EA0A5;
 }
+
+.lang-switcher {
+    .v-text-field--rounded > .v-input__control > .v-input__slot {
+        padding: 0 15px;
+    }
+}
 // 5. Inputs
 // ---------
 
