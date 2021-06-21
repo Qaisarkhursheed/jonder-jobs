@@ -10,23 +10,23 @@
           </router-link>
           <router-link :to="{ name: 'CompanyDashboard'}">
             <v-icon>mdi-view-dashboard-outline</v-icon>
-            <span>Dashboard</span>
+            <span>{{ $t('company.dashboard.dashboard') }}</span>
           </router-link>
           <router-link :to="{ name: 'CompanyInbox'}">
             <v-icon>mdi-email-outline</v-icon>
-            <span>Inbox</span>
+            <span>{{ $t('company.dashboard.inbox') }}</span>
           </router-link>
           <router-link :to="{ name: 'CompanySearch'}">
             <v-icon>mdi-magnify</v-icon>
-            <span>Search</span>
+            <span>{{ $t('company.dashboard.search') }}</span>
           </router-link>
           <router-link :to="{ name: 'CompanyProducts'}">
             <v-icon>mdi-currency-usd</v-icon>
-            <span>Product Pricing</span>
+            <span>{{ $t('company.dashboard.productPricing') }}</span>
           </router-link>
           <router-link :to="{name: 'CompanyProfile'}">
             <v-icon>mdi-account-outline</v-icon>
-            <span>Profile</span>
+            <span>{{ $t('general.profile') }}</span>
           </router-link>
         </nav>
       </v-col>

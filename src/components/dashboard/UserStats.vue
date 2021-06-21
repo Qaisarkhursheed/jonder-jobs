@@ -1,7 +1,9 @@
 <template>
   <v-row class="dashboard-user-stats">
     <v-col cols="6">
-      <h5 class="text-color-primary-blue-dark mb-4">Your Statistics</h5>
+      <h5 class="text-color-primary-blue-dark mb-4">
+        {{ $t('user.dashboard.yourStatistics') }}
+      </h5>
       <div class="user-info d-flex flex-row align-center">
         <v-card
           flat
@@ -12,7 +14,9 @@
               {{ userStats.search_display }}
             </h2></v-card-title
           >
-          <v-card-text>Search<br />appearances</v-card-text>
+          <v-card-text>
+            {{ $t('user.dashboard.searchAppearances') }}
+          </v-card-text>
         </v-card>
         <v-card
           flat
@@ -23,7 +27,9 @@
               {{ userStats.messaged_you }}
             </h2></v-card-title
           >
-          <v-card-text>Messaged<br />you</v-card-text>
+          <v-card-text>
+            {{ $t('user.dashboard.messagedYou') }}
+          </v-card-text>
         </v-card>
         <v-card
           flat
@@ -34,7 +40,9 @@
               {{ userStats.profile_views }}
             </h2></v-card-title
           >
-          <v-card-text>Who viewed<br />your profile</v-card-text>
+          <v-card-text>
+            {{ $t('user.dashboard.whoViewedProfile') }}
+          </v-card-text>
         </v-card>
       </div>
 
@@ -56,7 +64,9 @@
               company.company
             }}</span>
 
-            <a class="flex-grow-0 flex-shrink-0">See more</a>
+            <a class="flex-grow-0 flex-shrink-0">
+              {{ $t('user.dashboard.seeMore') }}
+            </a>
           </v-card-text>
         </v-card>
       </template>
@@ -70,7 +80,9 @@
         rounded="10px"
       >
         <v-card-title>
-          <h5 class="text-color-primary-blue-dark">Be featured on search</h5>
+          <h5 class="text-color-primary-blue-dark">
+            {{ $t('user.dashboard.beFeaturedOnSearch') }}
+          </h5>
         </v-card-title>
         <v-card-text
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu imperdiet
@@ -82,19 +94,19 @@
             <v-row>
               <v-col cols="6">
                 <button class="button dark-blue outline full-w pt-2 pb-2">
-                  For one day
+                  {{ $t('user.dashboard.forOneDay') }}
                 </button>
               </v-col>
               <v-col cols="6">
                 <button class="button dark-blue fill full-w pt-2 pb-2">
-                  For two days
+                  {{ $t('user.dashboard.forTwoDays') }}
                 </button>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
                 <button class="button dark-blue outline full-w pt-2 pb-2">
-                  Buy
+                  {{ $t('user.dashboard.buy') }}
                 </button>
               </v-col>
             </v-row>

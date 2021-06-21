@@ -24,17 +24,17 @@
       </v-col>
       <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >Save
+          >{{ $t('general.save') }}
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">First name</label>
+        <label>{{ $t('user.profile.firstName') }}</label>
         <v-text-field
           dense
-          placeholder="First name"
+          :label="$t('user.profile.firstName')"
           :rules="rules"
           type="text"
           outlined
@@ -46,10 +46,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Last name</label>
+        <label>{{ $t('user.profile.lastName') }}</label>
         <v-text-field
           dense
-          placeholder="Last name"
+          :label="$t('user.profile.lastName')"
           :rules="rules"
           type="text"
           outlined
@@ -64,10 +64,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Job title</label>
+        <label>{{ $t('user.profile.jobTitle') }}</label>
         <v-text-field
           dense
-          placeholder="Job title"
+          :label="$t('user.profile.jobTitle')"
           type="text"
           outlined
           solo
@@ -78,10 +78,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Work experience</label>
+        <label>{{ $t('user.profile.workExperience') }}</label>
         <v-text-field
           dense
-          placeholder="Work experience"
+          :label="$t('user.profile.workExperience')"
           type="text"
           outlined
           solo
@@ -95,10 +95,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Looking for</label>
+        <label>{{ $t('user.profile.lookingFor') }}</label>
         <v-text-field
           dense
-          placeholder="Looking for"
+          :label="$t('user.profile.lookingFor')"
           type="text"
           outlined
           solo
@@ -109,10 +109,10 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Education</label>
+        <label>{{ $t('user.profile.education') }}</label>
         <v-text-field
           dense
-          placeholder="Education"
+          :label="$t('user.profile.education')"
           type="text"
           outlined
           solo
@@ -126,10 +126,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="font-weight-bold">About me</label>
+        <label>{{ $t('user.profile.aboutMe') }}</label>
         <v-textarea
           dense
-          placeholder="About me"
+          :label="$t('user.profile.aboutMe')"
           outlined
           solo
           flat

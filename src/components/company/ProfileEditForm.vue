@@ -5,7 +5,7 @@
                        @close="dialogAction">
     </ProfileEditDialog>
     <v-card-title class="header pa-0 pb-7">
-      Edit Profile
+      {{ $t('company.profile.editProfile') }}
     </v-card-title>
     <v-row class="d-flex no-gutters">
       <v-col cols="6">
@@ -155,7 +155,7 @@
           color="#0253B3"
           dark
           @click="cancel">
-          Cancel
+            {{ $t('general.cancel') }}
         </v-btn>
       </v-col>
       <v-col cols="6" class="d-flex justify-end">
@@ -167,7 +167,7 @@
           color="#0253B3"
           dark
           @click="confirm">
-          Confirm
+            {{ $t('general.confirm') }}
         </v-btn>
       </v-col>
     </v-card-actions>
@@ -194,31 +194,31 @@ export default {
       },
       form: {
         employees: {
-          label: 'How many employees your company have ?',
+          label: this.$t('company.profile.howManyEmployees'),
           value: ''
         },
         industry: {
-          label: 'Which industry are you in?',
+          label: this.$t('company.profile.whichIndustry'),
           value: ''
         },
         lookingfor: {
-          label: 'Looking for',
+          label: this.$t('company.profile.lookingFor'),
           value: []
         },
         about: {
-          label: 'About company',
+          label: this.$t('company.profile.aboutCompany'),
           value: ''
         },
         email: {
-          label: 'E-mail Adresse',
+          label: this.$t('company.profile.email'),
           value: ''
         },
         address: {
-          label: 'City and Address',
+          label: this.$t('company.profile.cityAndAddress'),
           value: ''
         },
         radius: {
-          label: 'Work Radius',
+          label: this.$t('company.profile.workRadius'),
           value: ''
         }
       }

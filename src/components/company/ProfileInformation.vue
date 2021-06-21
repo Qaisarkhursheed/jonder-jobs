@@ -64,11 +64,13 @@
       </v-col>
       <v-col cols="6">
         <div class="no-gutters pa-0 ma-0 mb-7">
-          <label class="d-block">Looking for</label>
+          <label class="d-block">
+            {{ $t('company.profile.lookingFor') }}
+          </label>
 
           <div class="button-box mr-3 mb-2 font-weight-bold text-color-primary-blue-dark"
                v-for="(item, i) in lookingfor" :key="i">
-            {{item}}
+            {{ item }}
           </div>
           
         </div>
@@ -115,7 +117,7 @@
                  color="#E3F2FB"
                  width="40%"
                  dark>
-            Edit
+            {{ $t('general.edit') }}
           </v-btn>
         </div>
       </v-col>
@@ -139,23 +141,23 @@ export default {
           value: ''
         },
         email: {
-          label: 'E-mail address',
+          label: this.$t('company.profile.email'),
           value: ''
         },
         address: {
-          label: 'City and address',
+          label: this.$t('company.profile.cityAndAddress'),
           value: ''
         },
         radius: {
-          label: 'Work Radius',
+          label: this.$t('company.profile.workRadius'),
           value: ''
         },
         employees: {
-          label: 'How many employees your company have ?',
+          label: this.$t('company.profile.howManyEmployees'),
           value: ''
         },
         industry: {
-          label: 'Which industry are you in?',
+          label: this.$t('company.profile.whichIndustry'),
           value: ''
         },
       }

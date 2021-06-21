@@ -2,23 +2,21 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <p class="text-h6 font-weight-bold">
-          Was mochtest du an dienem profil bearbeiten?
-        </p>
+        <h4>{{ $t('user.profile.editProfileHeading') }}</h4>
       </v-col>
       <!-- <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >Speichern
+          >{{ $t('general.save') }}
         </v-btn>
       </v-col> -->
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label class="font-weight-bold">Wo arbeitest du aktuell?</label>
+        <label>{{ $t('user.profile.currentWork') }}</label>
         <v-text-field
           dense
-          placeholder="Text"
+          :label="$t('user.profile.currentWork')"
           :rules="rules"
           type="text"
           outlined
@@ -33,10 +31,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="font-weight-bold">Was ist deine aktuelle Position?</label>
+        <label>{{ $t('user.profile.currentPosition') }}</label>
         <v-text-field
           dense
-          placeholder="Text"
+          :label="$t('user.profile.currentPosition')"
           :rules="rules"
           type="text"
           outlined
@@ -51,28 +49,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label class="font-weight-bold"
-          >In welchen Branchen arbeitest du?</label
-        >
+        <label>{{ $t('user.profile.whichBranch') }}</label>
         <v-text-field
           dense
-          placeholder="Text"
-          type="text"
-          outlined
-          solo
-          flat
-          hide-details
-          background-color="white"
-          v-model="formData.branche"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <label class="font-weight-bold">Wo wohnst du?</label>
-        <v-text-field
-          dense
-          placeholder="Text"
+          :label="$t('user.profile.whichBranch')"
           type="text"
           outlined
           solo
@@ -86,10 +66,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Work Radius</label>
+        <label>{{ $t('user.profile.workingEnvironment') }}</label>
         <v-text-field
           dense
-          placeholder="Text"
+          :label="$t('user.profile.workingEnvironment')"
           type="text"
           outlined
           solo
@@ -100,9 +80,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold ml-8"
-          >Was beschreibt dich am besten?</label
-        >
+        <label>{{ $t('user.profile.whatDescribesYou') }}</label>
 
         <v-row>
           <v-col>

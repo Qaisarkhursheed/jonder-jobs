@@ -1,7 +1,7 @@
 <template>
   <div class="search-results">
     <div class="heading pb-4">
-      Search results
+      {{ $t('company.search.searchResults') }}
     </div>
     <v-row>
       <v-col cols="4" v-for="(result, i) in results" :key="i">

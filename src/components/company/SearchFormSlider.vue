@@ -1,7 +1,9 @@
 <template>
   <v-row class="search-slider no-gutters align-center">
     <v-col cols="1">
-      <label class="pb-0">Location</label>
+      <label class="pb-0">
+        {{ $t('company.search.location') }}
+      </label>
     </v-col>
     <v-col cols="9">
       <v-slider class="align-center"
@@ -20,7 +22,7 @@
              outlined
              height="50px"
              color="#0253B3">
-        {{slider}}km Radius
+        {{slider}}km {{ $t('company.search.radius') }}
       </v-btn>
     </v-col>
   </v-row>

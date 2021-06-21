@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="heading ma-0 mb-10 flex-column">
-      <div>Hello,</div>
+      <div>{{ $t('company.dashboard.hello') }},</div>
       <div class="text-color-primary-blue-dark font-weight-bold">
         {{user.company}}
       </div>

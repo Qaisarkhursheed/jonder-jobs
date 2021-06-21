@@ -56,7 +56,7 @@
                text
                class="save-btn mt-2"
                color="white">
-          Save
+          {{ $t('general.save') }}
         </v-btn>
       </span>
       <div class="notes-list align-self-start pl-4">
