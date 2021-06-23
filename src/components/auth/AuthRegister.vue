@@ -94,7 +94,7 @@
           <v-col cols="12">
             <v-text-field
               dense
-              label="Repeat Passwort"
+              label="Passwort erneut eingeben"
               :rules="[
                 formData.password === formData.password_confirmation ||
                   'Passwort muss übereinstimmen',

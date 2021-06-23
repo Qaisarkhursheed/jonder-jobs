@@ -119,7 +119,7 @@ export default {
       resume: null,
       qualifications: null,
       document: null,
-      profile_img: null
+      //profile_img: null
     }
   }),
   created() {
@@ -146,6 +146,15 @@ export default {
         );
       } else if (this.e1 === 3) {
         return !(
+          this.formData.your_qualification &&
+          this.formData.your_qualification.length > 0 &&
+          this.formData.training_studies &&
+          this.formData.training_studies.length > 0 &&
+          this.formData.additional_training &&
+          this.formData.additional_training.length > 0
+        );
+      } else if (this.e1 === 4) {
+        return !(
           this.formData.dream_job &&
           this.formData.dream_job.length > 0 &&
           this.formData.monthly_salary &&
@@ -153,18 +162,11 @@ export default {
           this.formData.ready_for_work &&
           this.formData.ready_for_work.length > 0
         );
-      } else if (this.e1 === 4) {
-        return !(
-          this.formData.document &&
-          this.formData.qualifications &&
-          this.formData.profile_img &&
-          this.formData.resume
-        );
       } else if (this.e1 === 5) {
         return !(
           this.formData.document &&
           this.formData.qualifications &&
-          this.formData.profile_img &&
+          //this.formData.profile_img &&
           this.formData.resume
         );
       }

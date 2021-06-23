@@ -288,7 +288,11 @@ h5, .h5 {
     }
 }
 .theme--light.v-input input, .theme--light.v-input textarea {
-    color: #9EA0A5;
+    color: #222222;
+}
+
+.v-text-field.v-text-field--solo.v-input--dense > .v-input__control {
+    border-radius: 10px;
 }
 
 .lang-switcher {

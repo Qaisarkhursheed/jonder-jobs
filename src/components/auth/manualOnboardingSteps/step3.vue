@@ -15,9 +15,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Kein Schulabschluss'"
+                @click="value.your_qualification = 'Kein Schulabschluss'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Kein Schulabschluss'
+                  outlined: value.your_qualification !== 'Kein Schulabschluss'
                 }"
                 color="primary"
               >
@@ -30,9 +30,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Hauptschulabschluss'"
+                @click="value.your_qualification = 'Hauptschulabschluss'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Hauptschulabschluss'
+                  outlined: value.your_qualification !== 'Hauptschulabschluss'
                 }"
                 color="primary"
               >
@@ -47,9 +47,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Mittlere Reife'"
+                @click="value.your_qualification = 'Mittlere Reife'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Mittlere Reife'
+                  outlined: value.your_qualification !== 'Mittlere Reife'
                 }"
                 color="primary"
                 >Mittlere Reife
@@ -61,9 +61,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Fachhochschulreife'"
+                @click="value.your_qualification = 'Fachhochschulreife'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Fachhochschulreife'
+                  outlined: value.your_qualification !== 'Fachhochschulreife'
                 }"
                 color="primary"
               >
@@ -78,9 +78,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Abitur'"
+                @click="value.your_qualification = 'Abitur'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Abitur'
+                  outlined: value.your_qualification !== 'Abitur'
                 }"
                 color="primary"
               >
@@ -98,9 +98,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Kein Studium'"
+                @click="value.training_studies = 'Kein Studium'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Kein Studium'
+                  outlined: value.training_studies !== 'Kein Studium'
                 }"
                 color="primary"
               >
@@ -113,9 +113,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Aktuell Student'"
+                @click="value.training_studies = 'Aktuell Student'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Aktuell Student'
+                  outlined: value.training_studies !== 'Aktuell Student'
                 }"
                 color="primary"
               >
@@ -130,9 +130,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Bachelor Abschluss'"
+                @click="value.training_studies = 'Bachelor Abschluss'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Bachelor Abschluss'
+                  outlined: value.training_studies !== 'Bachelor Abschluss'
                 }"
                 color="primary"
                 >Bachelor Abschluss
@@ -144,9 +144,9 @@
               <v-btn
                 block
                 class="pa-6"
-                @click="value.ready_for_work = 'Master Abschluss'"
+                @click="value.training_studies = 'Master Abschluss'"
                 v-bind="{
-                  outlined: value.ready_for_work !== 'Master Abschluss'
+                  outlined: value.training_studies !== 'Master Abschluss'
                 }"
                 color="primary"
                 >Master Abschluss
@@ -163,6 +163,8 @@
           type="text"
           outlined
           background-color="white"
+          :rules="rules"
+          v-model="value.additional_training"
         ></v-text-field>
       </div>
       <v-btn

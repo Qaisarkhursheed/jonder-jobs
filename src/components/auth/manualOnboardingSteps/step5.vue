@@ -102,10 +102,10 @@ export default {
     document: null,
     resume: null,
     qualifications: null,
-    profile: null
+    //profile: null
   }),
   created() {
-    this.populateData();
+    this.populateData(this.user);
   },
   methods: {
     populateData() {
@@ -115,27 +115,27 @@ export default {
         this.resume = { name: this.value.resume };
       if (this.value.qualifications && this.value.qualifications.length > 0)
         this.qualifications = { name: this.value.qualifications };
+    }
+  },
+  watch: {
+    document(val) {
+      console.log(val);
+      this.$emit("input", {
+        ...this.value,
+        document: val[0]
+      });
     },
-    watch: {
-      document(val) {
-        console.log(val);
-        this.$emit("input", {
-          ...this.value,
-          document: val[0]
-        });
-      },
-      resume(val) {
-        this.$emit("input", {
-          ...this.value,
-          resume: val[0]
-        });
-      },
-      qualifications(val) {
-        this.$emit("input", {
-          ...this.value,
-          qualifications: val[0]
-        });
-      }
+    resume(val) {
+      this.$emit("input", {
+        ...this.value,
+        resume: val[0]
+      });
+    },
+    qualifications(val) {
+      this.$emit("input", {
+        ...this.value,
+        qualifications: val[0]
+      });
     }
   }
 };
