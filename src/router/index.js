@@ -4,6 +4,7 @@ import store from "@/store";
 
 // Components
 import Landing from "../views/Landing.vue";
+import FAQ from "../views/FAQ.vue";
 // import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
@@ -41,6 +42,14 @@ const routes = [
     path: "/",
     name: "Home",
     component: Landing,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/faq",
+    name: "FAQ",
+    component: FAQ,
     meta: {
       guest: true
     }

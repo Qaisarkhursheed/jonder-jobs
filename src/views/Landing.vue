@@ -15,7 +15,7 @@
           </router-link>
         </v-col>
         <v-col cols="6" class="links">
-          <a class="txt-link text-color-primary-blue-dark">FAQ</a>
+          <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
           <router-link
             to="/register"
             class="txt-link text-color-primary-blue-dark"
@@ -51,11 +51,16 @@
         <v-col cols="6" class="box">
           <div class="inner">
             <h1>Lorem ipsum dolor sit amet</h1>
-            <p>
+            <p class="promo-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
               dui venenatis, neque, massa odio vitae diam. Odio risus in aliquet
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
+            <div class="promo-actions">
+              <router-link to="/register" class="button dark-blue fill">
+                Registrieren
+              </router-link>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -117,11 +122,16 @@
         <v-col cols="6" class="box">
           <div class="inner">
             <h1>Lorem ipsum dolor sit amet</h1>
-            <p>
+            <p class="promo-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
               dui venenatis, neque, massa odio vitae diam. Odio risus in aliquet
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
+            <div class="promo-actions">
+              <router-link to="/register" class="button dark-blue fill">
+                Registrieren
+              </router-link>
+            </div>
           </div>
         </v-col>
         <v-col cols="6" class="image-holder">
@@ -174,7 +184,7 @@
             </router-link>
           </v-col>
           <v-col cols="6" class="links">
-            <a class="txt-link text-color-primary-blue-dark">FAQ</a>
+            <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
             <router-link
               to="/register"
               class="txt-link text-color-primary-blue-dark"
@@ -216,7 +226,7 @@
   }
 
   .landing-header {
-    padding: 20px;
+    padding: 20px 60px;
 
     .links {
       text-align: right;
@@ -233,7 +243,7 @@
     min-height: 740px;
     .box {
       background: rgba(2, 83, 179, 0.8);
-      padding: 42px;
+      padding: 42px 42px 42px 82px;
       height: 540px;
       color: white;
 
@@ -318,6 +328,10 @@
         }
       }
     }
+  }
+
+  .promo-text {
+    margin-bottom: 60px,
   }
 
   .landing-partners {
