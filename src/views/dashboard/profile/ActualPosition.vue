@@ -32,35 +32,29 @@
     <v-row>
       <v-col cols="12">
         <label>{{ $t('user.profile.currentPosition') }}</label>
-        <v-text-field
-          dense
+        <v-select
+          outlined
+          dense          
           :label="$t('user.profile.currentPosition')"
           :rules="rules"
-          type="text"
-          outlined
-          solo
-          flat
-          hide-details
+          :items="currentPosition"          
           background-color="white"
           v-model="formData.current_position"
-        ></v-text-field>
+        ></v-select>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
         <label>{{ $t('user.profile.whichBranch') }}</label>
-        <v-text-field
-          dense
-          :label="$t('user.profile.whichBranch')"
-          type="text"
+        <v-select
           outlined
-          solo
-          flat
-          hide-details
-          background-color="white"
+          dense
+          :rules="rules"
+          :label="$t('user.profile.whichBranch')"
+          :items="branches"      
           v-model="formData.branche"
-        ></v-text-field>
+        ></v-select>
       </v-col>
     </v-row>
 
@@ -243,7 +237,9 @@ export default {
     rules: [
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
-    ]
+    ],
+    branches: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie','Ernährungsindustrie' , 'Elektrotechnikbranche'],
+    currentPosition: ['Entwickler/in', 'Projektmanager/in', 'Bauleiter/in', 'Praktikant/in', 'Auszubildende/r',  'Geschäftsführer/in']
   }),
   created() {
     this.resetFormData(this.user);

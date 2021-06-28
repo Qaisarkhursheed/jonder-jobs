@@ -4,17 +4,14 @@
       Loggen Sie sich in Ihren Jonder Account ein
     </jonder-title>
 
-    <v-btn outlined color="primary" class="full-w mt-4"
-      >Continue with Google
-    </v-btn>
-    <v-btn color="primary" class="full-w mt-4">Continue with Facebook</v-btn>
-
     <v-alert v-if="message.show" class="mt-4" text type="error">
       {{ this.message.text }}
     </v-alert>
 
     <div class="mt-10">
-      <p class="text-caption text-left">Oder via Email einloggen</p>
+      <p class="text-caption text-left">
+        Einloggen via Email 
+      </p>
 
       <form class="auth-form" action="#" @submit.prevent="handleLogin">
         <v-text-field
@@ -43,13 +40,32 @@
         <!--          v-model="formData.privacy"-->
         <!--        ></v-checkbox>-->
 
-        <v-btn type="submit" color="primary" class="full-w">Loggen Sie</v-btn>
+        
+
+        <v-btn outlined color="primary" class="full-w mt-4"
+          >Continue with Google
+        </v-btn>
+
+        <v-btn color="primary" class="full-w mt-4 fb-button">
+          Continue with Facebook
+        </v-btn>
+
+        <v-btn type="submit" 
+               color="primary" 
+               class="full-w"
+               :disabled="formData.email.length === 0 || formData.password.length === 0"
+               >
+          Loggen Sie
+        </v-btn>
       </form>
     </div>
 
-    <router-link to="/register">
-      <v-btn color="primary" class="full-w mt-5">Kostenlos registrieren</v-btn>
-    </router-link>
+    <p class="text-caption text-left">
+      Haben Sie kein Konto?
+      <router-link to="/register">      
+          Registrieren     
+      </router-link>
+    </p>
   </v-container>
 </template>
 
@@ -112,5 +128,9 @@ export default {
 <style lang="scss" scoped>
 .auth-login-wrap {
   width: 60%;
+}
+
+.fb-button {
+  margin-bottom: 50px;
 }
 </style>
