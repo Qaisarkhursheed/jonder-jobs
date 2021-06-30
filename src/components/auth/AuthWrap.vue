@@ -62,7 +62,7 @@ export default {
     height: 40px;
   }
   .auth-form {
-    height: calc(100% - 40px);
+    height: auto;
   }
 }
 </style>
