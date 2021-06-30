@@ -9,6 +9,7 @@ import FAQ from "../views/FAQ.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import RegisterCompany from "../views/auth/RegisterCompany";
+import ResetPassword from "../views/auth/ResetPassword.vue";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
 import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
@@ -82,6 +83,14 @@ const routes = [
     path: "/register-company",
     name: "RegisterCompany",
     component: RegisterCompany,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/reset-password",
+    name: "ResetPassword",
+    component: ResetPassword,
     meta: {
       guest: true
     }

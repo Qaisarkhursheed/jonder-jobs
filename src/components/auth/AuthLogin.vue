@@ -40,13 +40,20 @@
         <!--          v-model="formData.privacy"-->
         <!--        ></v-checkbox>-->
 
-        
+        <p class="text-caption text-left">
+          <router-link to="/reset-password">      
+              Passwort vergessen?
+          </router-link>
+        </p>
 
-        <v-btn outlined color="primary" class="full-w mt-4"
+        <v-btn outlined 
+               color="primary" 
+               class="full-w mt-4 "
           >Continue with Google
         </v-btn>
 
-        <v-btn color="primary" class="full-w mt-4 fb-button">
+        <v-btn color="primary" 
+               class="full-w mt-4 fb-button">
           Continue with Facebook
         </v-btn>
 
@@ -132,5 +139,9 @@ export default {
 
 .fb-button {
   margin-bottom: 50px;
+}
+
+.v-btn:not(.v-btn--round).v-size--default {
+  height: 55px !important;
 }
 </style>

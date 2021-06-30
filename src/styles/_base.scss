@@ -294,8 +294,12 @@ h5, .h5 {
     color: #222222;
 }
 
-.v-text-field.v-text-field--solo.v-input--dense > .v-input__control {
+.v-text-field.v-text-field--solo.v-input--dense > .v-input__control, .theme--light.v-input, button {
     border-radius: 10px;
+}
+
+.v-text-field__slot {
+    height: 55px;
 }
 
 .lang-switcher {
