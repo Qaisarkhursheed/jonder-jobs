@@ -6,9 +6,9 @@
 
 <style lang="scss" scoped>
 .jonder-title {
-  font-size: 24px;
+  font-size: 36px;
   text-align: center;
-  color: #222;
-  font-weight: 600;
+  color: $dark-grey;
+  font-weight: 700;
 }
 </style>

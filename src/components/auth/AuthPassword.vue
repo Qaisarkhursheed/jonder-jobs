@@ -1,9 +1,9 @@
 <template>
 <v-container class="auth-login-wrap align-center" fluid no-gutters>
     <jonder-title>
-         Password vergessen?
+         Passwort vergessen?
     </jonder-title>
-    <p>
+    <p class="p-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.
     </p>
 
@@ -64,11 +64,22 @@ export default {
 
 <style lang="scss" scoped>
     .auth-login-wrap {
-     width: 60%;
+     width: 80%;
     }
 
     .v-btn:not(.v-btn--round).v-size--default {
         height: 55px;
         margin-top: 60px;
+    }
+
+    .p-text {
+      color: $dark-grey;
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 400;
+      text-align: center;
+      width: 85%;
+      margin: auto;
+      padding-bottom: 50px;
     }
 </style>
