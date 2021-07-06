@@ -23,6 +23,7 @@ export default {
 .profile-holder {
   box-shadow: 8px 0 34px rgba(0, 0, 0, 0.03) !important;
   background-color: #fdfeff !important;
+  border-radius: 10px  !important;
 
   .card-link {
     overflow: hidden;

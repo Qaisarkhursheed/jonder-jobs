@@ -26,26 +26,26 @@
             <span>{{ $t('user.dashboard.profile') }}</span>
           </router-link>
           <div class="submenu">
-            <router-link to="/dashboard/profile">
+            <router-link to="/dashboard/profile" class="nav-item">
               {{ $t('user.dashboard.personalData') }}
             </router-link>
-            <router-link to="/dashboard/profile/qualifications">
+            <router-link to="/dashboard/profile/qualifications" class="nav-item">
               {{ $t('user.dashboard.qualifications') }}
             </router-link>
-            <router-link to="/dashboard/profile/actual-position">
+            <router-link to="/dashboard/profile/actual-position" class="nav-item">
               {{ $t('user.dashboard.actualPosition') }}
             </router-link>
-            <router-link to="/onboarding">
+            <router-link to="/onboarding" class="nav-item">
               {{ $t('user.dashboard.onboarding') }}
             </router-link>
-            <router-link to="/dashboard/profile/cv-maker">
+            <router-link to="/dashboard/profile/cv-maker" class="nav-item">
               {{ $t('user.dashboard.cvMaker') }}
             </router-link>
 <!--            <router-link to="/dashboard/profile">Zahlung</router-link>-->
           </div>
         </nav>
       </v-col>
-      <v-col cols="9" class="full-h bg-light-gray">
+      <v-col cols="9" class="full-h main">
         <v-container fluid class="d-flex flex-column full-h">
           <v-row class="flex-shrink-0 flex-grow-0 search-holder">
             <v-col cols="6">
@@ -68,6 +68,7 @@
             </v-col>
             <v-col cols="6" class="text-right">
               <div class="dashboard-avatar">
+                <span> Hello, </span>
                 <span class="name">{{ getUserFullName }}</span>
                 <v-menu offset-y>
                   <template v-slot:activator="{ on }">
@@ -157,6 +158,10 @@ export default {
   height: 100vh;
 }
 
+.main {
+  background-color: $lighter-grey;
+}
+
 .v-application .dashboard-navigation {
   padding: 0 0 0 50px;
 
@@ -164,28 +169,36 @@ export default {
     display: block;
     padding: 10px 0;
     margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
     text-align: left;
     clear: both;
-    color: $medium-grey;
+    color: black;
     text-decoration: none;
     @include clearfix;
 
     &.with-submenu {
       margin-bottom: 10px;
+      border: none !important;
+
+      & i, span {
+        border: none !important;
+      }
     }
 
     &.logo {
       margin-bottom: 30px;
+      border: none !important;
     }
 
     span,
     .v-icon {
-      float: left;
+      //float: left;
       display: inline-block;
       height: 20px;
       line-height: 22px;
+      border: none !important;
     }
 
     .v-icon {
@@ -200,6 +213,7 @@ export default {
       .v-icon {
         color: $primary-blue-dark;
         text-decoration: none;
+        border-bottom: 1px solid $primary-blue-dark;
       }
     }
 
@@ -238,6 +252,12 @@ export default {
 
   .name {
     margin-right: 10px;
+    cursor: default;
+    color: $primary-blue-dark;
+  }
+
+  .v-avatar {
+    cursor: pointer;
   }
 }
 
@@ -250,5 +270,13 @@ export default {
   .v-input__icon--append
   .v-icon {
   transform: rotate(0) !important;
+}
+
+.nav-item {
+  border-bottom: 1px solid $medium-grey;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  height: 44px;
 }
 </style>
