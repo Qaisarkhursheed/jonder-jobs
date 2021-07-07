@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="full-h pa-0" v-if="user">
     <v-row class="full-h ma-0">
-      <v-col cols="3" class="full-h ">
+      <v-col class="full-h navigation">
         <nav class="dashboard-navigation">
           <router-link to="/dashboard" class="logo">
             <v-img
@@ -26,22 +26,50 @@
             <span>{{ $t('user.dashboard.profile') }}</span>
           </router-link>
           <div class="submenu">
-            <router-link to="/dashboard/profile" class="nav-item">
-              {{ $t('user.dashboard.personalData') }}
-            </router-link>
-            <router-link to="/dashboard/profile/qualifications" class="nav-item">
+            <p @click="scrollToSection('personalInfo')">
+              <router-link to="/dashboard/profile" class="nav-item">
+                {{ $t('user.dashboard.personalData') }}
+              </router-link>
+            <p>
+            <div>
+              <div @click="scrollToSection('roleAndBranche')" class="nav-item"> 
+                Role & Branche
+              </div>
+              <div @click="scrollToSection('lookingFor')" class="nav-item"> 
+                What are you looking for
+              </div>
+              <div @click="scrollToSection('experienceAndEducation')" class="nav-item"> 
+                Experience and Education
+              </div>
+              <div @click="scrollToSection('documents')" class="nav-item"> 
+                Documents
+              </div>
+              <div @click="scrollToSection('invoices')" class="nav-item"> 
+                Invoices
+              </div>
+              <div @click="scrollToSection('paymentMethod')" class="nav-item"> 
+                Billing
+              </div>
+              <div @click="scrollToSection('changePassword')" class="nav-item"> 
+                Change Password
+              </div>
+              <div @click="scrollToSection('upgradeAccount')" class="nav-item"> 
+                Upgrade account
+              </div>
+            </div>
+            <!--<router-link to="/dashboard/profile/qualifications" class="nav-item">
               {{ $t('user.dashboard.qualifications') }}
             </router-link>
             <router-link to="/dashboard/profile/actual-position" class="nav-item">
               {{ $t('user.dashboard.actualPosition') }}
             </router-link>
-            <router-link to="/onboarding" class="nav-item">
-              {{ $t('user.dashboard.onboarding') }}
-            </router-link>
             <router-link to="/dashboard/profile/cv-maker" class="nav-item">
               {{ $t('user.dashboard.cvMaker') }}
             </router-link>
-<!--            <router-link to="/dashboard/profile">Zahlung</router-link>-->
+            <router-link to="/dashboard/profile">Zahlung</router-link>-->
+            <router-link to="/onboarding" class="nav-item">
+              {{ $t('user.dashboard.onboarding') }}
+            </router-link>
           </div>
         </nav>
       </v-col>
@@ -82,7 +110,7 @@
                       }}</span>
                     </v-avatar>
                   </template>
-                  <v-list>
+                  <v-list class="nav">
                     <v-list-item>
                       <v-list-item-title
                         @click="navigateTo('/dashboard/profile')"
@@ -132,7 +160,10 @@ export default {
     }, 2000),
     navigateTo(url) {
       this.$router.push(url);
-    }
+    },
+    scrollToSection(profileSection){
+      document.getElementById(profileSection).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    },
   },
   watch: {
     search(val) {
@@ -249,16 +280,20 @@ export default {
 .dashboard-avatar {
   font-size: 16px;
   line-height: 38px;
+  cursor: default;
 
   .name {
     margin-right: 10px;
-    cursor: default;
     color: $primary-blue-dark;
   }
 
   .v-avatar {
     cursor: pointer;
   }
+}
+
+.nav {
+  cursor: pointer;
 }
 
 .layout-content {
@@ -275,8 +310,20 @@ export default {
 .nav-item {
   border-bottom: 1px solid $medium-grey;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 28px;
-  height: 44px;
+  font-size: 14px;
+  line-height: 24px;
+  height: auto;
+  max-height: 90px;
+  padding: 5px 0;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-blue-dark;
+  }
+}
+
+.navigation {
+  max-width: 445px;
+  overflow: visible;
 }
 </style>

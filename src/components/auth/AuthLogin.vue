@@ -111,7 +111,7 @@ export default {
       this.response = await this.login(this.formData);
 
       if (this.response) {
-        if (this.response.onboarding_status && this.response.user.role === "user") {
+        if (this.response.user.role === "Jobseeker" || this.response.user.role === "user") {
           this.$router.replace({ name: "Dashboard" });
         }
         else if (this.response.onboarding_status && this.response.user.role === "company") {
