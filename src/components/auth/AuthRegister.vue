@@ -188,7 +188,7 @@ export default {
         phone: "",
         show_name: false,
         show_location: false,
-        role: "user"
+        role: "Jobseeker"
       },
       rules: [
         value => !!value || "Required.",
