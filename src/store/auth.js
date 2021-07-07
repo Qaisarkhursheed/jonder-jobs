@@ -8,7 +8,7 @@ export default {
     authenticated: localStorage.getItem("user-token") !== null,
     message: null,
     onBoardingCompleted: localStorage.getItem("onboarding-status")
-      ? JSON.parse(localStorage.getItem("onboarding-status"))
+      ? JSON.parse(localStorage.getItem(""))
       : false
   },
 
