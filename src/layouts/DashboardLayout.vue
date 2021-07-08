@@ -112,41 +112,57 @@
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
               <div class="top-info">
-                <v-img
-                  :src="user.profile_img"
-                  v-if="user.profile_img"
-                ></v-img>
-                <span class="white--text headline" v-else>{{
-                  getUserInitials
-                }}</span>
+
+                  <div class="profile-image">
+                    <v-img
+                      :src="user.profile_img"
+                      v-if="user.profile_img"
+                    ></v-img>
+                    <v-img :src="require('@/assets/icons/equal-rights.svg')" v-else></v-img>
+                  </div>
+
                 <span class="dash-name">{{ getUserFullName }}</span>
                 <a href="/dashboard/profile" class="settings-link"> Profile Settings </a>
               </div>
 
               <div class="top-info">
                 <span class="about-info"> About me </span>
-                <p> {{user.about_me}} </p>
-                <span class="about-info"> Jobseeking status </span>
-                <p> {{user.job_status}} </p>
-                <span class="about-info"> Position </span>
-                <p> {{user.current_position}} </p>
+                <p class="about-text"> {{user.about_me}} </p>
+
+                <div class="d-flex">
+                  <div>
+                    <p class="about-info"> Jobseeking status </p>
+                    <p class="about-text"> {{user.job_status}} </p>
+                  </div>
+                  <div>
+                    <p class="about-info text-right"> Position </p>
+                    <p class="about-text text-right"> {{user.current_position}} </p>
+                  </div>
+                </div>
+
                 <span class="about-info"> Current industry </span>
-                <p> {{user.branche}} </p>
+                <p class="about-text"> {{user.branche}} </p>
                 <span class="about-info"> City and areas </span>
-                <p> {{user.city}} </p>
+                <p class="about-text"> {{user.city}} </p>
+
                 <span class="about-info"> Experience </span>
-                <p> Company name </p>
-                <p> Position </p>                
-                <p> February 2020 - present </p>
+                <p class="company-ed"> Company name {{user.company }}</p>
+                <span> Position {{user.role_in_company}} </span>                
+                <span> February 2020 - present {{user.working_experience}} </span>
                </div>
               <div class="top-info">
                 <span class="about-info"> Education </span>
-                <p> University </p>
-                <p> Degree </p>                
-                <p> February 2020 - present </p>
+                <p class="company-ed"> University </p>
+                <span> Degree </span>                
+                <span> February 2020 - present </span>
               </div>
+
+
               <div class="top-info">
                 <span class="about-info"> Documents </span>
+                <div> {{user.cv}} </div>
+                <div> {{user.qualifications}} </div>
+                <div> {{user.resume}} </div>
               </div>
           </v-row>
         </div>
@@ -178,7 +194,7 @@ export default {
     },
     dashboard() {
       return this.$route.path === '/dashboard' ||  this.$route.path === '/dashboard/'
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -187,7 +203,7 @@ export default {
       this.searchLoading = false;
     }, 2000),
     navigateTo(url) {
-      this.$router.push(url)
+      this.$router.push(url);
     },
     scrollToSection(profileSection){
       document.getElementById(profileSection).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -371,7 +387,8 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 .dashboard-about {
     background: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 20px;    
+    margin-top: 60px;
 }
 
 .top-info {
@@ -379,6 +396,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid $light-grey;
+  padding: 20px;
 }
 
 .dash-name {
@@ -402,5 +420,32 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   line-height: 14px;
   color: $primary-blue-dark;
   margin-bottom: 8px;
+}
+.about-text {
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 34px !important;
+  color: $dark-grey;
+}
+
+.company-ed {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 17px;
+  color: $dark-grey;
+  margin-bottom: 5px !important;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  position: relative;
+  top: -75px;
+  margin: 0 auto -40px auto;
+
+  .v-image {
+    border-radius: 50px;
+  }
 }
 </style>
