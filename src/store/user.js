@@ -107,33 +107,23 @@ export default {
         });
     },
 
-    postOnboardingUser({ commit }, data) {
+    async postOnboardingUser({ commit, state }, data) {
       let formData = new FormData();
-      let response = {};
       Object.keys(data).forEach(key => {
         formData.append(key, data[key]);
       });
       formData.append("_method", "PATCH");
 
-      let id = null;
-      if (localStorage.getItem("registration-id"))
-        id = localStorage.getItem("registration-id");
-
-      if (id) {
-        axios
-          .post("/user/onboarding/" + id, formData)
-          .then(resp => {
-            if (resp.data.success && resp.data.user) {
-              commit("SET_USER", resp.data.user);
-            }
-            response = resp.data.success;
-          })
-          .catch(err => {
-            response = false;
-            console.error("Update user error:", err);
-          });
+      try {
+        const resp = await axios.post(
+          "/user/onboarding/" + state.user.id,
+          formData
+        );
+        commit("SET_USER", resp.data.user);
+        return resp;
+      } catch (error) {
+        return Promise.reject(error);
       }
-      return response;
     },
 
     getUser({ commit }, userId) {

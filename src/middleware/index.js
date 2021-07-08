@@ -1,4 +1,6 @@
 import axios from "axios";
+import router from "@/router";
+import store from "@/store";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE;
 
@@ -11,7 +13,7 @@ axios.interceptors.request.use(
     return config;
   },
   error => {
-    Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 
@@ -22,10 +24,24 @@ axios.interceptors.response.use(
   },
   async error => {
     if (error.response.status === 401) {
-      localStorage.removeItem("user-token");
-      window.location = "/login";
-      return Promise.reject(error);
+      if (
+        error.response.data.message == "Beenden Sie den Onboarding-Prozess."
+      ) {
+        const name =
+          store.getters["user/user"].role == "Jobseeker"
+            ? "ManualOnboarding"
+            : "ManualOnboardingCompany";
+
+        router.replace({ name });
+      } else {
+        localStorage.removeItem("user-token");
+
+        if (router.currentRoute.name != "Login") {
+          router.replace({ name: "Login" });
+        }
+      }
     }
+
     return Promise.reject(error);
   }
 );
