@@ -118,7 +118,7 @@ export default {
       ready_for_work: "",
       resume: null,
       qualifications: null,
-      document: null,
+      document: null
       //profile_img: null
     }
   }),
@@ -200,7 +200,9 @@ export default {
       this.saveInProgress = true;
       const resp = await this.postOnboardingUser(this.formData);
       this.saveInProgress = false;
+      console.log("resp", resp);
       if (resp) {
+        console.log("resp", resp);
         localStorage.setItem("onboarding-status", "false");
         this.$router.replace("/dashboard/profile");
       }
