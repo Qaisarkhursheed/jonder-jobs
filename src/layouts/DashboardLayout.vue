@@ -1,37 +1,87 @@
 <template>
   <v-container fluid class="full-h pa-0" v-if="user">
+    <v-row class="flex-shrink-0 flex-grow-0 search-holder">
+      <v-col cols="4">
+        <router-link to="/dashboard" class="logo">
+          <v-img
+            :src="require('@/assets/jonder_blue.png')"
+            max-width="128px"
+          />
+        </router-link>
+      </v-col>
+      <v-col cols="4">
+        <v-autocomplete v-if="!profile"
+          v-model="searchString"
+          :loading="searchLoading"
+          :items="searchItems"
+          :search-input.sync="search"
+          cache-items
+          flat
+          dense
+          outlined
+          hide-no-data
+          hide-details
+          label="Suche"
+          append-icon="mdi-magnify"
+          item-text="name"
+          item-value="id"
+        ></v-autocomplete>
+      </v-col>
+      <v-col cols="4" class="text-right">
+        <div class="dashboard-avatar">
+          <span> Hello, </span>
+          <span class="name">{{ getUserFullName }}</span>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-avatar color="primary" size="38" v-on="on">
+                <v-img
+                  :src="user.profile_img"
+                  v-if="user.profile_img"
+                ></v-img>
+                <span class="white--text headline" v-else>{{
+                  getUserInitials
+                }}</span>
+              </v-avatar>
+            </template>
+            <v-list class="nav">
+              <v-list-item>
+                <v-list-item-title
+                  @click="navigateTo('/dashboard/profile')"
+                  >
+                    {{ $t('general.profile') }}
+                  </v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title @click="navigateTo('/logout')"
+                  >
+                  {{ $t('general.logout') }}
+                  </v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row v-if="profile">
+      <v-col cols='12'>
+        <v-btn color="primary" class="back-btn" @click="navigateTo('/dashboard')">
+            Back to homepage
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-row class="full-h ma-0">
-      <v-col class="full-h navigation">
-        <nav class="dashboard-navigation">
-          <router-link to="/dashboard" class="logo">
-            <v-img
-              :src="require('@/assets/jonder_blue.png')"
-              max-width="128px"
-            />
-          </router-link>
-          <router-link to="/dashboard">
-            <v-icon>mdi-view-dashboard-outline</v-icon>
-            <span>{{ $t('user.dashboard.dashboard') }}</span>
-          </router-link>
-          <router-link to="/dashboard/chat">
-            <v-icon>mdi-message-outline</v-icon>
-            <span>{{ $t('user.dashboard.messages') }}</span>
-          </router-link>
-          <router-link to="/dashboard/product-pricing">
-            <v-icon>mdi-currency-usd</v-icon>
-            <span>{{ $t('user.dashboard.price') }}</span>
-          </router-link>
-          <router-link to="/dashboard/profile" class="with-submenu">
-            <v-icon>mdi-account-outline</v-icon>
-            <span>{{ $t('user.dashboard.profile') }}</span>
-          </router-link>
-          <div class="submenu">
-            <p @click="scrollToSection('personalInfo')">
-              <router-link to="/dashboard/profile" class="nav-item">
-                {{ $t('user.dashboard.personalData') }}
-              </router-link>
-            <p>
-            <div>
+      <v-col class="full-h navigation col-12 col-sm-4 col-xl-3">
+        <nav class="dashboard-navigation" v-if="profile">          
+          <div class="settings-nav">
+            <div class="settings-title">
+               Settings
+            </div>
+            <div class="submenu">
+              <div @click="scrollToSection('personalInfo')" class="nav-item"> 
+                Personal info
+              </div>
               <div @click="scrollToSection('roleAndBranche')" class="nav-item"> 
                 Role & Branche
               </div>
@@ -57,80 +107,52 @@
                 Upgrade account
               </div>
             </div>
-            <!--<router-link to="/dashboard/profile/qualifications" class="nav-item">
-              {{ $t('user.dashboard.qualifications') }}
-            </router-link>
-            <router-link to="/dashboard/profile/actual-position" class="nav-item">
-              {{ $t('user.dashboard.actualPosition') }}
-            </router-link>
-            <router-link to="/dashboard/profile/cv-maker" class="nav-item">
-              {{ $t('user.dashboard.cvMaker') }}
-            </router-link>
-            <router-link to="/dashboard/profile">Zahlung</router-link>-->
-            <router-link to="/onboarding" class="nav-item">
-              {{ $t('user.dashboard.onboarding') }}
-            </router-link>
           </div>
         </nav>
-      </v-col>
-      <v-col cols="9" class="full-h main">
-        <v-container fluid class="d-flex flex-column full-h">
-          <v-row class="flex-shrink-0 flex-grow-0 search-holder">
-            <v-col cols="6">
-              <v-autocomplete
-                v-model="searchString"
-                :loading="searchLoading"
-                :items="searchItems"
-                :search-input.sync="search"
-                cache-items
-                flat
-                dense
-                outlined
-                hide-no-data
-                hide-details
-                label="Suche"
-                append-icon="mdi-magnify"
-                item-text="name"
-                item-value="id"
-              ></v-autocomplete>
-            </v-col>
-            <v-col cols="6" class="text-right">
-              <div class="dashboard-avatar">
-                <span> Hello, </span>
-                <span class="name">{{ getUserFullName }}</span>
-                <v-menu offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-avatar color="primary" size="38" v-on="on">
-                      <v-img
-                        :src="user.profile_img"
-                        v-if="user.profile_img"
-                      ></v-img>
-                      <span class="white--text headline" v-else>{{
-                        getUserInitials
-                      }}</span>
-                    </v-avatar>
-                  </template>
-                  <v-list class="nav">
-                    <v-list-item>
-                      <v-list-item-title
-                        @click="navigateTo('/dashboard/profile')"
-                        >
-                          {{ $t('general.profile') }}
-                        </v-list-item-title
-                      >
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-title @click="navigateTo('/logout')"
-                        >
-                        {{ $t('general.logout') }}
-                        </v-list-item-title
-                      >
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
+        <div class="dashboard-about" v-if="dashboard">
+          <v-row class="full-h ma-0">
+              <div class="top-info">
+                <v-img
+                  :src="user.profile_img"
+                  v-if="user.profile_img"
+                ></v-img>
+                <span class="white--text headline" v-else>{{
+                  getUserInitials
+                }}</span>
+                <span class="dash-name">{{ getUserFullName }}</span>
+                <a href="/dashboard/profile" class="settings-link"> Profile Settings </a>
               </div>
-            </v-col>
+
+              <div class="top-info">
+                <span class="about-info"> About me </span>
+                <p> {{user.about_me}} </p>
+                <span class="about-info"> Jobseeking status </span>
+                <p> {{user.job_status}} </p>
+                <span class="about-info"> Position </span>
+                <p> {{user.current_position}} </p>
+                <span class="about-info"> Current industry </span>
+                <p> {{user.branche}} </p>
+                <span class="about-info"> City and areas </span>
+                <p> {{user.city}} </p>
+                <span class="about-info"> Experience </span>
+                <p> Company name </p>
+                <p> Position </p>                
+                <p> February 2020 - present </p>
+               </div>
+              <div class="top-info">
+                <span class="about-info"> Education </span>
+                <p> University </p>
+                <p> Degree </p>                
+                <p> February 2020 - present </p>
+              </div>
+              <div class="top-info">
+                <span class="about-info"> Documents </span>
+              </div>
           </v-row>
+        </div>
+      </v-col>
+      <v-col class="full-h main col-12 col-sm-8 col-xl-9">
+        <v-container fluid class="d-flex flex-column full-h">
           <slot />
         </v-container>
       </v-col>
@@ -150,7 +172,13 @@ export default {
     search: null
   }),
   computed: {
-    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
+    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    profile() {
+      return this.$route.path === '/dashboard/profile'
+    },
+    dashboard() {
+      return this.$route.path === '/dashboard' ||  this.$route.path === '/dashboard/'
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -159,7 +187,7 @@ export default {
       this.searchLoading = false;
     }, 2000),
     navigateTo(url) {
-      this.$router.push(url);
+      this.$router.push(url)
     },
     scrollToSection(profileSection){
       document.getElementById(profileSection).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -187,14 +215,15 @@ export default {
 <style lang="scss">
 .v-application--wrap {
   height: 100vh;
+  overflow: auto;
 }
 
-.main {
+.main, .navigation {
   background-color: $lighter-grey;
 }
 
 .v-application .dashboard-navigation {
-  padding: 0 0 0 50px;
+  padding: 0 0 0 32px;
 
   a {
     display: block;
@@ -216,11 +245,6 @@ export default {
       & i, span {
         border: none !important;
       }
-    }
-
-    &.logo {
-      margin-bottom: 30px;
-      border: none !important;
     }
 
     span,
@@ -254,15 +278,11 @@ export default {
       }
     }
   }
+}
 
-  .submenu {
-    padding-left: 34px;
-
-    a {
-      padding: 4px 0;
-      margin-bottom: 5px;
-    }
-  }
+.logo {
+  margin-bottom: 20px;
+  border: none !important;
 }
 
 .dashboard-search {
@@ -294,10 +314,7 @@ export default {
 
 .nav {
   cursor: pointer;
-}
-
-.layout-content {
-  overflow: auto;
+  width: 150px;
 }
 
 .search-holder
@@ -307,11 +324,16 @@ export default {
   transform: rotate(0) !important;
 }
 
+.search-holder {
+  padding: 20px;
+  border-bottom: 1px solid $light-grey;
+}
+
 .nav-item {
   border-bottom: 1px solid $medium-grey;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 28px;
   height: auto;
   max-height: 90px;
   padding: 5px 0;
@@ -322,8 +344,63 @@ export default {
   }
 }
 
-.navigation {
-  max-width: 445px;
-  overflow: visible;
+.settings-nav {
+  background-color: white;
+  padding: 32px;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+
+.settings-title {
+  font-size: 32px;
+  font-weight: 600;
+  width: 100%;
+  line-height: 38px;
+  margin-bottom: 26px;
+}
+
+button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 15px;
+  padding: 20px;
+  height: 48px;
+}
+
+.dashboard-about {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.top-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $light-grey;
+}
+
+.dash-name {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.settings-link {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-info {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 14px;
+  color: $primary-blue-dark;
+  margin-bottom: 8px;
 }
 </style>
