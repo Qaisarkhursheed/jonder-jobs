@@ -198,14 +198,11 @@ export default {
     },
     async saveOnboarding() {
       this.saveInProgress = true;
-      const resp = await this.postOnboardingUser(this.formData);
-      this.saveInProgress = false;
-      console.log("resp", resp);
-      if (resp) {
-        console.log("resp", resp);
+      await this.postOnboardingUser(this.formData).then(() => {
         localStorage.setItem("onboarding-status", "false");
         this.$router.replace("/dashboard/profile");
-      }
+      });
+      this.saveInProgress = false;
     }
   }
 };
