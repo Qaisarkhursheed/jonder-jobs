@@ -144,4 +144,10 @@ export default {
 .v-btn:not(.v-btn--round).v-size--default {
   height: 55px !important;
 }
+
+@media (max-width: 600px) {
+  .auth-login-wrap {
+    width: 90%;
+  }
+}
 </style>

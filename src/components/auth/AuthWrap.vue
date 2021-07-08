@@ -2,7 +2,12 @@
   <v-container fluid no-gutters class="main-wrap fill-height pa-0">
     <v-row no-gutters class="full-h">
       <!-- Left half -->
-      <v-col class="full-h" style="position: relative;">
+      <v-col class="full-h" 
+        cols="12" 
+        md="6"
+        order="2"
+        order-md="1" 
+        style="position: relative;">
         <div
           class="hero-image d-flex justify-content-center align-center"
           :style="{
@@ -17,7 +22,12 @@
         </v-overlay>
       </v-col>
       <!-- Right half -->
-      <v-col class="full-h" style="position: relative">
+      <v-col class="full-h" 
+        cols="12" 
+        md="6"
+        order="1"
+        order-md="2" 
+        style="position: relative">
         <div class="auth-wrap">
           <div class="auth-logo d-flex flex-column justify-center align-center">
             <v-img

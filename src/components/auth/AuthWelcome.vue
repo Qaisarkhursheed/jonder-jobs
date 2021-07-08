@@ -30,4 +30,9 @@ export default {
 .auth-welcome-wrap {
   width: 60%;
 }
+@media (max-width: 600px) {
+  .auth-welcome-wrap {
+    width: 90%;
+  }
+}
 </style>

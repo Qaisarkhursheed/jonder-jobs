@@ -113,4 +113,9 @@ export default {
     max-width: 150px;
   }
 }
+@media (max-width: 600px) {
+  .auth-moc-wrap {
+    width: 90%;
+  }
+}
 </style>

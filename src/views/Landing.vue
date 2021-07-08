@@ -6,7 +6,7 @@
 
     <v-container fluid class="landing-header-container">
       <v-row class="landing-header">
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <router-link to="/" class="logo">
             <v-img
               :src="require('@/assets/jonder_blue.png')"
@@ -14,7 +14,7 @@
             />
           </router-link>
         </v-col>
-        <v-col cols="6" class="links">
+        <v-col cols="12" md="6" class="links">
           <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
           <router-link
             to="/register"
@@ -29,7 +29,7 @@
     </v-container>
 
     <v-row class="landing-hero">
-      <v-col cols="7" class="box">
+      <v-col cols="12" md="7" class="box">
         <div class="inner">
           <h1>Lorem ipsum dolor sit amet</h1>
           <p>
@@ -43,12 +43,12 @@
 
     <v-container fluid>
       <v-row class="landing-section-with-image">
-        <v-col cols="6" class="image-holder">
+        <v-col cols="12" md="6" class="image-holder">
           <div class="image">
             <v-img :src="require('@/assets/landing/laptop.png')" />
           </div>
         </v-col>
-        <v-col cols="6" class="box">
+        <v-col cols="12" md="6" class="box">
           <div class="inner">
             <h1>Lorem ipsum dolor sit amet</h1>
             <p class="promo-text">
@@ -66,7 +66,7 @@
       </v-row>
 
       <v-row class="landing-promo-blocks">
-        <v-col cols="6" class="promo-block-container">
+        <v-col cols="12" md="6" class="promo-block-container">
           <div class="promo-block">
             <v-img
               class="promo-block-bg"
@@ -92,7 +92,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="6" class="promo-block-container">
+        <v-col cols="12" md="6" class="promo-block-container">
           <div class="promo-block">
             <v-img
               class="promo-block-bg"
@@ -119,7 +119,7 @@
       </v-row>
 
       <v-row class="landing-section-with-image">
-        <v-col cols="6" class="box">
+        <v-col cols="12" md="6" class="box">
           <div class="inner">
             <h1>Lorem ipsum dolor sit amet</h1>
             <p class="promo-text">
@@ -134,7 +134,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="6" class="image-holder">
+        <v-col cols="12" md="6" class="image-holder">
           <div class="image">
             <v-img :src="require('@/assets/landing/phones.png')" />
           </div>
@@ -175,7 +175,7 @@
     <footer>
       <v-container fluid class="landing-header-container">
         <v-row class="landing-header">
-          <v-col cols="6">
+          <v-col cols="12" md="6">
             <router-link to="/" class="logo">
               <v-img
                 :src="require('@/assets/jonder_blue.png')"
@@ -183,7 +183,7 @@
               />
             </router-link>
           </v-col>
-          <v-col cols="6" class="links">
+          <v-col cols="12" md="6" class="links">
             <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
             <router-link
               to="/register"
@@ -374,6 +374,15 @@
 
   footer {
     background: white;
+  }
+}
+
+@media (max-width: 450px) {
+  .links {
+    > a {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 </style>

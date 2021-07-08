@@ -7,81 +7,83 @@
         flat
         tile
       >
-        <v-sheet width="400">
-          <p class="text-center font-weight-bold mb-15 text-h6">
-            Zeig uns deine Qualifikationen..
-          </p>
+        <div class="sheet-wrap">
+          <v-sheet>
+            <p class="text-center font-weight-bold mb-15 text-h6">
+              Zeig uns deine Qualifikationen..
+            </p>
 
-          <div class="mt-6">
-            <v-file-input
-              v-model="document"
-              placeholder="Dokument hochladen"
-              multiple
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center"
-              accept=".doc, .docx, .pdf, .jpg, .png, .txt"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-
-            <v-file-input
-              v-model="qualifications"
-              placeholder="Qualifikationen hochladen"
-              multiple
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-
-            <v-file-input
-              v-model="resume"
-              placeholder="Lebenslauf hochladen"
-              multiple
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center "
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-            <v-sheet class="d-flex justify-center mt-16 pt-16">
-              <v-icon @click="prevScreen" class="mr-5">
-                mdi-arrow-left
-              </v-icon>
-
-              <v-sheet width="380">
-                <v-btn
-                  @click="nextScreen"
-                  block
-                  color="primary"
-                  class="font-weight-medium mr-5"
-                >
-                  Nur noch 2 Schritte!
-                </v-btn></v-sheet
+            <div class="mt-6">
+              <v-file-input
+                v-model="document"
+                placeholder="Dokument hochladen"
+                multiple
+                dense
+                outlined
+                prepend-icon=""
+                prepend-inner-icon="mdi-cloud-upload-outline"
+                class="text-center"
+                accept=".doc, .docx, .pdf, .jpg, .png, .txt"
               >
-            </v-sheet>
-          </div>
-        </v-sheet>
+                <template v-slot:selection="{ text }">
+                  <v-chip small label color="primary">
+                    {{ text }}
+                  </v-chip>
+                </template>
+              </v-file-input>
+
+              <v-file-input
+                v-model="qualifications"
+                placeholder="Qualifikationen hochladen"
+                multiple
+                dense
+                outlined
+                prepend-icon=""
+                prepend-inner-icon="mdi-cloud-upload-outline"
+                class="text-center"
+              >
+                <template v-slot:selection="{ text }">
+                  <v-chip small label color="primary">
+                    {{ text }}
+                  </v-chip>
+                </template>
+              </v-file-input>
+
+              <v-file-input
+                v-model="resume"
+                placeholder="Lebenslauf hochladen"
+                multiple
+                dense
+                outlined
+                prepend-icon=""
+                prepend-inner-icon="mdi-cloud-upload-outline"
+                class="text-center "
+              >
+                <template v-slot:selection="{ text }">
+                  <v-chip small label color="primary">
+                    {{ text }}
+                  </v-chip>
+                </template>
+              </v-file-input>
+              <v-sheet class="d-flex justify-center mt-16 pt-16">
+                <v-icon @click="prevScreen" class="mr-5">
+                  mdi-arrow-left
+                </v-icon>
+
+                <v-sheet width="380">
+                  <v-btn
+                    @click="nextScreen"
+                    block
+                    color="primary"
+                    class="font-weight-medium mr-5"
+                  >
+                    Nur noch 2 Schritte!
+                  </v-btn></v-sheet
+                >
+              </v-sheet>
+            </div>
+          </v-sheet>
+        </div>
       </v-card>
     </v-sheet>
   </div>
@@ -141,4 +143,13 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.sheet-wrap {
+  width: 500px;
+}
+@media (max-width: 600px) {
+  .sheet-wrap  {
+    width: 90%;
+  }
+}
+</style>

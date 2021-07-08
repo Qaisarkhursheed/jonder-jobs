@@ -188,7 +188,7 @@ export default {
         phone: "",
         show_name: false,
         show_location: false,
-        role: "user"
+        role: "Jobseeker"
       },
       rules: [
         value => !!value || "Required.",
@@ -235,5 +235,11 @@ export default {
 
 .p-text {
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .auth-register-wrap {
+    width: 90%;
+  }
 }
 </style>

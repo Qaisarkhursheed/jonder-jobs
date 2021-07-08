@@ -5,8 +5,7 @@
     </v-icon>
 
     <div
-      class="d-flex flex-column justify-space-between align-center full-h mt-10"
-      style="width: 70%"
+      class="stepper-wrap d-flex flex-column justify-space-between align-center full-h mt-10"
     >
       <v-stepper
         alt-labels
@@ -224,5 +223,13 @@ export default {
 }
 .mo-stepper-items {
   overflow: auto;
+}
+.stepper-wrap {
+  width: 70%;
+}
+@media (max-width: 600px) {
+  .stepper-wrap {
+    width: 100%;
+  }
 }
 </style>

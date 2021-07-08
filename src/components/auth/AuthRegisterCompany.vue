@@ -219,4 +219,9 @@ export default {
 .auth-register-wrap {
   width: 60%;
 }
+@media (max-width: 600px) {
+  .auth-register-wrap {
+    width: 90%;
+  }
+}
 </style>
