@@ -12,21 +12,8 @@
           <div class="d-flex align-center">
             <v-avatar color="primary" size="58" class="flex-grow-0 flex-shrink-0">
               <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-              <span class="white--text headline" v-else>{{
-                getUserInitials
-              }}</span>
+              <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
             </v-avatar>
-        <!--<div class="flex-grow-1 flex-shrink-1 pl-2">
-              <div
-                class="heading text-color-primary-blue-dark font-weight-bold ml-2 mb-2"
-              >
-                {{ getUserFullName }}
-              </div>
-              <div v-if="user.address">
-                <v-icon>mdi-map-marker</v-icon>
-                <span>{{ user.address }}</span>
-              </div>
-            </div>-->
           </div>
         </v-col>
         <v-col cols="6" class="text-right">
@@ -100,7 +87,6 @@
           <v-select
             outlined
             dense
-            :rules="rules"
             :items="branche"
             background-color="white"
             v-model="formData.branche"
@@ -113,8 +99,8 @@
           <label class="profile-label">What type of role are you looking for?</label>
           <v-select 
             outlined
+            multiple
             dense
-            :rules="rules"
             :items="lookingForRole"
             background-color="white"
             v-model="formData.looking_for"
@@ -166,7 +152,7 @@
             flat
             hide-details
             background-color="white"
-            v-model="formData.city"
+            v-model="formData.hiring_location"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -449,25 +435,25 @@ export default {
       first_name: "",
       last_name: "",
       branche: "",
-      looking_for: "",
-      looking_for_branche: "",
+      looking_for: [],
+      looking_for_branche: [],
       looking_for_employment_type: "",
-      city: "",
+      hiring_location: "",
       ready_for_work: "",
       monthly_salary: "",
       work_experience: "",
-      cv: "",
-      qualifications: "",
-      resume: "",
+      cv: null,
+      qualifications: null,
+      resume: null,
     },
     rules: [
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
     ],
-    branche: ['Marketing', 'Entwickler/in', 'Projektmanager/in', 'Bauleiter/in', 'Praktikant/in', 'Auszubildende/r',  'Geschäftsführer/in'],
-    lookingForRole: ['Product Designer', 'Graphic Designer', 'Project Manager', 'Software developer', 'Game developer'],
-    lookingForBranches: ['Entwickler/in', 'Projektmanager/in', 'Bauleiter/in', 'Praktikant/in', 'Auszubildende/r',  'Geschäftsführer/in'],
-    employment: ['Part - time', 'Full-time'],
+    branche: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie', 'Ernährungsindustrie', 'Elektrotechnikbranche'],
+    lookingForRole: ['Entwickler', 'Projektmanager', 'Bauleiter', 'Praktikant', 'Auszubildende',  'Geschäftsführer'],
+    lookingForBranches: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie', 'Ernährungsindustrie', 'Elektrotechnikbranche'],
+    employment: ['Part - time', 'Full - time'],
 
   }),
   created() {
@@ -483,11 +469,10 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
-      this.formData.current_position = user.current_position;
-      this.formData.looking_for = user.looking_for;
+      this.formData.looking_for = user.looking_for.jobs;
       this.formData.looking_for_branche = user.looking_for_branche;
       this.formData.looking_for_employment_type = user.looking_for_employment_type;
-      this.formData.city = user.city;
+      this.formData.hiring_location = user.hiring_location;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.work_experience = user.work_experience;

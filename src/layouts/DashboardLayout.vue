@@ -4,7 +4,7 @@
       <v-col cols="4">
         <router-link to="/dashboard" class="logo">
           <v-img
-            :src="require('@/assets/jonder_blue.png')"
+            :src="require('@/assets/jonder-logo.svg')"
             max-width="128px"
           />
         </router-link>
@@ -38,9 +38,7 @@
                   :src="user.profile_img"
                   v-if="user.profile_img"
                 ></v-img>
-                <span class="white--text headline" v-else>{{
-                  getUserInitials
-                }}</span>
+                <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
               </v-avatar>
             </template>
             <v-list class="nav">
@@ -118,7 +116,7 @@
                       :src="user.profile_img"
                       v-if="user.profile_img"
                     ></v-img>
-                    <v-img :src="require('@/assets/icons/equal-rights.svg')" v-else></v-img>
+                    <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
                   </div>
 
                 <span class="dash-name">{{ getUserFullName }}</span>
