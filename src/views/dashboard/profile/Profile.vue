@@ -10,22 +10,35 @@
         </p>
         <v-col cols="6">
           <div class="d-flex align-center">
-            <v-avatar color="primary" size="58" class="flex-grow-0 flex-shrink-0">
+            <v-avatar
+              color="primary"
+              size="58"
+              class="flex-grow-0 flex-shrink-0"
+            >
               <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-              <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
+              <v-img
+                :src="require('@/assets/icons/profile-placeholder.png')"
+                v-else
+              ></v-img>
             </v-avatar>
           </div>
         </v-col>
         <v-col cols="6" class="text-right">
-          <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-            >{{ $t('general.save') }}
+          <v-btn
+            depressed
+            color="primary"
+            class="pl-8 pr-8"
+            @click="handleUpdate"
+            >{{ $t("general.save") }}
           </v-btn>
         </v-col>
       </v-row>
 
       <v-row>
         <v-col cols="6">
-          <label class="profile-label">{{ $t('user.profile.firstName') }}</label>
+          <label class="profile-label">{{
+            $t("user.profile.firstName")
+          }}</label>
           <v-text-field
             dense
             :label="$t('user.profile.firstName')"
@@ -40,7 +53,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="6">
-          <label class="profile-label">{{ $t('user.profile.lastName') }}</label>
+          <label class="profile-label">{{ $t("user.profile.lastName") }}</label>
           <v-text-field
             dense
             :label="$t('user.profile.lastName')"
@@ -73,7 +86,7 @@
         </v-col>
       </v-row>
     </div>
-    
+
     <div id="roleAndBranche">
       <v-row>
         <p class="profile-title branche">
@@ -96,8 +109,10 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">What type of role are you looking for?</label>
-          <v-select 
+          <label class="profile-label"
+            >What type of role are you looking for?</label
+          >
+          <v-select
             outlined
             multiple
             dense
@@ -118,7 +133,9 @@
           Explanation goes here
         </p>
         <v-col cols="12">
-          <label class="profile-label">What type of branches are you looking for?</label>
+          <label class="profile-label"
+            >What type of branches are you looking for?</label
+          >
           <v-select
             outlined
             dense
@@ -131,8 +148,10 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">What type of employment are you looking for?</label>
-          <v-select 
+          <label class="profile-label"
+            >What type of employment are you looking for?</label
+          >
+          <v-select
             outlined
             dense
             :items="employment"
@@ -175,12 +194,12 @@
 
       <v-row>
         <v-col cols="10">
-          <label class="profile-label">Monatliche Netto Gehaltsvorstellung? (€) </label>
+          <label class="profile-label"
+            >Monatliche Netto Gehaltsvorstellung? (€)
+          </label>
           <v-col>
-              <div class="monthly-salary">
-                {{ formData.monthly_salary }}k
-              </div>
-            </v-col>
+            <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
+          </v-col>
           <v-slider
             v-model="formData.monthly_salary"
             track-color="grey"
@@ -202,12 +221,14 @@
           Explanation goes here
         </p>
         <v-col cols="6">
-          <label class="profile-label">Professional experience in years? </label>
+          <label class="profile-label"
+            >Professional experience in years?
+          </label>
           <v-col>
-              <div class="monthly-salary">
-                {{ formData.work_experience }}
-              </div>
-            </v-col>
+            <div class="monthly-salary">
+              {{ formData.work_experience }}
+            </div>
+          </v-col>
           <v-slider
             v-model="formData.work_experience"
             track-color="grey"
@@ -259,137 +280,135 @@
         </p>
         <v-col cols="6">
           <div class="mt-6">
-              <v-file-input
-                v-model="formData.cv"
-                placeholder="CV Document"
-                dense
-                outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center"
-                accept=".doc, .docx, .pdf, .jpg, .png, .txt"
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
+            <v-file-input
+              v-model="formData.cv"
+              placeholder="CV Document"
+              dense
+              outlined
+              prepend-icon=""
+              prepend-inner-icon="mdi-cloud-upload-outline"
+              class="text-center"
+              accept=".doc, .docx, .pdf, .jpg, .png, .txt"
+            >
+              <template v-slot:selection="{ text }">
+                <v-chip small label color="primary">
+                  {{ text }}
+                </v-chip>
+              </template>
+            </v-file-input>
 
-              <v-file-input
-                v-model="formData.qualifications"
-                placeholder="Qualifikationen document"
-                multiple
-                dense
-                outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center"
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
+            <v-file-input
+              v-model="formData.qualifications"
+              placeholder="Qualifikationen document"
+              multiple
+              dense
+              outlined
+              prepend-icon=""
+              prepend-inner-icon="mdi-cloud-upload-outline"
+              class="text-center"
+            >
+              <template v-slot:selection="{ text }">
+                <v-chip small label color="primary">
+                  {{ text }}
+                </v-chip>
+              </template>
+            </v-file-input>
 
-              <v-file-input
-                v-model="formData.resume"
-                placeholder="Lebenslauf document"
-                multiple
-                dense
-                outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center "
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
-            </div>
+            <v-file-input
+              v-model="formData.resume"
+              placeholder="Lebenslauf document"
+              multiple
+              dense
+              outlined
+              prepend-icon=""
+              prepend-inner-icon="mdi-cloud-upload-outline"
+              class="text-center "
+            >
+              <template v-slot:selection="{ text }">
+                <v-chip small label color="primary">
+                  {{ text }}
+                </v-chip>
+              </template>
+            </v-file-input>
+          </div>
         </v-col>
       </v-row>
     </div>
 
-  <div id="invoices">
-    <v-row>
-      <p class="profile-title branche">
-        Billing & Invoices
-      </p>
-      <p class="profile-subtitle">
-        Explanation goes here
-      </p>
-      
-    </v-row>
-  </div>
+    <div id="invoices">
+      <v-row>
+        <p class="profile-title branche">
+          Billing & Invoices
+        </p>
+        <p class="profile-subtitle">
+          Explanation goes here
+        </p>
+      </v-row>
+    </div>
 
-  <div id="paymentMethod">
-    <v-row>
-      <p class="profile-title branche">
-        Edit payment method
-      </p>
-      <p class="profile-subtitle">
-        Explanation goes here
-      </p>
-      
-    </v-row>
-  </div>
+    <div id="paymentMethod">
+      <v-row>
+        <p class="profile-title branche">
+          Edit payment method
+        </p>
+        <p class="profile-subtitle">
+          Explanation goes here
+        </p>
+      </v-row>
+    </div>
 
-  <div id="changePassword">
-    <v-row>
-      <p class="profile-title branche">
-        Change password
-      </p>
-      <p class="profile-subtitle">
-        Explanation goes here
-      </p>      
-    </v-row>    
-    <v-row>
-      <v-col cols="12">
-        <label class="profile-label">Enter old password</label>
-        <v-text-field
-          dense
-          type="text"
-          outlined
-          solo
-          flat
-          hide-details
-          background-color="white"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <label class="profile-label">Enter new password</label>
-        <v-text-field
-          dense
-          type="text"
-          outlined
-          solo
-          flat
-          hide-details
-          background-color="white"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <label class="profile-label">Repeat new password</label>
-        <v-text-field
-          dense
-          type="text"
-          outlined
-          solo
-          flat
-          hide-details
-          background-color="white"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-  </div>
+    <div id="changePassword">
+      <v-row>
+        <p class="profile-title branche">
+          Change password
+        </p>
+        <p class="profile-subtitle">
+          Explanation goes here
+        </p>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <label class="profile-label">Enter old password</label>
+          <v-text-field
+            dense
+            type="text"
+            outlined
+            solo
+            flat
+            hide-details
+            background-color="white"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <label class="profile-label">Enter new password</label>
+          <v-text-field
+            dense
+            type="text"
+            outlined
+            solo
+            flat
+            hide-details
+            background-color="white"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <label class="profile-label">Repeat new password</label>
+          <v-text-field
+            dense
+            type="text"
+            outlined
+            solo
+            flat
+            hide-details
+            background-color="white"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+    </div>
 
     <div id="upgradeAccount">
       <v-row>
@@ -398,8 +417,8 @@
         </p>
         <p class="profile-subtitle">
           Explanation goes here
-        </p>      
-      </v-row>    
+        </p>
+      </v-row>
       <v-row>
         <v-col cols="6">
           <div class="upgrade">
@@ -421,7 +440,6 @@
         </v-col>
       </v-row>
     </div>
-
   </div>
 </template>
 
@@ -444,17 +462,37 @@ export default {
       work_experience: "",
       cv: null,
       qualifications: null,
-      resume: null,
+      resume: null
     },
     rules: [
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
     ],
-    branche: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie', 'Ernährungsindustrie', 'Elektrotechnikbranche'],
-    lookingForRole: ['Entwickler', 'Projektmanager', 'Bauleiter', 'Praktikant', 'Auszubildende',  'Geschäftsführer'],
-    lookingForBranches: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie', 'Ernährungsindustrie', 'Elektrotechnikbranche'],
-    employment: ['Part - time', 'Full - time'],
-
+    branche: [
+      "Medizin",
+      "Automobilindustrie",
+      "Maschinenbau",
+      "Chemisch-pharmazeutische Industrie",
+      "Ernährungsindustrie",
+      "Elektrotechnikbranche"
+    ],
+    lookingForRole: [
+      "Entwickler",
+      "Projektmanager",
+      "Bauleiter",
+      "Praktikant",
+      "Auszubildende",
+      "Geschäftsführer"
+    ],
+    lookingForBranches: [
+      "Medizin",
+      "Automobilindustrie",
+      "Maschinenbau",
+      "Chemisch-pharmazeutische Industrie",
+      "Ernährungsindustrie",
+      "Elektrotechnikbranche"
+    ],
+    employment: ["Part - time", "Full - time"]
   }),
   created() {
     this.resetFormData(this.user);
@@ -469,9 +507,11 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
-      this.formData.looking_for = user.looking_for.jobs;
+      this.formData.branche = user.branche;
+      this.formData.looking_for = user.looking_for;
       this.formData.looking_for_branche = user.looking_for_branche;
-      this.formData.looking_for_employment_type = user.looking_for_employment_type;
+      this.formData.looking_for_employment_type =
+        user.looking_for_employment_type;
       this.formData.hiring_location = user.hiring_location;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
@@ -481,7 +521,27 @@ export default {
       this.formData.resume = user.resume;
     },
     handleUpdate() {
-      this.updateUser(this.formData);
+      const formDataCopy = Object.assign({}, this.formData);
+
+      if (!(this.formData.cv instanceof File)) {
+        delete formDataCopy.cv;
+      }
+
+      if (!(this.formData.resume instanceof File)) {
+        delete formDataCopy.resume;
+      }
+
+      if (!(this.formData.qualifications instanceof File)) {
+        delete formDataCopy.qualifications;
+      }
+
+      this.updateUser(formDataCopy)
+        .then(() => {
+          alert("Success");
+        })
+        .catch(err => {
+          alert(err.data.message);
+        });
     }
   },
   watch: {
@@ -503,13 +563,13 @@ export default {
 
 .profile-subtitle {
   width: 100%;
-  margin-left: 15px;  
+  margin-left: 15px;
 }
 
 .profile-label {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .branche {

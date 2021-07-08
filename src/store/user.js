@@ -142,17 +142,24 @@ export default {
       return axios.get("/users");
     },
 
-    updateUser({ commit }, userDetails) {
-      return axios
-        .post("/user", userDetails)
-        .then(resp => {
-          if (resp.data.success && resp.data.user) {
-            commit("SET_USER", resp.data.user);
-          }
-        })
-        .catch(err => {
-          console.error("Update user error:", err);
-        });
+    async updateUser({ commit, state }, data) {
+      let formData = new FormData();
+      Object.keys(data).forEach(key => {
+        if (Array.isArray(data[key])) {
+          data[key].forEach(el => formData.append(key + "[]", el));
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
+      formData.append("_method", "PATCH");
+
+      try {
+        const resp = await axios.post("/users/" + state.user.id, formData);
+        commit("SET_USER", resp.data.data);
+        return resp;
+      } catch (error) {
+        return Promise.reject(error.response);
+      }
     },
     updateCompanyUser({ commit }, details) {
       return axios
