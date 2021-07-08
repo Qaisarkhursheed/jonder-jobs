@@ -136,7 +136,7 @@
               Du bist bereits Mitglied?
 
               <router-link to="/login">
-              Hier einloggen
+                Hier einloggen
               </router-link>
             </div>
             <v-checkbox
@@ -152,13 +152,20 @@
           </v-col>
 
           <v-col cols="12">
-            <v-btn type="submit"
-                   color="primary"
-                   class="full-w"
-                   :disabled="formData.email.length === 0 || formData.password.length === 0 ||
-                               formData.first_name.length === 0 || formData.last_name.length === 0 ||
-                               formData.password_confirmation.length === 0 || formData.phone.length === 0"
-                   large>
+            <v-btn
+              type="submit"
+              color="primary"
+              class="full-w"
+              :disabled="
+                formData.email.length === 0 ||
+                  formData.password.length === 0 ||
+                  formData.first_name.length === 0 ||
+                  formData.last_name.length === 0 ||
+                  formData.password_confirmation.length === 0 ||
+                  formData.phone.length === 0
+              "
+              large
+            >
               Kostenlos registrieren
             </v-btn>
           </v-col>
@@ -216,6 +223,7 @@ export default {
       let response = await this.register(this.formData);
 
       if (response.success) {
+        localStorage.setItem("registration-id", response.user.id);
         this.$router.replace({ name: "ManualOnboarding" });
       } else {
         this.validationErrors = response.message;

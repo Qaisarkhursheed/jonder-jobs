@@ -47,71 +47,17 @@
           </v-col>
         </v-row>
 
-        <p class="text-left font-weight-bold">Was beschreibt dich am besten?</p>
+        <p class="text-left font-weight-bold">Wann bist du startklar?</p>
         <v-row>
-          <v-col class="text-center">
-            <v-card>
-              <v-btn
-                block
-                class="pa-6"
-                @click="value.ready_for_work = '1-3'"
-                v-bind="{ outlined: value.ready_for_work !== '1-3' }"
-                color="primary"
-              >
-                1-3
-              </v-btn></v-card
-            >
-
-            <p class="text-center font-weight-bold caption mt-1">Per month</p>
-          </v-col>
-
-          <v-col class="text-center">
-            <v-card>
-              <v-btn
-                block
-                class="pa-6"
-                @click="value.ready_for_work = '3-6'"
-                v-bind="{ outlined: value.ready_for_work !== '3-6' }"
-                color="primary"
-              >
-                3-6
-              </v-btn></v-card
-            >
-
-            <p class="text-center font-weight-bold caption mt-1">Per month</p>
-          </v-col>
-
-          <v-col class="text-center">
-            <v-card>
-              <v-btn
-                block
-                class="pa-6"
-                @click="value.ready_for_work = '6-12'"
-                v-bind="{ outlined: value.ready_for_work !== '6-12' }"
-                color="primary"
-              >
-                6-12
-              </v-btn></v-card
-            >
-
-            <p class="text-center font-weight-bold caption mt-1">Per month</p>
-          </v-col>
-
-          <v-col class="text-center">
-            <v-card>
-              <v-btn
-                block
-                class="pa-6 text-center"
-                @click="value.ready_for_work = '12+'"
-                v-bind="{ outlined: value.ready_for_work !== '12+' }"
-                color="primary"
-              >
-                12+
-              </v-btn></v-card
-            >
-
-            <p class="text-center caption font-weight-bold mt-1">Per month</p>
-          </v-col>
+          <v-text-field
+            block
+            placeholder="JJJJ-MM-TT (2021-09-01)"
+            type="text"
+            outlined
+            background-color="white"
+            :rules="rules"
+            v-model="value.ready_for_work"
+          ></v-text-field>
         </v-row>
         <v-btn
           @click="nextScreen"

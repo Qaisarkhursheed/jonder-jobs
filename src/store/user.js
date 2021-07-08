@@ -109,20 +109,31 @@ export default {
 
     postOnboardingUser({ commit }, data) {
       let formData = new FormData();
+      let response = {};
       Object.keys(data).forEach(key => {
         formData.append(key, data[key]);
       });
-      return axios
-        .post("/user/onboarding", formData)
-        .then(resp => {
-          if (resp.data.success && resp.data.user) {
-            commit("SET_USER", resp.data.user);
-          }
-          return resp.data.success;
-        })
-        .catch(err => {
-          console.error("Update user error:", err);
-        });
+      formData.append("_method", "PATCH");
+
+      let id = null;
+      if (localStorage.getItem("registration-id"))
+        id = localStorage.getItem("registration-id");
+
+      if (id) {
+        axios
+          .post("/user/onboarding/" + id, formData)
+          .then(resp => {
+            if (resp.data.success && resp.data.user) {
+              commit("SET_USER", resp.data.user);
+            }
+            response = resp.data.success;
+          })
+          .catch(err => {
+            response = false;
+            console.error("Update user error:", err);
+          });
+      }
+      return response;
     },
 
     getUser({ commit }, userId) {
@@ -155,10 +166,10 @@ export default {
     },
     updateCompanyUser({ commit }, details) {
       return axios
-        .post('/user', details)
+        .post("/user", details)
         .then(resp => {
           if (resp.data.success && resp.data.user) {
-            commit('SET_USER', resp.data.user);
+            commit("SET_USER", resp.data.user);
           }
         })
         .catch(err => {
@@ -180,11 +191,9 @@ export default {
     },
 
     addUserProfileView(context, payload) {
-      return axios
-        .post('stats/profile', payload)
-        .then(() => {
-          'Yupiii'
-        })
+      return axios.post("stats/profile", payload).then(() => {
+        "Yupiii";
+      });
     },
     saveCv(context, payload) {
       return axios.post("/cv_store", payload);
