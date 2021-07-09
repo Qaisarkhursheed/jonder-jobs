@@ -11,8 +11,10 @@
       <v-text-field
         v-model="date"
         readonly
+        outlined
         height="35px"
         :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
         v-bind="attrs"
         v-on="on"
       ></v-text-field>
@@ -32,7 +34,7 @@ export default {
 
   data() {
     return {
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      date: '',
       menu: false,
     }
   },

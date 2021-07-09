@@ -13,15 +13,13 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.looking_for_branche"
-                :items="positions"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.looking_for_branche"
+              :items="positions"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              outlined
+            ></v-select>
           </v-col>
         </v-row>
 
@@ -32,15 +30,13 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.looking_for_employment_type"
-                :items="emplType"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.looking_for_employment_type"
+              :items="emplType"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              outlined
+            ></v-select>
           </v-col>
         </v-row>
 
@@ -51,16 +47,14 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.address_to_work"
-                :items="cities"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-                flat
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.address_to_work"
+              :items="cities"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              outlined
+              flat
+            ></v-select>
           </v-col>
         </v-row>
 

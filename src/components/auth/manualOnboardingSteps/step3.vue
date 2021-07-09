@@ -13,15 +13,13 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.current_position"
-                :items="positions"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.current_position"
+              :items="positions"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              outlined
+            ></v-select>
           </v-col>
         </v-row>
 
@@ -32,15 +30,13 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.branche"
-                :items="branches"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.branche"
+              :items="branches"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              outlined
+            ></v-select>
           </v-col>
         </v-row>
 
@@ -51,16 +47,14 @@
             </p>
           </v-col>
           <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.looking_for"
-                :items="positions"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                multiple
-                outlined
-              ></v-select>
-            </v-card>
+            <v-select
+              v-model="value.looking_for"
+              :items="positions"
+              :hide-details="true"
+              :label="$t('user.onboarding.choose')"
+              multiple
+              outlined
+            ></v-select>
           </v-col>
         </v-row>
       </div>

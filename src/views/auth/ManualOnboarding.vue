@@ -228,7 +228,7 @@ export default {
 .mo-back-button {
   position: absolute;
   top: 40px;
-  left: 215px;
+  left: 25%;
   z-index: 100;
 }
 .step-five-back-button {

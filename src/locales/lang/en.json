@@ -86,6 +86,7 @@
       "locationPlaceholder": "Enter city",
       "next": "Next",
       "choose": "Choose",
+      "enter": "Enter",
       "whatBringsYou": "What brings you to Jonder?",
       "whatBringsYouJob": "I am actively looking for a job",
       "whatBringsYouOffer": "I am open to an interesting offer",
@@ -124,7 +125,15 @@
       "uploadQualifications": "Upload qualifications",
       "uploadResume": "Upload resume",
       "addExperience": "Add experience",
-      "addEducation": "Add education"
+      "addEducation": "Add education",
+      "university": "University",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "degreeFieldStudy": "Degree, field, study",
+      "company": "Company",
+      "position": "Position",
+      "type": "Type",
+      "description": "Description"
     },
     "profile": {
       "firstName": "First name",

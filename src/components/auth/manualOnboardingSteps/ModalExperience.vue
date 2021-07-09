@@ -13,7 +13,9 @@
         <v-col cols="12" md="6">
           <v-row>
             <v-col>
-              <label class="font-weight-medium">Company</label>
+              <label class="font-weight-medium">
+                {{ $t('user.onboarding.company') }}
+              </label>
               <v-text-field
                 class="rounded-lg"
                 style="height: 50px;"
@@ -21,6 +23,7 @@
                 type="text"
                 outlined
                 :hide-details="true"
+                :placeholder="$t('user.onboarding.choose')"
                 flat
                 dense
                 solo
@@ -31,11 +34,11 @@
           </v-row>
           <v-row>
             <v-col cols="6" class="mt-2">
-              <label>Start date</label>
+              <label>{{ $t('user.onboarding.startDate') }}</label>
               <Calendar @setDate="form.start_time = $event" />
             </v-col>
             <v-col cols="6" class="mt-2">
-              <label>End date</label>
+              <label>{{ $t('user.onboarding.endDate') }}</label>
               <Calendar  @setDate="form.end_time = $event" />
             </v-col>
           </v-row>
@@ -43,7 +46,7 @@
         <v-col cols="12" md="6">
           <v-row>
             <v-col>
-              <label>Position</label>
+              <label>{{ $t('user.onboarding.position') }}</label>
               <v-select
                 v-model="form.position"
                 :items="positions"
@@ -55,7 +58,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <label>Type</label>
+              <label>{{ $t('user.onboarding.type') }}</label>
               <v-select
                 v-model="form.employment_type"
                 :items="emplType"
@@ -72,12 +75,13 @@
 
         </v-col>
         <v-col cols="12">
-          <label>Description</label>
+          <label>{{ $t('user.onboarding.description') }}</label>
           <v-textarea
             v-model="form.description"
             outlined
             name="input-7-4"
             height="140px"
+            :placeholder="$t('user.onboarding.enter')"
           ></v-textarea>
         </v-col>
       </v-row>

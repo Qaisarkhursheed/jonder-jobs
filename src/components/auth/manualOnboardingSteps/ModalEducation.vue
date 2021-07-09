@@ -1,11 +1,11 @@
 <template>
-  <v-dialog class="dialog onboarding-dialog"
+  <v-dialog class="dialog"
             v-model="active"
             @click:outside="close('abort')"
             persistent
             width="750px"
             max-width="750px">
-    <v-card flat class="rounded-lg wrap">
+    <v-card flat class="rounded-lg wrap onboarding-dialog">
       <p class="text-left font-weight-bold mb-3 font-size-16 header">
         {{ $t('user.onboarding.addEducation') }}
       </p>
@@ -13,28 +13,29 @@
         <v-col cols="12" md="6">
           <v-row>
             <v-col>
-              <label>University</label>
+              <label>{{ $t('user.onboarding.university') }}</label>
               <v-text-field
                 class="rounded-lg mt-3"
                 style="height: 50px;"
                 height="100%"
                 type="text"
                 outlined
+                :hide-details="true"
                 flat
                 dense
                 solo
-                background-color="#fff"
+                :placeholder="$t('user.onboarding.enter')"
                 v-model="form.university_name">
               </v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="6" class="mt-2">
-              <label>Start date</label>
+              <label>{{ $t('user.onboarding.startDate') }}</label>
               <Calendar @setDate="form.start_time = $event" />
             </v-col>
             <v-col cols="6" class="mt-2">
-              <label>End date</label>
+              <label>{{ $t('user.onboarding.endDate') }}</label>
               <Calendar  @setDate="form.end_time = $event" />
             </v-col>
           </v-row>
@@ -42,7 +43,7 @@
         <v-col cols="12" md="6">
           <v-row>
             <v-col>
-              <label>Degree, field, study</label>
+              <label>{{ $t('user.onboarding.degreeFieldStudy') }}</label>
               <v-text-field
                 class="rounded-lg mt-3"
                 style="height: 50px;"
@@ -52,6 +53,7 @@
                 flat
                 dense
                 solo
+                :placeholder="$t('user.onboarding.enter')"
                 background-color="#fff"
                 v-model="form.study">
               </v-text-field>
