@@ -8,9 +8,14 @@
           <div class="no-msg"> There is no any messages yet </div>
           <div class="upgrade-box">
             <div class="upgrade-title"> Increase account visibility by upgrading account </div>
-            <div>
+            <v-img class="badge"
+            :src="require('@/assets/icons/top-rated.svg')"></v-img>
+            <div class="d-flex" style="font-size: 13px;">
               <p> 
                Be on the top of search for 3 days
+              </p>
+              <p style="color: #55F481; width: 40%;" class="text-right"> 
+               Upgrade now
               </p>
             </div>
           </div>
@@ -89,6 +94,8 @@ export default {
   padding: 25px;
   border-radius: 10px;
   width: 400px;
+  position: relative;
+  cursor: default;
 }
 
 .upgrade-title {
@@ -102,5 +109,11 @@ export default {
   margin: 50px auto 0 55px;
   max-width: 723px;
   max-height: 538px;
+}
+
+.badge {
+  position: absolute;
+  right: 17px;
+  top: -20px;
 }
 </style>

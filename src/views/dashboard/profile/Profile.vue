@@ -171,7 +171,7 @@
             flat
             hide-details
             background-color="white"
-            v-model="formData.hiring_location"
+            v-model="formData.address_to_work"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -456,7 +456,7 @@ export default {
       looking_for: [],
       looking_for_branche: [],
       looking_for_employment_type: "",
-      hiring_location: "",
+      address_to_work: "",
       ready_for_work: "",
       monthly_salary: "",
       work_experience: "",
@@ -469,30 +469,34 @@ export default {
       value => (value && value.length >= 3) || "Min 3 characters"
     ],
     branche: [
-      "Medizin",
-      "Automobilindustrie",
-      "Maschinenbau",
-      "Chemisch-pharmazeutische Industrie",
-      "Ernährungsindustrie",
-      "Elektrotechnikbranche"
+      "Medicine",
+      "Automotive industry",
+      "Mechanical engineering",
+      "Chemical-pharmaceutical industry",
+      "Food industry",
+      "Electrical engineering industry",
     ],
-    lookingForRole: [
-      "Entwickler",
-      "Projektmanager",
-      "Bauleiter",
-      "Praktikant",
-      "Auszubildende",
-      "Geschäftsführer"
+    lookingForRole: [      
+     "Developer",
+     "Project Manager",
+     "Construction manager",
+     "Intern",
+     "Apprentice",
+     "Manager",
     ],
-    lookingForBranches: [
-      "Medizin",
-      "Automobilindustrie",
-      "Maschinenbau",
-      "Chemisch-pharmazeutische Industrie",
-      "Ernährungsindustrie",
-      "Elektrotechnikbranche"
+    lookingForBranches: [      
+     "Developer",
+     "Project Manager",
+     "Construction manager",
+     "Intern",
+     "Apprentice",
+     "Manager",
     ],
-    employment: ["Part - time", "Full - time"]
+    employment: [
+      "Trainee",
+      "Fulltime",
+      "Parttime",
+    ]
   }),
   created() {
     this.resetFormData(this.user);
@@ -512,7 +516,7 @@ export default {
       this.formData.looking_for_branche = user.looking_for_branche;
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
-      this.formData.hiring_location = user.hiring_location;
+      this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.work_experience = user.work_experience;

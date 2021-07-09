@@ -162,9 +162,9 @@
 
             <div class="top-info">
               <span class="about-info"> Documents </span>
-              <div>{{ user.cv }}</div>
-              <div>{{ user.qualifications }}</div>
-              <div>{{ user.resume }}</div>
+              <p>{{ user.cv }}</p>
+              <p>{{ user.qualifications }}</p>
+              <p>{{ user.resume }}</p>
             </div>
           </v-row>
         </div>
@@ -407,6 +407,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   flex-direction: column;
   border-bottom: 1px solid $light-grey;
   padding: 20px;
+  word-break: break-all;
 }
 
 .dash-name {
