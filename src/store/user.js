@@ -5,7 +5,11 @@ export default {
 
   state: {
     user: null,
-    userDetails: null
+    userDetails: null,
+    jobseeker: {
+      experience: null,
+      education: null
+    }
   },
 
   getters: {
@@ -63,6 +67,12 @@ export default {
       }
 
       return initials;
+    },
+    jobseekerExperience(state) {
+      return state.jobseeker.experience;
+    },
+    jobseekerEducation(state) {
+      return state.jobseeker.education;
     }
   },
 
@@ -72,6 +82,12 @@ export default {
     },
     SET_USER_DETAILS(state, value) {
       state.userDetails = value;
+    },
+    SET_JOBSEEKER_EXPERIENCE(state, value) {
+      state.jobseeker.experience = value;
+    },
+    SET_JOBSEEKER_EDUCATION(state, value) {
+      state.jobseeker.education = value;
     }
   },
 
@@ -194,6 +210,28 @@ export default {
     },
     saveCv(context, payload) {
       return axios.post("/cv_store", payload);
+    },
+    addJobseekerExperience({ commit }, payload) {
+      console.log('asda', payload);
+      return axios
+            .post("/jobseeker-experience", payload)
+            .then(resp => {
+              console.log('AA', resp);
+              commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
+            })
+            .catch(err => {
+              console.error("Update user error:", err);
+            });
+    },
+    addJobseekerEducation({ commit }, payload) {
+      return axios
+            .post("/jobseeker-education", payload)
+            .then(resp => {
+              commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
+            })
+            .catch(err => {
+              console.error("Update user error:", err);
+            });
     }
   }
 };

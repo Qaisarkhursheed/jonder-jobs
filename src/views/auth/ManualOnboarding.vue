@@ -1,6 +1,6 @@
 <template>
   <auth-wrap :img="e1 + 1">
-    <v-icon v-if="e1 > 1 && e1 < 5" class="mo-back-button" @click="prevStep">
+    <v-icon v-if="e1 > 1 && e1 < 6" class="mo-back-button" @click="prevStep">
       mdi-arrow-left
     </v-icon>
 
@@ -30,6 +30,8 @@
           <v-divider></v-divider>
 
           <v-stepper-step step="5" :complete="complete(5)"></v-stepper-step>
+
+          <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items class="mo-stepper-items">
@@ -70,10 +72,21 @@
               v-model="formData"
             />
           </v-stepper-content>
+
+          <v-stepper-content
+            class="px-0 mo-stepper-items__step-content"
+            step="6"
+          >
+            <step-6
+              :prevScreen="prevStep"
+              :nextScreen="nextStep"
+              v-model="formData"
+            />
+          </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
     </div>
-  </auth-wrap>
+    </auth-wrap>
 </template>
 
 <script>
@@ -84,6 +97,8 @@ import Step2 from "@/components/auth/manualOnboardingSteps/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingSteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingSteps/step4.vue";
 import Step5 from "@/components/auth/manualOnboardingSteps/step5.vue";
+import Step6 from "@/components/auth/manualOnboardingSteps/step6.vue";
+
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -94,76 +109,78 @@ export default {
     Step2,
     Step3,
     Step4,
-    Step5
+    Step5,
+    Step6,
   },
   props: {
     isBtnVisible: Boolean
   },
   data: () => ({
     saveInProgress: false,
-    e1: 2,
+    e1: 1,
     formData: {
-      working_in: "",
-      current_position: "",
+      city: "",
+      why_jonder: "",
+      looking_for: [],
       branche: "",
-      address: "",
+      current_position: "",
+      looking_for_branche: "",
+      looking_for_employment_type: "",
       address_to_work: "",
-      describe_yourself: "",
-      your_qualification: "",
-      training_studies: "",
-      additional_training: "",
-      dream_job: "",
-      monthly_salary: 10,
       ready_for_work: "",
+      monthly_salary: 10,
+      working_experience: "",
+      cv: '',
       resume: null,
       qualifications: null,
-      document: null
-      //profile_img: null
-    }
+      // address: "",
+      // working_in: "",
+      // describe_yourself: "",
+      // training_studies: "",
+      // your_qualification: "",
+      // additional_training: "",
+      // dream_job: "",
+    },
   }),
   created() {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("user", ["user", 
+      'jobseekerExperience', 'jobseekerEducation']),
     isDisabled() {
       if (this.saveInProgress) return true;
       if (this.e1 === 2) {
         return !(
-          this.formData.working_in &&
-          this.formData.working_in.length > 0 &&
+          this.formData.why_jonder &&
+          this.formData.why_jonder.length > 0
+        );
+      } else if (this.e1 === 3) {
+        return !(
           this.formData.current_position &&
           this.formData.current_position.length > 0 &&
           this.formData.branche &&
           this.formData.branche.length > 0 &&
-          this.formData.address &&
-          this.formData.address.length > 0 &&
-          this.formData.address_to_work &&
-          this.formData.address_to_work.length > 0 &&
-          this.formData.describe_yourself &&
-          this.formData.describe_yourself.length > 0
-        );
-      } else if (this.e1 === 3) {
-        return !(
-          this.formData.your_qualification &&
-          this.formData.your_qualification.length > 0 &&
-          this.formData.training_studies &&
-          this.formData.training_studies.length > 0 &&
-          this.formData.additional_training &&
-          this.formData.additional_training.length > 0
+          this.formData.looking_for &&
+          this.formData.looking_for.length > 0
         );
       } else if (this.e1 === 4) {
         return !(
-          this.formData.dream_job &&
-          this.formData.dream_job.length > 0 &&
-          this.formData.monthly_salary &&
-          this.formData.monthly_salary > 0 &&
+          this.formData.looking_for_branche &&
+          this.formData.looking_for_employment_type &&
+          this.formData.address_to_work &&
           this.formData.ready_for_work &&
-          this.formData.ready_for_work.length > 0
+          this.formData.monthly_salary
+
         );
       } else if (this.e1 === 5) {
         return !(
-          this.formData.document &&
+          this.jobseekerExperience &&
+          this.jobseekerEducation
+        );
+      } else if (this.e1 === 6) {
+        return !(
+          this.formData.cv &&
           this.formData.qualifications &&
           //this.formData.profile_img &&
           this.formData.resume
@@ -189,7 +206,7 @@ export default {
     },
     nextStep() {
       if (this.isDisabled) return;
-      if (this.e1 < 5) this.e1++;
+      if (this.e1 < 6) this.e1++;
       else this.saveOnboarding();
     },
     complete(step) {

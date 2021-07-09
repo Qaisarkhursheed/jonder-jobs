@@ -1,155 +1,162 @@
 <template>
-  <div>
+  <div class="mo-step-3">
+    <ModalEducation :active="modals.education" @close="toggleModal('education')" />
+    <ModalExperience :active="modals.experience" @close="toggleModal('experience')" />
     <v-sheet class="px-12">
-      <v-card
-        class="d-flex align-center justify-center "
-        height="70vh"
-        flat
-        tile
-      >
-        <div class="sheet-wrap">
-          <v-sheet>
-            <p class="text-center font-weight-bold mb-15 text-h6">
-              Zeig uns deine Qualifikationen..
+      <p class="text-center font-weight-bold text-h6">
+        {{ $t('user.onboarding.tellAboutExperience') }}
+      </p>
+      <div class="mt-10">
+        <v-row>
+          <v-col cols="12" class="px-0">
+            <p class="text-left font-weight-bold mb-3">
+              {{ $t('user.onboarding.experienceInYears') }}
             </p>
+            <v-row class="d-flex align-center">
+              <v-col cols="3">
+                <div class="monthly-salary">
+                  {{ value.working_experience }} years
+                </div>
+              </v-col>
+              <v-col cols="9">
+                <v-slider
+                  v-model="value.working_experience"
+                  track-color="grey"
+                  color="primary"
+                  always-dirty
+                  min="0"
+                  max="40"
+                  step="0.1"
+                ></v-slider>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
 
-            <div class="mt-6">
-              <v-file-input
-                v-model="document"
-                placeholder="Dokument hochladen"
-                multiple
-                dense
+        <v-row>
+          <v-col cols="12" class="px-0">
+            <p class="text-left font-weight-bold mb-0">
+              {{ $t('user.onboarding.yourProfessionalExperience') }}
+            </p>
+          </v-col>
+          <v-col cols="12"  class="px-0">
+            <!-- <v-card v-if="jobseekerEducation">
+              {{ jobseekerEducation }}
+            </v-card> -->
+              <v-btn
+                @click="toggleModal('experience')"
                 outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center"
-                accept=".doc, .docx, .pdf, .jpg, .png, .txt"
+                rounded
+                small
+                fab
+                color="#0253B3"
               >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+                Add
+          </v-col>
+        </v-row>
 
-              <v-file-input
-                v-model="qualifications"
-                placeholder="Qualifikationen hochladen"
-                multiple
-                dense
-                outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center"
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
-
-              <v-file-input
-                v-model="resume"
-                placeholder="Lebenslauf hochladen"
-                multiple
-                dense
-                outlined
-                prepend-icon=""
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center "
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
-              <v-sheet class="d-flex justify-center mt-16 pt-16">
-                <v-icon @click="prevScreen" class="mr-5">
-                  mdi-arrow-left
-                </v-icon>
-
-                <v-sheet width="380">
-                  <v-btn
-                    @click="nextScreen"
-                    block
-                    color="primary"
-                    class="font-weight-medium mr-5"
-                  >
-                    Nur noch 2 Schritte!
-                  </v-btn></v-sheet
-                >
-              </v-sheet>
-            </div>
-          </v-sheet>
-        </div>
-      </v-card>
+        <v-row>
+          <v-col cols="12" class="px-0">
+            <p class="text-left font-weight-bold mb-0">
+              {{ $t('user.onboarding.yourEducation') }}
+            </p>
+          </v-col>
+          <v-col cols="12" class="px-0">
+            <v-btn
+              @click="toggleModal('education')"
+              outlined
+              rounded
+              small
+              fab
+              color="#0253B3"
+            >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+            Add
+          </v-col>
+        </v-row>
+      </div>
+      <v-btn
+        @click="nextScreen"
+        color="primary"
+        height="58"
+        class="full-w mt-16 font-weight-medium "
+      >
+        {{ $t('user.onboarding.next') }}
+      </v-btn>
     </v-sheet>
   </div>
 </template>
 
 <script>
+import store from '@/store';
+import ModalEducation from '@/components/auth/manualOnboardingSteps/ModalEducation';
+import ModalExperience from '@/components/auth/manualOnboardingSteps/ModalExperience';
+
 export default {
   name: "Step5",
+
+  components: {
+    ModalEducation,
+    ModalExperience,
+  },
+
   props: {
     value: {
       type: Object,
       required: true
     },
-    prevScreen: Function,
     nextScreen: Function
   },
-  data: () => ({
-    document: null,
-    resume: null,
-    qualifications: null,
-    //profile: null
-  }),
-  created() {
-    this.populateData(this.user);
+  data() {
+    return {
+      rules: [value => !!value || "Required."],
+      positions: [
+        this.$t('user.onboarding.positionDeveloper'),
+        this.$t('user.onboarding.positionProjectManager'),
+        this.$t('user.onboarding.positionConstructionManager'),
+        this.$t('user.onboarding.positionIntern'),
+        this.$t('user.onboarding.positionApprentice'),
+        this.$t('user.onboarding.positionManager'),
+      ],
+      branches: [
+         this.$t('user.onboarding.branchMedicine'),
+         this.$t('user.onboarding.branchAutomotive'),
+         this.$t('user.onboarding.branchMechanical'),
+         this.$t('user.onboarding.branchChemical'),
+         this.$t('user.onboarding.branchFood'),
+         this.$t('user.onboarding.branchElectrical'),
+      ],
+      modals: {
+        education: false,
+        experience: false,
+      },
+    };
   },
   methods: {
-    populateData() {
-      if (this.value.document && this.value.document.length > 0)
-        this.document = { name: this.value.document };
-      if (this.value.resume && this.value.resume.length > 0)
-        this.resume = { name: this.value.resume };
-      if (this.value.qualifications && this.value.qualifications.length > 0)
-        this.qualifications = { name: this.value.qualifications };
-    }
+    toggleModal(type) {
+      this.modals[type] = !this.modals[type];
+    },
   },
-  watch: {
-    document(val) {
-      console.log(val);
-      this.$emit("input", {
-        ...this.value,
-        document: val[0]
-      });
+  computed: {
+    jobseekerExperience() {
+      return store.getters['user/jobseekerExperience'];
     },
-    resume(val) {
-      this.$emit("input", {
-        ...this.value,
-        resume: val[0]
-      });
-    },
-    qualifications(val) {
-      this.$emit("input", {
-        ...this.value,
-        qualifications: val[0]
-      });
+    jobseekerEducation() {
+      return store.getters['user/jobseekerEducation'];
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.sheet-wrap {
-  width: 500px;
-}
-@media (max-width: 600px) {
-  .sheet-wrap  {
-    width: 90%;
+.mo-step-3 {
+  &__salary {
+    border: solid 1px $primary-blue;
+    border-radius: 4px;
+    color: $primary-blue;
   }
 }
 </style>

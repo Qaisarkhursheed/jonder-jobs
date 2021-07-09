@@ -22,7 +22,7 @@ function loadLocaleMessages() {
 }
 
 export default new VueI18n({
-  locale: localStorage.getItem('lang') || 'de',
+  locale: localStorage.getItem('lang') || 'en',
   fallbackLocale: 'en',
   messages: loadLocaleMessages()
 });
