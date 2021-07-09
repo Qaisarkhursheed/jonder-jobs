@@ -154,7 +154,7 @@ export default {
       emplType: [
         this.$t('user.onboarding.trainee'),
         this.$t('user.onboarding.fulltime'),
-        this.$t('user.onboarding.freelance')
+        this.$t('user.onboarding.parttime')
       ],
       cities: [
         'Zenica',

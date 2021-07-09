@@ -129,7 +129,10 @@ export default {
         formData.append(key, data[key]);
       });
       formData.append("_method", "PATCH");
-
+      formData.delete('looking_for');
+      data.looking_for.forEach((key, i) => {
+        formData.append(`looking_for[${i}]`, key);
+      })
       try {
         const resp = await axios.post(
           "/user/onboarding/" + state.user.id,
