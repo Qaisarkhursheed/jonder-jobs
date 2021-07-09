@@ -128,7 +128,7 @@
               <span class="about-info"> About me </span>
               <p class="about-text">{{ user.about_me }}</p>
 
-              <div class="d-flex">
+              <div class="d-flex" style="justify-content: space-between;">
                 <div>
                   <p class="about-info">Jobseeking status</p>
                   <p class="about-text">{{ user.job_status }}</p>
