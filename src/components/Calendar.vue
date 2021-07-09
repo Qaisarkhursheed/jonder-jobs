@@ -1,0 +1,45 @@
+<template>
+  <v-menu
+    v-model="menu"
+    :close-on-content-click="false"
+    :nudge-right="40"
+    transition="scale-transition"
+    offset-y
+    min-width="auto"
+  >
+    <template v-slot:activator="{ on, attrs }">
+      <v-text-field
+        v-model="date"
+        readonly
+        height="35px"
+        :hide-details="true"
+        v-bind="attrs"
+        v-on="on"
+      ></v-text-field>
+    </template>
+    <v-date-picker
+      :flat="true"
+      v-model="date"
+      @input="menu = false"
+      @change="dateSelect"
+    ></v-date-picker>
+  </v-menu>
+</template>
+
+<script>
+export default {
+  name: 'Calendar',
+
+  data() {
+    return {
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      menu: false,
+    }
+  },
+  methods: {
+    dateSelect(date) {
+      this.$emit('setDate', date);
+    }
+  },
+}
+</script>
