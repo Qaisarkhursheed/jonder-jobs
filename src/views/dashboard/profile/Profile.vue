@@ -1,5 +1,10 @@
 <template>
   <div>
+    <UpgradePlanModal v-if="modals.plan.active" :active="modals.plan.active"
+      :edit="modals.plan.edit"
+      @close="toggleModal('plan')" />
+
+
     <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
@@ -417,21 +422,37 @@
       </v-row>
       <v-row>
         <v-col cols="6">
-          <div class="upgrade">
-            <span class="upgrade-title">
-              Your account is higlighted in company search
-            </span>
-            <p>3 days active</p>
-            <span class="updgrade-price upgrade-title">35€</span>
+          <CardActionableList type="plan"
+              @edit="activateEdit('plan', $event)" />
+          <div class="upgrade" @click="toggleModal('plan')">
+            <v-img class="upgrade-icon"
+            :src="require('@/assets/icons/top-rated.svg')"></v-img>
+
+            <div>
+              <span class="upgrade-title">
+                Your account is higlighted in company search
+              </span>
+              <p>3 days active</p>
+              <span class="updgrade-price upgrade-title">10€</span>
+            </div>
           </div>
         </v-col>
+
+
         <v-col cols="6">
-          <div class="upgrade">
-            <span class="upgrade-title">
-              Your account is higlighted in company search
-            </span>
-            <p>3 days active</p>
-            <span class="updgrade-price upgrade-title">10€</span>
+          <CardActionableList type="plan"
+              @edit="activateEdit('plan', $event)" />
+          <div class="upgrade" @click="toggleModal('plan')">
+            <v-img class="upgrade-icon"
+            :src="require('@/assets/icons/medal.svg')"></v-img>
+
+            <div>
+              <span class="upgrade-title">
+                Your account is higlighted in company search
+              </span>
+              <p>3 days active</p>
+              <span class="updgrade-price upgrade-title">10€</span>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -442,8 +463,17 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
+import CardActionableList from '@/components/user/JobseekerCardActionableList';
+import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
+
 export default {
   name: "Profile",
+
+  components: {
+    UpgradePlanModal,
+    CardActionableList,
+  },
+
   data: () => ({
     formData: {
       first_name: "",
@@ -492,7 +522,17 @@ export default {
       "Trainee",
       "Fulltime",
       "Parttime",
-    ]
+    ],
+    modals: {
+      plan: {
+        active: false,
+        edit: false,
+        component: UpgradePlanModal
+      },
+    },
+    fileActions: {
+      plan: ['edit', 'delete'],
+    },
   }),
   created() {
     this.resetFormData(this.user);
@@ -542,6 +582,14 @@ export default {
         .catch(err => {
           alert(err.data.message);
         });
+    },
+    toggleModal(type) {
+      this.modals[type].edit = false;
+      this.modals[type].active = !this.modals[type].active;
+    },
+    activateEdit(type, item) {
+      this.toggleModal(type);
+      this.modals[type].edit = item;
     }
   },
   watch: {
@@ -589,6 +637,8 @@ export default {
   border: 1px solid $light-grey;
   border-radius: 10px;
   padding: 25px;
+  cursor: pointer;
+  display: flex;
 
   .upgrade-title {
     font-size: 16px;
@@ -602,5 +652,11 @@ export default {
 .profile-section {
   padding: 40px;
   border-radius: 10px;
+}
+
+.upgrade-icon {
+  width: 30px;
+  height: 50px;
+  margin-right: 18px;
 }
 </style>

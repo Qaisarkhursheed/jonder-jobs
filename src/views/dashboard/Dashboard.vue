@@ -1,5 +1,9 @@
 <template>
-  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
+  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">    
+    <UpgradePlanModal v-if="modals.plan.active" :active="modals.plan.active"
+      :edit="modals.plan.edit"
+      @close="toggleModal('plan')" />
+
     <v-col cols="12">
       <div class="dashboard-holder">
         <user-messages v-if="conversations" :messages="conversations" />
@@ -10,13 +14,19 @@
             <div class="upgrade-title"> Increase account visibility by upgrading account </div>
             <v-img class="badge"
             :src="require('@/assets/icons/top-rated.svg')"></v-img>
-            <div class="d-flex" style="font-size: 13px;">
+            <div class="d-flex" style="font-size: 13px; justify-content: space-between;">
               <p> 
                Be on the top of search for 3 days
               </p>
-              <p style="color: #55F481; width: 40%;" class="text-right"> 
-               Upgrade now
-              </p>
+
+              <div>        
+                <CardActionableList type="plan"
+                @edit="activateEdit('plan', $event)" />
+                  <p style="color: #55F481; width: 40%; cursor: pointer;" class="text-right"  @click="toggleModal('plan')"> 
+                  Upgrade now
+                  </p>
+              </div>
+
             </div>
           </div>
           <div class="image-placeholder">
@@ -33,6 +43,8 @@
 import UserMessages from "@/components/dashboard/UserMessages";
 import CompanyList from "@/components/dashboard/CompanyList";
 import { mapActions, mapGetters } from "vuex";
+import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
+import CardActionableList from '@/components/user/JobseekerCardActionableList';
 
 export default {
   name: "Dashboard",
@@ -45,11 +57,33 @@ export default {
   },
   methods: {
     ...mapActions("chat", ["getAllConversations"]),
+    toggleModal(type) {
+      this.modals[type].edit = false;
+      this.modals[type].active = !this.modals[type].active;
+    },
+    activateEdit(type, item) {
+      this.toggleModal(type);
+      this.modals[type].edit = item;
+    }
   },
   components: {
     CompanyList,
     UserMessages,
-  }
+    UpgradePlanModal,
+    CardActionableList,
+  },
+  data: () => ({
+    modals: {
+      plan: {
+        active: false,
+        edit: false,
+        component: UpgradePlanModal
+      },
+    },
+    fileActions: {
+      plan: ['edit', 'delete'],
+    },
+  }),
 };
 </script>
 
