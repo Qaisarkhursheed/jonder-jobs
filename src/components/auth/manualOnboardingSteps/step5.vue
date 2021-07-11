@@ -1,7 +1,11 @@
 <template>
   <div class="mo-step-3">
-    <ModalEducation :active="modals.education" @close="toggleModal('education')" />
-    <ModalExperience :active="modals.experience" @close="toggleModal('experience')" />
+    <ModalEducation v-if="modals.education.active" :active="modals.education.active"
+      :edit="modals.education.edit"
+      @close="toggleModal('education')" />
+    <ModalExperience v-if="modals.experience.active" :active="modals.experience.active" 
+      :edit="modals.experience.edit"
+      @close="toggleModal('experience')" />
     <v-sheet class="px-12">
       <p class="text-center font-weight-bold text-h6">
         {{ $t('user.onboarding.tellAboutExperience') }}
@@ -40,45 +44,19 @@
             </p>
           </v-col>
           <v-col cols="12"  class="px-0">
-            <!--<v-card flat outlined style="border-radius: 10px">
-              <v-menu
-                bottom
-                left
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </template>
-
-                <v-list>
-                  <v-list-item
-                    v-for="(item, i) in 3"
-                    :key="i"
-                  >
-                    <v-list-item-title>{{ i }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-              <div>Company Name</div>
-              <div>Position</div>
-              {{ jobseekerEducation }}
-            </v-card>-->
-              <v-btn
-                @click="toggleModal('experience')"
-                outlined
-                rounded
-                small
-                fab
-                color="#0253B3"
-              >
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-                Add
+            <CardActionableList type="Experience"
+              @edit="activateEdit('experience', $event)" />
+            <v-btn
+              @click="toggleModal('experience')"
+              outlined
+              rounded
+              small
+              fab
+              color="#0253B3"
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+              Add
           </v-col>
         </v-row>
 
@@ -89,6 +67,8 @@
             </p>
           </v-col>
           <v-col cols="12" class="px-0">
+            <CardActionableList type="Education" 
+              @edit="activateEdit('education', $event)"/>
             <v-btn
               @click="toggleModal('education')"
               outlined
@@ -116,7 +96,7 @@
 </template>
 
 <script>
-import store from '@/store';
+import CardActionableList from '@/components/user/JobseekerCardActionableList';
 import ModalEducation from '@/components/auth/manualOnboardingSteps/ModalEducation';
 import ModalExperience from '@/components/auth/manualOnboardingSteps/ModalExperience';
 
@@ -126,6 +106,7 @@ export default {
   components: {
     ModalEducation,
     ModalExperience,
+    CardActionableList,
   },
 
   props: {
@@ -155,22 +136,31 @@ export default {
          this.$t('user.onboarding.branchElectrical'),
       ],
       modals: {
-        education: false,
-        experience: false,
+        education: {
+          active: false,
+          edit: false,
+          component: ModalEducation
+        },
+        experience: {
+          active: false,
+          edit: false,
+          component: ModalExperience
+        },
+      },
+      fileActions: {
+        experience: ['edit', 'delete'],
+        education: ['edit', 'delete'],
       },
     };
   },
   methods: {
     toggleModal(type) {
-      this.modals[type] = !this.modals[type];
+      this.modals[type].edit = false;
+      this.modals[type].active = !this.modals[type].active;
     },
-  },
-  computed: {
-    jobseekerExperience() {
-      return store.getters['user/jobseekerExperience'];
-    },
-    jobseekerEducation() {
-      return store.getters['user/jobseekerEducation'];
+    activateEdit(type, item) {
+      this.toggleModal(type);
+      this.modals[type].edit = item;
     }
   }
 };

@@ -32,6 +32,16 @@
 export default {
   name: 'Calendar',
 
+  props: {
+    value: {
+      type: [String, Object, Date]
+    }
+  },
+  created() {
+    if (this.value) {
+      this.date = this.value;
+    }
+  },
   data() {
     return {
       date: '',

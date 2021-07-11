@@ -214,28 +214,106 @@ export default {
     saveCv(context, payload) {
       return axios.post("/cv_store", payload);
     },
-    addJobseekerExperience({ commit }, payload) {
-      console.log('asda', payload);
+    addJobseekerExperience({ dispatch }, payload) {
       return axios
-            .post("/jobseeker-experience", payload)
-            .then(resp => {
-              console.log('AA', resp);
-              commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
-            })
-            .catch(err => {
-              console.error("Update user error:", err);
-            });
+        .post("/jobseeker-experience", payload)
+        .then(() => {
+          dispatch('getAllJobseekerExperience');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
     },
-    addJobseekerEducation({ commit }, payload) {
+    getAllJobseekerExperience({ commit }) {
       return axios
-            .post("/jobseeker-education", payload)
-            .then(resp => {
-              commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
-            })
-            .catch(err => {
-              console.error("Update user error:", err);
-            });
-    }
+        .get("/jobseeker-experience")
+        .then(resp => {
+          commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    getJobseekerExperience({ commit }, id) {
+      return axios
+        .get(`/jobseeker-experience/${id}`)
+        .then(resp => {
+          commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    deleteJobseekerExperience({ dispatch }, id) {
+      return axios
+        .delete(`/jobseeker-experience/${id}`)
+        .then(() => {
+          dispatch('getAllJobseekerExperience');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    updateJobseekerExperience({ dispatch }, data) {
+      return axios
+        .patch(`/jobseeker-experience/${data.id}`, data.payload)
+        .then(() => {
+          dispatch('getAllJobseekerExperience');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    addJobseekerEducation({ dispatch }, payload) {
+      return axios
+        .post("/jobseeker-education", payload)
+        .then(() => {
+          dispatch('getAllJobseekerEducation');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    getAllJobseekerEducation({ commit }) {
+      return axios
+        .get("/jobseeker-education")
+        .then(resp => {
+          commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    getJobseekerEducation({ commit }, id) {
+      return axios
+        .get(`/jobseeker-education/${id}`)
+        .then(resp => {
+          commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    deleteJobseekerEducation({ dispatch }, id) {
+      return axios
+        .delete(`/jobseeker-education/${id}`)
+        .then(() => {
+          dispatch('getAllJobseekerEducation');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
+    updateJobseekerEducation({ dispatch }, data) {
+      return axios
+        .patch(`/jobseeker-education/${data.id}`, data.payload)
+        .then(() => {
+          dispatch('getAllJobseekerEducation');
+        })
+        .catch(err => {
+          console.error("Update user error:", err);
+        });
+    },
   }
 };
 

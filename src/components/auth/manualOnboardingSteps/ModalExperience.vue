@@ -35,11 +35,13 @@
           <v-row>
             <v-col cols="6" class="mt-2">
               <label>{{ $t('user.onboarding.startDate') }}</label>
-              <Calendar @setDate="form.start_time = $event" />
+              <Calendar @setDate="form.start_time = $event" 
+                :value="form.start_time" />
             </v-col>
             <v-col cols="6" class="mt-2">
               <label>{{ $t('user.onboarding.endDate') }}</label>
-              <Calendar  @setDate="form.end_time = $event" />
+              <Calendar  @setDate="form.end_time = $event" 
+                :value="form.end_time" />
             </v-col>
           </v-row>
         </v-col>
@@ -138,6 +140,9 @@ export default {
     type: {
       type: String,
       default: 'ok'
+    },
+    edit: {
+      type: [Object, Boolean]
     }
   },
   data() {
@@ -166,14 +171,35 @@ export default {
       }
     };
   },
+  created() {
+    if (this.edit) {
+      this.populate();
+    }
+  },
   methods: {
     close(type) {
       this.$emit('close', type);
     },
     save() {
-      store.dispatch('user/addJobseekerExperience', this.form);
+      if (this.edit) {
+        store.dispatch('user/updateJobseekerExperience', {
+          id: this.edit.id,
+          payload: this.form,
+        });
+      } else {
+        store.dispatch('user/addJobseekerExperience', this.form);
+      }
       this.$emit('close', 1);
     },
+    populate() {
+      this.form.company_name = this.edit.company_name;
+      this.form.position = this.edit.position;
+      this.form.employment_type = this.edit.employment_type;
+      this.form.start_time = this.edit.start_time;
+      this.form.end_time = this.edit.end_time;
+      this.form.description = this.edit.description;
+      this.form.working_here = this.edit.working_here;
+    }
   }
 }
 </script>
