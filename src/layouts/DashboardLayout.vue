@@ -356,17 +356,19 @@ export default {
 }
 
 .nav-item {
-  border-bottom: 1px solid $medium-grey;
+  border-bottom: 0.5px solid #CACACA;
   font-weight: 500;
   font-size: 18px;
-  line-height: 28px;
   height: auto;
   max-height: 90px;
-  padding: 5px 0;
+  padding: 15px 0;
   cursor: pointer;
+  color: #000;
+  transition: 0.3s color, 0.3s border-color;
 
   &:hover {
-    color: $primary-blue-dark;
+    color: #0253B3;
+    border-color: #0253B3;
   }
 }
 
@@ -383,6 +385,7 @@ export default {
   width: 100%;
   line-height: 38px;
   margin-bottom: 26px;
+  color: #222;
 }
 
 button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary {

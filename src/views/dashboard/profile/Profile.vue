@@ -1,6 +1,6 @@
 <template>
-  <div class="pa-8">
-    <div id="personalInfo">
+  <div>
+    <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
           Change personal info
@@ -85,11 +85,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="roleAndBranche">
+    <v-card flat id="roleAndBranche" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Rolle & Branche
         </p>
         <p class="profile-subtitle">
@@ -99,7 +99,6 @@
           <label class="profile-label">In which branches do you work?</label>
           <v-select
             outlined
-            dense
             :items="branche"
             background-color="white"
             v-model="formData.branche"
@@ -115,18 +114,17 @@
           <v-select
             outlined
             multiple
-            dense
             :items="lookingForRole"
             background-color="white"
             v-model="formData.looking_for"
           ></v-select>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="lookingFor">
+    <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           What are you looking for
         </p>
         <p class="profile-subtitle">
@@ -138,7 +136,6 @@
           >
           <v-select
             outlined
-            dense
             :items="lookingForBranches"
             background-color="white"
             v-model="formData.looking_for_branche"
@@ -153,7 +150,6 @@
           >
           <v-select
             outlined
-            dense
             :items="employment"
             background-color="white"
             v-model="formData.looking_for_employment_type"
@@ -210,11 +206,11 @@
           ></v-slider>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="experienceAndEducation">
+    <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Your experience and education
         </p>
         <p class="profile-subtitle">
@@ -268,11 +264,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="documents">
+    <v-card flat id="documents" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Documents
         </p>
         <p class="profile-subtitle">
@@ -333,33 +329,33 @@
           </div>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="invoices">
+    <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Billing & Invoices
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="paymentMethod">
+    <v-card flat id="paymentMethod" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Edit payment method
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="changePassword">
+    <v-card flat id="changePassword"  class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Change password
         </p>
         <p class="profile-subtitle">
@@ -408,11 +404,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="upgradeAccount">
+    <v-card flat id="upgradeAccount" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Upgrade account
         </p>
         <p class="profile-subtitle">
@@ -439,7 +435,7 @@
           </div>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
   </div>
 </template>
 
@@ -602,5 +598,9 @@ export default {
     float: right;
     color: $primary-blue-dark;
   }
+}
+.profile-section {
+  padding: 40px;
+  border-radius: 10px;
 }
 </style>

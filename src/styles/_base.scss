@@ -271,7 +271,8 @@ h5, .h5 {
 // overwrite input outline only form company 
 .company .v-text-field--outlined fieldset,
 .stepper-wrap .v-text-field--outlined fieldset,
-.onboarding-dialog .v-text-field--outlined fieldset {
+.onboarding-dialog .v-text-field--outlined fieldset,
+.v-text-field--outlined fieldset {
     border-color: #D4D4D4;
 }
 .company {

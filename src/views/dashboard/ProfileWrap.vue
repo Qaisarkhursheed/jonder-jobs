@@ -1,9 +1,9 @@
 <template>
   <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
     <v-col cols="12">
-      <v-card class="profile-holder">
+      <div class="profile-holder">
         <router-view />
-      </v-card>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -21,9 +21,6 @@ export default {
 
 <style lang="scss">
 .profile-holder {
-  box-shadow: 8px 0 34px rgba(0, 0, 0, 0.03) !important;
-  background-color: #fdfeff !important;
-  border-radius: 10px  !important;
 
   .card-link {
     overflow: hidden;
