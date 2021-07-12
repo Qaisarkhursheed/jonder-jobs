@@ -319,6 +319,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  if(to.name === 'Home' && from.name === null && localStorage.getItem("user-token")) {
+    next({
+      name: 'Dashboard'
+    });
+  } 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user-token") == null) {
       next({
