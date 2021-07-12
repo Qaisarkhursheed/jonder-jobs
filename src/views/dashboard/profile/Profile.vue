@@ -180,16 +180,8 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">When can you start?</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="formData.ready_for_work"
-          ></v-text-field>
+          <Calendar @setDate="formData.ready_for_work = $event"
+            :value="formData.ready_for_work" />
         </v-col>
       </v-row>
 
@@ -244,29 +236,14 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Your professional experience</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
+          <!-- todo actions and popup -->
+          <CardActionableList type="Experience" />
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Your education</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
+           <CardActionableList type="Education" />
         </v-col>
       </v-row>
     </v-card>
@@ -465,6 +442,7 @@ import { mapActions, mapGetters } from "vuex";
 
 import CardActionableList from '@/components/user/JobseekerCardActionableList';
 import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
+import Calendar from '@/components/Calendar';
 
 export default {
   name: "Profile",
@@ -472,6 +450,7 @@ export default {
   components: {
     UpgradePlanModal,
     CardActionableList,
+    Calendar
   },
 
   data: () => ({

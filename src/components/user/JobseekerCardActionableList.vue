@@ -15,7 +15,7 @@
           <div class="title">{{ value.university_name }}</div>
           <div class="subtitle">{{ value.study }}</div>
           <div class="subtitle">
-            {{ Date.parse(value.start_time) }} - {{ Date.parse(value.end_time) }}
+            {{ value.start_time }} - {{ value.end_time }}
           </div>
         </template>
       </CardActionable>
