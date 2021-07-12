@@ -12,7 +12,8 @@ export default {
       unread_messages: 0,
       profile_img: null
     },
-    selectedConversation: null
+    selectedConversation: null,
+    loaded: false,
   },
 
   getters: {
@@ -34,6 +35,9 @@ export default {
           ? conversation.unread_messages
           : 0;
       };
+    },
+    messagesLoaded(state) {
+      return state.loaded;
     }
   },
 
@@ -53,6 +57,9 @@ export default {
       state.conversationDetails.user_name = value.user_name;
       state.conversationDetails.unread_messages = value.unread_messages;
       state.conversationDetails.profile_img = value.profile_img;
+    },
+    SET_LOADED_STATE(state, value) {
+      state.loaded = value;
     }
   },
 
@@ -60,11 +67,14 @@ export default {
     getAllConversations({ commit }, payload = null) {
       let offset = payload && payload.offset ? payload.offset : 0;
       let limit = payload && payload.limit ? payload.limit : 10;
+
       return axios
         .get(`/messages/${offset}/${limit}`)
         .then(resp => {
-          if (resp.data.success)
+          if (resp.data.success) {
+            commit('SET_LOADED_STATE', true);
             commit("FILL_CONVERSATIONS", resp.data.conversations);
+          }
         })
         .catch(err => {
           console.error("Error getting conversations. " + err);

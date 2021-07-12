@@ -1,5 +1,8 @@
 <template>
-  <v-list-item :key="`id-${conversation.user_id}`" @click="open">
+  <v-list-item :key="`id-${conversation.user_id}`" 
+    class="pt-3 pb-3 pl-7 pr-7"
+    @click="open"
+  >
     <v-list-item-avatar color="primary" class="text-center">
       <v-img
         v-if="conversation.profile_img"
@@ -25,6 +28,9 @@
         v-if="getUnreadCount > 0"
         inline
       ></v-badge>
+      <div class="time-label">
+        {{ lastMessage }}
+      </div>
     </v-list-item-icon>
   </v-list-item>
 </template>
@@ -46,7 +52,14 @@ export default {
     ...mapGetters("chat", ["unreadMessages"]),
     getUnreadCount() {
       return this.unreadMessages(this.conversation.user_id);
-    }
+    },
+    lastMessage() {
+      if (this.conversation.messages && this.conversation.messages[0]) {
+        let d = new Date(this.conversation.messages[0].created_at);
+        return `${d.getHours()}:${d.getMinutes()}`
+      }
+      return "";
+    },
   },
   methods: {
     ...mapActions("chat", [
@@ -88,7 +101,7 @@ export default {
       this.$emit("refresh", false);
       this.$emit("loading", false);
     }
-  }
+  },
 };
 </script>
 
@@ -102,8 +115,14 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(39, 170, 225, 0.3);
     z-index: 10;
   }
+}
+.time-label {
+  font-weight: normal;
+  font-size: 12px;
+  color: #7A7A7A;
+  text-align: center;
 }
 </style>

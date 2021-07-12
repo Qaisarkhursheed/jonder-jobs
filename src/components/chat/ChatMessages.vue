@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="messages-holder full-h d-flex flex-column">
-    <v-card-title class="flex-grow-0 flex-shrink-0 pb-2">
+    <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
       <v-list-item class="grow">
         <v-list-item-avatar color="blue" @click="$emit('show-profile')">
           <v-img
@@ -21,43 +21,50 @@
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon class="mr-1">
-            mdi-video-outline
+          <v-icon class="chat-icon mr-4">
+            mdi-information-outline
           </v-icon>
-          <v-icon class="mr-1">
-            mdi-phone-outline
+          <v-icon class="chat-icon mr-4">
+            mdi-arrow-expand
+          </v-icon>
+          <v-icon class="chat-icon mr-4">
+            mdi-close
           </v-icon>
         </v-row>
       </v-list-item>
     </v-card-title>
-    <v-card-text
-      class="messages-content pa-5 flex-grow-1 flex-shrink-1 overflow-list"
-      id="messageList"
-    >
-      <div
-        v-for="msg in messages"
-        :key="msg.id"
-        :class="{ 'text-right': msg.send_by === msg.user_id }"
+    <div class="pl-5 pr-5">
+      <v-card-text
+        class="messages-content pa-5 flex-grow-1 flex-shrink-1 overflow-list"
+        id="messageList"
       >
-        <v-card
-          flat
-          class="message rounded-lg"
-          :class="[
-            { 'my-message': msg.send_by === msg.user_id },
-            [msg.send_by === msg.user_id ? 'rounded-tr-0' : 'rounded-tl-0']
-          ]"
+        <div
+          v-for="msg in messages"
+          :key="msg.id"
+          :class="{ 'text-right': msg.send_by === msg.user_id }"
         >
-          <v-card-text>
-            <div v-text="msg.message"></div>
-            <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
-          </v-card-text>
-        </v-card>
-      </div>
-    </v-card-text>
+          <v-card
+            flat
+            class="message rounded-lg"
+            :class="[
+              { 'my-message': msg.send_by === msg.user_id },
+              [msg.send_by === msg.user_id ? 'rounded-tr-0' : 'rounded-tl-0']
+            ]"
+          >
+            <v-card-text>
+              <div v-text="msg.message"></div>
+              <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
+            </v-card-text>
+          </v-card>
+        </div>
+      </v-card-text>
+    </div>
     <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
+      <v-icon class="chat-icon pl-3 pr-3"
+        >mdi-paperclip
+      </v-icon>
       <v-textarea
         class="rounded-lg"
-        dense
         label="Type a message"
         outlined
         solo
@@ -70,7 +77,7 @@
         >Message
       </v-textarea>
       <v-icon v-if="!loading" @click="send" class="message-type-new-send"
-        >mdi-send-outline
+        >mdi-send-circle
       </v-icon>
     </v-card-actions>
   </v-card>
@@ -151,6 +158,7 @@ export default {
 
 .message-type-new {
   position: relative;
+  border-radius: 62px !important;
 
   label {
     top: 10px !important;
@@ -173,10 +181,12 @@ export default {
     overflow: hidden;
     padding: 0;
     margin: 0;
-    transform: rotate(-45deg);
     color: $primary-blue-dark;
     cursor: pointer;
     z-index: 10;
   }
+}
+.chat-icon {
+  cursor: pointer;
 }
 </style>
