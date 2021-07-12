@@ -67,7 +67,7 @@
       </v-col>
     </v-row>
     <v-row class="full-h ma-0">
-      <v-col class="navigation col-12 col-sm-4 col-xl-3">
+      <v-col class="navigation col-12 col-sm-3 col-xl-3">
         <nav class="dashboard-navigation" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
@@ -169,7 +169,7 @@
           </v-row>
         </div>
       </v-col>
-      <v-col class="main col-12 col-sm-8 col-xl-9">
+      <v-col class="main col-12 col-sm-9 col-xl-9">
         <v-container fluid class="d-flex flex-column full-h">
           <slot />
         </v-container>
