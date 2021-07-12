@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UpgradePlanModal v-if="modals.plan.active" :active="modals.plan.active"
-      :edit="modals.plan.edit"
-      @close="toggleModal('plan')" />
+    <UpgradePlanModal v-if="modals.UpgradePlan.active" :active="modals.UpgradePlan.active"
+      :edit="modals.UpgradePlan.edit"
+      @close="toggleModal('UpgradePlan')" />
 
 
     <v-card flat id="personalInfo" class="profile-section mb-10">
@@ -399,9 +399,9 @@
       </v-row>
       <v-row>
         <v-col cols="6">
-          <CardActionableList type="plan"
-              @edit="activateEdit('plan', $event)" />
-          <div class="upgrade" @click="toggleModal('plan')">
+          <CardActionableList type="UpgradePlan"
+              @edit="activateEdit('UpgradePlan', $event)" />
+          <div class="upgrade" @click="toggleModal('UpgradePlan')">
             <v-img class="upgrade-icon"
             :src="require('@/assets/icons/top-rated.svg')"></v-img>
 
@@ -417,9 +417,9 @@
 
 
         <v-col cols="6">
-          <CardActionableList type="plan"
-              @edit="activateEdit('plan', $event)" />
-          <div class="upgrade" @click="toggleModal('plan')">
+          <CardActionableList type="UpgradePlan"
+              @edit="activateEdit('UpgradePlan', $event)" />
+          <div class="upgrade" @click="toggleModal('UpgradePlan')">
             <v-img class="upgrade-icon"
             :src="require('@/assets/icons/medal.svg')"></v-img>
 
@@ -503,14 +503,14 @@ export default {
       "Parttime",
     ],
     modals: {
-      plan: {
+      UpgradePlan: {
         active: false,
         edit: false,
         component: UpgradePlanModal
       },
     },
     fileActions: {
-      plan: ['edit', 'delete'],
+      UpgradePlan: ['edit', 'delete'],
     },
   }),
   created() {
@@ -637,5 +637,6 @@ export default {
   width: 30px;
   height: 50px;
   margin-right: 18px;
+  max-width: 30px;
 }
 </style>

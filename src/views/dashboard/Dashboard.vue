@@ -1,14 +1,16 @@
 <template>
   <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">    
-    <UpgradePlanModal v-if="modals.plan.active" :active="modals.plan.active"
-      :edit="modals.plan.edit"
-      @close="toggleModal('plan')" />
+    <UpgradePlanModal v-if="modals.UpgradePlan.active" :active="modals.UpgradePlan.active"
+      :edit="modals.UpgradePlan.edit"
+      @close="toggleModal('UpgradePlan')" />
 
     <v-col cols="12">
-      <div class="dashboard-holder" v-if="messagesLoaded">
-        <template v-if="conversations">
-          <Chat />
-        </template>
+      <div class="dashboard-holder">
+        <div  v-if="messagesLoaded">
+          <template v-if="conversations">
+            <Chat />
+          </template>
+        </div>
         <template v-else> 
           <div class="user-name"> Hello, <span  style="color:#0253B3;">{{user.first_name}} {{user.last_name}} </span></div>
           <div class="no-msg"> There is no any messages yet </div>
@@ -22,9 +24,9 @@
               </p>
 
               <div>        
-                <CardActionableList type="plan"
-                @edit="activateEdit('plan', $event)" />
-                  <p style="color: #55F481; width: 40%; cursor: pointer;" class="text-right"  @click="toggleModal('plan')"> 
+                <CardActionableList type="UpgradePlan"
+                @edit="activateEdit('UpgradePlan', $event)" />
+                  <p style="color: #55F481; width: 100%; cursor: pointer;" class="text-right"  @click="toggleModal('UpgradePlan')"> 
                   Upgrade now
                   </p>
               </div>
@@ -79,14 +81,14 @@ export default {
   },
   data: () => ({
     modals: {
-      plan: {
+      UpgradePlan: {
         active: false,
         edit: false,
         component: UpgradePlanModal
       },
     },
     fileActions: {
-      plan: ['edit', 'delete'],
+      UpgradePlan: ['edit', 'delete'],
     },
   }),
 };

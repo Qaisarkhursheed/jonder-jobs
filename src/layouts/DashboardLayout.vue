@@ -147,17 +147,11 @@
               <p class="about-text">{{ user.city }}</p>
 
               <span class="about-info"> Experience </span>
-              <p class="company-ed">Company name {{ user.company }}</p>
-              <span> Position {{ user.role_in_company }} </span>
-              <span>
-                February 2020 - present {{ user.working_experience }}
-              </span>
+              <CardActionableList type="Experience" />
             </div>
             <div class="top-info">
               <span class="about-info"> Education </span>
-              <p class="company-ed">University</p>
-              <span> Degree </span>
-              <span> February 2020 - present </span>
+              <CardActionableList type="Education" />
             </div>
 
             <div class="top-info">
@@ -181,8 +175,13 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
+import CardActionableList from '@/components/user/JobseekerCardActionableList';
 
 export default {
+  components: {
+    CardActionableList,
+  },
+
   data: () => ({
     searchString: null,
     searchLoading: false,
