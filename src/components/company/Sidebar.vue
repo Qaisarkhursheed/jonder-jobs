@@ -1,24 +1,28 @@
 <template>
   <nav class="sidebar-navigation pl-8 pr-5">
-    <router-link :to="{ name: 'CompanyDashboard'}" >
-      <v-icon>mdi-view-dashboard-outline</v-icon>
-      <span>{{ $t('company.dashboard.dashboard') }}</span>
+    <router-link :to="{ name: 'CompanySearch'}" >
+      <v-icon>mdi-magnify</v-icon>
+      <span>{{ $t('company.employer.search') }}</span>
+    </router-link>
+    <router-link :to="{ name: 'CompanySelectionManagement'}" >
+      <v-icon>mdi-magnify</v-icon>
+      <span>{{ $t('company.employer.selectionManagement') }}</span>
     </router-link>
     <router-link :to="{ name: 'CompanyInbox'}">
       <v-icon>mdi-email-outline</v-icon>
-      <span>{{ $t('company.dashboard.inbox') }}</span>
+      <span>{{ $t('company.employer.messages') }}</span>
     </router-link>
-    <router-link :to="{ name: 'CompanySearch'}">
+    <router-link :to="{ name: 'CompanyTeamManagement'}" >
       <v-icon>mdi-magnify</v-icon>
-      <span>{{ $t('company.dashboard.search') }}</span>
-    </router-link>
-    <router-link :to="{ name: 'CompanyProducts'}">
-      <v-icon>mdi-currency-usd</v-icon>
-      <span>{{ $t('company.dashboard.productPricing') }}</span>
+      <span>{{ $t('company.employer.teamManagement') }}</span>
     </router-link>
     <router-link :to="{name: 'CompanyProfile'}">
       <v-icon>mdi-account-outline</v-icon>
-      <span>{{ $t('general.profile') }}</span>
+      <span>{{ $t('company.employer.publicProfile') }}</span>
+    </router-link>
+    <router-link :to="{ name: 'CompanyProducts'}">
+      <v-icon>mdi-currency-usd</v-icon>
+      <span>{{ $t('company.employer.packagesPricing') }}</span>
     </router-link>
   </nav>
 </template>

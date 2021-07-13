@@ -1,5 +1,13 @@
 {
   "company": {
+    "employer": {
+      "search": "Jonder Search",
+      "selectionManagement": "Selection Management",
+      "messages": "Messages",
+      "teamManagement": "Team Management",
+      "publicProfile": "Public Company Profile",
+      "packagesPricing": "Packages Pricing"
+    },
     "dashboard": {
       "dashboard": "Dashboard",
       "inbox": "Inbox",

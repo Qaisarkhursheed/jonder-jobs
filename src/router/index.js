@@ -27,6 +27,8 @@ import CvMaker from "../views/dashboard/profile/CvMaker";
 import CompanyLayout from "@/layouts/CompanyLayout";
 import CompanyDashboard from "@/views/company/Dashboard";
 import CompanySearch from "@/views/company/Search";
+import CompanySelectionManagement from "@/views/company/SelectionManagement";
+import CompanyTeamManagement from "@/views/company/TeamManagement";
 import CompanyUser from "@/views/company/User";
 import CompanyProfile from "@/views/company/Profile";
 import CompanyProfileEdit from "@/views/company/ProfileEdit";
@@ -289,6 +291,24 @@ const routes = [
         path: "inbox",
         name: "CompanyInbox",
         component: Chat,
+        props: true,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "selection-management",
+        name: "CompanySelectionManagement",
+        component: CompanySelectionManagement,
+        props: true,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "team-management",
+        name: "CompanyTeamManagement",
+        component: CompanyTeamManagement,
         props: true,
         meta: {
           requiresAuth: true
