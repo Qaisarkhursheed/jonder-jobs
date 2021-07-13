@@ -8,7 +8,7 @@
       <v-icon>mdi-magnify</v-icon>
       <span>{{ $t('company.employer.selectionManagement') }}</span>
     </router-link>
-    <router-link :to="{ name: 'CompanyInbox'}">
+    <router-link :to="{ name: 'CompanyMessages'}">
       <v-icon>mdi-email-outline</v-icon>
       <span>{{ $t('company.employer.messages') }}</span>
     </router-link>
@@ -16,11 +16,11 @@
       <v-icon>mdi-magnify</v-icon>
       <span>{{ $t('company.employer.teamManagement') }}</span>
     </router-link>
-    <router-link :to="{name: 'CompanyProfile'}">
+    <router-link :to="{name: 'CompanyPublicProfile'}">
       <v-icon>mdi-account-outline</v-icon>
       <span>{{ $t('company.employer.publicProfile') }}</span>
     </router-link>
-    <router-link :to="{ name: 'CompanyProducts'}">
+    <router-link :to="{ name: 'CompanyPackagesPricing'}">
       <v-icon>mdi-currency-usd</v-icon>
       <span>{{ $t('company.employer.packagesPricing') }}</span>
     </router-link>

@@ -25,7 +25,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-title
-                @click="navigateTo('CompanyProfile')"
+                @click="navigateTo('CompanySettings')"
                 >Profile</v-list-item-title
               >
             </v-list-item>

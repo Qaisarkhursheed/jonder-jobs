@@ -13,7 +13,7 @@ import ProfileStatistic from '@/components/company/ProfileStatistic';
 import ProfileMap from '@/components/company/ProfileMap';
 
 export default {
-  name: 'CompanyProfile',
+  name: 'CompanyPublicProfile',
 
   components: {
     ProfileInformation,

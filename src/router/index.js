@@ -25,15 +25,13 @@ import CvMaker from "../views/dashboard/profile/CvMaker";
 
 // Company base view
 import CompanyLayout from "@/layouts/CompanyLayout";
-import CompanyDashboard from "@/views/company/Dashboard";
 import CompanySearch from "@/views/company/Search";
 import CompanySelectionManagement from "@/views/company/SelectionManagement";
 import CompanyTeamManagement from "@/views/company/TeamManagement";
 import CompanyUser from "@/views/company/User";
-import CompanyProfile from "@/views/company/Profile";
-import CompanyProfileEdit from "@/views/company/ProfileEdit";
-import CompanyProducts from "@/views/company/Products";
-// import CompanyInbox from "@/views/company/Inbox";
+import CompanyPublicProfile from "@/views/company/PublicProfile";
+import CompanySettings from '@/views/company/Settings';
+import CompanyPackagesPricing from '@/views/company/PackagesPricing';
 import Qualifications from "@/views/dashboard/profile/Qualifications";
 import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 
@@ -232,46 +230,24 @@ const routes = [
     ]
   },
   {
+    path: "/company-dashboard/settings",
+    name: "CompanySettings",
+    component: CompanySettings,
+    props: true,
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
     path: "/company-dashboard",
     component: CompanyLayout,
     meta: {
       requiresAuth: true
     },
+    
     children: [
       {
         path: "",
-        name: "CompanyDashboard",
-        component: CompanyDashboard,
-        meta: {
-          requiresAuth: true,
-        }
-      },
-      {
-        path: "profile",
-        name: "CompanyProfile",
-        component: CompanyProfile,
-        meta: {
-          requiresAuth: true
-        },
-      },
-      {
-        path: "profile/edit",
-        name: "CompanyProfileEdit",
-        component: CompanyProfileEdit,
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: "products",
-        name: "CompanyProducts",
-        component: CompanyProducts,
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: "search",
         name: "CompanySearch",
         component: CompanySearch,
         meta: {
@@ -279,27 +255,18 @@ const routes = [
         },
       },
       {
-        path: "user/:id",
-        name: "CompanyUser",
-        component: CompanyUser,
-        props: true,
-        meta: {
-          requiresAuth: true,
-        }
-      },
-      {
-        path: "inbox",
-        name: "CompanyInbox",
-        component: Chat,
+        path: "selection-management",
+        name: "CompanySelectionManagement",
+        component: CompanySelectionManagement,
         props: true,
         meta: {
           requiresAuth: true
         }
       },
       {
-        path: "selection-management",
-        name: "CompanySelectionManagement",
-        component: CompanySelectionManagement,
+        path: "messages",
+        name: "CompanyMessages",
+        component: Chat,
         props: true,
         meta: {
           requiresAuth: true
@@ -312,6 +279,33 @@ const routes = [
         props: true,
         meta: {
           requiresAuth: true
+        }
+      },
+      {
+        path: "profile",
+        name: "CompanyPublicProfile",
+        component: CompanyPublicProfile,
+        meta: {
+          requiresAuth: true
+        },
+      },      
+      {
+        path: "user/:id",
+        name: "CompanyUser",
+        component: CompanyUser,
+        props: true,
+        meta: {
+          requiresAuth: true,
+        }
+      },
+      
+      {
+        path: "packages",
+        name: "CompanyPackagesPricing",
+        component: CompanyPackagesPricing,
+        props: true,
+        meta: {
+          requiresAuth: true,
         }
       }
     ]

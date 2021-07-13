@@ -13,7 +13,7 @@ import ProductsPaymentMethod from '@/components/company/ProductsPaymentMethod';
 import ProductsPaymentFinish from '@/components/company/ProductsPaymentFinish';
 
 export default {
-  name: 'CompanyProducts',
+  name: 'CompanyPackagesPricing',
 
   components: {
     ProductsPlan,
