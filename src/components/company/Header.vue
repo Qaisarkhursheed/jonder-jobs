@@ -1,25 +1,11 @@
 <template>
-  <v-row class="search-holder flex-shrink-0 flex-grow-0 pb-2">
-    <v-col cols="6">
-      <v-autocomplete
-        v-model="searchString"
-        :loading="searchLoading"
-        :items="searchItems"
-        :search-input.sync="search"
-        cache-items
-        flat
-        dense
-        outlined
-        hide-no-data
-        hide-details
-        label="Suche"
-        append-icon="mdi-magnify"
-        item-text="name"
-        item-value="id"
-      ></v-autocomplete>
-    </v-col>
-    <v-col cols="2">
-      <LangSwitcher />
+  <v-row class="header justify-space-between align-center pr-8 pl-13">
+    <v-col cols="3">
+      <router-link to="" class="logo">
+      <v-img
+        :src="require('@/assets/jonder_blue.png')"
+        max-width="128px"/>
+    </router-link>
     </v-col>
     <v-col cols="4" class="text-right">
       <div class="dashboard-avatar">
@@ -58,14 +44,12 @@
 <script>
 
 import { mapActions, mapGetters } from "vuex";
-import LangSwitcher from '@/components/LangSwitcher';
 import debounce from "lodash.debounce";
 
 export default {
-  name: 'DashboardHeader',
+  name: 'Header',
 
   components: {
-    LangSwitcher,
   },
 
   data() {
@@ -112,8 +96,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .searc-holder {
-    background: #f6f6f7;
+  .header {
+    height: 100px;
+    background: #fff;
     z-index: 1111;
   }
 </style>
