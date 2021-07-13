@@ -31,6 +31,8 @@
 
           <v-stepper-step step="5" :complete="complete(5)"></v-stepper-step>
 
+          <v-divider></v-divider>
+
           <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step>
         </v-stepper-header>
 

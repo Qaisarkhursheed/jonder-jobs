@@ -11,8 +11,8 @@
         </div>
 
         <div class="options">
-            <v-btn  @click="form.active_plan = '35'" 
-                     v-bind="{ outlined: form.active_plan !== '35' }"
+            <v-btn  @click="form.active_plan = '35'"
+                     v-bind:color="form.active_plan == '35' ? 'primary' : ''"
                      height="104"
                      class="upgrade-option">
                
@@ -32,7 +32,7 @@
             </v-btn>
 
             <v-btn  @click="form.active_plan = '10'" 
-                    v-bind="{ outlined: form.active_plan !== '10' }"
+                     v-bind:color="form.active_plan == '10' ? 'primary' : ''"
                     height="104" 
                     class="upgrade-option">
                 
@@ -54,25 +54,25 @@
 
         
 
-        <div class="buttons">
-            <v-btn
-                @click="close"
-                height="56"
-                class="mt-16 font-weight-medium upgrade-btn"
-                style="margin-right: 20px;"
-            >
-                {{ $t('general.cancel') }}
-            </v-btn>
-            <v-btn
-                @click="save"
-                color="primary"
-                height="56"
-                width = "178"
-                class="mt-16 font-weight-medium upgrade-btn"
-            >
-                Next
-            </v-btn>
-        </div>
+      <div class="buttons">
+          <v-btn
+              @click="close"
+              height="56"
+              class="mt-16 font-weight-medium upgrade-btn"
+              style="margin-right: 20px;"
+          >
+              {{ $t('general.cancel') }}
+          </v-btn>
+          <v-btn
+              @click="save"
+              color="primary"
+              height="56"
+              width = "178"
+              class="mt-16 font-weight-medium upgrade-btn"
+          >
+              Next
+          </v-btn>
+      </div>
     </v-card>
   </v-dialog>
 </template>

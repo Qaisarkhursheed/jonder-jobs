@@ -3,6 +3,9 @@
     <UpgradePlanModal v-if="modals.UpgradePlan.active" :active="modals.UpgradePlan.active"
       :edit="modals.UpgradePlan.edit"
       @close="toggleModal('UpgradePlan')" />
+    <AddNewCard v-if="modals.AddNewCard.active" :active="modals.AddNewCard.active"
+      :edit="modals.AddNewCard.edit"
+      @close="toggleModal('AddNewCard')" />
 
 
     <v-card flat id="personalInfo" class="profile-section mb-10">
@@ -326,12 +329,26 @@
 
     <v-card flat id="paymentMethod" class="profile-section mb-10">
       <v-row>
+          <CardActionableList type="AddNewCard"
+              @edit="activateEdit('AddNewCard', $event)" />
         <p class="profile-title">
           Edit payment method
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
+
+        <v-btn
+          @click="toggleModal('AddNewCard')"
+          outlined
+          rounded
+          small
+          fab
+          color="#0253B3"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        Add
       </v-row>
     </v-card>
 
@@ -443,6 +460,7 @@ import { mapActions, mapGetters } from "vuex";
 import CardActionableList from '@/components/user/JobseekerCardActionableList';
 import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
 import Calendar from '@/components/Calendar';
+import AddNewCard from '@/views/dashboard/AddNewCard';
 
 export default {
   name: "Profile",
@@ -450,7 +468,8 @@ export default {
   components: {
     UpgradePlanModal,
     CardActionableList,
-    Calendar
+    Calendar,
+    AddNewCard
   },
 
   data: () => ({
@@ -507,10 +526,16 @@ export default {
         active: false,
         edit: false,
         component: UpgradePlanModal
+      },      
+      AddNewCard: {
+        active: false,
+        edit: false,
+        component: AddNewCard
       },
     },
     fileActions: {
       UpgradePlan: ['edit', 'delete'],
+      AddNewCard: ['edit', 'delete'],
     },
   }),
   created() {
