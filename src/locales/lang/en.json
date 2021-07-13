@@ -38,7 +38,6 @@
       "radius": "Radius",
       "saveFilter": "Save filter",
       "search": "Search",
-      "searchResults": "Search results",
       "branch": "Branch",
       "graduation": "Graduation",
       "contact": "Contact",
@@ -52,7 +51,8 @@
       "workExperience": "Work experience",
       "city": "City",
       "advancedSearch": "Advanced Search",
-      "findEmployee": "Find employee"
+      "findEmployee": "Find employee",
+      "searchResults": "results found"
     },
     "profile": {
       "email": "E-mail address",

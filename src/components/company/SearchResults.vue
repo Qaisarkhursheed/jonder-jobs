@@ -1,12 +1,21 @@
 <template>
   <div class="search-results">
     <div class="heading pb-4">
-      {{ $t('company.search.searchResults') }}
+      123 {{ $t('company.search.searchResults') }}
     </div>
     <v-row>
-      <v-col cols="4" v-for="(result, i) in results" :key="i">
-        <SearchResultsCard :candidate="result"/>
+      <v-col cols="4" v-for="(result, i) in 6" :key="i">
+        <SearchResultsCard :candidate="dummy"/>
       </v-col>
+    </v-row>
+    <v-row>
+      <div class="pagination pb-6 pt-4">
+        <v-pagination
+          v-model="page"
+          :length="10"
+          :total-visible="7"
+        ></v-pagination>
+      </div>
     </v-row>
   </div>
 
@@ -29,6 +38,46 @@ export default {
     }
   },
 
+  data() {
+    return {
+      page: 1,
+      dummy: {
+        id: 3,
+        first_name: "Victoria",
+        last_name: "Anderson",
+        address: "248 Caitlyn Islands Suite 561",
+        phone: "+19081150516",
+        email: "test_company@test.com",
+        role: "company",
+        branche: "Bauwesen",
+        job: "Designer",
+        current_position: "Agricultural Crop Farm Manager",
+        looking_for: [
+          "Entwickler",
+          "Projektmanager"
+        ],
+        looking_for_branche: "Automobilindustrie",
+        looking_for_employment_type: "fulltime",
+        address_to_work: "Issacland",
+        ready_for_work: "2021-09-01 00:00:00",
+        monthly_salary: "130000",
+        work_experience: "2-5 years",
+        why_jonder: "jonder for life",
+        city: "North Roel",
+        about_me: "this is an eazy job",
+        training_studies: "Abitur",
+        your_qualification: "Kaufmann für Bürokommunikation",
+        job_status: null,
+        cv: null,
+        qualifications: null,
+        resume: null,
+        profile_img: null,
+        created_at: null,
+        updated_at: null
+     },
+    }
+  }
+
 };
 
 </script>
@@ -36,10 +85,14 @@ export default {
 <style lang="scss" scoped>
   .search-results {
     .heading {
-      font-family: $open-sans;
       font-weight: 600;
-      font-size: 14px;
-      color: #0253B3;
+      font-size: 24px;
+      color: #000000;
     }
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 </style>

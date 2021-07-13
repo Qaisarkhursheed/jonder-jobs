@@ -20,17 +20,17 @@
                     color="#C4C6C9">
               mdi-briefcase-outline
             </v-icon>
-            <span class="text-color-primary-blue-dark">
+            <span>
               {{candidate.job}}
             </span>
           </div>
-          <div class="location">
+          <!--<div class="location">
             <v-icon size="18px"
                     color="#C4C6C9">
               mdi-map-marker-outline
             </v-icon>
             {{candidate.address}}
-          </div>
+          </div>-->
         </div>
       </v-card-text>
 
@@ -122,6 +122,18 @@ export default {
   }
   .job-info {
     border-top: 1px solid #EAEAEC;
+  }
+  .name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #222222;
+  }
+  .job {
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      color: #222222;
+    }
   }
   .experience {
     .value {
