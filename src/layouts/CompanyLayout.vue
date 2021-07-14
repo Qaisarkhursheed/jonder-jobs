@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss">
   .company {
-    font-family: $open-sans;
+    font-family: $inter;
     overflow: auto;
   }
   .main-wrap {
