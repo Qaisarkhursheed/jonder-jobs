@@ -1,5 +1,84 @@
 <template>
-  <v-card class="profile-info rounded-lg pl-10 pr-10 pt-10 pb-10" flat>
+  <div class="user-overview">
+    <div class="heading d-flex mb-5" @click="back">
+      <v-icon
+        size="25"
+      >
+        mdi-arrow-left
+      </v-icon>
+      <span class="pl-4">Back</span>
+    </div>
+    <div class="card-back">
+
+    </div>
+    <v-card class="profile-info rounded-lg" flat>
+      <v-row class="card-header no-gutters pl-10 pr-10">
+        <v-col cols="8" class="d-flex">
+          <v-avatar
+            color="primary"
+            size="150"
+            class="user-avatar"
+          ></v-avatar>
+          <div class="user-header pl-8 pt-5">
+            <div class="name">
+              James Smith
+            </div>
+            <div class="position">
+              Designer
+            </div>
+          </div>
+        </v-col>
+        <v-col cols="4" class="d-flex justify-end pt-7">
+          <div class="star-btn mr-3">
+            <v-icon
+              size="25"
+              @click="editNote(item)"
+            >
+              mdi-star-outline
+            </v-icon>
+          </div>
+          <v-btn
+            color="primary"
+            height="48"
+            width="70%"
+            class="font-weight-medium pl-4 pr-4"
+          >
+            Message now
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-tabs
+        v-model="tab"
+        align-with-title
+        slider-color="#0253B3"
+      >
+        <v-tabs-slider color="#0253B3"></v-tabs-slider>
+
+        <v-tab
+          v-for="item in items"
+          :key="item"
+          style="text-transform: uppercase;"
+          slider-color="#0253B3"
+        >
+          {{ item }}
+        </v-tab>
+      </v-tabs>
+      <v-divider></v-divider>
+      <v-tabs-items v-model="tab">
+        <v-tab-item
+          v-for="item in items"
+          :key="item"
+        >
+        <v-card flat>
+          <keep-alive>
+            <component :is="tabs[item]"></component>
+          </keep-alive>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+    </v-card>
+  </div>
+  <!-- <v-card class="profile-info rounded-lg pl-10 pr-10 pt-10 pb-10" flat>
     <v-row class="d-flex no-gutters">
       <v-col cols="6 pr-3">
         <v-card-text class="d-flex pa-0 pb-6 align-center">
@@ -90,13 +169,15 @@
 
       </v-col>
     </v-row>
-  </v-card>
+  </v-card> -->
 </template>
 
 <script>
 
 import axios from 'axios';
 import { mapActions } from 'vuex';
+import UserOverviewGeneral from '@/components/company/UserOverviewGeneral';
+import UserOverviewNotes from '@/components/company/UserOverviewNotes';
 
 export default {
   name: 'UserOverview',
@@ -106,7 +187,10 @@ export default {
       type: [String, Number]
     }
   },
-
+  components: {
+    UserOverviewGeneral,
+    UserOverviewNotes
+  },
   data() {
     return {
       profile: {
@@ -138,6 +222,14 @@ export default {
           label: 'Profesionsim',
           value: 'Junior'
         }
+      },
+      tab: null,
+      items: [
+        'general', 'notes'
+      ],
+      tabs: {
+        general: UserOverviewGeneral,
+        notes: UserOverviewNotes
       }
     }
   },
@@ -163,6 +255,11 @@ export default {
     },
     startConversation() {
       this.$router.push({ name: 'CompanyInbox', params: { id: this.$route.params.id, type: 'new', company: true} });
+    },
+    back() {
+      this.$router.push({
+        name: 'CompanySearch'
+      })
     }
   }
 };
@@ -170,6 +267,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .card-header {
+
+  }
+  .heading {
+    font-weight: 600;
+    font-size: 17px;
+    color: #222222;
+    cursor: pointer;
+  }
+  .card-back {
+    height: 156px;
+    background: #27AAE1;
+    border-radius: 13px;
+  }
+  .profile-info {
+    position: relative;
+    top: -60px;
+  }
+  .user-header {
+    .name {
+      font-weight: bold;
+      font-size: 32px;
+      color: #222222;
+    }
+    .position {
+      font-weight: 500;
+      font-size: 14px;
+      color: #222222;
+    }
+  }
+  .user-avatar {
+    position: relative;
+    top: -50px;
+  }
+  .star-btn {
+    width: 70px;
+    min-width: 70px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background: #E3F2FB;
+    border-radius: 10px;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .tab {}
   .name {
     font-size: 24px;
   }
