@@ -1,25 +1,42 @@
 <template>
   <div>
-    <ProductsPlan class="mb-10" />
-    <ProductsPaymentMethod class="mb-3"/>
-    <ProductsPaymentFinish />
+    <div class="heading pb-10">
+      <div class="title">
+        Upgrade your company
+      </div>
+      <div class="subtitle">
+        Explanation what are message templates
+      </div>
+    </div>
+    <Packages />
   </div>
 </template>
 
 <script>
 
-import ProductsPlan from '@/components/company/ProductsPlan';
-import ProductsPaymentMethod from '@/components/company/ProductsPaymentMethod';
-import ProductsPaymentFinish from '@/components/company/ProductsPaymentFinish';
+import Packages from '@/components/Packages';
 
 export default {
   name: 'CompanyPackagesPricing',
 
   components: {
-    ProductsPlan,
-    ProductsPaymentMethod,
-    ProductsPaymentFinish
+    Packages,
   },
 };
 
 </script>
+
+<style lang="scss" scoped>
+.heading {
+  .title {
+    font-weight: 600;
+    font-size: 32px !important;
+    color: #222222;
+  }
+  .subtitle {
+    font-weight: normal;
+    font-size: 18px;
+    color: #7A7A7A;
+  }
+}
+</style>
