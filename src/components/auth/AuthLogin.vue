@@ -109,19 +109,21 @@ export default {
 
     async handleLogin() {
       this.response = await this.login(this.formData);
+      console.log('LOGIN', this.response)
 
       if (this.response) {
         if (this.response.user.role === "Jobseeker" || this.response.user.role === "user") {
           this.$router.replace({ name: "Dashboard" });
         }
-        else if (this.response.onboarding_status && this.response.user.role === "company") {
-          this.$router.replace({ name: 'CompanyDashboard' });
+        else if (this.response.onboarding_status && this.response.user.role === "Employer") {
+          this.$router.replace({ name: 'CompanySearch' });
         }
         else if (this.response.user.role === "user") {
           this.$router.replace({ name: "ManualOnboarding" });
         }
-        else if (this.response.user.role === "company") {
-          this.$router.replace({ name: "ManualOnboardingCompany" });
+        else if (this.response.user.role === "Employer") {
+          // this.$router.replace({ name: "ManualOnboardingCompany" });
+           this.$router.replace({ name: 'CompanySearch' });
         }
       } else {
         this.message.show = true;
