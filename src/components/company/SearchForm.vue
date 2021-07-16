@@ -160,7 +160,6 @@
         <v-row>
           <v-col cols="6">
             <v-btn
-              @click="close"
               height="58"
               class="full-w mt-16 font-weight-medium "
               color="#fff"
@@ -170,7 +169,6 @@
           </v-col>
           <v-col cols="6">
             <v-btn
-              @click="save"
               color="primary"
               height="58"
               class="full-w mt-16 font-weight-medium "
