@@ -38,7 +38,7 @@
     </div>
 
     <div class="section d-flex mb-6">
-      <v-row class="no-gutters">
+      <v-row>
         <v-col cols="6">
           <label class="section-label">
             Address

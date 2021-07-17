@@ -6,13 +6,20 @@
         <div class="subtitle">Explanation what is team managment</div>
       </v-col>
       <v-col cols="3">
-        <!-- <v-btn
+        <v-btn
           color="primary"
           height="48"
           class="full-w font-weight-medium "
+          @click="viewAsTab"
         >
-          Invite new user
-        </v-btn> -->
+         <template v-if="viewAs">
+          Back to Edit
+         </template>
+         <template v-else>
+          View as Jobseeker
+         </template>
+        </v-btn>
+        
       </v-col>
     </v-row>
     <v-row>
@@ -44,14 +51,19 @@
               :key="item"
             >
             <v-card flat class="pa-10">
-              <keep-alive>
-                <component 
-                  :is="tabComponents[item]" 
-                  @update="updateCompany"
-                  :user="user"
-                >
-                </component>
-              </keep-alive>
+              <template v-if="viewAs">
+                <PublicProfileViewAs :user="user" />
+              </template>
+              <template v-else>
+                <keep-alive>
+                  <component 
+                    :is="tabComponents[item]" 
+                    @update="updateCompany"
+                    :user="user"
+                  >
+                  </component>
+                </keep-alive>
+              </template>
             </v-card>
             </v-tab-item>
           </v-tabs-items>
@@ -66,6 +78,7 @@ import store from '@/store'
 import PublicProfileGeneral from '@/components/company/PublicProfileGeneral';
 import PublicProfileDetails from '@/components/company/PublicProfileDetails';
 import PublicProfileContact from '@/components/company/PublicProfileContact';
+import PublicProfileViewAs from '@/components/company/PublicProfileViewAs';
 
 export default {
   name: 'CompanyPublicProfile',
@@ -73,20 +86,23 @@ export default {
   components: {
     PublicProfileGeneral,
     PublicProfileDetails,
-    PublicProfileContact
+    PublicProfileContact,
+    PublicProfileViewAs
   },
 
   data() {
     return {
       tabs: {
         active: 'details',
-        options: ['general', 'details', 'contact']
+        options: ['general', 'details', 'contact'],
       },
       tabComponents: {
         general: PublicProfileGeneral,
         details: PublicProfileDetails,
-        contact: PublicProfileContact
-      }
+        contact: PublicProfileContact,
+        viewAs:  PublicProfileViewAs
+      },
+      viewAs: false
     };
   },
   methods: {
@@ -98,9 +114,13 @@ export default {
           _method: 'PATCH'
         }
       })
-    }
+    },
+    viewAsTab() {
+      this.viewAs = !this.viewAs;
+    },
   },
   computed: {
+
     user() {
       return store.getters['user/user'];
     }

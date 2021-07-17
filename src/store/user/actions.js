@@ -89,7 +89,7 @@ export default {
       return Promise.reject(error.response);
     }
   },
-  updateCompanyUser({ commit }, payload) {
+  updateCompanyUser({ commit, dispatch }, payload) {
     let formData = new FormData();
     Object.keys(payload.data).forEach(key => {
       if (Array.isArray(payload.data[key])) {
@@ -101,8 +101,8 @@ export default {
     return axios
       .post(`/copmanies/${payload.id}`, formData)
       .then(resp => {
-        console.log(resp);
         if (resp.data.success && resp.data.user) {
+          dispatch('getUser');
           commit("SET_USER", resp.data.user);
         }
       })
