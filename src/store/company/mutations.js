@@ -1,3 +1,5 @@
+import { groupBy, assign } from "lodash";
+
 export default {
   SET_USER_INTERACTIONS(state, value) {
     state.userInteractions = {
@@ -24,5 +26,12 @@ export default {
   SET_COMPANY_INTERACTIONS(state, value) {
     state.companyInteractions.yearlyActivity = value.yearly_activity;
     state.companyInteractions.interactions = value.interactions;
+  },
+
+  SET_SELECTION_MANAGEMENT(state, value) {
+    assign(
+      state.selectionManagement,
+      groupBy(value, 'managment_status')
+    );
   }
 };

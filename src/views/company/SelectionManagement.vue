@@ -1,9 +1,19 @@
 <template>
-  <div>CompanySelectionManagement</div>
+  <div>
+    <SelectionManagementTable />
+  </div>
 </template>
 
 <script>
+
+import SelectionManagementTable from '@/components/company/SelectionManagementTable';
+
 export default {
-  name: 'CompanySelectionManagement'
+
+  name: 'CompanySelectionManagement',
+
+  components: {
+    SelectionManagementTable
+  }
 };
 </script>
