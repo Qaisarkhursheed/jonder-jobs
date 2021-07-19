@@ -48,5 +48,43 @@ export default {
   fetchUserNotes(context, user_id) {
     return axios
       .get(`/notepad/user/description/${user_id}`)
-  }
+  },
+  // Selection management
+  slManagementGetAll({ commit }) {
+    return axios
+      .get('/selection-managment')
+      .then((res) => {
+        if(res.data.success) {
+          console.log('res', res.data);
+          commit('SET_SELECTION_MANAGEMENT', res.data.data);
+        }
+      })
+  },
+  slManagementMoveCandidate({ dispatch }, payload) {
+    return axios
+      .patch(`/selection-managment/${payload.id}`, payload.data)
+      .then((res) => {
+        if(res.status === 200) {
+          dispatch('slManagementGetAll');
+        }
+      })
+  },
+  slManagementAddCandidate(context, payload) {
+    return axios
+      .post('/selection-managment', payload)
+      .then((res) => {
+        console.log(res);
+        // if(res.status === 200) {
+        // }
+      })
+  },
+  slManagementDeleteCandidate(context, id) {
+    return axios
+      .delete(`/selection-managment/${id}`)
+      .then((res) => {
+        console.log(res);
+        // if(res.status === 200) {
+        // }
+      })
+  },
 };

@@ -13,5 +13,9 @@ export default {
   },
   companyInteractionsYearly(state) {
     return state.companyInteractions.yearlyActivity;
+  },
+
+  selectionManagement(state) {
+    return state.selectionManagement;
   }
 };
