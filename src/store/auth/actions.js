@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   async login({ commit }, credentials) {
@@ -11,10 +11,7 @@ export default {
         const user = JSON.stringify(resp.data.user);
         localStorage.setItem("user-token", token);
         localStorage.setItem("user", user);
-        localStorage.setItem(
-          "onboarding-status",
-          resp.data.onboarding_status
-        );
+        localStorage.setItem("onboarding-status", resp.data.onboarding_status);
         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
         commit("SET_AUTHENTICATED", true);
         commit("SET_ONBOARDING_STATUS", resp.data.onboarding_status);
@@ -56,6 +53,25 @@ export default {
       });
 
     return response;
+  },
+
+  async registerCompany({ commit }, data) {
+    try {
+      const resp = await axios.post("/company/register", data);
+      localStorage.setItem("user-token", resp.data.token);
+      localStorage.setItem("user", JSON.stringify(resp.data.user));
+      localStorage.setItem("onboarding-status", "false");
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + resp.data.token;
+      commit("SET_AUTHENTICATED", true);
+      return resp;
+    } catch (error) {
+      localStorage.removeItem("user-token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("onboarding-status");
+      commit("SET_AUTHENTICATED", false);
+      return Promise.reject(error.response);
+    }
   },
 
   async forgotpass({ commit }, data) {
