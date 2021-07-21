@@ -16,6 +16,8 @@
 @import 'variables';
 
 @import 'modules/tab';
+@import 'modules/pagination';
+
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
 $roboto: 'Roboto', sans-serif;
@@ -291,7 +293,8 @@ h5, .h5 {
 
     .candidate-card.v-sheet.v-card--hover:hover {
         cursor: pointer;
-        box-shadow: 0px 0px 5px rgb(250 232 73) !important;
+        box-shadow: 0px 0px 3px rgb(39, 170, 225) !important;
+        background: linear-gradient(0deg, rgba(39, 170, 225, 0.04), rgba(39, 170, 225, 0.04)), #FFFFFF;
         transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 }

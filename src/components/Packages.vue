@@ -1,7 +1,11 @@
 <template>
   <div class="packages">
     <v-row>
-      <v-col cols="4" v-for="(item, i) in packages" :key="i">
+      <v-col 
+        cols="12"
+        md="6"
+        lg="4"
+        v-for="(item, i) in packages" :key="i">
         <PackagesPackage :plan="item" />
       </v-col>
     </v-row>

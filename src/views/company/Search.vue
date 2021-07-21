@@ -6,9 +6,10 @@
     <SearchFormAdvanced :active="advancedSearch"/>
 
     <SearchSaved />
+    <SearchResultsLock />
+    <SearchNoResults />
     <SearchResults class="mt-10"
                    :results="searchResults"/>
-    <SearchNoResults style="display: none" />
   </div>
 </template>
 
@@ -19,7 +20,7 @@ import SearchFormAdvanced from '@/components/company/SearchFormAdvanced';
 import SearchSaved from '@/components/company/SearchSaved';
 import SearchResults from '@/components/company/SearchResults';
 import SearchNoResults from '@/components/company/SearchNoResults';
-// import pricing packaages component when created
+import SearchResultsLock from '@/components/company/SearchResultsLock';
 
 export default {
   name: 'CompanySearch',
@@ -29,7 +30,8 @@ export default {
     SearchResults,
     SearchSaved,
     SearchFormAdvanced,
-    SearchNoResults
+    SearchNoResults,
+    SearchResultsLock
   },
 
   data() {

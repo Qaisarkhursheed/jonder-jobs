@@ -4,12 +4,17 @@
       123 {{ $t('company.search.searchResults') }}
     </div>
     <v-row>
-      <v-col cols="4" v-for="(result, i) in 6" :key="i">
+      <v-col 
+        cols="12"
+        md="6"
+        lg="4"
+        xl="3"
+        v-for="(result, i) in 6" :key="i">
         <SearchResultsCard :candidate="dummy"/>
       </v-col>
     </v-row>
     <v-row>
-      <div class="pagination pb-6 pt-4">
+      <div class="search-pagination pb-6 pt-4">
         <v-pagination
           v-model="page"
           :length="10"
@@ -90,7 +95,7 @@ export default {
       color: #000000;
     }
   }
-  .pagination {
+  .search-pagination {
     display: flex;
     justify-content: center;
     width: 100%;
