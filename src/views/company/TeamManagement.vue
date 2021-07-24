@@ -6,13 +6,7 @@
         <div class="subtitle">Explanation what is team managment</div>
       </v-col>
       <v-col cols="3">
-        <v-btn
-          color="primary"
-          height="48"
-          class="full-w font-weight-medium "
-        >
-          Invite new user
-        </v-btn>
+        <TeamManagementInviteUser />
       </v-col>
     </v-row>
     <div class="table">
@@ -22,21 +16,20 @@
 </template>
 
 <script>
-
-import TeamManagementTable from '@/components/company/TeamManagementTable'
+import TeamManagementTable from "@/components/company/TeamManagementTable";
+import TeamManagementInviteUser from "@/components/company/TeamManagementInviteUser";
 
 export default {
-  name: 'CompanyTeamManagement',
+  name: "CompanyTeamManagement",
 
   components: {
-    TeamManagementTable
-  },
-
+    TeamManagementTable,
+    TeamManagementInviteUser
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .heading {
   font-weight: 600;
   font-size: 32px;
@@ -50,7 +43,7 @@ export default {
   .subtitle {
     font-weight: normal;
     font-size: 18px;
-    color: #7A7A7A;
+    color: #7a7a7a;
   }
 }
 </style>
