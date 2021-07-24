@@ -7,7 +7,8 @@ export default {
     'Final round': [],
     'Hired': []
   },
-
+  searchResults: [],
+  searchInProgress: false,
   userInteractions: null,
   peopleReach: null,
   profileViews: null,

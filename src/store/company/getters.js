@@ -14,8 +14,13 @@ export default {
   companyInteractionsYearly(state) {
     return state.companyInteractions.yearlyActivity;
   },
-
   selectionManagement(state) {
     return state.selectionManagement;
+  },
+  searchResults(state) {
+    return state.searchResults;
+  },
+  searchInProgress(state) {
+    return state.searchInProgress;
   }
 };

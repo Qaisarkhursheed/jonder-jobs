@@ -87,4 +87,16 @@ export default {
         // }
       })
   },
+  searchJobseekers({ commit }, payload) {
+    commit('SET_SEARCH_INPROGRESS', true);
+    return axios
+      .post('/company/search/', payload)
+      .then((res) => {
+        console.log('SEARCH', res);
+        if (res.status === 200) {
+          commit('SET_SEARCH_INPROGRESS', false);
+          commit('SET_SEARCH_RESULTS', res.data.data);
+        }
+      })
+  }
 };

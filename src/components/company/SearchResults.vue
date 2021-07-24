@@ -1,7 +1,7 @@
 <template>
   <div class="search-results">
     <div class="heading pb-4">
-      123 {{ $t('company.search.searchResults') }}
+      {{ results.length }} {{ $t('company.search.searchResults') }}
     </div>
     <v-row>
       <v-col 
@@ -9,8 +9,8 @@
         md="6"
         lg="4"
         xl="3"
-        v-for="(result, i) in 6" :key="i">
-        <SearchResultsCard :candidate="dummy"/>
+        v-for="(result, i) in results" :key="i">
+        <SearchResultsCard :candidate="result"/>
       </v-col>
     </v-row>
     <v-row>
