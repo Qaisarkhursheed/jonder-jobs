@@ -2,90 +2,78 @@
   <div class="team-management-table">
     <v-data-table
       v-model="selected"
+      :loading="$store.getters['teamManagement/loading']"
       :headers="headers"
-      :items="dummy"
+      :items="$store.getters['teamManagement/users']"
+      :server-items-length="$store.getters['teamManagement/totalUsers']"
+      :items-per-page.sync="params.per_page"
+      :page.sync="params.page"
       :single-select="true"
+      @update:page="fetchData()"
+      @update:items-per-page="fetchData()"
       item-key="name"
       show-select
       flat
       class="table"
     >
       <template v-slot:[`item.actions`]="{ item }">
-        <v-btn
-          @click="removeUser(item)"
-          color="#F12727"
-          class="full-w font-weight-medium"
-          style="color: #fff"
-        >
-          Remove
-        </v-btn>
+        <TeamManagementDeleteUser :user="item"></TeamManagementDeleteUser>
       </template>
     </v-data-table>
   </div>
 </template>
 
 <script>
+import TeamManagementDeleteUser from "@/components/company/TeamManagementDeleteUser";
 
 export default {
-  name: 'TeamManagementTable',
+  components: { TeamManagementDeleteUser },
 
   data() {
     return {
+      params: {
+        page: 1,
+        per_page: 15
+      },
       selected: null,
       headers: [
         {
-          text: 'User',
-          value: 'user',
-          width: '25%'
+          text: "User",
+          value: "name",
+          width: "25%"
         },
         {
-          text: 'Email',
-          value: 'email',
-          width: '25%'
+          text: "Email",
+          value: "email",
+          width: "25%"
         },
         {
-          text: 'Status',
-          value: 'status',
-          width: '15%'
+          text: "Status",
+          value: "status",
+          width: "15%"
         },
         {
-          text: 'Invited on',
-          value: 'invited_on',
-          width: '15%'
-        },
-         { 
-           text: '', 
-           value: 'actions',
-           width: '10%'
-         }
-      ],
-      dummy:[
-        {
-          id: 1,
-          user: "Max Mustermann",
-          email: "marko@plutus.eu",
-          status: "Active",
-          invited_on: "Jun 14, 12:33 PM"
+          text: "Invited on",
+          value: "invited_on",
+          width: "15%"
         },
         {
-          id: 2,
-          user: "Max Mustermann",
-          email: "marko@plutus.eu",
-          status: "Active",
-          invited_on: "Jun 14, 12:33 PM"
-        },
-        {
-          id: 3,
-          user: "Max Mustermann",
-          email: "marko@plutus.eu",
-          status: "Active",
-          invited_on: "Jun 14, 12:33 PM"
+          text: "",
+          value: "actions",
+          width: "10%"
         }
       ]
     };
   },
 
+  created() {
+    this.fetchData();
+  },
+
   methods: {
+    fetchData() {
+      this.$store.dispatch("teamManagement/fetchUsers", this.params);
+    },
     removeUser() {}
   }
 };
@@ -93,7 +81,7 @@ export default {
 <style lang="scss" scoped>
 .team-management-table {
   .table {
-    border: 1px solid #E6E7E9;
+    border: 1px solid #e6e7e9;
   }
 }
 </style>
