@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    class="auth-register-wrap justify-content-center align-center"
-    fluid
-    no-gutters
-  >
+  <v-container class="auth-register-wrap mx-auto" fluid no-gutters>
     <jonder-title>
       Create account
     </jonder-title>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="auth-login-wrap align-center" fluid no-gutters>
+  <v-container class="auth-login-wrap mx-auto" fluid no-gutters>
     <jonder-title>
       Loggen Sie sich in Ihren Jonder Account ein
     </jonder-title>
@@ -10,7 +10,7 @@
 
     <div class="mt-10">
       <p class="text-caption text-left">
-        Einloggen via Email 
+        Einloggen via Email
       </p>
 
       <form class="auth-form" action="#" @submit.prevent="handleLogin">
@@ -41,27 +41,27 @@
         <!--        ></v-checkbox>-->
 
         <p class="text-caption text-left">
-          <router-link to="/reset-password">      
-              Passwort vergessen?
+          <router-link to="/forgot-password">
+            Passwort vergessen?
           </router-link>
         </p>
 
-        <v-btn outlined 
-               color="primary" 
-               class="full-w mt-4 "
+        <v-btn outlined color="primary" class="full-w mt-4 "
           >Continue with Google
         </v-btn>
 
-        <v-btn color="primary" 
-               class="full-w mt-4 fb-button">
+        <v-btn color="primary" class="full-w mt-4 fb-button">
           Continue with Facebook
         </v-btn>
 
-        <v-btn type="submit" 
-               color="primary" 
-               class="full-w"
-               :disabled="formData.email.length === 0 || formData.password.length === 0"
-               >
+        <v-btn
+          type="submit"
+          color="primary"
+          class="full-w"
+          :disabled="
+            formData.email.length === 0 || formData.password.length === 0
+          "
+        >
           Loggen Sie
         </v-btn>
       </form>
@@ -69,8 +69,8 @@
 
     <p class="text-caption text-left">
       Haben Sie kein Konto?
-      <router-link to="/register">      
-          Registrieren     
+      <router-link to="/register">
+        Registrieren
       </router-link>
     </p>
   </v-container>
@@ -109,21 +109,24 @@ export default {
 
     async handleLogin() {
       this.response = await this.login(this.formData);
-      console.log('LOGIN', this.response)
+      console.log("LOGIN", this.response);
 
       if (this.response) {
-        if (this.response.user.role === "Jobseeker" || this.response.user.role === "user") {
+        if (
+          this.response.user.role === "Jobseeker" ||
+          this.response.user.role === "user"
+        ) {
           this.$router.replace({ name: "Dashboard" });
-        }
-        else if (this.response.onboarding_status && this.response.user.role === "Employer") {
-          this.$router.replace({ name: 'CompanySearch' });
-        }
-        else if (this.response.user.role === "user") {
+        } else if (
+          this.response.onboarding_status &&
+          this.response.user.role === "Employer"
+        ) {
+          this.$router.replace({ name: "CompanySearch" });
+        } else if (this.response.user.role === "user") {
           this.$router.replace({ name: "ManualOnboarding" });
-        }
-        else if (this.response.user.role === "Employer") {
+        } else if (this.response.user.role === "Employer") {
           // this.$router.replace({ name: "ManualOnboardingCompany" });
-           this.$router.replace({ name: 'CompanySearch' });
+          this.$router.replace({ name: "CompanySearch" });
         }
       } else {
         this.message.show = true;

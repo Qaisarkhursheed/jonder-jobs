@@ -2,12 +2,14 @@
   <v-container fluid no-gutters class="main-wrap fill-height pa-0">
     <v-row no-gutters class="full-h">
       <!-- Left half -->
-      <v-col class="full-h" 
-        cols="12" 
+      <v-col
+        class="full-h"
+        cols="12"
         md="6"
         order="2"
-        order-md="1" 
-        style="position: relative;">
+        order-md="1"
+        style="position: relative;"
+      >
         <div
           class="hero-image d-flex justify-content-center align-center"
           :style="{
@@ -22,20 +24,24 @@
         </v-overlay>
       </v-col>
       <!-- Right half -->
-      <v-col class="full-h" 
-        cols="12" 
+      <v-col
+        class="full-h"
+        cols="12"
         md="6"
         order="1"
-        order-md="2" 
-        style="position: relative">
-        <div class="auth-wrap">
-          <div class="auth-logo d-flex flex-column justify-center align-center">
+        order-md="2"
+        style="position: relative"
+      >
+        <div class="auth-wrap d-flex">
+          <div class="my-auto mx-auto">
+            <!-- Logo -->
             <v-img
               :src="require('@/assets/jonder_blue.png')"
+              class="mx-auto"
               max-width="128px"
             ></v-img>
-          </div>
-          <div class="auth-form d-flex flex-column justify-center align-center">
+
+            <!-- Content -->
             <slot></slot>
           </div>
         </div>
@@ -68,11 +74,5 @@ export default {
   height: 100%;
   padding: 30px;
   overflow: auto;
-  .auth-logo {
-    height: 40px;
-  }
-  .auth-form {
-    height: auto;
-  }
 }
 </style>
