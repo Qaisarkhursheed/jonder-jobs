@@ -4,9 +4,7 @@
       mdi-arrow-left
     </v-icon>
 
-    <div
-      class="stepper-wrap d-flex flex-column justify-space-between align-center full-h mt-10"
-    >
+    <div class="stepper-wrap mt-10" style="width: 500px">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -88,7 +86,7 @@
         </v-stepper-items>
       </v-stepper>
     </div>
-    </auth-wrap>
+  </auth-wrap>
 </template>
 
 <script>
@@ -112,7 +110,7 @@ export default {
     Step3,
     Step4,
     Step5,
-    Step6,
+    Step6
   },
   props: {
     isBtnVisible: Boolean
@@ -132,9 +130,9 @@ export default {
       ready_for_work: "",
       monthly_salary: 10,
       working_experience: "",
-      cv: '',
+      cv: "",
       resume: null,
-      qualifications: null,
+      qualifications: null
       // address: "",
       // working_in: "",
       // describe_yourself: "",
@@ -142,20 +140,22 @@ export default {
       // your_qualification: "",
       // additional_training: "",
       // dream_job: "",
-    },
+    }
   }),
   created() {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", ["user", 
-      'jobseekerExperience', 'jobseekerEducation']),
+    ...mapGetters("user", [
+      "user",
+      "jobseekerExperience",
+      "jobseekerEducation"
+    ]),
     isDisabled() {
       if (this.saveInProgress) return true;
       if (this.e1 === 2) {
         return !(
-          this.formData.why_jonder &&
-          this.formData.why_jonder.length > 0
+          this.formData.why_jonder && this.formData.why_jonder.length > 0
         );
       } else if (this.e1 === 3) {
         return !(
@@ -173,13 +173,9 @@ export default {
           this.formData.address_to_work &&
           this.formData.ready_for_work &&
           this.formData.monthly_salary
-
         );
       } else if (this.e1 === 5) {
-        return !(
-          this.jobseekerExperience &&
-          this.jobseekerEducation
-        );
+        return !(this.jobseekerExperience && this.jobseekerEducation);
       } else if (this.e1 === 6) {
         return !(
           this.formData.cv &&
@@ -241,9 +237,6 @@ export default {
 }
 .mo-stepper-items {
   overflow: auto;
-}
-.stepper-wrap {
-  width: 70%;
 }
 @media (max-width: 600px) {
   .stepper-wrap {
