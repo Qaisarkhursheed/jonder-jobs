@@ -54,7 +54,7 @@ export default {
         },
         {
           text: "Invited on",
-          value: "invited_on",
+          value: "created_at",
           width: "15%"
         },
         {
