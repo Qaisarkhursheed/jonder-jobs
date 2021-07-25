@@ -19,17 +19,25 @@ export default {
       });
   },
 
-  postOnboardingCompany({ commit }, data) {
-    return axios
-      .post("/company/onboarding", data)
-      .then(resp => {
-        if (resp.data.success && resp.data.user) {
-          commit("SET_USER", resp.data.user);
-        }
-      })
-      .catch(err => {
-        console.error("Update user error:", err);
-      });
+  async postOnboardingCompany({ commit, state }, data) {
+    let formData = new FormData();
+    Object.keys(data).forEach(key => {
+      if (data[key] || data[key] == 0) {
+        formData.append(key, data[key]);
+      }
+    });
+    formData.append("_method", "PATCH");
+
+    try {
+      const resp = await axios.post(
+        "/company/onboarding/" + state.user.id,
+        formData
+      );
+      commit("SET_USER", resp.data.user);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   },
 
   async postOnboardingUser({ commit, state }, data) {
@@ -38,10 +46,10 @@ export default {
       formData.append(key, data[key]);
     });
     formData.append("_method", "PATCH");
-    formData.delete('looking_for');
+    formData.delete("looking_for");
     data.looking_for.forEach((key, i) => {
       formData.append(`looking_for[${i}]`, key);
-    })
+    });
     try {
       const resp = await axios.post(
         "/user/onboarding/" + state.user.id,
@@ -102,7 +110,7 @@ export default {
       .post(`/copmanies/${payload.id}`, formData)
       .then(resp => {
         if (resp.data.success && resp.data.user) {
-          dispatch('getUser');
+          dispatch("getUser");
           commit("SET_USER", resp.data.user);
         }
       })
@@ -136,7 +144,7 @@ export default {
     return axios
       .post("/jobseeker-experience", payload)
       .then(() => {
-        dispatch('getAllJobseekerExperience');
+        dispatch("getAllJobseekerExperience");
       })
       .catch(err => {
         console.error("Update user error:", err);
@@ -166,7 +174,7 @@ export default {
     return axios
       .delete(`/jobseeker-experience/${id}`)
       .then(() => {
-        dispatch('getAllJobseekerExperience');
+        dispatch("getAllJobseekerExperience");
       })
       .catch(err => {
         console.error("Update user error:", err);
@@ -176,7 +184,7 @@ export default {
     return axios
       .patch(`/jobseeker-experience/${data.id}`, data.payload)
       .then(() => {
-        dispatch('getAllJobseekerExperience');
+        dispatch("getAllJobseekerExperience");
       })
       .catch(err => {
         console.error("Update user error:", err);
@@ -186,7 +194,7 @@ export default {
     return axios
       .post("/jobseeker-education", payload)
       .then(() => {
-        dispatch('getAllJobseekerEducation');
+        dispatch("getAllJobseekerEducation");
       })
       .catch(err => {
         console.error("Update user error:", err);
@@ -216,7 +224,7 @@ export default {
     return axios
       .delete(`/jobseeker-education/${id}`)
       .then(() => {
-        dispatch('getAllJobseekerEducation');
+        dispatch("getAllJobseekerEducation");
       })
       .catch(err => {
         console.error("Update user error:", err);
@@ -226,12 +234,12 @@ export default {
     return axios
       .patch(`/jobseeker-education/${data.id}`, data.payload)
       .then(() => {
-        dispatch('getAllJobseekerEducation');
+        dispatch("getAllJobseekerEducation");
       })
       .catch(err => {
         console.error("Update user error:", err);
       });
-  },
+  }
 };
 
 const transformSearchResult = (user, dispatch) => {
