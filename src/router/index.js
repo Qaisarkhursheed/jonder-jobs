@@ -9,7 +9,7 @@ import FAQ from "../views/FAQ.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import RegisterCompany from "../views/auth/RegisterCompany";
-import ResetPassword from "../views/auth/ResetPassword.vue";
+import ForgotPassword from "../views/auth/ForgotPassword.vue";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
 import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
@@ -30,11 +30,10 @@ import CompanySelectionManagement from "@/views/company/SelectionManagement";
 import CompanyTeamManagement from "@/views/company/TeamManagement";
 import CompanyUser from "@/views/company/User";
 import CompanyPublicProfile from "@/views/company/PublicProfile";
-import CompanySettings from '@/views/company/Settings';
-import CompanyPackagesPricing from '@/views/company/PackagesPricing';
+import CompanySettings from "@/views/company/Settings";
+import CompanyPackagesPricing from "@/views/company/PackagesPricing";
 import Qualifications from "@/views/dashboard/profile/Qualifications";
 import ActualPosition from "@/views/dashboard/profile/ActualPosition";
-
 
 Vue.use(VueRouter);
 
@@ -88,9 +87,9 @@ const routes = [
     }
   },
   {
-    path: "/reset-password",
-    name: "ResetPassword",
-    component: ResetPassword,
+    path: "/forgot-password",
+    name: "ForgotPassword",
+    component: ForgotPassword,
     meta: {
       guest: true
     }
@@ -235,7 +234,7 @@ const routes = [
     component: CompanySettings,
     props: true,
     meta: {
-      requiresAuth: true,
+      requiresAuth: true
     }
   },
   {
@@ -244,7 +243,7 @@ const routes = [
     meta: {
       requiresAuth: true
     },
-    
+
     children: [
       {
         path: "",
@@ -252,7 +251,7 @@ const routes = [
         component: CompanySearch,
         meta: {
           requiresAuth: true
-        },
+        }
       },
       {
         path: "selection-management",
@@ -287,25 +286,25 @@ const routes = [
         component: CompanyPublicProfile,
         meta: {
           requiresAuth: true
-        },
-      },      
+        }
+      },
       {
         path: "user/:id",
         name: "CompanyUser",
         component: CompanyUser,
         props: true,
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         }
       },
-      
+
       {
         path: "packages",
         name: "CompanyPackagesPricing",
         component: CompanyPackagesPricing,
         props: true,
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         }
       }
     ]
@@ -333,11 +332,15 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  if(to.name === 'Home' && from.name === null && localStorage.getItem("user-token")) {
+  if (
+    to.name === "Home" &&
+    from.name === null &&
+    localStorage.getItem("user-token")
+  ) {
     next({
-      name: 'Dashboard'
+      name: "Dashboard"
     });
-  } 
+  }
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user-token") == null) {
       next({

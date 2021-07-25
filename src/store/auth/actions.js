@@ -74,17 +74,13 @@ export default {
     }
   },
 
-  async forgotpass({ commit }, data) {
-    await axios
-      .post("/forgot-password", data)
-      .then(() => {
-        commit("SET_MESSAGE", "User requested new password");
-      })
-      .catch(err => {
-        console.log("Forgot password error:", err);
-
-        commit("SET_MESSAGE", "Request password error");
-      });
+  async forgotPassword(context, data) {
+    try {
+      const resp = await axios.post("/password/email", data);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   },
 
   logout({ commit }) {
