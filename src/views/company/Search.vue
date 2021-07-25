@@ -1,26 +1,25 @@
 <template>
   <div>
-    <SearchForm class="mb-10"
-                @toggleAdvanced="toggle()"/>
-    <SearchFormAdvanced :active="advancedSearch"/>
+    <SearchForm class="mb-10" />
 
-    <SearchSaved style="display: none" />
-    <SearchResultsLock style="display: none" />
+    <SearchSavedFilters />
+    <component :is="searchStatus.components[searchStatus.current]"
+      :results="searchResults" />
+    <!-- <SearchResultsLock style="display: none" />
     <template v-if="searchResults.length">
       <SearchResults class="mt-10"
                    :results="searchResults"/>
     </template>
     <template v-else>
       <SearchNoResults />
-    </template>
+    </template> -->
   </div>
 </template>
 
 <script>
 import store from '@/store'
 import SearchForm from '@/components/company/SearchForm';
-import SearchFormAdvanced from '@/components/company/SearchFormAdvanced';
-import SearchSaved from '@/components/company/SearchSaved';
+import SearchSavedFilters from '@/components/company/SearchSavedFilters';
 import SearchResults from '@/components/company/SearchResults';
 import SearchNoResults from '@/components/company/SearchNoResults';
 import SearchResultsLock from '@/components/company/SearchResultsLock';
@@ -32,8 +31,7 @@ export default {
   components: {
     SearchForm,
     SearchResults,
-    SearchSaved,
-    SearchFormAdvanced,
+    SearchSavedFilters,
     SearchNoResults,
     SearchResultsLock
   },
@@ -41,15 +39,23 @@ export default {
   data() {
     return {
       advancedSearch: false,
+      searchStatus: {
+        current: 'results',
+        options: ['default', 'results', 'noresults', 'limited'],
+        components: {
+          results: SearchResults,
+          noresults: SearchNoResults,
+          limited: SearchResultsLock,
+          default: false,
+        }
+      }
     }
   },
   beforeDestroy() {
-    console.log('before');
+    store.commit('company/SET_SEARCH_RESULTS', []);
   },
   methods: {
-    toggle() {
-      this.advancedSearch = !this.advancedSearch;
-    },
+    
   },
   computed: {
     searchResults() {

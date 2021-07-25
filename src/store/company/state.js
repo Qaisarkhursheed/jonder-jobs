@@ -9,9 +9,11 @@ export default {
   },
   searchResults: [],
   searchInProgress: false,
+  searchFilters: [],
   userInteractions: null,
   peopleReach: null,
   profileViews: null,
+  jobseekerNotes: [],
   companyInteractions: {
     yearlyActivity: null,
     interactions: null

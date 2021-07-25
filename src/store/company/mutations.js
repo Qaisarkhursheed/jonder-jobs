@@ -36,7 +36,13 @@ export default {
   SET_SEARCH_RESULTS(state, value) {
     state.searchResults = value;
   },
+  SET_SEARCH_FILTERS(state, value) {
+    state.searchFilters = value;
+  },
   SET_SEARCH_INPROGRESS(state, value) {
     state.searchInProgress = value
+  },
+  SET_JOBSEEKER_NOTES(state, value) {
+    state.jobseekerNotes = value;
   }
 };

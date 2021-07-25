@@ -20,7 +20,13 @@ export default {
   searchResults(state) {
     return state.searchResults;
   },
+  searchFilters(state) {
+    return state.searchFilters;
+  },
   searchInProgress(state) {
     return state.searchInProgress;
+  },
+  jobseekerNotes(state) {
+    return state.jobseekerNotes;
   }
 };

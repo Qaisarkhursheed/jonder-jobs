@@ -18,13 +18,15 @@
             color="primary"
             size="150"
             class="user-avatar"
-          ></v-avatar>
+          >
+            <img :src="profile.profile_img">
+          </v-avatar>
           <div class="user-header pl-8 pt-5">
             <div class="name">
-              James Smith
+              {{ profile.first_name }} {{ profile.last_name }}
             </div>
             <div class="position">
-              Designer
+              {{ profile.current_position }}
             </div>
           </div>
         </v-col>
@@ -71,7 +73,7 @@
         >
         <v-card flat>
           <keep-alive>
-            <component :is="tabs[item]"></component>
+            <component :is="tabs[item]" :user="profile"></component>
           </keep-alive>
         </v-card>
       </v-tab-item>
@@ -241,12 +243,14 @@ export default {
     ...mapActions('user', ['addUserProfileView']),
     getUser() {
       axios.get(`/users/${this.$route.params.id}`)
-           .then((res) => {
-               this.populateData(res.data);
-           })
-           .catch();
+        .then((res) => {
+            // this.populateData(res.data);
+            this.profile = res.data.data;
+        })
+        .catch();
     },
     populateData(user) {
+      
       this.profile.fullname.value = `${user.first_name} ${user.last_name}`;
       this.profile.email.value = user.email;
       this.profile.address.value = user.address;

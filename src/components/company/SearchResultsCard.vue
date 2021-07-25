@@ -21,7 +21,7 @@
               mdi-briefcase
             </v-icon>
             <span>
-              {{candidate.job}}
+              {{candidate.current_position}}
             </span>
           </div>
         </div>
@@ -80,7 +80,7 @@
         <v-col cols="6" class="experience">
           <div class="label">Experience</div>
           <div class="value">
-            {{ candidate.work_experience }}
+            {{ candidate.working_experience }}
           </div>
         </v-col>
         <v-col cols="6" class="wage">
@@ -93,12 +93,12 @@
     </div>
     <v-card-actions class="pt-0">
       <v-col cols="12" class="d-flex justify-space-between">
-        <div class="star-btn mr-3">
+        <div class="star-btn mr-3" @click="saveJobseeker">
           <v-icon
             size="25"
-            @click="editNote(item)"
+            color="#27AAE1"
           >
-            mdi-star-outline
+            mdi-star
           </v-icon>
         </div>
         <v-btn
@@ -117,9 +117,10 @@
 
 <script>
 
-// Create generic people card with configuration and layout
+import store from '@/store';
 
 export default {
+
   name: 'SearchResultsCard',
 
   props: {
@@ -137,6 +138,13 @@ export default {
           type: 'new', 
           company: true 
         }
+      });
+    },
+    saveJobseeker() {
+      store.dispatch('company/slManagementAddCandidate', {
+        employer_id: store.getters['user/user'].id,
+        jobseeker_id: this.candidate.id,
+        managment_status: 'Saved candidates'
       });
     }
   }
@@ -214,5 +222,10 @@ export default {
     border-radius: 10px;
     justify-content: center;
     cursor: pointer;
+    transition: 0.3s background;
+
+    &:hover {
+      background: #add0e4;
+    }
   }
 </style>

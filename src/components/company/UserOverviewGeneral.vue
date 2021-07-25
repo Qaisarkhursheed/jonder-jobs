@@ -5,13 +5,7 @@
         <div class="section about-me">
           <div class="title">About me</div>
           <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit esse 
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {{ user.about_me }}
           </div>
         </div>
         <div class="section experience mt-7">
@@ -50,18 +44,18 @@
               Position
             </div>
             <div class="content">
-              Manager
+              {{ user.current_position }}
             </div>
           </div>
         </div>
         <div class="section mb-7">
           <div class="title">current industry</div>
-          <div class="content">IT</div>
+          <div class="content">{{ user.branche }}</div>
         </div>
         <div class="section mb-7">
           <div class="title">city and address</div>
           <div class="content">
-            New York, Central Park
+            {{ user.city }} {{ user.address }}
           </div>
         </div>
         <div class="section mb-7">
@@ -104,8 +98,12 @@ export default {
 
   name: 'UserOverviewGeneral',
 
-  components: {
-  }
+  props: {
+    user: {
+      type: Object,
+    }
+  },
+
 };
 </script>
 <style lang="scss" scoped>

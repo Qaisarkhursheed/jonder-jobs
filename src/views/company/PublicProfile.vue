@@ -1,5 +1,6 @@
 <template>
   <div class="public-profile">
+    <UserNoteAdd />
     <v-row class="heading mb-5">
       <v-col cols="9">
         <div class="title">Public Company Profile</div>
@@ -79,6 +80,7 @@ import PublicProfileGeneral from '@/components/company/PublicProfileGeneral';
 import PublicProfileDetails from '@/components/company/PublicProfileDetails';
 import PublicProfileContact from '@/components/company/PublicProfileContact';
 import PublicProfileViewAs from '@/components/company/PublicProfileViewAs';
+import UserNoteAdd from '@/components/modals/UserNoteAdd';
 
 export default {
   name: 'CompanyPublicProfile',
@@ -87,7 +89,8 @@ export default {
     PublicProfileGeneral,
     PublicProfileDetails,
     PublicProfileContact,
-    PublicProfileViewAs
+    PublicProfileViewAs,
+    UserNoteAdd
   },
 
   data() {

@@ -33,129 +33,151 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.industryOfProfession') }}
-        </label>
-        <v-select
-          v-model="formFields.branche"
-          :items="types.JOB_BRANCHE"
-          :hide-details="true"
-          :placeholder="$t('company.search.industryOfProfession')"
-          outlined
-        ></v-select>
-      </v-col>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.schoolGraduation') }}
-        </label>
-        <v-text-field
-          v-model="formFields.school"
-          class="rounded-lg"
-          style="height: 50px;"
-          height="100%"
-          type="text"
-          outlined
-          :hide-details="true"
-          :placeholder="$t('company.search.schoolGraduation')"
-          flat
-          dense
-          solo
-          background-color="#fff">
-        </v-text-field>
-      </v-col>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.educationStudy') }}
-        </label>
-        <v-select
-          v-model="formFields.education"
-          :hide-details="true"
-          :placeholder="$t('company.search.educationStudy')"
-          outlined
-        ></v-select>
-      </v-col>
-    </v-row>
+    <template v-if="advancedSearch">
+      <v-row>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.industryOfProfession') }}
+          </label>
+          <v-select
+            v-model="formFields.branche"
+            :items="types.JOB_BRANCHE"
+            :hide-details="true"
+            :placeholder="$t('company.search.industryOfProfession')"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.schoolGraduation') }}
+          </label>
+          <v-text-field
+            v-model="formFields.school"
+            class="rounded-lg"
+            style="height: 50px;"
+            height="100%"
+            type="text"
+            outlined
+            :hide-details="true"
+            :placeholder="$t('company.search.schoolGraduation')"
+            flat
+            dense
+            solo
+            background-color="#fff">
+          </v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.educationStudy') }}
+          </label>
+          <v-select
+            v-model="formFields.education"
+            :items="types.EDUCATION"
+            :hide-details="true"
+            :placeholder="$t('company.search.educationStudy')"
+            outlined
+          ></v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.salaryRange') }}
+          </label>
+          <v-row class="no-gutters justify-space-between">
+            <v-col cols="6" class="pr-2">
+              <v-text-field
+                v-model="formFields.min_salary"
+                placeholder="Min"
+                class="rounded-lg"
+                style="height: 50px;"
+                height="100%"
+                type="text"
+                outlined
+                :hide-details="true"
+                flat
+                dense
+                solo
+                background-color="#fff">
+              </v-text-field>
+            </v-col>
+            <v-col cols="6" class="pl-2">
+              <v-text-field
+                v-model="formFields.max_salary"
+                placeholder="Max"
+                class="rounded-lg"
+                style="height: 50px;"
+                height="100%"
+                type="text"
+                outlined
+                :hide-details="true"
+                flat
+                dense
+                solo
+                background-color="#fff">
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.workExperience') }}
+          </label>
+          <v-select
+            v-model="formFields.work_experience"
+            :items="types.WORK_EXPERIENCE"
+            :hide-details="true"
+            :placeholder="$t('company.search.workExperience')"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.city') }}
+          </label>
+          <v-text-field
+            v-model="formFields.city"
+            class="rounded-lg"
+            style="height: 50px;"
+            height="100%"
+            type="text"
+            outlined
+            :hide-details="true"
+            :placeholder="$t('company.search.city')"
+            flat
+            dense
+            solo
+            background-color="#fff">
+          </v-text-field>
+        </v-col>
+      </v-row>
+    </template>
 
-    <v-row>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.salaryRange') }}
-        </label>
-        <v-row class="no-gutters justify-space-between">
-          <v-col cols="6" class="pr-2">
-            <v-text-field
-              class="rounded-lg"
-              style="height: 50px;"
-              height="100%"
-              type="text"
-              outlined
-              :hide-details="true"
-              flat
-              dense
-              solo
-              background-color="#fff">
-            </v-text-field>
-          </v-col>
-          <v-col cols="6" class="pl-2">
-            <v-text-field
-              class="rounded-lg"
-              style="height: 50px;"
-              height="100%"
-              type="text"
-              outlined
-              :hide-details="true"
-              flat
-              dense
-              solo
-              background-color="#fff">
-            </v-text-field>
+    <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
+      <v-col cols="6">
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              color="#fff"
+              height="58"
+              class="full-w mt-16 font-weight-medium"
+              @click="searchSave"
+            >
+                Save search
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.workExperience') }}
-        </label>
-        <v-select
-          v-model="formFields.work_experience"
-          :items="types.WORK_EXPERIENCE"
-          :hide-details="true"
-          :placeholder="$t('company.search.workExperience')"
-          outlined
-        ></v-select>
-      </v-col>
-      <v-col cols="4">
-        <label class="section-label">
-          {{ $t('company.search.city') }}
-        </label>
-        <v-text-field
-          v-model="formFields.city"
-          class="rounded-lg"
-          style="height: 50px;"
-          height="100%"
-          type="text"
-          outlined
-          :hide-details="true"
-          :placeholder="$t('company.search.city')"
-          flat
-          dense
-          solo
-          background-color="#fff">
-        </v-text-field>
-      </v-col>
-    </v-row>
-
-    <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
-      <v-col cols="6"></v-col>
       <v-col cols="6">
         <v-row>
           <v-col cols="6">
             <v-btn
               height="58"
-              class="full-w mt-16 font-weight-medium "
+              :class="['advanced-search-btn full-w mt-16 font-weight-medium', 
+                { active: advancedSearch}
+              ]"
               color="#fff"
+              @click="advancedSearch = !advancedSearch"
             >
               {{ $t('company.search.advancedSearch') }}
             </v-btn>
@@ -197,8 +219,11 @@ export default {
         work_experience: '',
         branche: '',
         school: '',
-        education: ''
-      }
+        education: '',
+        min_salary: '',
+        max_salary: ''
+      },
+      advancedSearch: false
     }
   },
 
@@ -208,6 +233,9 @@ export default {
   methods: {
     search() {
       store.dispatch('company/searchJobseekers', this.prepareData());
+    },
+    searchSave() {
+      store.dispatch('company/searchFilterSave', this.prepareData());
     },
     prepareData() {
       let activatedFields = {};

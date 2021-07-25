@@ -50,6 +50,17 @@ const WORK_EXPERIENCE = [
   '20+'
 ];
 
+const SCHOOL = [
+  'School example 1',
+  'School example 2',
+  'School example 3'
+];
+
+const EDUCATION = [
+  'Education example 1',
+  'Education example 2',
+  'Education example 3'
+];
 
 export default {
   SELECTION_MANAGEMENT_STATUS,
@@ -57,5 +68,7 @@ export default {
   JOB_POSITION,
   JOB_BRANCHE,
   SALARY_RANGE,
-  WORK_EXPERIENCE
+  WORK_EXPERIENCE,
+  SCHOOL,
+  EDUCATION
 }
