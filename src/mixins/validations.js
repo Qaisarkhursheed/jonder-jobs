@@ -1,7 +1,7 @@
 export default {
-  data() {
-    return {
-      validations: {
+  computed: {
+    validations() {
+      return {
         email: v =>
           !v ||
           /\S+@\S+\.\S+/.test(v) ||
@@ -58,7 +58,7 @@ export default {
           string: n => v =>
             !v || v.length >= n || `Muss mindestens ${n} Zeichen lang sein.`
         }
-      }
-    };
+      };
+    }
   }
 };
