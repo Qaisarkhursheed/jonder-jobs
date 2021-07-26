@@ -242,9 +242,17 @@ export default {
     },
     filterData(){
       let searchMeta = store.getters['company/searchMeta'] ? store.getters['company/searchMeta'].searchInput : null;
+      console.log("meta", searchMeta);
       if(searchMeta){
         if(searchMeta.employment_type) this.formFields.employment_type = searchMeta.employment_type;
         if(searchMeta.job_position) this.formFields.job_position = searchMeta.job_position;
+        if(searchMeta.work_experience) this.formFields.work_experience = searchMeta.work_experience;
+        if(searchMeta.branche) this.formFields.branche = searchMeta.branche;
+        if(searchMeta.school) this.formFields.school = searchMeta.school;
+        if(searchMeta.education) this.formFields.education = searchMeta.education;
+        if(searchMeta.min_salary) this.formFields.min_salary = searchMeta.min_salary;
+        if(searchMeta.max_salary) this.formFields.max_salary = searchMeta.max_salary;
+        if(searchMeta.city) this.formFields.city = searchMeta.city;
       }
     },
     prepareData() {

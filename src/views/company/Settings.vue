@@ -19,6 +19,8 @@
       >
         Back to homepage
       </v-btn>
+
+      
     </div>
 
     <!-- Main -->
@@ -114,6 +116,17 @@
                   v-model="user.email"
                 ></v-text-field>
                 <small style="opacity: 60%">Email is not verified yet</small>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="6">
+                 <v-btn
+            depressed
+            color="primary"
+            class="pl-8 pr-8"
+            @click="handleUpdate"
+            >{{ $t("general.save") }}
+          </v-btn>
               </v-col>
             </v-row>
           </v-card>
@@ -251,6 +264,7 @@
 </template>
 
 <script>
+import store from "@/store";
 import { mapGetters } from "vuex";
 import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
@@ -286,6 +300,15 @@ export default {
     this.fillData();
   },
   methods: {
+    updateCompanyUser(input) {
+      store.dispatch("user/updateCompanyUser", {
+        id: this.user.id,
+        data: {
+          ...input,
+          _method: "PATCH"
+        }
+      });
+    },
     fillData() {
       const user = this.user;
       if (!user) return;
@@ -304,6 +327,22 @@ export default {
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
+    },
+    handleUpdate() {
+      const formDataCopy = Object.assign({}, this.formData);
+
+      if (!(this.formData.cv instanceof File)) {
+        delete formDataCopy.cv;
+      }
+
+      if (!(this.formData.resume instanceof File)) {
+        delete formDataCopy.resume;
+      }
+
+      if (!(this.formData.qualifications instanceof File)) {
+        delete formDataCopy.qualifications;
+      }
+      this.updateCompanyUser(formDataCopy);
     },
     downloadInvoice() {
       // TODO
