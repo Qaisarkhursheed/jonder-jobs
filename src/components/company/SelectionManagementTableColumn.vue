@@ -15,12 +15,14 @@
         :list="selection" 
         group="people" 
         @change="add($event)"
+        
       >
         <div
           class="column-group-item d-flex pa-4 
                  mb-3 full-h align-center justify-start"
           v-for="item in selection"
           :key="item.id"
+          @click="$router.push({ name: 'CompanyUser', params: { id: item.jobseeker.id, type: 'selection' } })"
         >
           <v-avatar
             color="#f1f1f1"

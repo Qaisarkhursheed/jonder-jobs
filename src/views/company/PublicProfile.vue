@@ -58,7 +58,7 @@
                   <keep-alive>
                     <component
                       :is="tabComponents[item]"
-                      @update="updateCompany"
+                      @update="handleUpdate"
                       :user="user"
                     >
                     </component>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import store from "@/store";
 import PublicProfileGeneral from "@/components/company/PublicProfileGeneral";
 import PublicProfileDetails from "@/components/company/PublicProfileDetails";
@@ -108,18 +109,30 @@ export default {
     };
   },
   methods: {
-    updateCompany(input) {
-      store.dispatch("user/updateCompanyUser", {
+     ...mapActions('user', ['updateCompany']),
+    updateCompanyOld(input) {
+      console.log("input");
+      console.log(input);
+      store.dispatch("user/updateCompany", {
         id: this.user.id,
         data: {
-          ...input,
-          _method: "PATCH"
+          ...input
         }
       });
     },
     viewAsTab() {
       this.viewAs = !this.viewAs;
-    }
+    },
+    handleUpdate(input) {
+      this.updateCompany(input)
+        .then(() => {
+          alert("Success");
+        })
+        .catch(err => {
+          alert(err.data.message);
+        });
+      //this.updateCompanyUser(formDataCopy);
+    },
   },
   computed: {
     user() {

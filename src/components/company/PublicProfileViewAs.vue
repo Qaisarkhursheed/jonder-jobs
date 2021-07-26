@@ -124,7 +124,7 @@ export default {
 
   computed: {
     avatar() {
-      return `https://dev.api.jonder.devla.dev/storage/avatars/${this.user.profile_img}`;
+      return `${this.user.profile_img}`;
     }
   }
 }

@@ -254,9 +254,16 @@ export default {
       });
     },
     back() {
-      this.$router.push({
-        name: "CompanySearch"
-      });
+
+      if(this.$route.params.type && this.$route.params.type === "selection"){
+        this.$router.push({
+          name: "CompanySelectionManagement"
+        });
+      }else{
+        this.$router.push({
+          name: "CompanySearch"
+        });
+      }
     }
   }
 };

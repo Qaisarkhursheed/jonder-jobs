@@ -119,6 +119,29 @@ export default {
       return Promise.reject(error.response);
     }
   },
+  async updateCompany({ commit, state }, payload) {
+    console.log(state.user.id);
+    let formData = new FormData();
+    let data = payload;
+    if (data.data) data = data.data;
+    Object.keys(data).forEach((key) => {
+      if (Array.isArray(data[key])) {
+        data[key].forEach((el) => {
+          if (el && el !== null) formData.append(key + "[]", el);
+        });
+      } else {
+        formData.append(key, data[key]);
+      }
+    });
+    formData.append("_method", "PATCH");
+    try {
+      const resp = await axios.post("/copmanies/" + state.user.id, formData);
+      commit("SET_USER", resp.data.data);
+      return resp;
+    } catch (error) {
+      return Promise.reject(error.response);
+    }
+  },
   async updateCompanyUser({ commit, state }, payload) {
     console.log(state.user.id);
     let formData = new FormData();

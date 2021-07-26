@@ -108,7 +108,8 @@ export default {
 
   methods: {
     populateData() {
-      this.form.profile_img = `https://dev.api.jonder.devla.dev/storage/avatars/${this.user.profile_img}`;
+      //this.form.profile_img = `https://dev.api.jonder.devla.dev/storage/avatars/${this.user.profile_img}`;
+      this.form.profile_img = `${this.user.profile_img}`;
       this.form.company = this.user.company;
       this.form.about_company = this.user.about_company;
     },
