@@ -1,18 +1,12 @@
 <template>
   <div>
-    <SearchForm class="mb-10" />
+    <SearchForm class="mb-10" @search="search"/>
 
-    <SearchSavedFilters />
+    <SearchSavedFilters @search="search" />
+
     <component :is="searchStatus.components[searchStatus.current]"
-      :results="searchResults" />
-    <!-- <SearchResultsLock style="display: none" />
-    <template v-if="searchResults.length">
-      <SearchResults class="mt-10"
-                   :results="searchResults"/>
-    </template>
-    <template v-else>
-      <SearchNoResults />
-    </template> -->
+      :results="searchResults" 
+    />
   </div>
 </template>
 
@@ -21,7 +15,6 @@ import store from '@/store'
 import SearchForm from '@/components/company/SearchForm';
 import SearchSavedFilters from '@/components/company/SearchSavedFilters';
 import SearchResults from '@/components/company/SearchResults';
-import SearchNoResults from '@/components/company/SearchNoResults';
 import SearchResultsLock from '@/components/company/SearchResultsLock';
 
 export default {
@@ -32,19 +25,18 @@ export default {
     SearchForm,
     SearchResults,
     SearchSavedFilters,
-    SearchNoResults,
     SearchResultsLock
   },
 
   data() {
     return {
       advancedSearch: false,
+      searchExecuted: false,
       searchStatus: {
-        current: 'results',
-        options: ['default', 'results', 'noresults', 'limited'],
+        current: 'default',
+        options: ['default', 'results', 'limited'],
         components: {
           results: SearchResults,
-          noresults: SearchNoResults,
           limited: SearchResultsLock,
           default: false,
         }
@@ -53,9 +45,14 @@ export default {
   },
   beforeDestroy() {
     store.commit('company/SET_SEARCH_RESULTS', []);
+    this.searchExecuted = false;
+    this.searchStatus.current = 'default';
   },
   methods: {
-    
+    search() {
+      this.searchExecuted = true;
+      this.searchStatus.current = 'results';
+    }
   },
   computed: {
     searchResults() {

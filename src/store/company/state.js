@@ -8,6 +8,11 @@ export default {
     'Hired': []
   },
   searchResults: [],
+  searchResultsMeta: {
+    per_page: 6,
+    current_page: 1,
+    total: 0
+  },
   searchInProgress: false,
   searchFilters: [],
   userInteractions: null,

@@ -36,6 +36,9 @@ export default {
   SET_SEARCH_RESULTS(state, value) {
     state.searchResults = value;
   },
+  SET_SEARCH_META(state, value) {
+    state.searchResultsMeta = value;
+  },
   SET_SEARCH_FILTERS(state, value) {
     state.searchFilters = value;
   },

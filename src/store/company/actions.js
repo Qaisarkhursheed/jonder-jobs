@@ -142,11 +142,37 @@ export default {
   },
 
   searchJobseekers({ commit }, payload) {
+    let obj = {
+      per_page: 3,
+      page: 1,
+      ...payload
+    };
     commit('SET_SEARCH_INPROGRESS', true);
     return axios
-      .post('/company/search/', payload)
+      .post('/company/search/', obj)
       .then((res) => {
-        console.log('SEARCH', res);
+        if (res.status === 200) {
+          commit('SET_SEARCH_INPROGRESS', false);
+          commit('SET_SEARCH_RESULTS', res.data.data);
+          commit('SET_SEARCH_META', {
+            current_page: res.data.meta.current_page, 
+            per_page: res.data.meta.per_page,
+            total: res.data.meta.total,
+            searchInput: payload
+          });
+        }
+      })
+  },
+  searchJobseekerPagination({ commit, getters }, page) {
+    let obj = {
+      ...getters['searchMeta'].searchInput,
+      page: page,
+      per_page: getters['searchMeta'].per_page
+    };
+    console.log(obj);
+    return axios
+      .post('/company/search/', obj)
+      .then((res) => {
         if (res.status === 200) {
           commit('SET_SEARCH_INPROGRESS', false);
           commit('SET_SEARCH_RESULTS', res.data.data);

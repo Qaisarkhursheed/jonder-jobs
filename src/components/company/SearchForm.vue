@@ -160,7 +160,8 @@
             <v-btn
               color="#fff"
               height="58"
-              class="full-w mt-16 font-weight-medium"
+              elevation="0"
+              class="full-w mt-16 font-weight-medium white"
               @click="searchSave"
             >
                 Save search
@@ -173,7 +174,8 @@
           <v-col cols="6">
             <v-btn
               height="58"
-              :class="['advanced-search-btn full-w mt-16 font-weight-medium', 
+              elevation="0"
+              :class="['advanced-search-btn full-w mt-16 white font-weight-medium', 
                 { active: advancedSearch}
               ]"
               color="#fff"
@@ -233,6 +235,7 @@ export default {
   methods: {
     search() {
       store.dispatch('company/searchJobseekers', this.prepareData());
+      this.$emit('search');
     },
     searchSave() {
       store.dispatch('company/searchFilterSave', this.prepareData());
