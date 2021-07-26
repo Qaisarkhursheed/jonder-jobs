@@ -93,14 +93,28 @@
     </div>
     <v-card-actions class="pt-0">
       <v-col cols="12" class="d-flex justify-space-between">
-        <div class="star-btn mr-3" @click="saveJobseeker">
-          <v-icon
-            size="25"
-            color="#27AAE1"
-          >
-            mdi-star
-          </v-icon>
-        </div>
+        <template v-if="candidate.selection_managment">
+          <div class="star-btn mr-3">
+            <v-icon
+              size="25"
+              color="#27AAE1"
+            >
+              mdi-star
+            </v-icon>
+          </div>
+        </template>
+
+        <template v-else>
+          <div class="star-btn mr-3" @click="saveJobseeker">
+            <v-icon
+              size="25"
+               color="#000"
+            >
+              mdi-star-outline
+            </v-icon>
+          </div>
+        </template>
+        
         <v-btn
           color="primary"
           height="48"
@@ -146,7 +160,8 @@ export default {
         jobseeker_id: this.candidate.id,
         managment_status: 'Saved candidates'
       });
-    }
+      this.candidate.selection_managment = true;
+    },
   }
 };
 
