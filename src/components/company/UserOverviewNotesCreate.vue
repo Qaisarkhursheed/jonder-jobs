@@ -11,7 +11,12 @@
       </p>
       <v-row>
         <v-col cols="12">
-          <v-textarea v-model="content">
+          <v-textarea 
+            v-model="content"
+            height="200px"
+            outlined
+            no-resize
+          >
 
           </v-textarea>
         </v-col>
@@ -24,9 +29,10 @@
               <v-btn
                 @click="close"
                 height="58"
-                class="full-w mt-16 font-weight-medium "
+                class="full-w white mt-16 font-weight-medium "
                 color="#fff"
                 light
+                elevation="0"
               >
                 {{ $t('general.cancel') }}
               </v-btn>
