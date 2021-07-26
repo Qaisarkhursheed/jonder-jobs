@@ -2,7 +2,11 @@
   <div class="search-saved">
     <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7" flat>
       <v-row class="no-gutters">
-        <v-col cols="10">
+        <v-col 
+          cols="10" 
+          xl="10"
+          lg="9"
+        >
           <v-row class="no-gutters">
             <v-col cols="12">
               <div class="title">
@@ -48,12 +52,19 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="2">
+        <v-col 
+          cols="2"
+          xl="2"
+          lg="3"
+        >
           <v-row class="no-gutters">
             <v-col cols="4"></v-col>
             <v-col cols="5" class="result">
-              <div class="value">142</div>
-              <div class="label">Results</div>
+              <!--
+                no backend support
+                <div class="value">142</div> 
+                <div class="label">Results</div>
+              -->
             </v-col>
             <v-col cols="3">
               <v-menu
@@ -92,6 +103,7 @@
 <script>
 
 import store from '@/store';
+import { forEach } from 'lodash';
 
 export default {
 
@@ -121,12 +133,23 @@ export default {
   methods: {
     filterAction(action) {
       if(action.type === 'use') {
-        store.dispatch('company/searchJobseekers', this.filter)
+        store.dispatch('company/searchJobseekers', this.prepareData());
+        this.$emit('filter-search');
       }
       if(action.type === 'delete') {
         store.dispatch('company/searchFilterDelete', this.filter.id);
       }
-    }
+    },
+    prepareData() {
+      let activatedFields = {};
+
+      forEach(this.filter, (item, key) => {
+        if (item) {
+          activatedFields[key] = item;
+        }
+      });
+      return activatedFields;
+    },
   }
 };
 </script>

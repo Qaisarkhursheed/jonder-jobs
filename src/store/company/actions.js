@@ -143,7 +143,7 @@ export default {
 
   searchJobseekers({ commit }, payload) {
     let obj = {
-      per_page: 3,
+      per_page: 6,
       page: 1,
       ...payload
     };

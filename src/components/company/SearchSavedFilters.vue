@@ -1,7 +1,11 @@
 <template>
   <div class="search-saved-filters">
     <div v-for="(filter, i) in searchFilters" :key="i">
-      <SearchFilter class="mb-5" :filter="filter" />
+      <SearchFilter 
+        class="mb-5" 
+        :filter="filter" 
+        @filter-search="$emit('search')" 
+      />
     </div>
   </div>
 </template>
