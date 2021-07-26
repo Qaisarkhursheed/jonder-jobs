@@ -23,11 +23,12 @@
   </div> -->
   <div class="chat-container">
     <v-row class="full-h">
-      <v-col cols="5" class="full-h">
+      <v-col v-if="!chatFull" cols="5" class="full-h">
         <chat-asside class="full-h flex-grow-1 flex-shrink-1 overflow-list" />
       </v-col>
-      <v-col cols="7" class="full-h">
+      <v-col cols="col" class="full-h">
         <chat-messages
+          @chat-full="chatFull = $event"
           v-if="selectedConversation && conversationDetails"
           :messages="selectedConversation"
           :conversation-details="conversationDetails"
@@ -55,7 +56,8 @@ export default {
   data: () => ({
     messages: null,
     showProfile: null,
-    polling: null
+    polling: null,
+    chatFull: false
   }),
   methods: {
     ...mapActions("chat", [
