@@ -2,6 +2,10 @@
   <v-list-item
     :key="`id-${conversation.id}`"
     class="pt-3 pb-3 pl-7 pr-7"
+    :class="{
+      'v-list-item--active':
+        conversation.id == $store.getters['chat/conversationDetails'].id
+    }"
     @click="open"
     v-if="getParticipian(conversation)"
   >
@@ -76,7 +80,7 @@ export default {
     },
     getFullName(conversation) {
       const p = this.getParticipian(conversation);
-      return p.first_name + " " + p.last_name;
+      return p.company || p.first_name + " " + p.last_name;
     },
     getInitials(conversation) {
       return (
@@ -106,7 +110,7 @@ export default {
       this.SET_CONVERSATION_DETAILS({
         id: this.conversation.id,
         user_id: p.id,
-        user_name: p.first_name + " " + p.last_name,
+        user_name: this.getFullName(this.conversation),
         unread_messages: this.conversation.unread_messages,
         profile_img: p.profile_img
       });

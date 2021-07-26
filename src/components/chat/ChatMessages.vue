@@ -28,10 +28,23 @@
           <v-icon class="chat-icon mr-4">
             mdi-information-outline
           </v-icon>
-          <v-icon class="chat-icon mr-4">
+          <v-icon
+            class="chat-icon mr-4"
+            @click="
+              chatFull = !chatFull;
+              $emit('chat-full', chatFull);
+            "
+          >
             mdi-arrow-expand
           </v-icon>
-          <v-icon class="chat-icon mr-4">
+          <v-icon
+            class="chat-icon mr-4"
+            @click="
+              $store.commit('chat/FILL_SINGLE_CONVERSATION', null);
+              $store.commit('chat/SET_CONVERSATION_DETAILS', {});
+              $emit('chat-full', false);
+            "
+          >
             mdi-close
           </v-icon>
         </v-row>
@@ -110,7 +123,8 @@ export default {
   },
   data: () => ({
     newMessage: "",
-    sending: false
+    sending: false,
+    chatFull: false
   }),
   mounted() {
     this.scrollToBottom();
@@ -140,10 +154,14 @@ export default {
         });
     },
     getInitials(conversation) {
-      return (
-        conversation.user_name.charAt(0) +
-        conversation.user_name.split(" ")[1].charAt(0)
-      );
+      if (conversation.user_name.split(" ").length > 1) {
+        return (
+          conversation.user_name.charAt(0) +
+          conversation.user_name.split(" ")[1].charAt(0)
+        );
+      }
+
+      return conversation.user_name.substr(0, 2);
     },
     getImagePath(msg) {
       const data = JSON.parse(msg.body);
