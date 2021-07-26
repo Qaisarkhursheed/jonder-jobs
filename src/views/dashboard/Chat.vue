@@ -22,11 +22,11 @@
     />
   </div> -->
   <div class="chat-container">
-    <v-row>
-      <v-col cols="5">
-        <chat-asside class="flex-grow-1 flex-shrink-1 overflow-list" />
+    <v-row class="full-h">
+      <v-col cols="5" class="full-h">
+        <chat-asside class="full-h flex-grow-1 flex-shrink-1 overflow-list" />
       </v-col>
-      <v-col cols="7">
+      <v-col cols="7" class="full-h">
         <chat-messages
           v-if="selectedConversation && conversationDetails"
           :messages="selectedConversation"
@@ -66,18 +66,18 @@ export default {
     ]),
     async init() {
       await this.getAllConversations();
-      if (this.$route.params.type === "new" && this.$route.params.id)
-        this.addPlaceholderMessage(this.$route.params.id);
+      // if (this.$route.params.type === "new" && this.$route.params.id)
+      //   this.addPlaceholderMessage(this.$route.params.id);
     },
     async pollData() {
       this.polling = setInterval(async () => {
-        this.getAllConversations();
+        // this.getAllConversations();
         if (this.conversationDetails && this.conversationDetails.user_id) {
-          if (this.conversationDetails.unread_messages > 0)
-            await this.seenMessage(this.conversationDetails.user_id);
-          this.getSingleConversation({ id: this.conversationDetails.user_id });
-          this.getAllConversations();
+          // if (this.conversationDetails.unread_messages > 0)
+          //   await this.seenMessage(this.conversationDetails.user_id);
+          this.getSingleConversation({ id: this.conversationDetails.id });
         }
+        this.getAllConversations();
       }, 30000);
     }
   },

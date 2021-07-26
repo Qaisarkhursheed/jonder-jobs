@@ -1,6 +1,6 @@
 <template>
   <div class="public-profile">
-    <UserNoteAdd />
+    <!-- <UserNoteAdd /> -->
     <v-row class="heading mb-5">
       <v-col cols="9">
         <div class="title">Public Company Profile</div>
@@ -13,14 +13,13 @@
           class="full-w font-weight-medium "
           @click="viewAsTab"
         >
-         <template v-if="viewAs">
-          Back to Edit
-         </template>
-         <template v-else>
-          View as Jobseeker
-         </template>
+          <template v-if="viewAs">
+            Back to Edit
+          </template>
+          <template v-else>
+            View as Jobseeker
+          </template>
         </v-btn>
-        
       </v-col>
     </v-row>
     <v-row>
@@ -30,17 +29,17 @@
             class="pl-8 pr-8"
             slider-color="#fff"
             vertical
-            v-model="tabs.active">
-              <v-tab
-                class="pt-7 pb-7"
-                v-for="tab in tabs.options"
-                :key="tab"
-                slider-color="#0253B3"
-              >
-                {{ tab }}
-              </v-tab>
+            v-model="tabs.active"
+          >
+            <v-tab
+              class="pt-7 pb-7"
+              v-for="tab in tabs.options"
+              :key="tab"
+              slider-color="#0253B3"
+            >
+              {{ tab }}
+            </v-tab>
           </v-tabs>
-
         </v-card>
       </v-col>
       <v-col cols="8">
@@ -51,21 +50,21 @@
               v-for="item in tabs.options"
               :key="item"
             >
-            <v-card flat class="pa-10">
-              <template v-if="viewAs">
-                <PublicProfileViewAs :user="user" />
-              </template>
-              <template v-else>
-                <keep-alive>
-                  <component 
-                    :is="tabComponents[item]" 
-                    @update="updateCompany"
-                    :user="user"
-                  >
-                  </component>
-                </keep-alive>
-              </template>
-            </v-card>
+              <v-card flat class="pa-10">
+                <template v-if="viewAs">
+                  <PublicProfileViewAs :user="user" />
+                </template>
+                <template v-else>
+                  <keep-alive>
+                    <component
+                      :is="tabComponents[item]"
+                      @update="updateCompany"
+                      :user="user"
+                    >
+                    </component>
+                  </keep-alive>
+                </template>
+              </v-card>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -75,61 +74,59 @@
 </template>
 
 <script>
-import store from '@/store'
-import PublicProfileGeneral from '@/components/company/PublicProfileGeneral';
-import PublicProfileDetails from '@/components/company/PublicProfileDetails';
-import PublicProfileContact from '@/components/company/PublicProfileContact';
-import PublicProfileViewAs from '@/components/company/PublicProfileViewAs';
-import UserNoteAdd from '@/components/modals/UserNoteAdd';
+import store from "@/store";
+import PublicProfileGeneral from "@/components/company/PublicProfileGeneral";
+import PublicProfileDetails from "@/components/company/PublicProfileDetails";
+import PublicProfileContact from "@/components/company/PublicProfileContact";
+import PublicProfileViewAs from "@/components/company/PublicProfileViewAs";
+// import UserNoteAdd from "@/components/modals/UserNoteAdd";
 
 export default {
-  name: 'CompanyPublicProfile',
+  name: "CompanyPublicProfile",
 
   components: {
     PublicProfileGeneral,
     PublicProfileDetails,
     PublicProfileContact,
-    PublicProfileViewAs,
-    UserNoteAdd
+    PublicProfileViewAs
+    // UserNoteAdd
   },
 
   data() {
     return {
       tabs: {
-        active: 'details',
-        options: ['general', 'details', 'contact'],
+        active: "details",
+        options: ["general", "details", "contact"]
       },
       tabComponents: {
         general: PublicProfileGeneral,
         details: PublicProfileDetails,
         contact: PublicProfileContact,
-        viewAs:  PublicProfileViewAs
+        viewAs: PublicProfileViewAs
       },
       viewAs: false
     };
   },
   methods: {
     updateCompany(input) {
-      store.dispatch('user/updateCompanyUser', {
+      store.dispatch("user/updateCompanyUser", {
         id: this.user.id,
         data: {
           ...input,
-          _method: 'PATCH'
+          _method: "PATCH"
         }
-      })
+      });
     },
     viewAsTab() {
       this.viewAs = !this.viewAs;
-    },
+    }
   },
   computed: {
-
     user() {
-      return store.getters['user/user'];
+      return store.getters["user/user"];
     }
   }
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -146,7 +143,7 @@ export default {
   .subtitle {
     font-weight: normal;
     font-size: 18px;
-    color: #7A7A7A;
+    color: #7a7a7a;
   }
 }
 </style>
