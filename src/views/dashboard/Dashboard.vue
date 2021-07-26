@@ -1,41 +1,59 @@
 <template>
-  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">    
-    <UpgradePlanModal v-if="modals.UpgradePlan.active" :active="modals.UpgradePlan.active"
+  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
+    <UpgradePlanModal
+      v-if="modals.UpgradePlan.active"
+      :active="modals.UpgradePlan.active"
       :edit="modals.UpgradePlan.edit"
-      @close="toggleModal('UpgradePlan')" />
+      @close="toggleModal('UpgradePlan')"
+    />
 
     <v-col cols="12">
       <div class="dashboard-holder">
-        <div  v-if="messagesLoaded">
-          <template v-if="conversations">
-            <Chat />
-          </template>
+        <div v-if="messagesLoaded && conversations.length">
+          <Chat />
         </div>
-        <template v-else> 
-          <div class="user-name"> Hello, <span  style="color:#0253B3;">{{user.first_name}} {{user.last_name}} </span></div>
-          <div class="no-msg"> There is no any messages yet </div>
+        <template v-else>
+          <div class="user-name">
+            Hello,
+            <span style="color:#0253B3;"
+              >{{ user.first_name }} {{ user.last_name }}
+            </span>
+          </div>
+          <div class="no-msg">There is no any messages yet</div>
           <div class="upgrade-box">
-            <div class="upgrade-title"> Increase account visibility by upgrading account </div>
-            <v-img class="badge"
-            :src="require('@/assets/icons/top-rated.svg')"></v-img>
-            <div class="d-flex" style="font-size: 13px; justify-content: space-between;">
-              <p> 
-               Be on the top of search for 3 days
+            <div class="upgrade-title">
+              Increase account visibility by upgrading account
+            </div>
+            <v-img
+              class="badge"
+              :src="require('@/assets/icons/top-rated.svg')"
+            ></v-img>
+            <div
+              class="d-flex"
+              style="font-size: 13px; justify-content: space-between;"
+            >
+              <p>
+                Be on the top of search for 3 days
               </p>
 
-              <div>        
-                <CardActionableList type="UpgradePlan"
-                @edit="activateEdit('UpgradePlan', $event)" />
-                  <p style="color: #55F481; width: 100%; cursor: pointer;" class="text-right"  @click="toggleModal('UpgradePlan')"> 
+              <div>
+                <CardActionableList
+                  type="UpgradePlan"
+                  @edit="activateEdit('UpgradePlan', $event)"
+                />
+                <p
+                  style="color: #55F481; width: 100%; cursor: pointer;"
+                  class="text-right"
+                  @click="toggleModal('UpgradePlan')"
+                >
                   Upgrade now
-                  </p>
+                </p>
               </div>
-
             </div>
           </div>
           <div class="image-placeholder">
             <v-img :src="require('@/assets/icons/rafiki.png')"></v-img>
-          </div>          
+          </div>
         </template>
         <company-list />
       </div>
@@ -47,10 +65,10 @@
 // import UserMessages from "@/components/dashboard/UserMessages";
 import CompanyList from "@/components/dashboard/CompanyList";
 import { mapActions, mapGetters } from "vuex";
-import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
-import CardActionableList from '@/components/user/JobseekerCardActionableList';
+import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
 // move chat to component
-import Chat from '@/views/dashboard/Chat';
+import Chat from "@/views/dashboard/Chat";
 
 export default {
   name: "Dashboard",
@@ -59,7 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"]),
-    ...mapGetters("chat", ["conversations", "messagesLoaded"]),
+    ...mapGetters("chat", ["conversations", "messagesLoaded"])
   },
   methods: {
     ...mapActions("chat", ["getAllConversations"]),
@@ -85,12 +103,12 @@ export default {
         active: false,
         edit: false,
         component: UpgradePlanModal
-      },
+      }
     },
     fileActions: {
-      UpgradePlan: ['edit', 'delete'],
-    },
-  }),
+      UpgradePlan: ["edit", "delete"]
+    }
+  })
 };
 </script>
 

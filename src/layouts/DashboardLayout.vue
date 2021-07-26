@@ -156,9 +156,36 @@
 
             <div class="top-info">
               <span class="about-info"> Documents </span>
-              <p>{{ user.cv }}</p>
-              <p>{{ user.qualifications }}</p>
-              <p>{{ user.resume }}</p>
+              <div v-if="user.cv" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.cv" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  CV
+                </div>
+              </div>
+              <div v-if="user.qualifications" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.qualifications" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  Qualifications
+                </div>
+              </div>
+              <div v-if="user.resume" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.resume" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  Resume
+                </div>
+              </div>
             </div>
           </v-row>
         </div>
@@ -175,11 +202,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
-import CardActionableList from '@/components/user/JobseekerCardActionableList';
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
 
 export default {
   components: {
-    CardActionableList,
+    CardActionableList
   },
 
   data: () => ({
@@ -355,7 +382,7 @@ export default {
 }
 
 .nav-item {
-  border-bottom: 0.5px solid #CACACA;
+  border-bottom: 0.5px solid #cacaca;
   font-weight: 500;
   font-size: 18px;
   height: auto;
@@ -366,8 +393,8 @@ export default {
   transition: 0.3s color, 0.3s border-color;
 
   &:hover {
-    color: #0253B3;
-    border-color: #0253B3;
+    color: #0253b3;
+    border-color: #0253b3;
   }
 }
 
