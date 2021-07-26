@@ -27,11 +27,25 @@ export default {
     state.companyInteractions.yearlyActivity = value.yearly_activity;
     state.companyInteractions.interactions = value.interactions;
   },
-
   SET_SELECTION_MANAGEMENT(state, value) {
     assign(
       state.selectionManagement,
       groupBy(value, 'managment_status')
     );
+  },
+  SET_SEARCH_RESULTS(state, value) {
+    state.searchResults = value;
+  },
+  SET_SEARCH_META(state, value) {
+    state.searchResultsMeta = value;
+  },
+  SET_SEARCH_FILTERS(state, value) {
+    state.searchFilters = value;
+  },
+  SET_SEARCH_INPROGRESS(state, value) {
+    state.searchInProgress = value
+  },
+  SET_JOBSEEKER_NOTES(state, value) {
+    state.jobseekerNotes = value;
   }
 };

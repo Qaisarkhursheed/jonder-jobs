@@ -2,11 +2,15 @@
   <div class="search-saved">
     <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7" flat>
       <v-row class="no-gutters">
-        <v-col cols="10">
+        <v-col 
+          cols="10" 
+          xl="10"
+          lg="9"
+        >
           <v-row class="no-gutters">
             <v-col cols="12">
               <div class="title">
-                Product Designer
+                {{ filter.job_position }}
               </div>
               <div class="subtitle">
                 02/07/2021
@@ -21,7 +25,7 @@
                     Type of employeement:
                   </span>
                   <span class="value">
-                    Fulltime
+                    {{ filter.employment_type }}
                   </span>
                 </div>
                 <div class="section">
@@ -29,7 +33,7 @@
                     Industry:
                   </span>
                   <span class="value">
-                    Fulltime
+                    {{ filter.branche }}
                   </span>
                 </div>
                 <div class="section">
@@ -37,23 +41,30 @@
                     Salary range:
                   </span>
                   <span class="value">
-                    10 000 - 20 000
+                    {{ filter.min_salary }} - {{ filter.max_salary }}
                   </span>
                 </div>
                 <div class="section">
                   <span class="label">City:</span>
-                  <span class="value">Munich</span>
+                  <span class="value">{{ filter.city }}</span>
                 </div>
               </div>
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="2">
+        <v-col 
+          cols="2"
+          xl="2"
+          lg="3"
+        >
           <v-row class="no-gutters">
             <v-col cols="4"></v-col>
             <v-col cols="5" class="result">
-              <div class="value">142</div>
-              <div class="label">Results</div>
+              <!--
+                no backend support
+                <div class="value">142</div> 
+                <div class="label">Results</div>
+              -->
             </v-col>
             <v-col cols="3">
               <v-menu
@@ -73,10 +84,11 @@
 
                 <v-list>
                   <v-list-item
-                    v-for="(item, i) in 3"
+                    v-for="(item, i) in actions"
                     :key="i"
+                    @click="filterAction(item)"
                   > 
-                   {{ item }}
+                   {{ item.label }}
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -89,8 +101,56 @@
 </template>
 
 <script>
+
+import store from '@/store';
+import { forEach } from 'lodash';
+
 export default {
-  name: 'SearchSaved'
+
+  name: 'SearchSavedFiltersFilter',
+
+  props: {
+    filter: {
+      type: Object,
+    }
+  },
+
+  data() {
+    return {
+      actions: [
+        {
+          type: 'delete',
+          label: 'Delete'
+        },
+        {
+          type: 'use',
+          label: 'Use filter'
+        }
+      ]
+    }
+  },
+
+  methods: {
+    filterAction(action) {
+      if(action.type === 'use') {
+        store.dispatch('company/searchJobseekers', this.prepareData());
+        this.$emit('filter-search');
+      }
+      if(action.type === 'delete') {
+        store.dispatch('company/searchFilterDelete', this.filter.id);
+      }
+    },
+    prepareData() {
+      let activatedFields = {};
+
+      forEach(this.filter, (item, key) => {
+        if (item) {
+          activatedFields[key] = item;
+        }
+      });
+      return activatedFields;
+    },
+  }
 };
 </script>
 

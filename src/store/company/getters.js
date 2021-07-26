@@ -14,8 +14,22 @@ export default {
   companyInteractionsYearly(state) {
     return state.companyInteractions.yearlyActivity;
   },
-
   selectionManagement(state) {
     return state.selectionManagement;
+  },
+  searchResults(state) {
+    return state.searchResults;
+  },
+  searchMeta(state) {
+    return state.searchResultsMeta;
+  },
+  searchFilters(state) {
+    return state.searchFilters;
+  },
+  searchInProgress(state) {
+    return state.searchInProgress;
+  },
+  jobseekerNotes(state) {
+    return state.jobseekerNotes;
   }
 };

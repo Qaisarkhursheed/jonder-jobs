@@ -159,6 +159,7 @@ h5, .h5 {
             cursor: default;
         }
     }
+    
 
     &.dark-blue {
         &.fill {
@@ -229,6 +230,11 @@ h5, .h5 {
             opacity: .5;
             cursor: default;
         }
+    }
+
+    &.white {
+        color: #222 !important;
+        border: 1px solid #E9E9E9 !important;
     }
 }
 .stars-btn {

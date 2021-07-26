@@ -1,52 +1,62 @@
 <template>
   <div>
-    <SearchForm class="mb-10"
-                @searchResults="setResults"
-                @toggleAdvanced="toggle()"/>
-    <SearchFormAdvanced :active="advancedSearch"/>
+    <SearchForm class="mb-10" @search="search"/>
 
-    <SearchSaved />
-    <SearchResultsLock />
-    <SearchNoResults />
-    <SearchResults class="mt-10"
-                   :results="searchResults"/>
+    <SearchSavedFilters @search="search" />
+
+    <component :is="searchStatus.components[searchStatus.current]"
+      :results="searchResults" 
+    />
   </div>
 </template>
 
 <script>
-
+import store from '@/store'
 import SearchForm from '@/components/company/SearchForm';
-import SearchFormAdvanced from '@/components/company/SearchFormAdvanced';
-import SearchSaved from '@/components/company/SearchSaved';
+import SearchSavedFilters from '@/components/company/SearchSavedFilters';
 import SearchResults from '@/components/company/SearchResults';
-import SearchNoResults from '@/components/company/SearchNoResults';
 import SearchResultsLock from '@/components/company/SearchResultsLock';
 
 export default {
+
   name: 'CompanySearch',
 
   components: {
     SearchForm,
     SearchResults,
-    SearchSaved,
-    SearchFormAdvanced,
-    SearchNoResults,
+    SearchSavedFilters,
     SearchResultsLock
   },
 
   data() {
     return {
       advancedSearch: false,
-      searchResults: [],
+      searchExecuted: false,
+      searchStatus: {
+        current: 'default',
+        options: ['default', 'results', 'limited'],
+        components: {
+          results: SearchResults,
+          limited: SearchResultsLock,
+          default: false,
+        }
+      }
     }
   },
-
+  beforeDestroy() {
+    store.commit('company/SET_SEARCH_RESULTS', []);
+    this.searchExecuted = false;
+    this.searchStatus.current = 'default';
+  },
   methods: {
-    toggle() {
-      this.advancedSearch = !this.advancedSearch;
-    },
-    setResults(results) {
-      this.searchResults = results;
+    search() {
+      this.searchExecuted = true;
+      this.searchStatus.current = 'results';
+    }
+  },
+  computed: {
+    searchResults() {
+      return store.getters['company/searchResults']
     }
   }
 };

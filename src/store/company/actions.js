@@ -40,15 +40,6 @@ export default {
         }
       })
   },
-  // move to notepad probably later
-  addUserNote(context, payload) {
-    return axios
-      .post('/notepad/user/description', payload)
-  },
-  fetchUserNotes(context, user_id) {
-    return axios
-      .get(`/notepad/user/description/${user_id}`)
-  },
   // Selection management
   slManagementGetAll({ commit }) {
     return axios
@@ -69,13 +60,14 @@ export default {
         }
       })
   },
-  slManagementAddCandidate(context, payload) {
+  slManagementAddCandidate({ dispatch }, payload) {
     return axios
       .post('/selection-managment', payload)
       .then((res) => {
         console.log(res);
-        // if(res.status === 200) {
-        // }
+        if (res.status === 200) {
+          dispatch('slManagementGetAll');
+        }
       })
   },
   slManagementDeleteCandidate(context, id) {
@@ -87,4 +79,104 @@ export default {
         // }
       })
   },
+  // Saved search filters
+  searchFilterFetchAll({ commit }) {
+    return axios
+      .get('/jobseeker-filter')
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          commit('SET_SEARCH_FILTERS', res.data.data);
+        }
+      })
+  },
+  searchFilterSave({ dispatch }, payload) {
+    return axios
+      .post('/jobseeker-filter', payload)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          dispatch('searchFilterFetchAll');
+        }
+      })
+  },
+  searchFilterDelete({ dispatch }, id) {
+    return axios
+      .delete(`/jobseeker-filter/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          dispatch('searchFilterFetchAll');
+        }
+      })
+  },
+  // Jobseeker
+  jobseekerNotesGetAll({ commit }, id) {
+    return axios
+      .get(`/jobseeker-note?per_page=10&page=1&search=&jobseeker_id=${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          commit('SET_JOBSEEKER_NOTES', res.data.data);
+        }
+      })
+  },
+  jobseekerNotesAdd({ dispatch }, payload) {
+    return axios
+      .post('/jobseeker-note/', payload)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch('jobseekerNotesGetAll', payload.jobseeker_id);
+        }
+      })
+  },
+  jobseekerNotesEdit() {},
+  jobseekerNotesDelete({ dispatch }, payload) {
+    return axios
+      .delete(`/jobseeker-note/${payload.id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch('jobseekerNotesGetAll', payload.userId);
+        }
+      })
+  },
+
+  searchJobseekers({ commit }, payload) {
+    let obj = {
+      per_page: 6,
+      page: 1,
+      ...payload
+    };
+    commit('SET_SEARCH_INPROGRESS', true);
+    return axios
+      .post('/company/search/', obj)
+      .then((res) => {
+        if (res.status === 200) {
+          commit('SET_SEARCH_INPROGRESS', false);
+          commit('SET_SEARCH_RESULTS', res.data.data);
+          commit('SET_SEARCH_META', {
+            current_page: res.data.meta.current_page, 
+            per_page: res.data.meta.per_page,
+            total: res.data.meta.total,
+            searchInput: payload
+          });
+        }
+      })
+  },
+  searchJobseekerPagination({ commit, getters }, page) {
+    let obj = {
+      ...getters['searchMeta'].searchInput,
+      page: page,
+      per_page: getters['searchMeta'].per_page
+    };
+    console.log(obj);
+    return axios
+      .post('/company/search/', obj)
+      .then((res) => {
+        if (res.status === 200) {
+          commit('SET_SEARCH_INPROGRESS', false);
+          commit('SET_SEARCH_RESULTS', res.data.data);
+        }
+      })
+  }
 };
