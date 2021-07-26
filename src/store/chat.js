@@ -103,6 +103,38 @@ export default {
         return Promise.reject(err.data);
       }
     },
+    async startChat({ state, commit, dispatch }, id) {
+      try {
+        const resp = await axios.post("/conversations", {
+          ids: [id]
+        });
+
+        if (!resp.data.conversation.length) {
+          await dispatch("getAllConversations");
+        }
+
+        const conversation = state.conversations.find(
+          c => c.id == resp.data.conversationData.id
+        );
+        const participant =
+          conversation.conversation.participants[1].messageable;
+
+        commit("SET_CONVERSATION_DETAILS", {
+          id: conversation.id,
+          user_id: participant.id,
+          user_name:
+            participant.company ||
+            participant.first_name + " " + participant.last_name,
+          unread_messages: conversation.unread_messages,
+          profile_img: participant.profile_img
+        });
+        commit("FILL_SINGLE_CONVERSATION", resp.data.conversation);
+
+        return resp;
+      } catch (err) {
+        return Promise.reject(err.data);
+      }
+    },
     async seenMessage(context, id) {
       return axios.post("/messages/seen/" + id);
     },

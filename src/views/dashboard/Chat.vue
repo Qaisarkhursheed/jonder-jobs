@@ -64,12 +64,15 @@ export default {
       "getAllConversations",
       "addPlaceholderMessage",
       "getSingleConversation",
+      "startChat",
       "seenMessage"
     ]),
     async init() {
       await this.getAllConversations();
-      // if (this.$route.params.type === "new" && this.$route.params.id)
-      //   this.addPlaceholderMessage(this.$route.params.id);
+
+      if (this.$route.params.type === "new" && this.$route.params.id) {
+        this.startChat(this.$route.params.id);
+      }
     },
     async pollData() {
       this.polling = setInterval(async () => {
