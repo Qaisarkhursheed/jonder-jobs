@@ -8,7 +8,7 @@
           height="70px"
           width="70px"
           max-width="70px"
-          :src="require('@/assets/candidate.png')"
+          :src="candidate.profile_img"
           class="image">
         </v-img>
         <div class="pl-4 align-center">
