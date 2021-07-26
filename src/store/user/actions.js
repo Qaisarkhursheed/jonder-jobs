@@ -3,12 +3,12 @@ import axios from "axios";
 export default {
   me({ state, commit }) {
     if (state.user) {
-      return new Promise(resolve => resolve(state.user));
+      return new Promise((resolve) => resolve(state.user));
     }
 
     return axios
       .get("/me")
-      .then(response => {
+      .then((response) => {
         commit("SET_USER", response.data);
         return response.data;
       })
@@ -21,7 +21,7 @@ export default {
 
   async postOnboardingCompany({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] || data[key] == 0) {
         formData.append(key, data[key]);
       }
@@ -42,7 +42,7 @@ export default {
 
   async postOnboardingUser({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
     formData.append("_method", "PATCH");
@@ -65,11 +65,11 @@ export default {
   getUser({ commit }, userId) {
     return axios
       .get("/users/" + userId)
-      .then(resp => {
+      .then((resp) => {
         if (resp.data) commit("SET_USER_DETAILS", resp.data);
         return resp;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting user details:", err);
       });
   },
@@ -80,9 +80,9 @@ export default {
 
   async updateUser({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => formData.append(key + "[]", el));
+        data[key].forEach((el) => formData.append(key + "[]", el));
       } else {
         formData.append(key, data[key]);
       }
@@ -97,36 +97,60 @@ export default {
       return Promise.reject(error.response);
     }
   },
-  updateCompanyUser({ commit, dispatch }, payload) {
+  async changePassword(context, payload) {
     let formData = new FormData();
-    Object.keys(payload.data).forEach(key => {
-      if (Array.isArray(payload.data[key])) {
-        payload.data[key].forEach(el => formData.append(key + "[]", el));
+    let data = payload;
+    if (data.data) data = data.data;
+    Object.keys(data).forEach((key) => {
+      if (Array.isArray(data[key])) {
+        data[key].forEach((el) => {
+          if (el && el !== null) formData.append(key + "[]", el);
+        });
       } else {
-        formData.append(key, payload.data[key]);
+        formData.append(key, data[key]);
       }
     });
-    return axios
-      .post(`/copmanies/${payload.id}`, formData)
-      .then(resp => {
-        if (resp.data.success && resp.data.user) {
-          dispatch("getUser");
-          commit("SET_USER", resp.data.user);
-        }
-      })
-      .catch(err => {
-        console.error("Update user error:", err);
-      });
+    //formData.append("_method", "PATCH");
+    try {
+      const resp = await axios.post("/password/change/", formData);
+      //commit("SET_USER", resp.data.data);
+      return resp;
+    } catch (error) {
+      return Promise.reject(error.response);
+    }
+  },
+  async updateCompanyUser({ commit, state }, payload) {
+    console.log(state.user.id);
+    let formData = new FormData();
+    let data = payload;
+    if (data.data) data = data.data;
+    Object.keys(data).forEach((key) => {
+      if (Array.isArray(data[key])) {
+        data[key].forEach((el) => {
+          if (el && el !== null) formData.append(key + "[]", el);
+        });
+      } else {
+        formData.append(key, data[key]);
+      }
+    });
+    formData.append("_method", "PATCH");
+    try {
+      const resp = await axios.post("/users/" + state.user.id, formData);
+      commit("SET_USER", resp.data.data);
+      return resp;
+    } catch (error) {
+      return Promise.reject(error.response);
+    }
   },
   searchUsers({ dispatch }, payload) {
     return axios
       .get("/search/0/10?data=" + payload)
-      .then(res => {
+      .then((res) => {
         if (res.data.success)
-          return res.data.data.map(i => transformSearchResult(i, dispatch));
+          return res.data.data.map((i) => transformSearchResult(i, dispatch));
         return [];
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting search results: ", err);
         return [];
       });
@@ -146,27 +170,27 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerExperience");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
   getAllJobseekerExperience({ commit }) {
     return axios
       .get("/jobseeker-experience")
-      .then(resp => {
+      .then((resp) => {
         commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
   getJobseekerExperience({ commit }, id) {
     return axios
       .get(`/jobseeker-experience/${id}`)
-      .then(resp => {
+      .then((resp) => {
         commit("SET_JOBSEEKER_EXPERIENCE", resp.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
@@ -176,7 +200,7 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerExperience");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
@@ -186,7 +210,7 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerExperience");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
@@ -196,27 +220,27 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerEducation");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
   getAllJobseekerEducation({ commit }) {
     return axios
       .get("/jobseeker-education")
-      .then(resp => {
+      .then((resp) => {
         commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
   getJobseekerEducation({ commit }, id) {
     return axios
       .get(`/jobseeker-education/${id}`)
-      .then(resp => {
+      .then((resp) => {
         commit("SET_JOBSEEKER_EDUCATION", resp.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
@@ -226,7 +250,7 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerEducation");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
   },
@@ -236,10 +260,10 @@ export default {
       .then(() => {
         dispatch("getAllJobseekerEducation");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Update user error:", err);
       });
-  }
+  },
 };
 
 const transformSearchResult = (user, dispatch) => {
@@ -249,6 +273,6 @@ const transformSearchResult = (user, dispatch) => {
       user.role === "user"
         ? user.first_name + " " + user.last_name
         : user.company,
-    id: user.id
+    id: user.id,
   };
 };

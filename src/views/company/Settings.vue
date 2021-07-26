@@ -217,6 +217,7 @@
                   flat
                   hide-details
                   background-color="white"
+                  v-model="formDataPassword.current_password"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -231,6 +232,8 @@
                   flat
                   hide-details
                   background-color="white"
+                  v-model="formDataPassword.new_password"
+
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -245,7 +248,21 @@
                   flat
                   hide-details
                   background-color="white"
+                  v-model="formDataPassword.new_confirm_password"
+
                 ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="6">
+                 <v-btn
+            depressed
+            color="primary"
+            class="pl-8 pr-8"
+            @click="handleChangePassword"
+            >Change Password
+          </v-btn>
               </v-col>
             </v-row>
           </v-card>
@@ -264,8 +281,7 @@
 </template>
 
 <script>
-import store from "@/store";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
 
@@ -277,6 +293,7 @@ export default {
   data() {
     return {
       formData: {},
+      formDataPassword: {},
       rules: [
         value => !!value || "Required.",
         value => (value && value.length >= 3) || "Min 3 characters"
@@ -300,18 +317,14 @@ export default {
     this.fillData();
   },
   methods: {
-    updateCompanyUser(input) {
-      store.dispatch("user/updateCompanyUser", {
-        id: this.user.id,
-        data: {
-          ...input,
-          _method: "PATCH"
-        }
-      });
-    },
+     ...mapActions('user', ['updateCompanyUser']),
+     ...mapActions('user', ['changePassword']),
     fillData() {
       const user = this.user;
       if (!user) return;
+      this.formDataPassword.new_confirm_password = '';
+      this.formDataPassword.new_password = '';
+      this.formDataPassword.current_password = '';
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
@@ -321,8 +334,6 @@ export default {
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work;
-      this.formData.ready_for_work = user.ready_for_work;
-      this.formData.monthly_salary = user.monthly_salary;
       this.formData.work_experience = user.work_experience;
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
@@ -342,7 +353,24 @@ export default {
       if (!(this.formData.qualifications instanceof File)) {
         delete formDataCopy.qualifications;
       }
-      this.updateCompanyUser(formDataCopy);
+
+      this.updateCompanyUser(formDataCopy)
+        .then(() => {
+          alert("Success");
+        })
+        .catch(err => {
+          alert(err.data.message);
+        });
+      //this.updateCompanyUser(formDataCopy);
+    },
+    handleChangePassword() {
+      const formDataCopy = Object.assign({}, this.formDataPassword);
+      this.changePassword(formDataCopy).then(() => {
+          alert("Success");
+        })
+        .catch(err => {
+          alert(err.data.message);
+        });
     },
     downloadInvoice() {
       // TODO
