@@ -240,6 +240,13 @@ export default {
     searchSave() {
       store.dispatch('company/searchFilterSave', this.prepareData());
     },
+    filterData(){
+      let searchMeta = store.getters['company/searchMeta'] ? store.getters['company/searchMeta'].searchInput : null;
+      if(searchMeta){
+        if(searchMeta.employment_type) this.formFields.employment_type = searchMeta.employment_type;
+        if(searchMeta.job_position) this.formFields.job_position = searchMeta.job_position;
+      }
+    },
     prepareData() {
       let activatedFields = {};
 
@@ -256,6 +263,7 @@ export default {
       return this.searchCount ? `Search (${this.searchCount} results)`: 'Search';
     },
     searchLoading() {
+      this.filterData();
       return store.getters['company/searchInProgress'];
     },
     types() {
