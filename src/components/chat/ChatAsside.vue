@@ -8,14 +8,15 @@
       <v-list-item-group color="primary">
         <template v-for="(conversation, index) in conversations">
           <chat-asside-item
-            :key="conversation.user_id"
+            v-if="conversation.ids.length"
+            :key="conversation.id"
             :conversation="conversation"
             @loading="loading = $event"
             @reload="refreshConversations"
           />
           <v-divider
             v-if="index < conversations.length - 1"
-            :key="index"
+            :key="conversation.id"
           ></v-divider>
         </template>
       </v-list-item-group>

@@ -1,5 +1,9 @@
 <template>
-  <v-card flat class="messages-holder full-h d-flex flex-column">
+  <v-card
+    flat
+    class="messages-holder full-h d-flex flex-column"
+    style="border-radius: 10px"
+  >
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
       <v-list-item class="grow">
         <v-list-item-avatar color="blue" @click="$emit('show-profile')">
@@ -33,26 +37,35 @@
         </v-row>
       </v-list-item>
     </v-card-title>
-    <div class="pl-5 pr-5">
+    <div class="pl-5 pr-5 flex-grow-1 flex-shrink-1 overflow-list">
       <v-card-text
-        class="messages-content pa-5 flex-grow-1 flex-shrink-1 overflow-list"
+        class="messages-content pa-5 full-h flex-grow-1 flex-shrink-1 overflow-list"
         id="messageList"
       >
         <div
           v-for="msg in messages"
           :key="msg.id"
-          :class="{ 'text-right': msg.send_by === msg.user_id }"
+          :class="{ 'text-right': msg.is_sender }"
         >
           <v-card
             flat
             class="message rounded-lg"
             :class="[
-              { 'my-message': msg.send_by === msg.user_id },
-              [msg.send_by === msg.user_id ? 'rounded-tr-0' : 'rounded-tl-0']
+              { 'my-message': msg.is_sender },
+              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0']
             ]"
           >
             <v-card-text>
-              <div v-text="msg.message"></div>
+              <!-- Text -->
+              <div v-if="msg.type == 'text'">
+                {{ msg.body }}
+              </div>
+
+              <div v-if="msg.type == 'upload'">
+                <img :src="getImagePath(msg)" style="max-width: 100%" />
+              </div>
+
+              <!-- Time -->
               <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
             </v-card-text>
           </v-card>
@@ -60,9 +73,7 @@
       </v-card-text>
     </div>
     <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
-      <v-icon class="chat-icon pl-3 pr-3"
-        >mdi-paperclip
-      </v-icon>
+      <v-icon class="chat-icon pl-3 pr-3">mdi-paperclip </v-icon>
       <v-textarea
         class="rounded-lg"
         label="Type a message"
@@ -76,7 +87,7 @@
         v-model="newMessage"
         >Message
       </v-textarea>
-      <v-icon v-if="!loading" @click="send" class="message-type-new-send"
+      <v-icon v-if="!sending" @click="send" class="message-type-new-send"
         >mdi-send-circle
       </v-icon>
     </v-card-actions>
@@ -99,7 +110,7 @@ export default {
   },
   data: () => ({
     newMessage: "",
-    loading: false
+    sending: false
   }),
   mounted() {
     this.scrollToBottom();
@@ -116,20 +127,27 @@ export default {
       }
     },
     async send() {
-      this.loading = true;
+      this.sending = true;
       await this.sendMessage({
-        send_to: this.conversationDetails.user_id,
+        id: this.conversationDetails.id,
         message: this.newMessage
-      });
-      this.updateMessageYou(this.conversationDetails.user_id);
-      this.newMessage = "";
-      this.loading = false;
+      })
+        .then(() => {
+          this.newMessage = "";
+        })
+        .finally(() => {
+          this.sending = false;
+        });
     },
     getInitials(conversation) {
       return (
         conversation.user_name.charAt(0) +
         conversation.user_name.split(" ")[1].charAt(0)
       );
+    },
+    getImagePath(msg) {
+      const data = JSON.parse(msg.body);
+      return data.url;
     }
   },
   watch: {
