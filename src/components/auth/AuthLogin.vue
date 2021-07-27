@@ -9,30 +9,29 @@
     </v-alert>
 
     <div class="mt-10">
-      <p class="text-caption text-left">
-        Einloggen via Email
-      </p>
-
-      <form class="auth-form" action="#" @submit.prevent="handleLogin">
+      <v-form
+        v-model="formValid"
+        class="auth-form"
+        @submit.prevent="handleLogin"
+      >
+        <label class="profile-label">Email</label>
         <v-text-field
           dense
-          label="Email Addresse"
-          :rules="rules"
+          :rules="[validations.required, validations.email]"
           type="email"
           outlined
           background-color="white"
           v-model="formData.email"
         ></v-text-field>
 
+        <label class="profile-label">Passwort</label>
         <v-text-field
           dense
-          label="Passwort"
+          :rules="[validations.required]"
           type="password"
           outlined
           background-color="white"
-          hide-details="auto"
           v-model="formData.password"
-          class="mb-6"
         ></v-text-field>
 
         <!--        <v-checkbox-->
@@ -46,31 +45,40 @@
           </router-link>
         </p>
 
-      <!-- Response alert -->
-      <response-alert :response="formResponse"></response-alert> 
+        <!-- Response alert -->
+        <response-alert :response="formResponse"></response-alert>
 
-        <v-btn outlined color="primary" class="full-w mt-4 "
+        <v-btn
+          link
+          href="https://dev.api.jonder.devla.dev/api/v1/auth/google"
+          outlined
+          color="primary"
+          class="full-w mt-2"
           >Continue with Google
         </v-btn>
 
-        <v-btn color="primary" class="full-w mt-4 fb-button">
+        <v-btn
+          link
+          href="https://dev.api.jonder.devla.dev/api/v1/auth/facebook"
+          outlined
+          color="primary"
+          class="full-w mt-4"
+        >
           Continue with Facebook
         </v-btn>
 
         <v-btn
           type="submit"
           color="primary"
-          class="full-w"
-          :disabled="
-            formData.email.length === 0 || formData.password.length === 0
-          "
+          class="full-w mt-5"
+          :disabled="!formValid"
         >
           Loggen Sie
         </v-btn>
-      </form>
+      </v-form>
     </div>
 
-    <p class="text-caption text-left">
+    <p class="text-caption text-left mt-1">
       Haben Sie kein Konto?
       <router-link to="/register">
         Registrieren
@@ -102,10 +110,7 @@ export default {
         privacy: false
       },
       formResponse: {},
-      rules: [
-        value => !!value || "Required.",
-        value => (value && value.length >= 3) || "Min 3 characters"
-      ]
+      formValid: false
     };
   },
   methods: {
@@ -136,7 +141,7 @@ export default {
           this.$router.replace({ name: "CompanySearch" });
         }
       } else {
-        this.formResponse = this.response
+        this.formResponse = this.response;
       }
     }
   }
@@ -145,11 +150,7 @@ export default {
 
 <style lang="scss" scoped>
 .auth-login-wrap {
-  width: 60%;
-}
-
-.fb-button {
-  margin-bottom: 50px;
+  max-width: 450px;
 }
 
 .v-btn:not(.v-btn--round).v-size--default {

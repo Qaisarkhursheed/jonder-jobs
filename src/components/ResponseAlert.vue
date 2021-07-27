@@ -57,9 +57,9 @@ export default {
     },
 
     message() {
-      return this.response.message || this.response.success
-        ? "Erfolg!"
-        : "Fehler!";
+      return (
+        this.response.message || (this.response.success ? "Erfolg!" : "Fehler!")
+      );
     }
   }
 };
