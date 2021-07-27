@@ -16,7 +16,10 @@
           <div class="subtitle">{{ value.position }}</div>
           <div class="subtitle">
             {{ value.start_time | moment("MMMM YYYY") }} -
-            {{ value.end_time | moment("MMMM YYYY") }}
+            <template v-if="value.end_time">
+              {{ value.end_time | moment("MMMM YYYY") }}
+            </template>
+            <template v-else>Present</template>
           </div>
         </template>
         <template v-else #default="{ value }">
@@ -24,7 +27,10 @@
           <div class="subtitle">{{ value.study }}</div>
           <div class="subtitle">
             {{ value.start_time | moment("MMMM YYYY") }} -
-            {{ value.end_time | moment("MMMM YYYY") }}
+            <template v-if="value.end_time">
+              {{ value.end_time | moment("MMMM YYYY") }}
+            </template>
+            <template v-else>Present</template>
           </div>
         </template>
       </CardActionable>
