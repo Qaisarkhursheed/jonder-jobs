@@ -1,5 +1,5 @@
 <template>
-  <h1 class="jonder-title mb-5">
+  <h1 class="jonder-title mb-3">
     <slot></slot>
   </h1>
 </template>

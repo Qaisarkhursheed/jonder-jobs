@@ -1,173 +1,127 @@
 <template>
-  <v-container class="auth-register-wrap mx-auto" fluid no-gutters>
+  <v-container
+    class="auth-register-wrap mx-auto"
+    fluid
+    no-gutters
+    style="max-width: 450px"
+  >
     <jonder-title>
       Create account
     </jonder-title>
 
-    <v-row class="mb-1">
-      <v-col cols="12" class="p-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-        ultricies felis eu libero.
-      </v-col>
-    </v-row>
-
-    <v-alert
-      v-if="showValidationMessage && !isValid"
-      text
-      prominent
-      type="error"
-      :icon="false"
-    >
+    <div class="text-center mb-2">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
       felis eu libero.
-    </v-alert>
-
-    <div>
-      <v-form
-        ref="form"
-        class="auth-form"
-        action="#"
-        v-model="isValid"
-        @submit.prevent="handleRegister"
-      >
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Vorname"
-              :rules="rules"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.first_name"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Nachname"
-              :rules="rules"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.last_name"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Email Addresse"
-              :rules="[!validationErrors.email || 'Email exists', ...rules]"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.email"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Passwort"
-              :rules="rules"
-              type="password"
-              outlined
-              background-color="white"
-              v-model="formData.password"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Passwort erneut eingeben"
-              :rules="[
-                formData.password === formData.password_confirmation ||
-                  'Passwort muss übereinstimmen',
-                rules[0]
-              ]"
-              type="password"
-              outlined
-              background-color="white"
-              v-model="formData.password_confirmation"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Telefonnummer"
-              :rules="[
-                formData.phone.match(
-                  /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .\-–\/]?)([\d]+))/
-                )
-                  ? true
-                  : 'Invalid phone'
-              ]"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.phone"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12">
-            <div class="caption text-left">
-              Du bist bereits Mitglied?
-
-              <router-link to="/login">
-                Hier einloggen
-              </router-link>
-            </div>
-            <v-checkbox
-              label="Möchten Sie, dass wir Ihren Namen anzeigen?"
-              hide-details="auto"
-              v-model="formData.show_name"
-            ></v-checkbox>
-            <v-checkbox
-              label="Möchten Sie, dass wir Ihren Standort anzeigen?"
-              hide-details="auto"
-              v-model="formData.show_location"
-            ></v-checkbox>
-          </v-col>
-
-          <v-col cols="12">
-            <v-btn
-              type="submit"
-              color="primary"
-              class="full-w"
-              :disabled="
-                formData.email.length === 0 ||
-                  formData.password.length === 0 ||
-                  formData.first_name.length === 0 ||
-                  formData.last_name.length === 0 ||
-                  formData.password_confirmation.length === 0 ||
-                  formData.phone.length === 0
-              "
-              large
-            >
-              Kostenlos registrieren
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
     </div>
+
+    <v-form
+      ref="form"
+      class="auth-form"
+      v-model="formValid"
+      @submit.prevent="handleRegister"
+    >
+      <!-- First name -->
+      <v-text-field
+        v-model="formData.first_name"
+        label="Vorname"
+        :rules="[validations.required]"
+        type="text"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Last name -->
+      <v-text-field
+        v-model="formData.last_name"
+        label="Nachname"
+        :rules="[validations.required]"
+        type="text"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Email -->
+      <v-text-field
+        v-model="formData.email"
+        label="Email Addresse"
+        :rules="[validations.required, validations.email]"
+        type="email"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Password -->
+      <v-text-field
+        v-model="formData.password"
+        label="Passwort"
+        :rules="[validations.required, validations.min.string(6)]"
+        type="password"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Password confirm -->
+      <v-text-field
+        v-model="formData.password_confirmation"
+        label="Passwort erneut eingeben"
+        :rules="[
+          validations.required,
+          validations.same('Passwort', formData.password)
+        ]"
+        type="password"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Phone -->
+      <v-text-field
+        v-model="formData.phone"
+        label="Telefonnummer"
+        :rules="[validations.phone]"
+        type="text"
+        dense
+        outlined
+        background-color="white"
+      ></v-text-field>
+
+      <!-- Show name -->
+      <v-checkbox
+        class="mt-0"
+        label="Möchten Sie, dass wir Ihren Namen anzeigen?"
+        hide-details="auto"
+        v-model="formData.show_name"
+      ></v-checkbox>
+
+      <!-- Show location -->
+      <v-checkbox
+        label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+        hide-details="auto"
+        v-model="formData.show_location"
+      ></v-checkbox>
+
+      <v-btn
+        type="submit"
+        color="primary"
+        class="full-w mt-3"
+        :disabled="!formValid"
+        large
+      >
+        Kostenlos registrieren
+      </v-btn>
+
+      <div class="caption mt-1">
+        Du bist bereits Mitglied?
+
+        <router-link to="/login">
+          Hier einloggen
+        </router-link>
+      </div>
+    </v-form>
   </v-container>
 </template>
 
@@ -193,10 +147,7 @@ export default {
         show_location: false,
         role: "Jobseeker"
       },
-      rules: [
-        value => !!value || "Required.",
-        value => (value && value.length >= 3) || "Min 3 characters"
-      ],
+      formValid: false,
       showValidationMessage: false,
       validationErrors: {},
       isValid: false
@@ -232,18 +183,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.auth-register-wrap {
-  width: 60%;
-}
-
-.p-text {
-  text-align: center;
-}
-
-@media (max-width: 600px) {
-  .auth-register-wrap {
-    width: 90%;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
