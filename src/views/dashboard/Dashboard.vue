@@ -7,55 +7,66 @@
       @close="toggleModal('UpgradePlan')"
     />
 
-    <v-col cols="12">
-      <div class="dashboard-holder">
-        <div v-if="messagesLoaded && conversations.length">
-          <Chat />
-        </div>
-        <template v-else>
-          <div class="user-name">
-            Hello,
-            <span style="color:#0253B3;"
-              >{{ user.first_name }} {{ user.last_name }}
-            </span>
-          </div>
-          <div class="no-msg">There is no any messages yet</div>
-          <div class="upgrade-box">
-            <div class="upgrade-title">
-              Increase account visibility by upgrading account
-            </div>
-            <v-img
-              class="badge"
-              :src="require('@/assets/icons/top-rated.svg')"
-            ></v-img>
-            <div
-              class="d-flex"
-              style="font-size: 13px; justify-content: space-between;"
-            >
-              <p>
-                Be on the top of search for 3 days
-              </p>
+    <v-col cols="cols" v-if="messagesLoaded && conversations.length">
+      <Chat />
+    </v-col>
+    <v-col cols="cols" v-if="!$store.getters['chat/selectedConversation']">
+      <!-- Hello -->
+      <div class="user-name">
+        Hello,
+        <span style="color:#0253B3;">
+          {{ user.first_name }} {{ user.last_name }}
+        </span>
+      </div>
 
-              <div>
-                <CardActionableList
-                  type="UpgradePlan"
-                  @edit="activateEdit('UpgradePlan', $event)"
-                />
-                <p
-                  style="color: #55F481; width: 100%; cursor: pointer;"
-                  class="text-right"
-                  @click="toggleModal('UpgradePlan')"
-                >
-                  Upgrade now
-                </p>
-              </div>
-            </div>
+      <!-- Messages text -->
+      <div class="no-msg">
+        {{
+          conversations.length
+            ? "Open chat to start communicate"
+            : "There is no any messages yet"
+        }}
+      </div>
+
+      <!-- Upgrade box -->
+      <div class="upgrade-box">
+        <div class="upgrade-title">
+          Increase account visibility by upgrading account
+        </div>
+        <v-img
+          class="badge"
+          :src="require('@/assets/icons/top-rated.svg')"
+        ></v-img>
+        <div
+          class="d-flex"
+          style="font-size: 13px; justify-content: space-between;"
+        >
+          <p>
+            Be on the top of search for 3 days
+          </p>
+
+          <div>
+            <CardActionableList
+              type="UpgradePlan"
+              @edit="activateEdit('UpgradePlan', $event)"
+            />
+            <p
+              style="color: #55F481; width: 100%; cursor: pointer;"
+              class="text-right"
+              @click="toggleModal('UpgradePlan')"
+            >
+              Upgrade now
+            </p>
           </div>
-          <div class="image-placeholder">
-            <v-img :src="require('@/assets/icons/rafiki.png')"></v-img>
-          </div>
-        </template>
-        <company-list />
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="mt-5">
+        <v-img
+          :src="require('@/assets/svg/rafiki.svg')"
+          max-width="500"
+        ></v-img>
       </div>
     </v-col>
   </v-row>
@@ -63,7 +74,6 @@
 
 <script>
 // import UserMessages from "@/components/dashboard/UserMessages";
-import CompanyList from "@/components/dashboard/CompanyList";
 import { mapActions, mapGetters } from "vuex";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
@@ -91,7 +101,6 @@ export default {
     }
   },
   components: {
-    CompanyList,
     //UserMessages,
     UpgradePlanModal,
     CardActionableList,
@@ -162,12 +171,6 @@ export default {
   font-size: 18px;
   line-height: 18px;
   margin-bottom: 7px;
-}
-
-.image-placeholder {
-  margin: 50px auto 0 55px;
-  max-width: 723px;
-  max-height: 538px;
 }
 
 .badge {

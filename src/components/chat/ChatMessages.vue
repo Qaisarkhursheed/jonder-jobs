@@ -35,7 +35,7 @@
               $emit('chat-full', chatFull);
             "
           >
-            mdi-arrow-expand
+            {{ !chatFull ? "mdi-arrow-expand" : "mdi-arrow-collapse" }}
           </v-icon>
           <v-icon
             class="chat-icon mr-4"

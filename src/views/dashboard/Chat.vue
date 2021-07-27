@@ -21,21 +21,22 @@
       @hide-profile="showProfile = false"
     />
   </div> -->
-  <div class="chat-container">
-    <v-row class="full-h">
-      <v-col v-if="!chatFull" cols="5" class="full-h">
-        <chat-asside class="full-h flex-grow-1 flex-shrink-1 overflow-list" />
-      </v-col>
-      <v-col cols="col" class="full-h">
-        <chat-messages
-          @chat-full="chatFull = $event"
-          v-if="selectedConversation && conversationDetails"
-          :messages="selectedConversation"
-          :conversation-details="conversationDetails"
-        />
-      </v-col>
-    </v-row>
-  </div>
+  <v-row class="full-h">
+    <v-col v-if="!chatFull" cols="col" class="full-h">
+      <chat-asside class="full-h flex-grow-1 flex-shrink-1 overflow-list" />
+    </v-col>
+    <v-col
+      cols="col"
+      class="full-h"
+      v-if="selectedConversation && conversationDetails"
+    >
+      <chat-messages
+        @chat-full="chatFull = $event"
+        :messages="selectedConversation"
+        :conversation-details="conversationDetails"
+      />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -99,9 +100,9 @@ export default {
 .chat-holder {
   overflow: hidden;
 }
-.chat-container {
-  height: 800px;
-}
+// .chat-container {
+//   height: 800px;
+// }
 .overflow-list {
   overflow: auto;
 }
