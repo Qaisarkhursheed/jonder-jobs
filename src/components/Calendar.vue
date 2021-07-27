@@ -9,7 +9,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        v-model="date"
+        v-model="dateFormatted"
         :rules="rules"
         :disabled="disabled"
         readonly
@@ -57,6 +57,11 @@ export default {
       date: "",
       menu: false
     };
+  },
+  computed: {
+    dateFormatted() {
+      return this.date.substr(0, 10);
+    }
   },
   methods: {
     dateSelect(date) {
