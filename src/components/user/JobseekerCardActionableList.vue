@@ -6,7 +6,10 @@
         :data="item"
         @click="select($event, item)"
         :view-only="viewOnly"
-        :class="{ 'view-only': viewOnly, 'border-none': i == items.length - 1 }"
+        :class="{
+          'view-only': viewOnly,
+          'border-none': viewOnly && i == items.length - 1
+        }"
       >
         <template v-if="type === 'Experience'" #default="{ value }">
           <div class="title">{{ value.company_name }}</div>
