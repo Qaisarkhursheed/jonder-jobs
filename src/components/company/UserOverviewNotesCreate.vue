@@ -1,23 +1,19 @@
 <template>
-  <v-dialog class="dialog"
-            v-model="active"
-            @click:outside="close"
-            persistent
-            width="750px"
-            max-width="750px">
+  <v-dialog
+    class="dialog"
+    v-model="active"
+    @click:outside="close"
+    persistent
+    width="750px"
+    max-width="750px"
+  >
     <v-card flat class="rounded-lg wrap onboarding-dialog pa-8">
       <p class="text-left font-weight-bold mb-3 font-size-16 header">
         Create Note
       </p>
       <v-row>
         <v-col cols="12">
-          <v-textarea 
-            v-model="content"
-            height="200px"
-            outlined
-            no-resize
-          >
-
+          <v-textarea v-model="content" height="200px" outlined no-resize>
           </v-textarea>
         </v-col>
       </v-row>
@@ -34,7 +30,7 @@
                 light
                 elevation="0"
               >
-                {{ $t('general.cancel') }}
+                {{ $t("general.cancel") }}
               </v-btn>
             </v-col>
             <v-col cols="6">
@@ -44,7 +40,7 @@
                 height="58"
                 class="full-w mt-16 font-weight-medium "
               >
-                {{ $t('general.save') }}
+                {{ $t("general.save") }}
               </v-btn>
             </v-col>
           </v-row>
@@ -55,32 +51,44 @@
 </template>
 
 <script>
-
 // import store from '@/store'
 
 export default {
-
-  name: 'UserOverviewNotesCreate',
+  name: "UserOverviewNotesCreate",
 
   props: {
     active: {
       type: Boolean
+    },
+    note: {
+      type: Object,
+      required: false
     }
   },
   data() {
     return {
-      content: ''
+      content: ""
+    };
+  },
+  watch: {
+    active(val) {
+      if (val) {
+        if (this.note) {
+          this.content = this.note.content;
+        }
+      } else {
+        this.content = "";
+      }
     }
   },
   methods: {
     close() {
-      this.$emit('close');
+      this.$emit("close");
     },
     save() {
-      this.$emit('create', this.content);
+      this.$emit(this.note ? "edit" : "create", this.content);
     }
   }
-
 };
 </script>
 
