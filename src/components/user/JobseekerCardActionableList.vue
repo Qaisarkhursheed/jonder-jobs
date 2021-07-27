@@ -1,21 +1,27 @@
 <template>
   <div>
     <div v-for="(item, i) in items" :key="i" style="margin-bottom: 10px">
-      <CardActionable :actions="actions"
+      <CardActionable
+        :actions="actions"
         :data="item"
-        @click="select($event, item)">
+        @click="select($event, item)"
+        :view-only="viewOnly"
+        :class="{ 'view-only': viewOnly, 'border-none': i == items.length - 1 }"
+      >
         <template v-if="type === 'Experience'" #default="{ value }">
           <div class="title">{{ value.company_name }}</div>
           <div class="subtitle">{{ value.position }}</div>
           <div class="subtitle">
-            {{ Date.parse(value.start_time) }} - {{ Date.parse(value.end_time) }}
+            {{ value.start_time | moment("MMMM YYYY") }} -
+            {{ value.end_time | moment("MMMM YYYY") }}
           </div>
         </template>
-        <template v-else #default="{ value }"> 
+        <template v-else #default="{ value }">
           <div class="title">{{ value.university_name }}</div>
           <div class="subtitle">{{ value.study }}</div>
           <div class="subtitle">
-            {{ value.start_time }} - {{ value.end_time }}
+            {{ value.start_time | moment("MMMM YYYY") }} -
+            {{ value.end_time | moment("MMMM YYYY") }}
           </div>
         </template>
       </CardActionable>
@@ -24,26 +30,29 @@
 </template>
 
 <script>
-
-import store from '@/store';
-import CardActionable from '@/components/CardActionable';
+import store from "@/store";
+import CardActionable from "@/components/CardActionable";
 
 export default {
-  name: 'JobseekerCardActionableList',
+  name: "JobseekerCardActionableList",
 
   props: {
     type: {
       type: String
+    },
+    viewOnly: {
+      type: Boolean,
+      default: false
     }
   },
-  
+
   components: {
-    CardActionable,
+    CardActionable
   },
 
   data() {
     return {
-      actions: ['edit', 'delete']
+      actions: ["edit", "delete"]
     };
   },
   created() {
@@ -52,12 +61,12 @@ export default {
 
   methods: {
     select(type, item) {
-      if (type === 'delete') {
+      if (type === "delete") {
         store.dispatch(`user/deleteJobseeker${this.type}`, item.id);
-      } else if (type === 'edit') {
-        this.$emit('edit', item);
+      } else if (type === "edit") {
+        this.$emit("edit", item);
       }
-    },
+    }
   },
   computed: {
     items() {
@@ -66,3 +75,27 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.border-none {
+  border: none !important;
+}
+
+.view-only {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  padding: 0 !important;
+  padding-bottom: 10px !important;
+
+  .title {
+    font-size: 16px !important;
+    line-height: unset !important;
+  }
+
+  .subtitle {
+    line-height: unset !important;
+  }
+}
+</style>

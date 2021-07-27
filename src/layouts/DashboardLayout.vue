@@ -66,6 +66,7 @@
         </v-btn>
       </v-col>
     </v-row>
+
     <v-row class="full-h ma-0">
       <v-col class="navigation col-12 col-sm-3 col-xl-3">
         <nav class="dashboard-navigation" v-if="profile">
@@ -73,6 +74,7 @@
             <div class="settings-title">
               Settings
             </div>
+
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
                 Personal info
@@ -107,6 +109,7 @@
             </div>
           </div>
         </nav>
+
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
             <div class="top-info">
@@ -119,39 +122,32 @@
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
-              <a href="/dashboard/profile" class="settings-link">
+              <router-link to="/dashboard/profile" class="settings-link">
                 Profile Settings
-              </a>
+              </router-link>
             </div>
 
             <div class="top-info">
               <span class="about-info"> About me </span>
               <p class="about-text">{{ user.about_me }}</p>
 
-              <div class="d-flex" style="justify-content: space-between;">
-                <div>
-                  <p class="about-info">Jobseeking status</p>
-                  <p class="about-text">{{ user.job_status }}</p>
-                </div>
-                <div>
-                  <p class="about-info text-right">Position</p>
-                  <p class="about-text text-right">
-                    {{ user.current_position }}
-                  </p>
-                </div>
-              </div>
+              <span class="about-info">Jobseeking status</span>
+              <p class="about-text">{{ user.looking_for_employment_type }}</p>
+
+              <span class="about-info">Position</span>
+              <p class="about-text">{{ user.looking_for_branche }}</p>
 
               <span class="about-info"> Current industry </span>
               <p class="about-text">{{ user.branche }}</p>
+
               <span class="about-info"> City and areas </span>
               <p class="about-text">{{ user.city }}</p>
 
               <span class="about-info"> Experience </span>
-              <CardActionableList type="Experience" />
-            </div>
-            <div class="top-info">
+              <CardActionableList type="Experience" view-only class="mb-5" />
+
               <span class="about-info"> Education </span>
-              <CardActionableList type="Education" />
+              <CardActionableList type="Education" view-only />
             </div>
 
             <div class="top-info">
@@ -166,6 +162,7 @@
                   CV
                 </div>
               </div>
+
               <div v-if="user.qualifications" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.qualifications" target="_blank">
@@ -176,6 +173,7 @@
                   Qualifications
                 </div>
               </div>
+
               <div v-if="user.resume" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.resume" target="_blank">
@@ -190,6 +188,7 @@
           </v-row>
         </div>
       </v-col>
+
       <v-col class="main col-12 col-sm-9 col-xl-9">
         <v-container fluid class="d-flex flex-column full-h">
           <slot />
@@ -427,15 +426,15 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   background: white;
   border-radius: 10px;
   padding: 20px;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .top-info {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid $light-grey;
   padding: 20px;
+  padding-top: 0px;
   word-break: break-all;
 }
 
@@ -451,6 +450,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   width: 100%;
   text-align: center;
   margin-bottom: 20px;
+  text-underline-offset: 3px;
 }
 
 .about-info {

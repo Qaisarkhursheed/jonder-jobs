@@ -1,19 +1,13 @@
 <template>
   <v-card
     class="card-actionable pl-4 pr-4 pt-3 pb-3"
-    flat 
-    outlined>
-    <v-menu
-      bottom
-      left
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          icon
-          v-bind="attrs"
-          v-on="on"
-          class="menu-button"
-        >
+    :class="{ 'view-only': viewOnly }"
+    flat
+    outlined
+  >
+    <v-menu bottom left>
+      <template v-slot:activator="{ on, attrs }" v-if="!viewOnly">
+        <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
@@ -23,39 +17,42 @@
           v-for="(item, i) in actions"
           :key="i"
           @click="handleAction(item)"
-        > 
+        >
           <v-list-item-title class="list-item">
             {{ item }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
-      <slot :value="data">
-      </slot>
+    <slot :value="data"> </slot>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'CardActionable',
+  name: "CardActionable",
 
   props: {
     actions: {
-      type: [Array, Object],
+      type: [Array, Object]
     },
     data: {
       type: Object
+    },
+    viewOnly: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     handleAction(item) {
-      this.$emit('click', item);
+      this.$emit("click", item);
     }
-  },
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card-actionable {
   position: relative;
   border-radius: 10px;

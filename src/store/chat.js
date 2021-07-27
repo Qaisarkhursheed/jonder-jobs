@@ -5,7 +5,7 @@ export default {
   namespaced: true,
 
   state: {
-    conversations: null,
+    conversations: [],
     conversationDetails: {
       user_id: null,
       user_name: null,
