@@ -1,5 +1,5 @@
 <template>
-  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
+  <v-row class="layout-content flex-shrink-1 flex-grow-1" v-if="user">
     <v-col cols="12">
       <div class="profile-holder">
         <router-view />
@@ -21,7 +21,6 @@ export default {
 
 <style lang="scss">
 .profile-holder {
-
   .card-link {
     overflow: hidden;
   }
