@@ -42,6 +42,9 @@
         </v-col>
       </v-row>
 
+      <!-- Response alert -->
+      <response-alert :response="formResponse"></response-alert>
+
       <v-row>
         <v-col cols="6">
           <label class="profile-label">{{
@@ -259,7 +262,7 @@
         <p class="profile-subtitle">
           Explanation goes here
         </p>
-        <v-col cols="6">
+        <v-col cols="12">
           <div class="mt-6">
             <v-file-input
               v-model="formData.cv"
@@ -272,7 +275,10 @@
               accept=".doc, .docx, .pdf, .jpg, .png, .txt"
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.cv">
+                  {{ user.cv }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -289,7 +295,10 @@
               class="text-center"
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.qualifications">
+                  {{ user.qualifications }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -306,7 +315,10 @@
               class="text-center "
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.resume">
+                  {{ user.resume }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -461,6 +473,7 @@ import CardActionableList from '@/components/user/JobseekerCardActionableList';
 import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
 import Calendar from '@/components/Calendar';
 import AddNewCard from '@/views/dashboard/AddNewCard';
+import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
   name: "Profile",
@@ -469,7 +482,8 @@ export default {
     UpgradePlanModal,
     CardActionableList,
     Calendar,
-    AddNewCard
+    AddNewCard,
+    ResponseAlert
   },
 
   data: () => ({
@@ -488,6 +502,7 @@ export default {
       qualifications: null,
       resume: null
     },
+    formResponse: {},
     rules: [
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
@@ -565,6 +580,7 @@ export default {
       this.formData.resume = user.resume;
     },
     handleUpdate() {
+      this.formResponse = {};
       const formDataCopy = Object.assign({}, this.formData);
 
       if (!(this.formData.cv instanceof File)) {
@@ -584,7 +600,7 @@ export default {
           alert("Success");
         })
         .catch(err => {
-          alert(err.data.message);
+          this.formResponse = err.data;
         });
     },
     toggleModal(type) {

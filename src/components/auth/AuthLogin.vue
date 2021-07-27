@@ -46,6 +46,9 @@
           </router-link>
         </p>
 
+      <!-- Response alert -->
+      <response-alert :response="formResponse"></response-alert> 
+
         <v-btn outlined color="primary" class="full-w mt-4 "
           >Continue with Google
         </v-btn>
@@ -79,11 +82,13 @@
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
+import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
   name: "AuthLogin",
   components: {
-    JonderTitle
+    JonderTitle,
+    ResponseAlert
   },
   data() {
     return {
@@ -96,6 +101,7 @@ export default {
         password: "",
         privacy: false
       },
+      formResponse: {},
       rules: [
         value => !!value || "Required.",
         value => (value && value.length >= 3) || "Min 3 characters"
@@ -108,10 +114,11 @@ export default {
     }),
 
     async handleLogin() {
+      this.formResponse = {};
       this.response = await this.login(this.formData);
       console.log("LOGIN", this.response);
 
-      if (this.response) {
+      if (this.response.success) {
         if (
           this.response.user.role === "Jobseeker" ||
           this.response.user.role === "user"
@@ -129,8 +136,7 @@ export default {
           this.$router.replace({ name: "CompanySearch" });
         }
       } else {
-        this.message.show = true;
-        this.message.text = this.response.message || "Wrong credentials";
+        this.formResponse = this.response
       }
     }
   }
