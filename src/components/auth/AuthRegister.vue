@@ -99,16 +99,22 @@
 
       <!-- Show location -->
       <v-checkbox
+        class="mb-3"
         label="Möchten Sie, dass wir Ihren Standort anzeigen?"
         hide-details="auto"
         v-model="formData.show_location"
       ></v-checkbox>
 
+      <!-- ResponseAlert -->
+      <ResponseAlert :response="formResponse" />
+
+      <!-- Submit button -->
       <v-btn
         type="submit"
         color="primary"
-        class="full-w mt-3"
+        class="full-w"
         :disabled="!formValid"
+        :loading="formLoading"
         large
       >
         Kostenlos registrieren
@@ -127,10 +133,8 @@
 
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
-import { mapActions } from "vuex";
 
 export default {
-  name: "AuthRegister",
   components: {
     JonderTitle
   },
@@ -147,37 +151,27 @@ export default {
         show_location: false,
         role: "Jobseeker"
       },
-      formValid: false,
-      showValidationMessage: false,
-      validationErrors: {},
-      isValid: false
+      formLoading: false,
+      formResponse: {},
+      formValid: false
     };
   },
   methods: {
-    ...mapActions({
-      register: "auth/register"
-    }),
-
     async handleRegister() {
-      this.validationErrors = {};
-      await this.$refs.form.validate();
-      if (!this.isValid) {
-        this.showValidationMessage = true;
-        this.$emit("changeImage");
-        return false;
-      }
-
-      let response = await this.register(this.formData);
-
-      if (response.success) {
-        localStorage.setItem("registration-id", response.user.id);
-        this.$router.replace({ name: "ManualOnboarding" });
-      } else {
-        this.validationErrors = response.message;
-        this.showValidationMessage = true;
-        this.$refs.form.validate();
-        this.$emit("changeImage");
-      }
+      this.formResponse = {};
+      this.formLoading = true;
+      this.$store
+        .dispatch("auth/register", this.formData)
+        .then(resp => {
+          localStorage.setItem("registration-id", resp.data.user.id);
+          this.$router.replace({ name: "ManualOnboarding" });
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
     }
   }
 };

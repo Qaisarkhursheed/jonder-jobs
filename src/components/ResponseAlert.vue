@@ -6,6 +6,7 @@
     :icon="false"
     text
   >
+    <p if="message" class="ma-0">{{ message }}</p>
     <template v-if="response.errors">
       <ul v-for="[key, value] of Object.entries(response.errors)" :key="key">
         <template v-if="Array.isArray(value)">
@@ -15,7 +16,6 @@
         </template>
       </ul>
     </template>
-    <p v-else-if="message" class="ma-0">{{ message }}</p>
   </v-alert>
 </template>
 
