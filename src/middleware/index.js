@@ -20,9 +20,11 @@ axios.interceptors.request.use(
 // Response interceptor for API calls
 axios.interceptors.response.use(
   response => {
+    response.data.success = true;
     return response;
   },
   async error => {
+    error.response.data.success = false;
     if (error.response.status === 401) {
       if (
         error.response.data.message == "Beenden Sie den Onboarding-Prozess."

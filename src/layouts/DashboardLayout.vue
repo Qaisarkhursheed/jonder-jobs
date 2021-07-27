@@ -481,7 +481,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   height: 80px;
   object-fit: cover;
   position: relative;
-  top: -75px;
+  top: -60px;
   margin: 0 auto -40px auto;
 
   .v-image {

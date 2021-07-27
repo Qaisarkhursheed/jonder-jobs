@@ -7,7 +7,6 @@
     >
       <v-card-text class="d-flex align-center pa-0 pa-6 pb-5">
         <v-img
-          :lazy-src="require('@/assets/candidate.png')"
           height="70px"
           width="70px"
           max-width="70px"

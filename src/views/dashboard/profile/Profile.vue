@@ -1,12 +1,20 @@
 <template>
   <div>
-    <UpgradePlanModal v-if="modals.UpgradePlan.active" :active="modals.UpgradePlan.active"
+    <UpgradePlanModal
+      v-if="modals.UpgradePlan.active"
+      :active="modals.UpgradePlan.active"
       :edit="modals.UpgradePlan.edit"
-      @close="toggleModal('UpgradePlan')" />
-    <AddNewCard v-if="modals.AddNewCard.active" :active="modals.AddNewCard.active"
+      @close="toggleModal('UpgradePlan')"
+    />
+    <AddNewCard
+      v-if="modals.AddNewCard.active"
+      :active="modals.AddNewCard.active"
       :edit="modals.AddNewCard.edit"
-      @close="toggleModal('AddNewCard')" />
+      @close="toggleModal('AddNewCard')"
+    />
 
+    <!-- Response alert -->
+    <response-alert :response="formResponse"></response-alert>
 
     <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
@@ -41,9 +49,6 @@
           </v-btn>
         </v-col>
       </v-row>
-
-      <!-- Response alert -->
-      <response-alert :response="formResponse"></response-alert>
 
       <v-row>
         <v-col cols="6">
@@ -186,8 +191,10 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">When can you start?</label>
-          <Calendar @setDate="formData.ready_for_work = $event"
-            :value="formData.ready_for_work" />
+          <Calendar
+            @setDate="formData.ready_for_work = $event"
+            :value="formData.ready_for_work"
+          />
         </v-col>
       </v-row>
 
@@ -196,17 +203,23 @@
           <label class="profile-label"
             >Monatliche Netto Gehaltsvorstellung? (€)
           </label>
-          <v-col>
-            <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
-          </v-col>
-          <v-slider
-            v-model="formData.monthly_salary"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            min="0"
-            max="100"
-          ></v-slider>
+          <v-row>
+            <v-col cols="auto">
+              <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
+            </v-col>
+            <v-col cols="col" class="d-flex my-auto">
+              <v-slider
+                v-model="formData.monthly_salary"
+                hide-details
+                track-color="grey"
+                color="primary"
+                always-dirty
+                min="1"
+                max="20"
+                step="0.5"
+              ></v-slider>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-card>
@@ -219,23 +232,29 @@
         <p class="profile-subtitle">
           Explanation goes here
         </p>
-        <v-col cols="6">
+        <v-col cols="10">
           <label class="profile-label"
             >Professional experience in years?
           </label>
-          <v-col>
-            <div class="monthly-salary">
-              {{ formData.work_experience }}
-            </div>
-          </v-col>
-          <v-slider
-            v-model="formData.work_experience"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            min="1"
-            max="10"
-          ></v-slider>
+          <v-row>
+            <v-col cols="auto">
+              <div class="monthly-salary">
+                {{ formData.work_experience }}
+              </div>
+            </v-col>
+            <v-col class="d-flex my-auto">
+              <v-slider
+                v-model="formData.work_experience"
+                track-color="grey"
+                color="primary"
+                always-dirty
+                hide-details
+                step="0.5"
+                min="0"
+                max="40"
+              ></v-slider>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
 
@@ -249,7 +268,7 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Your education</label>
-           <CardActionableList type="Education" />
+          <CardActionableList type="Education" />
         </v-col>
       </v-row>
     </v-card>
@@ -287,7 +306,6 @@
             <v-file-input
               v-model="formData.qualifications"
               placeholder="Qualifikationen document"
-              multiple
               dense
               outlined
               prepend-icon=""
@@ -307,7 +325,6 @@
             <v-file-input
               v-model="formData.resume"
               placeholder="Lebenslauf document"
-              multiple
               dense
               outlined
               prepend-icon=""
@@ -341,8 +358,10 @@
 
     <v-card flat id="paymentMethod" class="profile-section mb-10">
       <v-row>
-          <CardActionableList type="AddNewCard"
-              @edit="activateEdit('AddNewCard', $event)" />
+        <CardActionableList
+          type="AddNewCard"
+          @edit="activateEdit('AddNewCard', $event)"
+        />
         <p class="profile-title">
           Edit payment method
         </p>
@@ -364,7 +383,7 @@
       </v-row>
     </v-card>
 
-    <v-card flat id="changePassword"  class="profile-section mb-10">
+    <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
           Change password
@@ -428,11 +447,15 @@
       </v-row>
       <v-row>
         <v-col cols="6">
-          <CardActionableList type="UpgradePlan"
-              @edit="activateEdit('UpgradePlan', $event)" />
+          <CardActionableList
+            type="UpgradePlan"
+            @edit="activateEdit('UpgradePlan', $event)"
+          />
           <div class="upgrade" @click="toggleModal('UpgradePlan')">
-            <v-img class="upgrade-icon"
-            :src="require('@/assets/icons/top-rated.svg')"></v-img>
+            <v-img
+              class="upgrade-icon"
+              :src="require('@/assets/icons/top-rated.svg')"
+            ></v-img>
 
             <div>
               <span class="upgrade-title">
@@ -444,13 +467,16 @@
           </div>
         </v-col>
 
-
         <v-col cols="6">
-          <CardActionableList type="UpgradePlan"
-              @edit="activateEdit('UpgradePlan', $event)" />
+          <CardActionableList
+            type="UpgradePlan"
+            @edit="activateEdit('UpgradePlan', $event)"
+          />
           <div class="upgrade" @click="toggleModal('UpgradePlan')">
-            <v-img class="upgrade-icon"
-            :src="require('@/assets/icons/medal.svg')"></v-img>
+            <v-img
+              class="upgrade-icon"
+              :src="require('@/assets/icons/medal.svg')"
+            ></v-img>
 
             <div>
               <span class="upgrade-title">
@@ -469,10 +495,10 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
-import CardActionableList from '@/components/user/JobseekerCardActionableList';
-import UpgradePlanModal from '@/views/dashboard/UpgradePlanModal';
-import Calendar from '@/components/Calendar';
-import AddNewCard from '@/views/dashboard/AddNewCard';
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
+import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
+import Calendar from "@/components/Calendar";
+import AddNewCard from "@/views/dashboard/AddNewCard";
 import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
@@ -513,45 +539,41 @@ export default {
       "Mechanical engineering",
       "Chemical-pharmaceutical industry",
       "Food industry",
-      "Electrical engineering industry",
+      "Electrical engineering industry"
     ],
-    lookingForRole: [      
-     "Developer",
-     "Project Manager",
-     "Construction manager",
-     "Intern",
-     "Apprentice",
-     "Manager",
+    lookingForRole: [
+      "Developer",
+      "Project Manager",
+      "Construction manager",
+      "Intern",
+      "Apprentice",
+      "Manager"
     ],
-    lookingForBranches: [      
-     "Developer",
-     "Project Manager",
-     "Construction manager",
-     "Intern",
-     "Apprentice",
-     "Manager",
+    lookingForBranches: [
+      "Developer",
+      "Project Manager",
+      "Construction manager",
+      "Intern",
+      "Apprentice",
+      "Manager"
     ],
-    employment: [
-      "Trainee",
-      "Fulltime",
-      "Parttime",
-    ],
+    employment: ["Trainee", "Fulltime", "Parttime"],
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
         component: UpgradePlanModal
-      },      
+      },
       AddNewCard: {
         active: false,
         edit: false,
         component: AddNewCard
-      },
+      }
     },
     fileActions: {
-      UpgradePlan: ['edit', 'delete'],
-      AddNewCard: ['edit', 'delete'],
-    },
+      UpgradePlan: ["edit", "delete"],
+      AddNewCard: ["edit", "delete"]
+    }
   }),
   created() {
     this.resetFormData(this.user);
@@ -596,8 +618,8 @@ export default {
       }
 
       this.updateUser(formDataCopy)
-        .then(() => {
-          alert("Success");
+        .then(resp => {
+          this.formResponse = resp.data;
         })
         .catch(err => {
           this.formResponse = err.data;
@@ -649,7 +671,7 @@ export default {
   border-radius: 10px;
   width: 80px;
   text-align: center;
-  padding: 25px 0;
+  padding: 15px 0;
   color: $primary-blue-dark;
 }
 

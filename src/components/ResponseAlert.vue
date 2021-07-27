@@ -6,7 +6,6 @@
     :icon="false"
     text
   >
-    <p v-if="message" class="ma-0">{{ message }}</p>
     <template v-if="response.errors">
       <ul v-for="[key, value] of Object.entries(response.errors)" :key="key">
         <template v-if="Array.isArray(value)">
@@ -16,6 +15,7 @@
         </template>
       </ul>
     </template>
+    <p v-else-if="message" class="ma-0">{{ message }}</p>
   </v-alert>
 </template>
 
@@ -57,7 +57,9 @@ export default {
     },
 
     message() {
-      return this.response.message || "Unbekannte Nachricht.";
+      return this.response.message || this.response.success
+        ? "Erfolg!"
+        : "Fehler!";
     }
   }
 };
