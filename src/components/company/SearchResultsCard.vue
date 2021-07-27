@@ -90,21 +90,16 @@
     </div>
     <v-card-actions class="pt-0">
       <v-col cols="12" class="d-flex justify-space-between">
-        <template v-if="candidate.selection_managment">
-          <div class="star-btn mr-3">
-            <v-icon size="25" color="#27AAE1">
-              mdi-star
-            </v-icon>
-          </div>
-        </template>
-
-        <template v-else>
-          <div class="star-btn mr-3" @click="saveJobseeker">
-            <v-icon size="25" color="#000">
-              mdi-star-outline
-            </v-icon>
-          </div>
-        </template>
+        <div class="star-btn mr-3" @click="handleStarIconClick">
+          <v-icon
+            size="25"
+            :color="candidate.selection_managment ? '#27AAE1' : '#000'"
+          >
+            {{
+              candidate.selection_managment ? "mdi-star" : "mdi-star-outline"
+            }}
+          </v-icon>
+        </div>
 
         <v-btn
           color="primary"
@@ -121,8 +116,6 @@
 </template>
 
 <script>
-import store from "@/store";
-
 export default {
   name: "SearchResultsCard",
 
@@ -143,13 +136,23 @@ export default {
         }
       });
     },
-    saveJobseeker() {
-      store.dispatch("company/slManagementAddCandidate", {
-        employer_id: store.getters["user/user"].id,
-        jobseeker_id: this.candidate.id,
-        managment_status: "Saved candidates"
-      });
-      this.candidate.selection_managment = true;
+    handleStarIconClick() {
+      if (this.candidate.selection_managment) {
+        this.$store
+          .dispatch("company/slManagementDeleteCandidate", this.candidate.id)
+          .then(() => {
+            this.candidate.selection_managment = false;
+          });
+      } else {
+        this.$store
+          .dispatch("company/slManagementAddCandidate", {
+            jobseeker_id: this.candidate.id,
+            managment_status: "Saved candidates"
+          })
+          .then(() => {
+            this.candidate.selection_managment = true;
+          });
+      }
     }
   }
 };

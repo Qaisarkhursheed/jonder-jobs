@@ -23,9 +23,14 @@
           </div>
         </v-col>
         <v-col cols="4" class="d-flex justify-end pt-7">
-          <div class="star-btn mr-3">
-            <v-icon size="25" @click="editNote(item)">
-              mdi-star-outline
+          <div class="star-btn mr-3" @click="handleStarIconClick">
+            <v-icon
+              size="25"
+              :color="profile.selection_managment ? '#27AAE1' : '#000'"
+            >
+              {{
+                profile.selection_managment ? "mdi-star" : "mdi-star-outline"
+              }}
             </v-icon>
           </div>
           <v-btn
@@ -253,13 +258,30 @@ export default {
         params: { id: this.$route.params.id, type: "new", company: true }
       });
     },
+    handleStarIconClick() {
+      if (this.profile.selection_managment) {
+        this.$store
+          .dispatch("company/slManagementDeleteCandidate", this.profile.id)
+          .then(() => {
+            this.profile.selection_managment = false;
+          });
+      } else {
+        this.$store
+          .dispatch("company/slManagementAddCandidate", {
+            jobseeker_id: this.profile.id,
+            managment_status: "Saved candidates"
+          })
+          .then(() => {
+            this.profile.selection_managment = true;
+          });
+      }
+    },
     back() {
-
-      if(this.$route.params.type && this.$route.params.type === "selection"){
+      if (this.$route.params.type && this.$route.params.type === "selection") {
         this.$router.push({
           name: "CompanySelectionManagement"
         });
-      }else{
+      } else {
         this.$router.push({
           name: "CompanySearch"
         });

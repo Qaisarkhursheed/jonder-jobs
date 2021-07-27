@@ -61,11 +61,12 @@ export default {
     });
   },
   slManagementDeleteCandidate(context, id) {
-    return axios.delete(`/selection-managment/${id}`).then(res => {
-      console.log(res);
-      // if(res.status === 200) {
-      // }
-    });
+    try {
+      const resp = axios.delete(`/selection-managment/${id}`);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   },
   // Saved search filters
   searchFilterFetchAll({ commit }) {
