@@ -1,10 +1,10 @@
 <template>
   <auth-wrap :img="e1 + 1">
-    <v-icon v-if="e1 > 1 && e1 < 6" class="mo-back-button" @click="prevStep">
+    <!-- <v-icon v-if="e1 > 1 && e1 < 6" class="mo-back-button" @click="prevStep">
       mdi-arrow-left
-    </v-icon>
+    </v-icon> -->
 
-    <div class="stepper-wrap mt-10" style="width: 500px">
+    <div class="stepper-wrap mt-10" style="width: 450px">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -39,36 +39,53 @@
             class="px-0 mo-stepper-items__step-content"
             step="1"
           >
-            <step-1 :nextScreen="nextStep" v-model="formData" />
+            <step-1
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+            />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="2"
           >
-            <step-2 :nextScreen="nextStep" v-model="formData" />
+            <step-2
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+            />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="3"
           >
-            <step-3 :nextScreen="nextStep" v-model="formData" />
+            <step-3
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+            />
           </v-stepper-content>
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="4"
           >
-            <step-4 :nextScreen="nextStep" v-model="formData" />
+            <step-4
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+            />
           </v-stepper-content>
+
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="5"
           >
             <step-5
-              :prevScreen="prevStep"
               :nextScreen="nextStep"
+              @prevScreen="prevStep"
               v-model="formData"
             />
           </v-stepper-content>
@@ -78,13 +95,16 @@
             step="6"
           >
             <step-6
-              :prevScreen="prevStep"
               :nextScreen="nextStep"
+              @prevScreen="prevStep"
               v-model="formData"
+              :formLoading="saveInProgress"
             />
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
+
+      <ResponseAlert :response="formResponse" />
     </div>
   </auth-wrap>
 </template>
@@ -118,6 +138,7 @@ export default {
   data: () => ({
     saveInProgress: false,
     e1: 1,
+    formResponse: {},
     formData: {
       city: "",
       why_jonder: "",
@@ -128,7 +149,7 @@ export default {
       looking_for_employment_type: "",
       address_to_work: "",
       ready_for_work: "",
-      monthly_salary: 10,
+      monthly_salary: "",
       working_experience: "",
       cv: "",
       resume: null,
@@ -146,47 +167,7 @@ export default {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", [
-      "user",
-      "jobseekerExperience",
-      "jobseekerEducation"
-    ]),
-    isDisabled() {
-      if (this.saveInProgress) return true;
-      if (this.e1 === 2) {
-        return !(
-          this.formData.why_jonder && this.formData.why_jonder.length > 0
-        );
-      } else if (this.e1 === 3) {
-        return !(
-          this.formData.current_position &&
-          this.formData.current_position.length > 0 &&
-          this.formData.branche &&
-          this.formData.branche.length > 0 &&
-          this.formData.looking_for &&
-          this.formData.looking_for.length > 0
-        );
-      } else if (this.e1 === 4) {
-        return !(
-          this.formData.looking_for_branche &&
-          this.formData.looking_for_employment_type &&
-          this.formData.address_to_work &&
-          this.formData.ready_for_work &&
-          this.formData.monthly_salary
-        );
-      } else if (this.e1 === 5) {
-        return !(this.jobseekerExperience && this.jobseekerEducation);
-      } else if (this.e1 === 6) {
-        return !(
-          this.formData.cv &&
-          this.formData.qualifications &&
-          //this.formData.profile_img &&
-          this.formData.resume
-        );
-      }
-
-      return false;
-    }
+    ...mapGetters("user", ["user", "jobseekerExperience", "jobseekerEducation"])
   },
   methods: {
     ...mapActions("user", ["postOnboardingUser"]),
@@ -203,20 +184,28 @@ export default {
       this.e1 !== 1 ? this.e1-- : this.e1;
     },
     nextStep() {
-      if (this.isDisabled) return;
+      if (this.saveInProgress) return;
       if (this.e1 < 6) this.e1++;
       else this.saveOnboarding();
     },
     complete(step) {
       return step < this.e1;
     },
-    async saveOnboarding() {
+    saveOnboarding() {
+      this.formResponse = {};
       this.saveInProgress = true;
-      await this.postOnboardingUser(this.formData).then(() => {
-        localStorage.setItem("onboarding-status", "false");
-        this.$router.replace("/dashboard/profile");
-      });
-      this.saveInProgress = false;
+
+      this.postOnboardingUser(this.formData)
+        .then(() => {
+          localStorage.setItem("onboarding-status", "false");
+          this.$router.replace("/dashboard");
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.saveInProgress = false;
+        });
     }
   }
 };

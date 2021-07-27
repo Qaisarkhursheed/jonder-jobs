@@ -295,7 +295,7 @@
             >
               <template v-slot:selection="{ text }">
                 <v-chip small label color="primary" v-if="user.cv">
-                  {{ user.cv }}
+                  ...{{ user.cv.slice(-30) }}
                 </v-chip>
                 <v-chip small label color="primary" v-else>
                   {{ text }}
@@ -314,7 +314,7 @@
             >
               <template v-slot:selection="{ text }">
                 <v-chip small label color="primary" v-if="user.qualifications">
-                  {{ user.qualifications }}
+                  ...{{ user.qualifications.slice(-30) }}
                 </v-chip>
                 <v-chip small label color="primary" v-else>
                   {{ text }}
@@ -333,7 +333,7 @@
             >
               <template v-slot:selection="{ text }">
                 <v-chip small label color="primary" v-if="user.resume">
-                  {{ user.resume }}
+                  ...{{ user.resume.slice(-30) }}
                 </v-chip>
                 <v-chip small label color="primary" v-else>
                   {{ text }}
