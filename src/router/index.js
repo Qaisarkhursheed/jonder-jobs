@@ -66,8 +66,7 @@ const routes = [
     path: "/logout",
     name: "Logout",
     meta: {
-      requiresAuth: true,
-      isAdmin: false
+      requiresAuth: true
     }
   },
   {
@@ -99,7 +98,9 @@ const routes = [
     name: "ManualOnboarding",
     component: ManualOnboarding,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresUser: true,
+      isOnboarding: true
     }
   },
   {
@@ -107,7 +108,9 @@ const routes = [
     name: "ManualOnboardingCompany",
     component: ManualOnboardingCompany,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresCompany: true,
+      isOnboarding: true
     }
   },
   {
@@ -115,6 +118,7 @@ const routes = [
     component: DashboardWrap,
     meta: {
       requiresAuth: true,
+      requiresUser: true,
       isAdmin: false
     },
     children: [
@@ -124,6 +128,7 @@ const routes = [
         component: Dashboard,
         meta: {
           requiresAuth: true,
+          requiresUser: true,
           isAdmin: false
         }
       },
@@ -133,6 +138,7 @@ const routes = [
         component: EditNotepad,
         meta: {
           requiresAuth: true,
+          requiresUser: true,
           isAdmin: false
         }
       },
@@ -141,6 +147,7 @@ const routes = [
         component: ProfileWrap,
         meta: {
           requiresAuth: true,
+          requiresUser: true,
           isAdmin: false
         },
         children: [
@@ -150,6 +157,7 @@ const routes = [
             component: Profile,
             meta: {
               requiresAuth: true,
+              requiresUser: true,
               isAdmin: false
             }
           },
@@ -159,6 +167,7 @@ const routes = [
             component: ProfileView,
             meta: {
               requiresAuth: true,
+              requiresUser: true,
               isAdmin: false
             }
           },
@@ -168,6 +177,7 @@ const routes = [
             component: CvMaker,
             meta: {
               requiresAuth: true,
+              requiresUser: true,
               isAdmin: false
             }
           },
@@ -177,6 +187,7 @@ const routes = [
             component: Qualifications,
             meta: {
               requiresAuth: true,
+              requiresUser: true,
               isAdmin: false
             }
           },
@@ -186,6 +197,7 @@ const routes = [
             component: ActualPosition,
             meta: {
               requiresAuth: true,
+              requiresUser: true,
               isAdmin: false
             }
           },
@@ -234,14 +246,16 @@ const routes = [
     component: CompanySettings,
     props: true,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresCompany: true
     }
   },
   {
     path: "/company-dashboard",
     component: CompanyLayout,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresCompany: true
     },
 
     children: [
@@ -250,7 +264,8 @@ const routes = [
         name: "CompanySearch",
         component: CompanySearch,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
       {
@@ -259,7 +274,8 @@ const routes = [
         component: CompanySelectionManagement,
         props: true,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
       {
@@ -268,7 +284,8 @@ const routes = [
         component: Chat,
         props: true,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
       {
@@ -277,7 +294,8 @@ const routes = [
         component: CompanyTeamManagement,
         props: true,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
       {
@@ -285,7 +303,8 @@ const routes = [
         name: "CompanyPublicProfile",
         component: CompanyPublicProfile,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
       {
@@ -294,7 +313,8 @@ const routes = [
         component: CompanyUser,
         props: true,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       },
 
@@ -304,7 +324,8 @@ const routes = [
         component: CompanyPackagesPricing,
         props: true,
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          requiresCompany: true
         }
       }
     ]
@@ -321,7 +342,7 @@ const routes = [
   {
     // will match everything
     path: "*",
-    redirect: "/home"
+    redirect: { name: "Home" }
   }
 ];
 
@@ -331,54 +352,82 @@ const router = new VueRouter({
   routes
 });
 
+const getDashboardRoute = () => {
+  const user = store.getters["user/user"];
+
+  if (!user) {
+    return {
+      name: "Login"
+    };
+  }
+
+  switch (user.role) {
+    case "Jobseeker":
+      return {
+        name: "Dashboard"
+      };
+
+    case "Employer":
+      return {
+        name: "CompanySearch"
+      };
+
+    default:
+      console.log("Err: Unsupported user role.");
+      alert("Error");
+      return {
+        name: "Login"
+      };
+  }
+};
+
 router.beforeEach(async (to, from, next) => {
-  if (
-    to.name === "Home" &&
-    from.name === null &&
-    localStorage.getItem("user-token")
-  ) {
-    next({
-      name: "Dashboard"
+  const isAuth = store.getters["auth/authenticated"];
+  const user = store.getters["user/user"];
+
+  if (to.name == "Logout") {
+    store.dispatch("auth/logout").finally(() => {
+      router.replace({ name: "Home" });
     });
   }
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("user-token") == null) {
-      next({
-        path: "/login",
-        params: { nextUrl: to.fullPath }
-      });
-    } else {
-      let user = await store.dispatch("user/me");
 
-      if (to.matched.some(record => record.meta.isAdmin)) {
-        if (user.role === "admin") {
-          next();
-        } else {
-          next({ name: "Dashboard" });
-        }
-      } else {
-        if (to.fullPath === "/logout") {
-          store.dispatch("auth/logout");
-
-          next({ name: "Home" });
-        } else {
-          next();
-        }
-      }
-    }
-  } else if (
-    to.matched.some(
-      record => record.name === "Login" || record.name === "Register"
-    )
-  ) {
-    if (localStorage.getItem("user-token") == null) {
-      next();
-    } else {
-      next({ name: "Dashboard" });
-    }
-  } else {
-    next();
+  if (to.meta.requiresAuth && !isAuth) {
+    return next({ name: "Login", params: { nextUrl: to.fullPath } });
   }
+
+  if (to.meta.guest && isAuth) {
+    return router.replace(getDashboardRoute());
+  }
+
+  if (to.name == "Home" && isAuth) {
+    return router.replace(getDashboardRoute());
+  }
+
+  if (
+    (to.meta.requiresCompany && user.role != "Employer") ||
+    (to.meta.requiresUser && user.role != "Jobseeker")
+  ) {
+    return next({ name: "Home" });
+  }
+
+  if (
+    to.meta.requiresAuth &&
+    !to.meta.isOnboarding &&
+    !user.onboarding_finished
+  ) {
+    const userRole = store.getters["user/user"].role;
+
+    if (userRole == "Jobseeker") {
+      router.replace({ name: "ManualOnboarding" });
+    } else if (userRole == "Employer") {
+      router.replace({ name: "ManualOnboardingCompany" });
+    } else {
+      console.log("Err: Onboarding error for unsupported role.");
+      alert("Error");
+    }
+  }
+
+  return next();
 });
 
 export default router;

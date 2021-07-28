@@ -9,13 +9,14 @@ export default {
     return axios
       .get("/me")
       .then(response => {
+        commit("auth/SET_AUTHENTICATED", true, { root: true });
         commit("SET_USER", response.data);
         return response.data;
       })
       .catch(() => {
+        commit("auth/SET_AUTHENTICATED", false, { root: true });
         commit("SET_USER", null);
         localStorage.removeItem("user-token");
-        localStorage.removeItem("user");
       });
   },
 
@@ -33,7 +34,7 @@ export default {
         "/company/onboarding/" + state.user.id,
         formData
       );
-      commit("SET_USER", resp.data.user);
+      commit("SET_USER", resp.data.data);
       return resp;
     } catch (err) {
       return Promise.reject(err.response);
@@ -57,7 +58,7 @@ export default {
         "/user/onboarding/" + state.user.id,
         formData
       );
-      commit("SET_USER", resp.data.user);
+      commit("SET_USER", resp.data.data);
       return resp;
     } catch (err) {
       return Promise.reject(err.response);

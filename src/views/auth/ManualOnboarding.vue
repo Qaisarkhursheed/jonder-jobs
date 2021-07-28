@@ -164,6 +164,10 @@ export default {
     }
   }),
   created() {
+    if (this.$store.getters["user/user"].onboarding_finished) {
+      this.$router.replace({ name: "Home" });
+    }
+
     this.populateData(this.user);
   },
   computed: {
@@ -197,7 +201,6 @@ export default {
 
       this.postOnboardingUser(this.formData)
         .then(() => {
-          localStorage.setItem("onboarding-status", "false");
           this.$router.replace("/dashboard");
         })
         .catch(err => {

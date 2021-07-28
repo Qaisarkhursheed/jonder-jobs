@@ -1,48 +1,41 @@
+/* eslint-disable no-unreachable */
 import axios from "axios";
 
 export default {
   async login({ commit }, credentials) {
-    let response = {};
+    try {
+      const resp = await axios.post("/login", credentials);
+      const token = resp.data.token;
+      const user = resp.data.user;
 
-    await axios
-      .post("/login", credentials)
-      .then(resp => {
-        const token = resp.data.token;
-        const user = JSON.stringify(resp.data.user);
-        localStorage.setItem("user-token", token);
-        localStorage.setItem("user", user);
-        localStorage.setItem("onboarding-status", resp.data.onboarding_status);
-        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-        commit("SET_AUTHENTICATED", true);
-        commit("SET_ONBOARDING_STATUS", resp.data.onboarding_status);
-        response = resp.data;
-      })
-      .catch(err => {
-        localStorage.removeItem("user-token");
-        localStorage.removeItem("user");
-        commit("SET_AUTHENTICATED", false);
-        response = err.response.data;
-      });
+      localStorage.setItem("user-token", token);
+      commit("SET_AUTHENTICATED", true);
+      commit("user/SET_USER", user, { root: true });
 
-    return response;
+      return resp;
+    } catch (err) {
+      localStorage.removeItem("user-token");
+      commit("SET_AUTHENTICATED", false);
+      commit("user/SET_USER", null, { root: true });
+      return Promise.reject(err.response);
+    }
   },
 
   async register({ commit }, data) {
     try {
       const resp = await axios.post("/register", data);
       const token = resp.data.token;
-      const user = JSON.stringify(resp.data.user);
+      const user = resp.data.user;
+
       localStorage.setItem("user-token", token);
-      localStorage.setItem("user", user);
-      localStorage.setItem("onboarding-status", "false");
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       commit("SET_AUTHENTICATED", true);
+      commit("user/SET_USER", user, { root: true });
+
       return resp;
     } catch (err) {
       localStorage.removeItem("user-token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("onboarding-status");
       commit("SET_AUTHENTICATED", false);
+      commit("user/SET_USER", null, { root: true });
       return Promise.reject(err.response);
     }
   },
@@ -50,17 +43,16 @@ export default {
   async registerCompany({ commit }, data) {
     try {
       const resp = await axios.post("/company/register", data);
-      localStorage.setItem("user-token", resp.data.token);
-      localStorage.setItem("user", JSON.stringify(resp.data.user));
-      localStorage.setItem("onboarding-status", "false");
-      axios.defaults.headers.common["Authorization"] =
-        "Bearer " + resp.data.token;
+      const token = resp.data.token;
+      const user = resp.data.user;
+
+      localStorage.setItem("user-token", token);
       commit("SET_AUTHENTICATED", true);
+      commit("user/SET_USER", user, { root: true });
+
       return resp;
     } catch (error) {
       localStorage.removeItem("user-token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("onboarding-status");
       commit("SET_AUTHENTICATED", false);
       return Promise.reject(error.response);
     }
@@ -75,15 +67,16 @@ export default {
     }
   },
 
-  logout({ commit }) {
-    return axios.post("/logout").then(() => {
+  async logout({ commit }) {
+    try {
+      const resp = await axios.post("/logout");
       localStorage.removeItem("user-token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("onboarding-status");
-      delete axios.defaults.headers.common["Authorization"];
       commit("SET_AUTHENTICATED", false);
-      this.reset();
-    });
+      commit("user/SET_USER", null, { root: true });
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   },
 
   async facebooklogin() {
