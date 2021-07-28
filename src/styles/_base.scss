@@ -318,6 +318,10 @@ h5, .h5 {
     height: 55px;
 }
 
+.v-textarea .v-text-field__slot {
+    height: unset;
+}
+
 .lang-switcher {
     .v-text-field--rounded > .v-input__control > .v-input__slot {
         padding: 0 15px;

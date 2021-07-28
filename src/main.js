@@ -18,10 +18,13 @@ Vue.component("ResponseAlert", ResponseAlert);
 Vue.mixin(Validations);
 
 Vue.config.productionTip = false;
-new Vue({
-  router,
-  store,
-  vuetify,
-  i18n,
-  render: h => h(App)
-}).$mount("#app");
+
+store.dispatch("user/me").finally(() => {
+  new Vue({
+    router,
+    store,
+    vuetify,
+    i18n,
+    render: h => h(App)
+  }).$mount("#app");
+});

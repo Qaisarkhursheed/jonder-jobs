@@ -72,6 +72,7 @@
           color="primary"
           class="full-w mt-5"
           :disabled="!formValid"
+          :loading="formLoading"
         >
           Loggen Sie
         </v-btn>
@@ -89,7 +90,6 @@
 
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
-import { mapActions } from "vuex";
 import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
@@ -109,40 +109,26 @@ export default {
         password: "",
         privacy: false
       },
+      formLoading: false,
       formResponse: {},
       formValid: false
     };
   },
   methods: {
-    ...mapActions({
-      login: "auth/login"
-    }),
-
     async handleLogin() {
+      this.formLoading = true;
       this.formResponse = {};
-      this.response = await this.login(this.formData);
-      console.log("LOGIN", this.response);
-
-      if (this.response.success) {
-        if (
-          this.response.user.role === "Jobseeker" ||
-          this.response.user.role === "user"
-        ) {
-          this.$router.replace({ name: "Dashboard" });
-        } else if (
-          this.response.onboarding_status &&
-          this.response.user.role === "Employer"
-        ) {
-          this.$router.replace({ name: "CompanySearch" });
-        } else if (this.response.user.role === "user") {
-          this.$router.replace({ name: "ManualOnboarding" });
-        } else if (this.response.user.role === "Employer") {
-          // this.$router.replace({ name: "ManualOnboardingCompany" });
-          this.$router.replace({ name: "CompanySearch" });
-        }
-      } else {
-        this.formResponse = this.response;
-      }
+      this.$store
+        .dispatch("auth/login", this.formData)
+        .then(() => {
+          this.$router.replace({ name: "Home" });
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
     }
   }
 };
