@@ -15,12 +15,11 @@
       <v-btn
         color="primary"
         depressed
+        large
         @click="$router.push('/company-dashboard')"
       >
         Back to homepage
       </v-btn>
-
-      
     </div>
 
     <!-- Main -->
@@ -53,6 +52,9 @@
       <!-- Right side -->
       <v-col class="col-12 col-sm-9 col-xl-9">
         <v-container fluid class="d-flex flex-column">
+          <!-- Response alert -->
+          <response-alert :response="formResponse"></response-alert>
+
           <!-- Personal info -->
           <v-card flat id="personalInfo" class="profile-section mb-10">
             <v-row>
@@ -64,71 +66,76 @@
               </p>
             </v-row>
 
-            <v-row>
-              <v-col cols="6">
-                <label class="profile-label">{{
-                  $t("user.profile.firstName")
-                }}</label>
-                <v-text-field
-                  dense
-                  :label="$t('user.profile.firstName')"
-                  :rules="rules"
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="formData.first_name"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="6">
-                <label class="profile-label">{{
-                  $t("user.profile.lastName")
-                }}</label>
-                <v-text-field
-                  dense
-                  :label="$t('user.profile.lastName')"
-                  :rules="rules"
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="formData.last_name"
-                ></v-text-field>
-              </v-col>
-            </v-row>
+            <v-form v-model="formValid">
+              <v-row>
+                <v-col cols="6">
+                  <label class="profile-label">{{
+                    $t("user.profile.firstName")
+                  }}</label>
+                  <v-text-field
+                    dense
+                    :label="$t('user.profile.firstName')"
+                    :rules="[validations.required]"
+                    type="text"
+                    outlined
+                    solo
+                    flat
+                    hide-details
+                    background-color="white"
+                    v-model="formData.first_name"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <label class="profile-label">{{
+                    $t("user.profile.lastName")
+                  }}</label>
+                  <v-text-field
+                    dense
+                    :label="$t('user.profile.lastName')"
+                    :rules="[validations.required]"
+                    type="text"
+                    outlined
+                    solo
+                    flat
+                    hide-details
+                    background-color="white"
+                    v-model="formData.last_name"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
 
-            <v-row>
-              <v-col cols="6">
-                <label class="profile-label">Email</label>
-                <v-text-field
-                  dense
-                  disabled
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="user.email"
-                ></v-text-field>
-                <small style="opacity: 60%">Email is not verified yet</small>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="6">
-                 <v-btn
-            depressed
-            color="primary"
-            class="pl-8 pr-8"
-            @click="handleUpdate"
-            >{{ $t("general.save") }}
-          </v-btn>
-              </v-col>
-            </v-row>
+              <v-row>
+                <v-col cols="6">
+                  <label class="profile-label">Email</label>
+                  <v-text-field
+                    dense
+                    disabled
+                    type="text"
+                    outlined
+                    solo
+                    flat
+                    hide-details
+                    background-color="white"
+                    v-model="user.email"
+                  ></v-text-field>
+                  <small style="opacity: 60%">Email is not verified yet</small>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="6">
+                  <v-btn
+                    :disabled="!formValid"
+                    depressed
+                    large
+                    color="primary"
+                    class="pl-8 pr-8"
+                    @click="handleUpdate"
+                    >{{ $t("general.save") }}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-form>
           </v-card>
 
           <!-- Billing & Invoices -->
@@ -198,7 +205,7 @@
 
           <!-- Password -->
           <v-card flat id="changePassword" class="profile-section mb-10">
-            <v-row>
+            <v-row class="mb-0">
               <p class="profile-title">
                 Change password
               </p>
@@ -206,65 +213,55 @@
                 Explanation goes here
               </p>
             </v-row>
-            <v-row>
-              <v-col cols="12">
-                <label class="profile-label">Enter old password</label>
-                <v-text-field
-                  dense
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="formDataPassword.current_password"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
-                <label class="profile-label">Enter new password</label>
-                <v-text-field
-                  dense
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="formDataPassword.new_password"
 
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
-                <label class="profile-label">Repeat new password</label>
-                <v-text-field
-                  dense
-                  type="text"
-                  outlined
-                  solo
-                  flat
-                  hide-details
-                  background-color="white"
-                  v-model="formDataPassword.new_confirm_password"
+            <v-form ref="passwordForm" v-model="passwordFormValid">
+              <label class="profile-label">Enter old password</label>
+              <v-text-field
+                v-model="passwordFormData.current_password"
+                dense
+                type="password"
+                outlined
+                :rules="[validations.required]"
+                background-color="white"
+              ></v-text-field>
 
-                ></v-text-field>
-              </v-col>
-            </v-row>
+              <label class="profile-label">Enter new password</label>
+              <v-text-field
+                v-model="passwordFormData.new_password"
+                dense
+                type="password"
+                outlined
+                :rules="[validations.required, validations.min.string(6)]"
+                background-color="white"
+              ></v-text-field>
 
-            <v-row>
-              <v-col cols="6">
-                 <v-btn
-            depressed
-            color="primary"
-            class="pl-8 pr-8"
-            @click="handleChangePassword"
-            >Change Password
-          </v-btn>
-              </v-col>
-            </v-row>
+              <label class="profile-label">Repeat new password</label>
+              <v-text-field
+                v-model="passwordFormData.new_confirm_password"
+                dense
+                type="password"
+                outlined
+                :rules="[validations.required]"
+                background-color="white"
+              ></v-text-field>
+
+              <!-- Response alert -->
+              <response-alert :response="passwordFormResponse"></response-alert>
+
+              <v-row>
+                <v-col cols="6">
+                  <v-btn
+                    :disabled="!passwordFormValid"
+                    depressed
+                    large
+                    color="primary"
+                    class="pl-8 pr-8"
+                    @click="handleChangePassword"
+                    >Change Password
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-form>
           </v-card>
         </v-container>
       </v-col>
@@ -293,11 +290,11 @@ export default {
   data() {
     return {
       formData: {},
-      formDataPassword: {},
-      rules: [
-        value => !!value || "Required.",
-        value => (value && value.length >= 3) || "Min 3 characters"
-      ],
+      formValid: false,
+      formResponse: {},
+      passwordFormData: {},
+      passwordFormValid: false,
+      passwordFormResponse: {},
       modals: {
         AddNewCard: {
           active: false,
@@ -317,59 +314,42 @@ export default {
     this.fillData();
   },
   methods: {
-     ...mapActions('user', ['updateCompanyUser']),
-     ...mapActions('user', ['changePassword']),
+    ...mapActions("user", ["updateCompany"]),
+    ...mapActions("user", ["changePassword"]),
     fillData() {
       const user = this.user;
       if (!user) return;
-      this.formDataPassword.new_confirm_password = '';
-      this.formDataPassword.new_password = '';
-      this.formDataPassword.current_password = '';
+      this.passwordFormData.new_confirm_password = "";
+      this.passwordFormData.new_password = "";
+      this.passwordFormData.current_password = "";
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
       this.formData.branche = user.branche;
-      this.formData.looking_for = user.looking_for;
-      this.formData.looking_for_branche = user.looking_for_branche;
-      this.formData.looking_for_employment_type =
-        user.looking_for_employment_type;
-      this.formData.address_to_work = user.address_to_work;
-      this.formData.work_experience = user.work_experience;
-      this.formData.cv = user.cv;
-      this.formData.qualifications = user.qualifications;
-      this.formData.resume = user.resume;
     },
     handleUpdate() {
       const formDataCopy = Object.assign({}, this.formData);
+      this.formResponse = {};
 
-      if (!(this.formData.cv instanceof File)) {
-        delete formDataCopy.cv;
-      }
-
-      if (!(this.formData.resume instanceof File)) {
-        delete formDataCopy.resume;
-      }
-
-      if (!(this.formData.qualifications instanceof File)) {
-        delete formDataCopy.qualifications;
-      }
-
-      this.updateCompanyUser(formDataCopy)
-        .then(() => {
-          alert("Success");
+      this.updateCompany(formDataCopy)
+        .then(resp => {
+          this.formResponse = resp.data;
         })
         .catch(err => {
-          alert(err.data.message);
+          this.formResponse = err.data;
         });
-      //this.updateCompanyUser(formDataCopy);
     },
     handleChangePassword() {
-      const formDataCopy = Object.assign({}, this.formDataPassword);
-      this.changePassword(formDataCopy).then(() => {
-          alert("Success");
+      const formDataCopy = Object.assign({}, this.passwordFormData);
+      this.passwordFormResponse = {};
+
+      this.changePassword(formDataCopy)
+        .then(resp => {
+          this.passwordFormResponse = resp.data;
+          this.$refs.passwordForm.reset();
         })
         .catch(err => {
-          alert(err.data.message);
+          this.passwordFormResponse = err.data;
         });
     },
     downloadInvoice() {

@@ -58,7 +58,7 @@
           <v-text-field
             dense
             :label="$t('user.profile.firstName')"
-            :rules="rules"
+            :rules="[validations.required]"
             type="text"
             outlined
             solo
@@ -73,7 +73,7 @@
           <v-text-field
             dense
             :label="$t('user.profile.lastName')"
-            :rules="rules"
+            :rules="[validations.required]"
             type="text"
             outlined
             solo
@@ -392,48 +392,55 @@
           Explanation goes here
         </p>
       </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Enter old password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Enter new password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Repeat new password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+
+      <v-form ref="passwordForm" v-model="passwordFormValid">
+        <label class="profile-label">Enter old password</label>
+        <v-text-field
+          v-model="passwordFormData.current_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required]"
+          background-color="white"
+        ></v-text-field>
+
+        <label class="profile-label">Enter new password</label>
+        <v-text-field
+          v-model="passwordFormData.new_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required, validations.min.string(6)]"
+          background-color="white"
+        ></v-text-field>
+
+        <label class="profile-label">Repeat new password</label>
+        <v-text-field
+          v-model="passwordFormData.new_confirm_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required]"
+          background-color="white"
+        ></v-text-field>
+
+        <!-- Response alert -->
+        <response-alert :response="passwordFormResponse"></response-alert>
+
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              :disabled="!passwordFormValid"
+              depressed
+              large
+              color="primary"
+              class="pl-8 pr-8"
+              @click="handleChangePassword"
+              >Change Password
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
     </v-card>
 
     <v-card flat id="upgradeAccount" class="profile-section mb-10">
@@ -529,10 +536,9 @@ export default {
       resume: null
     },
     formResponse: {},
-    rules: [
-      value => !!value || "Required.",
-      value => (value && value.length >= 3) || "Min 3 characters"
-    ],
+    passwordFormData: {},
+    passwordFormValid: false,
+    passwordFormResponse: {},
     branche: [
       "Medicine",
       "Automotive industry",
@@ -623,6 +629,20 @@ export default {
         })
         .catch(err => {
           this.formResponse = err.data;
+        });
+    },
+    handleChangePassword() {
+      const formDataCopy = Object.assign({}, this.passwordFormData);
+      this.passwordFormResponse = {};
+
+      this.$store
+        .dispatch("user/changePassword", formDataCopy)
+        .then(resp => {
+          this.passwordFormResponse = resp.data;
+          this.$refs.passwordForm.reset();
+        })
+        .catch(err => {
+          this.passwordFormResponse = err.data;
         });
     },
     toggleModal(type) {
