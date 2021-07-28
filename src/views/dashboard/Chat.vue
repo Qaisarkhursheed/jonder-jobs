@@ -23,7 +23,10 @@
   </div> -->
   <v-row class="full-h">
     <v-col v-if="!chatFull" cols="col" class="full-h">
-      <chat-asside class="full-h flex-grow-1 flex-shrink-1 overflow-list" />
+      <chat-asside
+        class="full-h flex-grow-1 flex-shrink-1 overflow-list"
+        @item-click="showProfile = false"
+      />
     </v-col>
     <v-col
       cols="col"
@@ -31,10 +34,14 @@
       v-if="selectedConversation && conversationDetails"
     >
       <chat-messages
+        v-if="!showProfile"
         @chat-full="chatFull = $event"
+        @show-profile="showProfile = true"
         :messages="selectedConversation"
         :conversation-details="conversationDetails"
       />
+
+      <PublicProfile v-else @back="showProfile = false" />
     </v-col>
   </v-row>
 </template>
@@ -42,6 +49,7 @@
 <script>
 import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
+import PublicProfile from "@/components/chat/PublicProfile";
 import { mapActions, mapGetters } from "vuex";
 //import UserPreview from "@/components/parts/UserPreview";
 
@@ -56,7 +64,7 @@ export default {
   },
   data: () => ({
     messages: null,
-    showProfile: null,
+    showProfile: false,
     polling: null,
     chatFull: false
   }),
@@ -91,7 +99,8 @@ export default {
   components: {
     //UserPreview,
     ChatMessages,
-    ChatAsside
+    ChatAsside,
+    PublicProfile
   }
 };
 </script>

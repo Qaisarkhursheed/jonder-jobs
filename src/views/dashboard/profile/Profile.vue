@@ -28,19 +28,34 @@
           <div class="d-flex align-center">
             <v-avatar
               color="primary"
-              size="58"
+              size="80"
               class="flex-grow-0 flex-shrink-0"
             >
-              <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
+              <input
+                type="file"
+                ref="uploadAvatarInput"
+                style="display: none"
+                @change="newImage = $event.target.files[0]"
+              />
+              <v-img v-if="profile_img" :src="profile_img"></v-img>
               <v-img
                 :src="require('@/assets/icons/profile-placeholder.png')"
                 v-else
               ></v-img>
             </v-avatar>
+            <v-icon
+              @click="$refs.uploadAvatarInput.click()"
+              color="white"
+              size="20"
+              style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%"
+            >
+              mdi-camera
+            </v-icon>
           </div>
         </v-col>
         <v-col cols="6" class="text-right">
           <v-btn
+            :loading="formLoading"
             depressed
             color="primary"
             class="pl-8 pr-8"
@@ -430,6 +445,7 @@
         <v-row>
           <v-col cols="6">
             <v-btn
+              :loading="passwordFormLoading"
               :disabled="!passwordFormValid"
               depressed
               large
@@ -520,6 +536,7 @@ export default {
   },
 
   data: () => ({
+    newImage: null,
     formData: {
       first_name: "",
       last_name: "",
@@ -536,8 +553,10 @@ export default {
       resume: null
     },
     formResponse: {},
+    formLoading: false,
     passwordFormData: {},
     passwordFormValid: false,
+    passwordFormLoading: false,
     passwordFormResponse: {},
     branche: [
       "Medicine",
@@ -585,7 +604,14 @@ export default {
     this.resetFormData(this.user);
   },
   computed: {
-    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"])
+    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    profile_img() {
+      if (this.newImage) {
+        return URL.createObjectURL(this.newImage);
+      }
+
+      return this.user.profile_img;
+    }
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -611,6 +637,10 @@ export default {
       this.formResponse = {};
       const formDataCopy = Object.assign({}, this.formData);
 
+      if (this.newImage) {
+        formDataCopy.profile_img = this.newImage;
+      }
+
       if (!(this.formData.cv instanceof File)) {
         delete formDataCopy.cv;
       }
@@ -623,17 +653,22 @@ export default {
         delete formDataCopy.qualifications;
       }
 
+      this.formLoading = true;
       this.updateUser(formDataCopy)
         .then(resp => {
           this.formResponse = resp.data;
         })
         .catch(err => {
           this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
         });
     },
     handleChangePassword() {
       const formDataCopy = Object.assign({}, this.passwordFormData);
       this.passwordFormResponse = {};
+      this.passwordFormLoading = true;
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
@@ -643,6 +678,9 @@ export default {
         })
         .catch(err => {
           this.passwordFormResponse = err.data;
+        })
+        .finally(() => {
+          this.passwordFormLoading = false;
         });
     },
     toggleModal(type) {

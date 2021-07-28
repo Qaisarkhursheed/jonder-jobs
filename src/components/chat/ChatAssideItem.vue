@@ -106,13 +106,15 @@ export default {
     },
     async open() {
       this.$emit("loading", true);
+      this.$emit("item-click");
       const p = this.getParticipian(this.conversation);
       this.SET_CONVERSATION_DETAILS({
         id: this.conversation.id,
         user_id: p.id,
         user_name: this.getFullName(this.conversation),
         unread_messages: this.conversation.unread_messages,
-        profile_img: p.profile_img
+        profile_img: p.profile_img,
+        user: p
       });
 
       // if (this.getUnreadCount > 0) {
