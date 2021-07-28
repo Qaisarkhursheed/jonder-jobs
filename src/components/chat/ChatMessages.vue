@@ -6,7 +6,7 @@
   >
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
       <v-list-item class="grow">
-        <v-list-item-avatar color="blue" @click="$emit('show-profile')">
+        <v-list-item-avatar color="blue">
           <v-img
             v-if="conversationDetails.profile_img"
             :alt="`${conversationDetails.user_name} avatar`"
@@ -17,7 +17,7 @@
           }}</span>
         </v-list-item-avatar>
 
-        <v-list-item-content @click="$emit('show-profile')">
+        <v-list-item-content>
           <v-list-item-title
             >{{ conversationDetails.user_name }}
           </v-list-item-title>
@@ -25,7 +25,11 @@
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon class="chat-icon mr-4">
+          <v-icon
+            class="chat-icon mr-4"
+            @click="$emit('show-profile')"
+            v-if="conversationDetails.user.role == 'Employer'"
+          >
             mdi-information-outline
           </v-icon>
           <v-icon

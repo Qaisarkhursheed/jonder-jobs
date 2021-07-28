@@ -13,6 +13,7 @@
             :conversation="conversation"
             @loading="loading = $event"
             @reload="refreshConversations"
+            @item-click="$emit('item-click')"
           />
           <v-divider
             v-if="index < conversations.length - 1"
