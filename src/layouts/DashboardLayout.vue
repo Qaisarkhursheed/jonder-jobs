@@ -112,7 +112,7 @@
 
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
-            <div class="top-info">
+            <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
               <div class="profile-image">
                 <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
                 <v-img
@@ -127,7 +127,13 @@
               </router-link>
             </div>
 
-            <div class="top-info">
+            <UpgradeAccountBox
+              class="mt-7"
+              v-if="messagesLoaded && conversations.length"
+              small
+            />
+
+            <div class="top-info mt-7">
               <span class="about-info"> About me </span>
               <p class="about-text">{{ user.about_me }}</p>
 
@@ -202,10 +208,12 @@
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
+import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 
 export default {
   components: {
-    CardActionableList
+    CardActionableList,
+    UpgradeAccountBox
   },
 
   data: () => ({
@@ -216,6 +224,7 @@ export default {
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
       return this.$route.path === "/dashboard/profile";
     },

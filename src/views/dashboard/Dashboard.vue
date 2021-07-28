@@ -1,16 +1,13 @@
 <template>
   <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
-    <UpgradePlanModal
-      v-if="modals.UpgradePlan.active"
-      :active="modals.UpgradePlan.active"
-      :edit="modals.UpgradePlan.edit"
-      @close="toggleModal('UpgradePlan')"
-    />
-
     <v-col cols="cols" v-if="messagesLoaded && conversations.length">
       <Chat />
     </v-col>
-    <v-col cols="cols" v-if="!$store.getters['chat/selectedConversation']">
+    <v-col
+      cols="cols"
+      v-if="!$store.getters['chat/selectedConversation']"
+      :class="{ 'd-flex flex-column my-auto': !showUpgradeBox }"
+    >
       <!-- Hello -->
       <div class="user-name">
         Hello,
@@ -29,37 +26,7 @@
       </div>
 
       <!-- Upgrade box -->
-      <div class="upgrade-box">
-        <div class="upgrade-title">
-          Increase account visibility by upgrading account
-        </div>
-        <v-img
-          class="badge"
-          :src="require('@/assets/icons/top-rated.svg')"
-        ></v-img>
-        <div
-          class="d-flex"
-          style="font-size: 13px; justify-content: space-between;"
-        >
-          <p>
-            Be on the top of search for 3 days
-          </p>
-
-          <div>
-            <CardActionableList
-              type="UpgradePlan"
-              @edit="activateEdit('UpgradePlan', $event)"
-            />
-            <p
-              style="color: #55F481; width: 100%; cursor: pointer;"
-              class="text-right"
-              @click="toggleModal('UpgradePlan')"
-            >
-              Upgrade now
-            </p>
-          </div>
-        </div>
-      </div>
+      <UpgradeAccountBox v-if="showUpgradeBox" />
 
       <!-- Image -->
       <div class="mt-5">
@@ -73,11 +40,8 @@
 </template>
 
 <script>
-// import UserMessages from "@/components/dashboard/UserMessages";
 import { mapActions, mapGetters } from "vuex";
-import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
-import CardActionableList from "@/components/user/JobseekerCardActionableList";
-// move chat to component
+import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import Chat from "@/views/dashboard/Chat";
 
 export default {
@@ -87,37 +51,19 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"]),
-    ...mapGetters("chat", ["conversations", "messagesLoaded"])
+    ...mapGetters("chat", ["conversations", "messagesLoaded"]),
+
+    showUpgradeBox() {
+      return !(this.messagesLoaded && this.conversations.length);
+    }
   },
   methods: {
-    ...mapActions("chat", ["getAllConversations"]),
-    toggleModal(type) {
-      this.modals[type].edit = false;
-      this.modals[type].active = !this.modals[type].active;
-    },
-    activateEdit(type, item) {
-      this.toggleModal(type);
-      this.modals[type].edit = item;
-    }
+    ...mapActions("chat", ["getAllConversations"])
   },
   components: {
-    //UserMessages,
-    UpgradePlanModal,
-    CardActionableList,
-    Chat
-  },
-  data: () => ({
-    modals: {
-      UpgradePlan: {
-        active: false,
-        edit: false,
-        component: UpgradePlanModal
-      }
-    },
-    fileActions: {
-      UpgradePlan: ["edit", "delete"]
-    }
-  })
+    Chat,
+    UpgradeAccountBox
+  }
 };
 </script>
 
@@ -154,28 +100,5 @@ export default {
   font-size: 20px;
   line-height: 24px;
   margin-bottom: 20px;
-}
-
-.upgrade-box {
-  background-color: $primary-blue-dark;
-  color: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 400px;
-  position: relative;
-  cursor: default;
-}
-
-.upgrade-title {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 18px;
-  margin-bottom: 7px;
-}
-
-.badge {
-  position: absolute;
-  right: 17px;
-  top: -20px;
 }
 </style>
