@@ -92,7 +92,7 @@ export default {
           this.getSingleConversation({ id: this.conversationDetails.id });
         }
         this.getAllConversations();
-      }, 30000);
+      }, 5000);
     }
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
