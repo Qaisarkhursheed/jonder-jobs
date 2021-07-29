@@ -7,7 +7,8 @@ import Landing from "../views/Landing.vue";
 import FAQ from "../views/FAQ.vue";
 // import Home from "../views/Home.vue";
 import Login from "../views/auth/Login.vue";
-import Register from "../views/auth/Register";
+import RegisterWelcome from "../views/auth/RegisterWelcome";
+import RegisterUser from "../views/auth/RegisterUser";
 import RegisterCompany from "../views/auth/RegisterCompany";
 import ForgotPassword from "../views/auth/ForgotPassword.vue";
 import ResetPassword from "../views/auth/ResetPassword.vue";
@@ -73,7 +74,15 @@ const routes = [
   {
     path: "/register",
     name: "Register",
-    component: Register,
+    component: RegisterWelcome,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/register-user",
+    name: "RegisterUser",
+    component: RegisterUser,
     meta: {
       guest: true
     }

@@ -15,7 +15,9 @@
           </router-link>
         </v-col>
         <v-col cols="12" md="6" class="links">
-          <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
+          <router-link to="/faq" class="txt-link text-color-primary-blue-dark"
+            >FAQ</router-link
+          >
           <router-link
             to="/register"
             class="txt-link text-color-primary-blue-dark"
@@ -108,7 +110,7 @@
                 feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim
                 nulla non
                 <div class="promo-actions">
-                  <router-link to="/register" class="button dark-blue fill"
+                  <router-link to="/register-user" class="button dark-blue fill"
                     >Registrieren</router-link
                   >
                 </div>
@@ -184,7 +186,9 @@
             </router-link>
           </v-col>
           <v-col cols="12" md="6" class="links">
-            <router-link to="/faq" class="txt-link text-color-primary-blue-dark">FAQ</router-link>
+            <router-link to="/faq" class="txt-link text-color-primary-blue-dark"
+              >FAQ</router-link
+            >
             <router-link
               to="/register"
               class="txt-link text-color-primary-blue-dark"
@@ -331,7 +335,7 @@
   }
 
   .promo-text {
-    margin-bottom: 60px,
+    margin-bottom: 60px;
   }
 
   .landing-partners {

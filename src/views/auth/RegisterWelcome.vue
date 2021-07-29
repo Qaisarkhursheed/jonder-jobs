@@ -15,19 +15,12 @@
             @click="step = 2"
             type="button"
             color="primary"
-            style="width: 350px"
             large
+            block
+            height="55"
           >
             Jetzt durchstarten
           </v-btn>
-          <div class="mt-4">
-            <span style="color: #222222">
-              Du bist bereits Mitglied?
-            </span>
-            <router-link to="/login" style="text-decoration: none">
-              <b>Hier einloggen</b>
-            </router-link>
-          </div>
         </v-stepper-content>
 
         <!-- Step 2 - Register type -->
@@ -44,8 +37,9 @@
             class="mb-3"
             type="button"
             color="primary"
+            height="55"
             outlined
-            style="width: 350px"
+            block
             large
           >
             <v-icon left>mdi-google</v-icon>
@@ -56,8 +50,9 @@
             class="mb-3"
             type="button"
             color="primary"
+            height="55"
             outlined
-            style="width: 350px"
+            block
             large
           >
             <v-icon left>mdi-facebook</v-icon>
@@ -68,49 +63,93 @@
             @click="step = 3"
             type="button"
             color="primary"
-            style="width: 350px"
             height="55"
+            block
             large
           >
             <v-icon left>mdi-email</v-icon>
             Continue with Email
           </v-btn>
+        </v-stepper-content>
 
-          <div class="mt-4">
-            <span style="color: #222222">
-              Du bist bereits Mitglied?
-            </span>
-            <router-link to="/login" style="text-decoration: none">
-              <b>Hier einloggen</b>
-            </router-link>
+        <!-- Step 3 - Account type -->
+        <v-stepper-content step="3">
+          <jonder-title style="font-size: 28px">
+            Are you a Jobseeker or Employer
+          </jonder-title>
+
+          <div class="mx-auto mt-5" style="max-width: 400px">
+            <v-btn
+              block
+              color="primary"
+              class="mb-4"
+              height="55"
+              @click="accountType = 'user'"
+              :outlined="accountType != 'user'"
+            >
+              I'm looking for a Job
+            </v-btn>
+
+            <v-btn
+              block
+              color="primary"
+              class="mb-4"
+              @click="accountType = 'company'"
+              :outlined="accountType != 'company'"
+              height="55"
+            >
+              I'm looking for employee
+            </v-btn>
+
+            <v-btn
+              :disabled="!accountType"
+              type="submit"
+              block
+              color="primary"
+              class="mt-10"
+              @click="submit"
+              height="55"
+            >
+              Weiter
+            </v-btn>
           </div>
         </v-stepper-content>
-
-        <!-- Step 3 - Registration form -->
-        <v-stepper-content step="3">
-          <auth-register-company @changeImage="changeImage" />
-        </v-stepper-content>
       </v-stepper-items>
+
+      <div class="text-center">
+        <span style="color: #222222">
+          Du bist bereits Mitglied?
+        </span>
+        <router-link to="/login" style="text-decoration: none">
+          <b>Hier einloggen</b>
+        </router-link>
+      </div>
     </v-stepper>
   </auth-wrap>
 </template>
 
 <script>
 import AuthWrap from "@/components/auth/AuthWrap.vue";
-import AuthRegisterCompany from "@/components/auth/AuthRegisterCompany";
 import JonderTitle from "@/components/parts/JonderTitle.vue";
 
 export default {
   components: {
     AuthWrap,
-    AuthRegisterCompany,
     JonderTitle
   },
   data: () => ({
     img: 1,
-    step: 3
+    step: 1,
+    accountType: null
   }),
   methods: {
+    submit() {
+      if (this.accountType == "user") {
+        this.$router.push({ name: "RegisterUser" });
+      } else {
+        this.$router.push({ name: "RegisterCompany" });
+      }
+    },
     changeImage() {
       this.img = 2;
     }

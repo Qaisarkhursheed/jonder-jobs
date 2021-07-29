@@ -30,6 +30,7 @@
           :rules="[validations.required]"
           type="password"
           outlined
+          hide-details="auto"
           background-color="white"
           v-model="formData.password"
         ></v-text-field>
@@ -39,8 +40,8 @@
         <!--          v-model="formData.privacy"-->
         <!--        ></v-checkbox>-->
 
-        <p class="text-caption text-left">
-          <router-link to="/forgot-password">
+        <p class="text-caption text-left mt-2" style="font-size: 14px">
+          <router-link to="/forgot-password" style="text-decoration: none">
             Passwort vergessen?
           </router-link>
         </p>
@@ -54,7 +55,9 @@
           outlined
           color="primary"
           class="full-w mt-2"
-          >Continue with Google
+        >
+          <v-icon left>mdi-google</v-icon>
+          Continue with Google
         </v-btn>
 
         <v-btn
@@ -64,6 +67,7 @@
           color="primary"
           class="full-w mt-4"
         >
+          <v-icon left>mdi-facebook</v-icon>
           Continue with Facebook
         </v-btn>
 
@@ -79,9 +83,9 @@
       </v-form>
     </div>
 
-    <p class="text-caption text-left mt-1">
+    <p class="text-center mt-2" style="font-size: 14px">
       Haben Sie kein Konto?
-      <router-link to="/register">
+      <router-link to="/register" style="text-decoration: none">
         Registrieren
       </router-link>
     </p>
