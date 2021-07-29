@@ -4,11 +4,11 @@
       Loggen Sie sich in Ihren Jonder Account ein
     </jonder-title>
 
-    <v-alert v-if="message.show" class="mt-4" text type="error">
-      {{ this.message.text }}
+    <v-alert v-if="$route.query.resetPassword" text type="success">
+      Ihr Passwort wurde zurückgesetzt!
     </v-alert>
 
-    <div class="mt-10">
+    <div class="mt-5">
       <v-form
         v-model="formValid"
         class="auth-form"

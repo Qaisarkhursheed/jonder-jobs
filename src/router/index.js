@@ -10,6 +10,7 @@ import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register";
 import RegisterCompany from "../views/auth/RegisterCompany";
 import ForgotPassword from "../views/auth/ForgotPassword.vue";
+import ResetPassword from "../views/auth/ResetPassword.vue";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
 import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
@@ -89,6 +90,14 @@ const routes = [
     path: "/forgot-password",
     name: "ForgotPassword",
     component: ForgotPassword,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/reset-password",
+    name: "ResetPassword",
+    component: ResetPassword,
     meta: {
       guest: true
     }
