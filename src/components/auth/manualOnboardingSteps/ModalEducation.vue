@@ -71,7 +71,7 @@
                 <v-checkbox
                   class="mt-5 pt-5"
                   v-model="form.study_here"
-                  label="Currently working here"
+                  label="Currently attending here"
                 ></v-checkbox>
               </v-col>
             </v-row>

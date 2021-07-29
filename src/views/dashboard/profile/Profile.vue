@@ -274,16 +274,52 @@
       </v-row>
 
       <v-row>
+        <ModalEducation
+          v-if="modals.education.active"
+          :active="modals.education.active"
+          :edit="modals.education.edit"
+          @close="toggleModal('education')"
+        />
+        <ModalExperience
+          v-if="modals.experience.active"
+          :active="modals.experience.active"
+          :edit="modals.experience.edit"
+          @close="toggleModal('experience')"
+        />
+
         <v-col cols="12">
           <label class="profile-label">Your professional experience</label>
-          <!-- todo actions and popup -->
-          <CardActionableList type="Experience" />
+          <CardActionableList
+            type="Experience"
+            @edit="activateEdit('experience', $event)"
+          />
+          <v-btn
+            @click="toggleModal('experience')"
+            outlined
+            rounded
+            color="#0253B3"
+          >
+            <v-icon>mdi-plus</v-icon>
+            Add
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Your education</label>
-          <CardActionableList type="Education" />
+          <CardActionableList
+            type="Education"
+            @edit="activateEdit('education', $event)"
+          />
+          <v-btn
+            @click="toggleModal('education')"
+            outlined
+            rounded
+            color="#0253B3"
+          >
+            <v-icon>mdi-plus</v-icon>
+            Add
+          </v-btn>
         </v-col>
       </v-row>
     </v-card>
@@ -523,6 +559,8 @@ import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
 import Calendar from "@/components/Calendar";
 import AddNewCard from "@/views/dashboard/AddNewCard";
 import ResponseAlert from "@/components/ResponseAlert";
+import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
+import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 
 export default {
   name: "Profile",
@@ -532,7 +570,9 @@ export default {
     CardActionableList,
     Calendar,
     AddNewCard,
-    ResponseAlert
+    ResponseAlert,
+    ModalEducation,
+    ModalExperience
   },
 
   data: () => ({
@@ -593,11 +633,23 @@ export default {
         active: false,
         edit: false,
         component: AddNewCard
+      },
+      education: {
+        active: false,
+        edit: false,
+        component: ModalEducation
+      },
+      experience: {
+        active: false,
+        edit: false,
+        component: ModalExperience
       }
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
-      AddNewCard: ["edit", "delete"]
+      AddNewCard: ["edit", "delete"],
+      experience: ["edit", "delete"],
+      education: ["edit", "delete"]
     }
   }),
   created() {
