@@ -54,35 +54,43 @@
         </div>
         <div class="section mb-7">
           <div class="title">city and address</div>
-          <div class="content">
-            {{ user.city }} {{ user.address }}
-          </div>
+          <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>
         <div class="section mb-7">
           <div class="title">
             DOCUMENTS & CERTIFICATS
           </div>
           <div class="content">
-            <div class="file d-flex pb-4 pt-4">
-              <v-icon
-                size="40"
-              >
-                mdi-file-pdf-outline
-              </v-icon>
-              <div class="details ml-3 ">
-                <div>CV.pdf</div>
-                <div>236 KB</div>
+            <div v-if="user.cv" class="row mt-1">
+              <div class="col-auto">
+                <a :href="user.cv" target="_blank">
+                  <img :src="require('@/assets/svg/pdf.svg')" />
+                </a>
+              </div>
+              <div class="col my-auto">
+                CV
               </div>
             </div>
-            <div class="file d-flex pb-4 pt-4">
-              <v-icon
-                size="40"
-              >
-                mdi-file-pdf-outline
-              </v-icon>
-              <div class="details ml-3">
-                <div>CV.pdf</div>
-                <div>236 KB</div>
+
+            <div v-if="user.qualifications" class="row mt-1">
+              <div class="col-auto">
+                <a :href="user.qualifications" target="_blank">
+                  <img :src="require('@/assets/svg/pdf.svg')" />
+                </a>
+              </div>
+              <div class="col my-auto">
+                Qualifications
+              </div>
+            </div>
+
+            <div v-if="user.resume" class="row mt-1">
+              <div class="col-auto">
+                <a :href="user.resume" target="_blank">
+                  <img :src="require('@/assets/svg/pdf.svg')" />
+                </a>
+              </div>
+              <div class="col my-auto">
+                Resume
               </div>
             </div>
           </div>
@@ -93,17 +101,14 @@
 </template>
 
 <script>
-
 export default {
-
-  name: 'UserOverviewGeneral',
+  name: "UserOverviewGeneral",
 
   props: {
     user: {
-      type: Object,
+      type: Object
     }
-  },
-
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -112,7 +117,7 @@ export default {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 12px !important;
-    color: #0253B3;
+    color: #0253b3;
   }
   .content {
     font-weight: normal;
@@ -122,7 +127,7 @@ export default {
 }
 .experience {
   .item {
-    border-bottom: 0.5px solid #CACACA;
+    border-bottom: 0.5px solid #cacaca;
     .title {
       font-weight: 600;
       font-size: 14px !important;
@@ -138,10 +143,10 @@ export default {
   }
 }
 .right {
-  border-left: 1px solid #E9E9E9;
+  border-left: 1px solid #e9e9e9;
 }
 .file {
-  border-bottom: 0.5px solid #CACACA;
+  border-bottom: 0.5px solid #cacaca;
 
   &:last-child {
     border: none;
