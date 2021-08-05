@@ -175,7 +175,7 @@
             <v-btn
               height="58"
               elevation="0"
-              :class="['advanced-search-btn full-w mt-16 white font-weight-medium', 
+              :class="['advanced-search-btn full-w mt-16 white font-weight-medium',
                 { active: advancedSearch}
               ]"
               color="#fff"
@@ -198,6 +198,11 @@
         </v-row>
       </v-col>
     </v-card-actions>
+    <transition name="fade">
+      <section class="error-message" v-if="errorMessage">
+        <div>{{errorMessage}}</div>
+      </section>
+    </transition>
   </v-card>
 </div>
 </template>
@@ -225,20 +230,41 @@ export default {
         min_salary: '',
         max_salary: ''
       },
-      advancedSearch: false
+      advancedSearch: false,
+      errorMessage: '',
     }
   },
-
-  created() {
-  },
-
   methods: {
     search() {
       store.dispatch('company/searchJobseekers', this.prepareData());
       this.$emit('search');
     },
     searchSave() {
-      store.dispatch('company/searchFilterSave', this.prepareData());
+      let i = 0;
+      let isValid = true;
+      const saveData = this.prepareData();
+      const searchFilters = store.getters['company/searchFilters'];
+      while(i < searchFilters.length) {
+        let count = 0;
+        forEach(saveData, (prop, key) => {
+          if (searchFilters[i][key] === prop) {
+            count += 1;
+          }
+        });
+        if (count === Object.keys(saveData).length) {
+          isValid = false;
+          this.errorMessage = 'Already saved';
+          setTimeout(() => {
+            this.errorMessage = false;
+          }, 5000);
+          break;
+        } else {
+          i++;
+        }
+      }
+      if (isValid) {
+        store.dispatch('company/searchFilterSave', saveData)
+      }
     },
     filterData(){
       let searchMeta = store.getters['company/searchMeta'] ? store.getters['company/searchMeta'].searchInput : null;
@@ -329,5 +355,15 @@ export default {
     font-weight: 700;
     font-size: 16px;
     cursor: pointer;
+  }
+  .error-message {
+    color: #C15143;
+    padding: 20px;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>
