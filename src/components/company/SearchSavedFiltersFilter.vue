@@ -1,9 +1,11 @@
 <template>
-  <div class="search-saved">
-    <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7" flat>
+  <div class="search-saved"
+       @click="filterAction(actions[1])">
+    <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7"
+            flat>
       <v-row class="no-gutters">
-        <v-col 
-          cols="10" 
+        <v-col
+          cols="10"
           xl="10"
           lg="9"
         >
@@ -52,7 +54,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col 
+        <v-col
           cols="2"
           xl="2"
           lg="3"
@@ -62,7 +64,7 @@
             <v-col cols="5" class="result">
               <!--
                 no backend support
-                <div class="value">142</div> 
+                <div class="value">142</div>
                 <div class="label">Results</div>
               -->
             </v-col>
@@ -87,7 +89,7 @@
                     v-for="(item, i) in actions"
                     :key="i"
                     @click="filterAction(item)"
-                  > 
+                  >
                    {{ item.label }}
                   </v-list-item>
                 </v-list>
@@ -155,6 +157,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-saved {
+  cursor: pointer;
+}
 .title {
   font-weight: bold;
   font-size: 18px;
