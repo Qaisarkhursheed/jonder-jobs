@@ -1,3 +1,22 @@
+import { parsePhoneNumber, isPossiblePhoneNumber, isValidPhoneNumber } from 'libphonenumber-js';
+
+const validatePhoneNumber = (number) => {
+  let isValid = false;
+  try {
+    const numberResult = parsePhoneNumber(number);
+    console.log('numberResult', numberResult);
+    if (numberResult) {
+      isValid =
+        numberResult.isValid() &&
+        isPossiblePhoneNumber(number, numberResult.country) === true &&
+        isValidPhoneNumber(number, numberResult.country) === true;
+    }
+  } catch {
+    isValid = false;
+  }
+  return isValid;
+};
+
 export default {
   computed: {
     validations() {
@@ -23,10 +42,8 @@ export default {
 
         phone: v =>
           !v ||
-          /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[-. \\/]?)?((?:\(?\d{1,}\)?[-. \\/]?){0,})(?:[-. \\/]?(?:#|ext\.?|extension|x)[-. \\/]?(\d+))?$/gm.test(
-            v
-          ) ||
-          "Muss eine gültige Telefonnummer sein.",
+          validatePhoneNumber(v) ||
+          "Muss eine gültige Telefonnummer sein und beginnen mit Ländernummer Beispiel (+49)",
 
         time24: v =>
           !v ||
