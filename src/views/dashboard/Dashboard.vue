@@ -1,33 +1,48 @@
 <template>
   <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
-    <v-col cols="12">
-      <div class="dashboard-holder">
-        <user-messages v-if="conversations" :messages="conversations" />
-        <div v-else> 
-          <div class="user-name"> Hello, <span  style="color:#0253B3;">{{user.first_name}} {{user.last_name}} </span></div>
-          <div class="no-msg"> There is no any messages yet </div>
-          <div class="upgrade-box">
-            <div class="upgrade-title"> Increase account visibility by upgrading account </div>
-            <div>
-              <p> 
-               Be on the top of search for 3 days
-              </p>
-            </div>
-          </div>
-          <div class="image-placeholder">
-            <v-img :src="require('@/assets/icons/rafiki.png')"></v-img>
-          </div>          
-        </div>
-        <company-list />
+    <v-col cols="cols" v-if="messagesLoaded && conversations.length">
+      <Chat />
+    </v-col>
+    <v-col
+      cols="cols"
+      v-if="!$store.getters['chat/selectedConversation']"
+      :class="{ 'd-flex flex-column my-auto': !showUpgradeBox }"
+    >
+      <!-- Hello -->
+      <div class="user-name">
+        Hello,
+        <span style="color:#0253B3;">
+          {{ user.first_name }} {{ user.last_name }}
+        </span>
+      </div>
+
+      <!-- Messages text -->
+      <div class="no-msg">
+        {{
+          conversations.length
+            ? "Open chat to start communicate"
+            : "There is no any messages yet"
+        }}
+      </div>
+
+      <!-- Upgrade box -->
+      <UpgradeAccountBox v-if="showUpgradeBox" />
+
+      <!-- Image -->
+      <div class="mt-5">
+        <v-img
+          :src="require('@/assets/svg/rafiki.svg')"
+          max-width="500"
+        ></v-img>
       </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import UserMessages from "@/components/dashboard/UserMessages";
-import CompanyList from "@/components/dashboard/CompanyList";
 import { mapActions, mapGetters } from "vuex";
+import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
+import Chat from "@/views/dashboard/Chat";
 
 export default {
   name: "Dashboard",
@@ -36,14 +51,18 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"]),
-    ...mapGetters("chat", ["conversations"]),
+    ...mapGetters("chat", ["conversations", "messagesLoaded"]),
+
+    showUpgradeBox() {
+      return !(this.messagesLoaded && this.conversations.length);
+    }
   },
   methods: {
-    ...mapActions("chat", ["getAllConversations"]),
+    ...mapActions("chat", ["getAllConversations"])
   },
   components: {
-    CompanyList,
-    UserMessages,
+    Chat,
+    UpgradeAccountBox
   }
 };
 </script>
@@ -81,26 +100,5 @@ export default {
   font-size: 20px;
   line-height: 24px;
   margin-bottom: 20px;
-}
-
-.upgrade-box {
-  background-color: $primary-blue-dark;
-  color: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 400px;
-}
-
-.upgrade-title {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 18px;
-  margin-bottom: 7px;
-}
-
-.image-placeholder {
-  margin: 50px auto 0 55px;
-  max-width: 723px;
-  max-height: 538px;
 }
 </style>

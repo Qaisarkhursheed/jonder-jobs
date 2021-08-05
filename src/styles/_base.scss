@@ -14,6 +14,10 @@
 // -------
 
 @import 'variables';
+
+@import 'modules/tab';
+@import 'modules/pagination';
+
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
 $roboto: 'Roboto', sans-serif;
@@ -26,7 +30,7 @@ $open-sans: 'Open Sans', sans-serif;
 $inter: 'Inter', sans-serif;
 
 body {
-    font-family: $roboto!important;
+    font-family: $inter !important;
 }
 
 // 2. Colors
@@ -155,6 +159,7 @@ h5, .h5 {
             cursor: default;
         }
     }
+    
 
     &.dark-blue {
         &.fill {
@@ -194,6 +199,8 @@ h5, .h5 {
 }
 
 .v-btn {
+    border-radius: 10px;
+    box-shadow: none;
     text-transform: none !important;
 
     &.light-blue {
@@ -225,6 +232,11 @@ h5, .h5 {
             opacity: .5;
             cursor: default;
         }
+    }
+
+    &.white {
+        color: #222 !important;
+        border: 1px solid #E9E9E9 !important;
     }
 }
 .stars-btn {
@@ -271,7 +283,8 @@ h5, .h5 {
 // overwrite input outline only form company 
 .company .v-text-field--outlined fieldset,
 .stepper-wrap .v-text-field--outlined fieldset,
-.onboarding-dialog .v-text-field--outlined fieldset {
+.onboarding-dialog .v-text-field--outlined fieldset,
+.v-text-field--outlined fieldset {
     border-color: #D4D4D4;
 }
 .company {
@@ -288,7 +301,8 @@ h5, .h5 {
 
     .candidate-card.v-sheet.v-card--hover:hover {
         cursor: pointer;
-        box-shadow: 0px 0px 5px rgb(250 232 73) !important;
+        box-shadow: 0px 0px 3px rgb(39, 170, 225) !important;
+        background: linear-gradient(0deg, rgba(39, 170, 225, 0.04), rgba(39, 170, 225, 0.04)), #FFFFFF;
         transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 }
@@ -304,10 +318,17 @@ h5, .h5 {
     height: 55px;
 }
 
+.v-textarea .v-text-field__slot {
+    height: unset;
+}
+
 .lang-switcher {
     .v-text-field--rounded > .v-input__control > .v-input__slot {
         padding: 0 15px;
     }
+}
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
+    background: rgba(255, 255, 255, 0.001) !important;
 }
 // 5. Inputs
 // ---------
@@ -365,6 +386,11 @@ label {
     margin-bottom: 0!important;
 }
 
+.section-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #222222;
+}
 // 5. Layout
 // ---------
 

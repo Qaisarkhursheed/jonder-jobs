@@ -1,0 +1,7 @@
+.v-pagination__navigation,
+.v-pagination__item {
+  .search-pagination & {
+    box-shadow: none;
+    background: none !important;
+  }
+}

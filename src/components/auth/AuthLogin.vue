@@ -1,38 +1,38 @@
 <template>
-  <v-container class="auth-login-wrap align-center" fluid no-gutters>
+  <v-container class="auth-login-wrap mx-auto" fluid no-gutters>
     <jonder-title>
       Loggen Sie sich in Ihren Jonder Account ein
     </jonder-title>
 
-    <v-alert v-if="message.show" class="mt-4" text type="error">
-      {{ this.message.text }}
+    <v-alert v-if="$route.query.resetPassword" text type="success">
+      Ihr Passwort wurde zurückgesetzt!
     </v-alert>
 
-    <div class="mt-10">
-      <p class="text-caption text-left">
-        Einloggen via Email 
-      </p>
-
-      <form class="auth-form" action="#" @submit.prevent="handleLogin">
+    <div class="mt-5">
+      <v-form
+        v-model="formValid"
+        class="auth-form"
+        @submit.prevent="handleLogin"
+      >
+        <label class="profile-label">Email</label>
         <v-text-field
           dense
-          label="Email Addresse"
-          :rules="rules"
+          :rules="[validations.required, validations.email]"
           type="email"
           outlined
           background-color="white"
           v-model="formData.email"
         ></v-text-field>
 
+        <label class="profile-label">Passwort</label>
         <v-text-field
           dense
-          label="Passwort"
+          :rules="[validations.required]"
           type="password"
           outlined
-          background-color="white"
           hide-details="auto"
+          background-color="white"
           v-model="formData.password"
-          class="mb-6"
         ></v-text-field>
 
         <!--        <v-checkbox-->
@@ -40,37 +40,53 @@
         <!--          v-model="formData.privacy"-->
         <!--        ></v-checkbox>-->
 
-        <p class="text-caption text-left">
-          <router-link to="/reset-password">      
-              Passwort vergessen?
+        <p class="text-caption text-left mt-2" style="font-size: 14px">
+          <router-link to="/forgot-password" style="text-decoration: none">
+            Passwort vergessen?
           </router-link>
         </p>
 
-        <v-btn outlined 
-               color="primary" 
-               class="full-w mt-4 "
-          >Continue with Google
+        <!-- Response alert -->
+        <response-alert :response="formResponse"></response-alert>
+
+        <v-btn
+          link
+          href="https://dev.api.jonder.devla.dev/api/v1/auth/google"
+          outlined
+          color="primary"
+          class="full-w mt-2"
+        >
+          <v-icon left>mdi-google</v-icon>
+          Continue with Google
         </v-btn>
 
-        <v-btn color="primary" 
-               class="full-w mt-4 fb-button">
+        <v-btn
+          link
+          href="https://dev.api.jonder.devla.dev/api/v1/auth/facebook"
+          outlined
+          color="primary"
+          class="full-w mt-4"
+        >
+          <v-icon left>mdi-facebook</v-icon>
           Continue with Facebook
         </v-btn>
 
-        <v-btn type="submit" 
-               color="primary" 
-               class="full-w"
-               :disabled="formData.email.length === 0 || formData.password.length === 0"
-               >
+        <v-btn
+          type="submit"
+          color="primary"
+          class="full-w mt-5"
+          :disabled="!formValid"
+          :loading="formLoading"
+        >
           Loggen Sie
         </v-btn>
-      </form>
+      </v-form>
     </div>
 
-    <p class="text-caption text-left">
+    <p class="text-center mt-2" style="font-size: 14px">
       Haben Sie kein Konto?
-      <router-link to="/register">      
-          Registrieren     
+      <router-link to="/register" style="text-decoration: none">
+        Registrieren
       </router-link>
     </p>
   </v-container>
@@ -78,12 +94,13 @@
 
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
-import { mapActions } from "vuex";
+import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
   name: "AuthLogin",
   components: {
-    JonderTitle
+    JonderTitle,
+    ResponseAlert
   },
   data() {
     return {
@@ -96,37 +113,26 @@ export default {
         password: "",
         privacy: false
       },
-      rules: [
-        value => !!value || "Required.",
-        value => (value && value.length >= 3) || "Min 3 characters"
-      ]
+      formLoading: false,
+      formResponse: {},
+      formValid: false
     };
   },
   methods: {
-    ...mapActions({
-      login: "auth/login"
-    }),
-
     async handleLogin() {
-      this.response = await this.login(this.formData);
-
-      if (this.response) {
-        if (this.response.user.role === "Jobseeker" || this.response.user.role === "user") {
-          this.$router.replace({ name: "Dashboard" });
-        }
-        else if (this.response.onboarding_status && this.response.user.role === "company") {
-          this.$router.replace({ name: 'CompanyDashboard' });
-        }
-        else if (this.response.user.role === "user") {
-          this.$router.replace({ name: "ManualOnboarding" });
-        }
-        else if (this.response.user.role === "company") {
-          this.$router.replace({ name: "ManualOnboardingCompany" });
-        }
-      } else {
-        this.message.show = true;
-        this.message.text = this.response.message || "Wrong credentials";
-      }
+      this.formLoading = true;
+      this.formResponse = {};
+      this.$store
+        .dispatch("auth/login", this.formData)
+        .then(() => {
+          this.$router.replace({ name: "Home" });
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
     }
   }
 };
@@ -134,11 +140,7 @@ export default {
 
 <style lang="scss" scoped>
 .auth-login-wrap {
-  width: 60%;
-}
-
-.fb-button {
-  margin-bottom: 50px;
+  max-width: 450px;
 }
 
 .v-btn:not(.v-btn--round).v-size--default {

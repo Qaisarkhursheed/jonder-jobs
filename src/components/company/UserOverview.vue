@@ -1,5 +1,83 @@
 <template>
-  <v-card class="profile-info rounded-lg pl-10 pr-10 pt-10 pb-10" flat>
+  <div class="user-overview">
+    <div class="heading d-flex mb-5" @click="back">
+      <v-icon size="25">
+        mdi-arrow-left
+      </v-icon>
+      <span class="pl-4">Back</span>
+    </div>
+    <div class="card-back"></div>
+    <v-card class="profile-info rounded-lg" flat>
+      <v-row class="card-header no-gutters pl-10 pr-10">
+        <v-col cols="8" class="d-flex">
+          <v-avatar color="primary" size="150" class="user-avatar">
+            <img :src="profile.profile_img" />
+          </v-avatar>
+          <div class="user-header pl-8 pt-5">
+            <div class="name">
+              {{ profile.first_name }} {{ profile.last_name }}
+            </div>
+            <div class="position">
+              {{ profile.current_position }}
+            </div>
+          </div>
+        </v-col>
+        <v-col cols="4" class="d-flex justify-end pt-7">
+          <div class="star-btn mr-3" @click="handleStarIconClick">
+            <v-icon
+              size="25"
+              :color="profile.selection_managment ? '#27AAE1' : '#000'"
+            >
+              {{
+                profile.selection_managment ? "mdi-star" : "mdi-star-outline"
+              }}
+            </v-icon>
+          </div>
+          <v-btn
+            color="primary"
+            height="48"
+            width="70%"
+            class="font-weight-medium pl-4 pr-4"
+            @click="
+              $router.push({
+                name: 'CompanyMessages',
+                params: {
+                  id: profile.id,
+                  type: 'new',
+                  company: true
+                }
+              })
+            "
+          >
+            Message now
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-tabs v-model="tab" align-with-title slider-color="#0253B3">
+        <v-tabs-slider color="#0253B3"></v-tabs-slider>
+
+        <v-tab
+          v-for="item in items"
+          :key="item"
+          style="text-transform: uppercase;"
+          slider-color="#0253B3"
+        >
+          {{ item }}
+        </v-tab>
+      </v-tabs>
+      <v-divider></v-divider>
+      <v-tabs-items v-model="tab">
+        <v-tab-item v-for="item in items" :key="item">
+          <v-card flat>
+            <keep-alive>
+              <component :is="tabs[item]" :user="profile"></component>
+            </keep-alive>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-card>
+  </div>
+  <!-- <v-card class="profile-info rounded-lg pl-10 pr-10 pt-10 pb-10" flat>
     <v-row class="d-flex no-gutters">
       <v-col cols="6 pr-3">
         <v-card-text class="d-flex pa-0 pb-6 align-center">
@@ -90,69 +168,82 @@
 
       </v-col>
     </v-row>
-  </v-card>
+  </v-card> -->
 </template>
 
 <script>
-
-import axios from 'axios';
-import { mapActions } from 'vuex';
+import axios from "axios";
+import { mapActions } from "vuex";
+import UserOverviewGeneral from "@/components/company/UserOverviewGeneral";
+import UserOverviewNotes from "@/components/company/UserOverviewNotes";
 
 export default {
-  name: 'UserOverview',
+  name: "UserOverview",
 
   props: {
     id: {
       type: [String, Number]
     }
   },
-
+  components: {
+    UserOverviewGeneral,
+    UserOverviewNotes
+  },
   data() {
     return {
       profile: {
         fullname: {
-          label: '',
-          value: ''
+          label: "",
+          value: ""
         },
         email: {
-          label: 'E-mail address',
-          value: ''
+          label: "E-mail address",
+          value: ""
         },
         address: {
-          label: 'City and address',
-          value: ''
+          label: "City and address",
+          value: ""
         },
-         about: {
-          label: '',
-          value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et'
+        about: {
+          label: "",
+          value:
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"
         },
         profession: {
-          label: '',
-          value: 'My Profession'
+          label: "",
+          value: "My Profession"
         },
         radius: {
-          label: 'Work Radius',
-          value: '50km'
+          label: "Work Radius",
+          value: "50km"
         },
         profesionsim: {
-          label: 'Profesionsim',
-          value: 'Junior'
+          label: "Profesionsim",
+          value: "Junior"
         }
+      },
+      tab: null,
+      items: ["general", "notes"],
+      tabs: {
+        general: UserOverviewGeneral,
+        notes: UserOverviewNotes
       }
-    }
+    };
   },
   mounted() {
     this.getUser();
-    this.addUserProfileView({user_id: this.$route.params.id});
+    this.addUserProfileView({ user_id: this.$route.params.id });
   },
   methods: {
-    ...mapActions('user', ['addUserProfileView']),
+    ...mapActions("user", ["addUserProfileView"]),
     getUser() {
-      axios.get(`/users/${this.$route.params.id}`)
-           .then((res) => {
-               this.populateData(res.data);
-           })
-           .catch();
+      axios
+        .get(`/users/${this.$route.params.id}`)
+        .then(res => {
+          // this.populateData(res.data);
+          this.profile = res.data.data;
+        })
+        .catch();
     },
     populateData(user) {
       this.profile.fullname.value = `${user.first_name} ${user.last_name}`;
@@ -162,45 +253,122 @@ export default {
       this.profile.profesionsim.value = user.work_experience;
     },
     startConversation() {
-      this.$router.push({ name: 'CompanyInbox', params: { id: this.$route.params.id, type: 'new', company: true} });
+      this.$router.push({
+        name: "CompanyInbox",
+        params: { id: this.$route.params.id, type: "new", company: true }
+      });
+    },
+    handleStarIconClick() {
+      if (this.profile.selection_managment) {
+        this.$store
+          .dispatch("company/slManagementDeleteCandidate", this.profile.id)
+          .then(() => {
+            this.profile.selection_managment = false;
+          });
+      } else {
+        this.$store
+          .dispatch("company/slManagementAddCandidate", {
+            jobseeker_id: this.profile.id,
+            managment_status: "Saved candidates"
+          })
+          .then(() => {
+            this.profile.selection_managment = true;
+          });
+      }
+    },
+    back() {
+      if (this.$route.params.type && this.$route.params.type === "selection") {
+        this.$router.push({
+          name: "CompanySelectionManagement"
+        });
+      } else {
+        this.$router.push({
+          name: "CompanySearch"
+        });
+      }
     }
   }
 };
-
 </script>
 
 <style lang="scss" scoped>
+.card-header {
+}
+.heading {
+  font-weight: 600;
+  font-size: 17px;
+  color: #222222;
+  cursor: pointer;
+}
+.card-back {
+  height: 156px;
+  background: #27aae1;
+  border-radius: 13px;
+}
+.profile-info {
+  position: relative;
+  top: -60px;
+}
+.user-header {
   .name {
-    font-size: 24px;
+    font-weight: bold;
+    font-size: 32px;
+    color: #222222;
   }
-  .job {
-    font-size: 20px;
+  .position {
+    font-weight: 500;
+    font-size: 14px;
+    color: #222222;
   }
-  .about {
-    font-weight: 400;
-    font-size: 16px;
-    color: #3E3E47;
-  }
-  .icon-wrap {
-    width: 43px;
-    height: 43px;
-    background: #E3F2FB;
-    line-height: 43px;
-    text-align: center;
-    border-radius: 7px;
-  }
+}
+.user-avatar {
+  position: relative;
+  top: -50px;
+}
+.star-btn {
+  width: 70px;
+  min-width: 70px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background: #e3f2fb;
+  border-radius: 10px;
+  justify-content: center;
+  cursor: pointer;
+}
+.tab {
+}
+.name {
+  font-size: 24px;
+}
+.job {
+  font-size: 20px;
+}
+.about {
+  font-weight: 400;
+  font-size: 16px;
+  color: #3e3e47;
+}
+.icon-wrap {
+  width: 43px;
+  height: 43px;
+  background: #e3f2fb;
+  line-height: 43px;
+  text-align: center;
+  border-radius: 7px;
+}
 
-  .field-wrap {
-    .profile-info-label {
-      font-size: 16px;
-      font-weight: 600;
-      color: #0253B3;
-      padding-bottom: 7px;
-    }
-    .profile-info-value {
-      font-weight: 600;
-      font-size: 20px;
-      color: #222222;
-    }
+.field-wrap {
+  .profile-info-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0253b3;
+    padding-bottom: 7px;
   }
+  .profile-info-value {
+    font-weight: 600;
+    font-size: 20px;
+    color: #222222;
+  }
+}
 </style>

@@ -1,78 +1,70 @@
 <template>
   <div class="mo-step-3">
-    <v-sheet class="px-12">
-      <p class="text-center font-weight-bold text-h6">
-        {{ $t('user.onboarding.detailsAboutYou') }}
-      </p>
+    <p class="text-center font-weight-bold text-h6">
+      {{ $t("user.onboarding.detailsAboutYou") }}
+    </p>
 
-      <div class="mt-10">
-        <v-row>
-          <v-col cols="12" class="pb-2">
-            <p class="text-left font-weight-bold mb-0">
-              {{ $t('user.onboarding.detailsAboutYouPosition') }}
-            </p>
-          </v-col>
-          <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.current_position"
-                :items="positions"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
-          </v-col>
-        </v-row>
+    <v-form v-model="formValid" @submit.prevent="nextScreen">
+      <!-- Current position -->
+      <label class="profile-label">
+        {{ $t("user.onboarding.detailsAboutYouPosition") }}
+      </label>
+      <v-select
+        v-model="value.current_position"
+        :items="positions"
+        :rules="[validations.required]"
+        :placeholder="$t('user.onboarding.choose')"
+        outlined
+      ></v-select>
 
-        <v-row>
-          <v-col cols="12" class="pb-2">
-            <p class="text-left font-weight-bold mb-0">
-              {{ $t('user.onboarding.detailsAboutYouBranches') }}
-            </p>
-          </v-col>
-          <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.branche"
-                :items="branches"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                outlined
-              ></v-select>
-            </v-card>
-          </v-col>
-        </v-row>
+      <!-- Branche -->
+      <label class="profile-label">
+        {{ $t("user.onboarding.detailsAboutYouBranches") }}
+      </label>
+      <v-select
+        v-model="value.branche"
+        :items="branches"
+        :rules="[validations.required]"
+        :placeholder="$t('user.onboarding.choose')"
+        outlined
+      ></v-select>
 
-        <v-row>
-          <v-col cols="12" class="p2-0">
-            <p class="text-left font-weight-bold mb-0">
-              {{ $t('user.onboarding.detailsAboutYouRole') }}
-            </p>
-          </v-col>
-          <v-col cols="12" class="pt-0">
-            <v-card>
-              <v-select
-                v-model="value.looking_for"
-                :items="positions"
-                :hide-details="true"
-                :label="$t('user.onboarding.choose')"
-                multiple
-                outlined
-              ></v-select>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-      <v-btn
-        @click="nextScreen"
-        color="primary"
-        height="58"
-        class="full-w mt-16 font-weight-medium "
-      >
-        {{ $t('user.onboarding.next') }}
-      </v-btn>
-    </v-sheet>
+      <!-- Looking for role -->
+      <label class="profile-label">
+        {{ $t("user.onboarding.detailsAboutYouRole") }}
+      </label>
+      <v-select
+        v-model="value.looking_for"
+        :items="positions"
+        :placeholder="$t('user.onboarding.choose')"
+        :rules="[validations.required]"
+        multiple
+        outlined
+      ></v-select>
+
+      <v-row class="mt-0">
+        <v-col cols="3">
+          <v-btn
+            @click="$emit('prevScreen')"
+            height="55"
+            class="full-w font-weight-medium "
+          >
+            Back
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn
+            :disabled="!formValid"
+            type="submit"
+            color="primary"
+            height="58"
+            class="full-w font-weight-medium "
+          >
+            {{ $t("user.onboarding.next") }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
   </div>
 </template>
 
@@ -88,34 +80,26 @@ export default {
   },
   data() {
     return {
-      rules: [value => !!value || "Required."],
+      formValid: false,
       positions: [
-        this.$t('user.onboarding.positionDeveloper'),
-        this.$t('user.onboarding.positionProjectManager'),
-        this.$t('user.onboarding.positionConstructionManager'),
-        this.$t('user.onboarding.positionIntern'),
-        this.$t('user.onboarding.positionApprentice'),
-        this.$t('user.onboarding.positionManager'),
+        this.$t("user.onboarding.positionDeveloper"),
+        this.$t("user.onboarding.positionProjectManager"),
+        this.$t("user.onboarding.positionConstructionManager"),
+        this.$t("user.onboarding.positionIntern"),
+        this.$t("user.onboarding.positionApprentice"),
+        this.$t("user.onboarding.positionManager")
       ],
       branches: [
-         this.$t('user.onboarding.branchMedicine'),
-         this.$t('user.onboarding.branchAutomotive'),
-         this.$t('user.onboarding.branchMechanical'),
-         this.$t('user.onboarding.branchChemical'),
-         this.$t('user.onboarding.branchFood'),
-         this.$t('user.onboarding.branchElectrical'),
+        this.$t("user.onboarding.branchMedicine"),
+        this.$t("user.onboarding.branchAutomotive"),
+        this.$t("user.onboarding.branchMechanical"),
+        this.$t("user.onboarding.branchChemical"),
+        this.$t("user.onboarding.branchFood"),
+        this.$t("user.onboarding.branchElectrical")
       ]
     };
-  },
+  }
 };
 </script>
 
-<style scoped lang="scss">
-.mo-step-3 {
-  &__salary {
-    border: solid 1px $primary-blue;
-    border-radius: 4px;
-    color: $primary-blue;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

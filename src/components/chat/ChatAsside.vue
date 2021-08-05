@@ -1,17 +1,23 @@
 <template>
   <v-card class="chat-conversations" flat>
+    <v-card-title class="chat-conversations-title pl-7 pr-7">
+      Messages
+    </v-card-title>
+    <v-divider></v-divider>
     <v-list subheader class="pb-0">
       <v-list-item-group color="primary">
         <template v-for="(conversation, index) in conversations">
           <chat-asside-item
-            :key="conversation.user_id"
+            v-if="conversation.ids.length"
+            :key="conversation.id"
             :conversation="conversation"
             @loading="loading = $event"
             @reload="refreshConversations"
+            @item-click="$emit('item-click')"
           />
           <v-divider
             v-if="index < conversations.length - 1"
-            :key="index"
+            :key="conversation.id"
           ></v-divider>
         </template>
       </v-list-item-group>
@@ -41,6 +47,8 @@ export default {
 <style lang="scss">
 .chat-conversations {
   position: relative;
+  border-radius: 10px !important;
+  height: 500px;
 
   .overlay {
     position: absolute;
@@ -51,5 +59,9 @@ export default {
     background: rgba(255, 255, 255, 0.6);
     z-index: 10;
   }
+}
+.chat-conversations-title {
+  color: #222;
+  font-weight: bold;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <v-container class="auth-register-wrap align-center" fluid no-gutters>
+  <div class="auth-register-wrap align-center">
     <jonder-title>
-      Morbi at venenatis.
+      Create account
     </jonder-title>
 
     <v-row class="mb-1">
@@ -11,159 +11,163 @@
       </v-col>
     </v-row>
 
-    <v-alert
-      v-if="showValidationMessage && !isValid"
-      text
-      prominent
-      type="error"
-      :icon="false"
+    <v-form
+      ref="form"
+      class="auth-form"
+      action="#"
+      @submit.prevent="handleRegister"
+      v-model="isValid"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
-      felis eu libero.
-    </v-alert>
+      <!-- First name -->
+      <v-text-field
+        dense
+        label="Vorname"
+        :rules="[validations.required, validations.min.string(3)]"
+        type="text"
+        outlined
+        background-color="white"
+        v-model="formData.first_name"
+        solo
+        flat
+      ></v-text-field>
 
-    <div>
-      <v-form
-        ref="form"
-        class="auth-form"
-        action="#"
-        @submit.prevent="handleRegister"
-        v-model="isValid"
+      <!-- Last name -->
+      <v-text-field
+        dense
+        label="Nachname"
+        :rules="[validations.required, validations.min.string(3)]"
+        type="text"
+        outlined
+        background-color="white"
+        v-model="formData.last_name"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Company name -->
+      <v-text-field
+        dense
+        label="Name der Firma"
+        :rules="[validations.required, validations.min.string(3)]"
+        type="text"
+        outlined
+        background-color="white"
+        v-model="formData.company"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Email -->
+      <v-text-field
+        dense
+        label="Email Addresse"
+        :rules="[validations.required, validations.email]"
+        type="email"
+        outlined
+        background-color="white"
+        v-model="formData.email"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Phone number -->
+      <v-text-field
+        dense
+        label="Telefonnummer"
+        type="text"
+        :rules="[validations.required, validations.phone]"
+        outlined
+        background-color="white"
+        v-model="formData.phone"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Hiring location -->
+      <v-text-field
+        dense
+        label="Hiring location"
+        :rules="[validations.required, validations.min.string(3)]"
+        type="text"
+        outlined
+        background-color="white"
+        v-model="formData.hiring_location"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Password -->
+      <v-text-field
+        dense
+        label="Passwort"
+        type="password"
+        :rules="[validations.required, validations.min.string(6)]"
+        outlined
+        background-color="white"
+        v-model="formData.password"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Password confirmation -->
+      <v-text-field
+        dense
+        label="Repeat Passwort"
+        type="password"
+        :rules="[
+          validations.required,
+          validations.same('Passwort', formData.password)
+        ]"
+        outlined
+        background-color="white"
+        v-model="formData.password_confirmation"
+        solo
+        flat
+      ></v-text-field>
+
+      <!-- Response alert -->
+      <response-alert :response="formResponse"></response-alert>
+
+      <!-- Submit button -->
+      <div class="text-left mb-1" style="color: #222222">
+        Ja, ich stimme der Datenschutzerklärung zu.
+      </div>
+      <v-btn
+        :disabled="!isValid"
+        type="submit"
+        color="primary"
+        block
+        large
+        :loading="isLoading"
       >
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Vorname"
-              :rules="rules"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.first_name"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Nachname"
-              :rules="rules"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.last_name"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Name der Firma"
-              :rules="rules"
-              type="text"
-              outlined
-              background-color="white"
-              v-model="formData.company"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Email Addresse"
-              :rules="[!validationErrors.email || 'Email exists', ...rules]"
-              type="email"
-              outlined
-              background-color="white"
-              v-model="formData.email"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Telefonnummer"
-              type="text"
-              :rules="[
-                formData.phone.match(
-                  /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .\-–\/]?)([\d]+))/
-                )
-                  ? true
-                  : 'Invalid phone'
-              ]"
-              outlined
-              background-color="white"
-              v-model="formData.phone"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Passwort"
-              type="password"
-              :rules="rules"
-              outlined
-              background-color="white"
-              v-model="formData.password"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              dense
-              label="Repeat Passwort"
-              type="password"
-              :rules="[
-                formData.password === formData.password_confirmation ||
-                  'Passwort muss übereinstimmen',
-                rules[0]
-              ]"
-              outlined
-              background-color="white"
-              v-model="formData.password_confirmation"
-              hide-details
-              solo
-              flat
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <div class="caption text-left">
-              Du bist bereits Mitglied?
-              <router-link to="/login">Hier einloggen</router-link>
-            </div>
-          </v-col>
-          <v-col cols="12">
-            <v-btn type="submit" color="primary" class="full-w" large>
-              Kostenlos registrieren
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
-    </div>
-  </v-container>
+        Kostenlos registrieren
+      </v-btn>
+
+      <!-- Login link -->
+      <div class="mt-2">
+        <span style="color: #222222">
+          Du bist bereits Mitglied?
+        </span>
+        <router-link to="/login" style="text-decoration: none">
+          <b>Hier einloggen</b>
+        </router-link>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
+import Validations from "@/mixins/validations";
 import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
+import ResponseAlert from "@/components/ResponseAlert";
 
 export default {
   name: "AuthRegisterCompany",
+  mixins: [Validations],
   components: {
-    JonderTitle
+    JonderTitle,
+    ResponseAlert
   },
   data() {
     return {
@@ -171,57 +175,51 @@ export default {
         first_name: "",
         last_name: "",
         email: "",
+        hiring_location: "",
         password: "",
         password_confirmation: "",
         phone: "",
         company: "",
         role: "company"
       },
-      rules: [
-        value => !!value || "Required.",
-        value => (value && value.length >= 3) || "Min 3 characters"
-      ],
-      isValid: false,
-      showValidationMessage: false,
-      validationErrors: {}
+      formResponse: {},
+      isLoading: false,
+      isValid: false
     };
   },
   methods: {
     ...mapActions({
-      register: "auth/register"
+      register: "auth/registerCompany"
     }),
 
     async handleRegister() {
-      this.validationErrors = {};
-      await this.$refs.form.validate();
-      if (!this.isValid) {
-        this.showValidationMessage = true;
-        this.$emit("changeImage");
-        return false;
-      }
-
-      let response = await this.register(this.formData);
-
-      if (response.success) {
-        this.$router.replace({ name: "ManualOnboardingCompany" });
-      } else {
-        this.validationErrors = response.message;
-        this.showValidationMessage = true;
-        this.$refs.form.validate();
-        this.$emit("changeImage");
-      }
+      this.formResponse = {};
+      this.isLoading = true;
+      this.register(this.formData)
+        .then(resp => {
+          console.log("resp", resp);
+          this.$router.replace({ name: "ManualOnboardingCompany" });
+        })
+        .catch(err => {
+          console.log("err", err);
+          this.formResponse = err.data;
+          this.$emit("changeImage");
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.auth-register-wrap {
-  width: 60%;
-}
-@media (max-width: 600px) {
-  .auth-register-wrap {
-    width: 90%;
-  }
-}
+// .auth-register-wrap {
+//   width: 60%;
+// }
+// @media (max-width: 600px) {
+//   .auth-register-wrap {
+//     width: 90%;
+//   }
+// }
 </style>
