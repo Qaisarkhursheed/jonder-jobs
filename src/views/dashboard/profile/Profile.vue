@@ -506,6 +506,37 @@
       </v-row>
       <v-row>
         <v-col cols="6">
+<<<<<<< HEAD
+          <div class="upgrade">
+            <span class="upgrade-title">
+              Your account is higlighted in company search
+            </span>
+            <p>3 days active</p>
+            <span class="updgrade-price upgrade-title">35€</span>
+            <template>
+              <div>
+                <simple-modal
+                  v-model="isShow"
+                  title="Choose your payment method"
+                >
+                  <template slot="body">
+                    <h2>
+                      Pay with
+                      <a href="https://buy.stripe.com/test_8wM6s04n502G76MeUV"
+                        ><v-btn class="ma-2" color="primary" dark>
+                          Stripe
+                          <v-icon dark right>
+                            mdi-card-bulleted
+                          </v-icon>
+                        </v-btn></a
+                      >
+                    </h2>
+                  </template>
+                </simple-modal>
+                <button @click="isShow = !isShow" class="btn">Activate</button>
+              </div>
+            </template>
+=======
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -523,10 +554,45 @@
               <p>3 days active</p>
               <span class="updgrade-price upgrade-title">10€</span>
             </div>
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
           </div>
         </v-col>
 
         <v-col cols="6">
+<<<<<<< HEAD
+          <div class="upgrade">
+            <span class="upgrade-title">
+              Your account is higlighted in company search
+            </span>
+            <p>3 days active</p>
+            <span class="updgrade-price upgrade-title">10€</span>
+
+            <template>
+              <div>
+                <simple-modal
+                  v-model="isModal"
+                  title="Choose your payment method"
+                >
+                  <template slot="body">
+                    <h2>
+                      Pay with
+                      <a href="https://buy.stripe.com/test_eVa03CdXF9DgfDi8ww"
+                        ><v-btn class="ma-2" color="primary" dark>
+                          Stripe
+                          <v-icon dark right>
+                            mdi-card-bulleted
+                          </v-icon>
+                        </v-btn></a
+                      >
+                    </h2>
+                  </template>
+                </simple-modal>
+                <button @click="isModal = !isModal" class="btn">
+                  Activate
+                </button>
+              </div>
+            </template>
+=======
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -544,6 +610,7 @@
               <p>3 days active</p>
               <span class="updgrade-price upgrade-title">10€</span>
             </div>
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
           </div>
         </v-col>
       </v-row>
@@ -553,6 +620,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import SimpleModal from "simple-modal-vue";
 
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -563,8 +631,30 @@ import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducati
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 
 export default {
+  components: {
+    SimpleModal,
+  },
   name: "Profile",
 
+<<<<<<< HEAD
+  data: () => ({
+    stripe: null,
+    isShow: false,
+    isModal: false,
+    modal: true,
+    dialog: false,
+
+    ccData: {
+      ccNumber: "",
+      ccOwner: "",
+      exDate: "",
+      cvc: "",
+    },
+    planSelected: {
+      plan_id: null,
+      selectedClass: false,
+    },
+=======
   components: {
     UpgradePlanModal,
     CardActionableList,
@@ -577,6 +667,7 @@ export default {
 
   data: () => ({
     newImage: null,
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
     formData: {
       first_name: "",
       last_name: "",
@@ -590,8 +681,39 @@ export default {
       work_experience: "",
       cv: null,
       qualifications: null,
-      resume: null
+      resume: null,
     },
+<<<<<<< HEAD
+    rules: [
+      (value) => !!value || "Required.",
+      (value) => (value && value.length >= 3) || "Min 3 characters",
+    ],
+    branche: [
+      "Medizin",
+      "Automobilindustrie",
+      "Maschinenbau",
+      "Chemisch-pharmazeutische Industrie",
+      "Ernährungsindustrie",
+      "Elektrotechnikbranche",
+    ],
+    lookingForRole: [
+      "Entwickler",
+      "Projektmanager",
+      "Bauleiter",
+      "Praktikant",
+      "Auszubildende",
+      "Geschäftsführer",
+    ],
+    lookingForBranches: [
+      "Medizin",
+      "Automobilindustrie",
+      "Maschinenbau",
+      "Chemisch-pharmazeutische Industrie",
+      "Ernährungsindustrie",
+      "Elektrotechnikbranche",
+    ],
+    employment: ["Part - time", "Full - time"],
+=======
     formResponse: {},
     formLoading: false,
     passwordFormData: {},
@@ -651,12 +773,16 @@ export default {
       experience: ["edit", "delete"],
       education: ["edit", "delete"]
     }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   }),
   created() {
     this.resetFormData(this.user);
   },
+
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+<<<<<<< HEAD
+=======
     profile_img() {
       if (this.newImage) {
         return URL.createObjectURL(this.newImage);
@@ -664,9 +790,24 @@ export default {
 
       return this.user.profile_img;
     }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
+
+    alertUser() {
+      alert("Processing your payment");
+    },
+    changeModal() {
+      this.modal = !this.modal;
+      console.log(this.ccData);
+    },
+    selectOption(option) {
+      this.planSelected = option;
+      this.selectedClass = !this.selectedClass;
+      console.log(this.planSelected, this.selectedClass);
+    },
+
     resetFormData(user) {
       if (!user) return;
       this.formData.first_name = user.first_name;
@@ -710,6 +851,12 @@ export default {
         .then(resp => {
           this.formResponse = resp.data;
         })
+<<<<<<< HEAD
+        .catch((err) => {
+          alert(err.data.message);
+        });
+    },
+=======
         .catch(err => {
           this.formResponse = err.data;
         })
@@ -743,16 +890,33 @@ export default {
       this.toggleModal(type);
       this.modals[type].edit = item;
     }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
+.div-hover :hover {
+  background-color: #27aae1;
+  border-radius: 10px;
+  opacity: 85%;
+}
+.header {
+  display: inline-block;
+  padding: 3rem 0 0 3rem;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.optionOfPayment {
+  padding: 3rem;
+}
+
 .profile-title {
   font-size: 20px;
   width: 100%;
@@ -761,6 +925,18 @@ export default {
   margin: 15px 0 0 15px;
 }
 
+.btn {
+  display: inline-block;
+  background-color: #0253b3;
+  color: white;
+  padding: 0.7rem;
+}
+
+.selectedOptionDesign {
+  background-color: #2592c0;
+  border-radius: 10px;
+  opacity: 85%;
+}
 .profile-subtitle {
   width: 100%;
   margin-left: 15px;
