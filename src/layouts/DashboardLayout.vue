@@ -3,14 +3,12 @@
     <v-row class="flex-shrink-0 flex-grow-0 search-holder">
       <v-col cols="4">
         <router-link to="/dashboard" class="logo">
-          <v-img
-            :src="require('@/assets/jonder-logo.svg')"
-            max-width="128px"
-          />
+          <v-img :src="require('@/assets/jonder-logo.svg')" max-width="128px" />
         </router-link>
       </v-col>
       <v-col cols="4">
-        <v-autocomplete v-if="!profile"
+        <v-autocomplete
+          v-if="!profile"
           v-model="searchString"
           :loading="searchLoading"
           :items="searchItems"
@@ -34,28 +32,23 @@
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-avatar color="primary" size="38" v-on="on">
+                <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
                 <v-img
-                  :src="user.profile_img"
-                  v-if="user.profile_img"
+                  :src="require('@/assets/icons/profile-placeholder.png')"
+                  v-else
                 ></v-img>
-                <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
               </v-avatar>
             </template>
             <v-list class="nav">
               <v-list-item>
-                <v-list-item-title
-                  @click="navigateTo('/dashboard/profile')"
-                  >
-                    {{ $t('general.profile') }}
-                  </v-list-item-title
-                >
+                <v-list-item-title @click="navigateTo('/dashboard/profile')">
+                  {{ $t("general.profile") }}
+                </v-list-item-title>
               </v-list-item>
               <v-list-item>
-                <v-list-item-title @click="navigateTo('/logout')"
-                  >
-                  {{ $t('general.logout') }}
-                  </v-list-item-title
-                >
+                <v-list-item-title @click="navigateTo('/logout')">
+                  {{ $t("general.logout") }}
+                </v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -63,45 +56,52 @@
       </v-col>
     </v-row>
     <v-row v-if="profile">
-      <v-col cols='12'>
-        <v-btn color="primary" class="back-btn" @click="navigateTo('/dashboard')">
-            Back to homepage
+      <v-col cols="12">
+        <v-btn
+          color="primary"
+          class="back-btn"
+          @click="navigateTo('/dashboard')"
+        >
+          Back to homepage
         </v-btn>
       </v-col>
     </v-row>
     <v-row class="full-h ma-0">
       <v-col class="full-h navigation col-12 col-sm-4 col-xl-3">
-        <nav class="dashboard-navigation" v-if="profile">          
+        <nav class="dashboard-navigation" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
-               Settings
+              Settings
             </div>
             <div class="submenu">
-              <div @click="scrollToSection('personalInfo')" class="nav-item"> 
+              <div @click="scrollToSection('personalInfo')" class="nav-item">
                 Personal info
               </div>
-              <div @click="scrollToSection('roleAndBranche')" class="nav-item"> 
+              <div @click="scrollToSection('roleAndBranche')" class="nav-item">
                 Role & Branche
               </div>
-              <div @click="scrollToSection('lookingFor')" class="nav-item"> 
+              <div @click="scrollToSection('lookingFor')" class="nav-item">
                 What are you looking for
               </div>
-              <div @click="scrollToSection('experienceAndEducation')" class="nav-item"> 
+              <div
+                @click="scrollToSection('experienceAndEducation')"
+                class="nav-item"
+              >
                 Experience and Education
               </div>
-              <div @click="scrollToSection('documents')" class="nav-item"> 
+              <div @click="scrollToSection('documents')" class="nav-item">
                 Documents
               </div>
-              <div @click="scrollToSection('invoices')" class="nav-item"> 
+              <div @click="scrollToSection('invoices')" class="nav-item">
                 Invoices
               </div>
-              <div @click="scrollToSection('paymentMethod')" class="nav-item"> 
+              <div @click="scrollToSection('paymentMethod')" class="nav-item">
                 Billing
               </div>
-              <div @click="scrollToSection('changePassword')" class="nav-item"> 
+              <div @click="scrollToSection('changePassword')" class="nav-item">
                 Change Password
               </div>
-              <div @click="scrollToSection('upgradeAccount')" class="nav-item"> 
+              <div @click="scrollToSection('upgradeAccount')" class="nav-item">
                 Upgrade account
               </div>
             </div>
@@ -109,59 +109,63 @@
         </nav>
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
-              <div class="top-info">
-
-                  <div class="profile-image">
-                    <v-img
-                      :src="user.profile_img"
-                      v-if="user.profile_img"
-                    ></v-img>
-                    <v-img :src="require('@/assets/icons/profile-placeholder.png')" v-else></v-img>
-                  </div>
-
-                <span class="dash-name">{{ getUserFullName }}</span>
-                <a href="/dashboard/profile" class="settings-link"> Profile Settings </a>
+            <div class="top-info">
+              <div class="profile-image">
+                <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
+                <v-img
+                  :src="require('@/assets/icons/profile-placeholder.png')"
+                  v-else
+                ></v-img>
               </div>
 
-              <div class="top-info">
-                <span class="about-info"> About me </span>
-                <p class="about-text"> {{user.about_me}} </p>
+              <span class="dash-name">{{ getUserFullName }}</span>
+              <a href="/dashboard/profile" class="settings-link">
+                Profile Settings
+              </a>
+            </div>
 
-                <div class="d-flex">
-                  <div>
-                    <p class="about-info"> Jobseeking status </p>
-                    <p class="about-text"> {{user.job_status}} </p>
-                  </div>
-                  <div>
-                    <p class="about-info text-right"> Position </p>
-                    <p class="about-text text-right"> {{user.current_position}} </p>
-                  </div>
+            <div class="top-info">
+              <span class="about-info"> About me </span>
+              <p class="about-text">{{ user.about_me }}</p>
+
+              <div class="d-flex">
+                <div>
+                  <p class="about-info">Jobseeking status</p>
+                  <p class="about-text">{{ user.job_status }}</p>
                 </div>
-
-                <span class="about-info"> Current industry </span>
-                <p class="about-text"> {{user.branche}} </p>
-                <span class="about-info"> City and areas </span>
-                <p class="about-text"> {{user.city}} </p>
-
-                <span class="about-info"> Experience </span>
-                <p class="company-ed"> Company name {{user.company }}</p>
-                <span> Position {{user.role_in_company}} </span>                
-                <span> February 2020 - present {{user.working_experience}} </span>
-               </div>
-              <div class="top-info">
-                <span class="about-info"> Education </span>
-                <p class="company-ed"> University </p>
-                <span> Degree </span>                
-                <span> February 2020 - present </span>
+                <div>
+                  <p class="about-info text-right">Position</p>
+                  <p class="about-text text-right">
+                    {{ user.current_position }}
+                  </p>
+                </div>
               </div>
 
+              <span class="about-info"> Current industry </span>
+              <p class="about-text">{{ user.branche }}</p>
+              <span class="about-info"> City and areas </span>
+              <p class="about-text">{{ user.city }}</p>
 
-              <div class="top-info">
-                <span class="about-info"> Documents </span>
-                <div> {{user.cv}} </div>
-                <div> {{user.qualifications}} </div>
-                <div> {{user.resume}} </div>
-              </div>
+              <span class="about-info"> Experience </span>
+              <p class="company-ed">Company name {{ user.company }}</p>
+              <span> Position {{ user.role_in_company }} </span>
+              <span>
+                February 2020 - present {{ user.working_experience }}
+              </span>
+            </div>
+            <div class="top-info">
+              <span class="about-info"> Education </span>
+              <p class="company-ed">University</p>
+              <span> Degree </span>
+              <span> February 2020 - present </span>
+            </div>
+
+            <div class="top-info">
+              <span class="about-info"> Documents </span>
+              <div>{{ user.cv }}</div>
+              <div>{{ user.qualifications }}</div>
+              <div>{{ user.resume }}</div>
+            </div>
           </v-row>
         </div>
       </v-col>
@@ -175,6 +179,7 @@
 </template>
 
 <script>
+// import Modal from "../components/dashboard/Modal.vue";
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
 
@@ -183,15 +188,17 @@ export default {
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
     profile() {
-      return this.$route.path === '/dashboard/profile'
+      return this.$route.path === "/dashboard/profile";
     },
     dashboard() {
-      return this.$route.path === '/dashboard' ||  this.$route.path === '/dashboard/'
+      return (
+        this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
+      );
     },
   },
   methods: {
@@ -203,8 +210,10 @@ export default {
     navigateTo(url) {
       this.$router.push(url);
     },
-    scrollToSection(profileSection){
-      document.getElementById(profileSection).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    scrollToSection(profileSection) {
+      document
+        .getElementById(profileSection)
+        .scrollIntoView({ behavior: "smooth", block: "center" });
     },
   },
   watch: {
@@ -221,8 +230,8 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -232,7 +241,8 @@ export default {
   overflow: auto;
 }
 
-.main, .navigation {
+.main,
+.navigation {
   background-color: $lighter-grey;
 }
 
@@ -256,7 +266,8 @@ export default {
       margin-bottom: 10px;
       border: none !important;
 
-      & i, span {
+      & i,
+      span {
         border: none !important;
       }
     }
@@ -383,10 +394,10 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 }
 
 .dashboard-about {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;    
-    margin-top: 60px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 60px;
 }
 
 .top-info {
