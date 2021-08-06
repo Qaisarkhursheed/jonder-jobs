@@ -9,16 +9,20 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        v-model="date"
+        v-model="dateFormatted"
+        :rules="rules"
+        :disabled="disabled"
         readonly
+        outlined
         height="35px"
-        :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
         v-bind="attrs"
         v-on="on"
       ></v-text-field>
     </template>
     <v-date-picker
       :flat="true"
+      :disabled="disabled"
       v-model="date"
       @input="menu = false"
       @change="dateSelect"
@@ -28,18 +32,41 @@
 
 <script>
 export default {
-  name: 'Calendar',
+  name: "Calendar",
 
+  props: {
+    value: {
+      type: [String, Object, Date]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    rules: {
+      type: Array,
+      default: Array
+    }
+  },
+  created() {
+    if (this.value) {
+      this.date = this.value;
+    }
+  },
   data() {
     return {
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      menu: false,
+      date: "",
+      menu: false
+    };
+  },
+  computed: {
+    dateFormatted() {
+      return this.date.substr(0, 10);
     }
   },
   methods: {
     dateSelect(date) {
-      this.$emit('setDate', date);
+      this.$emit("setDate", date);
     }
-  },
-}
+  }
+};
 </script>

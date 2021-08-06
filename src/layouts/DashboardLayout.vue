@@ -66,13 +66,19 @@
         </v-btn>
       </v-col>
     </v-row>
+
     <v-row class="full-h ma-0">
+<<<<<<< HEAD
       <v-col class="full-h navigation col-12 col-sm-4 col-xl-3">
+=======
+      <v-col class="navigation col-12 col-sm-3 col-xl-3">
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
         <nav class="dashboard-navigation" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
               Settings
             </div>
+
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
                 Personal info
@@ -107,9 +113,14 @@
             </div>
           </div>
         </nav>
+
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
+<<<<<<< HEAD
             <div class="top-info">
+=======
+            <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
               <div class="profile-image">
                 <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
                 <v-img
@@ -119,6 +130,7 @@
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
+<<<<<<< HEAD
               <a href="/dashboard/profile" class="settings-link">
                 Profile Settings
               </a>
@@ -165,11 +177,82 @@
               <div>{{ user.cv }}</div>
               <div>{{ user.qualifications }}</div>
               <div>{{ user.resume }}</div>
+=======
+              <router-link to="/dashboard/profile" class="settings-link">
+                Profile Settings
+              </router-link>
+            </div>
+
+            <UpgradeAccountBox
+              class="mt-7"
+              v-if="messagesLoaded && conversations.length"
+              small
+            />
+
+            <div class="top-info mt-7">
+              <span class="about-info"> About me </span>
+              <p class="about-text">{{ user.about_me }}</p>
+
+              <span class="about-info">Jobseeking status</span>
+              <p class="about-text">{{ user.looking_for_employment_type }}</p>
+
+              <span class="about-info">Position</span>
+              <p class="about-text">{{ user.looking_for_branche }}</p>
+
+              <span class="about-info"> Current industry </span>
+              <p class="about-text">{{ user.branche }}</p>
+
+              <span class="about-info"> City and areas </span>
+              <p class="about-text">{{ user.city }}</p>
+
+              <span class="about-info"> Experience </span>
+              <CardActionableList type="Experience" view-only class="mb-5" />
+
+              <span class="about-info"> Education </span>
+              <CardActionableList type="Education" view-only />
+            </div>
+
+            <div class="top-info">
+              <span class="about-info"> Documents </span>
+              <div v-if="user.cv" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.cv" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  CV
+                </div>
+              </div>
+
+              <div v-if="user.qualifications" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.qualifications" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  Qualifications
+                </div>
+              </div>
+
+              <div v-if="user.resume" class="row mt-1">
+                <div class="col-auto">
+                  <a :href="user.resume" target="_blank">
+                    <img :src="require('@/assets/svg/pdf.svg')" />
+                  </a>
+                </div>
+                <div class="col my-auto font-weight-bold">
+                  Resume
+                </div>
+              </div>
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
             </div>
           </v-row>
         </div>
       </v-col>
-      <v-col class="full-h main col-12 col-sm-8 col-xl-9">
+
+      <v-col class="main col-12 col-sm-9 col-xl-9">
         <v-container fluid class="d-flex flex-column full-h">
           <slot />
         </v-container>
@@ -182,8 +265,15 @@
 // import Modal from "../components/dashboard/Modal.vue";
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
+import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 
 export default {
+  components: {
+    CardActionableList,
+    UpgradeAccountBox
+  },
+
   data: () => ({
     searchString: null,
     searchLoading: false,
@@ -192,6 +282,7 @@ export default {
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
       return this.$route.path === "/dashboard/profile";
     },
@@ -199,7 +290,11 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -214,7 +309,11 @@ export default {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   watch: {
     search(val) {
@@ -248,6 +347,8 @@ export default {
 
 .v-application .dashboard-navigation {
   padding: 0 0 0 32px;
+  position: sticky;
+  top: 2rem;
 
   a {
     display: block;
@@ -355,17 +456,19 @@ export default {
 }
 
 .nav-item {
-  border-bottom: 1px solid $medium-grey;
+  border-bottom: 0.5px solid #cacaca;
   font-weight: 500;
   font-size: 18px;
-  line-height: 28px;
   height: auto;
   max-height: 90px;
-  padding: 5px 0;
+  padding: 15px 0;
   cursor: pointer;
+  color: #000;
+  transition: 0.3s color, 0.3s border-color;
 
   &:hover {
-    color: $primary-blue-dark;
+    color: #0253b3;
+    border-color: #0253b3;
   }
 }
 
@@ -382,6 +485,7 @@ export default {
   width: 100%;
   line-height: 38px;
   margin-bottom: 26px;
+  color: #222;
 }
 
 button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary {
@@ -397,15 +501,20 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   background: white;
   border-radius: 10px;
   padding: 20px;
+<<<<<<< HEAD
   margin-top: 60px;
+=======
+  margin-top: 40px;
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
 }
 
 .top-info {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid $light-grey;
   padding: 20px;
+  padding-top: 0px;
+  word-break: break-all;
 }
 
 .dash-name {
@@ -420,6 +529,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   width: 100%;
   text-align: center;
   margin-bottom: 20px;
+  text-underline-offset: 3px;
 }
 
 .about-info {
@@ -450,7 +560,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   height: 80px;
   object-fit: cover;
   position: relative;
-  top: -75px;
+  top: -60px;
   margin: 0 auto -40px auto;
 
   .v-image {

@@ -1,86 +1,85 @@
 <template>
   <div class="mo-step-3">
-    <v-sheet class="px-12">
-      <p class="text-center font-weight-bold text-h6">
-        {{ $t('user.onboarding.uploadDocuments') }}
-      </p>
-      <div class="mt-10">
-        <v-row>
-          <v-col cols="12">
-            <v-file-input
-              v-model="cv"
-              :placeholder="$t('user.onboarding.uploadCv')"
-              multiple
-              outlined
-              :prepend-icon="false"
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-          </v-col>
-        </v-row>
+    <p class="text-center font-weight-bold text-h6">
+      {{ $t("user.onboarding.uploadDocuments") }}
+    </p>
 
-        <v-row>
-          <v-col cols="12">
-            <v-file-input
-                v-model="qualifications"
-                :placeholder="$t('user.onboarding.uploadQualifications')"
-                multiple
-                outlined
-                :prepend-icon="false"
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                class="text-center"
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
-            </v-col>
-          </v-row>
-
-          <v-row>
-          <v-col cols="12">
-            <v-file-input
-                v-model="resume"
-                :placeholder="$t('user.onboarding.uploadResume')"
-                multiple
-                outlined
-                :prepend-icon="false"
-                :hide-details="true"
-                prepend-inner-icon="mdi-cloud-upload-outline"
-                
-              >
-                <template v-slot:selection="{ text }">
-                  <v-chip small label color="primary">
-                    {{ text }}
-                  </v-chip>
-                </template>
-              </v-file-input>
-            </v-col>
-          </v-row>
-      </div>
-      <v-btn
-        @click="nextScreen"
-        color="primary"
-        height="58"
-        class="full-w mt-16 font-weight-medium "
+    <v-form v-model="formValid" @submit.prevent="nextScreen">
+      <v-file-input
+        v-model="cv"
+        :placeholder="$t('user.onboarding.uploadCv')"
+        multiple
+        outlined
+        :prepend-icon="null"
+        prepend-inner-icon="mdi-cloud-upload-outline"
+        class="text-center"
       >
-        {{ $t('user.onboarding.next') }}
-      </v-btn>
-    </v-sheet>
+        <template v-slot:selection="{ text }">
+          <v-chip small label color="primary">
+            {{ text }}
+          </v-chip>
+        </template>
+      </v-file-input>
+
+      <v-file-input
+        v-model="qualifications"
+        :placeholder="$t('user.onboarding.uploadQualifications')"
+        multiple
+        outlined
+        :prepend-icon="null"
+        prepend-inner-icon="mdi-cloud-upload-outline"
+        class="text-center"
+      >
+        <template v-slot:selection="{ text }">
+          <v-chip small label color="primary">
+            {{ text }}
+          </v-chip>
+        </template>
+      </v-file-input>
+
+      <v-file-input
+        v-model="resume"
+        :placeholder="$t('user.onboarding.uploadResume')"
+        multiple
+        outlined
+        :prepend-icon="null"
+        prepend-inner-icon="mdi-cloud-upload-outline"
+      >
+        <template v-slot:selection="{ text }">
+          <v-chip small label color="primary">
+            {{ text }}
+          </v-chip>
+        </template>
+      </v-file-input>
+
+      <v-row class="mt-0">
+        <v-col cols="3">
+          <v-btn
+            @click="$emit('prevScreen')"
+            height="55"
+            class="full-w font-weight-medium "
+          >
+            Back
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn
+            :disabled="!formValid"
+            :loading="formLoading"
+            type="submit"
+            color="primary"
+            height="55"
+            class="full-w font-weight-medium "
+          >
+            {{ $t("user.onboarding.next") }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
   </div>
 </template>
 
 <script>
-import store from '@/store';
-
 export default {
   name: "Step6",
 
@@ -89,25 +88,18 @@ export default {
       type: Object,
       required: true
     },
-    nextScreen: Function
+    nextScreen: Function,
+    formLoading: Boolean
   },
   data() {
     return {
-      rules: [value => !!value || "Required."],
+      formValid: true,
       qualifications: null,
       resume: null,
-      cv: null,
+      cv: null
     };
   },
-  computed: {
-    jobseekerExperience() {
-      return store.getters['user/jobseekerExperience'];
-    },
-    jobseekerEducation() {
-      return store.getters['user/jobseekerEducation'];
-    }
-  },
-   watch: {
+  watch: {
     cv(val) {
       console.log(val);
       this.$emit("input", {
@@ -131,12 +123,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.mo-step-3 {
-  &__salary {
-    border: solid 1px $primary-blue;
-    border-radius: 4px;
-    color: $primary-blue;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

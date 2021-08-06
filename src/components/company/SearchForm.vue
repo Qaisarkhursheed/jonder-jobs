@@ -1,195 +1,318 @@
 <template>
-  <v-card class="search-form rounded-lg"
+<div>
+  <div class="heading-title mb-6">
+    {{ $t('company.search.headingTitle') }}
+  </div>
+
+  <v-card class="search-form rounded-lg pa-8"
           flat>
-    <v-card-title class="search-title pa-0 pb-3">
-      {{ $t('company.search.headingTitle') }}
-    </v-card-title>
-
-    <label>
-      {{ $t('company.search.lookingFor') }}
-    </label>
-
-    <v-row class="search-selection no-gutters pt-1">
-      <v-col class="d-flex justify-center align-center"
-             :class="{ active: item === lookingfor.selected }"
-             v-for="(item, i) in lookingfor.options" :key="i"
-             @click="selectLookingfor(item)">
-        <div>{{item.label}}</div>
+    <v-row>
+      <v-col cols="7">
+        <label class="section-label">
+          {{ $t('company.search.jobPosition') }}
+        </label>
+        <v-select
+          v-model="formFields.job_position"
+          :items="types.JOB_POSITION"
+          :hide-details="true"
+          :placeholder="$t('company.search.jobPosition')"
+          outlined
+        ></v-select>
+      </v-col>
+      <v-col cols="5">
+         <label class="section-label">
+          {{ $t('company.search.employementType') }}
+        </label>
+        <v-select
+          v-model="formFields.employment_type"
+          :items="types.EMPLOYEMENT_TYPE"
+          hide-details
+          :placeholder="$t('company.search.employementType')"
+          outlined
+        ></v-select>
       </v-col>
     </v-row>
 
-    <v-form ref="form"
-            v-model="validForm"
-            action="#"
-            class="pt-2">
-
-      <v-row class="search-form-fields no-gutters pb-5">
-          <v-col v-for="(field, i) in form" :key="i"
-                cols="4"
-                class="pb-6"
-                :class="[ (i+1)%3==0 ? 'pr-0': 'pr-5' ]"> 
-            <label>{{field.label}}</label>
-            <v-text-field class="rounded-lg"
-                          :rules="[() => !!field.value || 'This field is required']"
-                          style="height: 50px;"
-                          height="100%"
-                          type="text"
-                          outlined
-                          flat
-                          dense
-                          solo
-                          background-color="#fff"
-                          v-model="field.value">
-            </v-text-field>
-          </v-col>
+    <template v-if="advancedSearch">
+      <v-row>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.industryOfProfession') }}
+          </label>
+          <v-select
+            v-model="formFields.branche"
+            :items="types.JOB_BRANCHE"
+            :hide-details="true"
+            :placeholder="$t('company.search.industryOfProfession')"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.schoolGraduation') }}
+          </label>
+          <v-text-field
+            v-model="formFields.school"
+            class="rounded-lg"
+            style="height: 50px;"
+            height="100%"
+            type="text"
+            outlined
+            :hide-details="true"
+            :placeholder="$t('company.search.schoolGraduation')"
+            flat
+            dense
+            solo
+            background-color="#fff">
+          </v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.educationStudy') }}
+          </label>
+          <v-select
+            v-model="formFields.education"
+            :items="types.EDUCATION"
+            :hide-details="true"
+            :placeholder="$t('company.search.educationStudy')"
+            outlined
+          ></v-select>
+        </v-col>
       </v-row>
-      
-    </v-form>
-
-    <SearchFormSlider @selected="(value) => {this.radius.value = value}"/>
+      <v-row>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.salaryRange') }}
+          </label>
+          <v-row class="no-gutters justify-space-between">
+            <v-col cols="6" class="pr-2">
+              <v-text-field
+                v-model="formFields.min_salary"
+                placeholder="Min"
+                class="rounded-lg"
+                style="height: 50px;"
+                height="100%"
+                type="text"
+                outlined
+                :hide-details="true"
+                flat
+                dense
+                solo
+                background-color="#fff">
+              </v-text-field>
+            </v-col>
+            <v-col cols="6" class="pl-2">
+              <v-text-field
+                v-model="formFields.max_salary"
+                placeholder="Max"
+                class="rounded-lg"
+                style="height: 50px;"
+                height="100%"
+                type="text"
+                outlined
+                :hide-details="true"
+                flat
+                dense
+                solo
+                background-color="#fff">
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.workExperience') }}
+          </label>
+          <v-select
+            v-model="formFields.work_experience"
+            :items="types.WORK_EXPERIENCE"
+            :hide-details="true"
+            :placeholder="$t('company.search.workExperience')"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col cols="4">
+          <label class="section-label">
+            {{ $t('company.search.city') }}
+          </label>
+          <v-text-field
+            v-model="formFields.city"
+            class="rounded-lg"
+            style="height: 50px;"
+            height="100%"
+            type="text"
+            outlined
+            :hide-details="true"
+            :placeholder="$t('company.search.city')"
+            flat
+            dense
+            solo
+            background-color="#fff">
+          </v-text-field>
+        </v-col>
+      </v-row>
+    </template>
 
     <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
-      <v-col cols="8">
-        <v-btn class="font-weight-bold"
-               height="54px"
-               style="border-radius: 10px;"
-               elevation="1"
-               color="#27AAE1"
-               width="30%"
-               dark>
-          {{ $t('company.search.saveFilter') }}
-        </v-btn>
-        <v-btn class="ml-8 font-weight-bold"
-               height="54px"
-               width="45%"
-               elevation="1"
-               style="border-radius: 10px;"
-               color="#0253B3"
-               dark
-               @click="handleSearch">
-            {{searchCountLabel}}
-        </v-btn>
+      <v-col cols="6">
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              color="#fff"
+              height="58"
+              elevation="0"
+              class="full-w mt-16 font-weight-medium white"
+              @click="searchSave"
+            >
+                Save search
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
-
-      <v-col cols="4" class="align-self-end text-right">
-        <span @click="$emit('toggleAdvanced')"
-              class="advanced-label text-color-primary-blue-dark">
-          {{ $t('company.search.advancedSearch') }}
-        </span>
+      <v-col cols="6">
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              height="58"
+              elevation="0"
+              :class="['advanced-search-btn full-w mt-16 white font-weight-medium',
+                { active: advancedSearch}
+              ]"
+              color="#fff"
+              @click="advancedSearch = !advancedSearch"
+            >
+              {{ $t('company.search.advancedSearch') }}
+            </v-btn>
+          </v-col>
+          <v-col cols="6">
+            <v-btn
+              :loading="searchLoading"
+              color="primary"
+              height="58"
+              class="full-w mt-16 font-weight-medium"
+              @click="search"
+            >
+               {{ $t('company.search.findEmployee') }}
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
     </v-card-actions>
+    <transition name="fade">
+      <section class="error-message" v-if="errorMessage">
+        <div>{{errorMessage}}</div>
+      </section>
+    </transition>
   </v-card>
+</div>
 </template>
 
 <script>
-
-import axios from 'axios';
-import SearchFormSlider from '@/components/company/SearchFormSlider';
+import { forEach } from 'lodash';
+import store from '@/store';
+import types from '@/types';
 
 export default {
   name: 'SearchForm',
 
   components: {
-    SearchFormSlider
   },
 
   data() {
     return {
-      form: {
-        jobtitle: {
-          label: this.$t('company.search.jobTitle'),
-          value: ''
-        },
-        school: {
-          label: this.$t('company.search.schoolGraduation'),
-          value: ''
-        },
-        education: {
-          label: this.$t('company.search.education'),
-          value: '', 
-        },
-        branche: {
-          label: this.$t('company.search.industry'),
-          value: '', 
-        },
-        salary: {
-          label: this.$t('company.search.salary'),
-          value: '', 
-        },
-        experience: {
-          label: this.$t('company.search.experience'),
-          value: '', 
-        },
+      formFields: {
+        employment_type: '',
+        job_position: '',
+        work_experience: '',
+        branche: '',
+        school: '',
+        education: '',
+        min_salary: '',
+        max_salary: ''
       },
-      lookingfor: {
-        selected: false,
-        options: [
-          {
-            label: 'Trainee',
-            value: 'trainee'
-          },
-          {
-            label: 'Full time',
-            value: 'full time'
-          },
-          {
-            label: 'Freelance',
-            value: 'freelance'
-          }
-        ]
-      },
-      radius: {
-        label: 'Radius',
-        value: 1
-      },
-      searchCount: '',
-      validForm: false
+      advancedSearch: false,
+      errorMessage: '',
     }
   },
-
   methods: {
-    formatData() {
-      return {
-        looking_for: this.lookingfor.selected.value || 'trainee',
-        work_experience: this.form.experience.value,
-        job_title: this.form.jobtitle.value,
-        school: this.form.school.value,
-        education: this.form.education.value,
-        branche: this.form.branche.value,
-        monthly_salary: this.form.salary.value,
-        working_radius: `${this.radius.value} KM` || '20'
+    search() {
+      store.dispatch('company/searchJobseekers', this.prepareData());
+      this.$emit('search');
+    },
+    searchSave() {
+      let i = 0;
+      let isValid = true;
+      const saveData = this.prepareData();
+      const searchFilters = store.getters['company/searchFilters'];
+      while(i < searchFilters.length) {
+        let count = 0;
+        forEach(saveData, (prop, key) => {
+          if (searchFilters[i][key] === prop) {
+            count += 1;
+          }
+        });
+        if (count === Object.keys(saveData).length) {
+          isValid = false;
+          this.errorMessage = 'Already saved';
+          setTimeout(() => {
+            this.errorMessage = false;
+          }, 5000);
+          break;
+        } else {
+          i++;
+        }
+      }
+      if (isValid) {
+        store.dispatch('company/searchFilterSave', saveData)
       }
     },
-    async handleSearch() {
-      await this.$refs.form.validate();
-      if (this.validForm) this.search()
+    filterData(){
+      let searchMeta = store.getters['company/searchMeta'] ? store.getters['company/searchMeta'].searchInput : null;
+      console.log("meta", searchMeta);
+      if(searchMeta){
+        if(searchMeta.employment_type) this.formFields.employment_type = searchMeta.employment_type;
+        if(searchMeta.job_position) this.formFields.job_position = searchMeta.job_position;
+        if(searchMeta.work_experience) this.formFields.work_experience = searchMeta.work_experience;
+        if(searchMeta.branche) this.formFields.branche = searchMeta.branche;
+        if(searchMeta.school) this.formFields.school = searchMeta.school;
+        if(searchMeta.education) this.formFields.education = searchMeta.education;
+        if(searchMeta.min_salary) this.formFields.min_salary = searchMeta.min_salary;
+        if(searchMeta.max_salary) this.formFields.max_salary = searchMeta.max_salary;
+        if(searchMeta.city) this.formFields.city = searchMeta.city;
+      }
     },
-    search() {
-      axios.post('/company/search/', this.formatData())
-      .then((res) => {
-        this.searchCount = res.data.users.length;
-        this.$emit('searchResults', res.data.users);
-      })
-      .catch((er) => {
-        console.log(er);
+    prepareData() {
+      let activatedFields = {};
+
+      forEach(this.formFields, (item, key) => {
+        if (item) {
+          activatedFields[key] = item;
+        }
       });
-    },
-    selectLookingfor(item) {
-      this.lookingfor.selected = item;
+      return activatedFields;
     },
   },
   computed: {
     searchCountLabel() {
       return this.searchCount ? `Search (${this.searchCount} results)`: 'Search';
+    },
+    searchLoading() {
+      this.filterData();
+      return store.getters['company/searchInProgress'];
+    },
+    types() {
+      return types;
     }
-  }
+  },
 };
 
 </script>
 
 <style lang="scss" scoped>
-  .search-form {
-    padding: 20px 25px 25px 25px;
+  .heading-title {
+    font-weight: 600;
+    font-size: 24px;
+    color: #222222;
   }
   .search-selection {
     height: 86px;
@@ -232,5 +355,15 @@ export default {
     font-weight: 700;
     font-size: 16px;
     cursor: pointer;
+  }
+  .error-message {
+    color: #C15143;
+    padding: 20px;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>

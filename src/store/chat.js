@@ -5,14 +5,15 @@ export default {
   namespaced: true,
 
   state: {
-    conversations: null,
+    conversations: [],
     conversationDetails: {
       user_id: null,
       user_name: null,
       unread_messages: 0,
       profile_img: null
     },
-    selectedConversation: null
+    selectedConversation: null,
+    loaded: false
   },
 
   getters: {
@@ -34,6 +35,9 @@ export default {
           ? conversation.unread_messages
           : 0;
       };
+    },
+    messagesLoaded(state) {
+      return state.loaded;
     }
   },
 
@@ -49,22 +53,24 @@ export default {
       state.selectedConversation = value;
     },
     SET_CONVERSATION_DETAILS(state, value) {
-      state.conversationDetails.user_id = value.user_id;
-      state.conversationDetails.user_name = value.user_name;
-      state.conversationDetails.unread_messages = value.unread_messages;
-      state.conversationDetails.profile_img = value.profile_img;
+      state.conversationDetails = value;
+    },
+    SET_LOADED_STATE(state, value) {
+      state.loaded = value;
     }
   },
 
   actions: {
-    getAllConversations({ commit }, payload = null) {
-      let offset = payload && payload.offset ? payload.offset : 0;
-      let limit = payload && payload.limit ? payload.limit : 10;
+    getAllConversations({ commit }) {
+      // let offset = payload && payload.offset ? payload.offset : 0;
+      // let limit = payload && payload.limit ? payload.limit : 10;
+
       return axios
-        .get(`/messages/${offset}/${limit}`)
+        .get(`/conversations`)
         .then(resp => {
-          if (resp.data.success)
-            commit("FILL_CONVERSATIONS", resp.data.conversations);
+          commit("SET_LOADED_STATE", true);
+          commit("FILL_CONVERSATIONS", resp.data);
+          console.log(resp.data);
         })
         .catch(err => {
           console.error("Error getting conversations. " + err);
@@ -72,30 +78,62 @@ export default {
         });
     },
     getSingleConversation({ commit }, payload) {
-      if (!payload.offset) payload.offset = 0;
-      if (!payload.limit) payload.limit = 10;
-      return axios
-        .get(`/messages/${payload.id}/${payload.offset}/${payload.limit}`)
-        .then(resp => {
-          if (resp.data.success)
-            commit("FILL_SINGLE_CONVERSATION", resp.data.messages);
-        })
-        .catch(err => {
-          console.error("Error getting conversation. " + err);
-          commit("FILL_SINGLE_CONVERSATION", null);
-        });
+      // if (!payload.offset) payload.offset = 0;
+      // if (!payload.limit) payload.limit = 10;
+      return (
+        axios
+          .get(`/conversations/${payload.id}`)
+          // .get(`/messages/${payload.id}/${payload.offset}/${payload.limit}`)
+          .then(resp => {
+            commit("FILL_SINGLE_CONVERSATION", resp.data);
+          })
+          .catch(err => {
+            console.error("Error getting conversation. " + err);
+            commit("FILL_SINGLE_CONVERSATION", null);
+          })
+      );
     },
     async sendMessage({ dispatch }, payload) {
-      await axios
-        .post("/messages", payload)
-        .then(resp => {
-          console.log(resp);
-        })
-        .catch(err => {
-          console.error(err);
+      try {
+        const resp = await axios.post(`/conversations/${payload.id}`, payload);
+        dispatch("getSingleConversation", { id: payload.id });
+        dispatch("getAllConversations");
+        return resp;
+      } catch (err) {
+        return Promise.reject(err.data);
+      }
+    },
+    async startChat({ state, commit, dispatch }, id) {
+      try {
+        const resp = await axios.post("/conversations", {
+          ids: [id]
         });
-      dispatch("getSingleConversation", { id: payload.send_to });
-      return new Promise(resolve => resolve(payload));
+
+        if (!resp.data.conversation.length) {
+          await dispatch("getAllConversations");
+        }
+
+        const conversation = state.conversations.find(
+          c => c.id == resp.data.conversationData.id
+        );
+        const participant =
+          conversation.conversation.participants[1].messageable;
+
+        commit("SET_CONVERSATION_DETAILS", {
+          id: conversation.id,
+          user_id: participant.id,
+          user_name:
+            participant.company ||
+            participant.first_name + " " + participant.last_name,
+          unread_messages: conversation.unread_messages,
+          profile_img: participant.profile_img
+        });
+        commit("FILL_SINGLE_CONVERSATION", resp.data.conversation);
+
+        return resp;
+      } catch (err) {
+        return Promise.reject(err.data);
+      }
     },
     async seenMessage(context, id) {
       return axios.post("/messages/seen/" + id);

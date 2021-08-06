@@ -1,6 +1,22 @@
 <template>
-  <div class="pa-8">
-    <div id="personalInfo">
+  <div>
+    <UpgradePlanModal
+      v-if="modals.UpgradePlan.active"
+      :active="modals.UpgradePlan.active"
+      :edit="modals.UpgradePlan.edit"
+      @close="toggleModal('UpgradePlan')"
+    />
+    <AddNewCard
+      v-if="modals.AddNewCard.active"
+      :active="modals.AddNewCard.active"
+      :edit="modals.AddNewCard.edit"
+      @close="toggleModal('AddNewCard')"
+    />
+
+    <!-- Response alert -->
+    <response-alert :response="formResponse"></response-alert>
+
+    <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
           Change personal info
@@ -12,19 +28,34 @@
           <div class="d-flex align-center">
             <v-avatar
               color="primary"
-              size="58"
+              size="80"
               class="flex-grow-0 flex-shrink-0"
             >
-              <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
+              <input
+                type="file"
+                ref="uploadAvatarInput"
+                style="display: none"
+                @change="newImage = $event.target.files[0]"
+              />
+              <v-img v-if="profile_img" :src="profile_img"></v-img>
               <v-img
                 :src="require('@/assets/icons/profile-placeholder.png')"
                 v-else
               ></v-img>
             </v-avatar>
+            <v-icon
+              @click="$refs.uploadAvatarInput.click()"
+              color="white"
+              size="20"
+              style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%"
+            >
+              mdi-camera
+            </v-icon>
           </div>
         </v-col>
         <v-col cols="6" class="text-right">
           <v-btn
+            :loading="formLoading"
             depressed
             color="primary"
             class="pl-8 pr-8"
@@ -42,7 +73,7 @@
           <v-text-field
             dense
             :label="$t('user.profile.firstName')"
-            :rules="rules"
+            :rules="[validations.required]"
             type="text"
             outlined
             solo
@@ -57,7 +88,7 @@
           <v-text-field
             dense
             :label="$t('user.profile.lastName')"
-            :rules="rules"
+            :rules="[validations.required]"
             type="text"
             outlined
             solo
@@ -85,11 +116,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="roleAndBranche">
+    <v-card flat id="roleAndBranche" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Rolle & Branche
         </p>
         <p class="profile-subtitle">
@@ -99,7 +130,6 @@
           <label class="profile-label">In which branches do you work?</label>
           <v-select
             outlined
-            dense
             :items="branche"
             background-color="white"
             v-model="formData.branche"
@@ -115,18 +145,17 @@
           <v-select
             outlined
             multiple
-            dense
             :items="lookingForRole"
             background-color="white"
             v-model="formData.looking_for"
           ></v-select>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="lookingFor">
+    <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           What are you looking for
         </p>
         <p class="profile-subtitle">
@@ -138,7 +167,6 @@
           >
           <v-select
             outlined
-            dense
             :items="lookingForBranches"
             background-color="white"
             v-model="formData.looking_for_branche"
@@ -153,7 +181,6 @@
           >
           <v-select
             outlined
-            dense
             :items="employment"
             background-color="white"
             v-model="formData.looking_for_employment_type"
@@ -171,7 +198,7 @@
             flat
             hide-details
             background-color="white"
-            v-model="formData.hiring_location"
+            v-model="formData.address_to_work"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -179,16 +206,10 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">When can you start?</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="formData.ready_for_work"
-          ></v-text-field>
+          <Calendar
+            @setDate="formData.ready_for_work = $event"
+            :value="formData.ready_for_work"
+          />
         </v-col>
       </v-row>
 
@@ -197,88 +218,121 @@
           <label class="profile-label"
             >Monatliche Netto Gehaltsvorstellung? (€)
           </label>
-          <v-col>
-            <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
-          </v-col>
-          <v-slider
-            v-model="formData.monthly_salary"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            min="0"
-            max="100"
-          ></v-slider>
+          <v-row>
+            <v-col cols="auto">
+              <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
+            </v-col>
+            <v-col cols="col" class="d-flex my-auto">
+              <v-slider
+                v-model="formData.monthly_salary"
+                hide-details
+                track-color="grey"
+                color="primary"
+                always-dirty
+                min="1"
+                max="20"
+                step="0.5"
+              ></v-slider>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="experienceAndEducation">
+    <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Your experience and education
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
-        <v-col cols="6">
+        <v-col cols="10">
           <label class="profile-label"
             >Professional experience in years?
           </label>
-          <v-col>
-            <div class="monthly-salary">
-              {{ formData.work_experience }}
-            </div>
-          </v-col>
-          <v-slider
-            v-model="formData.work_experience"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            min="1"
-            max="10"
-          ></v-slider>
+          <v-row>
+            <v-col cols="auto">
+              <div class="monthly-salary">
+                {{ formData.work_experience }}
+              </div>
+            </v-col>
+            <v-col class="d-flex my-auto">
+              <v-slider
+                v-model="formData.work_experience"
+                track-color="grey"
+                color="primary"
+                always-dirty
+                hide-details
+                step="0.5"
+                min="0"
+                max="40"
+              ></v-slider>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
 
       <v-row>
+        <ModalEducation
+          v-if="modals.education.active"
+          :active="modals.education.active"
+          :edit="modals.education.edit"
+          @close="toggleModal('education')"
+        />
+        <ModalExperience
+          v-if="modals.experience.active"
+          :active="modals.experience.active"
+          :edit="modals.experience.edit"
+          @close="toggleModal('experience')"
+        />
+
         <v-col cols="12">
           <label class="profile-label">Your professional experience</label>
-          <v-text-field
-            dense
-            type="text"
+          <CardActionableList
+            type="Experience"
+            @edit="activateEdit('experience', $event)"
+          />
+          <v-btn
+            @click="toggleModal('experience')"
             outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
+            rounded
+            color="#0253B3"
+          >
+            <v-icon>mdi-plus</v-icon>
+            Add
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Your education</label>
-          <v-text-field
-            dense
-            type="text"
+          <CardActionableList
+            type="Education"
+            @edit="activateEdit('education', $event)"
+          />
+          <v-btn
+            @click="toggleModal('education')"
             outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
+            rounded
+            color="#0253B3"
+          >
+            <v-icon>mdi-plus</v-icon>
+            Add
+          </v-btn>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="documents">
+    <v-card flat id="documents" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Documents
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
-        <v-col cols="6">
+        <v-col cols="12">
           <div class="mt-6">
             <v-file-input
               v-model="formData.cv"
@@ -291,7 +345,10 @@
               accept=".doc, .docx, .pdf, .jpg, .png, .txt"
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.cv">
+                  ...{{ user.cv.slice(-30) }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -300,7 +357,6 @@
             <v-file-input
               v-model="formData.qualifications"
               placeholder="Qualifikationen document"
-              multiple
               dense
               outlined
               prepend-icon=""
@@ -308,7 +364,10 @@
               class="text-center"
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.qualifications">
+                  ...{{ user.qualifications.slice(-30) }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -317,7 +376,6 @@
             <v-file-input
               v-model="formData.resume"
               placeholder="Lebenslauf document"
-              multiple
               dense
               outlined
               prepend-icon=""
@@ -325,7 +383,10 @@
               class="text-center "
             >
               <template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip small label color="primary" v-if="user.resume">
+                  ...{{ user.resume.slice(-30) }}
+                </v-chip>
+                <v-chip small label color="primary" v-else>
                   {{ text }}
                 </v-chip>
               </template>
@@ -333,86 +394,110 @@
           </div>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="invoices">
+    <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Billing & Invoices
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
       </v-row>
-    </div>
+    </v-card>
 
-    <div id="paymentMethod">
+    <v-card flat id="paymentMethod" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <CardActionableList
+          type="AddNewCard"
+          @edit="activateEdit('AddNewCard', $event)"
+        />
+        <p class="profile-title">
           Edit payment method
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
-      </v-row>
-    </div>
 
-    <div id="changePassword">
+        <v-btn
+          @click="toggleModal('AddNewCard')"
+          outlined
+          rounded
+          small
+          fab
+          color="#0253B3"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        Add
+      </v-row>
+    </v-card>
+
+    <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Change password
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
       </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Enter old password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Enter new password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">Repeat new password</label>
-          <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </div>
 
-    <div id="upgradeAccount">
+      <v-form ref="passwordForm" v-model="passwordFormValid">
+        <label class="profile-label">Enter old password</label>
+        <v-text-field
+          v-model="passwordFormData.current_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required]"
+          background-color="white"
+        ></v-text-field>
+
+        <label class="profile-label">Enter new password</label>
+        <v-text-field
+          v-model="passwordFormData.new_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required, validations.min.string(6)]"
+          background-color="white"
+        ></v-text-field>
+
+        <label class="profile-label">Repeat new password</label>
+        <v-text-field
+          v-model="passwordFormData.new_confirm_password"
+          dense
+          type="password"
+          outlined
+          :rules="[validations.required]"
+          background-color="white"
+        ></v-text-field>
+
+        <!-- Response alert -->
+        <response-alert :response="passwordFormResponse"></response-alert>
+
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              :loading="passwordFormLoading"
+              :disabled="!passwordFormValid"
+              depressed
+              large
+              color="primary"
+              class="pl-8 pr-8"
+              @click="handleChangePassword"
+              >Change Password
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+    </v-card>
+
+    <v-card flat id="upgradeAccount" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title branche">
+        <p class="profile-title">
           Upgrade account
         </p>
         <p class="profile-subtitle">
@@ -421,6 +506,7 @@
       </v-row>
       <v-row>
         <v-col cols="6">
+<<<<<<< HEAD
           <div class="upgrade">
             <span class="upgrade-title">
               Your account is higlighted in company search
@@ -450,9 +536,30 @@
                 <button @click="isShow = !isShow" class="btn">Activate</button>
               </div>
             </template>
+=======
+          <CardActionableList
+            type="UpgradePlan"
+            @edit="activateEdit('UpgradePlan', $event)"
+          />
+          <div class="upgrade" @click="toggleModal('UpgradePlan')">
+            <v-img
+              class="upgrade-icon"
+              :src="require('@/assets/icons/top-rated.svg')"
+            ></v-img>
+
+            <div>
+              <span class="upgrade-title">
+                Your account is higlighted in company search
+              </span>
+              <p>3 days active</p>
+              <span class="updgrade-price upgrade-title">10€</span>
+            </div>
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
           </div>
         </v-col>
+
         <v-col cols="6">
+<<<<<<< HEAD
           <div class="upgrade">
             <span class="upgrade-title">
               Your account is higlighted in company search
@@ -485,10 +592,29 @@
                 </button>
               </div>
             </template>
+=======
+          <CardActionableList
+            type="UpgradePlan"
+            @edit="activateEdit('UpgradePlan', $event)"
+          />
+          <div class="upgrade" @click="toggleModal('UpgradePlan')">
+            <v-img
+              class="upgrade-icon"
+              :src="require('@/assets/icons/medal.svg')"
+            ></v-img>
+
+            <div>
+              <span class="upgrade-title">
+                Your account is higlighted in company search
+              </span>
+              <p>3 days active</p>
+              <span class="updgrade-price upgrade-title">10€</span>
+            </div>
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
           </div>
         </v-col>
       </v-row>
-    </div>
+    </v-card>
   </div>
 </template>
 
@@ -496,12 +622,21 @@
 import { mapActions, mapGetters } from "vuex";
 import SimpleModal from "simple-modal-vue";
 
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
+import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
+import Calendar from "@/components/Calendar";
+import AddNewCard from "@/views/dashboard/AddNewCard";
+import ResponseAlert from "@/components/ResponseAlert";
+import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
+import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
+
 export default {
   components: {
     SimpleModal,
   },
   name: "Profile",
 
+<<<<<<< HEAD
   data: () => ({
     stripe: null,
     isShow: false,
@@ -519,6 +654,20 @@ export default {
       plan_id: null,
       selectedClass: false,
     },
+=======
+  components: {
+    UpgradePlanModal,
+    CardActionableList,
+    Calendar,
+    AddNewCard,
+    ResponseAlert,
+    ModalEducation,
+    ModalExperience
+  },
+
+  data: () => ({
+    newImage: null,
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
     formData: {
       first_name: "",
       last_name: "",
@@ -526,7 +675,7 @@ export default {
       looking_for: [],
       looking_for_branche: [],
       looking_for_employment_type: "",
-      hiring_location: "",
+      address_to_work: "",
       ready_for_work: "",
       monthly_salary: "",
       work_experience: "",
@@ -534,6 +683,7 @@ export default {
       qualifications: null,
       resume: null,
     },
+<<<<<<< HEAD
     rules: [
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
@@ -563,6 +713,67 @@ export default {
       "Elektrotechnikbranche",
     ],
     employment: ["Part - time", "Full - time"],
+=======
+    formResponse: {},
+    formLoading: false,
+    passwordFormData: {},
+    passwordFormValid: false,
+    passwordFormLoading: false,
+    passwordFormResponse: {},
+    branche: [
+      "Medicine",
+      "Automotive industry",
+      "Mechanical engineering",
+      "Chemical-pharmaceutical industry",
+      "Food industry",
+      "Electrical engineering industry"
+    ],
+    lookingForRole: [
+      "Developer",
+      "Project Manager",
+      "Construction manager",
+      "Intern",
+      "Apprentice",
+      "Manager"
+    ],
+    lookingForBranches: [
+      "Developer",
+      "Project Manager",
+      "Construction manager",
+      "Intern",
+      "Apprentice",
+      "Manager"
+    ],
+    employment: ["Trainee", "Fulltime", "Parttime"],
+    modals: {
+      UpgradePlan: {
+        active: false,
+        edit: false,
+        component: UpgradePlanModal
+      },
+      AddNewCard: {
+        active: false,
+        edit: false,
+        component: AddNewCard
+      },
+      education: {
+        active: false,
+        edit: false,
+        component: ModalEducation
+      },
+      experience: {
+        active: false,
+        edit: false,
+        component: ModalExperience
+      }
+    },
+    fileActions: {
+      UpgradePlan: ["edit", "delete"],
+      AddNewCard: ["edit", "delete"],
+      experience: ["edit", "delete"],
+      education: ["edit", "delete"]
+    }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   }),
   created() {
     this.resetFormData(this.user);
@@ -570,6 +781,16 @@ export default {
 
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+<<<<<<< HEAD
+=======
+    profile_img() {
+      if (this.newImage) {
+        return URL.createObjectURL(this.newImage);
+      }
+
+      return this.user.profile_img;
+    }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -597,7 +818,7 @@ export default {
       this.formData.looking_for_branche = user.looking_for_branche;
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
-      this.formData.hiring_location = user.hiring_location;
+      this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.work_experience = user.work_experience;
@@ -606,7 +827,12 @@ export default {
       this.formData.resume = user.resume;
     },
     handleUpdate() {
+      this.formResponse = {};
       const formDataCopy = Object.assign({}, this.formData);
+
+      if (this.newImage) {
+        formDataCopy.profile_img = this.newImage;
+      }
 
       if (!(this.formData.cv instanceof File)) {
         delete formDataCopy.cv;
@@ -620,14 +846,51 @@ export default {
         delete formDataCopy.qualifications;
       }
 
+      this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then(() => {
-          alert("Success");
+        .then(resp => {
+          this.formResponse = resp.data;
         })
+<<<<<<< HEAD
         .catch((err) => {
           alert(err.data.message);
         });
     },
+=======
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
+    },
+    handleChangePassword() {
+      const formDataCopy = Object.assign({}, this.passwordFormData);
+      this.passwordFormResponse = {};
+      this.passwordFormLoading = true;
+
+      this.$store
+        .dispatch("user/changePassword", formDataCopy)
+        .then(resp => {
+          this.passwordFormResponse = resp.data;
+          this.$refs.passwordForm.reset();
+        })
+        .catch(err => {
+          this.passwordFormResponse = err.data;
+        })
+        .finally(() => {
+          this.passwordFormLoading = false;
+        });
+    },
+    toggleModal(type) {
+      this.modals[type].edit = false;
+      this.modals[type].active = !this.modals[type].active;
+    },
+    activateEdit(type, item) {
+      this.toggleModal(type);
+      this.modals[type].edit = item;
+    }
+>>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   watch: {
     user(newVal) {
@@ -694,7 +957,7 @@ export default {
   border-radius: 10px;
   width: 80px;
   text-align: center;
-  padding: 25px 0;
+  padding: 15px 0;
   color: $primary-blue-dark;
 }
 
@@ -702,6 +965,8 @@ export default {
   border: 1px solid $light-grey;
   border-radius: 10px;
   padding: 25px;
+  cursor: pointer;
+  display: flex;
 
   .upgrade-title {
     font-size: 16px;
@@ -711,5 +976,16 @@ export default {
     float: right;
     color: $primary-blue-dark;
   }
+}
+.profile-section {
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.upgrade-icon {
+  width: 30px;
+  height: 50px;
+  margin-right: 18px;
+  max-width: 30px;
 }
 </style>
