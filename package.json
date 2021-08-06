@@ -16,13 +16,10 @@
     "chart.js": "^3.2.1",
     "core-js": "^3.6.5",
     "leaflet": "^1.7.1",
-<<<<<<< HEAD
     "simple-modal-vue": "^1.0.12",
     "v-easy-dialog": "^1.0.6",
-=======
     "libphonenumber-js": "^1.9.23",
     "lodash": "^4.17.21",
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
     "v-mask": "^2.2.4",
     "vue": "^2.6.14",
     "vue-i18n": "^8.24.4",
