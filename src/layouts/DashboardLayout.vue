@@ -68,11 +68,7 @@
     </v-row>
 
     <v-row class="full-h ma-0">
-<<<<<<< HEAD
-      <v-col class="full-h navigation col-12 col-sm-4 col-xl-3">
-=======
       <v-col class="navigation col-12 col-sm-3 col-xl-3">
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
         <nav class="dashboard-navigation" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
@@ -116,11 +112,7 @@
 
         <div class="dashboard-about" v-if="dashboard">
           <v-row class="full-h ma-0">
-<<<<<<< HEAD
-            <div class="top-info">
-=======
             <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
               <div class="profile-image">
                 <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
                 <v-img
@@ -130,54 +122,6 @@
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
-<<<<<<< HEAD
-              <a href="/dashboard/profile" class="settings-link">
-                Profile Settings
-              </a>
-            </div>
-
-            <div class="top-info">
-              <span class="about-info"> About me </span>
-              <p class="about-text">{{ user.about_me }}</p>
-
-              <div class="d-flex">
-                <div>
-                  <p class="about-info">Jobseeking status</p>
-                  <p class="about-text">{{ user.job_status }}</p>
-                </div>
-                <div>
-                  <p class="about-info text-right">Position</p>
-                  <p class="about-text text-right">
-                    {{ user.current_position }}
-                  </p>
-                </div>
-              </div>
-
-              <span class="about-info"> Current industry </span>
-              <p class="about-text">{{ user.branche }}</p>
-              <span class="about-info"> City and areas </span>
-              <p class="about-text">{{ user.city }}</p>
-
-              <span class="about-info"> Experience </span>
-              <p class="company-ed">Company name {{ user.company }}</p>
-              <span> Position {{ user.role_in_company }} </span>
-              <span>
-                February 2020 - present {{ user.working_experience }}
-              </span>
-            </div>
-            <div class="top-info">
-              <span class="about-info"> Education </span>
-              <p class="company-ed">University</p>
-              <span> Degree </span>
-              <span> February 2020 - present </span>
-            </div>
-
-            <div class="top-info">
-              <span class="about-info"> Documents </span>
-              <div>{{ user.cv }}</div>
-              <div>{{ user.qualifications }}</div>
-              <div>{{ user.resume }}</div>
-=======
               <router-link to="/dashboard/profile" class="settings-link">
                 Profile Settings
               </router-link>
@@ -246,7 +190,6 @@
                   Resume
                 </div>
               </div>
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
             </div>
           </v-row>
         </div>
@@ -262,7 +205,6 @@
 </template>
 
 <script>
-// import Modal from "../components/dashboard/Modal.vue";
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
@@ -278,7 +220,7 @@ export default {
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -290,11 +232,7 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-<<<<<<< HEAD
-    },
-=======
     }
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -309,11 +247,7 @@ export default {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
-<<<<<<< HEAD
-    },
-=======
     }
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
   },
   watch: {
     search(val) {
@@ -329,8 +263,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -501,11 +435,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   background: white;
   border-radius: 10px;
   padding: 20px;
-<<<<<<< HEAD
-  margin-top: 60px;
-=======
   margin-top: 40px;
->>>>>>> 7e5bdf9f96b326aba5055a829f4e2b90dd3e5636
 }
 
 .top-info {
