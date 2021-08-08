@@ -12,10 +12,11 @@
         Choose upgrade plan
       </div>
 
-      <div class="options">
+      <div class="options" v-for="plan in data" :key="plan.id">
         <v-btn
-          @click="(form.active_plan = '35'), savePlanId(1)"
-          v-bind:color="form.active_plan == '35' ? 'primary' : ''"
+          v-if="plan.plan_type === 'jobseeker_paln'"
+          @click="(form.active_plan = plan.id), savePlanId(plan.id)"
+          v-bind:color="form.active_plan == plan.id ? 'primary' : ''"
           height="104"
           class="upgrade-option"
         >
@@ -25,33 +26,11 @@
           ></v-img>
 
           <div>
-            <span class="upgrade-title"> {{ data[0].name }} </span>
+            <span class="upgrade-title"> {{ plan.name }} </span>
             <p class="upgrade-text">
-              Some random description just for testing purposes.........
+              {{ plan.plan_description }}
             </p>
-            <span class="updgrade-price">{{ data[0].price }}$</span>
-          </div>
-        </v-btn>
-
-        <v-btn
-          @click="(form.active_plan = '10'), savePlanId(2)"
-          v-bind:color="form.active_plan == '10' ? 'primary' : ''"
-          height="104"
-          class="upgrade-option"
-        >
-          <v-img
-            class="upgrade-icon"
-            :src="require('@/assets/icons/medal.svg')"
-          ></v-img>
-
-          <div>
-            <span class="upgrade-title">
-              {{ data[1].name }}
-            </span>
-            <p class="upgrade-text">
-              {{ data[1].plan_description }}
-            </p>
-            <span class="updgrade-price">{{ data[1].price }}$</span>
+            <span class="updgrade-price">{{ plan.price }}€</span>
           </div>
         </v-btn>
       </div>
@@ -67,6 +46,7 @@
         </v-btn>
         <v-btn
           @click="next()"
+          :loading="isLoading"
           color="primary"
           height="56"
           width="178"
@@ -81,7 +61,6 @@
 
 <script>
 import store from "@/store";
-import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 // import Vue from "vue";
 // Vue.prototype.$http = axios;
@@ -92,31 +71,32 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     type: {
       type: String,
-      default: "ok",
+      default: "ok"
     },
     edit: {
-      type: [Object, Boolean],
-    },
+      type: [Object, Boolean]
+    }
   },
   data() {
     return {
       data: "",
+      isLoading: false,
       planId: null,
-      // tokenId: "",
+      stripeId: null,
       form: {
-        active_plan: "",
-      },
+        active_plan: ""
+      }
     };
   },
   created() {
     if (this.edit) {
       this.populate();
     }
-    this.fetchUsers();
+    this.fetchPlans();
   },
   methods: {
     close(type) {
@@ -126,34 +106,43 @@ export default {
       this.planId = id;
       console.log(this.planId);
     },
-    next() {
-      axios
-        .post(`${process.env.VUE_APP_API_BASE}/api/v1/plan`, {
-          plan_id: this.planId,
-          payment_method: "credit card",
-        })
-        .then(function(res) {
-          // this.tokenId = res.data.data.id;
-          console.log(res.data.data.id);
-          console.log(res);
-          async function processStripe() {
-            const resolved = res.data.data.id;
-            const stripe = await loadStripe(
-              `${process.env.STRIPE_PUBLISHABLE_KEY}`
-            );
-            stripe.redirectToCheckout({
-              sessionId: resolved,
-            });
-          }
-          processStripe();
+    async processStripe() {
+      if (this.stripeId && this.stripeId.length > 5) {
+        this.isLoading = true;
+        const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
+        stripe.redirectToCheckout({
+          sessionId: this.stripeId
         });
+      } else {
+        this.isLoading = false;
+      }
+    },
+    next() {
+      if(this.planId && this.planId>0){
+      this.isLoading = true;
+      this.$http
+        .post(`${process.env.VUE_APP_API_BASE}/plan`, {
+          plan_id: this.planId,
+          payment_method: "credit card"
+        })
+        .then(res => {
+          this.stripeId = res.data.data.id;
+        })
+        .finally(() => {
+          this.isLoading = false;
+          this.processStripe();
+        });
+      }else{
+         alert("Please select the plan!");
+        this.isLoading = false;
+      }
     },
 
     save() {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form,
+          payload: this.form
         });
       } else {
         console.log();
@@ -163,14 +152,14 @@ export default {
     populate() {
       this.form.active_plan = this.edit.active_plan;
     },
-    fetchUsers() {
-      const baseURI = `${process.env.VUE_APP_API_BASE}/api/v1/plans/0/2`;
-      this.$http.get(baseURI).then((res) => {
+    fetchPlans() {
+      const baseURI = `${process.env.VUE_APP_API_BASE}/plans/0/100`;
+      this.$http.get(baseURI).then(res => {
         this.data = res.data.plans;
         console.log(this.data);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -201,8 +190,10 @@ export default {
   .upgrade-text {
     font-size: 11px;
     line-height: 12px;
-    word-break: break-all;
     padding-top: 9px;
+    max-width: 590px;
+    white-space: normal;
+    word-break: break-word;
   }
 }
 
