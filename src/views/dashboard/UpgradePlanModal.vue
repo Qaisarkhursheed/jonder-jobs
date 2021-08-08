@@ -12,13 +12,13 @@
         Choose upgrade plan
       </div>
 
-      <div class="options">
+      <div class="options" v-for="plan in data" :key="plan.id">
         <v-btn
-          @click="form.active_plan = '35'"
-          v-bind:color="form.active_plan == '35' ? 'primary' : ''"
+          v-if="plan.plan_type === 'jobseeker_paln'"
+          @click="(form.active_plan = plan.id), savePlanId(plan.id)"
+          v-bind:color="form.active_plan == plan.id ? 'primary' : ''"
           height="104"
           class="upgrade-option"
-          href="https://buy.stripe.com/test_8wM6s04n502G76MeUV"
         >
           <v-img
             class="upgrade-icon"
@@ -26,36 +26,11 @@
           ></v-img>
 
           <div>
-            <span class="upgrade-title">
-              Your account is higlighted in company search
-            </span>
+            <span class="upgrade-title"> {{ plan.name }} </span>
             <p class="upgrade-text">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              {{ plan.plan_description }}
             </p>
-            <span class="updgrade-price">35€</span>
-          </div>
-        </v-btn>
-
-        <v-btn
-          @click="form.active_plan = '10'"
-          v-bind:color="form.active_plan == '10' ? 'primary' : ''"
-          height="104"
-          class="upgrade-option"
-          href="https://buy.stripe.com/test_eVa03CdXF9DgfDi8ww"
-        >
-          <v-img
-            class="upgrade-icon"
-            :src="require('@/assets/icons/medal.svg')"
-          ></v-img>
-
-          <div>
-            <span class="upgrade-title">
-              Your account is higlighted in company search
-            </span>
-            <p class="upgrade-text">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-            </p>
-            <span class="updgrade-price">10€</span>
+            <span class="updgrade-price">{{ plan.price }}€</span>
           </div>
         </v-btn>
       </div>
@@ -70,7 +45,8 @@
           {{ $t("general.cancel") }}
         </v-btn>
         <v-btn
-          @click="save"
+          @click="next()"
+          :loading="isLoading"
           color="primary"
           height="56"
           width="178"
@@ -85,6 +61,9 @@
 
 <script>
 import store from "@/store";
+import { loadStripe } from "@stripe/stripe-js";
+// import Vue from "vue";
+// Vue.prototype.$http = axios;
 
 export default {
   name: "UpgradePlanModal",
@@ -92,37 +71,78 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     type: {
       type: String,
-      default: "ok",
+      default: "ok"
     },
     edit: {
-      type: [Object, Boolean],
-    },
+      type: [Object, Boolean]
+    }
   },
   data() {
     return {
+      data: "",
+      isLoading: false,
+      planId: null,
+      stripeId: null,
       form: {
-        active_plan: "",
-      },
+        active_plan: ""
+      }
     };
   },
   created() {
     if (this.edit) {
       this.populate();
     }
+    this.fetchPlans();
   },
   methods: {
     close(type) {
       this.$emit("close", type);
     },
+    savePlanId(id) {
+      this.planId = id;
+      console.log(this.planId);
+    },
+    async processStripe() {
+      if (this.stripeId && this.stripeId.length > 5) {
+        this.isLoading = true;
+        const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
+        stripe.redirectToCheckout({
+          sessionId: this.stripeId
+        });
+      } else {
+        this.isLoading = false;
+      }
+    },
+    next() {
+      if(this.planId && this.planId>0){
+      this.isLoading = true;
+      this.$http
+        .post(`${process.env.VUE_APP_API_BASE}/plan`, {
+          plan_id: this.planId,
+          payment_method: "credit card"
+        })
+        .then(res => {
+          this.stripeId = res.data.data.id;
+        })
+        .finally(() => {
+          this.isLoading = false;
+          this.processStripe();
+        });
+      }else{
+         alert("Please select the plan!");
+        this.isLoading = false;
+      }
+    },
+
     save() {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form,
+          payload: this.form
         });
       } else {
         console.log();
@@ -132,7 +152,14 @@ export default {
     populate() {
       this.form.active_plan = this.edit.active_plan;
     },
-  },
+    fetchPlans() {
+      const baseURI = `${process.env.VUE_APP_API_BASE}/plans/0/100`;
+      this.$http.get(baseURI).then(res => {
+        this.data = res.data.plans;
+        console.log(this.data);
+      });
+    }
+  }
 };
 </script>
 
@@ -163,8 +190,10 @@ export default {
   .upgrade-text {
     font-size: 11px;
     line-height: 12px;
-    word-break: break-all;
     padding-top: 9px;
+    max-width: 590px;
+    white-space: normal;
+    word-break: break-word;
   }
 }
 
