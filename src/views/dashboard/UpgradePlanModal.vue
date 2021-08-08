@@ -14,11 +14,10 @@
 
       <div class="options">
         <v-btn
-          @click="form.active_plan = '35'"
+          @click="(form.active_plan = '35'), savePlanId(1)"
           v-bind:color="form.active_plan == '35' ? 'primary' : ''"
           height="104"
           class="upgrade-option"
-          href="https://buy.stripe.com/test_8wM6s04n502G76MeUV"
         >
           <v-img
             class="upgrade-icon"
@@ -26,22 +25,19 @@
           ></v-img>
 
           <div>
-            <span class="upgrade-title">
-              Your account is higlighted in company search
-            </span>
+            <span class="upgrade-title"> {{ data[0].name }} </span>
             <p class="upgrade-text">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              Some random description just for testing purposes.........
             </p>
-            <span class="updgrade-price">35€</span>
+            <span class="updgrade-price">{{ data[0].price }}$</span>
           </div>
         </v-btn>
 
         <v-btn
-          @click="form.active_plan = '10'"
+          @click="(form.active_plan = '10'), savePlanId(2)"
           v-bind:color="form.active_plan == '10' ? 'primary' : ''"
           height="104"
           class="upgrade-option"
-          href="https://buy.stripe.com/test_eVa03CdXF9DgfDi8ww"
         >
           <v-img
             class="upgrade-icon"
@@ -50,12 +46,12 @@
 
           <div>
             <span class="upgrade-title">
-              Your account is higlighted in company search
+              {{ data[1].name }}
             </span>
             <p class="upgrade-text">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              {{ data[1].plan_description }}
             </p>
-            <span class="updgrade-price">10€</span>
+            <span class="updgrade-price">{{ data[1].price }}$</span>
           </div>
         </v-btn>
       </div>
@@ -70,7 +66,7 @@
           {{ $t("general.cancel") }}
         </v-btn>
         <v-btn
-          @click="save"
+          @click="next()"
           color="primary"
           height="56"
           width="178"
@@ -85,6 +81,10 @@
 
 <script>
 import store from "@/store";
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+// import Vue from "vue";
+// Vue.prototype.$http = axios;
 
 export default {
   name: "UpgradePlanModal",
@@ -104,6 +104,9 @@ export default {
   },
   data() {
     return {
+      data: "",
+      planId: null,
+      // tokenId: "",
       form: {
         active_plan: "",
       },
@@ -113,11 +116,39 @@ export default {
     if (this.edit) {
       this.populate();
     }
+    this.fetchUsers();
   },
   methods: {
     close(type) {
       this.$emit("close", type);
     },
+    savePlanId(id) {
+      this.planId = id;
+      console.log(this.planId);
+    },
+    next() {
+      axios
+        .post(`${process.env.VUE_APP_API_BASE}/api/v1/plan`, {
+          plan_id: this.planId,
+          payment_method: "credit card",
+        })
+        .then(function(res) {
+          // this.tokenId = res.data.data.id;
+          console.log(res.data.data.id);
+          console.log(res);
+          async function processStripe() {
+            const resolved = res.data.data.id;
+            const stripe = await loadStripe(
+              `${process.env.STRIPE_PUBLISHABLE_KEY}`
+            );
+            stripe.redirectToCheckout({
+              sessionId: resolved,
+            });
+          }
+          processStripe();
+        });
+    },
+
     save() {
       if (this.edit) {
         store.dispatch("user/updateUser", {
@@ -131,6 +162,13 @@ export default {
     },
     populate() {
       this.form.active_plan = this.edit.active_plan;
+    },
+    fetchUsers() {
+      const baseURI = `${process.env.VUE_APP_API_BASE}/api/v1/plans/0/2`;
+      this.$http.get(baseURI).then((res) => {
+        this.data = res.data.plans;
+        console.log(this.data);
+      });
     },
   },
 };

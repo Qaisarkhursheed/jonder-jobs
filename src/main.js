@@ -9,6 +9,7 @@ import VueMoment from "vue-moment";
 import i18n from "./locales";
 import ResponseAlert from "@/components/ResponseAlert";
 import Validations from "@/mixins/validations";
+import axios from "axios";
 
 require("./middleware");
 
@@ -16,6 +17,7 @@ Vue.use(VueMoment);
 Vue.directive("mask", VueMaskDirective);
 Vue.component("ResponseAlert", ResponseAlert);
 Vue.mixin(Validations);
+Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 
@@ -25,6 +27,6 @@ store.dispatch("user/me").finally(() => {
     store,
     vuetify,
     i18n,
-    render: h => h(App)
+    render: (h) => h(App),
   }).$mount("#app");
 });
