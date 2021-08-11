@@ -25,11 +25,7 @@
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon
-            class="chat-icon mr-4"
-            @click="$emit('show-profile')"
-            v-if="conversationDetails.user.role == 'Employer'"
-          >
+          <v-icon class="chat-icon mr-4" @click="$emit('show-profile')">
             mdi-information-outline
           </v-icon>
           <v-icon
@@ -69,7 +65,7 @@
             class="message rounded-lg"
             :class="[
               { 'my-message': msg.is_sender },
-              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0']
+              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0'],
             ]"
           >
             <v-card-text>
@@ -118,17 +114,17 @@ export default {
   props: {
     messages: {
       type: Array,
-      required: true
+      required: true,
     },
     conversationDetails: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     newMessage: "",
     sending: false,
-    chatFull: false
+    chatFull: false,
   }),
   mounted() {
     this.scrollToBottom();
@@ -148,7 +144,7 @@ export default {
       this.sending = true;
       await this.sendMessage({
         id: this.conversationDetails.id,
-        message: this.newMessage
+        message: this.newMessage,
       })
         .then(() => {
           this.newMessage = "";
@@ -170,13 +166,13 @@ export default {
     getImagePath(msg) {
       const data = JSON.parse(msg.body);
       return data.url;
-    }
+    },
   },
   watch: {
     messages() {
       this.scrollToBottom();
-    }
-  }
+    },
+  },
 };
 </script>
 

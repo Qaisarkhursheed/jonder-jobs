@@ -44,7 +44,7 @@
 import PublicProfileViewAs from "@/components/company/PublicProfileViewAs";
 
 export default {
-  components: { PublicProfileViewAs }
+  components: { PublicProfileViewAs },
 };
 </script>
 
