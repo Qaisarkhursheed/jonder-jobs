@@ -35,6 +35,7 @@
               class="pt-7 pb-7"
               v-for="tab in tabs.options"
               :key="tab"
+              :disabled="viewAs"
               slider-color="#0253B3"
             >
               {{ tab }}
@@ -111,8 +112,6 @@ export default {
   methods: {
     ...mapActions("user", ["updateCompany"]),
     updateCompanyOld(input) {
-      console.log("input");
-      console.log(input);
       store.dispatch("user/updateCompany", {
         id: this.user.id,
         data: {
