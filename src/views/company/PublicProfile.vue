@@ -89,7 +89,7 @@ export default {
     PublicProfileGeneral,
     PublicProfileDetails,
     PublicProfileContact,
-    PublicProfileViewAs
+    PublicProfileViewAs,
     // UserNoteAdd
   },
 
@@ -97,27 +97,27 @@ export default {
     return {
       tabs: {
         active: "details",
-        options: ["general", "details", "contact"]
+        options: ["general", "details", "contact"],
       },
       tabComponents: {
         general: PublicProfileGeneral,
         details: PublicProfileDetails,
         contact: PublicProfileContact,
-        viewAs: PublicProfileViewAs
+        viewAs: PublicProfileViewAs,
       },
-      viewAs: false
+      viewAs: false,
     };
   },
   methods: {
-     ...mapActions('user', ['updateCompany']),
+    ...mapActions("user", ["updateCompany"]),
     updateCompanyOld(input) {
       console.log("input");
       console.log(input);
       store.dispatch("user/updateCompany", {
         id: this.user.id,
         data: {
-          ...input
-        }
+          ...input,
+        },
       });
     },
     viewAsTab() {
@@ -128,7 +128,7 @@ export default {
         .then(() => {
           alert("Success");
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err.data.message);
         });
       //this.updateCompanyUser(formDataCopy);
@@ -137,8 +137,8 @@ export default {
   computed: {
     user() {
       return store.getters["user/user"];
-    }
-  }
+    },
+  },
 };
 </script>
 

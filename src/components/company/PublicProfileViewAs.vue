@@ -2,22 +2,15 @@
   <div class="public-profile-viewas">
     <div class="d-flex mb-6">
       <div>
-        <v-avatar
-            color="#f1f1f1"
-            size="80"
-            class="user-avatar"
-          >
-            <template v-if="avatar">
-              <img
-                :src="avatar"
-              >
-            </template>
-            <template v-else>
-              <v-icon class="camera-icon"
-                size="60px">
+        <v-avatar color="#f1f1f1" size="80" class="user-avatar">
+          <template v-if="avatar">
+            <img :src="avatar" />
+          </template>
+          <template v-else>
+            <v-icon class="camera-icon" size="60px">
               mdi-camera-plus-outline
             </v-icon>
-            </template>
+          </template>
         </v-avatar>
       </div>
       <div class="pl-4">
@@ -25,33 +18,63 @@
         <div class="heading-subtitle">{{ user.city }} {{ user.address }}</div>
       </div>
     </div>
-    <div class="section mb-8">
-      <label class="section-label">
-        About company
-      </label>
-      <div class="section-value">
-        {{ user.about_company }}
+    <div v-if="user.role === 'Employer'">
+      <div class="section mb-8">
+        <label class="section-label">
+          About company
+        </label>
+        <div class="section-value">
+          {{ user.about_company }}
+        </div>
       </div>
+
+      <v-row class="mb-8">
+        <v-col cols="4">
+          <label class="section-label">
+            Employees
+          </label>
+          <div class="section-value">
+            {{ user.company_employees }}
+          </div>
+        </v-col>
+        <v-col cols="5">
+          <label class="section-label">
+            Industry
+          </label>
+          <div class="section-value">
+            {{ user.branche }}
+          </div>
+        </v-col>
+      </v-row>
     </div>
 
-    <v-row class="mb-8">
-      <v-col cols="4">
+    <div v-else>
+      <div class="section mb-8">
         <label class="section-label">
-          Employees
+          About Me
         </label>
         <div class="section-value">
-          {{ user.company_employees }}
+          {{ user.about_me }}
         </div>
-      </v-col>
-      <v-col cols="5">
-        <label class="section-label">
-          Industry
-        </label>
-        <div class="section-value">
-          {{ user.branche }}
-        </div>
-      </v-col>
-    </v-row>
+      </div>
+
+      <v-row class="mb-8">
+        <v-col cols="4">
+          <label class="section-label">
+            Work experience
+          </label>
+          <div class="section-value">{{ user.work_experience }} Years</div>
+        </v-col>
+        <v-col cols="5">
+          <label class="section-label">
+            Current Position
+          </label>
+          <div class="section-value">
+            {{ user.current_position }}
+          </div>
+        </v-col>
+      </v-row>
+    </div>
 
     <div class="section">
       <label class="section-label">
@@ -59,11 +82,11 @@
       </label>
       <div class="content pt-4">
         <div class="contact-section d-flex pb-5">
-            <div class="icon-wrap">
-              <v-icon color="#fff">
-                mdi-email-outline
-              </v-icon>
-            </div>
+          <div class="icon-wrap">
+            <v-icon color="#fff">
+              mdi-email-outline
+            </v-icon>
+          </div>
           <div class="pl-4">
             <div class="label">Email address</div>
             <div class="value">{{ user.company_email }}</div>
@@ -71,11 +94,11 @@
         </div>
 
         <div class="contact-section d-flex pb-5">
-            <div class="icon-wrap">
-              <v-icon color="#fff">
-                mdi-phone-outline
-              </v-icon>
-            </div>
+          <div class="icon-wrap">
+            <v-icon color="#fff">
+              mdi-phone-outline
+            </v-icon>
+          </div>
           <div class="pl-4">
             <div class="label">Phone number</div>
             <div class="value">{{ user.company_phone }}</div>
@@ -83,11 +106,11 @@
         </div>
 
         <div class="contact-section d-flex pb-5">
-            <div class="icon-wrap">
-              <v-icon color="#fff">
-                mdi-map-marker-outline
-              </v-icon>
-            </div>
+          <div class="icon-wrap">
+            <v-icon color="#fff">
+              mdi-map-marker-outline
+            </v-icon>
+          </div>
           <div class="pl-4">
             <div class="label">City and address</div>
             <div class="value">{{ user.city }}, {{ user.address }}</div>
@@ -111,23 +134,21 @@
 </template>
 
 <script>
-
 export default {
+  name: "PublicProfileViewAs",
 
-  name: 'PublicProfileViewAs',
-  
   props: {
     user: {
       type: Object,
-    }
+    },
   },
 
   computed: {
     avatar() {
       return `${this.user.profile_img}`;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -144,14 +165,14 @@ export default {
 .section-label {
   font-weight: 600;
   font-size: 12px;
-  color: #0253B3;
+  color: #0253b3;
   text-transform: uppercase;
 }
 .contact-section {
   .icon-wrap {
     width: 43px;
     height: 43px;
-    background: #0253B3;;
+    background: #0253b3;
     line-height: 43px;
     text-align: center;
     border-radius: 7px;
