@@ -11,13 +11,23 @@
         <label class="section-label">
           {{ $t('company.search.jobPosition') }}
         </label>
-        <v-select
+        <!-- <v-select
           v-model="formFields.job_position"
           :items="types.JOB_POSITION"
           :hide-details="true"
           :placeholder="$t('company.search.jobPosition')"
           outlined
-        ></v-select>
+        ></v-select> -->
+        <v-autocomplete
+          v-model="formFields.job_position"
+          :items="types.JOB_POSITION"
+          cache-items
+          outlined
+          flat
+          hide-no-data
+          :hide-details="true"
+          placeholder="Enter job position"
+        ></v-autocomplete>
       </v-col>
       <v-col cols="5">
          <label class="section-label">
@@ -39,13 +49,23 @@
           <label class="section-label">
             {{ $t('company.search.industryOfProfession') }}
           </label>
-          <v-select
+          <!-- <v-select
             v-model="formFields.branche"
             :items="types.JOB_BRANCHE"
             :hide-details="true"
             :placeholder="$t('company.search.industryOfProfession')"
             outlined
-          ></v-select>
+          ></v-select> -->
+          <v-autocomplete
+            v-model="formFields.branche"
+            :items="types.JOB_BRANCHE"
+            cache-items
+            outlined
+            flat
+            hide-no-data
+            :hide-details="true"
+            placeholder="Enter industry "
+          ></v-autocomplete>
         </v-col>
         <v-col cols="4">
           <label class="section-label">

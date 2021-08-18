@@ -9,38 +9,69 @@
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouPosition") }}
       </label>
-      <v-select
+      <!-- <v-select
         v-model="value.current_position"
         :items="positions"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
-      ></v-select>
+      ></v-select> -->
+      <v-autocomplete
+        v-model="value.current_position"
+        :items="types.JOB_POSITION"
+        :rules="[validations.required]"
+        outlined
+        flat
+        hide-no-data
+        :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
+      ></v-autocomplete>
 
       <!-- Branche -->
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouBranches") }}
       </label>
-      <v-select
+      <!-- <v-select
         v-model="value.branche"
         :items="branches"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
-      ></v-select>
+      ></v-select> -->
+      <v-autocomplete
+        v-model="value.branche"
+        :items="types.JOB_BRANCHE"
+        :rules="[validations.required]"
+        outlined
+        flat
+        hide-no-data
+        :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
+      ></v-autocomplete>
 
       <!-- Looking for role -->
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouRole") }}
       </label>
-      <v-select
+      <!-- <v-select
         v-model="value.looking_for"
         :items="positions"
         :placeholder="$t('user.onboarding.choose')"
         :rules="[validations.required]"
         multiple
         outlined
-      ></v-select>
+      ></v-select> -->
+       <v-autocomplete
+          v-model="value.looking_for"
+          :items="types.JOB_POSITION"
+          :placeholder="$t('user.onboarding.choose')"
+          :rules="[validations.required]"
+          multiple
+          outlined
+          flat
+          hide-no-data
+          :hide-details="true"
+        ></v-autocomplete>
 
       <v-row class="mt-0">
         <v-col cols="3">
@@ -69,6 +100,9 @@
 </template>
 
 <script>
+
+import types from '@/types';
+
 export default {
   name: "Step3",
   props: {
@@ -81,23 +115,12 @@ export default {
   data() {
     return {
       formValid: false,
-      positions: [
-        this.$t("user.onboarding.positionDeveloper"),
-        this.$t("user.onboarding.positionProjectManager"),
-        this.$t("user.onboarding.positionConstructionManager"),
-        this.$t("user.onboarding.positionIntern"),
-        this.$t("user.onboarding.positionApprentice"),
-        this.$t("user.onboarding.positionManager")
-      ],
-      branches: [
-        this.$t("user.onboarding.branchMedicine"),
-        this.$t("user.onboarding.branchAutomotive"),
-        this.$t("user.onboarding.branchMechanical"),
-        this.$t("user.onboarding.branchChemical"),
-        this.$t("user.onboarding.branchFood"),
-        this.$t("user.onboarding.branchElectrical")
-      ]
     };
+  },
+  computed: {
+    types() {
+      return types;
+    }
   }
 };
 </script>

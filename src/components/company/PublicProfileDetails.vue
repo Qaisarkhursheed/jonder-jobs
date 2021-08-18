@@ -4,12 +4,16 @@
       <label class="section-label">
         Industry
       </label>
-     <v-select
-      v-model="form.branche"
-      :hide-details="true"
-      :items="branches"
-      outlined
-      ></v-select>
+      <v-autocomplete
+        v-model="form.branche"
+        :items="types.JOB_BRANCHE"
+        cache-items
+        outlined
+        flat
+        hide-no-data
+        :hide-details="true"
+        placeholder="Enter industry "
+      ></v-autocomplete>
     </div>
     <div class="section mb-6">
       <label class="section-label">
@@ -17,7 +21,7 @@
       </label>
      <v-select
       v-model="form.company_employees"
-      :items="employeeNumber"
+      :items="types.EMPLOYEE_NUMBER"
       :hide-details="true"
       outlined
     ></v-select>
@@ -36,6 +40,7 @@
 </template>
 
 <script>
+import types from '@/types';
 
 export default {
   
@@ -53,20 +58,6 @@ export default {
         branche: '',
         company_employees: ''
       },
-      branches: [
-        this.$t('user.onboarding.branchMedicine'),
-        this.$t('user.onboarding.branchAutomotive'),
-        this.$t('user.onboarding.branchMechanical'),
-        this.$t('user.onboarding.branchChemical'),
-        this.$t('user.onboarding.branchFood'),
-        this.$t('user.onboarding.branchElectrical'),
-      ],
-      employeeNumber: [
-        '0-50',
-        '50-100',
-        '100-500',
-        '1000+'
-      ],
     }
   },
 
@@ -84,6 +75,11 @@ export default {
       });
     },
   },
+  computed: {
+    types() {
+      return types;
+    }
+  }
 };
 
 </script>

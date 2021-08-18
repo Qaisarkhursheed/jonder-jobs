@@ -128,12 +128,21 @@
         </p>
         <v-col cols="12">
           <label class="profile-label">In which branches do you work?</label>
-          <v-select
+          <!-- <v-select
             outlined
-            :items="branche"
+            :items="types.JOB_BRANCHE"
             background-color="white"
             v-model="formData.branche"
-          ></v-select>
+          ></v-select> -->
+          <v-autocomplete
+            v-model="formData.branche"
+            :items="types.JOB_BRANCHE"
+            cache
+            outlined
+            flat
+            hide-no-data
+            :hide-details="true"
+          ></v-autocomplete>
         </v-col>
       </v-row>
 
@@ -142,13 +151,22 @@
           <label class="profile-label"
             >What type of role are you looking for?</label
           >
-          <v-select
+           <v-autocomplete
+            v-model="formData.looking_for"
+            :items="types.JOB_POSITION"
+            multiple
+            outlined
+            flat
+            hide-no-data
+            :hide-details="true"
+          ></v-autocomplete>
+          <!-- <v-select
             outlined
             multiple
             :items="lookingForRole"
             background-color="white"
             v-model="formData.looking_for"
-          ></v-select>
+          ></v-select> -->
         </v-col>
       </v-row>
     </v-card>
@@ -165,12 +183,21 @@
           <label class="profile-label"
             >What type of branches are you looking for?</label
           >
-          <v-select
+          <!-- <v-select
             outlined
             :items="lookingForBranches"
             background-color="white"
             v-model="formData.looking_for_branche"
-          ></v-select>
+          ></v-select> -->
+          <v-autocomplete
+            v-model="formData.looking_for_branche"
+            :items="types.JOB_BRANCHE"
+            cache
+            outlined
+            flat
+            hide-no-data
+            :hide-details="true"
+          ></v-autocomplete>
         </v-col>
       </v-row>
 
@@ -553,6 +580,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import types from '@/types';
 
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -663,6 +691,9 @@ export default {
       }
 
       return this.user.profile_img;
+    },
+    types() {
+      return types;
     }
   },
   methods: {

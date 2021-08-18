@@ -8,20 +8,30 @@
       <label class="profile-label">
         {{ $t("user.onboarding.lookingForBranche") }}
       </label>
-      <v-select
+      <!-- <v-select
         v-model="value.looking_for_branche"
         :items="positions"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
-      ></v-select>
+      ></v-select> -->
+      <v-autocomplete
+        v-model="value.looking_for_branche"
+        :items="types.JOB_BRANCHE"
+        :rules="[validations.required]"
+        outlined
+        flat
+        hide-no-data
+        :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
+      ></v-autocomplete>
 
       <label class="profile-label">
         {{ $t("user.onboarding.lookingForEmployement") }}
       </label>
       <v-select
         v-model="value.looking_for_employment_type"
-        :items="emplType"
+        :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
@@ -97,6 +107,7 @@
 
 <script>
 import Calendar from "@/components/Calendar";
+import types from '@/types';
 
 export default {
   name: "Step4",
@@ -116,29 +127,13 @@ export default {
     return {
       rules: [value => !!value || "Required."],
       formValid: false,
-      positions: [
-        this.$t("user.onboarding.positionDeveloper"),
-        this.$t("user.onboarding.positionProjectManager"),
-        this.$t("user.onboarding.positionConstructionManager"),
-        this.$t("user.onboarding.positionIntern"),
-        this.$t("user.onboarding.positionApprentice"),
-        this.$t("user.onboarding.positionManager")
-      ],
-      branches: [
-        this.$t("user.onboarding.branchMedicine"),
-        this.$t("user.onboarding.branchAutomotive"),
-        this.$t("user.onboarding.branchMechanical"),
-        this.$t("user.onboarding.branchChemical"),
-        this.$t("user.onboarding.branchFood"),
-        this.$t("user.onboarding.branchElectrical")
-      ],
-      emplType: [
-        this.$t("user.onboarding.trainee"),
-        this.$t("user.onboarding.fulltime"),
-        this.$t("user.onboarding.parttime")
-      ],
       cities: ["Zenica", "Visoko"]
     };
+  },
+  computed: {
+    types() {
+      return types;
+    }
   }
 };
 </script>

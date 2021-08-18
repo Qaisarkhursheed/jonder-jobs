@@ -19,7 +19,14 @@ const JOB_POSITION = [
   'Construction manager',
   'Intern',
   'Apprentice',
-  'Manager'
+  'Manager',
+  'Architecht',
+  'Social Media Manager',
+  'Marketing Manager',
+  'Frontend Developer',
+  'Backend Developer',
+  'Mobile Developer',
+  'DevOps Engineer'
 ];
 
 const JOB_BRANCHE = [
@@ -50,6 +57,16 @@ const WORK_EXPERIENCE = [
   '20+'
 ];
 
+const EMPLOYEE_NUMBER = [
+  '0-20',
+  '20-50',
+  '50-100',
+  '100-200',
+  '200-500',
+  '500-1000',
+  '1000+'
+];
+
 const SCHOOL = [
   'School example 1',
   'School example 2',
@@ -70,5 +87,6 @@ export default {
   SALARY_RANGE,
   WORK_EXPERIENCE,
   SCHOOL,
-  EDUCATION
+  EDUCATION,
+  EMPLOYEE_NUMBER
 }

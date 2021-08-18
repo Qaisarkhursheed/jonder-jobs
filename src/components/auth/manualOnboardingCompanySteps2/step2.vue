@@ -6,18 +6,28 @@
 
     <v-form v-model="formValid">
       <label class="profile-label">Industry</label>
-      <v-select
+      <!-- <v-select
         v-model="value.branche"
         :items="branches"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
-      ></v-select>
+      ></v-select> -->
+      <v-autocomplete
+        v-model="value.branche"
+        :items="types.JOB_BRANCHE"
+        :rules="[validations.required]"
+        outlined
+        flat
+        hide-no-data
+        :hide-details="true"
+        :placeholder="$t('user.onboarding.choose')"
+      ></v-autocomplete>
 
       <label class="profile-label">Number of employees</label>
       <v-select
         v-model="value.company_employees"
-        :items="numberOfEmployees"
+        :items="types.EMPLOYEE_NUMBER"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
@@ -50,6 +60,8 @@
 </template>
 
 <script>
+import types from '@/types';
+
 export default {
   name: "Step2",
   props: {
@@ -71,7 +83,12 @@ export default {
       "1000+"
     ],
     branches: ["IT", "Medicine"]
-  })
+  }),
+  computed: {
+    types() {
+      return types;
+    }
+  },
 };
 </script>
 
