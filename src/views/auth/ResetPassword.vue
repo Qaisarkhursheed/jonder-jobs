@@ -74,8 +74,10 @@ export default {
   methods: {
     submit() {
       this.formResponse = {};
-      this.formData.token = this.$route.query.token;
-      this.formData.email = this.$route.query.email;
+      this.formData.email = this.$route.params.email;
+      this.formData.expires = this.$route.params.expires;
+      this.formData.token = this.$route.params.token;
+      this.formData.signature = this.$route.params.signature;
 
       this.$store
         .dispatch("auth/resetPassword", this.formData)

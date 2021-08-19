@@ -104,10 +104,11 @@ const routes = [
     }
   },
   {
-    path: "/reset-password",
+    path: "/reset-password/:email/:expires/:token/:signature",
     name: "ResetPassword",
     component: ResetPassword,
     meta: {
+      requiresAuth: false,
       guest: true
     }
   },
