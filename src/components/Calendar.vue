@@ -26,6 +26,7 @@
       v-model="date"
       @input="menu = false"
       @change="dateSelect"
+      type="month"
     ></v-date-picker>
   </v-menu>
 </template>
@@ -36,16 +37,16 @@ export default {
 
   props: {
     value: {
-      type: [String, Object, Date]
+      type: [String, Object, Date],
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     rules: {
       type: Array,
-      default: Array
-    }
+      default: Array,
+    },
   },
   created() {
     if (this.value) {
@@ -55,18 +56,18 @@ export default {
   data() {
     return {
       date: "",
-      menu: false
+      menu: false,
     };
   },
   computed: {
     dateFormatted() {
       return this.date.substr(0, 10);
-    }
+    },
   },
   methods: {
     dateSelect(date) {
       this.$emit("setDate", date);
-    }
-  }
+    },
+  },
 };
 </script>

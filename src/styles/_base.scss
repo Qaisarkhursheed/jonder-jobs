@@ -8,284 +8,330 @@
 //   3. Typography
 //   4. Buttons
 //   5. Inputs
-//   6. 
+//   6.
 
 // 1. Base
 // -------
 
-@import 'variables';
+@import "variables";
 
-@import 'modules/tab';
-@import 'modules/pagination';
+@import "modules/tab";
+@import "modules/pagination";
 
 //fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
-$roboto: 'Roboto', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap");
+$roboto: "Roboto", sans-serif;
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+$open-sans: "Open Sans", sans-serif;
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-$open-sans: 'Open Sans', sans-serif;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-$inter: 'Inter', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+$inter: "Inter", sans-serif;
 
 body {
-    font-family: $inter !important;
+  font-family: $inter !important;
 }
 
 // 2. Colors
 // ---------
 //primary
-$primary: #C15143;
-$primary-dark: #A94438;
-$primary-medium: #F5DBD6;
-$primary-light: #FBF0EE;
+$primary: #c15143;
+$primary-dark: #a94438;
+$primary-medium: #f5dbd6;
+$primary-light: #fbf0ee;
 $primary-blue: #1976d2;
-$primary-blue-light: #E3F2FB;
-$primary-blue-dark: #0253B3;
+$primary-blue-light: #e3f2fb;
+$primary-blue-dark: #0253b3;
 
 //secondary
-$green: #32BE4A;
-$dark-green: #49A600;
-$orange: #FF7612;
-$blue: #24B0FF;
-$yellow: #FFD260;
+$green: #32be4a;
+$dark-green: #49a600;
+$orange: #ff7612;
+$blue: #24b0ff;
+$yellow: #ffd260;
 
 //greyscale
 $dark-grey: #222222;
 $medium-grey: #999999;
-$light-grey: #E5E5E5;
+$light-grey: #e5e5e5;
 $lighter-grey: #f6f6f7;
 
-
-$status-request: #F5980C;
-$status-negotiation: #0253B3;
-$status-call: #018D28;
-
+$status-request: #f5980c;
+$status-negotiation: #0253b3;
+$status-call: #018d28;
 
 // 3. Typography
 // -------------
 
 //headings
 
-h1, h2, h3, h4, .h1, .h2, .h3, .h4 { color: #222!important; }
-
-h1, .h1 {
-    size: 30px;
-    font-weight: 700;
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4 {
+  color: #222 !important;
 }
 
-h2, .h2 {
-    size: 20px;
-    font-weight: 500;
+h1,
+.h1 {
+  size: 30px;
+  font-weight: 700;
 }
 
-h3, .h3 {
-    size: 18px;
-    font-weight: 500;
+h2,
+.h2 {
+  size: 20px;
+  font-weight: 500;
 }
 
-h4, .h4 {
-    size: 17px;
-    font-weight: 700;
+h3,
+.h3 {
+  size: 18px;
+  font-weight: 500;
 }
 
-h5, .h5 {
-    size: 16px;
-    font-weight: 700;
+h4,
+.h4 {
+  size: 17px;
+  font-weight: 700;
+}
+
+h5,
+.h5 {
+  size: 16px;
+  font-weight: 700;
 }
 
 //body
 
-.text-large { font-size: 17px!important; }
-.text-medium { font-size: 14px!important; }
-.text-regular { font-size: 12px!important; }
+.text-large {
+  font-size: 17px !important;
+}
+.text-medium {
+  font-size: 14px !important;
+}
+.text-regular {
+  font-size: 12px !important;
+}
 
-.text-weight-bold { font-weight: 700!important; }
-.text-weight-medium { font-weight: 500!important; }
-.text-weight-regular { font-weight: normal!important; }
+.text-weight-bold {
+  font-weight: 700 !important;
+}
+.text-weight-medium {
+  font-weight: 500 !important;
+}
+.text-weight-regular {
+  font-weight: normal !important;
+}
 
-.text-color-primary-blue-dark { color: $primary-blue-dark !important; }
+.text-color-primary-blue-dark {
+  color: $primary-blue-dark !important;
+}
 
-.border-right-gray { border-right: 1px solid $light-grey !important; }
-.border-top-gray { border-top: 1px solid $light-grey !important; }
-.border-blue-dark { border: 1px solid $primary-blue-dark !important; }
-.border-right-blue-dark-thick { border-right: 4px solid $primary-blue-dark !important; }
-.border-top-blue-dark { border-top: 1px solid $primary-blue-dark !important; }
+.border-right-gray {
+  border-right: 1px solid $light-grey !important;
+}
+.border-top-gray {
+  border-top: 1px solid $light-grey !important;
+}
+.border-blue-dark {
+  border: 1px solid $primary-blue-dark !important;
+}
+.border-right-blue-dark-thick {
+  border-right: 4px solid $primary-blue-dark !important;
+}
+.border-top-blue-dark {
+  border-top: 1px solid $primary-blue-dark !important;
+}
 
 .pull-right {
-    float: right;
+  float: right;
 }
 
 // 4. Buttons
 // ----------
 
 .button {
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 5px;
-    padding: 15px 40px;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 15px 40px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
 
-    &.primary {
-        color: white;
-        background-color: $primary;
-        border-color: $primary;
+  &.primary {
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
 
-        &.active, &:active {
-            background-color: $primary-dark;
-            border-color: $primary-dark;
-        }
-
-        &.disabled, &:disabled {
-            opacity: .5;
-            cursor: default;
-        }
+    &.active,
+    &:active {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
     }
 
-    &.secondary {
-        color: $primary;
-        border-color: $primary;
-
-        &.active, &:active {
-            background-color: $primary-light;
-        }
-
-        &.disabled, &:disabled {
-            opacity: .5;
-            cursor: default;
-        }
+    &.disabled,
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
-    
+  }
 
-    &.dark-blue {
-        &.fill {
-            color: $primary-light;
-            background-color: $primary-blue-dark;
-            border-color: $primary-blue-dark;
+  &.secondary {
+    color: $primary;
+    border-color: $primary;
 
-            &.active, &:active {
-                background-color: $primary-blue;
-            }
-
-            &.disabled, &:disabled {
-                opacity: .5;
-                cursor: default;
-            }
-        }
-
-        &.outline {
-            color: $primary-blue-dark;
-            background-color: white;
-            border-color: $primary-blue-dark;
-
-            &.active, &:active {
-                background-color: $primary-light;
-            }
-
-            &.disabled, &:disabled {
-                opacity: .5;
-                cursor: default;
-            }
-        }
+    &.active,
+    &:active {
+      background-color: $primary-light;
     }
 
-    &:hover {
-        text-decoration: none;
+    &.disabled,
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
+  }
+
+  &.dark-blue {
+    &.fill {
+      color: $primary-light;
+      background-color: $primary-blue-dark;
+      border-color: $primary-blue-dark;
+
+      &.active,
+      &:active {
+        background-color: $primary-blue;
+      }
+
+      &.disabled,
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+
+    &.outline {
+      color: $primary-blue-dark;
+      background-color: white;
+      border-color: $primary-blue-dark;
+
+      &.active,
+      &:active {
+        background-color: $primary-light;
+      }
+
+      &.disabled,
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .v-btn {
-    border-radius: 10px;
-    box-shadow: none;
-    text-transform: none !important;
+  border-radius: 10px;
+  box-shadow: none;
+  text-transform: none !important;
 
-    &.light-blue {
-        color: $primary-blue-dark !important;
-        background-color: $primary-blue-light !important;
-        border-color: $primary-blue-light !important;
+  &.light-blue {
+    color: $primary-blue-dark !important;
+    background-color: $primary-blue-light !important;
+    border-color: $primary-blue-light !important;
 
-        &.active, &:active {
-            color: $primary-blue-light !important;
-            background-color: $primary-blue !important;
-        }
-
-        &.disabled, &:disabled {
-            opacity: .5;
-            cursor: default;
-        }
-    }
-    &.dark-blue {
-        color: #fff !important;
-        background-color: $primary-blue-dark !important;
-        border-color: $primary-blue-dark !important;
-
-        &.active, &:active {
-            color: #fff !important;
-            background-color: $primary-blue-dark !important;
-        }
-
-        &.disabled, &:disabled {
-            opacity: .5;
-            cursor: default;
-        }
+    &.active,
+    &:active {
+      color: $primary-blue-light !important;
+      background-color: $primary-blue !important;
     }
 
-    &.white {
-        color: #222 !important;
-        border: 1px solid #E9E9E9 !important;
+    &.disabled,
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
+  }
+  &.dark-blue {
+    color: #fff !important;
+    background-color: $primary-blue-dark !important;
+    border-color: $primary-blue-dark !important;
+
+    &.active,
+    &:active {
+      color: #fff !important;
+      background-color: $primary-blue-dark !important;
+    }
+
+    &.disabled,
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  &.white {
+    color: #222 !important;
+    border: 1px solid #e9e9e9 !important;
+  }
 }
 .stars-btn {
-    max-width: 70px;
-    height: 40px !important;
-    padding: 0 !important;
-    text-align: center;
+  max-width: 70px;
+  height: 40px !important;
+  padding: 0 !important;
+  text-align: center;
 
+  .v-btn__content {
+    width: 100%;
+    flex-flow: row wrap;
+
+    .v-icon {
+      font-size: 20px;
+    }
+  }
+
+  &.senior {
     .v-btn__content {
-        width: 100%;
-        flex-flow: row wrap;
-
-        .v-icon {
-            font-size: 20px;
+      .v-icon {
+        font-size: 28px;
+        &:first-child,
+        &:last-child {
+          font-size: 16px;
+          margin: 0 -4px;
         }
+      }
     }
+  }
 
-    &.senior {
-        .v-btn__content {
-            .v-icon {
-                font-size: 28px;
-                &:first-child,
-                &:last-child {
-                    font-size: 16px;
-                    margin: 0 -4px;
-                }
-            }
-        }
+  &.advanced {
+    .v-btn__content {
+      .v-icon {
+        margin: -2px 2px;
+      }
     }
-
-    &.advanced {
-        .v-btn__content {
-            .v-icon {
-                margin: -2px 2px;
-            }
-        }
-    }
+  }
 }
 
 .v-text-field.v-text-field--solo .v-label {
-    top: 10px;
+  top: 10px;
 }
 
-// overwrite input outline only form company 
+// overwrite input outline only form company
 .company .v-text-field--outlined fieldset,
 .stepper-wrap .v-text-field--outlined fieldset,
 .onboarding-dialog .v-text-field--outlined fieldset,
 .v-text-field--outlined fieldset {
-    border-color: #D4D4D4;
+  border-color: #d4d4d4;
 }
 
 .file-input-jonder.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded) > .v-input__control > .v-input__slot,
@@ -305,78 +351,91 @@ h5, .h5 {
     }
 }
 .company {
-    .products-payment-method {
-        .v-input--radio-group--column .v-input--radio-group__input {
-            flex-direction: row;
-        }
-        .v-input--selection-controls__input {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-        }
+  .products-payment-method {
+    .v-input--radio-group--column .v-input--radio-group__input {
+      flex-direction: row;
     }
-
-    .candidate-card.v-sheet.v-card--hover:hover {
-        cursor: pointer;
-        box-shadow: 0px 0px 3px rgb(39, 170, 225) !important;
-        background: linear-gradient(0deg, rgba(39, 170, 225, 0.04), rgba(39, 170, 225, 0.04)), #FFFFFF;
-        transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    .v-input--selection-controls__input {
+      position: absolute;
+      top: 14px;
+      right: 14px;
     }
+  }
+
+  .candidate-card.v-sheet.v-card--hover:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px rgb(39, 170, 225) !important;
+    background: linear-gradient(
+        0deg,
+        rgba(39, 170, 225, 0.04),
+        rgba(39, 170, 225, 0.04)
+      ),
+      #ffffff;
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
 }
-.theme--light.v-input input, .theme--light.v-input textarea {
-    color: #222222;
+.theme--light.v-input input,
+.theme--light.v-input textarea {
+  color: #222222;
 }
 
-.v-text-field.v-text-field--solo.v-input--dense > .v-input__control, .theme--light.v-input, button {
-    border-radius: 10px;
+.v-text-field.v-text-field--solo.v-input--dense > .v-input__control,
+.theme--light.v-input,
+button {
+  border-radius: 10px;
 }
 
 .v-text-field__slot {
-    height: 55px;
+  height: 55px;
 }
 
 .v-textarea .v-text-field__slot {
-    height: unset;
+  height: unset;
 }
 
 .lang-switcher {
-    .v-text-field--rounded > .v-input__control > .v-input__slot {
-        padding: 0 15px;
-    }
+  .v-text-field--rounded > .v-input__control > .v-input__slot {
+    padding: 0 15px;
+  }
 }
-.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
-    background: rgba(255, 255, 255, 0.001) !important;
+.theme--light.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > thead
+  > tr:last-child
+  > th {
+  background: rgba(255, 255, 255, 0.001) !important;
 }
 // 5. Inputs
 // ---------
 
 //update placeholder styling
 @mixin inputPlaceholder() {
-    $selector: '';
-    $prefixes: (
-        moz: "::-moz",
-        webkit: "::-webkit",
-        ie: ":-ms"
-    );
-    @each $prop, $value in $prefixes {
-        @if $prop != "moz" {
-            $selector: #{$value}-input-placeholder;
-        } @else {
-            $selector: #{$value}-placeholder;
-        }
-        @if & {
-            &#{$selector} {
-                @content;
-            }
-        } @else {
-            #{$selector} {
-                @content;
-            }
-        }
+  $selector: "";
+  $prefixes: (
+    moz: "::-moz",
+    webkit: "::-webkit",
+    ie: ":-ms",
+  );
+  @each $prop, $value in $prefixes {
+    @if $prop != "moz" {
+      $selector: #{$value}-input-placeholder;
+    } @else {
+      $selector: #{$value}-placeholder;
     }
-    &::placeholder {
-      @content;
+    @if & {
+      &#{$selector} {
+        @content;
+      }
+    } @else {
+      #{$selector} {
+        @content;
+      }
     }
+  }
+  &::placeholder {
+    @content;
+  }
 }
 
 // input {
@@ -400,30 +459,38 @@ h5, .h5 {
 // }
 
 label {
-    margin-bottom: 0!important;
+  margin-bottom: 0 !important;
 }
 
 .section-label {
-    font-weight: 600;
-    font-size: 14px;
-    color: #222222;
+  font-weight: 600;
+  font-size: 14px;
+  color: #222222;
 }
 // 5. Layout
 // ---------
 
-.full-h { height: 100%!important; }
-.full-w { width: 100%!important; }
+.full-h {
+  height: 100% !important;
+}
+.full-w {
+  width: 100% !important;
+}
+
+.max-height-chat {
+  max-height: 50rem;
+}
 
 .bg-light-gray {
-    background: $lighter-grey;
+  background: $lighter-grey;
 }
 
 // 6. Mixins
 // ---------
 @mixin clearfix {
-    &:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }

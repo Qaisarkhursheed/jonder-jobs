@@ -40,6 +40,7 @@
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
                   :rules="[validations.required]"
+                  type="month"
                 />
               </v-col>
 
@@ -153,21 +154,21 @@ export default {
   name: "ModalExperience",
 
   components: {
-    Calendar
+    Calendar,
   },
 
   props: {
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: "ok"
+      default: "ok",
     },
     edit: {
-      type: [Object, Boolean]
-    }
+      type: [Object, Boolean],
+    },
   },
   data() {
     return {
@@ -177,7 +178,7 @@ export default {
       emplType: [
         this.$t("user.onboarding.trainee"),
         this.$t("user.onboarding.fulltime"),
-        this.$t("user.onboarding.parttime")
+        this.$t("user.onboarding.parttime"),
       ],
       positions: [
         this.$t("user.onboarding.positionDeveloper"),
@@ -185,7 +186,7 @@ export default {
         this.$t("user.onboarding.positionConstructionManager"),
         this.$t("user.onboarding.positionIntern"),
         this.$t("user.onboarding.positionApprentice"),
-        this.$t("user.onboarding.positionManager")
+        this.$t("user.onboarding.positionManager"),
       ],
       form: {
         company_name: "",
@@ -194,8 +195,8 @@ export default {
         start_time: "",
         end_time: "",
         description: "",
-        working_here: 0
-      }
+        working_here: 0,
+      },
     };
   },
   created() {
@@ -219,12 +220,12 @@ export default {
         this.$store
           .dispatch("user/updateJobseekerExperience", {
             id: this.edit.id,
-            payload: this.form
+            payload: this.form,
           })
           .then(() => {
             this.$emit("close", 1);
           })
-          .catch(err => {
+          .catch((err) => {
             this.formResponse = err.data;
           })
           .finally(() => {
@@ -236,7 +237,7 @@ export default {
           .then(() => {
             this.$emit("close", 1);
           })
-          .catch(err => {
+          .catch((err) => {
             this.formResponse = err.data;
           })
           .finally(() => {
@@ -252,8 +253,8 @@ export default {
       this.form.end_time = this.edit.end_time;
       this.form.description = this.edit.description;
       this.form.working_here = this.edit.working_here;
-    }
-  }
+    },
+  },
 };
 </script>
 

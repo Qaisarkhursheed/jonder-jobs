@@ -15,6 +15,13 @@
         dense
       ></v-text-field>
 
+      <v-checkbox
+        class="mb-3"
+        label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+        hide-details="auto"
+        v-model="data.show_location"
+      ></v-checkbox>
+
       <v-btn
         type="submit"
         :disabled="!formValid"
@@ -34,15 +41,15 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
 };
 </script>
 

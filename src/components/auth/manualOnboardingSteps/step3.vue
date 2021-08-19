@@ -108,9 +108,9 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
@@ -125,4 +125,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.info-text {
+  font-size: 12px;
+  position: absolute;
+  bottom: 3.5rem;
+}
+</style>
