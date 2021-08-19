@@ -30,7 +30,7 @@
     </v-col>
     <v-col
       cols="col"
-      class="full-h"
+      class="max-height-chat"
       v-if="selectedConversation && conversationDetails"
     >
       <chat-messages
@@ -66,7 +66,7 @@ export default {
     messages: null,
     showProfile: false,
     polling: null,
-    chatFull: false
+    chatFull: false,
   }),
   methods: {
     ...mapActions("chat", [
@@ -74,7 +74,7 @@ export default {
       "addPlaceholderMessage",
       "getSingleConversation",
       "startChat",
-      "seenMessage"
+      "seenMessage",
     ]),
     async init() {
       await this.getAllConversations();
@@ -93,15 +93,15 @@ export default {
         }
         this.getAllConversations();
       }, 5000);
-    }
+    },
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
   components: {
     //UserPreview,
     ChatMessages,
     ChatAsside,
-    PublicProfile
-  }
+    PublicProfile,
+  },
 };
 </script>
 
