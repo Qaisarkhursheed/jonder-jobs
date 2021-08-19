@@ -10,9 +10,10 @@
         :placeholder="$t('user.onboarding.uploadCv')"
         multiple
         outlined
+        color="#0253B3"
         :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
+        prepend-inner-icon="mdi-cloud-upload"
+        class="file-input-jonder text-center"
       >
         <template v-slot:selection="{ text }">
           <v-chip small label color="primary">
@@ -27,8 +28,8 @@
         multiple
         outlined
         :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload-outline"
-        class="text-center"
+        prepend-inner-icon="mdi-cloud-upload"
+        class="file-input-jonder text-center"
       >
         <template v-slot:selection="{ text }">
           <v-chip small label color="primary">
@@ -43,7 +44,8 @@
         multiple
         outlined
         :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload-outline"
+        prepend-inner-icon="mdi-cloud-upload"
+        class="file-input-jonder"
       >
         <template v-slot:selection="{ text }">
           <v-chip small label color="primary">

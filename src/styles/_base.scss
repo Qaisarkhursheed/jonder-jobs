@@ -287,6 +287,23 @@ h5, .h5 {
 .v-text-field--outlined fieldset {
     border-color: #D4D4D4;
 }
+
+.file-input-jonder.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded) > .v-input__control > .v-input__slot,
+.file-input-jonder.v-text-field--outlined fieldset {
+    border: 1px dashed #e9e9e9;
+}
+.file-input-jonder.theme--light.v-file-input .v-file-input__text--placeholder {
+    font-weight: 600;
+    color: #0253B3;
+}
+.file-input-jonder .v-file-input__text--placeholder {
+    padding-left: 10px;
+}
+.file-input-jonder {
+    .v-icon.v-icon {
+        color: #0253B3;
+    }
+}
 .company {
     .products-payment-method {
         .v-input--radio-group--column .v-input--radio-group__input {
