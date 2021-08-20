@@ -5,54 +5,11 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <v-file-input
-        v-model="cv"
-        :placeholder="$t('user.onboarding.uploadCv')"
-        multiple
-        outlined
-        color="#0253B3"
-        :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload"
-        class="file-input-jonder text-center"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+      <DocumentUploadSection @change="e => cv = e" type="Cv" />
 
-      <v-file-input
-        v-model="qualifications"
-        :placeholder="$t('user.onboarding.uploadQualifications')"
-        multiple
-        outlined
-        :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload"
-        class="file-input-jonder text-center"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+      <DocumentUploadSection @change="e => qualifications = e" type="Qualifications" />
 
-      <v-file-input
-        v-model="resume"
-        :placeholder="$t('user.onboarding.uploadResume')"
-        multiple
-        outlined
-        :prepend-icon="null"
-        prepend-inner-icon="mdi-cloud-upload"
-        class="file-input-jonder"
-      >
-        <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
-        </template>
-      </v-file-input>
+      <DocumentUploadSection @change="e => resume = e" type="Resume" />
 
       <v-row class="mt-0">
         <v-col cols="3">
@@ -82,8 +39,14 @@
 </template>
 
 <script>
+import DocumentUploadSection from '@/components/DocumentUploadSection.vue';
+
 export default {
   name: "Step6",
+
+  components: {
+    DocumentUploadSection
+  },
 
   props: {
     value: {
@@ -124,5 +87,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss"></style>
