@@ -361,63 +361,27 @@
         </p>
         <v-col cols="12">
           <div class="mt-6">
-            <v-file-input
-              v-model="formData.cv"
-              placeholder="CV Document"
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center"
-              accept=".doc, .docx, .pdf, .jpg, .png, .txt"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary" v-if="user.cv">
-                  ...{{ user.cv.slice(-30) }}
-                </v-chip>
-                <v-chip small label color="primary" v-else>
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-
-            <v-file-input
-              v-model="formData.qualifications"
-              placeholder="Qualifikationen document"
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary" v-if="user.qualifications">
-                  ...{{ user.qualifications.slice(-30) }}
-                </v-chip>
-                <v-chip small label color="primary" v-else>
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-
-            <v-file-input
-              v-model="formData.resume"
-              placeholder="Lebenslauf document"
-              dense
-              outlined
-              prepend-icon=""
-              prepend-inner-icon="mdi-cloud-upload-outline"
-              class="text-center "
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="primary" v-if="user.resume">
-                  ...{{ user.resume.slice(-30) }}
-                </v-chip>
-                <v-chip small label color="primary" v-else>
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
+            <div style="width: 70%">
+              <DocumentUploadSection 
+                @change="e => formData.cv = e" 
+                type="Cv" 
+                :value="formData.cv" 
+              /> 
+            </div>
+            <div style="width: 70%">
+              <DocumentUploadSection 
+                @change="e => formData.qualifications = e" 
+                type="Qualifications"
+                :value="formData.qualifications" 
+              />
+            </div>
+            <div style="width: 70%">
+              <DocumentUploadSection 
+                @change="e => formData.resume = e" 
+                type="Resume"
+                :value="formData.resume"
+              />
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -589,6 +553,7 @@ import AddNewCard from "@/views/dashboard/AddNewCard";
 import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
+import DocumentUploadSection from '@/components/DocumentUploadSection.vue';
 
 export default {
   name: "Profile",
@@ -600,7 +565,8 @@ export default {
     AddNewCard,
     ResponseAlert,
     ModalEducation,
-    ModalExperience
+    ModalExperience,
+    DocumentUploadSection
   },
 
   data: () => ({

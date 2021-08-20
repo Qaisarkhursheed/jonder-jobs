@@ -20,12 +20,14 @@
     </template>
     <template v-else>
       <div class="d-flex justify-space-between pt-4 pb-4">
-        <div class="pr-3">
+        <div class="d-flex">
           <img :src="require('@/assets/svg/pdf.svg')" />
-        </div>
-        <div>
-          <div class="pdf-name">{{ inputData[0].name }}</div>
-          <div class="pdf-size">{{ inputData[0].size }} Bytes</div>
+          <div class="pl-3">
+            <div class="pdf-name">{{ inputData[0].name }}</div>
+            <div class="pdf-size" v-if="inputData[0].size">
+              {{ inputData[0].size }} Bytes
+            </div>
+          </div>
         </div>
         <div>
           <v-menu top right>
@@ -61,11 +63,25 @@ export default {
   props: {
     type: {
       type: String
-    }
+    },
+    value: {
+      type: [Object, Boolean],
+      default: false
+    },
   },
   data() {
     return {
       inputData: null,
+    }
+  },
+  created() {
+    if(this.value) {
+      this.inputData = [
+        {
+          name: this.value,
+          size: false,
+        }
+      ]
     }
   },
   methods: {
@@ -87,6 +103,7 @@ export default {
 .pdf-name {
   font-weight: 600;
   color: #000;
+  word-break: break-word;
 }
 .pdf-size {
   font-weight: 400;    
