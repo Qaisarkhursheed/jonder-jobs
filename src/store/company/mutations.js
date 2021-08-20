@@ -36,6 +36,9 @@ export default {
   SET_SEARCH_RESULTS(state, value) {
     state.searchResults = value;
   },
+  SET_SEARCH_STATUS(state, value) {
+    state.searchStatus.current = value;
+  },
   SET_SEARCH_META(state, value) {
     state.searchResultsMeta = value;
   },
@@ -47,5 +50,5 @@ export default {
   },
   SET_JOBSEEKER_NOTES(state, value) {
     state.jobseekerNotes = value;
-  }
+  },
 };

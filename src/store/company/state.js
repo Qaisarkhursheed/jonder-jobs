@@ -8,6 +8,10 @@ export default {
     'Hired': []
   },
   searchResults: [],
+  searchStatus: {
+    current: 'default',
+    options: ['default', 'results', 'limited'],
+  },
   searchResultsMeta: {
     per_page: 6,
     current_page: 1,
@@ -15,6 +19,8 @@ export default {
   },
   searchInProgress: false,
   searchFilters: [],
+
+
   userInteractions: null,
   peopleReach: null,
   profileViews: null,

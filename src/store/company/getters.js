@@ -20,6 +20,9 @@ export default {
   searchResults(state) {
     return state.searchResults;
   },
+  searchStatus(state) {
+    return state.searchStatus.current;
+  },
   searchMeta(state) {
     return state.searchResultsMeta;
   },

@@ -135,6 +135,7 @@ export default {
       ...payload
     };
     commit("SET_SEARCH_INPROGRESS", true);
+
     return axios.post("/company/search/", obj).then(res => {
       if (res.status === 200) {
         commit("SET_SEARCH_INPROGRESS", false);
@@ -145,6 +146,14 @@ export default {
           total: res.data.meta.total,
           searchInput: payload
         });
+      }
+    }).catch(err => {
+      if (
+        JSON.parse(err.request.response).message == 
+        'Upgrade your plan to use this action.'
+      ) {
+        commit("SET_SEARCH_INPROGRESS", false);
+        commit("SET_SEARCH_STATUS", 'limited');
       }
     });
   },

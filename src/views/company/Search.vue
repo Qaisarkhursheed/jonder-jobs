@@ -1,10 +1,9 @@
 <template>
   <div>
     <SearchForm class="mb-10" @search="search"/>
-
     <SearchSavedFilters @search="search" />
 
-    <component :is="searchStatus.components[searchStatus.current]"
+    <component :is="searchComponents[searchStatus]"
       :results="searchResults" 
     />
   </div>
@@ -32,31 +31,32 @@ export default {
     return {
       advancedSearch: false,
       searchExecuted: false,
-      searchStatus: {
-        current: 'default',
-        options: ['default', 'results', 'limited'],
-        components: {
-          results: SearchResults,
-          limited: SearchResultsLock,
-          default: false,
-        }
+      searchComponents: {
+        results: SearchResults,
+        limited: SearchResultsLock,
+        default: false,
       }
     }
   },
   beforeDestroy() {
     store.commit('company/SET_SEARCH_RESULTS', []);
     this.searchExecuted = false;
-    this.searchStatus.current = 'default';
+    // this.searchStatus.current = 'default';
+    store.commit('company/SET_SEARCH_STATUS', 'default');
   },
   methods: {
     search() {
       this.searchExecuted = true;
-      this.searchStatus.current = 'results';
+      // this.searchStatus.current = 'results';
+      store.commit('company/SET_SEARCH_STATUS', 'results');
     }
   },
   computed: {
     searchResults() {
       return store.getters['company/searchResults']
+    },
+    searchStatus() {
+      return store.getters['company/searchStatus'];
     }
   }
 };
