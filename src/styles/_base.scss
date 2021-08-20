@@ -240,7 +240,8 @@ h5,
   }
 }
 
-.v-btn {
+.v-btn,
+.theme--light .v-btn {
   border-radius: 10px;
   box-shadow: none;
   text-transform: none !important;
@@ -275,6 +276,7 @@ h5,
 
     &.disabled,
     &:disabled {
+      background-color: $primary-blue-dark !important;
       opacity: 0.5;
       cursor: default;
     }

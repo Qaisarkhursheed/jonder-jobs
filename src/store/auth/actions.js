@@ -23,7 +23,17 @@ export default {
 
   async register({ commit }, data) {
     try {
-      const resp = await axios.post("/register", data);
+      let formData = new FormData();
+      Object.keys(data).forEach(key => {
+        if (Array.isArray(data[key])) {
+          data[key].forEach(el => {
+            if (el && el !== null) formData.append(key + "[]", el);
+          });
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
+      const resp = await axios.post("/register", formData);
       const token = resp.data.token;
       const user = resp.data.user;
 

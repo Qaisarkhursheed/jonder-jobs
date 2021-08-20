@@ -20,90 +20,158 @@
       v-model="formValid"
       @submit.prevent="handleRegister"
     >
+      <!-- Avatar upload -->
+      <div class="d-flex align-center flex-column mt-8 mb-6">
+        <v-avatar
+          color="#E3F2FB"
+          size="120"
+          class="flex-grow-0 flex-shrink-0"
+          style="cursor: pointer"
+          @click="$refs.uploadAvatarInput.click()"
+        >
+          <v-img v-if="avatar_img" :src="avatar_img"></v-img>
+          <v-icon
+            size="64"
+            color="#6a9cd4"
+            v-else
+          >
+            mdi-cloud-upload
+          </v-icon>
+        </v-avatar>
+        <input
+          type="file"
+          ref="uploadAvatarInput"
+          style="display: none"
+          @change="profile_img = $event.target.files[0]"
+        />
+        <div class="avatar-label mt-4">
+          Click to upload photo
+        </div>
+      </div>
+
+
       <!-- First name -->
       <v-text-field
         v-model="formData.first_name"
-        label="Vorname"
+        placeholder="Vorname"
         :rules="[validations.required]"
+        hide-details
         type="text"
         dense
         outlined
         background-color="white"
+        class="mb-4"
       ></v-text-field>
 
       <!-- Last name -->
       <v-text-field
         v-model="formData.last_name"
-        label="Nachname"
+        placeholder="Nachname"
         :rules="[validations.required]"
+        hide-details
         type="text"
         dense
         outlined
         background-color="white"
+        class="mb-4"
       ></v-text-field>
 
       <!-- Email -->
       <v-text-field
         v-model="formData.email"
-        label="Email Addresse"
+        placeholder="Email Addresse"
         :rules="[validations.required, validations.email]"
+        hide-details
         type="email"
         dense
         outlined
         background-color="white"
+        class="mb-4"
       ></v-text-field>
 
       <!-- Password -->
       <v-text-field
         v-model="formData.password"
-        label="Passwort"
+        placeholder="Passwort"
         :rules="[validations.required, validations.min.string(6)]"
-        type="password"
+        :type="showPass ? 'text' : 'password'"
+        hide-details
         dense
         outlined
         background-color="white"
-      ></v-text-field>
+        class="mb-4"
+      >
+        <template v-slot:append  >
+          <div class="d-flex align-center">
+            <v-icon style="line-height: 1.5" @click="showPass = !showPass">
+              <template v-if="showPass">
+                mdi-eye
+              </template>
+              <template v-else>
+                mdi-eye-off
+              </template>
+            </v-icon>
+          </div>
+        </template>
+      </v-text-field>
 
       <!-- Password confirm -->
       <v-text-field
         v-model="formData.password_confirmation"
-        label="Passwort erneut eingeben"
+        placeholder="Passwort erneut eingeben"
         :rules="[
           validations.required,
           validations.same('Passwort', formData.password)
         ]"
-        type="password"
+        :type="showPassConfirm ? 'text' : 'password'"
+        hide-details
         dense
         outlined
         background-color="white"
-      ></v-text-field>
+        class="mb-4 align-center"
+      >
+        <template v-slot:append  >
+          <div class="d-flex align-center">
+            <v-icon style="line-height: 1.5" @click="showPassConfirm = !showPassConfirm">
+              <template v-if="showPassConfirm">
+                mdi-eye
+              </template>
+              <template v-else>
+                mdi-eye-off
+              </template>
+            </v-icon>
+          </div>
+        </template>
+      </v-text-field>
 
-      <!-- Phone -->
+      <!-- Phone : TO BE REMOVED -->
       <v-text-field
         v-model="formData.phone"
-        label="Telefonnummer"
+        placeholder="Telefonnummer"
         :rules="[validations.phone]"
+        hide-details
         type="text"
         dense
         outlined
         background-color="white"
+        class="mb-4"
       ></v-text-field>
 
       <!-- Show name -->
-      <v-checkbox
+      <!-- <v-checkbox
         class="mt-0"
         label="Möchten Sie, dass wir Ihren Namen anzeigen?"
         hide-details="auto"
         v-model="formData.show_name"
-      ></v-checkbox>
+      ></v-checkbox> -->
 
       <!-- Show location -->
-      <v-checkbox
+      <!-- <v-checkbox
         class="mb-3"
         label="Möchten Sie, dass wir Ihren Standort anzeigen?"
         hide-details="auto"
         v-model="formData.show_location"
-      ></v-checkbox>
+      ></v-checkbox> -->
 
       <!-- ResponseAlert -->
       <ResponseAlert :response="formResponse" />
@@ -111,19 +179,19 @@
       <!-- Submit button -->
       <v-btn
         type="submit"
-        color="primary"
-        class="full-w"
+        class="full-w mt-3 dark-blue"
         :disabled="!formValid"
         :loading="formLoading"
         large
+        height="56"
       >
         Kostenlos registrieren
       </v-btn>
 
-      <div class="caption mt-1">
+      <div class="login-caption mt-5 text-center">
         Du bist bereits Mitglied?
 
-        <router-link to="/login">
+        <router-link to="/login" class="login-caption-bold">
           Hier einloggen
         </router-link>
       </div>
@@ -147,10 +215,13 @@ export default {
         password: "",
         password_confirmation: "",
         phone: "",
-        show_name: false,
-        show_location: false,
-        role: "Jobseeker"
+        // show_name: false,
+        // show_location: false,
+        role: "Jobseeker",
       },
+      profile_img: false,
+      showPass: false,
+      showPassConfirm: false,
       formLoading: false,
       formResponse: {},
       formValid: false
@@ -160,6 +231,9 @@ export default {
     async handleRegister() {
       this.formResponse = {};
       this.formLoading = true;
+      if(this.profile_img) {
+        this.formData['profile_img'] = this.profile_img;
+      }
       this.$store
         .dispatch("auth/register", this.formData)
         .then(resp => {
@@ -173,8 +247,28 @@ export default {
           this.formLoading = false;
         });
     }
+  },
+  computed: {
+    avatar_img() {
+      if (this.profile_img) {
+        return URL.createObjectURL(this.profile_img);
+      }
+      return false;
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar-label {
+  font-weight: normal;
+  font-size: 17px;
+  color: rgba(43, 43, 43, 0.5);
+}
+.login-caption {
+  font-size: 14px;
+}
+.login-caption-bold {
+  font-weight: 600;
+}
+</style>

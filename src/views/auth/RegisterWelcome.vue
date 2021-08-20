@@ -102,11 +102,10 @@
             </v-btn>
 
             <v-btn
-              :disabled="!accountType"
               type="submit"
               block
-              color="primary"
-              class="mt-10"
+              class="mt-10 dark-blue"
+              :disabled="!accountType"
               @click="submit"
               height="55"
             >
