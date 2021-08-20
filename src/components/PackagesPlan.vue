@@ -5,7 +5,7 @@
       <div>/month</div>
     </div>
     <div class="type mt-3">
-      <div class="name" :style="`color: ${plan.color}`">
+      <div class="name" :style="`color: ${color}`">
         {{ plan.name }}
       </div>
       <div class="description">
@@ -16,8 +16,8 @@
     <v-divider class="mb-10 mt-10"></v-divider>
 
     <div class="features">
-      <div class="feature pb-5" v-for="(feature, i) in plan.features" :key="i">
-        <v-icon size="25" :color="plan.color">
+      <div class="feature pb-5" v-for="(feature, i) in features" :key="i">
+        <v-icon size="25" :color="color">
           mdi-check
         </v-icon>
         <span class="text">
@@ -51,6 +51,9 @@ export default {
     plan: {
       type: Object,
     },
+    color: {
+      type: String
+    }
   },
   data() {
     return {
@@ -85,6 +88,11 @@ export default {
         });
     },
   },
+  computed: {
+    features() {
+      return JSON.parse(this.plan.benefits);
+    }
+  }
 };
 </script>
 
