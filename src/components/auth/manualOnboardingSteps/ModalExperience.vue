@@ -60,13 +60,23 @@
             <v-row>
               <v-col>
                 <label>{{ $t("user.onboarding.position") }}</label>
-                <v-select
+                <!-- <v-select
                   v-model="form.position"
                   :placeholder="$t('user.onboarding.choose')"
                   :items="positions"
                   :rules="[validations.required]"
                   outlined
-                ></v-select>
+                ></v-select> -->
+                <v-autocomplete
+                  v-model="form.position"
+                  :items="types.JOB_POSITION"
+                  :rules="[validations.required]"
+                  outlined
+                  flat
+                  hide-no-data
+                  :placeholder="$t('user.onboarding.choose')"
+                  class="mt-1"
+                ></v-autocomplete>
               </v-col>
             </v-row>
 
@@ -133,7 +143,7 @@
                   type="submit"
                   color="primary"
                   height="58"
-                  class="full-w mt-5 font-weight-medium "
+                  class="full-w mt-5 font-weight-medium dark-blue"
                 >
                   {{ $t("general.save") }}
                 </v-btn>
@@ -147,6 +157,7 @@
 </template>
 
 <script>
+import types from '@/types';
 // Move to generic global component if needed
 import Calendar from "@/components/Calendar";
 
@@ -255,6 +266,11 @@ export default {
       this.form.working_here = this.edit.working_here;
     },
   },
+  computed: {
+    types() {
+      return types;
+    }
+  }
 };
 </script>
 

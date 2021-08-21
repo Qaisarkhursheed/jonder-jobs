@@ -23,8 +23,8 @@
         outlined
         flat
         hide-no-data
-        :hide-details="true"
         :placeholder="$t('user.onboarding.choose')"
+        class="mt-1"
       ></v-autocomplete>
 
       <!-- Branche -->
@@ -45,8 +45,8 @@
         outlined
         flat
         hide-no-data
-        :hide-details="true"
         :placeholder="$t('user.onboarding.choose')"
+        class="mt-1"
       ></v-autocomplete>
 
       <!-- Looking for role -->
@@ -70,7 +70,7 @@
           outlined
           flat
           hide-no-data
-          :hide-details="true"
+          class="mt-1"
         ></v-autocomplete>
 
       <v-row class="mt-0">
@@ -89,7 +89,7 @@
             type="submit"
             color="primary"
             height="58"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>

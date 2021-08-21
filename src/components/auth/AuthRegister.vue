@@ -55,12 +55,10 @@
         v-model="formData.first_name"
         placeholder="Vorname"
         :rules="[validations.required]"
-        hide-details
         type="text"
         dense
         outlined
         background-color="white"
-        class="mb-4"
       ></v-text-field>
 
       <!-- Last name -->
@@ -68,12 +66,10 @@
         v-model="formData.last_name"
         placeholder="Nachname"
         :rules="[validations.required]"
-        hide-details
         type="text"
         dense
         outlined
         background-color="white"
-        class="mb-4"
       ></v-text-field>
 
       <!-- Email -->
@@ -81,12 +77,10 @@
         v-model="formData.email"
         placeholder="Email Addresse"
         :rules="[validations.required, validations.email]"
-        hide-details
         type="email"
         dense
         outlined
         background-color="white"
-        class="mb-4"
       ></v-text-field>
 
       <!-- Password -->
@@ -95,11 +89,9 @@
         placeholder="Passwort"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
-        hide-details
         dense
         outlined
         background-color="white"
-        class="mb-4"
       >
         <template v-slot:append  >
           <div class="d-flex align-center">
@@ -124,11 +116,9 @@
           validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
-        hide-details
         dense
         outlined
         background-color="white"
-        class="mb-4 align-center"
       >
         <template v-slot:append  >
           <div class="d-flex align-center">
@@ -148,13 +138,11 @@
       <v-text-field
         v-model="formData.phone"
         placeholder="Telefonnummer"
-        :rules="[validations.phone]"
-        hide-details
+        :rules="[validations.required, validations.phone]"
         type="text"
         dense
         outlined
         background-color="white"
-        class="mb-4"
       ></v-text-field>
 
       <!-- Show name -->

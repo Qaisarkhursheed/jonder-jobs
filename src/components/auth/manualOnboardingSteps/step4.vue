@@ -22,8 +22,8 @@
         outlined
         flat
         hide-no-data
-        :hide-details="true"
         :placeholder="$t('user.onboarding.choose')"
+        class="mt-1"
       ></v-autocomplete>
 
       <label class="profile-label">
@@ -35,6 +35,7 @@
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
+        class="mt-1"
       ></v-select>
 
       <label class="profile-label">
@@ -46,6 +47,7 @@
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
+        class="mt-1"
       ></v-select>
 
       <label class="profile-label">
@@ -54,14 +56,15 @@
       <Calendar
         @setDate="value.ready_for_work = $event"
         :rules="[validations.required]"
+        class="mt-1"
       />
 
       <label class="profile-label">
         {{ $t("user.onboarding.monthlySalary") }}
       </label>
       <v-row>
-        <v-col cols="auto">
-          <div class="monthly-salary">{{ value.monthly_salary }}k</div>
+        <v-col cols="auto mb-2">
+          <div class="monthly-salary ">{{ value.monthly_salary }}k</div>
         </v-col>
         <v-col cols="col" class="d-flex">
           <v-slider
@@ -95,7 +98,7 @@
             type="submit"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>

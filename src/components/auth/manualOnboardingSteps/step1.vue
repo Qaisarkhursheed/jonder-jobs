@@ -27,7 +27,7 @@
         :disabled="!formValid"
         color="primary"
         height="55"
-        class="full-w mt-5 font-weight-medium "
+        class="full-w mt-5 font-weight-medium dark-blue"
       >
         {{ $t("user.onboarding.next") }}
       </v-btn>
