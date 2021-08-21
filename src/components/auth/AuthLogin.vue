@@ -73,8 +73,7 @@
 
         <v-btn
           type="submit"
-          color="primary"
-          class="full-w mt-5"
+          class="full-w mt-5 dark-blue"
           :disabled="!formValid"
           :loading="formLoading"
         >

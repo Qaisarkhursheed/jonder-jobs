@@ -4,9 +4,11 @@
       Company contact details.
     </h1>
 
-    <v-form v-model="formValid">
+    <v-form v-model="formValid" ref="form"
+      class="auth-form">
       <label class="profile-label">Company Email Address</label>
       <v-text-field
+        class="mt-1"
         v-model="value.company_email"
         :rules="[validations.required, validations.email]"
         dense
@@ -19,6 +21,7 @@
 
       <label class="profile-label">Company Phone Number</label>
       <v-text-field
+        class="mt-1"
         v-model="value.company_phone"
         :rules="[validations.required, validations.phone]"
         dense
@@ -30,8 +33,9 @@
 
       <label class="profile-label">Address</label>
       <v-text-field
+        class="mt-1"
         v-model="value.address"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.min.string(6)]"
         dense
         placeholder="Enter"
         outlined
@@ -41,12 +45,12 @@
 
       <label class="profile-label">City</label>
       <v-text-field
+        class="mt-1"
         v-model="value.city"
         :rules="[validations.required]"
         dense
         placeholder="Enter"
         outlined
-        flat
         background-color="white"
       ></v-text-field>
 
@@ -66,7 +70,7 @@
             :disabled="!formValid"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>
@@ -77,6 +81,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Step3",
   props: {

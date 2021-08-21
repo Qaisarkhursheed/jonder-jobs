@@ -95,7 +95,7 @@
             type="submit"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>
@@ -129,22 +129,6 @@ export default {
   data() {
     return {
       formValid: false,
-      positions: [
-        this.$t("user.onboarding.positionDeveloper"),
-        this.$t("user.onboarding.positionProjectManager"),
-        this.$t("user.onboarding.positionConstructionManager"),
-        this.$t("user.onboarding.positionIntern"),
-        this.$t("user.onboarding.positionApprentice"),
-        this.$t("user.onboarding.positionManager")
-      ],
-      branches: [
-        this.$t("user.onboarding.branchMedicine"),
-        this.$t("user.onboarding.branchAutomotive"),
-        this.$t("user.onboarding.branchMechanical"),
-        this.$t("user.onboarding.branchChemical"),
-        this.$t("user.onboarding.branchFood"),
-        this.$t("user.onboarding.branchElectrical")
-      ],
       modals: {
         education: {
           active: false,

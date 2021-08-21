@@ -5,16 +5,45 @@
     </h1>
 
     <v-form v-model="formValid">
-      <label class="profile-label">Logo</label>
-      <v-file-input
+      <!-- <v-file-input
         placeholder="Click to upload logo photo"
         outlined
         dense
         v-model="value.profile_img_file"
-      ></v-file-input>
+      ></v-file-input> -->
+
+      <!-- Avatar upload: Move to component  -->
+      <div class="d-flex align-center flex-column mt-8 mb-6">
+        <v-avatar
+          color="#E3F2FB"
+          size="120"
+          class="flex-grow-0 flex-shrink-0"
+          style="cursor: pointer"
+          @click="$refs.uploadAvatarInput.click()"
+        >
+          <v-img v-if="avatar_img" :src="avatar_img"></v-img>
+          <v-icon
+            size="64"
+            color="#6a9cd4"
+            v-else
+          >
+            mdi-cloud-upload
+          </v-icon>
+        </v-avatar>
+        <input
+          type="file"
+          ref="uploadAvatarInput"
+          style="display: none"
+          @change="value.profile_img_file = $event.target.files[0]"
+        />
+        <div class="avatar-label mt-4">
+          Click to upload photo
+        </div>
+      </div>
 
       <label class="profile-label">About company</label>
       <v-textarea
+        class="mt-3"
         dense
         height="150"
         placeholder="Describe your company"
@@ -27,9 +56,8 @@
       <v-btn
         @click="nextScreen"
         :disabled="!formValid"
-        color="primary"
         height="55"
-        class="full-w mt-5 font-weight-medium "
+        class="full-w mt-5 font-weight-medium dark-blue"
       >
         {{ $t("user.onboarding.next") }}
       </v-btn>
@@ -51,6 +79,14 @@ export default {
     return {
       formValid: false
     };
+  },
+  computed: {
+    avatar_img() {
+      if (this.value.profile_img_file) {
+        return URL.createObjectURL(this.value.profile_img_file);
+      }
+      return false;
+    }
   }
 };
 </script>
@@ -62,6 +98,11 @@ export default {
 </style>
 
 <style scoped lang="scss">
+.avatar-label {
+  font-weight: normal;
+  font-size: 17px;
+  color: rgba(43, 43, 43, 0.5);
+}
 .mo-step-1 {
   &__btn-icon {
     position: absolute;

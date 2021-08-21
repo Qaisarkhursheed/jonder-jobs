@@ -14,18 +14,19 @@
         outlined
       ></v-select> -->
       <v-autocomplete
+        class="mt-1"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required]"
         outlined
         flat
         hide-no-data
-        :hide-details="true"
         :placeholder="$t('user.onboarding.choose')"
       ></v-autocomplete>
 
       <label class="profile-label">Number of employees</label>
       <v-select
+        class="mt-1"
         v-model="value.company_employees"
         :items="types.EMPLOYEE_NUMBER"
         :rules="[validations.required]"
@@ -49,7 +50,7 @@
             :disabled="!formValid"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>
