@@ -95,7 +95,13 @@ export default {
     },
     async sendMessage({ dispatch }, payload) {
       try {
-        const resp = await axios.post(`/conversations/${payload.id}`, payload);
+        let formData = new FormData();
+        Object.keys(payload).forEach(key => {
+          if (payload[key] || payload[key] == 0) {
+            formData.append(key, payload[key]);
+          }
+        });
+        const resp = await axios.post(`/conversations/${payload.id}`, formData);
         dispatch("getSingleConversation", { id: payload.id });
         dispatch("getAllConversations");
         return resp;

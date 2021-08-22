@@ -77,7 +77,17 @@
               ></div>
 
               <div v-if="msg.type == 'upload'">
-                <img :src="getImagePath(msg)" style="max-width: 100%" />
+                <!-- Image -->
+                <img
+                  v-if="isImage(msg)"
+                  :src="getFileData(msg).url"
+                  style="max-width: 100%"
+                />
+
+                <!-- Document -->
+                <a v-else :href="getFileData(msg).url" target="_blank">
+                  {{ getFileData(msg).name }}
+                </a>
               </div>
 
               <!-- Time -->
@@ -88,9 +98,11 @@
       </v-card-text>
     </div>
     <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
-      <v-icon class="chat-icon pl-3 pr-3">mdi-paperclip </v-icon>
+      <v-file-input v-model="newFile" class="pa-0" hide-input></v-file-input>
+
       <v-textarea
         class="rounded-lg"
+        style="width: 100%"
         label="Type a message"
         outlined
         solo
@@ -102,6 +114,7 @@
         v-model="newMessage"
         >Message
       </v-textarea>
+
       <v-icon v-if="!sending" @click="send" class="message-type-new-send"
         >mdi-send-circle
       </v-icon>
@@ -125,6 +138,7 @@ export default {
   },
   data: () => ({
     newMessage: "",
+    newFile: null,
     sending: false,
     chatFull: false
   }),
@@ -143,13 +157,19 @@ export default {
       }
     },
     async send() {
+      if (!this.newMessage && !this.newFile) {
+        return;
+      }
+
       this.sending = true;
       await this.sendMessage({
         id: this.conversationDetails.id,
+        file: this.newFile,
         message: this.newMessage
       })
         .then(() => {
           this.newMessage = "";
+          this.newFile = null;
         })
         .finally(() => {
           this.sending = false;
@@ -165,9 +185,15 @@ export default {
 
       return conversation.user_name.substr(0, 2);
     },
-    getImagePath(msg) {
-      const data = JSON.parse(msg.body);
-      return data.url;
+    isImage(msg) {
+      if (msg.type != "upload") {
+        return false;
+      }
+
+      return this.getFileData(msg).path.match(/.(jpg|jpeg|png|gif)$/i);
+    },
+    getFileData(msg) {
+      return JSON.parse(msg.body);
     }
   },
   watch: {
@@ -223,8 +249,5 @@ export default {
     cursor: pointer;
     z-index: 10;
   }
-}
-.chat-icon {
-  cursor: pointer;
 }
 </style>
