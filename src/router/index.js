@@ -414,17 +414,17 @@ const getDashboardRoute = () => {
 router.beforeEach(async (to, from, next) => {
   const isAuth = store.getters["auth/authenticated"];
   const user = store.getters["user/user"];
-  
-  if (to.meta.requiresAuth && isAuth && to.name != 'RegisterVerifyEmail') {
-    if (!user.email_verified_at) {
-      return router.replace({ name: "RegisterVerifyEmail"});
-      }
-  }
 
   if (to.name == "Logout") {
     store.dispatch("auth/logout").finally(() => {
       router.replace({ name: "Home" });
     });
+  }
+
+  if (to.meta.requiresAuth && isAuth && !user.email_verified_at) {
+    if (to.name != "RegisterVerifyEmail") {
+      return router.replace({ name: "RegisterVerifyEmail" });
+    }
   }
 
   if (to.meta.requiresAuth && !isAuth) {
@@ -445,14 +445,15 @@ router.beforeEach(async (to, from, next) => {
   ) {
     return next({ name: "Home" });
   }
-  
+
   if (
     to.meta.requiresAuth &&
     !to.meta.isOnboarding &&
+    user.email_verified_at &&
     !user.onboarding_finished
   ) {
     const userRole = store.getters["user/user"].role;
-    
+
     if (userRole == "Jobseeker") {
       router.replace({ name: "ManualOnboarding" });
     } else if (userRole == "Employer") {
