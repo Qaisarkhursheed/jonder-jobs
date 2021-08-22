@@ -10,6 +10,7 @@ import Login from "../views/auth/Login.vue";
 import RegisterWelcome from "../views/auth/RegisterWelcome";
 import RegisterUser from "../views/auth/RegisterUser";
 import RegisterCompany from "../views/auth/RegisterCompany";
+import RegisterVerifyEmail from "@/components/auth/AuthConfirmEmail";
 import ForgotPassword from "../views/auth/ForgotPassword.vue";
 import ResetPassword from "../views/auth/ResetPassword.vue";
 import Protected from "../views/Protected";
@@ -110,6 +111,16 @@ const routes = [
     meta: {
       requiresAuth: false,
       guest: true
+    }
+  },
+  {
+    path: "/verify-email",
+    name: "RegisterVerifyEmail",
+    component: RegisterVerifyEmail,
+    meta: {
+      requiresAuth: true,
+      verify: true,
+      guest: false
     }
   },
   {
@@ -403,6 +414,12 @@ const getDashboardRoute = () => {
 router.beforeEach(async (to, from, next) => {
   const isAuth = store.getters["auth/authenticated"];
   const user = store.getters["user/user"];
+  
+  if (to.meta.requiresAuth && isAuth && to.name != 'RegisterVerifyEmail') {
+    if (!user.email_verified_at) {
+      return router.replace({ name: "RegisterVerifyEmail"});
+      }
+  }
 
   if (to.name == "Logout") {
     store.dispatch("auth/logout").finally(() => {
@@ -428,14 +445,14 @@ router.beforeEach(async (to, from, next) => {
   ) {
     return next({ name: "Home" });
   }
-
+  
   if (
     to.meta.requiresAuth &&
     !to.meta.isOnboarding &&
     !user.onboarding_finished
   ) {
     const userRole = store.getters["user/user"].role;
-
+    
     if (userRole == "Jobseeker") {
       router.replace({ name: "ManualOnboarding" });
     } else if (userRole == "Employer") {
