@@ -7,7 +7,8 @@ axios.defaults.baseURL = process.env.VUE_APP_API_BASE;
 // Request interceptor for API calls
 axios.interceptors.request.use(
   config => {
-    const token = localStorage.getItem("user-token");
+    const token =
+      router.history.current.query.token || localStorage.getItem("user-token");
     config.headers.Authorization = `Bearer ${token}`;
     config.headers.Accept = "application/json";
     return config;
