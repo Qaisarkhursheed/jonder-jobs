@@ -171,6 +171,29 @@
       </v-row>
     </v-card>
 
+    <v-card flat id="status" class="profile-section mb-10">
+      <v-row>
+        <p class="profile-title">
+          Your status
+        </p>
+        <p class="profile-subtitle">
+          Explanation goes here
+        </p>
+        <v-col cols="12">
+          <label class="profile-label">
+            Your status on Jonder
+          </label>
+          <v-select
+            v-model="formData.why_jonder"
+            :rules="[validations.required]"
+            :items="jonderStatus"
+            background-color="white"
+            outlined
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-card>
+
     <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
@@ -582,6 +605,7 @@ export default {
       ready_for_work: "",
       monthly_salary: "",
       work_experience: "",
+      why_jonder: "",
       cv: null,
       qualifications: null,
       resume: null
@@ -599,6 +623,11 @@ export default {
       "Chemical-pharmaceutical industry",
       "Food industry",
       "Electrical engineering industry"
+    ],
+    jonderStatus: [
+      "I am actively looking for a job",
+      "I am open to an interesting offer",
+      "I am just curious"
     ],
     lookingForRole: [
       "Developer",
@@ -681,6 +710,7 @@ export default {
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
+      this.formData.why_jonder = user.why_jonder;
     },
     handleUpdate() {
       this.formResponse = {};
