@@ -89,6 +89,10 @@ export default {
       );
     },
     getShortMessage(conversation) {
+      if (conversation.conversation.last_message.type == "upload") {
+        return "File";
+      }
+
       return conversation.conversation.last_message
         ? conversation.conversation.last_message.body.substr(0, 200)
         : "-";
