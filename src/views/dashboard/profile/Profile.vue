@@ -151,7 +151,7 @@
           <label class="profile-label"
             >What type of role are you looking for?</label
           >
-           <v-autocomplete
+          <v-autocomplete
             v-model="formData.looking_for"
             :items="types.JOB_POSITION"
             multiple
@@ -362,22 +362,22 @@
         <v-col cols="12">
           <div class="mt-6">
             <div style="width: 70%">
-              <DocumentUploadSection 
-                @change="e => formData.cv = e" 
-                type="Cv" 
-                :value="formData.cv" 
-              /> 
-            </div>
-            <div style="width: 70%">
-              <DocumentUploadSection 
-                @change="e => formData.qualifications = e" 
-                type="Qualifications"
-                :value="formData.qualifications" 
+              <DocumentUploadSection
+                @change="e => (formData.cv = e)"
+                type="Cv"
+                :value="formData.cv"
               />
             </div>
             <div style="width: 70%">
-              <DocumentUploadSection 
-                @change="e => formData.resume = e" 
+              <DocumentUploadSection
+                @change="e => (formData.qualifications = e)"
+                type="Qualifications"
+                :value="formData.qualifications"
+              />
+            </div>
+            <div style="width: 70%">
+              <DocumentUploadSection
+                @change="e => (formData.resume = e)"
                 type="Resume"
                 :value="formData.resume"
               />
@@ -544,7 +544,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import types from '@/types';
+import types from "@/types";
 
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -553,7 +553,7 @@ import AddNewCard from "@/views/dashboard/AddNewCard";
 import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
-import DocumentUploadSection from '@/components/DocumentUploadSection.vue';
+import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 
 export default {
   name: "Profile",
@@ -724,6 +724,10 @@ export default {
         .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
+
+          this.$store.dispatch("auth/logout").then(() => {
+            this.$router.push({ name: "Login", query: { changePassword: 1 } });
+          });
         })
         .catch(err => {
           this.passwordFormResponse = err.data;

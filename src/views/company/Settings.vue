@@ -347,6 +347,10 @@ export default {
         .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
+
+          this.$store.dispatch("auth/logout").then(() => {
+            this.$router.push({ name: "Login", query: { changePassword: 1 } });
+          });
         })
         .catch(err => {
           this.passwordFormResponse = err.data;
