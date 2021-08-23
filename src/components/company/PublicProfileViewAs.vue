@@ -139,15 +139,25 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   computed: {
     avatar() {
-      return `${this.user.profile_img}`;
-    },
-  },
+      if (!this.user.profile_img) {
+        return null;
+      }
+
+      try {
+        const url = new URL(this.user.profile_img);
+        return url;
+      } catch (err) {
+        const origin = new URL(process.env.VUE_APP_API_BASE).origin;
+        return `${origin}/storage/avatars/${this.user.profile_img}`;
+      }
+    }
+  }
 };
 </script>
 
