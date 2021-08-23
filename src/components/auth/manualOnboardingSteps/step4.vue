@@ -22,6 +22,7 @@
         outlined
         flat
         hide-no-data
+        multiple
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
       ></v-autocomplete>
@@ -41,14 +42,15 @@
       <label class="profile-label">
         {{ $t("user.onboarding.whereToWork") }}
       </label>
-      <v-select
+      <GooglePlacesAutocomplete @select="e => value.address_to_work = e" />
+      <!-- <v-select
         v-model="value.address_to_work"
         :items="cities"
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
         class="mt-1"
-      ></v-select>
+      ></v-select> -->
 
       <label class="profile-label">
         {{ $t("user.onboarding.whenToStart") }}
@@ -57,12 +59,14 @@
         @setDate="value.ready_for_work = $event"
         :rules="[validations.required]"
         class="mt-1"
+        type="date"
+        :fromToday="true"
       />
 
       <label class="profile-label">
         {{ $t("user.onboarding.monthlySalary") }}
       </label>
-      <v-row>
+      <v-row class="mt-1">
         <v-col cols="auto mb-2">
           <div class="monthly-salary ">{{ value.monthly_salary }}k</div>
         </v-col>
@@ -109,6 +113,7 @@
 </template>
 
 <script>
+import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete';
 import Calendar from "@/components/Calendar";
 import types from '@/types';
 
@@ -116,7 +121,8 @@ export default {
   name: "Step4",
 
   components: {
-    Calendar
+    Calendar,
+    GooglePlacesAutocomplete
   },
 
   props: {

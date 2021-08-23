@@ -45,6 +45,7 @@
         outlined
         flat
         hide-no-data
+        multiple
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
       ></v-autocomplete>

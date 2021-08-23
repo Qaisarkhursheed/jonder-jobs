@@ -26,7 +26,8 @@
       v-model="date"
       @input="menu = false"
       @change="dateSelect"
-      type="month"
+      :type="type"
+      :min="startDate"
     ></v-date-picker>
   </v-menu>
 </template>
@@ -47,6 +48,13 @@ export default {
       type: Array,
       default: Array,
     },
+    type: {
+      type: String,
+      default: 'month'
+    },
+    fromToday: {
+      type: Boolean,
+    }
   },
   created() {
     if (this.value) {
@@ -63,6 +71,12 @@ export default {
     dateFormatted() {
       return this.date.substr(0, 10);
     },
+    startDate() {
+      if(this.fromToday) {
+        return (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
+      }
+      return '1970-01-01';
+    }
   },
   methods: {
     dateSelect(date) {

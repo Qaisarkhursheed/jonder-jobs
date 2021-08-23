@@ -5,7 +5,8 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <v-text-field
+      <GooglePlacesAutocomplete @select="e => value.city = e" />
+      <!-- <v-text-field
         v-model="value.city"
         :rules="[validations.required]"
         type="text"
@@ -13,13 +14,13 @@
         outlined
         background-color="white"
         dense
-      ></v-text-field>
+      ></v-text-field> -->
 
       <v-checkbox
         class="mb-3"
         label="Möchten Sie, dass wir Ihren Standort anzeigen?"
         hide-details="auto"
-        v-model="data.show_location"
+        v-model="value.show_location"
       ></v-checkbox>
 
       <v-btn
@@ -36,7 +37,11 @@
 </template>
 
 <script>
+import GooglePlacesAutocomplete from '../../GooglePlacesAutocomplete.vue';
 export default {
+  components: { 
+    GooglePlacesAutocomplete 
+  },
   name: "Step1",
   props: {
     value: {

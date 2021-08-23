@@ -153,13 +153,14 @@ export default {
       working_experience: "",
       cv: "",
       resume: null,
-      qualifications: null
+      qualifications: null,
+      show_location: false,
       // address: "",
       // working_in: "",
       // describe_yourself: "",
       // training_studies: "",
       // your_qualification: "",
-      // additional_training: "",
+      // additional_traidning: "",
       // dream_job: "",
     }
   }),
