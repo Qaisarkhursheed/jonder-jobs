@@ -21,7 +21,7 @@
       <label class="profile-label">
         {{ $t("user.onboarding.experienceInYears") }}
       </label>
-      <v-row class="d-flex align-center">
+      <v-row class="d-flex align-center mt-1">
         <v-col cols="auto">
           <div class="monthly-salary">{{ value.working_experience }} years</div>
         </v-col>
@@ -41,42 +41,60 @@
         </v-col>
       </v-row>
 
-      <div class="mt-3">
+      <div class="mt-4">
         <label class="profile-label">
           {{ $t("user.onboarding.yourProfessionalExperience") }}
         </label>
         <CardActionableList
+          class="mt-1"
           type="Experience"
           @edit="activateEdit('experience', $event)"
         />
-        <v-btn
-          @click="toggleModal('experience')"
-          outlined
-          rounded
-          color="#0253B3"
-        >
-          <v-icon>mdi-plus</v-icon>
-          Add
-        </v-btn>
+        <div @click="toggleModal('experience')" 
+          class="d-flex">
+          <v-btn
+            rounded
+            outlined
+            color="#0253B3"
+            height="26"
+            width="26"
+            style="cursor: pointer;"
+            fab
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            Add
+          </div>
+        </div>
       </div>
 
-      <div class="mt-3">
+      <div class="mt-5">
         <label class="profile-label">
           {{ $t("user.onboarding.yourEducation") }}
         </label>
         <CardActionableList
+          class="mt-1"
           type="Education"
           @edit="activateEdit('education', $event)"
         />
-        <v-btn
-          @click="toggleModal('education')"
-          outlined
-          rounded
-          color="#0253B3"
-        >
-          <v-icon>mdi-plus</v-icon>
-          Add
-        </v-btn>
+        <div @click="toggleModal('education')" 
+          class="d-flex">
+          <v-btn
+            rounded
+            outlined
+            color="#0253B3"
+            height="26"
+            width="26"
+            style="cursor: pointer;"
+            fab
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            Add
+          </div>
+        </div>
       </div>
 
       <v-row class="mt-5">

@@ -40,17 +40,18 @@
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
                   :rules="[validations.required]"
-                  type="month"
+                  type="date"
                 />
               </v-col>
 
-              <v-col cols="6" class="mt-2">
+              <v-col cols="6" class="mt-2" v-if="!form.working_here">
                 <label>{{ $t("user.onboarding.endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
                   :value="form.end_time"
                   :rules="form.working_here ? [] : [validations.required]"
                   :disabled="!!form.working_here"
+                  type="date"
                 />
               </v-col>
             </v-row>

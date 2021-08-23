@@ -246,6 +246,10 @@ h5,
   box-shadow: none;
   text-transform: none !important;
 
+  &.v-btn--round {
+    border-radius: 50%;
+  } 
+  
   &.light-blue {
     color: $primary-blue-dark !important;
     background-color: $primary-blue-light !important;
