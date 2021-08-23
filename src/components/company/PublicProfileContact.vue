@@ -43,37 +43,18 @@
           <label class="section-label">
             Address
           </label>
-          <v-text-field
-            v-model="form.address"
-            class="rounded-lg"
-            style="height: 50px;"
-            height="100%"
-            type="text"
-            outlined
-            :hide-details="true"
-            flat
-            dense
-            solo
-            background-color="#fff">
-          </v-text-field>
+          <GooglePlacesAutocomplete 
+            type="geocode"
+            :value="form.address"
+            @select="e => form.address = e" />
         </v-col>
         <v-col cols="6">
           <label class="section-label">
             City
           </label>
-          <v-text-field
-            v-model="form.city"
-            class="rounded-lg"
-            style="height: 50px;"
-            height="100%"
-            type="text"
-            outlined
-            :hide-details="true"
-            flat
-            dense
-            solo
-            background-color="#fff">
-          </v-text-field>
+          <GooglePlacesAutocomplete 
+            :value="form.city"
+            @select="e => form.city = e" />
         </v-col>
       </v-row>
     </div>
@@ -134,9 +115,15 @@
 <script>
 
 import { forEach } from 'lodash';
+import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
 
 export default {
+
   name: 'PublicProfileContact',
+
+  components: {
+    GooglePlacesAutocomplete
+  },
 
   props: {
     user: {

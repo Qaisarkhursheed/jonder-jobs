@@ -11,13 +11,6 @@
         <label class="section-label">
           {{ $t('company.search.jobPosition') }}
         </label>
-        <!-- <v-select
-          v-model="formFields.job_position"
-          :items="types.JOB_POSITION"
-          :hide-details="true"
-          :placeholder="$t('company.search.jobPosition')"
-          outlined
-        ></v-select> -->
         <v-autocomplete
           v-model="formFields.job_position"
           :items="types.JOB_POSITION"
@@ -49,13 +42,6 @@
           <label class="section-label">
             {{ $t('company.search.industryOfProfession') }}
           </label>
-          <!-- <v-select
-            v-model="formFields.branche"
-            :items="types.JOB_BRANCHE"
-            :hide-details="true"
-            :placeholder="$t('company.search.industryOfProfession')"
-            outlined
-          ></v-select> -->
           <v-autocomplete
             v-model="formFields.branche"
             :items="types.JOB_BRANCHE"
@@ -155,7 +141,8 @@
           <label class="section-label">
             {{ $t('company.search.city') }}
           </label>
-          <v-text-field
+          <GooglePlacesAutocomplete @select="e => formFields.city = e" />
+          <!-- <v-text-field
             v-model="formFields.city"
             class="rounded-lg"
             style="height: 50px;"
@@ -168,7 +155,7 @@
             dense
             solo
             background-color="#fff">
-          </v-text-field>
+          </v-text-field> -->
         </v-col>
       </v-row>
     </template>
@@ -231,11 +218,13 @@
 import { forEach } from 'lodash';
 import store from '@/store';
 import types from '@/types';
+import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
 
 export default {
   name: 'SearchForm',
 
   components: {
+    GooglePlacesAutocomplete
   },
 
   data() {

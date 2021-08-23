@@ -34,7 +34,7 @@
             </v-row>
 
             <v-row>
-              <v-col cols="6" class="mt-2">
+              <v-col cols="6" class="mt-1">
                 <label>{{ $t("user.onboarding.startDate") }}</label>
                 <Calendar
                   @setDate="form.start_time = $event"
@@ -44,7 +44,7 @@
                 />
               </v-col>
 
-              <v-col cols="6" class="mt-2" v-if="!form.working_here">
+              <v-col cols="6" class="mt-1" v-if="!form.working_here">
                 <label>{{ $t("user.onboarding.endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
@@ -76,7 +76,6 @@
                   flat
                   hide-no-data
                   :placeholder="$t('user.onboarding.choose')"
-                  class="mt-1"
                 ></v-autocomplete>
               </v-col>
             </v-row>

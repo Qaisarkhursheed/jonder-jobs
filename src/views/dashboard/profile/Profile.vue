@@ -240,7 +240,10 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Where would you like to work?</label>
-          <v-text-field
+           <GooglePlacesAutocomplete 
+            :value="formData.address_to_work"
+            @select="e => formData.address_to_work = e" />
+          <!-- <v-text-field
             dense
             type="text"
             outlined
@@ -249,7 +252,7 @@
             hide-details
             background-color="white"
             v-model="formData.address_to_work"
-          ></v-text-field>
+          ></v-text-field> -->
         </v-col>
       </v-row>
 
@@ -577,6 +580,7 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
+import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
 
 export default {
   name: "Profile",
@@ -589,7 +593,8 @@ export default {
     ResponseAlert,
     ModalEducation,
     ModalExperience,
-    DocumentUploadSection
+    DocumentUploadSection,
+    GooglePlacesAutocomplete
   },
 
   data: () => ({

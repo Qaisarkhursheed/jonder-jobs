@@ -1,8 +1,9 @@
 <template>
   <div>
-  <v-autocomplete
+  <v-combobox
     :items="entries"
     v-model="model"
+    :value="model"
     :loading="isLoading"
     :rules="[validations.required]"
     :search-input.sync="search"
@@ -12,7 +13,6 @@
     no-filter
     hide-no-data
     placeholder="Enter"
-    class="mt-1"
     @input="select"
   >
     <template v-slot:item="{ item }">
@@ -21,7 +21,7 @@
     <template v-slot:selection="{ item }">
       {{ item.description }}
     </template>
-  </v-autocomplete>
+  </v-combobox>
   </div>
 </template>
 
@@ -45,7 +45,6 @@ export default {
       entries: [],
       model: null,
       isLoading: false,
-      aaaa: null,
       search: null
     }
   },
@@ -53,8 +52,9 @@ export default {
   created() {
     this.service = new window.google.maps.places.AutocompleteService();
     if(this.value) {
-      console.log(this.value);
-      this.model = this.value;
+      this.model = {
+        description: this.value 
+      };
     }
   },
 
@@ -69,6 +69,8 @@ export default {
       });
     },
     select() {
+      if(!this.model)
+        return;
       if (this.type == 'geocode') {
         this.$emit('select', this.model.structured_formatting.main_text);
       } else {

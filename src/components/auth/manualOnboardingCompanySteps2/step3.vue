@@ -65,7 +65,7 @@
 
 <script>
 
-import GooglePlacesAutocomplete from '../../GooglePlacesAutocomplete.vue';
+import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
 
 export default {
   name: "Step3",
