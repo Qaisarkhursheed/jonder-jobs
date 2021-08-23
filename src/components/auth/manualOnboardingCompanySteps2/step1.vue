@@ -34,7 +34,7 @@
           type="file"
           ref="uploadAvatarInput"
           style="display: none"
-          @change="value.profile_img_file = $event.target.files[0]"
+          @change="change"
         />
         <div class="avatar-label mt-4">
           Click to upload photo
@@ -77,13 +77,21 @@ export default {
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
+      profile_img: false
     };
+  },
+  methods: {
+    change(e) {
+      this.profile_img = this.value.profile_img_file = e.target.files[0];
+      // this.value.profile_img_file = e.target.files[0];
+      console.log(e);
+    }
   },
   computed: {
     avatar_img() {
-      if (this.value.profile_img_file) {
-        return URL.createObjectURL(this.value.profile_img_file);
+      if (this.profile_img) {
+        return URL.createObjectURL(this.profile_img);
       }
       return false;
     }

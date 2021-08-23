@@ -10,11 +10,10 @@
     outlined
     flat
     no-filter
-    item-value="description"
     hide-no-data
-    :placeholder="$t('user.onboarding.locationPlaceholder')"
+    placeholder="Enter"
     class="mt-1"
-    @input="clearSearch"
+    @input="select"
   >
     <template v-slot:item="{ item }">
       {{ item.description }}
@@ -34,6 +33,10 @@ export default {
   props: {
     value: {
       type: [String, Object]
+    },
+    type: {
+      type: String,
+      default: '(cities)'
     }
   },
   data() {
@@ -59,15 +62,18 @@ export default {
     async getPlaces() {
       await this.service.getPlacePredictions({
         input: this.search,
-        types: ['(cities)'],
+        types: [this.type],
       }).then((res) => {
         this.entries = res.predictions;
         // this.isLoading = false;
       });
     },
-    clearSearch() {
-      console.log('c;ikc');
-      this.$emit('select', this.model);
+    select() {
+      if (this.type == 'geocode') {
+        this.$emit('select', this.model.structured_formatting.main_text);
+      } else {
+        this.$emit('select', this.model.description);
+      }
     }
   },
   

@@ -32,27 +32,10 @@
       ></v-text-field>
 
       <label class="profile-label">Address</label>
-      <v-text-field
-        class="mt-1"
-        v-model="value.address"
-        :rules="[validations.required, validations.min.string(6)]"
-        dense
-        placeholder="Enter"
-        outlined
-        flat
-        background-color="white"
-      ></v-text-field>
+      <GooglePlacesAutocomplete @select="e => value.address = e" type="geocode" />
 
       <label class="profile-label">City</label>
-      <v-text-field
-        class="mt-1"
-        v-model="value.city"
-        :rules="[validations.required]"
-        dense
-        placeholder="Enter"
-        outlined
-        background-color="white"
-      ></v-text-field>
+      <GooglePlacesAutocomplete @select="e => value.city = e" />
 
       <v-row class="mt-1">
         <v-col cols="3">
@@ -82,8 +65,14 @@
 
 <script>
 
+import GooglePlacesAutocomplete from '../../GooglePlacesAutocomplete.vue';
+
 export default {
   name: "Step3",
+
+  components: {
+    GooglePlacesAutocomplete
+  },
   props: {
     value: {
       type: Object,
