@@ -14,9 +14,9 @@
         v-if="getProfileImage(conversation)"
         :src="getProfileImage(conversation)"
       ></v-img>
-      <span class="white--text full-w text-center d-block" v-else>{{
-        getInitials(conversation)
-      }}</span>
+      <span class="white--text full-w text-center d-block" v-else>
+        {{ getInitials(conversation) }}
+      </span>
     </v-list-item-avatar>
 
     <v-list-item-content>
@@ -73,10 +73,17 @@ export default {
     ]),
     ...mapMutations("chat", ["SET_CONVERSATION_DETAILS"]),
     getParticipian(conversation) {
-      return conversation.conversation.participants[1].messageable;
+      return conversation.conversation.participants[0].messageable;
     },
     getProfileImage(conversation) {
-      return this.getParticipian(conversation).profile_img || false;
+      const img = this.getParticipian(conversation).profile_img;
+
+      if (!img) {
+        return null;
+      }
+
+      const origin = new URL(process.env.VUE_APP_API_BASE).origin;
+      return `${origin}/storage/avatars/${img}`;
     },
     getFullName(conversation) {
       const p = this.getParticipian(conversation);

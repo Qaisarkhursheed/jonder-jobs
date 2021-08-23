@@ -10,7 +10,7 @@
           <v-img
             v-if="conversationDetails.profile_img"
             :alt="`${conversationDetails.user_name} avatar`"
-            :src="conversationDetails.profile_img"
+            :src="getProfileImage(conversationDetails)"
           ></v-img>
           <span class="white--text full-w text-center d-block" v-else>{{
             getInitials(conversationDetails)
@@ -184,6 +184,14 @@ export default {
       }
 
       return conversation.user_name.substr(0, 2);
+    },
+    getProfileImage(conversation) {
+      if (!conversation.profile_img) {
+        return null;
+      }
+
+      const origin = new URL(process.env.VUE_APP_API_BASE).origin;
+      return `${origin}/storage/avatars/${conversation.profile_img}`;
     },
     isImage(msg) {
       if (msg.type != "upload") {
