@@ -389,21 +389,21 @@
           <div class="mt-6">
             <div style="width: 70%">
               <DocumentUploadSection
-                @change="e => (formData.cv = e)"
+                @change="e => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
             <div style="width: 70%">
               <DocumentUploadSection
-                @change="e => (formData.qualifications = e)"
+                @change="e => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
             <div style="width: 70%">
               <DocumentUploadSection
-                @change="e => (formData.resume = e)"
+                @change="e => (formData.resume = e[0])"
                 type="Resume"
                 :value="formData.resume"
               />

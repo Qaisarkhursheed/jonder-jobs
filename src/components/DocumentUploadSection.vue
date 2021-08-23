@@ -39,7 +39,7 @@
 
             <v-list>
               <v-list-item
-                v-for="(item, i) in ['Delete']"
+                v-for="(item, i) in ['Delete', 'View']"
                 :key="i"
                 @click="handleAction(item)"
               >
@@ -65,7 +65,7 @@ export default {
       type: String
     },
     value: {
-      type: [Object, Boolean],
+      type: [Object, Boolean, Array],
       default: false
     },
   },
@@ -85,13 +85,22 @@ export default {
     }
   },
   methods: {
-    handleAction() {
-      this.inputData = null;
+    handleAction(item) {
+      if(item === 'View') {
+        let t = this.type.toLowerCase();
+        if(t === 'cv') {
+          t = 'cvs'
+        }
+        const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
+        window.open(link, '_blank').focus();
+
+      } else {
+        this.inputData = null;
+      }
     }
   },
   watch: {
     inputData(val) {
-      console.log('llll', val);
       this.$emit('change', val);
     }
   },
