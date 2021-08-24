@@ -39,7 +39,7 @@
             dense
             placeholder="User's email"
             :rules="[validations.required, validations.email]"
-            type="text"
+            type="email"
             outlined
             flat
             background-color="white"
@@ -65,6 +65,7 @@
               height="48"
               class="ml-3 font-weight-medium "
               :disabled="!isValid"
+              :loading="formLoading"
             >
               Invite user
             </v-btn>
@@ -90,11 +91,13 @@ export default {
         name: "",
         email: ""
       },
+      formLoading: false,
       formResponse: {}
     };
   },
   methods: {
     submit() {
+      this.formLoading = true;
       this.formResponse = {};
       this.$store
         .dispatch("teamManagement/inviteUser", this.formData)
@@ -103,6 +106,9 @@ export default {
         })
         .catch(err => {
           this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
         });
     }
   }
