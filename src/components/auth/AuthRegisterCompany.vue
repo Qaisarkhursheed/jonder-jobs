@@ -114,7 +114,7 @@
         dense
         placeholder="Passwort"
         :rules="[validations.required, validations.min.string(6)]"
-        :type="showPassConfirm ? 'text' : 'password'"
+        :type="showPass ? 'text' : 'password'"
         hide-details=""
         outlined
         background-color="white"
