@@ -23,8 +23,50 @@
           </v-btn>
         </v-stepper-content>
 
-        <!-- Step 2 - Register type -->
+        <!-- Step 2 - Account type -->
         <v-stepper-content step="2">
+          <jonder-title style="font-size: 28px">
+            Are you a Jobseeker or Employer
+          </jonder-title>
+
+          <div class="mx-auto mt-5" style="max-width: 400px">
+            <v-btn
+              block
+              color="primary"
+              class="mb-4"
+              height="55"
+              @click="accountType = 'user'"
+              :outlined="accountType != 'user'"
+            >
+              I'm looking for a Job
+            </v-btn>
+
+            <v-btn
+              block
+              color="primary"
+              class="mb-4"
+              @click="accountType = 'company'"
+              :outlined="accountType != 'company'"
+              height="55"
+            >
+              I'm looking for employee
+            </v-btn>
+
+            <v-btn
+              type="submit"
+              block
+              class="mt-10 dark-blue"
+              :disabled="!accountType"
+              @click="step = 3"
+              height="55"
+            >
+              Weiter
+            </v-btn>
+          </div>
+        </v-stepper-content>
+
+        <!-- Step 3 - Register type -->
+        <v-stepper-content step="3">
           <jonder-title>
             Register
           </jonder-title>
@@ -60,7 +102,7 @@
           </v-btn>
 
           <v-btn
-            @click="step = 3"
+            @click="submit"
             type="button"
             color="primary"
             height="55"
@@ -72,47 +114,7 @@
           </v-btn>
         </v-stepper-content>
 
-        <!-- Step 3 - Account type -->
-        <v-stepper-content step="3">
-          <jonder-title style="font-size: 28px">
-            Are you a Jobseeker or Employer
-          </jonder-title>
-
-          <div class="mx-auto mt-5" style="max-width: 400px">
-            <v-btn
-              block
-              color="primary"
-              class="mb-4"
-              height="55"
-              @click="accountType = 'user'"
-              :outlined="accountType != 'user'"
-            >
-              I'm looking for a Job
-            </v-btn>
-
-            <v-btn
-              block
-              color="primary"
-              class="mb-4"
-              @click="accountType = 'company'"
-              :outlined="accountType != 'company'"
-              height="55"
-            >
-              I'm looking for employee
-            </v-btn>
-
-            <v-btn
-              type="submit"
-              block
-              class="mt-10 dark-blue"
-              :disabled="!accountType"
-              @click="submit"
-              height="55"
-            >
-              Weiter
-            </v-btn>
-          </div>
-        </v-stepper-content>
+        
       </v-stepper-items>
 
       <div class="text-center">
