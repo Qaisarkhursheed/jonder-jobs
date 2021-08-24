@@ -19,6 +19,9 @@
       <template v-slot:[`item.actions`]="{ item }">
         <TeamManagementDeleteUser :user="item"></TeamManagementDeleteUser>
       </template>
+      <template v-slot:[`item.created_at`]="{ item }">
+        {{ item.created_at | moment("MMM DD, HH:mm") }}
+      </template>
     </v-data-table>
   </div>
 </template>
