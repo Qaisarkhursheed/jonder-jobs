@@ -86,6 +86,15 @@ export default {
     }
   },
 
+  async setPassword(context, data) {
+    try {
+      const resp = await axios.post("/set-password", data);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
+  },
+
   async logout({ commit }) {
     try {
       const resp = await axios.post("/logout");

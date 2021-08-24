@@ -8,6 +8,10 @@
       Ihr Passwort wurde zurückgesetzt!
     </v-alert>
 
+    <v-alert v-if="$route.query.setPassword" text type="success">
+      Ihr Passwort wurde festgelegt!
+    </v-alert>
+
     <v-alert v-if="$route.query.changePassword" text type="success">
       Ihr Passwort wurde geändert!
     </v-alert>

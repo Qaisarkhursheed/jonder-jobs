@@ -13,6 +13,7 @@ import RegisterCompany from "../views/auth/RegisterCompany";
 import RegisterVerifyEmail from "@/components/auth/AuthConfirmEmail";
 import ForgotPassword from "../views/auth/ForgotPassword.vue";
 import ResetPassword from "../views/auth/ResetPassword.vue";
+import SetPassword from "../views/auth/SetPassword.vue";
 import Protected from "../views/Protected";
 import ManualOnboarding from "../views/auth/ManualOnboarding";
 import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
@@ -108,6 +109,15 @@ const routes = [
     path: "/reset-password/:email/:expires/:token/:signature",
     name: "ResetPassword",
     component: ResetPassword,
+    meta: {
+      requiresAuth: false,
+      guest: true
+    }
+  },
+  {
+    path: "/set-password/:token/:expires/:signature",
+    name: "SetPassword",
+    component: SetPassword,
     meta: {
       requiresAuth: false,
       guest: true
@@ -398,6 +408,7 @@ const getDashboardRoute = () => {
       };
 
     case "Employer":
+    case "Employee":
       return {
         name: "CompanySearch"
       };
@@ -406,7 +417,7 @@ const getDashboardRoute = () => {
       console.log("Err: Unsupported user role.");
       alert("Error");
       return {
-        name: "Login"
+        name: "Logout"
       };
   }
 };
@@ -440,7 +451,9 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (
-    (to.meta.requiresCompany && user.role != "Employer") ||
+    (to.meta.requiresCompany &&
+      user.role != "Employer" &&
+      user.role != "Employee") ||
     (to.meta.requiresUser && user.role != "Jobseeker")
   ) {
     return next({ name: "Home" });
