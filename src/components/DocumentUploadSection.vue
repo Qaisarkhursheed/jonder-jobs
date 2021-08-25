@@ -86,12 +86,13 @@ export default {
   },
   methods: {
     handleAction(item) {
-      if(item === 'View') {
-        let t = this.type.toLowerCase();
-        if(t === 'cv') {
-          t = 'cvs'
-        }
-        const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
+       if(item === 'View') {
+      //   let t = this.type.toLowerCase();
+      //   if(t === 'cv') {
+      //     t = 'cvs'
+      //   }
+      //  const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
+        const link = this.value.name;
         window.open(link, '_blank').focus();
 
       } else {
