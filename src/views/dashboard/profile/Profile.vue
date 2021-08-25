@@ -242,9 +242,10 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Where would you like to work?</label>
-           <GooglePlacesAutocomplete 
+          <GooglePlacesAutocomplete
             :value="formData.address_to_work"
-            @select="e => formData.address_to_work = e" />
+            @select="e => (formData.address_to_work = e)"
+          />
           <!-- <v-text-field
             dense
             type="text"
@@ -418,11 +419,35 @@
     <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Billing & Invoices
+          Billing &amp; Invoices
         </p>
         <p class="profile-subtitle">
           Explanation goes here
         </p>
+      </v-row>
+
+      <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
+        <v-col>
+          <div class="invoice-number">
+            Number of invoice: {{ item.invoice_number }}
+          </div>
+          <div class="invoice-date">
+            Date of invoice:
+            {{ item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm") }}
+          </div>
+        </v-col>
+        <v-col cols="auto d-flex align-center">
+          <v-img
+            class="hover-pointer"
+            :src="require('@/assets/icons/download.svg')"
+            @click="
+              $store.dispatch('invoices/downloadInvoice', {
+                id: item.id,
+                number: item.invoice_number
+              })
+            "
+          ></v-img>
+        </v-col>
       </v-row>
     </v-card>
 
@@ -582,7 +607,7 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 
 export default {
   name: "Profile",
@@ -623,6 +648,7 @@ export default {
     passwordFormValid: false,
     passwordFormLoading: false,
     passwordFormResponse: {},
+    invoices: [],
     branche: [
       "Medicine",
       "Automotive industry",
@@ -684,6 +710,10 @@ export default {
   }),
   created() {
     this.resetFormData(this.user);
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+      this.invoices = resp.data.data;
+      this.invoices = this.invoices.filter(i => i.status == "complete");
+    });
   },
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -705,15 +735,15 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
-      this.formData.branche = user.branche.split(',');
+      this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
-      this.formData.looking_for_branche = user.looking_for_branche.split(',');
+      this.formData.looking_for_branche = user.looking_for_branche.split(",");
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
-      this.formData.working_experience =  user.working_experience;
+      this.formData.working_experience = user.working_experience;
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;

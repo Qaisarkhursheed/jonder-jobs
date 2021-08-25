@@ -150,20 +150,31 @@
             </v-row>
 
             <v-row
-              v-for="item in [1, 2, 3, 4]"
-              :key="item"
+              v-for="item in invoices"
+              :key="item.id"
               class="invoice-row py-1"
             >
               <v-col>
-                <div class="invoice-number">Number of invoice: {{ item }}</div>
+                <div class="invoice-number">
+                  Number of invoice: {{ item.invoice_number }}
+                </div>
                 <div class="invoice-date">
-                  Date of invoice: 02.10.21 / 12:23
+                  Date of invoice:
+                  {{
+                    item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm")
+                  }}
                 </div>
               </v-col>
               <v-col cols="auto d-flex align-center">
                 <v-img
+                  class="hover-pointer"
                   :src="require('@/assets/icons/download.svg')"
-                  @click="downloadInvoice(item)"
+                  @click="
+                    $store.dispatch('invoices/downloadInvoice', {
+                      id: item.id,
+                      number: item.invoice_number
+                    })
+                  "
                 ></v-img>
               </v-col>
             </v-row>
@@ -295,6 +306,7 @@ export default {
       passwordFormData: {},
       passwordFormValid: false,
       passwordFormResponse: {},
+      invoices: [],
       modals: {
         AddNewCard: {
           active: false,
@@ -312,6 +324,10 @@ export default {
   },
   created() {
     this.fillData();
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+      this.invoices = resp.data.data;
+      this.invoices = this.invoices.filter(i => i.status == "complete");
+    });
   },
   methods: {
     ...mapActions("user", ["updateCompany"]),
@@ -355,9 +371,6 @@ export default {
         .catch(err => {
           this.passwordFormResponse = err.data;
         });
-    },
-    downloadInvoice() {
-      // TODO
     },
     scrollToSection(profileSection) {
       document
