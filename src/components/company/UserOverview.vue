@@ -173,7 +173,6 @@
 
 <script>
 import axios from "axios";
-import { mapActions } from "vuex";
 import UserOverviewGeneral from "@/components/company/UserOverviewGeneral";
 import UserOverviewNotes from "@/components/company/UserOverviewNotes";
 
@@ -232,10 +231,10 @@ export default {
   },
   mounted() {
     this.getUser();
-    this.addUserProfileView({ user_id: this.$route.params.id });
+   // this.addUserProfileView({ user_id: this.$route.params.id });
   },
   methods: {
-    ...mapActions("user", ["addUserProfileView"]),
+  //  ...mapActions("user", ["addUserProfileView"]),
     getUser() {
       axios
         .get(`/users/${this.$route.params.id}`)
