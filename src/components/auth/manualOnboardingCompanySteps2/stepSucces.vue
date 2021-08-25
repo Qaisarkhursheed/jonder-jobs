@@ -16,12 +16,11 @@
           Unternehmen angezeigt!
         </p>
         <v-btn
-          :loading="loading"
           type="submit"
           color="primary"
           height="58"
           class="full-w font-weight-medium dark-blue mb"
-          @click="nextScreen"
+          :to="{ name: 'CompanySearch' }"
         >
           Abschließen
         </v-btn>
@@ -34,9 +33,9 @@
 export default {
   props: {
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
-  name: "StepSucces",
+  name: "StepSucces"
 };
 </script>
 
