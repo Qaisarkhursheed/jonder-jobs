@@ -206,8 +206,8 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-      if (this.e1 < 7) this.e1++;
       if (this.e1 === 7) this.showSteps = false;
+      if (this.e1 < 7) this.e1++;
       else this.saveOnboarding();
     },
     complete(step) {
