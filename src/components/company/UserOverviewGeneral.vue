@@ -11,20 +11,14 @@
         <div class="section experience mt-7">
           <div class="title">Experience</div>
           <div class="content">
-            <div class="item pb-5 pt-5">
-              <div class="title">Company 1</div>
-              <div class="subtitle">Position 1</div>
-              <div class="subtitle">February 2020 - Present</div>
-            </div>
-            <div class="item pb-5 pt-5">
-              <div class="title">Company 2</div>
-              <div class="subtitle">Position 2</div>
-              <div class="subtitle">February 2020 - Present</div>
-            </div>
-            <div class="item pb-5 pt-5">
-              <div class="title">Company 3</div>
-              <div class="subtitle">Position 3</div>
-              <div class="subtitle">February 2020 - Present</div>
+            <div v-for="data in experience" :key="data.company">
+              <div class="item pb-5 pt-5">
+                <div class="title">{{ data.company_name }}</div>
+                <div class="subtitle">{{ data.position }}</div>
+                <div class="subtitle">
+                  {{ data.start_time }} - {{ data.end_time }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -106,9 +100,37 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      experience: [],
+    };
+  },
+  methods: {
+    getExperience() {
+      this.$http
+        .get(`${process.env.VUE_APP_API_BASE}/jobseeker-experience`)
+        .then((res) => {
+          let response = res.data.data.map((obj) => {
+            return obj;
+          });
+          for (let i = 0; i < response.length; i++) {
+            if (res.data.data[i].id === this.user.id) {
+              this.experience.push(res.data.data[i]);
+            }
+          }
+        })
+
+        .catch((error) => {
+          alert(error);
+        });
+    },
+  },
+  beforeMount() {
+    this.getExperience();
+  },
 };
 </script>
 <style lang="scss" scoped>
