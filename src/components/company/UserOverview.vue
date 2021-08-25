@@ -1,5 +1,5 @@
 <template>
-  <div class="user-overview">
+  <div class="user-overview" v-if="profile">
     <div class="heading d-flex mb-5" @click="back">
       <v-icon size="25">
         mdi-arrow-left
@@ -190,37 +190,38 @@ export default {
   },
   data() {
     return {
-      profile: {
-        fullname: {
-          label: "",
-          value: ""
-        },
-        email: {
-          label: "E-mail address",
-          value: ""
-        },
-        address: {
-          label: "City and address",
-          value: ""
-        },
-        about: {
-          label: "",
-          value:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"
-        },
-        profession: {
-          label: "",
-          value: "My Profession"
-        },
-        radius: {
-          label: "Work Radius",
-          value: "50km"
-        },
-        profesionsim: {
-          label: "Profesionsim",
-          value: "Junior"
-        }
-      },
+      profile: null,
+      // profile: {
+      //   fullname: {
+      //     label: "",
+      //     value: ""
+      //   },
+      //   email: {
+      //     label: "E-mail address",
+      //     value: ""
+      //   },
+      //   address: {
+      //     label: "City and address",
+      //     value: ""
+      //   },
+      //   about: {
+      //     label: "",
+      //     value:
+      //       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"
+      //   },
+      //   profession: {
+      //     label: "",
+      //     value: "My Profession"
+      //   },
+      //   radius: {
+      //     label: "Work Radius",
+      //     value: "50km"
+      //   },
+      //   profesionsim: {
+      //     label: "Profesionsim",
+      //     value: "Junior"
+      //   }
+      // },
       tab: null,
       items: ["general", "notes"],
       tabs: {
@@ -231,10 +232,10 @@ export default {
   },
   mounted() {
     this.getUser();
-   // this.addUserProfileView({ user_id: this.$route.params.id });
+    // this.addUserProfileView({ user_id: this.$route.params.id });
   },
   methods: {
-  //  ...mapActions("user", ["addUserProfileView"]),
+    //  ...mapActions("user", ["addUserProfileView"]),
     getUser() {
       axios
         .get(`/users/${this.$route.params.id}`)
@@ -242,7 +243,9 @@ export default {
           // this.populateData(res.data);
           this.profile = res.data.data;
         })
-        .catch();
+        .catch(() => {
+          this.$router.replace({ name: "CompanySearch" });
+        });
     },
     populateData(user) {
       this.profile.fullname.value = `${user.first_name} ${user.last_name}`;
