@@ -145,6 +145,7 @@ export default {
         web_url: '',
         facebook: '',
         instagram: '',
+        youtube: '',
         linkedin: '',
         twitter: ''
       },
