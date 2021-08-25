@@ -142,10 +142,10 @@ export default {
     Step4,
     Step5,
     Step6,
-    StepSucces,
+    StepSucces
   },
   props: {
-    isBtnVisible: Boolean,
+    isBtnVisible: Boolean
   },
   data: () => ({
     showSteps: true,
@@ -166,7 +166,7 @@ export default {
       working_experience: "",
       cv: "",
       resume: null,
-      qualifications: null,
+      qualifications: null
       // address: "",
       // working_in: "",
       // describe_yourself: "",
@@ -174,7 +174,7 @@ export default {
       // your_qualification: "",
       // additional_training: "",
       // dream_job: "",
-    },
+    }
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -184,18 +184,14 @@ export default {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", [
-      "user",
-      "jobseekerExperience",
-      "jobseekerEducation",
-    ]),
+    ...mapGetters("user", ["user", "jobseekerExperience", "jobseekerEducation"])
   },
   methods: {
     ...mapActions("user", ["postOnboardingUser"]),
     populateData(user) {
       console.log("populateData", user);
       if (user) {
-        Object.keys(user).forEach((key) => {
+        Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -206,9 +202,12 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-      if (this.e1 === 7) this.showSteps = false;
-      if (this.e1 < 7) this.e1++;
-      else this.saveOnboarding();
+
+      if (this.e1 < 6) {
+        this.e1++;
+      } else {
+        this.saveOnboarding();
+      }
     },
     complete(step) {
       return step < this.e1;
@@ -219,16 +218,18 @@ export default {
 
       this.postOnboardingUser(this.formData)
         .then(() => {
-          this.$router.replace("/dashboard");
+          this.showSteps = false;
+          this.e1 = 7;
+          // this.$router.replace("/dashboard");
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
