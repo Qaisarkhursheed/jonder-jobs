@@ -39,26 +39,26 @@ export default {
 
   props: {
     value: {
-      type: [String, Object, Date],
+      type: [String, Object, Date]
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     rules: {
       type: Array,
-      default: Array,
+      default: Array
     },
     type: {
       type: String,
-      default: "month",
+      default: "month"
     },
     fromToday: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   fromToday: {
-    type: Boolean,
+    type: Boolean
   },
 
   created() {
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  data: (vm) => ({
+  data: vm => ({
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       .toISOString()
       .substr(0, 10),
@@ -76,7 +76,7 @@ export default {
         .toISOString()
         .substr(0, 10)
     ),
-    menu: false,
+    menu: false
   }),
 
   computed: {
@@ -94,7 +94,7 @@ export default {
 
     computedDateFormatted() {
       return this.formatDate(this.date);
-    },
+    }
   },
   methods: {
     dateSelect(date) {
@@ -111,12 +111,12 @@ export default {
 
       const [month, day, year] = date.split("/");
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    },
+    }
   },
   watch: {
-    date(val) {
+    date() {
       this.dateFormatted = this.formatDate(this.date);
-    },
-  },
+    }
+  }
 };
 </script>
