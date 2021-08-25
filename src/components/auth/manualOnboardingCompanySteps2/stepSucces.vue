@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="px-12">
     <v-card class="d-flex align-center justify-center" flat height="45vh" tile>
-      <v-sheet width="400">
+      <v-sheet>
         <v-sheet class="d-flex align-center justify-center my-16"
           ><v-icon color="primary" size="100"
             >mdi-check-circle-outline</v-icon

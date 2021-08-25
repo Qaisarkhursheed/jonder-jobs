@@ -1,6 +1,6 @@
 <template>
   <auth-wrap :img="2">
-    <div class="stepper-wrap mt-10" style="width: 500px">
+    <div class="stepper-wrap mt-10">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -103,7 +103,7 @@ export default {
     showSteps: true,
 
     saveInProgress: false,
-    e1: 1,
+    e1: 2,
     formData: {
       profile_img: "",
       about_company: "",
@@ -191,6 +191,7 @@ export default {
 @media (max-width: 600px) {
   .stepper-wrap {
     width: 100%;
+    padding: 15px;
   }
 }
 </style>

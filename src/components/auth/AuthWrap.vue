@@ -75,4 +75,10 @@ export default {
   padding: 30px;
   overflow: auto;
 }
+
+@media (max-width: 500px) {
+  .auth-wrap {
+    padding: 0;
+  }
+}
 </style>

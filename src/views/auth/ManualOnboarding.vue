@@ -4,7 +4,7 @@
       mdi-arrow-left
     </v-icon> -->
 
-    <div class="stepper-wrap mt-10" style="width: 450px">
+    <div class="stepper-wrap mt-10">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -249,9 +249,13 @@ export default {
 .mo-stepper-items {
   overflow: auto;
 }
+.stepper-wrap {
+  width: 450px;
+}
 @media (max-width: 600px) {
   .stepper-wrap {
     width: 100%;
+    padding: 15px;
   }
 }
 </style>
