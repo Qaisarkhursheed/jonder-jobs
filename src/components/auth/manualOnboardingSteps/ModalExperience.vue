@@ -40,7 +40,6 @@
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
                   :rules="[validations.required]"
-                  type="date"
                 />
               </v-col>
 
@@ -51,7 +50,6 @@
                   :value="form.end_time"
                   :rules="form.working_here ? [] : [validations.required]"
                   :disabled="!!form.working_here"
-                  type="date"
                 />
               </v-col>
             </v-row>

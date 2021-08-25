@@ -63,25 +63,18 @@ export default {
 
   created() {
     if (this.value) {
-      this.date = this.value;
+      this.date = this.formatServerDate(this.value);
     }
   },
 
-  data: vm => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      .toISOString()
-      .substr(0, 10),
-    dateFormatted: vm.formatDate(
-      new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10)
-    ),
+  data: () => ({
+    date: "",
     menu: false
   }),
 
   computed: {
     dateFormatted() {
-      return this.date.substr(0, 10);
+      return this.formatDate(this.date);
     },
     startDate() {
       if (this.fromToday) {
@@ -98,25 +91,40 @@ export default {
   },
   methods: {
     dateSelect(date) {
-      this.$emit("setDate", date);
+      let newDate = date;
+      if (this.type==='month') {
+        let [year, month, day] = date.split("-");
+        if(!day)
+          newDate = `${year}-${month}-01`;
+      }
+      this.$emit("setDate", newDate);
     },
     formatDate(date) {
       if (!date) return null;
 
-      const [year, month, day] = date.split("-");
+      let [year, month, day] = date.split("-");
+      if(!day) {
+        return `${month}/${year}`;
+      }
+      if(this.type==='month') {
+        return `${month}/${year}`; 
+      }
       return `${day}/${month}/${year}`;
     },
-    parseDate(date) {
-      if (!date) return null;
+    // parseDate(date) {
+    //   if (!date) return null;
 
-      const [month, day, year] = date.split("/");
-      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    }
+    //   const [month, day, year] = date.split("/");
+    //   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    // },
+    formatServerDate(val) {
+      return val.substr(0, 10);
+    },
   },
   watch: {
-    date() {
-      this.dateFormatted = this.formatDate(this.date);
-    }
+    // date() {
+    //   this.dateFormatted = this.formatDate(this.date);
+    // }
   }
 };
 </script>
