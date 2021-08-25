@@ -160,7 +160,7 @@
               <span class="about-info"> Documents </span>
               <div v-if="user.cv" class="row mt-1">
                 <div class="col-auto">
-                  <a :href="`https://dev.api.jonder.devla.dev/storage/cvs/${user.cv}`" target="_blank">
+                  <a :href="user.cv" target="_blank">
                     <img :src="require('@/assets/svg/pdf.svg')" />
                   </a>
                 </div>
@@ -170,7 +170,7 @@
               </div>
               <div v-if="user.qualifications" class="row mt-1">
                 <div class="col-auto">
-                  <a :href="`https://dev.api.jonder.devla.dev/storage/qualifications/${user.qualifications}`" target="_blank">
+                  <a :href="`${user.qualifications}`" target="_blank">
                     <img :src="require('@/assets/svg/pdf.svg')" />
                   </a>
                 </div>
@@ -181,7 +181,7 @@
 
               <div v-if="user.resume" class="row mt-1">
                 <div class="col-auto">
-                  <a :href="`https://dev.api.jonder.devla.dev/storage/resume/${user.resume}`" target="_blank">
+                  <a :href="user.resume" target="_blank">
                     <img :src="require('@/assets/svg/pdf.svg')" />
                   </a>
                 </div>
