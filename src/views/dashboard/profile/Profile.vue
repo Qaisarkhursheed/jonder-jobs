@@ -139,6 +139,7 @@
             :items="types.JOB_BRANCHE"
             cache
             outlined
+            multiple
             flat
             hide-no-data
             :hide-details="true"
@@ -215,6 +216,7 @@
           <v-autocomplete
             v-model="formData.looking_for_branche"
             :items="types.JOB_BRANCHE"
+            multiple
             cache
             outlined
             flat
@@ -703,9 +705,9 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
-      this.formData.branche = user.branche;
+      this.formData.branche = user.branche.split(',');
       this.formData.looking_for = user.looking_for;
-      this.formData.looking_for_branche = user.looking_for_branche;
+      this.formData.looking_for_branche = user.looking_for_branche.split(',');
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work;
@@ -719,8 +721,9 @@ export default {
     },
     handleUpdate() {
       this.formResponse = {};
-      const formDataCopy = Object.assign({}, this.formData);
-
+      let formDataCopy = Object.assign({}, this.formData);
+      formDataCopy.branche = formDataCopy.branche.join();
+      formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
       if (this.newImage) {
         formDataCopy.profile_img = this.newImage;
       }
