@@ -128,9 +128,9 @@ const routes = [
     name: "RegisterVerifyEmail",
     component: RegisterVerifyEmail,
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       verify: true,
-      guest: true
+      guest: false
     }
   },
   {
