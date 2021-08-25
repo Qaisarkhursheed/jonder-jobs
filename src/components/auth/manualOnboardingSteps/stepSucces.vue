@@ -15,7 +15,14 @@
           Leichter geht Karriere wirklich nicht. Dein Profil wird nun
           Unternehmen angezeigt!
         </p>
-        <v-btn color="primary" block class="font-weight-medium mt-10">
+        <v-btn
+          :loading="formLoading"
+          type="submit"
+          color="primary"
+          height="58"
+          class="full-w font-weight-medium dark-blue mb"
+          @click="nextScreen"
+        >
           Abschließen
         </v-btn>
       </v-sheet>
@@ -25,8 +32,16 @@
 
 <script>
 export default {
-  name: "StepSucces"
+  props: {
+    nextScreen: Function,
+    formLoading: Boolean,
+  },
+  name: "StepSucces",
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.mb {
+  margin-bottom: 4.4rem;
+}
+</style>
