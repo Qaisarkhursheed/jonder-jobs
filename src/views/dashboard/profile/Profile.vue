@@ -309,12 +309,12 @@
           <v-row>
             <v-col cols="auto">
               <div class="monthly-salary">
-                {{ formData.work_experience }}
+                {{ formData.working_experience }}
               </div>
             </v-col>
             <v-col class="d-flex my-auto">
               <v-slider
-                v-model="formData.work_experience"
+                v-model="formData.working_experience"
                 track-color="grey"
                 color="primary"
                 always-dirty
@@ -611,7 +611,7 @@ export default {
       address_to_work: "",
       ready_for_work: "",
       monthly_salary: "",
-      work_experience: "",
+      working_experience: "",
       why_jonder: "",
       cv: null,
       qualifications: null,
@@ -713,7 +713,7 @@ export default {
       this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
-      this.formData.work_experience = user.work_experience;
+      this.formData.working_experience =  user.working_experience;
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
