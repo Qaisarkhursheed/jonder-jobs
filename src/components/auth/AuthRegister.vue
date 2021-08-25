@@ -30,11 +30,7 @@
           @click="$refs.uploadAvatarInput.click()"
         >
           <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-icon
-            size="64"
-            color="#6a9cd4"
-            v-else
-          >
+          <v-icon size="64" color="#6a9cd4" v-else>
             mdi-cloud-upload
           </v-icon>
         </v-avatar>
@@ -48,7 +44,6 @@
           Click to upload photo
         </div>
       </div>
-
 
       <!-- First name -->
       <v-text-field
@@ -93,7 +88,7 @@
         outlined
         background-color="white"
       >
-        <template v-slot:append  >
+        <template v-slot:append>
           <div class="d-flex align-center">
             <v-icon style="line-height: 1.5" @click="showPass = !showPass">
               <template v-if="showPass">
@@ -120,9 +115,12 @@
         outlined
         background-color="white"
       >
-        <template v-slot:append  >
+        <template v-slot:append>
           <div class="d-flex align-center">
-            <v-icon style="line-height: 1.5" @click="showPassConfirm = !showPassConfirm">
+            <v-icon
+              style="line-height: 1.5"
+              @click="showPassConfirm = !showPassConfirm"
+            >
               <template v-if="showPassConfirm">
                 mdi-eye
               </template>
@@ -205,7 +203,7 @@ export default {
         phone: "",
         // show_name: false,
         // show_location: false,
-        role: "Jobseeker",
+        role: "Jobseeker"
       },
       profile_img: false,
       showPass: false,
@@ -219,14 +217,13 @@ export default {
     async handleRegister() {
       this.formResponse = {};
       this.formLoading = true;
-      if(this.profile_img) {
-        this.formData['profile_img'] = this.profile_img;
+      if (this.profile_img) {
+        this.formData["profile_img"] = this.profile_img;
       }
       this.$store
         .dispatch("auth/register", this.formData)
-        .then(resp => {
-          localStorage.setItem("registration-id", resp.data.user.id);
-          this.$router.replace({ name: "ManualOnboarding" });
+        .then(() => {
+          this.$router.replace({ name: "RegisterVerifyEmail" });
         })
         .catch(err => {
           this.formResponse = err.data;

@@ -135,7 +135,11 @@ export default {
           this.$router.replace({ name: "Home" });
         })
         .catch(err => {
-          this.formResponse = err.data;
+          if (err.data.data?.email_not_verified) {
+            this.$router.push({ name: "RegisterVerifyEmail" });
+          } else {
+            this.formResponse = err.data;
+          }
         })
         .finally(() => {
           this.formLoading = false;

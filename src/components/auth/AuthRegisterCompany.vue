@@ -94,7 +94,7 @@
       ></v-text-field>
 
       <!-- Hiring location -->
-      <GooglePlacesAutocomplete @select="e => formData.hiring_location = e" />
+      <GooglePlacesAutocomplete @select="e => (formData.hiring_location = e)" />
       <!-- <v-text-field
         dense
         placeholder="Hiring location"
@@ -123,7 +123,7 @@
         flat
         class="mb-4"
       >
-        <template v-slot:append  >
+        <template v-slot:append>
           <div class="d-flex align-center">
             <v-icon style="line-height: 1.5" @click="showPass = !showPass">
               <template v-if="showPass">
@@ -154,9 +154,12 @@
         flat
         class="mb-4"
       >
-        <template v-slot:append  >
+        <template v-slot:append>
           <div class="d-flex align-center">
-            <v-icon style="line-height: 1.5" @click="showPassConfirm = !showPassConfirm">
+            <v-icon
+              style="line-height: 1.5"
+              @click="showPassConfirm = !showPassConfirm"
+            >
               <template v-if="showPassConfirm">
                 mdi-eye
               </template>
@@ -204,7 +207,7 @@ import Validations from "@/mixins/validations";
 import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
 import ResponseAlert from "@/components/ResponseAlert";
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete';
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 
 export default {
   name: "AuthRegisterCompany",
@@ -231,7 +234,7 @@ export default {
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false,
+      showPassConfirm: false
     };
   },
   methods: {
@@ -243,12 +246,10 @@ export default {
       this.formResponse = {};
       this.isLoading = true;
       this.register(this.formData)
-        .then(resp => {
-          console.log("resp", resp);
-          this.$router.replace({ name: "ManualOnboardingCompany" });
+        .then(() => {
+          this.$router.replace({ name: "RegisterVerifyEmail" });
         })
         .catch(err => {
-          console.log("err", err);
           this.formResponse = err.data;
           this.$emit("changeImage");
         })
@@ -268,4 +269,3 @@ export default {
   font-weight: 600;
 }
 </style>
-

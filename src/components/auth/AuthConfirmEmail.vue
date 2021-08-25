@@ -11,7 +11,13 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat est
         purus ipsum.
       </p>
-    </div>  
+
+      <router-link :to="{ name: 'Login' }">
+        <v-btn type="button" color="primary" height="55">
+          Back to Login
+        </v-btn>
+      </router-link>
+    </div>
   </auth-wrap>
 </template>
 
@@ -20,7 +26,7 @@ import AuthWrap from "@/components/auth/AuthWrap.vue";
 
 export default {
   components: {
-    AuthWrap,
+    AuthWrap
   }
 };
 </script>

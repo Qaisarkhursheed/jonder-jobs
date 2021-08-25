@@ -21,7 +21,7 @@ export default {
     }
   },
 
-  async register({ commit }, data) {
+  async register(context, data) {
     try {
       let formData = new FormData();
       Object.keys(data).forEach(key => {
@@ -34,36 +34,37 @@ export default {
         }
       });
       const resp = await axios.post("/register", formData);
-      const token = resp.data.token;
-      const user = resp.data.user;
+      // const token = resp.data.token;
+      // const user = resp.data.user;
 
-      localStorage.setItem("user-token", token);
-      commit("SET_AUTHENTICATED", true);
-      commit("user/SET_USER", user, { root: true });
+      // localStorage.setItem("user-token", token);
+      // commit("SET_AUTHENTICATED", true);
+      // commit("user/SET_USER", user, { root: true });
 
       return resp;
     } catch (err) {
-      localStorage.removeItem("user-token");
-      commit("SET_AUTHENTICATED", false);
-      commit("user/SET_USER", null, { root: true });
+      // localStorage.removeItem("user-token");
+      // commit("SET_AUTHENTICATED", false);
+      // commit("user/SET_USER", null, { root: true });
       return Promise.reject(err.response);
     }
   },
 
-  async registerCompany({ commit }, data) {
+  async registerCompany(context, data) {
     try {
       const resp = await axios.post("/company/register", data);
-      const token = resp.data.token;
-      const user = resp.data.user;
+      // const token = resp.data.token;
+      // const user = resp.data.user;
 
-      localStorage.setItem("user-token", token);
-      commit("SET_AUTHENTICATED", true);
-      commit("user/SET_USER", user, { root: true });
+      // localStorage.setItem("user-token", token);
+      // commit("SET_AUTHENTICATED", true);
+      // commit("user/SET_USER", user, { root: true });
 
       return resp;
     } catch (error) {
-      localStorage.removeItem("user-token");
-      commit("SET_AUTHENTICATED", false);
+      // localStorage.removeItem("user-token");
+      // commit("SET_AUTHENTICATED", false);
+      // commit("user/SET_USER", null, { root: true });
       return Promise.reject(error.response);
     }
   },
