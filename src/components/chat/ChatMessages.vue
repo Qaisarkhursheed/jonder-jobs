@@ -205,8 +205,10 @@ export default {
     }
   },
   watch: {
-    messages() {
-      this.scrollToBottom();
+    conversationDetails() {
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 500);
     }
   }
 };
