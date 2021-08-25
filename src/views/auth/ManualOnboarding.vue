@@ -10,7 +10,7 @@
         class="elevation-0 full-w d-flex flex-column"
         v-model="e1"
       >
-        <v-stepper-header class="elevation-0">
+        <v-stepper-header class="elevation-0" v-if="this.showSteps === true">
           <v-stepper-step step="1" :complete="complete(1)"></v-stepper-step>
 
           <v-divider></v-divider>
@@ -33,7 +33,6 @@
 
           <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step>
         </v-stepper-header>
-
         <v-stepper-items class="mo-stepper-items">
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
@@ -98,8 +97,19 @@
               :nextScreen="nextStep"
               @prevScreen="prevStep"
               v-model="formData"
-              :formLoading="saveInProgress"
             />
+          </v-stepper-content>
+
+          <v-stepper-content
+            class="px-0 mo-stepper-items__step-content"
+            step="7"
+          >
+            <step-succes
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+              :formLoading="saveInProgress"
+            ></step-succes>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -118,6 +128,7 @@ import Step3 from "@/components/auth/manualOnboardingSteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingSteps/step4.vue";
 import Step5 from "@/components/auth/manualOnboardingSteps/step5.vue";
 import Step6 from "@/components/auth/manualOnboardingSteps/step6.vue";
+import StepSucces from "../../components/auth/manualOnboardingSteps/stepSucces.vue";
 
 import { mapActions, mapGetters } from "vuex";
 
@@ -130,12 +141,14 @@ export default {
     Step3,
     Step4,
     Step5,
-    Step6
+    Step6,
+    StepSucces,
   },
   props: {
-    isBtnVisible: Boolean
+    isBtnVisible: Boolean,
   },
   data: () => ({
+    showSteps: true,
     saveInProgress: false,
     e1: 1,
     formResponse: {},
@@ -154,15 +167,14 @@ export default {
       cv: "",
       resume: null,
       qualifications: null,
-      show_location: false,
       // address: "",
       // working_in: "",
       // describe_yourself: "",
       // training_studies: "",
       // your_qualification: "",
-      // additional_traidning: "",
+      // additional_training: "",
       // dream_job: "",
-    }
+    },
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -172,14 +184,18 @@ export default {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", ["user", "jobseekerExperience", "jobseekerEducation"])
+    ...mapGetters("user", [
+      "user",
+      "jobseekerExperience",
+      "jobseekerEducation",
+    ]),
   },
   methods: {
     ...mapActions("user", ["postOnboardingUser"]),
     populateData(user) {
       console.log("populateData", user);
       if (user) {
-        Object.keys(user).forEach(key => {
+        Object.keys(user).forEach((key) => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -190,7 +206,8 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-      if (this.e1 < 6) this.e1++;
+      if (this.e1 < 7) this.e1++;
+      if (this.e1 === 7) this.showSteps = false;
       else this.saveOnboarding();
     },
     complete(step) {
@@ -204,14 +221,14 @@ export default {
         .then(() => {
           this.$router.replace("/dashboard");
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

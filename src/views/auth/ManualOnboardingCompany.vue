@@ -6,7 +6,7 @@
         class="elevation-0 full-w d-flex flex-column"
         v-model="e1"
       >
-        <v-stepper-header class="elevation-0">
+        <v-stepper-header class="elevation-0" v-if="this.showSteps === true">
           <v-stepper-step step="1" :complete="complete(1)"></v-stepper-step>
 
           <v-divider></v-divider>
@@ -60,10 +60,20 @@
               :nextScreen="nextStep"
               @prevScreen="prevStep"
               v-model="formData"
-              :loading="saveInProgress"
             />
           </v-stepper-content>
 
+          <v-stepper-content
+            class="px-0 mo-stepper-items__step-content"
+            step="5"
+          >
+            <step-succes
+              :nextScreen="nextStep"
+              @prevScreen="prevStep"
+              v-model="formData"
+              :loading="saveInProgress"
+            />
+          </v-stepper-content>
           <ResponseAlert :response="formResponse"></ResponseAlert>
         </v-stepper-items>
       </v-stepper>
@@ -78,6 +88,7 @@ import Step1 from "@/components/auth/manualOnboardingCompanySteps2/step1.vue";
 import Step2 from "@/components/auth/manualOnboardingCompanySteps2/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingCompanySteps2/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingCompanySteps2/step4.vue";
+import StepSucces from "../../components/auth/manualOnboardingCompanySteps2/stepSucces.vue";
 
 export default {
   components: {
@@ -85,9 +96,12 @@ export default {
     Step1,
     Step2,
     Step3,
-    Step4
+    Step4,
+    StepSucces,
   },
   data: () => ({
+    showSteps: true,
+
     saveInProgress: false,
     e1: 1,
     formData: {
@@ -104,9 +118,9 @@ export default {
       instagram: "",
       twitter: "",
       linkedin: "",
-      youtube: ""
+      youtube: "",
     },
-    formResponse: {}
+    formResponse: {},
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -119,7 +133,7 @@ export default {
     populateData() {
       const user = this.$store.getters["user/user"];
       if (user) {
-        Object.keys(user).forEach(key => {
+        Object.keys(user).forEach((key) => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -131,8 +145,8 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-
-      if (this.e1 < 4) {
+      if (this.e1 === 4) this.showSteps = false;
+      if (this.e1 < 5) {
         this.e1++;
       } else {
         this.saveOnboarding();
@@ -157,14 +171,14 @@ export default {
         .then(() => {
           this.$router.replace("/company-dashboard");
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

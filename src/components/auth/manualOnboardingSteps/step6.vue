@@ -5,11 +5,14 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <DocumentUploadSection @change="e => cv = e" type="Cv" />
+      <DocumentUploadSection @change="(e) => (cv = e)" type="Cv" />
 
-      <DocumentUploadSection @change="e => qualifications = e" type="Qualifications" />
+      <DocumentUploadSection
+        @change="(e) => (qualifications = e)"
+        type="Qualifications"
+      />
 
-      <DocumentUploadSection @change="e => resume = e" type="Resume" />
+      <DocumentUploadSection @change="(e) => (resume = e)" type="Resume" />
 
       <v-row class="mt-0">
         <v-col cols="3">
@@ -24,7 +27,6 @@
         <v-col>
           <v-btn
             :disabled="!formValid"
-            :loading="formLoading"
             type="submit"
             color="primary"
             height="55"
@@ -39,29 +41,29 @@
 </template>
 
 <script>
-import DocumentUploadSection from '@/components/DocumentUploadSection.vue';
+import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 
 export default {
   name: "Step6",
 
   components: {
-    DocumentUploadSection
+    DocumentUploadSection,
   },
 
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
     nextScreen: Function,
-    formLoading: Boolean
+    formLoading: Boolean,
   },
   data() {
     return {
       formValid: true,
       qualifications: null,
       resume: null,
-      cv: null
+      cv: null,
     };
   },
   watch: {
@@ -69,21 +71,21 @@ export default {
       console.log(val);
       this.$emit("input", {
         ...this.value,
-        cv: val[0]
+        cv: val[0],
       });
     },
     resume(val) {
       this.$emit("input", {
         ...this.value,
-        resume: val[0]
+        resume: val[0],
       });
     },
     qualifications(val) {
       this.$emit("input", {
         ...this.value,
-        qualifications: val[0]
+        qualifications: val[0],
       });
-    }
-  }
+    },
+  },
 };
 </script>

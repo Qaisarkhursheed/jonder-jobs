@@ -20,6 +20,7 @@
         v-on="on"
       ></v-text-field>
     </template>
+
     <v-date-picker
       :flat="true"
       :disabled="disabled"
@@ -50,37 +51,71 @@ export default {
     },
     type: {
       type: String,
-      default: 'month'
+      default: "month",
     },
     fromToday: {
       type: Boolean,
-    }
+    },
   },
+  fromToday: {
+    type: Boolean,
+  },
+
   created() {
     if (this.value) {
       this.date = this.value;
     }
   },
-  data() {
-    return {
-      date: "",
-      menu: false,
-    };
-  },
+
+  data: (vm) => ({
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
+    dateFormatted: vm.formatDate(
+      new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10)
+    ),
+    menu: false,
+  }),
+
   computed: {
     dateFormatted() {
       return this.date.substr(0, 10);
     },
     startDate() {
-      if(this.fromToday) {
-        return (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
+      if (this.fromToday) {
+        return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10);
       }
-      return '1970-01-01';
-    }
+      return "1970-01-01";
+    },
+
+    computedDateFormatted() {
+      return this.formatDate(this.date);
+    },
   },
   methods: {
     dateSelect(date) {
       this.$emit("setDate", date);
+    },
+    formatDate(date) {
+      if (!date) return null;
+
+      const [year, month, day] = date.split("-");
+      return `${day}/${month}/${year}`;
+    },
+    parseDate(date) {
+      if (!date) return null;
+
+      const [month, day, year] = date.split("/");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    },
+  },
+  watch: {
+    date(val) {
+      this.dateFormatted = this.formatDate(this.date);
     },
   },
 };
