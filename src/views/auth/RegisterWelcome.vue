@@ -83,6 +83,7 @@
             outlined
             block
             large
+            @click="google"
           >
             <v-icon left>mdi-google</v-icon>
             Continue with Google
@@ -96,6 +97,7 @@
             outlined
             block
             large
+            @click="facebook"
           >
             <v-icon left>mdi-facebook</v-icon>
             Continue with Facebook
@@ -153,7 +155,17 @@ export default {
     },
     changeImage() {
       this.img = 2;
-    }
+    },
+    facebook() {
+      const url = `${process.env.VUE_APP_API_BASE}/auth/facebook`;
+
+      window.open(url, "_blank").focus();
+    },
+    google() {
+      const url = `${process.env.VUE_APP_API_BASE}/auth/google`;
+
+      window.open(url, "_blank").focus();
+    } 
   }
 };
 </script>
