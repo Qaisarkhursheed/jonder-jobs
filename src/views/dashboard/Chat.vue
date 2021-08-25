@@ -21,7 +21,10 @@
       @hide-profile="showProfile = false"
     />
   </div> -->
-  <v-row class="full-h">
+  <v-row v-if="chatLoading" class="full-h">
+    <spinner />
+  </v-row>
+  <v-row v-else class="full-h">
     <v-col v-if="!chatFull" cols="col" class="full-h">
       <chat-asside
         class="full-h flex-grow-1 flex-shrink-1 overflow-list"
@@ -50,6 +53,7 @@
 import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
 import PublicProfile from "@/components/chat/PublicProfile";
+import Spinner from "@/components/loaders/Spinner";
 import { mapActions, mapGetters } from "vuex";
 //import UserPreview from "@/components/parts/UserPreview";
 
@@ -67,6 +71,7 @@ export default {
     showProfile: false,
     polling: null,
     chatFull: false,
+    chatLoading: false
   }),
   methods: {
     ...mapActions("chat", [
@@ -74,10 +79,12 @@ export default {
       "addPlaceholderMessage",
       "getSingleConversation",
       "startChat",
-      "seenMessage",
+      "seenMessage"
     ]),
     async init() {
+      this.chatLoading = true;
       await this.getAllConversations();
+      this.chatLoading = false;
 
       if (this.$route.params.type === "new" && this.$route.params.id) {
         this.startChat(this.$route.params.id);
@@ -93,7 +100,7 @@ export default {
         }
         this.getAllConversations();
       }, 5000);
-    },
+    }
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
   components: {
@@ -101,7 +108,8 @@ export default {
     ChatMessages,
     ChatAsside,
     PublicProfile,
-  },
+    Spinner
+  }
 };
 </script>
 

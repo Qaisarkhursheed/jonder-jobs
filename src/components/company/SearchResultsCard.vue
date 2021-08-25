@@ -107,6 +107,7 @@
           width="70%"
           class="font-weight-medium pl-4 pr-4"
           @click="startConversation"
+          :loading="startChatLoading"
         >
           Contact
         </v-btn>
@@ -125,16 +126,28 @@ export default {
     }
   },
 
+  data() {
+    return {
+      startChatLoading: false
+    };
+  },
+
   methods: {
     startConversation() {
-      this.$router.push({
-        name: "CompanyMessages",
-        params: {
-          id: this.candidate.id,
-          type: "new",
-          company: true
-        }
-      });
+      this.startChatLoading = true;
+      this.$store
+        .dispatch("chat/startChat", this.candidate.id)
+        .then(() => {
+          this.$router.push({
+            name: "CompanyMessages",
+            params: {
+              company: true
+            }
+          });
+        })
+        .finally(() => {
+          this.startChatLoading = false;
+        });
     },
     handleStarIconClick() {
       if (this.candidate.selection_managment) {

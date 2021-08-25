@@ -73,7 +73,15 @@ export default {
     ]),
     ...mapMutations("chat", ["SET_CONVERSATION_DETAILS"]),
     getParticipian(conversation) {
-      return conversation.conversation.participants[0].messageable;
+      const myId = this.$store.getters["user/user"].id;
+
+      for (const p of conversation.conversation.participants) {
+        if (p.messageable_id != myId) {
+          return p.messageable;
+        }
+      }
+
+      return null;
     },
     getProfileImage(conversation) {
       const img = this.getParticipian(conversation).profile_img;
@@ -96,6 +104,10 @@ export default {
       );
     },
     getShortMessage(conversation) {
+      if (!conversation.conversation.last_message) {
+        return "";
+      }
+
       if (conversation.conversation.last_message.type == "upload") {
         return "File";
       }

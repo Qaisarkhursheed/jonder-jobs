@@ -38,16 +38,8 @@
             height="48"
             width="70%"
             class="font-weight-medium pl-4 pr-4"
-            @click="
-              $router.push({
-                name: 'CompanyMessages',
-                params: {
-                  id: profile.id,
-                  type: 'new',
-                  company: true
-                }
-              })
-            "
+            @click="startConversation"
+            :loading="startChatLoading"
           >
             Message now
           </v-btn>
@@ -227,7 +219,8 @@ export default {
       tabs: {
         general: UserOverviewGeneral,
         notes: UserOverviewNotes
-      }
+      },
+      startChatLoading: false
     };
   },
   mounted() {
@@ -255,10 +248,20 @@ export default {
       this.profile.profesionsim.value = user.work_experience;
     },
     startConversation() {
-      this.$router.push({
-        name: "CompanyInbox",
-        params: { id: this.$route.params.id, type: "new", company: true }
-      });
+      this.startChatLoading = true;
+      this.$store
+        .dispatch("chat/startChat", this.profile.id)
+        .then(() => {
+          this.$router.push({
+            name: "CompanyMessages",
+            params: {
+              company: true
+            }
+          });
+        })
+        .finally(() => {
+          this.startChatLoading = false;
+        });
     },
     handleStarIconClick() {
       if (this.profile.selection_managment) {
