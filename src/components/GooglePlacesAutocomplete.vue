@@ -12,7 +12,7 @@
     flat
     no-filter
     hide-no-data
-    placeholder="Enter"
+    placeholder="Enter location"
     @input="select"
   >
     <template v-slot:item="{ item }">
