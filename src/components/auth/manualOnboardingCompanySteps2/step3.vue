@@ -31,11 +31,15 @@
         background-color="white"
       ></v-text-field>
 
-      <label class="profile-label">Address</label>
-      <GooglePlacesAutocomplete @select="e => value.address = e" type="geocode" />
+      <label class="profile-label">City and address</label>
+      <GooglePlacesAutocomplete 
+        @select="e => value.address = e" 
+        type="geocode"
+        :full-address="true" 
+      />
 
-      <label class="profile-label">City</label>
-      <GooglePlacesAutocomplete @select="e => value.city = e" />
+      <!-- <label class="profile-label">City</label>
+      <GooglePlacesAutocomplete @select="e => value.city = e" /> -->
 
       <v-row class="mt-1">
         <v-col cols="3">
