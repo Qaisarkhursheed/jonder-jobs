@@ -7,7 +7,7 @@
         </router-link>
       </v-col>
       <v-col cols="4">
-        <v-autocomplete
+        <!-- <v-autocomplete
           v-if="!profile"
           v-model="searchString"
           :loading="searchLoading"
@@ -23,7 +23,7 @@
           append-icon="mdi-magnify"
           item-text="name"
           item-value="id"
-        ></v-autocomplete>
+        ></v-autocomplete> -->
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
@@ -212,14 +212,14 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: {
     CardActionableList,
-    UpgradeAccountBox
+    UpgradeAccountBox,
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -231,7 +231,7 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -246,7 +246,7 @@ export default {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    },
   },
   watch: {
     search(val) {
@@ -262,8 +262,8 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

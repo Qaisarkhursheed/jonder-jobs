@@ -62,9 +62,10 @@
                 Change personal info
               </p>
               <p class="profile-subtitle">
-                Explanation goes here
-              </p>
-            </v-row>
+                <!-- Explanation goes here
+              </p> -->
+              </p></v-row
+            >
 
             <v-form v-model="formValid">
               <v-row>
@@ -144,9 +145,9 @@
               <p class="profile-title">
                 Billing &amp; Invoices
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-row
@@ -172,7 +173,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number
+                      number: item.invoice_number,
                     })
                   "
                 ></v-img>
@@ -186,9 +187,9 @@
               <p class="profile-title">
                 Edit payment method
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-row class="payment-card pa-3">
@@ -220,9 +221,9 @@
               <p class="profile-title">
                 Change password
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
@@ -296,7 +297,7 @@ import AddNewCard from "@/views/dashboard/AddNewCard";
 export default {
   components: {
     Header,
-    AddNewCard
+    AddNewCard,
   },
   data() {
     return {
@@ -311,22 +312,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard
-        }
+          component: AddNewCard,
+        },
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"]
-      }
+        AddNewCard: ["edit", "delete"],
+      },
     };
   },
   computed: {
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["user"]),
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status == "complete");
+      this.invoices = this.invoices.filter((i) => i.status == "complete");
     });
   },
   methods: {
@@ -348,10 +349,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
     },
@@ -360,7 +361,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -368,7 +369,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -384,8 +385,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
-  }
+    },
+  },
 };
 </script>
 
