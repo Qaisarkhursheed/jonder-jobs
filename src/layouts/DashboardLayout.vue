@@ -494,6 +494,8 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 
   .v-image {
     border-radius: 50px;
+    max-width: 5rem;
+    max-height: 5rem;
   }
 }
 </style>
