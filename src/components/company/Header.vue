@@ -1,13 +1,13 @@
 <template>
-  <v-row class="header justify-space-between align-center pr-8 pl-13">
-    <v-col cols="3">
+  <v-row class="header justify-space-between align-center pr-4 pl-4 pr-md-8 pl-md-13">
+    <v-col cols="6" md="3">
       <router-link to="" class="logo">
       <v-img
         :src="require('@/assets/jonder_blue.png')"
         max-width="128px"/>
     </router-link>
     </v-col>
-    <v-col cols="4" class="text-right">
+    <v-col cols="6" md="4" class="text-right">
       <div class="dashboard-avatar">
         <span class="name">{{ user.company }}</span>
         <v-menu offset-y>
@@ -96,9 +96,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .header {
-    height: 100px;
-    background: #fff;
-    z-index: 1111;
+.header {
+  height: 100px;
+  background: #fff;
+  z-index: 1111;
+  
+  .dashboard-avatar {
+    .name {
+      display: none;
+    }
   }
+}
+
+@media (min-width: 960px) {
+  .header {
+    .dashboard-avatar {
+      .name {
+        display: inline;
+      }
+    }
+  }
+}
 </style>

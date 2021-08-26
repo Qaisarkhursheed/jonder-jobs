@@ -2,11 +2,11 @@
   <div class="public-profile">
     <!-- <UserNoteAdd /> -->
     <v-row class="heading mb-5">
-      <v-col cols="9">
+      <v-col cols="12" md="9">
         <div class="title">Public Company Profile</div>
         <div class="subtitle">Explanation what is team managment</div>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="12" md="3">
         <v-btn
           color="primary"
           height="48"
@@ -23,8 +23,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="4">
-        <v-card flat class="rounded-lg pt-5 pb-5" style="height: 450px">
+      <v-col cols="12" md="4">
+        <v-card flat class="public-profile-sidebar rounded-lg pt-5 pb-5">
           <v-tabs
             class="pl-8 pr-8"
             slider-color="#fff"
@@ -43,7 +43,7 @@
           </v-tabs>
         </v-card>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="12" md="8">
         <v-card flat class="rounded-lg">
           <v-tabs-items v-model="tabs.active">
             <v-tab-item
@@ -156,6 +156,12 @@ export default {
     font-weight: normal;
     font-size: 18px;
     color: #7a7a7a;
+  }
+}
+
+@media (min-width: 960px) {
+  .public-profile-sidebar {
+    height: 450px
   }
 }
 </style>

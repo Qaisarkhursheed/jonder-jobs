@@ -39,7 +39,7 @@
 
     <div class="section d-flex mb-6">
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <label class="section-label">
             Address
           </label>
@@ -48,7 +48,7 @@
             :value="form.address"
             @select="e => form.address = e" />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <label class="section-label">
             City
           </label>
