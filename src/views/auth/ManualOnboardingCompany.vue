@@ -103,7 +103,7 @@ export default {
     showSteps: true,
 
     saveInProgress: false,
-    e1: 2,
+    e1: 1,
     formData: {
       profile_img: "",
       about_company: "",
