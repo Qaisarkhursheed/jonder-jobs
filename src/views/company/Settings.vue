@@ -119,7 +119,6 @@
                     background-color="white"
                     v-model="user.email"
                   ></v-text-field>
-                  <small style="opacity: 60%">Email is not verified yet</small>
                 </v-col>
               </v-row>
 
