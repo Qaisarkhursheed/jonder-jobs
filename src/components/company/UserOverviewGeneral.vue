@@ -16,7 +16,11 @@
                 <div class="title">{{ data.company_name }}</div>
                 <div class="subtitle">{{ data.position }}</div>
                 <div class="subtitle">
-                  {{ data.start_time }} - {{ data.end_time }}
+                  {{ data.start_time | moment("MMMM YYYY") }} -
+                  <template v-if="data.end_time">
+                    {{ data.end_time | moment("MMMM YYYY") }}
+                  </template>
+                  <template v-else>Present</template>
                 </div>
               </div>
             </div>

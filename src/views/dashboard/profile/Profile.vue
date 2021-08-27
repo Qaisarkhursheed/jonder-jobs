@@ -64,7 +64,7 @@
       </v-row>
 
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">{{
             $t("user.profile.firstName")
           }}</label>
@@ -81,7 +81,7 @@
             v-model="formData.first_name"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">{{ $t("user.profile.lastName") }}</label>
           <v-text-field
             dense
@@ -99,7 +99,7 @@
       </v-row>
 
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">Email</label>
           <v-text-field
             dense
@@ -126,12 +126,6 @@
         </p> -->
         <v-col cols="12">
           <label class="profile-label">In which branches do you work?</label>
-          <!-- <v-select
-            outlined
-            :items="types.JOB_BRANCHE"
-            background-color="white"
-            v-model="formData.branche"
-          ></v-select> -->
           <v-autocomplete
             v-model="formData.branche"
             :items="types.JOB_BRANCHE"
@@ -159,13 +153,7 @@
             hide-no-data
             :hide-details="true"
           ></v-autocomplete>
-          <!-- <v-select
-            outlined
-            multiple
-            :items="lookingForRole"
-            background-color="white"
-            v-model="formData.looking_for"
-          ></v-select> -->
+          
         </v-col>
       </v-row>
     </v-card>
@@ -388,21 +376,21 @@
         </p> -->
         <v-col cols="12">
           <div class="mt-6">
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
                 @change="(e) => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
                 @change="(e) => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
                 @change="(e) => (formData.resume = e[0])"
                 type="Resume"
@@ -547,7 +535,7 @@
         </p> -->
       </v-row>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -568,7 +556,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -878,5 +866,14 @@ export default {
   height: 50px;
   margin-right: 18px;
   max-width: 30px;
+}
+
+.document-wrap {
+  width: 70%;
+}
+@media (max-width: 800px) {
+  .document-wrap {
+    width: 100%;
+  }
 }
 </style>

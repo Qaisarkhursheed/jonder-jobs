@@ -39,23 +39,25 @@
 
     <div class="section d-flex mb-6">
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12">
           <label class="section-label">
-            Address
+            City and address
           </label>
           <GooglePlacesAutocomplete 
             type="geocode"
             :value="form.address"
-            @select="e => form.address = e" />
+            @select="e => form.address = e" 
+            :full-address="true"
+          />
         </v-col>
-        <v-col cols="12" md="6">
+        <!-- <v-col cols="12" md="6">
           <label class="section-label">
             City
           </label>
           <GooglePlacesAutocomplete 
             :value="form.city"
             @select="e => form.city = e" />
-        </v-col>
+        </v-col> -->
       </v-row>
     </div>
 
@@ -141,7 +143,7 @@ export default {
         company_email: '',
         company_phone: '',
         address: '',
-        city: '',
+        //city: '',
         web_url: '',
         facebook: '',
         instagram: '',

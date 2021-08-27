@@ -56,10 +56,21 @@
         id="messageList"
       >
         <div
-          v-for="msg in messages"
+          v-for="(msg, index) in messages"
           :key="msg.id"
           :class="{ 'text-right': msg.is_sender }"
         >
+          <div
+            class="day-in-chat"
+            v-if="
+              index == 0 ||
+                msg.created_at.substr(0, 10) !=
+                  messages[index - 1].created_at.substr(0, 10)
+            "
+          >
+            <span>{{ msg.created_at | moment("ddd, DD/MM") }}</span>
+          </div>
+
           <v-card
             flat
             class="message rounded-lg"
@@ -91,7 +102,13 @@
               </div>
 
               <!-- Time -->
-              <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
+              <small
+                :title="
+                  $options.filters.moment(msg.created_at, 'DD.MM.YYYY HH:mm')
+                "
+              >
+                {{ msg.created_at | moment("from", "now") }}
+              </small>
             </v-card-text>
           </v-card>
         </div>
@@ -140,7 +157,9 @@ export default {
     newMessage: "",
     newFile: null,
     sending: false,
-    chatFull: false
+    chatFull: false,
+
+    chatMessageDateCache: null
   }),
   mounted() {
     this.scrollToBottom();
@@ -150,19 +169,19 @@ export default {
     ...mapActions("stats", ["updateMessageYou"]),
     scrollToBottom() {
       const messageListDiv = document.getElementById("messageList");
-      if (messageListDiv) {
-        setTimeout(() => {
-          messageListDiv.scrollTop = messageListDiv.scrollHeight;
-        });
-      }
+      // messageListDiv.scrollTop = messageListDiv.scrollHeight;
+
+      setTimeout(() => {
+        messageListDiv.scrollTo(messageListDiv.scrollLeft, 999999999);
+      }, 100);
     },
-    async send() {
+    send() {
       if (!this.newMessage && !this.newFile) {
         return;
       }
 
       this.sending = true;
-      await this.sendMessage({
+      this.sendMessage({
         id: this.conversationDetails.id,
         file: this.newFile,
         message: this.newMessage
@@ -170,6 +189,8 @@ export default {
         .then(() => {
           this.newMessage = "";
           this.newFile = null;
+
+          setTimeout(this.scrollToBottom, 500);
         })
         .finally(() => {
           this.sending = false;
@@ -216,17 +237,37 @@ export default {
 
 <style lang="scss">
 .messages-content {
-  background-color: #eff2f4 !important;
+  background-color: #f7f7f8 !important;
   padding: 1rem !important;
 
   .message {
+    background-color: #ffffff;
+    color: #2d3037;
     display: inline-block;
     max-width: 360px;
     margin-bottom: 16px;
   }
 
   .my-message {
-    background-color: #e3f2fb !important;
+    background-color: #0253b3 !important;
+
+    .v-card__text {
+      color: white;
+    }
+  }
+
+  .day-in-chat {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ededed;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+
+    span {
+      color: #adb5bd;
+      padding: 0 10px;
+      background: #f7f7f8;
+    }
   }
 }
 

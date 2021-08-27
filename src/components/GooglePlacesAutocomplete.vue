@@ -19,7 +19,7 @@
       {{ item.description }}
     </template>
     <template v-slot:selection="{ item }">
-      <template v-if="type == 'geocode'">
+      <template v-if="type == 'geocode' && !fullAddress">
         {{ item.structured_formatting.main_text }}
       </template>
       <template v-else>
@@ -42,6 +42,10 @@ export default {
     type: {
       type: String,
       default: '(cities)'
+    },
+    fullAddress: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -56,13 +60,20 @@ export default {
 
   created() {
     this.service = new window.google.maps.places.AutocompleteService();
+    // refactor in better times
     if(this.value) {
       if (this.type == 'geocode') {
-        this.model = {
-          structured_formatting: {
-            main_text: this.value
-          } 
-        };
+        if (this.fullAddress) {
+          this.model = {
+            description: this.value
+          };
+        } else {
+          this.model = {
+            structured_formatting: {
+              main_text: this.value
+            } 
+          };
+        }
       } else {
         this.model = {
           description: this.value
@@ -85,7 +96,11 @@ export default {
       if(!this.model)
         return;
       if (this.type == 'geocode') {
-        this.$emit('select', this.model.structured_formatting.main_text);
+        if(this.fullAddress) {
+          this.$emit('select', this.model.description);
+        } else {
+          this.$emit('select', this.model.structured_formatting.main_text);
+        }
       } else {
         this.$emit('select', this.model.description);
       }

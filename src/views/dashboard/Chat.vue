@@ -1,30 +1,8 @@
 <template>
-  <!-- <div class="chat-holder flex-grow-1 flex-shrink-1 mt-4 full-h">
-    <v-row class="mt-0 mb-0 full-h">
-      <v-col cols="4" class="d-flex flex-column full-h">
-        <h2 class="text-color-primary-blue-dark mb-4 flex-shrink-0 flex-grow-0">
-          Nachrichten
-        </h2>
-        <chat-asside class="flex-grow-1 flex-shrink-1 overflow-list" />
-      </v-col>
-      <v-col cols="8" class="full-h">
-        <chat-messages
-          v-if="selectedConversation && conversationDetails"
-          :messages="selectedConversation"
-          :conversation-details="conversationDetails"
-        />
-      </v-col>
-    </v-row>
-    <user-preview
-      v-if="showProfile"
-      :user-id="conversationDetails.user_id"
-      @hide-profile="showProfile = false"
-    />
-  </div> -->
   <v-row v-if="chatLoading" class="full-h">
     <spinner />
   </v-row>
-  <v-row v-else class="full-h">
+  <v-row v-else class="" style="height: calc(100vh - 150px)">
     <v-col v-if="!chatFull" cols="col" class="full-h">
       <chat-asside
         class="full-h flex-grow-1 flex-shrink-1 overflow-list"
@@ -33,7 +11,7 @@
     </v-col>
     <v-col
       cols="col"
-      class="max-height-chat"
+      class="full-h"
       v-if="selectedConversation && conversationDetails"
     >
       <chat-messages
