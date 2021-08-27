@@ -65,7 +65,7 @@ export default {
       type: String
     },
     value: {
-      type: [Object, Boolean, Array],
+      type: [Object, Boolean, Array, String],
       default: false
     },
   },
