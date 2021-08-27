@@ -238,6 +238,9 @@ export default {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
+    },
+    navigateTo(url) {
+      this.$router.push(url);
     }
   },
   watch: {
