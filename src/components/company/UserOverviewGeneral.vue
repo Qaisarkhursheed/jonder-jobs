@@ -47,10 +47,21 @@
           </div>
         </div>
         <div class="section mb-7">
+          <div class="title">Open for Remote</div>
+          <div class="content">
+            <template v-if="user.work_remotely">
+              Yes
+            </template>
+            <template v-else>
+              No
+            </template>
+          </div>
+        </div>
+        <div class="section mb-7">
           <div class="title">current industry</div>
           <div class="content">{{ user.branche }}</div>
         </div>
-        <div class="section mb-7">
+        <div class="section mb-7" v-if="user.location_show">
           <div class="title">city and address</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>

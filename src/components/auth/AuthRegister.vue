@@ -144,6 +144,14 @@
       ></v-text-field>
 
       <!-- Show name -->
+      <v-checkbox
+        class="mt-6 mb-6"
+        color="#333"
+        label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
+        hide-details="auto"
+        v-model="formData.accept_policy"
+      ></v-checkbox>
+
       <!-- <v-checkbox
         class="mt-0"
         label="Möchten Sie, dass wir Ihren Namen anzeigen?"
@@ -203,7 +211,8 @@ export default {
         phone: "",
         // show_name: false,
         // show_location: false,
-        role: "Jobseeker"
+        role: "Jobseeker",
+        accept_policy: false,
       },
       profile_img: false,
       showPass: false,
