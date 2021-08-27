@@ -112,7 +112,7 @@ export default {
       company_email: "",
       company_phone: "",
       address: "",
-      city: "",
+      //city: "",
       web_url: "",
       facebook: "",
       instagram: "",
