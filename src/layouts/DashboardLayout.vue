@@ -195,7 +195,7 @@
       </v-col>
 
       <v-col class="main col-12 col-md-8 col-xl-9">
-        <v-container fluid class="d-flex flex-column full-h">
+        <v-container fluid class="d-flex flex-column">
           <slot />
         </v-container>
       </v-col>
@@ -212,14 +212,14 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: {
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -231,7 +231,7 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -246,7 +246,7 @@ export default {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
-    },
+    }
   },
   watch: {
     search(val) {
@@ -262,8 +262,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
