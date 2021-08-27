@@ -50,7 +50,7 @@
           <div class="title">current industry</div>
           <div class="content">{{ user.branche }}</div>
         </div>
-        <div class="section mb-7">
+        <div class="section mb-7" v-if="user.location_show">
           <div class="title">city and address</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>

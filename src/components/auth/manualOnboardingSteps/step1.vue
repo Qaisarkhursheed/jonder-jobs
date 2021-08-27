@@ -6,21 +6,12 @@
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
       <GooglePlacesAutocomplete @select="e => value.city = e" />
-      <!-- <v-text-field
-        v-model="value.city"
-        :rules="[validations.required]"
-        type="text"
-        :placeholder="$t('user.onboarding.locationPlaceholder')"
-        outlined
-        background-color="white"
-        dense
-      ></v-text-field> -->
 
       <v-checkbox
         class="mb-3"
         label="Möchten Sie, dass wir Ihren Standort anzeigen?"
         hide-details="auto"
-        v-model="value.show_location"
+        v-model="value.location_show"
       ></v-checkbox>
 
       <v-btn

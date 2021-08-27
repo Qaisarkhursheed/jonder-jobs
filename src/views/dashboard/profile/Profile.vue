@@ -114,6 +114,16 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-checkbox
+            class="mb-0 mt-0"
+            label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+            hide-details="auto"
+            v-model="formData.location_show"
+          ></v-checkbox>
+        </v-col>
+      </v-row>
     </v-card>
 
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
@@ -226,6 +236,12 @@
             :value="formData.address_to_work"
             @select="(e) => (formData.address_to_work = e)"
           />
+           <v-checkbox
+            class="mb-8 mt-0"
+            label="Are you also open to working remotely?"
+            hide-details="auto"
+            v-model="formData.work_remotely"
+          ></v-checkbox>
         </v-col>
       </v-row>
 
@@ -611,6 +627,8 @@ export default {
       cv: null,
       qualifications: null,
       resume: null,
+      location_show: "",
+      work_remotely: ""
     },
     formResponse: {},
     formLoading: false,
@@ -693,6 +711,8 @@ export default {
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
       this.formData.why_jonder = user.why_jonder;
+      this.formData.location_show = user.location_show;
+      this.formData.work_remotely = user.work_remotely;
     },
     handleUpdate() {
       this.formResponse = {};
