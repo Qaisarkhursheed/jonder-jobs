@@ -1,5 +1,23 @@
 <template>
   <auth-wrap :img="2">
+    <!-- Menu options - Logout -->
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <v-menu top right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item @click="$router.replace({ name: 'Logout' })">
+            {{ $t("general.logout") }}
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+
+    <!-- Content -->
     <div class="stepper-wrap mt-10">
       <v-stepper
         alt-labels
