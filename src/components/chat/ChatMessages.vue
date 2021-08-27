@@ -91,7 +91,13 @@
               </div>
 
               <!-- Time -->
-              <small>{{ msg.created_at.toString() | moment("h:mm") }}</small>
+              <small
+                :title="
+                  $options.filters.moment(msg.created_at, 'DD.MM.YYYY HH:mm')
+                "
+              >
+                {{ msg.created_at | moment("from", "now") }}
+              </small>
             </v-card-text>
           </v-card>
         </div>
