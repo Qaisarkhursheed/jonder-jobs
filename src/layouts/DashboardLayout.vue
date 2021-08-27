@@ -32,23 +32,18 @@
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-avatar color="primary" size="38" v-on="on">
-                <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-                <v-img
-                  :src="require('@/assets/icons/profile-placeholder.png')"
-                  v-else
-                ></v-img>
+                <v-img v-if="user.profile_img" :src="user.profile_img"></v-img>
+                <span v-else class="white--text">
+                  {{ $store.getters["user/getUserInitials"] }}
+                </span>
               </v-avatar>
             </template>
             <v-list class="nav">
-              <v-list-item>
-                <v-list-item-title @click="navigateTo('/dashboard/profile')">
-                  {{ $t("general.profile") }}
-                </v-list-item-title>
+              <v-list-item @click="$router.push({ name: 'Profile' })">
+                {{ $t("general.profile") }}
               </v-list-item>
-              <v-list-item>
-                <v-list-item-title @click="navigateTo('/logout')">
-                  {{ $t("general.logout") }}
-                </v-list-item-title>
+              <v-list-item @click="$router.push({ name: 'Logout' })">
+                {{ $t("general.logout") }}
               </v-list-item>
             </v-list>
           </v-menu>
@@ -225,7 +220,7 @@ export default {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
-      return this.$route.path === "/dashboard/profile";
+      return this.$route.name === "Profile";
     },
     dashboard() {
       return (
@@ -239,9 +234,6 @@ export default {
       this.searchItems = await this.searchUsers(val);
       this.searchLoading = false;
     }, 2000),
-    navigateTo(url) {
-      this.$router.push(url);
-    },
     scrollToSection(profileSection) {
       document
         .getElementById(profileSection)
