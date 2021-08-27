@@ -174,10 +174,13 @@
       <!-- Response alert -->
       <response-alert :response="formResponse"></response-alert>
 
-      <!-- Submit button -->
-      <div class="text-left mb-1" style="color: #222222">
-        Ja, ich stimme der Datenschutzerklärung zu.
-      </div>
+      <v-checkbox
+        class="mt-6 mb-6"
+        color="#333"
+        label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
+        hide-details="auto"
+        v-model="formData.accept_policy"
+      ></v-checkbox>
       <v-btn
         :disabled="!isValid"
         type="submit"
@@ -228,7 +231,8 @@ export default {
         password_confirmation: "",
         phone: "",
         company: "",
-        role: "company"
+        role: "company",
+        accept_policy: false,
       },
       formResponse: {},
       isLoading: false,
