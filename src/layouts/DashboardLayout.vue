@@ -32,23 +32,18 @@
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-avatar color="primary" size="38" v-on="on">
-                <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
-                <v-img
-                  :src="require('@/assets/icons/profile-placeholder.png')"
-                  v-else
-                ></v-img>
+                <v-img v-if="user.profile_img" :src="user.profile_img"></v-img>
+                <span v-else class="white--text">
+                  {{ $store.getters["user/getUserInitials"] }}
+                </span>
               </v-avatar>
             </template>
             <v-list class="nav">
-              <v-list-item>
-                <v-list-item-title @click="navigateTo('/dashboard/profile')">
-                  {{ $t("general.profile") }}
-                </v-list-item-title>
+              <v-list-item @click="$router.push({ name: 'Profile' })">
+                {{ $t("general.profile") }}
               </v-list-item>
-              <v-list-item>
-                <v-list-item-title @click="navigateTo('/logout')">
-                  {{ $t("general.logout") }}
-                </v-list-item-title>
+              <v-list-item @click="$router.push({ name: 'Logout' })">
+                {{ $t("general.logout") }}
               </v-list-item>
             </v-list>
           </v-menu>
@@ -195,7 +190,7 @@
       </v-col>
 
       <v-col class="main col-12 col-md-8 col-xl-9">
-        <v-container fluid class="d-flex flex-column full-h">
+        <v-container fluid class="d-flex flex-column">
           <slot />
         </v-container>
       </v-col>
@@ -212,26 +207,26 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: {
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
-      return this.$route.path === "/dashboard/profile";
+      return this.$route.name === "Profile";
     },
     dashboard() {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -239,14 +234,11 @@ export default {
       this.searchItems = await this.searchUsers(val);
       this.searchLoading = false;
     }, 2000),
-    navigateTo(url) {
-      this.$router.push(url);
-    },
     scrollToSection(profileSection) {
       document
         .getElementById(profileSection)
         .scrollIntoView({ behavior: "smooth", block: "center" });
-    },
+    }
   },
   watch: {
     search(val) {
@@ -262,8 +254,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

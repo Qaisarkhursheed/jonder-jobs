@@ -34,8 +34,13 @@
         v-if="getUnreadCount > 0"
         inline
       ></v-badge>
-      <div class="time-label">
-        {{ lastMessage }}
+      <div
+        class="time-label"
+        :title="$options.filters.moment(lastMessage, 'DD.MM.YYYY HH:mm')"
+      >
+        <template v-if="lastMessage">
+          {{ lastMessage | moment("from", "now") }}
+        </template>
       </div>
     </v-list-item-icon>
   </v-list-item>
@@ -61,7 +66,7 @@ export default {
     },
     lastMessage() {
       return this.conversation.conversation.last_message
-        ? this.conversation.conversation.last_message.updated_at.substr(0, 10)
+        ? this.conversation.conversation.last_message.updated_at
         : "";
     }
   },
