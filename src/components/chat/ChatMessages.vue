@@ -156,19 +156,19 @@ export default {
     ...mapActions("stats", ["updateMessageYou"]),
     scrollToBottom() {
       const messageListDiv = document.getElementById("messageList");
-      if (messageListDiv) {
-        setTimeout(() => {
-          messageListDiv.scrollTop = messageListDiv.scrollHeight;
-        });
-      }
+      // messageListDiv.scrollTop = messageListDiv.scrollHeight;
+
+      setTimeout(() => {
+        messageListDiv.scrollTo(messageListDiv.scrollLeft, 999999999);
+      }, 100);
     },
-    async send() {
+    send() {
       if (!this.newMessage && !this.newFile) {
         return;
       }
 
       this.sending = true;
-      await this.sendMessage({
+      this.sendMessage({
         id: this.conversationDetails.id,
         file: this.newFile,
         message: this.newMessage
@@ -176,6 +176,8 @@ export default {
         .then(() => {
           this.newMessage = "";
           this.newFile = null;
+
+          setTimeout(this.scrollToBottom, 500);
         })
         .finally(() => {
           this.sending = false;
