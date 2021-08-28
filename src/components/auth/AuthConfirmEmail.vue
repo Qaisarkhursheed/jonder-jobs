@@ -12,6 +12,18 @@
         purus ipsum.
       </p>
 
+      <div class="reset-email-btn mb-2">
+        <v-btn
+          color="blue darken-4"
+          text
+          :disabled="!resendValid"
+          elevation="0"
+          large
+          @click="verificationEmail()"
+        >
+          {{ $t("company.profile.resendEmail") }}
+        </v-btn>
+      </div>
       <router-link :to="{ name: 'Login' }">
         <v-btn type="button" color="primary" height="55">
           Back to Login
@@ -25,10 +37,49 @@
 import AuthWrap from "@/components/auth/AuthWrap.vue";
 
 export default {
+  data() {
+    return {
+      email: localStorage.getItem("user-email"),
+      resendValid: false,
+      interval: null
+    };
+  },
   components: {
     AuthWrap
+  },
+  methods: {
+    setInterval() {
+      this.interval = setInterval(() => {
+        this.canResend();
+      }, 1000);
+    },
+    canResend() {
+      const tempTime = new Date().getTime();
+      const lastTime = +localStorage.getItem("verificationTime") || tempTime;
+      this.resendValid = (tempTime - lastTime) / 1000 >= 60;
+      if (this.resendValid) {
+        clearInterval(this.interval);
+      }
+    },
+    verificationEmail() {
+      if (this.resendValid) {
+        this.$store.dispatch("auth/sendVerificationEmail", this.email);
+        const time = new Date().getTime().toString();
+        localStorage.setItem("verificationTime", time);
+        this.setInterval();
+      }
+    }
+  },
+  mounted() {
+    this.setInterval();
   }
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.reset-email-btn {
+  .v-btn:before {
+    display: none;
+  }
+}
+</style>

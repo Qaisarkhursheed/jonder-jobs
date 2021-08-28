@@ -56,6 +56,7 @@
     },
     "profile": {
       "email": "E-mail address",
+      "resendEmail": "Resend E-mail",
       "cityAndAddress": "City and address",
       "workRadius": "Work Radius",
       "lookingFor": "Looking for",
