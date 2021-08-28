@@ -1,3 +1,5 @@
+import groupBy from 'lodash/groupBy';
+
 export default {
   userInteractions(state) {
     return state.userInteractions;
@@ -14,8 +16,14 @@ export default {
   companyInteractionsYearly(state) {
     return state.companyInteractions.yearlyActivity;
   },
-  selectionManagement(state) {
-    return state.selectionManagement;
+  selectionManagement: (state) => (view) => {
+    let data;
+    if (view === 'list') {
+      data = state.selectionManagement;
+    } else {
+      data = groupBy(state.selectionManagement, 'managment_status')
+    }
+    return data;
   },
   searchResults(state) {
     return state.searchResults;

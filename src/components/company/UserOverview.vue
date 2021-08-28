@@ -1,6 +1,6 @@
 <template>
   <div class="user-overview" v-if="profile">
-    <div class="heading d-flex mb-5" @click="back">
+    <div class="heading d-flex mb-5" v-if="!calledFromList" @click="back">
       <v-icon size="25">
         mdi-arrow-left
       </v-icon>
@@ -82,6 +82,10 @@ export default {
   props: {
     id: {
       type: [String, Number]
+    },
+    calledFromList: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -138,8 +142,10 @@ export default {
   methods: {
     //  ...mapActions("user", ["addUserProfileView"]),
     getUser() {
+      const id = this.calledFromList ? this.id : this.$route.params.id;
+      console.log(id);
       axios
-        .get(`/users/${this.$route.params.id}`)
+        .get(`/users/${id}`)
         .then(res => {
           // this.populateData(res.data);
           this.profile = res.data.data;
@@ -198,6 +204,13 @@ export default {
         this.$router.push({
           name: "CompanySearch"
         });
+      }
+    }
+  },
+  watch: {
+    id() {
+      if (this.calledFromList) {
+        this.getUser();
       }
     }
   }

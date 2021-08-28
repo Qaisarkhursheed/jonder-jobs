@@ -1,12 +1,5 @@
 export default {
-  selectionManagement: {
-    'Saved candidates': [],
-    'Candidates': [],
-    'Qualified': [],
-    'Interview': [],
-    'Final round': [],
-    'Hired': []
-  },
+  selectionManagement: null,
   searchResults: [],
   searchStatus: {
     current: 'default',
