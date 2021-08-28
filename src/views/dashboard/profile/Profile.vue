@@ -712,13 +712,15 @@ export default {
       this.formData.resume = user.resume;
       this.formData.why_jonder = user.why_jonder;
       this.formData.location_show = user.location_show;
-      this.formData.work_remotely = user.work_remotely;
+      this.formData.work_remotely = user.work_remotely ? true : false;
     },
     handleUpdate() {
       this.formResponse = {};
       let formDataCopy = Object.assign({}, this.formData);
       formDataCopy.branche = formDataCopy.branche.join();
       formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
+      if(formDataCopy.work_remotely) formDataCopy.work_remotely = 1;
+      else formDataCopy.work_remotely = 0;
       if (this.newImage) {
         formDataCopy.profile_img = this.newImage;
       }
