@@ -23,15 +23,15 @@
         <div class="d-flex">
           <img :src="require('@/assets/svg/pdf.svg')" />
           <div class="pl-3">
-            <div class="pdf-name">{{ inputData[0].name }}</div>
-            <div class="pdf-size" v-if="inputData[0].size">
+            <div class="pdf-name">{{ type }}</div>
+            <!-- <div class="pdf-size" v-if="inputData[0].size">
               {{ inputData[0].size }} Bytes
-            </div>
+            </div> -->
           </div>
         </div>
         <div>
           <v-menu top right>
-            <template v-slot:activator="{ on, attrs }" >
+            <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
@@ -56,57 +56,56 @@
 </template>
 
 <script>
-
 export default {
-  name: 'DocumentUploadSection',
+  name: "DocumentUploadSection",
 
   props: {
     type: {
-      type: String
+      type: String,
     },
     value: {
       type: [Object, Boolean, Array, String],
-      default: false
+      default: false,
     },
   },
   data() {
     return {
       inputData: null,
-    }
+    };
   },
   created() {
-    if(this.value) {
+    if (this.value) {
       this.inputData = [
         {
           name: this.value,
           size: false,
-        }
-      ]
+        },
+      ];
     }
   },
+
   methods: {
     handleAction(item) {
-       if(item === 'View') {
-      //   let t = this.type.toLowerCase();
-      //   if(t === 'cv') {
-      //     t = 'cvs'
-      //   }
-      //  const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
+      if (item === "View") {
+        //   let t = this.type.toLowerCase();
+        //   if(t === 'cv') {
+        //     t = 'cvs'
+        //   }
+        //  const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
         const link = this.value.name;
-        window.open(link, '_blank').focus();
-
+        window.open(link, "_blank").focus();
       } else {
         this.inputData = null;
       }
-    }
+    },
   },
+
   watch: {
     inputData(val) {
-      this.$emit('change', val);
-    }
+      this.$emit("change", val);
+    },
   },
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -116,7 +115,7 @@ export default {
   word-break: break-word;
 }
 .pdf-size {
-  font-weight: 400;    
-  color: #7A7A7A;
+  font-weight: 400;
+  color: #7a7a7a;
 }
 </style>
