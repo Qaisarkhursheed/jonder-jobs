@@ -43,14 +43,13 @@
         {{ $t("user.onboarding.whereToWork") }}
       </label>
       <GooglePlacesAutocomplete @select="e => value.address_to_work = e" />
-      <!-- <v-select
-        v-model="value.address_to_work"
-        :items="cities"
-        :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
-        outlined
-        class="mt-1"
-      ></v-select> -->
+      
+      <v-checkbox
+        class="mb-8 mt-0"
+        label="Are you also open to working remotely?"
+        hide-details="auto"
+        v-model="value.work_remotely"
+      ></v-checkbox>
 
       <label class="profile-label">
         {{ $t("user.onboarding.whenToStart") }}

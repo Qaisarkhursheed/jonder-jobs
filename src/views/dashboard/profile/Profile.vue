@@ -114,6 +114,16 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-checkbox
+            class="mb-0 mt-0"
+            label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+            hide-details="auto"
+            v-model="formData.location_show"
+          ></v-checkbox>
+        </v-col>
+      </v-row>
     </v-card>
 
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
@@ -193,12 +203,6 @@
           <label class="profile-label"
             >What type of branches are you looking for?</label
           >
-          <!-- <v-select
-            outlined
-            :items="lookingForBranches"
-            background-color="white"
-            v-model="formData.looking_for_branche"
-          ></v-select> -->
           <v-autocomplete
             v-model="formData.looking_for_branche"
             :items="types.JOB_BRANCHE"
@@ -219,7 +223,7 @@
           >
           <v-select
             outlined
-            :items="employment"
+            :items="types.EMPLOYEMENT_TYPE"
             background-color="white"
             v-model="formData.looking_for_employment_type"
           ></v-select>
@@ -232,16 +236,12 @@
             :value="formData.address_to_work"
             @select="(e) => (formData.address_to_work = e)"
           />
-          <!-- <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="formData.address_to_work"
-          ></v-text-field> -->
+           <v-checkbox
+            class="mb-8 mt-0"
+            label="Are you also open to working remotely?"
+            hide-details="auto"
+            v-model="formData.work_remotely"
+          ></v-checkbox>
         </v-col>
       </v-row>
 
@@ -627,6 +627,8 @@ export default {
       cv: null,
       qualifications: null,
       resume: null,
+      location_show: "",
+      work_remotely: ""
     },
     formResponse: {},
     formLoading: false,
@@ -635,36 +637,11 @@ export default {
     passwordFormLoading: false,
     passwordFormResponse: {},
     invoices: [],
-    branche: [
-      "Medicine",
-      "Automotive industry",
-      "Mechanical engineering",
-      "Chemical-pharmaceutical industry",
-      "Food industry",
-      "Electrical engineering industry",
-    ],
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
       "I am just curious",
     ],
-    lookingForRole: [
-      "Developer",
-      "Project Manager",
-      "Construction manager",
-      "Intern",
-      "Apprentice",
-      "Manager",
-    ],
-    lookingForBranches: [
-      "Developer",
-      "Project Manager",
-      "Construction manager",
-      "Intern",
-      "Apprentice",
-      "Manager",
-    ],
-    employment: ["Trainee", "Fulltime", "Parttime"],
     modals: {
       UpgradePlan: {
         active: false,
@@ -734,6 +711,8 @@ export default {
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
       this.formData.why_jonder = user.why_jonder;
+      this.formData.location_show = user.location_show;
+      this.formData.work_remotely = user.work_remotely;
     },
     handleUpdate() {
       this.formResponse = {};
