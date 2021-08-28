@@ -1,12 +1,30 @@
 <template>
   <auth-wrap :img="2">
-    <div class="stepper-wrap mt-10" style="width: 500px">
+    <!-- Menu options - Logout -->
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <v-menu top right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item @click="$router.replace({ name: 'Logout' })">
+            {{ $t("general.logout") }}
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+
+    <!-- Content -->
+    <div class="stepper-wrap mt-10">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
         v-model="e1"
       >
-        <v-stepper-header class="elevation-0" v-if="this.showSteps === true">
+        <v-stepper-header class="elevation-0" v-if="showSteps === true">
           <v-stepper-step step="1" :complete="complete(1)"></v-stepper-step>
 
           <v-divider></v-divider>
@@ -97,7 +115,7 @@ export default {
     Step2,
     Step3,
     Step4,
-    StepSucces,
+    StepSucces
   },
   data: () => ({
     showSteps: true,
@@ -112,15 +130,15 @@ export default {
       company_email: "",
       company_phone: "",
       address: "",
-      city: "",
+      //city: "",
       web_url: "",
       facebook: "",
       instagram: "",
       twitter: "",
       linkedin: "",
-      youtube: "",
+      youtube: ""
     },
-    formResponse: {},
+    formResponse: {}
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -133,7 +151,7 @@ export default {
     populateData() {
       const user = this.$store.getters["user/user"];
       if (user) {
-        Object.keys(user).forEach((key) => {
+        Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -145,8 +163,8 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-      if (this.e1 === 4) this.showSteps = false;
-      if (this.e1 < 5) {
+
+      if (this.e1 < 4) {
         this.e1++;
       } else {
         this.saveOnboarding();
@@ -169,16 +187,18 @@ export default {
       this.$store
         .dispatch("user/postOnboardingCompany", data)
         .then(() => {
-          this.$router.replace("/company-dashboard");
+          this.showSteps = false;
+          this.e1 = 5;
+          // this.$router.replace("/company-dashboard");
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -189,6 +209,7 @@ export default {
 @media (max-width: 600px) {
   .stepper-wrap {
     width: 100%;
+    padding: 15px;
   }
 }
 </style>

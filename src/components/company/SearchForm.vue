@@ -7,7 +7,7 @@
   <v-card class="search-form rounded-lg pa-8"
           flat>
     <v-row>
-      <v-col cols="7">
+      <v-col cols="12" md="7">
         <label class="section-label">
           {{ $t('company.search.jobPosition') }}
         </label>
@@ -22,7 +22,7 @@
           placeholder="Enter job position"
         ></v-autocomplete>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="12" md="5">
          <label class="section-label">
           {{ $t('company.search.employementType') }}
         </label>
@@ -38,7 +38,7 @@
 
     <template v-if="advancedSearch">
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.industryOfProfession') }}
           </label>
@@ -53,7 +53,7 @@
             placeholder="Enter industry "
           ></v-autocomplete>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.schoolGraduation') }}
           </label>
@@ -72,7 +72,7 @@
             background-color="#fff">
           </v-text-field>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.educationStudy') }}
           </label>
@@ -86,7 +86,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.salaryRange') }}
           </label>
@@ -125,7 +125,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.workExperience') }}
           </label>
@@ -137,73 +137,61 @@
             outlined
           ></v-select>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <label class="section-label">
             {{ $t('company.search.city') }}
           </label>
           <GooglePlacesAutocomplete @select="e => formFields.city = e" />
-          <!-- <v-text-field
-            v-model="formFields.city"
-            class="rounded-lg"
-            style="height: 50px;"
-            height="100%"
-            type="text"
-            outlined
-            :hide-details="true"
-            :placeholder="$t('company.search.city')"
-            flat
-            dense
-            solo
-            background-color="#fff">
-          </v-text-field> -->
         </v-col>
       </v-row>
     </template>
 
     <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
-      <v-col cols="6">
-        <v-row>
-          <v-col cols="6">
-            <v-btn
-              color="#fff"
-              height="58"
-              elevation="0"
-              class="full-w mt-16 font-weight-medium white"
-              @click="searchSave"
-            >
-                Save search
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="6">
-        <v-row>
-          <v-col cols="6">
-            <v-btn
-              height="58"
-              elevation="0"
-              :class="['advanced-search-btn full-w mt-16 white font-weight-medium',
-                { active: advancedSearch}
-              ]"
-              color="#fff"
-              @click="advancedSearch = !advancedSearch"
-            >
-              {{ $t('company.search.advancedSearch') }}
-            </v-btn>
-          </v-col>
-          <v-col cols="6">
-            <v-btn
-              :loading="searchLoading"
-              color="primary"
-              height="58"
-              class="full-w mt-16 font-weight-medium"
-              @click="search"
-            >
-               {{ $t('company.search.findEmployee') }}
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-btn
+                color="#fff"
+                height="58"
+                elevation="0"
+                class="full-w mt-md-16 font-weight-medium white"
+                @click="searchSave"
+              >
+                  Save search
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-btn
+                height="58"
+                elevation="0"
+                :class="['advanced-search-btn full-w mt-md-16 white font-weight-medium',
+                  { active: advancedSearch}
+                ]"
+                color="#fff"
+                @click="advancedSearch = !advancedSearch"
+              >
+                {{ $t('company.search.advancedSearch') }}
+              </v-btn>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                :loading="searchLoading"
+                color="primary"
+                height="58"
+                class="full-w mt-md-16 font-weight-medium"
+                @click="search"
+              >
+                {{ $t('company.search.findEmployee') }}
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
     </v-card-actions>
     <transition name="fade">
       <section class="error-message" v-if="errorMessage">

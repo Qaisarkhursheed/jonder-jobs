@@ -30,23 +30,21 @@
             </v-row>
 
             <v-row>
-              <v-col cols="6">
+              <v-col cols="12" sm="6">
                 <label>{{ $t("user.onboarding.startDate") }}</label>
                 <Calendar
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
                   :rules="[validations.required]"
-                  type="date"
                 />
               </v-col>
-              <v-col cols="6" v-if="!form.study_here">
+              <v-col cols="12" sm="6" v-if="!form.study_here">
                 <label>{{ $t("user.onboarding.endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
                   :value="form.end_time"
                   :rules="form.study_here ? [] : [validations.required]"
                   :disabled="!!form.study_here"
-                  type="date"
                 />
               </v-col>
             </v-row>

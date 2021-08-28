@@ -3,12 +3,12 @@ import axios from "axios";
 export default {
   me({ state, commit }) {
     if (state.user) {
-      return new Promise(resolve => resolve(state.user));
+      return new Promise((resolve) => resolve(state.user));
     }
 
     return axios
       .get("/me")
-      .then(response => {
+      .then((response) => {
         commit("auth/SET_AUTHENTICATED", true, { root: true });
         commit("SET_USER", response.data);
         return response.data;
@@ -22,7 +22,7 @@ export default {
 
   async postOnboardingCompany({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] || data[key] == 0) {
         formData.append(key, data[key]);
       }
@@ -43,7 +43,7 @@ export default {
 
   async postOnboardingUser({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] || data[key] == 0) {
         formData.append(key, data[key]);
       }
@@ -68,11 +68,11 @@ export default {
   getUser({ commit }, userId) {
     return axios
       .get("/users/" + userId)
-      .then(resp => {
+      .then((resp) => {
         if (resp.data) commit("SET_USER_DETAILS", resp.data);
         return resp;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting user details:", err);
       });
   },
@@ -83,9 +83,9 @@ export default {
 
   async updateUser({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => formData.append(key + "[]", el));
+        data[key].forEach((el) => formData.append(key + "[]", el));
       } else {
         formData.append(key, data[key]);
       }
@@ -104,9 +104,9 @@ export default {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -127,9 +127,9 @@ export default {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -150,9 +150,9 @@ export default {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -171,22 +171,24 @@ export default {
   searchUsers({ dispatch }, payload) {
     return axios
       .get("/search/0/10?data=" + payload)
-      .then(res => {
+      .then((res) => {
         if (res.data.success)
-          return res.data.data.map(i => transformSearchResult(i, dispatch));
+          return res.data.data.map((i) => transformSearchResult(i, dispatch));
         return [];
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting search results: ", err);
         return [];
       });
   },
 
+  /*
   addUserProfileView(context, payload) {
     return axios.post("stats/profile", payload).then(() => {
       "Yupiii";
     });
   },
+  */
   saveCv(context, payload) {
     return axios.post("/cv_store", payload);
   },
@@ -283,7 +285,7 @@ export default {
     } catch (err) {
       return Promise.reject(err.response);
     }
-  }
+  },
 };
 
 const transformSearchResult = (user, dispatch) => {
@@ -293,6 +295,6 @@ const transformSearchResult = (user, dispatch) => {
       user.role === "user"
         ? user.first_name + " " + user.last_name
         : user.company,
-    id: user.id
+    id: user.id,
   };
 };

@@ -34,8 +34,13 @@
         v-if="getUnreadCount > 0"
         inline
       ></v-badge>
-      <div class="time-label">
-        {{ lastMessage }}
+      <div
+        class="time-label"
+        :title="$options.filters.moment(lastMessage, 'DD.MM.YYYY HH:mm')"
+      >
+        <template v-if="lastMessage">
+          {{ lastMessage | moment("from", "now") }}
+        </template>
       </div>
     </v-list-item-icon>
   </v-list-item>
@@ -61,7 +66,7 @@ export default {
     },
     lastMessage() {
       return this.conversation.conversation.last_message
-        ? this.conversation.conversation.last_message.updated_at.substr(0, 10)
+        ? this.conversation.conversation.last_message.updated_at
         : "";
     }
   },
@@ -73,7 +78,15 @@ export default {
     ]),
     ...mapMutations("chat", ["SET_CONVERSATION_DETAILS"]),
     getParticipian(conversation) {
-      return conversation.conversation.participants[0].messageable;
+      const myId = this.$store.getters["user/user"].id;
+
+      for (const p of conversation.conversation.participants) {
+        if (p.messageable_id != myId) {
+          return p.messageable;
+        }
+      }
+
+      return null;
     },
     getProfileImage(conversation) {
       const img = this.getParticipian(conversation).profile_img;
@@ -90,12 +103,26 @@ export default {
       return p.company || p.first_name + " " + p.last_name;
     },
     getInitials(conversation) {
-      return (
-        this.getParticipian(conversation).first_name.charAt(0) +
-        this.getParticipian(conversation).last_name.charAt(0)
-      );
+      const participant = this.getParticipian(conversation);
+
+      if (participant.company) {
+        if (participant.company.split(" ").length > 1) {
+          return (
+            participant.company.charAt(0) +
+            participant.company.split(" ")[1].charAt(0)
+          );
+        }
+
+        return participant.company.substr(0, 2);
+      }
+
+      return participant.first_name.charAt(0) + participant.last_name.charAt(0);
     },
     getShortMessage(conversation) {
+      if (!conversation.conversation.last_message) {
+        return "";
+      }
+
       if (conversation.conversation.last_message.type == "upload") {
         return "File";
       }

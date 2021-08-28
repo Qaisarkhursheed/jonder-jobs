@@ -70,7 +70,6 @@ export default {
         .then(resp => {
           commit("SET_LOADED_STATE", true);
           commit("FILL_CONVERSATIONS", resp.data);
-          console.log(resp.data);
         })
         .catch(err => {
           console.error("Error getting conversations. " + err);

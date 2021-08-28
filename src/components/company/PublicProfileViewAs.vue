@@ -101,7 +101,11 @@
           </div>
           <div class="pl-4">
             <div class="label">Email address</div>
-            <div class="value">{{ user.company_email }}</div>
+            <div class="value">
+              <a :href="'mailto:' + user.company_email">
+                {{ user.company_email }}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -113,7 +117,11 @@
           </div>
           <div class="pl-4">
             <div class="label">Phone number</div>
-            <div class="value">{{ user.company_phone }}</div>
+            <div class="value">
+              <a :href="'tel:' + user.company_phone">
+                {{ user.company_phone }}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -125,7 +133,11 @@
           </div>
           <div class="pl-4">
             <div class="label">City and address</div>
-            <div class="value">{{ user.city }}, {{ user.address }}</div>
+            <div class="value">
+              <a :href="googleMapsLink" target="_blank">
+                {{ address }}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -137,7 +149,11 @@
           </div>
           <div class="pl-4">
             <div class="label">Web</div>
-            <div class="value">{{ user.web_url }}</div>
+            <div class="value">
+              <a :href="user.web_url" target="_blank">
+                {{ user.web_url }}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -218,6 +234,11 @@ export default {
     font-weight: 600;
     font-size: 16px;
     color: #222222;
+
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
   }
 }
 </style>

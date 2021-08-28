@@ -62,9 +62,10 @@
                 Change personal info
               </p>
               <p class="profile-subtitle">
-                Explanation goes here
-              </p>
-            </v-row>
+                <!-- Explanation goes here
+              </p> -->
+              </p></v-row
+            >
 
             <v-form v-model="formValid">
               <v-row>
@@ -118,7 +119,6 @@
                     background-color="white"
                     v-model="user.email"
                   ></v-text-field>
-                  <small style="opacity: 60%">Email is not verified yet</small>
                 </v-col>
               </v-row>
 
@@ -144,26 +144,37 @@
               <p class="profile-title">
                 Billing &amp; Invoices
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-row
-              v-for="item in [1, 2, 3, 4]"
-              :key="item"
+              v-for="item in invoices"
+              :key="item.id"
               class="invoice-row py-1"
             >
               <v-col>
-                <div class="invoice-number">Number of invoice: {{ item }}</div>
+                <div class="invoice-number">
+                  Number of invoice: {{ item.invoice_number }}
+                </div>
                 <div class="invoice-date">
-                  Date of invoice: 02.10.21 / 12:23
+                  Date of invoice:
+                  {{
+                    item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm")
+                  }}
                 </div>
               </v-col>
               <v-col cols="auto d-flex align-center">
                 <v-img
+                  class="hover-pointer"
                   :src="require('@/assets/icons/download.svg')"
-                  @click="downloadInvoice(item)"
+                  @click="
+                    $store.dispatch('invoices/downloadInvoice', {
+                      id: item.id,
+                      number: item.invoice_number,
+                    })
+                  "
                 ></v-img>
               </v-col>
             </v-row>
@@ -175,9 +186,9 @@
               <p class="profile-title">
                 Edit payment method
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-row class="payment-card pa-3">
@@ -209,9 +220,9 @@
               <p class="profile-title">
                 Change password
               </p>
-              <p class="profile-subtitle">
+              <!-- <p class="profile-subtitle">
                 Explanation goes here
-              </p>
+              </p> -->
             </v-row>
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
@@ -285,7 +296,7 @@ import AddNewCard from "@/views/dashboard/AddNewCard";
 export default {
   components: {
     Header,
-    AddNewCard
+    AddNewCard,
   },
   data() {
     return {
@@ -295,23 +306,28 @@ export default {
       passwordFormData: {},
       passwordFormValid: false,
       passwordFormResponse: {},
+      invoices: [],
       modals: {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard
-        }
+          component: AddNewCard,
+        },
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"]
-      }
+        AddNewCard: ["edit", "delete"],
+      },
     };
   },
   computed: {
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["user"]),
   },
   created() {
     this.fillData();
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+      this.invoices = resp.data.data;
+      this.invoices = this.invoices.filter((i) => i.status == "complete");
+    });
   },
   methods: {
     ...mapActions("user", ["updateCompany"]),
@@ -332,10 +348,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
     },
@@ -344,7 +360,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -352,12 +368,9 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         });
-    },
-    downloadInvoice() {
-      // TODO
     },
     scrollToSection(profileSection) {
       document
@@ -371,8 +384,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
-  }
+    },
+  },
 };
 </script>
 

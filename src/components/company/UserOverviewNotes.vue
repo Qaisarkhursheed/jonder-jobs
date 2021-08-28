@@ -8,7 +8,7 @@
       :note="selectedNote"
     />
     <v-row>
-      <v-col cols="6" v-for="(note, i) in notes" :key="i">
+      <v-col cols="12" md="6" v-for="(note, i) in notes" :key="i">
         <v-card
           class="full-h d-flex flex-column justify-space-between"
           flat

@@ -74,7 +74,7 @@ export default {
       if (this.$route.params.id) {
         const userId = parseInt(this.$route.params.id);
         this.$store.dispatch("user/getUser", userId);
-        this.$store.dispatch("stats/updateProfileView", userId);
+       // this.$store.dispatch("stats/updateProfileView", userId);
       } else this.$router.push("/dashboard");
     }
   },

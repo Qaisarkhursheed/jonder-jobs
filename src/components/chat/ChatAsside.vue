@@ -6,20 +6,23 @@
     <v-divider></v-divider>
     <v-list subheader class="pb-0">
       <v-list-item-group color="primary">
-        <template v-for="(conversation, index) in conversations">
+        <div
+          v-for="(conversation, index) in conversations"
+          :key="conversation.id"
+        >
           <chat-asside-item
-            v-if="conversation.ids.length"
-            :key="conversation.id"
+            v-if="showConversation(conversation)"
             :conversation="conversation"
             @loading="loading = $event"
             @reload="refreshConversations"
             @item-click="$emit('item-click')"
           />
           <v-divider
-            v-if="index < conversations.length - 1"
-            :key="conversation.id"
+            v-if="
+              index < conversations.length - 1 && showConversation(conversation)
+            "
           ></v-divider>
-        </template>
+        </div>
       </v-list-item-group>
     </v-list>
     <div class="overlay" v-if="loading"></div>
@@ -39,6 +42,17 @@ export default {
   methods: {
     refreshConversations() {
       this.$store.dispatch("chat/getAllConversations");
+    },
+
+    showConversation(conversation) {
+      const selectedConversationId = this.$store.getters[
+        "chat/conversationDetails"
+      ].id;
+
+      return (
+        conversation.id == selectedConversationId ||
+        (conversation.ids.length && conversation.conversation.last_message)
+      );
     }
   }
 };

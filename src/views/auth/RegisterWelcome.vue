@@ -1,6 +1,16 @@
 <template>
   <auth-wrap :img="img">
     <v-stepper v-model="step" style="box-shadow: none">
+      <v-alert
+        v-if="$route.query.noAccount"
+        text
+        type="info"
+        class="mt-5 mx-5"
+        style="margin-bottom: -10px"
+      >
+        No account found, please register first.
+      </v-alert>
+
       <v-stepper-items class="text-center" style="max-width: 500px">
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">
@@ -83,6 +93,8 @@
             outlined
             block
             large
+            link
+            :href="googleUrl"
           >
             <v-icon left>mdi-google</v-icon>
             Continue with Google
@@ -96,6 +108,8 @@
             outlined
             block
             large
+            link
+            :href="facebookUrl"
           >
             <v-icon left>mdi-facebook</v-icon>
             Continue with Facebook
@@ -113,8 +127,6 @@
             Continue with Email
           </v-btn>
         </v-stepper-content>
-
-        
       </v-stepper-items>
 
       <div class="text-center">
@@ -143,6 +155,20 @@ export default {
     step: 1,
     accountType: null
   }),
+  computed: {
+    facebookUrl() {
+      const urlNumber = this.accountType == "user" ? 1 : 2;
+      const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/facebook`;
+
+      return url;
+    },
+    googleUrl() {
+      const urlNumber = this.accountType == "user" ? 1 : 2;
+      const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
+
+      return url;
+    }
+  },
   methods: {
     submit() {
       if (this.accountType == "user") {

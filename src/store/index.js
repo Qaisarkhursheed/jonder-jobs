@@ -8,6 +8,7 @@ import notepad from "./notepad";
 import chat from "./chat";
 import company from "./company";
 import teamManagement from "./teamManagement";
+import invoices from "./invoices";
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default createStore(Vuex.Store, {
     notepad,
     chat,
     company,
-    teamManagement
+    teamManagement,
+    invoices
   }
 });

@@ -34,24 +34,22 @@
             </v-row>
 
             <v-row>
-              <v-col cols="6" class="mt-1">
+              <v-col cols="12" sm="6" class="mt-1">
                 <label>{{ $t("user.onboarding.startDate") }}</label>
                 <Calendar
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
                   :rules="[validations.required]"
-                  type="date"
                 />
               </v-col>
 
-              <v-col cols="6" class="mt-1" v-if="!form.working_here">
+              <v-col cols="12" sm="6" class="mt-1" v-if="!form.working_here">
                 <label>{{ $t("user.onboarding.endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
                   :value="form.end_time"
                   :rules="form.working_here ? [] : [validations.required]"
                   :disabled="!!form.working_here"
-                  type="date"
                 />
               </v-col>
             </v-row>
@@ -61,13 +59,6 @@
             <v-row>
               <v-col>
                 <label>{{ $t("user.onboarding.position") }}</label>
-                <!-- <v-select
-                  v-model="form.position"
-                  :placeholder="$t('user.onboarding.choose')"
-                  :items="positions"
-                  :rules="[validations.required]"
-                  outlined
-                ></v-select> -->
                 <v-autocomplete
                   v-model="form.position"
                   :items="types.JOB_POSITION"
@@ -86,7 +77,7 @@
                 <v-select
                   v-model="form.employment_type"
                   :placeholder="$t('user.onboarding.choose')"
-                  :items="emplType"
+                  :items="types.EMPLOYEMENT_TYPE"
                   :rules="[validations.required]"
                   outlined
                 ></v-select>
@@ -186,19 +177,6 @@ export default {
       formValid: false,
       formLoading: false,
       formResponse: {},
-      emplType: [
-        this.$t("user.onboarding.trainee"),
-        this.$t("user.onboarding.fulltime"),
-        this.$t("user.onboarding.parttime"),
-      ],
-      positions: [
-        this.$t("user.onboarding.positionDeveloper"),
-        this.$t("user.onboarding.positionProjectManager"),
-        this.$t("user.onboarding.positionConstructionManager"),
-        this.$t("user.onboarding.positionIntern"),
-        this.$t("user.onboarding.positionApprentice"),
-        this.$t("user.onboarding.positionManager"),
-      ],
       form: {
         company_name: "",
         position: "",

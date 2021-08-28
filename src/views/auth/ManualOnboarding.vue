@@ -1,10 +1,24 @@
 <template>
   <auth-wrap :img="e1 + 1">
-    <!-- <v-icon v-if="e1 > 1 && e1 < 6" class="mo-back-button" @click="prevStep">
-      mdi-arrow-left
-    </v-icon> -->
+    <!-- Menu options - Logout -->
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <v-menu top right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
 
-    <div class="stepper-wrap mt-10" style="width: 450px">
+        <v-list>
+          <v-list-item @click="$router.replace({ name: 'Logout' })">
+            {{ $t("general.logout") }}
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+
+    <!-- Content -->
+    <div class="stepper-wrap mt-10">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -142,10 +156,10 @@ export default {
     Step4,
     Step5,
     Step6,
-    StepSucces,
+    StepSucces
   },
   props: {
-    isBtnVisible: Boolean,
+    isBtnVisible: Boolean
   },
   data: () => ({
     showSteps: true,
@@ -167,6 +181,8 @@ export default {
       cv: "",
       resume: null,
       qualifications: null,
+      location_show: 1,
+      work_remotely: false
       // address: "",
       // working_in: "",
       // describe_yourself: "",
@@ -174,7 +190,7 @@ export default {
       // your_qualification: "",
       // additional_training: "",
       // dream_job: "",
-    },
+    }
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -184,18 +200,14 @@ export default {
     this.populateData(this.user);
   },
   computed: {
-    ...mapGetters("user", [
-      "user",
-      "jobseekerExperience",
-      "jobseekerEducation",
-    ]),
+    ...mapGetters("user", ["user", "jobseekerExperience", "jobseekerEducation"])
   },
   methods: {
     ...mapActions("user", ["postOnboardingUser"]),
     populateData(user) {
       console.log("populateData", user);
       if (user) {
-        Object.keys(user).forEach((key) => {
+        Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -206,9 +218,12 @@ export default {
     },
     nextStep() {
       if (this.saveInProgress) return;
-      if (this.e1 === 7) this.showSteps = false;
-      if (this.e1 < 7) this.e1++;
-      else this.saveOnboarding();
+
+      if (this.e1 < 6) {
+        this.e1++;
+      } else {
+        this.saveOnboarding();
+      }
     },
     complete(step) {
       return step < this.e1;
@@ -219,16 +234,18 @@ export default {
 
       this.postOnboardingUser(this.formData)
         .then(() => {
-          this.$router.replace("/dashboard");
+          this.showSteps = false;
+          this.e1 = 7;
+          // this.$router.replace("/dashboard");
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -248,9 +265,13 @@ export default {
 .mo-stepper-items {
   overflow: auto;
 }
+.stepper-wrap {
+  width: 450px;
+}
 @media (max-width: 600px) {
   .stepper-wrap {
     width: 100%;
+    padding: 15px;
   }
 }
 </style>

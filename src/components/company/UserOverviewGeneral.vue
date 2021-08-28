@@ -1,7 +1,7 @@
 <template>
   <div class="user-overview-general">
     <v-row class="no-gutters">
-      <v-col cols="8" class="left pl-10 pr-10 pt-7 pb-10">
+      <v-col cols="12" md="8" class="left pl-10 pr-10 pt-7 pb-10">
         <div class="section about-me">
           <div class="title">About me</div>
           <div class="content">
@@ -27,7 +27,7 @@
           </div>
         </div>
       </v-col>
-      <v-col cols="4" class="right pl-10 pr-10 pt-8">
+      <v-col cols="12" md="4" class="right pl-10 pr-10 pt-8">
         <div class="d-flex justify-space-between mb-7">
           <div class="section">
             <div class="title">
@@ -47,10 +47,21 @@
           </div>
         </div>
         <div class="section mb-7">
+          <div class="title">Open for Remote</div>
+          <div class="content">
+            <template v-if="user.work_remotely">
+              Yes
+            </template>
+            <template v-else>
+              No
+            </template>
+          </div>
+        </div>
+        <div class="section mb-7">
           <div class="title">current industry</div>
           <div class="content">{{ user.branche }}</div>
         </div>
-        <div class="section mb-7">
+        <div class="section mb-7" v-if="user.location_show">
           <div class="title">city and address</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>

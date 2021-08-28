@@ -6,6 +6,7 @@
       <v-row class="no-gutters">
         <v-col
           cols="10"
+          md="11"
           xl="10"
           lg="9"
         >
@@ -19,43 +20,55 @@
               </div>
             </v-col>
           </v-row>
+
           <v-row class="no-gutters">
             <v-col cols="12">
               <div class="infobar mt-3">
-                <div class="section">
-                  <span class="label">
-                    Type of employeement:
-                  </span>
-                  <span class="value">
-                    {{ filter.employment_type }}
-                  </span>
-                </div>
-                <div class="section">
-                  <span class="label">
-                    Industry:
-                  </span>
-                  <span class="value">
-                    {{ filter.branche }}
-                  </span>
-                </div>
-                <div class="section">
-                  <span class="label">
-                    Salary range:
-                  </span>
-                  <span class="value">
-                    {{ filter.min_salary }} - {{ filter.max_salary }}
-                  </span>
-                </div>
-                <div class="section">
-                  <span class="label">City:</span>
-                  <span class="value">{{ filter.city }}</span>
-                </div>
+                <v-row>
+                  <v-col cols="12" md="3">
+                    <div class="section">
+                      <span class="label">
+                        Type of employeement:
+                      </span>
+                      <span class="value">
+                        {{ filter.employment_type }}
+                      </span>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <div class="section">
+                      <span class="label">
+                        Industry:
+                      </span>
+                      <span class="value">
+                        {{ filter.branche }}
+                      </span>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <div class="section">
+                      <span class="label">
+                        Salary range:
+                      </span>
+                      <span class="value">
+                        {{ filter.min_salary }} - {{ filter.max_salary }}
+                      </span>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" md="3" >
+                    <div class="section">
+                      <span class="label">City:</span>
+                      <span class="value">{{ filter.city }}</span>
+                    </div>
+                  </v-col>
+                </v-row>
               </div>
             </v-col>
           </v-row>
         </v-col>
         <v-col
           cols="2"
+          md="1"
           xl="2"
           lg="3"
         >

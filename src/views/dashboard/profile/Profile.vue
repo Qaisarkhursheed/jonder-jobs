@@ -21,9 +21,7 @@
         <p class="profile-title">
           Change personal info
         </p>
-        <p class="profile-subtitle">
-          Explanation goes here
-        </p>
+        <p class="profile-subtitle"></p>
         <v-col cols="6">
           <div class="d-flex align-center">
             <v-avatar
@@ -66,7 +64,7 @@
       </v-row>
 
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">{{
             $t("user.profile.firstName")
           }}</label>
@@ -83,7 +81,7 @@
             v-model="formData.first_name"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">{{ $t("user.profile.lastName") }}</label>
           <v-text-field
             dense
@@ -101,7 +99,7 @@
       </v-row>
 
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="6">
           <label class="profile-label">Email</label>
           <v-text-field
             dense
@@ -116,6 +114,16 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-checkbox
+            class="mb-0 mt-0"
+            label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+            hide-details="auto"
+            v-model="formData.location_show"
+          ></v-checkbox>
+        </v-col>
+      </v-row>
     </v-card>
 
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
@@ -123,17 +131,11 @@
         <p class="profile-title">
           Rolle & Branche
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
         <v-col cols="12">
           <label class="profile-label">In which branches do you work?</label>
-          <!-- <v-select
-            outlined
-            :items="types.JOB_BRANCHE"
-            background-color="white"
-            v-model="formData.branche"
-          ></v-select> -->
           <v-autocomplete
             v-model="formData.branche"
             :items="types.JOB_BRANCHE"
@@ -161,13 +163,7 @@
             hide-no-data
             :hide-details="true"
           ></v-autocomplete>
-          <!-- <v-select
-            outlined
-            multiple
-            :items="lookingForRole"
-            background-color="white"
-            v-model="formData.looking_for"
-          ></v-select> -->
+          
         </v-col>
       </v-row>
     </v-card>
@@ -177,9 +173,9 @@
         <p class="profile-title">
           Your status
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
         <v-col cols="12">
           <label class="profile-label">
             Your status on Jonder
@@ -200,19 +196,13 @@
         <p class="profile-title">
           What are you looking for
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
         <v-col cols="12">
           <label class="profile-label"
             >What type of branches are you looking for?</label
           >
-          <!-- <v-select
-            outlined
-            :items="lookingForBranches"
-            background-color="white"
-            v-model="formData.looking_for_branche"
-          ></v-select> -->
           <v-autocomplete
             v-model="formData.looking_for_branche"
             :items="types.JOB_BRANCHE"
@@ -233,7 +223,7 @@
           >
           <v-select
             outlined
-            :items="employment"
+            :items="types.EMPLOYEMENT_TYPE"
             background-color="white"
             v-model="formData.looking_for_employment_type"
           ></v-select>
@@ -242,19 +232,16 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label">Where would you like to work?</label>
-           <GooglePlacesAutocomplete 
+          <GooglePlacesAutocomplete
             :value="formData.address_to_work"
-            @select="e => formData.address_to_work = e" />
-          <!-- <v-text-field
-            dense
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="formData.address_to_work"
-          ></v-text-field> -->
+            @select="(e) => (formData.address_to_work = e)"
+          />
+           <v-checkbox
+            class="mb-8 mt-0"
+            label="Are you also open to working remotely?"
+            hide-details="auto"
+            v-model="formData.work_remotely"
+          ></v-checkbox>
         </v-col>
       </v-row>
 
@@ -299,9 +286,9 @@
         <p class="profile-title">
           Your experience and education
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
         <v-col cols="10">
           <label class="profile-label"
             >Professional experience in years?
@@ -384,28 +371,28 @@
         <p class="profile-title">
           Documents
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
         <v-col cols="12">
           <div class="mt-6">
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.cv = e[0])"
+                @change="(e) => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.qualifications = e[0])"
+                @change="(e) => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
-            <div style="width: 70%">
+            <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.resume = e[0])"
+                @change="(e) => (formData.resume = e[0])"
                 type="Resume"
                 :value="formData.resume"
               />
@@ -418,15 +405,39 @@
     <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Billing & Invoices
+          Billing &amp; Invoices
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
+      </v-row>
+
+      <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
+        <v-col>
+          <div class="invoice-number">
+            Number of invoice: {{ item.invoice_number }}
+          </div>
+          <div class="invoice-date">
+            Date of invoice:
+            {{ item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm") }}
+          </div>
+        </v-col>
+        <v-col cols="auto d-flex align-center">
+          <v-img
+            class="hover-pointer"
+            :src="require('@/assets/icons/download.svg')"
+            @click="
+              $store.dispatch('invoices/downloadInvoice', {
+                id: item.id,
+                number: item.invoice_number,
+              })
+            "
+          ></v-img>
+        </v-col>
       </v-row>
     </v-card>
 
-    <v-card flat id="paymentMethod" class="profile-section mb-10">
+    <!-- <v-card flat id="paymentMethod" class="profile-section mb-10">
       <v-row>
         <CardActionableList
           type="AddNewCard"
@@ -434,12 +445,12 @@
         />
         <p class="profile-title">
           Edit payment method
-        </p>
-        <p class="profile-subtitle">
+        </p> -->
+    <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
 
-        <v-btn
+    <!-- <v-btn
           @click="toggleModal('AddNewCard')"
           outlined
           rounded
@@ -451,16 +462,16 @@
         </v-btn>
         Add
       </v-row>
-    </v-card>
+    </v-card> -->
 
     <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
           Change password
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
       </v-row>
 
       <v-form ref="passwordForm" v-model="passwordFormValid">
@@ -519,12 +530,12 @@
         <p class="profile-title">
           Upgrade account
         </p>
-        <p class="profile-subtitle">
+        <!-- <p class="profile-subtitle">
           Explanation goes here
-        </p>
+        </p> -->
       </v-row>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -545,7 +556,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -582,7 +593,7 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 
 export default {
   name: "Profile",
@@ -596,7 +607,7 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
 
   data: () => ({
@@ -615,7 +626,9 @@ export default {
       why_jonder: "",
       cv: null,
       qualifications: null,
-      resume: null
+      resume: null,
+      location_show: "",
+      work_remotely: ""
     },
     formResponse: {},
     formLoading: false,
@@ -623,67 +636,47 @@ export default {
     passwordFormValid: false,
     passwordFormLoading: false,
     passwordFormResponse: {},
-    branche: [
-      "Medicine",
-      "Automotive industry",
-      "Mechanical engineering",
-      "Chemical-pharmaceutical industry",
-      "Food industry",
-      "Electrical engineering industry"
-    ],
+    invoices: [],
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
-      "I am just curious"
+      "I am just curious",
     ],
-    lookingForRole: [
-      "Developer",
-      "Project Manager",
-      "Construction manager",
-      "Intern",
-      "Apprentice",
-      "Manager"
-    ],
-    lookingForBranches: [
-      "Developer",
-      "Project Manager",
-      "Construction manager",
-      "Intern",
-      "Apprentice",
-      "Manager"
-    ],
-    employment: ["Trainee", "Fulltime", "Parttime"],
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal
+        component: UpgradePlanModal,
       },
       AddNewCard: {
         active: false,
         edit: false,
-        component: AddNewCard
+        component: AddNewCard,
       },
       education: {
         active: false,
         edit: false,
-        component: ModalEducation
+        component: ModalEducation,
       },
       experience: {
         active: false,
         edit: false,
-        component: ModalExperience
-      }
+        component: ModalExperience,
+      },
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
-      education: ["edit", "delete"]
-    }
+      education: ["edit", "delete"],
+    },
   }),
   created() {
     this.resetFormData(this.user);
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+      this.invoices = resp.data.data;
+      this.invoices = this.invoices.filter((i) => i.status == "complete");
+    });
   },
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -696,7 +689,7 @@ export default {
     },
     types() {
       return types;
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -705,19 +698,21 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       //this.formData.email = user.email;
-      this.formData.branche = user.branche.split(',');
+      this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
-      this.formData.looking_for_branche = user.looking_for_branche.split(',');
+      this.formData.looking_for_branche = user.looking_for_branche.split(",");
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
-      this.formData.working_experience =  user.working_experience;
+      this.formData.working_experience = user.working_experience;
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
       this.formData.why_jonder = user.why_jonder;
+      this.formData.location_show = user.location_show;
+      this.formData.work_remotely = user.work_remotely;
     },
     handleUpdate() {
       this.formResponse = {};
@@ -742,10 +737,10 @@ export default {
 
       this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
@@ -759,7 +754,7 @@ export default {
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -767,7 +762,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         })
         .finally(() => {
@@ -781,13 +776,13 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
+    },
   },
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -850,5 +845,14 @@ export default {
   height: 50px;
   margin-right: 18px;
   max-width: 30px;
+}
+
+.document-wrap {
+  width: 70%;
+}
+@media (max-width: 800px) {
+  .document-wrap {
+    width: 100%;
+  }
 }
 </style>

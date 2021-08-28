@@ -1,8 +1,8 @@
 <template>
   <v-sheet class="px-12">
-    <v-card class="d-flex align-center justify-center" flat height="45vh" tile>
-      <v-sheet width="400">
-        <v-sheet class="d-flex align-center justify-center my-16"
+    <v-card class="d-flex align-center justify-center" flat tile>
+      <v-sheet>
+        <v-sheet class="d-flex align-center justify-center mb-16"
           ><v-icon color="primary" size="100"
             >mdi-check-circle-outline</v-icon
           ></v-sheet
@@ -16,12 +16,11 @@
           Unternehmen angezeigt!
         </p>
         <v-btn
-          :loading="loading"
           type="submit"
           color="primary"
           height="58"
-          class="full-w font-weight-medium dark-blue mb"
-          @click="nextScreen"
+          class="full-w font-weight-medium dark-blue"
+          :to="{ name: 'CompanySearch' }"
         >
           Abschließen
         </v-btn>
@@ -34,9 +33,9 @@
 export default {
   props: {
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
-  name: "StepSucces",
+  name: "StepSucces"
 };
 </script>
 
