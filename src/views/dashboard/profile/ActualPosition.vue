@@ -171,7 +171,8 @@
           <v-dialog v-model="dialog" persistent max-width="310">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" outlined v-bind="attrs" v-on="on" block>
-                Cancel
+               {{ $t('general.cancel') }}
+
               </v-btn>
             </template>
             <v-card height="280">
@@ -189,7 +190,8 @@
                 <v-row>
                   <v-col md="6" class="text-center">
                     <v-btn text @click="dialog = false">
-                      Cancel
+                    {{ $t('general.cancel') }}
+
                     </v-btn></v-col
                   >
                   <v-col md="6" class="text-center">
@@ -199,7 +201,7 @@
                       @click="dialog = false"
                       class="font-weight-bold"
                     >
-                      Save
+                    {{ $t('general.save') }}
                     </v-btn></v-col
                   >
                 </v-row>
@@ -211,7 +213,7 @@
       <v-col md="6">
         <v-card>
           <v-btn block color="primary" @click="handleUpdate"
-            >Confirm</v-btn
+            >{{ $t('general.confirm') }}</v-btn
           ></v-card
         >
       </v-col>

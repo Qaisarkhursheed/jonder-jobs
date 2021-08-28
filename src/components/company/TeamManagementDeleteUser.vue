@@ -14,7 +14,7 @@
       </template>
 
       <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4 text-center" style="font-size: 28px;">Are you sure?</h1>
+        <h1 class="mb-4 text-center" style="font-size: 28px;">{{ $t('general.areYouSure') }}</h1>
 
         <v-form
           ref="form"
@@ -23,8 +23,7 @@
           v-model="isValid"
         >
           <p>
-            Are you sure that you want to delete user "{{ user.name }}"? This
-            action cannot be undo.
+            {{ $t('general.areYouSureQuestion') }}
           </p>
 
           <ResponseAlert :response="formResponse"></ResponseAlert>
@@ -38,7 +37,7 @@
                 $refs.form.reset();
               "
             >
-              Cancel
+              {{ $t('general.cancelOption') }}
             </v-btn>
             <v-btn
               type="submit"
@@ -47,7 +46,8 @@
               class="ml-3 font-weight-medium "
               :disabled="!isValid"
             >
-              Confirm
+              {{ $t('general.confirmOption') }}
+
             </v-btn>
           </div>
         </v-form>

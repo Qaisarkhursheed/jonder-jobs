@@ -57,7 +57,7 @@
                 $refs.form.reset();
               "
             >
-              Cancel
+              {{ $t('general.cancelOption') }}
             </v-btn>
             <v-btn
               type="submit"
