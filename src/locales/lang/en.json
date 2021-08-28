@@ -57,6 +57,7 @@
     },
     "profile": {
       "email": "E-mail address",
+      "resendEmail": "Resend E-mail",
       "phone": "Phone number",
       "webUrl": "Web URL",
       "socialLinks": "Social links",

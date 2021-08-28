@@ -129,9 +129,12 @@ export default {
     async handleLogin() {
       this.formLoading = true;
       this.formResponse = {};
+      localStorage.setItem('user-email', this.formData.email);
       this.$store
         .dispatch("auth/login", this.formData)
         .then(() => {
+          localStorage.removeItem("user-email");
+          localStorage.removeItem("verificationTime");
           this.$router.replace({ name: "Home" });
         })
         .catch(err => {
