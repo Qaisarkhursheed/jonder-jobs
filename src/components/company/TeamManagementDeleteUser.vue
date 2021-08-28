@@ -9,7 +9,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          Remove
+          Entfernen
         </v-btn>
       </template>
 
@@ -63,14 +63,14 @@ export default {
   components: { ResponseAlert },
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
       dialog: false,
       isValid: false,
-      formResponse: {}
+      formResponse: {},
     };
   },
   methods: {
@@ -81,10 +81,10 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
-    }
-  }
+    },
+  },
 };
 </script>

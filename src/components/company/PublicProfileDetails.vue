@@ -2,7 +2,7 @@
   <div class="public-profile-details d-flex flex-column">
     <div class="section mb-6">
       <label class="section-label">
-        Industry
+        Branche
       </label>
       <v-autocomplete
         v-model="form.branche"
@@ -17,14 +17,14 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Number of employees
+        Anzahl an Angestellten
       </label>
-     <v-select
-      v-model="form.company_employees"
-      :items="types.EMPLOYEE_NUMBER"
-      :hide-details="true"
-      outlined
-    ></v-select>
+      <v-select
+        v-model="form.company_employees"
+        :items="types.EMPLOYEE_NUMBER"
+        :hide-details="true"
+        outlined
+      ></v-select>
     </div>
     <div class="action d-flex justify-end">
       <v-btn
@@ -33,32 +33,31 @@
         class="font-weight-medium"
         @click="save"
       >
-        Save changes
+        Änderungen speichern
       </v-btn>
     </div>
   </div>
 </template>
 
 <script>
-import types from '@/types';
+import types from "@/types";
 
 export default {
-  
-  name: 'PublicProfileDetails',
+  name: "PublicProfileDetails",
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
       form: {
-        branche: '',
-        company_employees: ''
+        branche: "",
+        company_employees: "",
       },
-    }
+    };
   },
 
   created() {
@@ -67,19 +66,18 @@ export default {
   methods: {
     populate() {
       this.form.branche = this.user.branche;
-      this.form.company_employees = this.user.company_employees
+      this.form.company_employees = this.user.company_employees;
     },
     save() {
-      this.$emit('update', {
-        ...this.form
+      this.$emit("update", {
+        ...this.form,
       });
     },
   },
   computed: {
     types() {
       return types;
-    }
-  }
+    },
+  },
 };
-
 </script>

@@ -4,7 +4,7 @@
       <v-icon size="25">
         mdi-arrow-left
       </v-icon>
-      <span class="pl-4">Back</span>
+      <span class="pl-4">Zurück zu den Suchergebnissen</span>
     </div>
     <div class="card-back"></div>
     <v-card class="profile-info rounded-lg" flat>
@@ -81,12 +81,12 @@ export default {
 
   props: {
     id: {
-      type: [String, Number]
-    }
+      type: [String, Number],
+    },
   },
   components: {
     UserOverviewGeneral,
-    UserOverviewNotes
+    UserOverviewNotes,
   },
   data() {
     return {
@@ -126,9 +126,9 @@ export default {
       items: ["general", "notes"],
       tabs: {
         general: UserOverviewGeneral,
-        notes: UserOverviewNotes
+        notes: UserOverviewNotes,
       },
-      startChatLoading: false
+      startChatLoading: false,
     };
   },
   mounted() {
@@ -140,7 +140,7 @@ export default {
     getUser() {
       axios
         .get(`/users/${this.$route.params.id}`)
-        .then(res => {
+        .then((res) => {
           // this.populateData(res.data);
           this.profile = res.data.data;
         })
@@ -163,8 +163,8 @@ export default {
           this.$router.push({
             name: "CompanyMessages",
             params: {
-              company: true
-            }
+              company: true,
+            },
           });
         })
         .finally(() => {
@@ -182,7 +182,7 @@ export default {
         this.$store
           .dispatch("company/slManagementAddCandidate", {
             jobseeker_id: this.profile.id,
-            managment_status: "Saved candidates"
+            managment_status: "Saved candidates",
           })
           .then(() => {
             this.profile.selection_managment = true;
@@ -192,21 +192,19 @@ export default {
     back() {
       if (this.$route.params.type && this.$route.params.type === "selection") {
         this.$router.push({
-          name: "CompanySelectionManagement"
+          name: "CompanySelectionManagement",
         });
       } else {
         this.$router.push({
-          name: "CompanySearch"
+          name: "CompanySearch",
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.card-header {
-}
 .heading {
   font-weight: 600;
   font-size: 17px;
@@ -249,8 +247,7 @@ export default {
   justify-content: center;
   cursor: pointer;
 }
-.tab {
-}
+
 .name {
   font-size: 24px;
 }

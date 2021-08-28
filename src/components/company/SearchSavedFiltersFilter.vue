@@ -1,15 +1,8 @@
 <template>
-  <div class="search-saved"
-       @click="filterAction(actions[1])">
-    <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7"
-            flat>
+  <div class="search-saved" @click="filterAction(actions[1])">
+    <v-card class="rounded-lg pt-6 pl-6 pr-6 pb-7" flat>
       <v-row class="no-gutters">
-        <v-col
-          cols="10"
-          md="11"
-          xl="10"
-          lg="9"
-        >
+        <v-col cols="10" md="11" xl="10" lg="9">
           <v-row class="no-gutters">
             <v-col cols="12">
               <div class="title">
@@ -28,7 +21,7 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Type of employeement:
+                        Art der Anstellung;
                       </span>
                       <span class="value">
                         {{ filter.employment_type }}
@@ -38,7 +31,7 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Industry:
+                        Branche:
                       </span>
                       <span class="value">
                         {{ filter.branche }}
@@ -48,16 +41,16 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Salary range:
+                        Gehaltsspanne
                       </span>
                       <span class="value">
                         {{ filter.min_salary }} - {{ filter.max_salary }}
                       </span>
                     </div>
                   </v-col>
-                  <v-col cols="12" md="3" >
+                  <v-col cols="12" md="3">
                     <div class="section">
-                      <span class="label">City:</span>
+                      <span class="label">Stadt</span>
                       <span class="value">{{ filter.city }}</span>
                     </div>
                   </v-col>
@@ -66,12 +59,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col
-          cols="2"
-          md="1"
-          xl="2"
-          lg="3"
-        >
+        <v-col cols="2" md="1" xl="2" lg="3">
           <v-row class="no-gutters">
             <v-col cols="4"></v-col>
             <v-col cols="5" class="result">
@@ -82,17 +70,9 @@
               -->
             </v-col>
             <v-col cols="3">
-              <v-menu
-                bottom
-                left
-              >
+              <v-menu bottom left>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                    class="menu-button"
-                  >
+                  <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
                     <v-icon>mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
@@ -103,7 +83,7 @@
                     :key="i"
                     @click="filterAction(item)"
                   >
-                   {{ item.label }}
+                    {{ item.label }}
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -116,43 +96,41 @@
 </template>
 
 <script>
-
-import store from '@/store';
-import { forEach } from 'lodash';
+import store from "@/store";
+import { forEach } from "lodash";
 
 export default {
-
-  name: 'SearchSavedFiltersFilter',
+  name: "SearchSavedFiltersFilter",
 
   props: {
     filter: {
       type: Object,
-    }
+    },
   },
 
   data() {
     return {
       actions: [
         {
-          type: 'delete',
-          label: 'Delete'
+          type: "delete",
+          label: "Delete",
         },
         {
-          type: 'use',
-          label: 'Use filter'
-        }
-      ]
-    }
+          type: "use",
+          label: "Use filter",
+        },
+      ],
+    };
   },
 
   methods: {
     filterAction(action) {
-      if(action.type === 'use') {
-        store.dispatch('company/searchJobseekers', this.prepareData());
-        this.$emit('filter-search');
+      if (action.type === "use") {
+        store.dispatch("company/searchJobseekers", this.prepareData());
+        this.$emit("filter-search");
       }
-      if(action.type === 'delete') {
-        store.dispatch('company/searchFilterDelete', this.filter.id);
+      if (action.type === "delete") {
+        store.dispatch("company/searchFilterDelete", this.filter.id);
       }
     },
     prepareData() {
@@ -165,7 +143,7 @@ export default {
       });
       return activatedFields;
     },
-  }
+  },
 };
 </script>
 
@@ -199,7 +177,7 @@ export default {
   }
 }
 .result {
-  color: #0253B3;
+  color: #0253b3;
   .value {
     font-weight: bold;
     font-size: 32px;

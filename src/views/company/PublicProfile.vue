@@ -3,8 +3,11 @@
     <!-- <UserNoteAdd /> -->
     <v-row class="heading mb-5">
       <v-col cols="12" md="9">
-        <div class="title">Public Company Profile</div>
-        <div class="subtitle">Explanation what is team managment</div>
+        <div class="title">Öffentliches Firmenprofil</div>
+        <div class="subtitle">
+          Bearbeiten Sie die Informationen, die potenzielle Angestellte sehen
+          werden.
+        </div>
       </v-col>
       <v-col cols="12" md="3">
         <v-btn
@@ -17,7 +20,7 @@
             Back to Edit
           </template>
           <template v-else>
-            View as Jobseeker
+            Als Arbeitssuchender ansehen
           </template>
         </v-btn>
       </v-col>
@@ -161,7 +164,7 @@ export default {
 
 @media (min-width: 960px) {
   .public-profile-sidebar {
-    height: 450px
+    height: 450px;
   }
 }
 </style>

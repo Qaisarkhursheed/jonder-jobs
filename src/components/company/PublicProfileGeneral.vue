@@ -15,25 +15,22 @@
           @click="activateInput"
         >
           <template v-if="display_img">
-            <img
-              :src="display_img"
-            >
+            <img :src="display_img" />
           </template>
           <template v-else>
-            <v-icon class="camera-icon"
-              size="60px">
-            mdi-camera-plus-outline
-          </v-icon>
+            <v-icon class="camera-icon" size="60px">
+              mdi-camera-plus-outline
+            </v-icon>
           </template>
         </v-avatar>
-          <v-icon class="camera-icon">
-            mdi-camera
-          </v-icon>
+        <v-icon class="camera-icon">
+          mdi-camera
+        </v-icon>
       </div>
     </div>
     <div class="section mb-6 mt-5">
       <label class="section-label">
-        Company name
+        Unternehmensname
       </label>
       <v-text-field
         class="rounded-lg"
@@ -46,12 +43,13 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-text-field>
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        About company
+        Über das Unternehmen
       </label>
       <v-textarea
         class="rounded-lg"
@@ -63,7 +61,8 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-textarea>
     </div>
     <div class="action d-flex justify-end">
@@ -73,22 +72,20 @@
         class="font-weight-medium "
         @click="save"
       >
-        Save changes
+        Änderungen speichern
       </v-btn>
     </div>
   </div>
 </template>
 
 <script>
-
-
 export default {
-  name: 'PublicProfileGeneral',
+  name: "PublicProfileGeneral",
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   created() {
@@ -98,12 +95,12 @@ export default {
   data() {
     return {
       form: {
-        profile_img: '',
-        company: '',
-        about_company: '',
+        profile_img: "",
+        company: "",
+        about_company: "",
       },
-      new_img: ''
-    }
+      new_img: "",
+    };
   },
 
   methods: {
@@ -122,15 +119,15 @@ export default {
     save() {
       let obj = {
         company: this.form.company,
-        about_company: this.form.about_company
+        about_company: this.form.about_company,
       };
 
       if (this.new_img) {
-        obj['profile_img'] = this.new_img;
+        obj["profile_img"] = this.new_img;
       }
 
-      this.$emit('update', obj);
-    }
+      this.$emit("update", obj);
+    },
   },
   computed: {
     display_img() {
@@ -139,16 +136,15 @@ export default {
       }
       return this.form.profile_img;
     },
-  }
+  },
 };
-
 </script>
 
 <style lang="scss" scoped>
 label {
   font-size: 16px;
   font-weight: 400;
-  color: #82858C;
+  color: #82858c;
 }
 .user-avatar {
   cursor: pointer;

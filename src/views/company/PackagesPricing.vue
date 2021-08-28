@@ -5,7 +5,7 @@
         Upgrade your company
       </div>
       <div class="subtitle">
-        Explanation what are message templates
+        Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen.
       </div>
     </div>
     <Packages />
@@ -13,17 +13,15 @@
 </template>
 
 <script>
-
-import Packages from '@/components/Packages';
+import Packages from "@/components/Packages";
 
 export default {
-  name: 'CompanyPackagesPricing',
+  name: "CompanyPackagesPricing",
 
   components: {
     Packages,
   },
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +34,7 @@ export default {
   .subtitle {
     font-weight: normal;
     font-size: 18px;
-    color: #7A7A7A;
+    color: #7a7a7a;
   }
 }
 </style>

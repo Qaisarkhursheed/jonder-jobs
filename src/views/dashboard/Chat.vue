@@ -49,7 +49,7 @@ export default {
     showProfile: false,
     polling: null,
     chatFull: false,
-    chatLoading: false
+    chatLoading: false,
   }),
   methods: {
     ...mapActions("chat", [
@@ -57,7 +57,7 @@ export default {
       "addPlaceholderMessage",
       "getSingleConversation",
       "startChat",
-      "seenMessage"
+      "seenMessage",
     ]),
     async init() {
       this.chatLoading = true;
@@ -78,7 +78,7 @@ export default {
         }
         this.getAllConversations();
       }, 5000);
-    }
+    },
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
   components: {
@@ -86,8 +86,8 @@ export default {
     ChatMessages,
     ChatAsside,
     PublicProfile,
-    Spinner
-  }
+    Spinner,
+  },
 };
 </script>
 
