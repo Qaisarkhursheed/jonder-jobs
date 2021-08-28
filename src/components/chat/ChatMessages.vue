@@ -25,11 +25,27 @@
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon class="chat-icon mr-4" @click="$emit('show-profile')">
+          <!-- Star -->
+          <v-icon
+            v-if="conversationDetails.user.role == 'Jobseeker'"
+            class="chat-icon mr-3"
+            :color="conversationDetails.selection_managment ? '#27AAE1' : null"
+          >
+            {{
+              conversationDetails.selection_managment
+                ? "mdi-star"
+                : "mdi-star-outline"
+            }}
+          </v-icon>
+
+          <!-- Info -->
+          <v-icon class="chat-icon mr-3" @click="$emit('show-profile')">
             mdi-information-outline
           </v-icon>
+
+          <!-- Resize -->
           <v-icon
-            class="chat-icon mr-4"
+            class="chat-icon mr-3"
             @click="
               chatFull = !chatFull;
               $emit('chat-full', chatFull);
@@ -37,8 +53,10 @@
           >
             {{ !chatFull ? "mdi-arrow-expand" : "mdi-arrow-collapse" }}
           </v-icon>
+
+          <!-- Close -->
           <v-icon
-            class="chat-icon mr-4"
+            class="chat-icon"
             @click="
               $store.commit('chat/FILL_SINGLE_CONVERSATION', null);
               $store.commit('chat/SET_CONVERSATION_DETAILS', {});
