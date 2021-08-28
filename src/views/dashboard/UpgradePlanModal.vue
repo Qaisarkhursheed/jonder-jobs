@@ -9,7 +9,7 @@
   >
     <v-card flat class="rounded-lg wrap upgrade-dialog">
       <div class="modal-title">
-        Choose upgrade plan
+        Wähle einen Premiumplan
       </div>
 
       <div class="options" v-for="plan in data" :key="plan.id">
@@ -71,15 +71,15 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: "ok"
+      default: "ok",
     },
     edit: {
-      type: [Object, Boolean]
-    }
+      type: [Object, Boolean],
+    },
   },
   data() {
     return {
@@ -88,8 +88,8 @@ export default {
       planId: null,
       stripeId: null,
       form: {
-        active_plan: ""
-      }
+        active_plan: "",
+      },
     };
   },
   created() {
@@ -111,29 +111,29 @@ export default {
         this.isLoading = true;
         const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
         stripe.redirectToCheckout({
-          sessionId: this.stripeId
+          sessionId: this.stripeId,
         });
       } else {
         this.isLoading = false;
       }
     },
     next() {
-      if(this.planId && this.planId>0){
-      this.isLoading = true;
-      this.$http
-        .post(`${process.env.VUE_APP_API_BASE}/plan`, {
-          plan_id: this.planId,
-          payment_method: "credit card"
-        })
-        .then(res => {
-          this.stripeId = res.data.data.id;
-        })
-        .finally(() => {
-          this.isLoading = false;
-          this.processStripe();
-        });
-      }else{
-         alert("Please select the plan!");
+      if (this.planId && this.planId > 0) {
+        this.isLoading = true;
+        this.$http
+          .post(`${process.env.VUE_APP_API_BASE}/plan`, {
+            plan_id: this.planId,
+            payment_method: "credit card",
+          })
+          .then((res) => {
+            this.stripeId = res.data.data.id;
+          })
+          .finally(() => {
+            this.isLoading = false;
+            this.processStripe();
+          });
+      } else {
+        alert("Please select the plan!");
         this.isLoading = false;
       }
     },
@@ -142,7 +142,7 @@ export default {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form
+          payload: this.form,
         });
       } else {
         console.log();
@@ -154,12 +154,12 @@ export default {
     },
     fetchPlans() {
       const baseURI = `${process.env.VUE_APP_API_BASE}/plans/0/100`;
-      this.$http.get(baseURI).then(res => {
+      this.$http.get(baseURI).then((res) => {
         this.data = res.data.plans;
         console.log(this.data);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
