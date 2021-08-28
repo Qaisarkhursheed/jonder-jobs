@@ -76,7 +76,7 @@
             class="message rounded-lg"
             :class="[
               { 'my-message': msg.is_sender },
-              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0']
+              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0'],
             ]"
           >
             <v-card-text>
@@ -120,7 +120,7 @@
       <v-textarea
         class="rounded-lg"
         style="width: 100%"
-        label="Type a message"
+        label="Nachricht senden"
         outlined
         solo
         flat
@@ -146,12 +146,12 @@ export default {
   props: {
     messages: {
       type: Array,
-      required: true
+      required: true,
     },
     conversationDetails: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     newMessage: "",
@@ -159,7 +159,7 @@ export default {
     sending: false,
     chatFull: false,
 
-    chatMessageDateCache: null
+    chatMessageDateCache: null,
   }),
   mounted() {
     this.scrollToBottom();
@@ -184,7 +184,7 @@ export default {
       this.sendMessage({
         id: this.conversationDetails.id,
         file: this.newFile,
-        message: this.newMessage
+        message: this.newMessage,
       })
         .then(() => {
           this.newMessage = "";
@@ -223,15 +223,15 @@ export default {
     },
     getFileData(msg) {
       return JSON.parse(msg.body);
-    }
+    },
   },
   watch: {
     conversationDetails() {
       setTimeout(() => {
         this.scrollToBottom();
       }, 500);
-    }
-  }
+    },
+  },
 };
 </script>
 

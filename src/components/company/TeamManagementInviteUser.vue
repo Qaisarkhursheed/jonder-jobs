@@ -9,12 +9,12 @@
           v-bind="attrs"
           v-on="on"
         >
-          Invite new user
+          Neue Nutzer einladen
         </v-btn>
       </template>
 
       <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4" style="font-size: 28px;">Invite new user</h1>
+        <h1 class="mb-4" style="font-size: 28px;">Neue Nutzer einladen</h1>
 
         <v-form
           ref="form"
@@ -67,7 +67,7 @@
               :disabled="!isValid"
               :loading="formLoading"
             >
-              Invite user
+              Neue Nutzer einladen
             </v-btn>
           </div>
         </v-form>
@@ -89,10 +89,10 @@ export default {
       isValid: false,
       formData: {
         name: "",
-        email: ""
+        email: "",
       },
       formLoading: false,
-      formResponse: {}
+      formResponse: {},
     };
   },
   methods: {
@@ -104,13 +104,13 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>

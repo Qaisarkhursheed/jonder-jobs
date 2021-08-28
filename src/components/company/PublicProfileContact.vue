@@ -15,7 +15,8 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-text-field>
     </div>
     <div class="section mb-6">
@@ -33,7 +34,8 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-text-field>
     </div>
 
@@ -43,10 +45,10 @@
           <label class="section-label">
             City and address
           </label>
-          <GooglePlacesAutocomplete 
+          <GooglePlacesAutocomplete
             type="geocode"
             :value="form.address"
-            @select="e => form.address = e" 
+            @select="(e) => (form.address = e)"
             :full-address="true"
           />
         </v-col>
@@ -76,10 +78,11 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-text-field>
     </div>
-    <div class="social-links mb-4"> 
+    <div class="social-links mb-4">
       Social links
     </div>
     <div class="section mb-6" v-for="(item, i) in social" :key="i">
@@ -97,7 +100,8 @@
         flat
         dense
         solo
-        background-color="#fff">
+        background-color="#fff"
+      >
       </v-text-field>
     </div>
 
@@ -108,57 +112,49 @@
         @click="save"
         class="font-weight-medium "
       >
-        Save changes
+        Änderungen speichern
       </v-btn>
     </div>
   </div>
 </template>
 
 <script>
-
-import { forEach } from 'lodash';
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
+import { forEach } from "lodash";
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 
 export default {
-
-  name: 'PublicProfileContact',
+  name: "PublicProfileContact",
 
   components: {
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   created() {
-    this.populateData()
+    this.populateData();
   },
 
   data() {
     return {
       form: {
-        company_email: '',
-        company_phone: '',
-        address: '',
+        company_email: "",
+        company_phone: "",
+        address: "",
         //city: '',
-        web_url: '',
-        facebook: '',
-        instagram: '',
-        youtube: '',
-        linkedin: '',
-        twitter: ''
+        web_url: "",
+        facebook: "",
+        instagram: "",
+        youtube: "",
+        linkedin: "",
+        twitter: "",
       },
-      social: [
-        'facebook',
-        'instagram',  
-        'linkedin',  
-        'youtube',  
-        'twitter', 
-      ]
-    }
+      social: ["facebook", "instagram", "linkedin", "youtube", "twitter"],
+    };
   },
   methods: {
     populateData() {
@@ -167,13 +163,12 @@ export default {
       });
     },
     save() {
-      this.$emit('update', {
-        ...this.form
+      this.$emit("update", {
+        ...this.form,
       });
-    }
-  }
+    },
+  },
 };
-
 </script>
 
 <style lang="scss" scoped>
