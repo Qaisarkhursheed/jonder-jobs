@@ -57,7 +57,7 @@
           class="back-btn"
           @click="navigateTo('/dashboard')"
         >
-          Back to homepage
+          Zurück zur Startseite
         </v-btn>
       </v-col>
     </v-row>
@@ -181,7 +181,7 @@
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">
-                  Resume
+                  Lebenslauf
                 </div>
               </div>
             </div>

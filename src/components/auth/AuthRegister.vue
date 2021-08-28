@@ -70,7 +70,7 @@
       <!-- Email -->
       <v-text-field
         v-model="formData.email"
-        placeholder="Email Addresse"
+        placeholder="$t('company.profile.email')"
         :rules="[validations.required, validations.email]"
         type="email"
         dense

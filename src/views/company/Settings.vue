@@ -18,7 +18,7 @@
         large
         @click="$router.push('/company-dashboard')"
       >
-        Back to homepage
+        Zurück zur Startseite
       </v-btn>
     </div>
 
@@ -29,20 +29,20 @@
         <nav class="dashboard-navigation">
           <div class="settings-nav">
             <div class="settings-title">
-              Settings
+              Einstellungen
             </div>
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                Personal info
+                Persönliche Informationen
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                Billing &amp; Invoices
+                Abrechnung &amp; Rechnungen
               </div>
               <div @click="scrollToSection('payment')" class="nav-item">
-                Payment
+                Zahlung
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                Change Password
+                Passwort ändern
               </div>
             </div>
           </div>

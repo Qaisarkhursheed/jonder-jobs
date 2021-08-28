@@ -518,7 +518,7 @@
               color="primary"
               class="pl-8 pr-8"
               @click="handleChangePassword"
-              >Change Password
+              >Passwort ändern
             </v-btn>
           </v-col>
         </v-row>
