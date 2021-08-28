@@ -49,7 +49,7 @@
       <v-text-field
         v-model="formData.first_name"
         placeholder="Vorname"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
         outlined
@@ -60,7 +60,7 @@
       <v-text-field
         v-model="formData.last_name"
         placeholder="Nachname"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
         outlined
@@ -108,7 +108,7 @@
         placeholder="Passwort erneut eingeben"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password)
+          validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         dense
@@ -198,7 +198,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle
+    JonderTitle,
   },
   data() {
     return {
@@ -219,7 +219,7 @@ export default {
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
     };
   },
   methods: {
@@ -234,13 +234,13 @@ export default {
         .then(() => {
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    }
+    },
   },
   computed: {
     avatar_img() {
@@ -248,8 +248,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 
