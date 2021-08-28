@@ -75,13 +75,13 @@
 
       <v-card-text class="job-info d-flex pb-0">
         <v-col cols="6" class="experience">
-          <div class="label">Experience</div>
+          <div class="label">Erfahrung</div>
           <div class="value">
             {{ candidate.working_experience }}
           </div>
         </v-col>
         <v-col cols="6" class="wage">
-          <div class="label">Salary Expect.</div>
+          <div class="label">GEHALTSERWARTUNG</div>
           <div class="value">
             {{ candidate.monthly_salary }}
           </div>
@@ -122,13 +122,13 @@ export default {
 
   props: {
     candidate: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
-      startChatLoading: false
+      startChatLoading: false,
     };
   },
 
@@ -141,8 +141,8 @@ export default {
           this.$router.push({
             name: "CompanyMessages",
             params: {
-              company: true
-            }
+              company: true,
+            },
           });
         })
         .finally(() => {
@@ -160,14 +160,14 @@ export default {
         this.$store
           .dispatch("company/slManagementAddCandidate", {
             jobseeker_id: this.candidate.id,
-            managment_status: "Saved candidates"
+            managment_status: "Saved candidates",
           })
           .then(() => {
             this.candidate.selection_managment = true;
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

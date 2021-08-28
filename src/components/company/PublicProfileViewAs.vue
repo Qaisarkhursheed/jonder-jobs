@@ -21,7 +21,7 @@
     <div v-if="user.role === 'Employer'">
       <div class="section mb-8">
         <label class="section-label">
-          About company
+          Über das Unternehmen
         </label>
         <div class="section-value">
           {{ user.about_company }}
@@ -31,7 +31,7 @@
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            Employees
+            Angestellte
           </label>
           <div class="section-value">
             {{ user.company_employees }}
@@ -39,7 +39,7 @@
         </v-col>
         <v-col cols="5">
           <label class="section-label">
-            Industry
+            Branche
           </label>
           <div class="section-value">
             {{ user.branche }}
@@ -50,27 +50,39 @@
 
     <div v-else>
       <div class="section mb-8">
-        <label class="section-label">
-          About Me
-        </label>
-        <div class="section-value">
-          {{ user.about_me }}
-        </div>
+        <v-row class="mb-8">
+          <v-col cols="4">
+            <label class="section-label">
+              Jobseeking Status
+            </label>
+            <div class="section-value">
+              {{ user.job_status }}
+            </div>
+          </v-col>
+          <v-col cols="5">
+            <label class="section-label">
+              Position
+            </label>
+            <div class="section-value">
+              {{ user.current_position }}
+            </div>
+          </v-col>
+        </v-row>
       </div>
 
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            Work experience
+            Current Industry
           </label>
-          <div class="section-value">{{ user.work_experience }} Years</div>
+          <div class="section-value">{{ user.branche }}</div>
         </v-col>
         <v-col cols="5">
           <label class="section-label">
-            Current Position
+            City and adress
           </label>
           <div class="section-value">
-            {{ user.current_position }}
+            {{ user.city }}
           </div>
         </v-col>
       </v-row>
@@ -155,8 +167,8 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   computed: {
@@ -181,8 +193,8 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

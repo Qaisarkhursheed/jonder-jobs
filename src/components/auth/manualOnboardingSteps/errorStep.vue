@@ -1,6 +1,6 @@
 <template>
   <v-sheet class="px-12">
-    <v-card class="d-flex align-center justify-center" flat height="45vh" tile>
+    <v-card class="d-flex align-center justify-center" flat tile>
       <v-sheet width="400">
         <p
           class="text-center text-body-2 red--text text--darken-4 pink lighten-5 pa-3 border-special"

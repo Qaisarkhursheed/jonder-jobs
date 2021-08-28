@@ -1,5 +1,13 @@
 {
   "company": {
+    "employer": {
+      "search": "Jonder Search",
+      "selectionManagement": "Selection Management",
+      "messages": "Messages",
+      "teamManagement": "Team Management",
+      "publicProfile": "Öffentliches Firmenprofil",
+      "packagesPricing": "Packages Pricing"
+    },
     "dashboard": {
       "dashboard": "Dashboard",
       "inbox": "Posteingang",
@@ -15,7 +23,6 @@
       "negotiation": "Verhandlung",
       "call": "Anruf",
       "note": "Hinweis"
-      
     },
     "search": {
       "headingTitle": "Finden sie Ihren Traummitarbeiter. Mithilfe der Jonder Mitarbeitersuche.",
@@ -36,10 +43,11 @@
       "advancedSearch": "Erweiterte Suche",
       "searchResults": "Suchergebnisse",
       "branch": "Branche",
-      "graduation": "Abschluss",
+      "graduation": "Schulabschluss:",
       "education": "Ausbildung",
       "workExperience": "Berufserfahrung",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "findEmployee": "Mitarbeiter finden"
     },
     "profile": {
       "email": "E-mail addresse",
@@ -128,7 +136,7 @@
     "december": "Dezember",
     "messages": "Nachrichten",
     "typeMessage": "Geben Sie eine Nachricht ein",
-    "cancel":  "Stornieren",
+    "cancel": "Stornieren",
     "confirm": "Bestätigen",
     "logout": "Ausloggen",
     "save": "Speichern",

@@ -92,23 +92,7 @@
         flat
         class="mb-4"
       ></v-text-field>
-
-      <!-- Hiring location -->
-      <GooglePlacesAutocomplete @select="e => (formData.hiring_location = e)" />
-      <!-- <v-text-field
-        dense
-        placeholder="Hiring location"
-        :rules="[validations.required, validations.min.string(3)]"
-        type="text"
-        hide-details
-        outlined
-        background-color="white"
-        v-model="formData.hiring_location"
-        solo
-        flat
-        class="mb-4"
-      ></v-text-field> -->
-
+      
       <!-- Password -->
       <v-text-field
         dense
@@ -210,7 +194,6 @@ import Validations from "@/mixins/validations";
 import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
 import ResponseAlert from "@/components/ResponseAlert";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 
 export default {
   name: "AuthRegisterCompany",
@@ -218,7 +201,6 @@ export default {
   components: {
     JonderTitle,
     ResponseAlert,
-    GooglePlacesAutocomplete
   },
   data() {
     return {
@@ -226,7 +208,6 @@ export default {
         first_name: "",
         last_name: "",
         email: "",
-        hiring_location: "",
         password: "",
         password_confirmation: "",
         phone: "",

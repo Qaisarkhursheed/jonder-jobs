@@ -180,7 +180,9 @@ export default {
       working_experience: "",
       cv: "",
       resume: null,
-      qualifications: null
+      qualifications: null,
+      location_show: 1,
+      work_remotely: false
       // address: "",
       // working_in: "",
       // describe_yourself: "",

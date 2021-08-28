@@ -3,7 +3,10 @@
     <v-row class="heading mb-5">
       <v-col cols="9">
         <div class="title">Team Management</div>
-        <div class="subtitle">Explanation what is team managment</div>
+        <div class="subtitle">
+          Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu
+          suchen
+        </div>
       </v-col>
       <v-col cols="3">
         <TeamManagementInviteUser />
@@ -24,8 +27,8 @@ export default {
 
   components: {
     TeamManagementTable,
-    TeamManagementInviteUser
-  }
+    TeamManagementInviteUser,
+  },
 };
 </script>
 

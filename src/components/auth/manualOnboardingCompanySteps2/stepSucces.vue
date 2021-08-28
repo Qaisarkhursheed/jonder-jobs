@@ -1,8 +1,8 @@
 <template>
   <v-sheet class="px-12">
-    <v-card class="d-flex align-center justify-center" flat height="45vh" tile>
+    <v-card class="d-flex align-center justify-center" flat tile>
       <v-sheet>
-        <v-sheet class="d-flex align-center justify-center my-16"
+        <v-sheet class="d-flex align-center justify-center mb-16"
           ><v-icon color="primary" size="100"
             >mdi-check-circle-outline</v-icon
           ></v-sheet
@@ -19,7 +19,7 @@
           type="submit"
           color="primary"
           height="58"
-          class="full-w font-weight-medium dark-blue mb"
+          class="full-w font-weight-medium dark-blue"
           :to="{ name: 'CompanySearch' }"
         >
           Abschließen

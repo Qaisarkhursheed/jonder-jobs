@@ -10,7 +10,7 @@
     >
       <!-- Hello -->
       <div class="user-name">
-        Hello,
+        Hallo,
         <span style="color:#0253B3;">
           {{ user.first_name }} {{ user.last_name }}
         </span>
@@ -20,7 +20,7 @@
       <div class="no-msg">
         {{
           conversations.length
-            ? "Open chat to start communicate"
+            ? "Öffnen Sie den Chat, um zu kommunizieren"
             : "There is no any messages yet"
         }}
       </div>
@@ -55,15 +55,15 @@ export default {
 
     showUpgradeBox() {
       return !(this.messagesLoaded && this.conversations.length);
-    }
+    },
   },
   methods: {
-    ...mapActions("chat", ["getAllConversations"])
+    ...mapActions("chat", ["getAllConversations"]),
   },
   components: {
     Chat,
-    UpgradeAccountBox
-  }
+    UpgradeAccountBox,
+  },
 };
 </script>
 

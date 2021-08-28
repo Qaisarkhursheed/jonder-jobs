@@ -49,7 +49,7 @@
       <v-text-field
         v-model="formData.first_name"
         placeholder="Vorname"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
         outlined
@@ -60,7 +60,7 @@
       <v-text-field
         v-model="formData.last_name"
         placeholder="Nachname"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
         outlined
@@ -108,7 +108,7 @@
         placeholder="Passwort erneut eingeben"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password)
+          validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         dense
@@ -144,6 +144,14 @@
       ></v-text-field>
 
       <!-- Show name -->
+      <v-checkbox
+        class="mt-6 mb-6"
+        color="#333"
+        label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
+        hide-details="auto"
+        v-model="formData.accept_policy"
+      ></v-checkbox>
+
       <!-- <v-checkbox
         class="mt-0"
         label="Möchten Sie, dass wir Ihren Namen anzeigen?"
@@ -190,7 +198,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle
+    JonderTitle,
   },
   data() {
     return {
@@ -203,14 +211,15 @@ export default {
         phone: "",
         // show_name: false,
         // show_location: false,
-        role: "Jobseeker"
+        role: "Jobseeker",
+        accept_policy: false,
       },
       profile_img: false,
       showPass: false,
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
     };
   },
   methods: {
@@ -225,13 +234,13 @@ export default {
         .then(() => {
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    }
+    },
   },
   computed: {
     avatar_img() {
@@ -239,8 +248,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 

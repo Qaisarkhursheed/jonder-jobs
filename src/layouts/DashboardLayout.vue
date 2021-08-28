@@ -67,39 +67,39 @@
         <nav class="dashboard-navigation pl-0 pl-md-8" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
-              Settings
+              Einstellungen
             </div>
 
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                Personal info
+                Persönliche Informationen
               </div>
               <div @click="scrollToSection('roleAndBranche')" class="nav-item">
-                Role & Branche
+                Position & Branche
               </div>
               <div @click="scrollToSection('lookingFor')" class="nav-item">
-                What are you looking for
+                Wonach suchen Sie?
               </div>
               <div
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
-                Experience and Education
+                Erfahrung & Ausbildung
               </div>
               <div @click="scrollToSection('documents')" class="nav-item">
-                Documents
+                Dokumente
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                Invoices
+                Rechnungen
               </div>
               <div @click="scrollToSection('paymentMethod')" class="nav-item">
-                Billing
+                Rechnungsstellung
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                Change Password
+                Passwort ändern
               </div>
               <div @click="scrollToSection('upgradeAccount')" class="nav-item">
-                Upgrade account
+                Account Upgraden
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@
 
               <span class="dash-name">{{ getUserFullName }}</span>
               <router-link to="/dashboard/profile" class="settings-link">
-                Profile Settings
+                Profil Einstellungen
               </router-link>
             </div>
 
@@ -129,30 +129,30 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info"> About me </span>
+              <span class="about-info"> Über mich </span>
               <p class="about-text">{{ user.about_me }}</p>
 
-              <span class="about-info">Jobseeking status</span>
+              <span class="about-info">Status der arbeitssuche</span>
               <p class="about-text">{{ user.looking_for_employment_type }}</p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.looking_for_branche }}</p>
 
-              <span class="about-info"> Current industry </span>
+              <span class="about-info">Aktuelle Branche</span>
               <p class="about-text">{{ user.branche }}</p>
 
-              <span class="about-info"> City and areas </span>
+              <span class="about-info"> Stadt & Adresse</span>
               <p class="about-text">{{ user.city }}</p>
 
-              <span class="about-info"> Experience </span>
+              <span class="about-info"> Erfahrung </span>
               <CardActionableList type="Experience" view-only class="mb-5" />
 
-              <span class="about-info"> Education </span>
+              <span class="about-info"> Ausbildung </span>
               <CardActionableList type="Education" view-only />
             </div>
 
             <div class="top-info">
-              <span class="about-info"> Documents </span>
+              <span class="about-info"> Dokumente </span>
               <div v-if="user.cv" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.cv" target="_blank">
@@ -207,14 +207,14 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: {
     CardActionableList,
-    UpgradeAccountBox
+    UpgradeAccountBox,
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -226,7 +226,7 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -241,7 +241,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    }
+    },
   },
   watch: {
     search(val) {
@@ -257,8 +257,8 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
