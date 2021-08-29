@@ -66,7 +66,7 @@
       <!-- Email -->
       <v-text-field
         dense
-        placeholder="$t('company.profile.email')"
+        :placeholder="$t('company.profile.email')"
         :rules="[validations.required, validations.email]"
         type="email"
         hide-details
@@ -92,7 +92,7 @@
         flat
         class="mb-4"
       ></v-text-field>
-      
+
       <!-- Password -->
       <v-text-field
         dense
@@ -127,7 +127,7 @@
         placeholder="Repeat Passwort"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password)
+          validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         outlined
@@ -219,12 +219,12 @@ export default {
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false
+      showPassConfirm: false,
     };
   },
   methods: {
     ...mapActions({
-      register: "auth/registerCompany"
+      register: "auth/registerCompany",
     }),
 
     async handleRegister() {
@@ -234,15 +234,15 @@ export default {
         .then(() => {
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
           this.$emit("changeImage");
         })
         .finally(() => {
           this.isLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
