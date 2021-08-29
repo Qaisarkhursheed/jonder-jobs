@@ -132,7 +132,7 @@ export default {
             participant.first_name + " " + participant.last_name,
           unread_messages: conversation.unread_messages,
           profile_img: participant.profile_img,
-          starred: !!this.conversation.selection_managment.length,
+          starred: !!conversation.selection_managment.length,
           user: participant
         });
         commit("FILL_SINGLE_CONVERSATION", resp.data.conversation);

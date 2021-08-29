@@ -2,7 +2,7 @@
   <auth-wrap :img="img">
     <v-stepper v-model="step" style="box-shadow: none">
       <v-alert
-        v-if="$route.query.noAccount"
+        v-if="$route.query.noAccount && step == 1"
         text
         type="info"
         class="mt-5 mx-5"
@@ -22,7 +22,10 @@
             ultricies felis eu libero.
           </p>
           <v-btn
-            @click="step = 2"
+            @click="
+              delete $route.query.noAccount;
+              step = 2;
+            "
             type="button"
             color="primary"
             large
