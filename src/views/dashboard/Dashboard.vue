@@ -109,6 +109,7 @@ export default {
 .mt {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 65%;
+  text-align: center;
 }
 </style>
