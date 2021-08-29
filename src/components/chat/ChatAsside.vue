@@ -1,7 +1,7 @@
 <template>
   <v-card class="chat-conversations" flat>
     <v-card-title class="chat-conversations-title pl-7 pr-7">
-      Messages
+      {{ $t('user.dashboard.messages') }}
     </v-card-title>
     <v-divider></v-divider>
     <v-list subheader class="pb-0">

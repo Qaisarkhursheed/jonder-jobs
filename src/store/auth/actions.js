@@ -108,6 +108,15 @@ export default {
     }
   },
 
+  sendVerificationEmail(context, data) {
+    try {
+      const resp = axios.post("/resend-by-email", { email: data });
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
+  },
+
   async facebooklogin() {
     await axios.get("/login/facebook").catch(err => {
       console.log("Facebook login error:", err);

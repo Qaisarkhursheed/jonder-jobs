@@ -48,6 +48,7 @@
       "schoolGraduation": "School graduation",
       "educationStudy": "Education Study",
       "salaryRange": "Salary range (yearly)",
+      "salary": "Salary",
       "workExperience": "Work experience",
       "city": "City",
       "advancedSearch": "Advanced Search",
@@ -56,13 +57,20 @@
     },
     "profile": {
       "email": "E-mail address",
+      "resendEmail": "Resend E-mail",
+      "phone": "Phone number",
+      "webUrl": "Web URL",
+      "socialLinks": "Social links",
       "cityAndAddress": "City and address",
       "workRadius": "Work Radius",
       "lookingFor": "Looking for",
       "howManyEmployees": "How many employees your company have ?",
       "whichIndustry": "Which industry are you in ?",
       "aboutCompany": "About company",
-      "editProfile": "Edit Profile"
+      "editProfile": "Edit Profile",
+      "general": "General",
+      "details": "Details",
+      "contact": "Contact"
     }
   },
   "user": {
@@ -94,6 +102,25 @@
       "education": "Education",
       "employee": "Employee",
       "branch": "Branch"
+    },
+    "profile": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "jobTitle": "Job title",
+      "workExperience": "Work experience",
+      "lookingFor": "Looking for",
+      "education": "Education",
+      "aboutMe": "About me",
+      "editProfileHeading": "What would you like to edit on your profile ?",
+      "whatCanYouDo": "Show us what you can do",
+      "showUsQualifications": "Show us your qualifications",
+      "showUsWhatYouWant": "Show us what you want",
+      "tellUsAboutYou": "Tell us something about yourself",
+      "currentWork": "Where are you currently working?",
+      "currentPosition": "What is your current position?",
+      "whichBranch": "Which industries do you work in?",
+      "workingEnvironment": "Working environment",
+      "whatDescribesYou": "What describes you best?"
     },
     "onboarding": {
       "location": "Please let us know where you are located at the moment!",
@@ -148,27 +175,6 @@
       "position": "Position",
       "type": "Type",
       "description": "Description"
-    },
-    "profile": {
-      "firstName": "First name",
-      "lastName": "Last name",
-      "jobTitle": "Job title",
-      "workExperience": "Work experience",
-      "lookingFor": "Looking for",
-      "education": "Education",
-      "aboutMe": "About me",
-      "editProfileHeading": "What would you like to edit on your profile ?",
-      "whatCanYouDo": "Show us what you can do",
-      "showUsQualifications": "Show us your qualifications",
-      "showUsWhatYouWant": "Show us what you want",
-      "tellUsAboutYou": "Tell us something about yourself",
-      "currentWork": "Where are you currently working?",
-      "currentPosition": "What is your current position?",
-      "whichBranch": "Which industries do you work in?",
-      "workingEnvironment": "Working environment",
-      "whatDescribesYou": "What describes you best?"
-
-
     }
   },
   "general": {
@@ -198,12 +204,18 @@
     "messages": "Messages",
     "typeMessage": "Type a message",
     "cancel":  "Cancel",
+    "cancelOption": "Cancel",
     "confirm": "Confirm",
+    "confirmOption": "Confirm",
     "logout": "Logout",
     "save": "Save",
     "edit": "Edit",
     "ok": "OK",
     "modalConfirm": "Are you sure you don't want to save changes ?",
-    "modalSuccess": "Your changes have been saved successfully !"
+    "modalSuccess": "Your changes have been saved successfully !",
+    "seeMore": "",
+    "areYouSure": "Are you sure?",
+    "areYouSureQuestion": "Are you sure that you want to delete user?",
+    "areYouSureAction": "action cannot be undo"
   }
 }

@@ -1,32 +1,30 @@
 <template>
-  <div class="d-flex pr-4" v-if="selections">
-    <div style="min-width:300px" 
-      v-for="(selection, i) in selections" :key="i">
+  <div class="d-flex pr-4 selection-management-table">
+    <div style="min-width:300px"
+      v-for="(selection, i) in selection" :key="i">
       <SManagementTableColumn :selection="selection" :type="i" />
     </div>
   </div>
 </template>
 <script>
-import store from '@/store';
 import SManagementTableColumn from '@/components/company/SelectionManagementTableColumn'
 
 export default {
 
   name: "SelectionManagementTable",
-
   order: 1,
-
   components: {
     SManagementTableColumn
   },
-  created() {
-    store.dispatch('company/slManagementGetAll');
-  },
-
-  computed: {
-    selections() {
-      return store.getters['company/selectionManagement'];
+  props: {
+    selection: {
+      type: Object
     }
   }
 };
 </script>
+<style scoped>
+.selection-management-table {
+  overflow: auto;
+}
+</style>

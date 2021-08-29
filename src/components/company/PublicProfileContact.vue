@@ -2,7 +2,7 @@
   <div class="public-profile-contact d-flex flex-column">
     <div class="section mb-6">
       <label class="section-label">
-        Email address
+        {{ $t('company.profile.email') }}
       </label>
       <v-text-field
         v-model="form.company_email"
@@ -21,7 +21,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Phone number
+        {{ $t('company.profile.phone') }}
       </label>
       <v-text-field
         v-model="form.company_phone"
@@ -43,7 +43,7 @@
       <v-row>
         <v-col cols="12">
           <label class="section-label">
-            City and address
+            {{ $t('company.profile.cityAndAddress') }}
           </label>
           <GooglePlacesAutocomplete
             type="geocode"
@@ -65,7 +65,7 @@
 
     <div class="section mb-6 ">
       <label class="section-label">
-        Web URL
+        {{ $t('company.profile.webUrl') }}
       </label>
       <v-text-field
         v-model="form.web_url"
@@ -83,7 +83,7 @@
       </v-text-field>
     </div>
     <div class="social-links mb-4">
-      Social links
+      {{ $t('company.profile.socialLinks') }}
     </div>
     <div class="section mb-6" v-for="(item, i) in social" :key="i">
       <label class="section-label">

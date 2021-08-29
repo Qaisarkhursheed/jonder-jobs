@@ -66,7 +66,7 @@
       <!-- Email -->
       <v-text-field
         dense
-        placeholder="Email Addresse"
+        placeholder="$t('company.profile.email')"
         :rules="[validations.required, validations.email]"
         type="email"
         hide-details

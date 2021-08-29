@@ -70,7 +70,7 @@
       <!-- Email -->
       <v-text-field
         v-model="formData.email"
-        placeholder="Email Addresse"
+        placeholder="$t('company.profile.email')"
         :rules="[validations.required, validations.email]"
         type="email"
         dense
@@ -108,7 +108,7 @@
         placeholder="Passwort erneut eingeben"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password),
+          validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         dense
@@ -198,7 +198,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle,
+    JonderTitle
   },
   data() {
     return {
@@ -212,14 +212,14 @@ export default {
         // show_name: false,
         // show_location: false,
         role: "Jobseeker",
-        accept_policy: false,
+        accept_policy: false
       },
       profile_img: false,
       showPass: false,
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -232,15 +232,18 @@ export default {
       this.$store
         .dispatch("auth/register", this.formData)
         .then(() => {
+          const time = new Date().getTime().toString();
+          localStorage.setItem("user-email", this.formData.email);
+          localStorage.setItem("verificationTime", time);
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    },
+    }
   },
   computed: {
     avatar_img() {
@@ -248,8 +251,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 

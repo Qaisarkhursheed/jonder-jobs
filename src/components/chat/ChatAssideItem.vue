@@ -146,12 +146,14 @@ export default {
       this.$emit("loading", true);
       this.$emit("item-click");
       const p = this.getParticipian(this.conversation);
+
       this.SET_CONVERSATION_DETAILS({
         id: this.conversation.id,
         user_id: p.id,
         user_name: this.getFullName(this.conversation),
         unread_messages: this.conversation.unread_messages,
         profile_img: p.profile_img,
+        starred: !!this.conversation.selection_managment.length,
         user: p
       });
 

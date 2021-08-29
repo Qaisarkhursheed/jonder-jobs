@@ -37,11 +37,11 @@
             <v-tab
               class="pt-7 pb-7"
               v-for="tab in tabs.options"
-              :key="tab"
+              :key="tab.key"
               :disabled="viewAs"
               slider-color="#0253B3"
             >
-              {{ tab }}
+              {{ $t('company.profile.' + tab.key) }}
             </v-tab>
           </v-tabs>
         </v-card>
@@ -52,7 +52,7 @@
             <v-tab-item
               :transition="false"
               v-for="item in tabs.options"
-              :key="item"
+              :key="item.key"
             >
               <v-card flat class="pa-10">
                 <template v-if="viewAs">
@@ -61,7 +61,7 @@
                 <template v-else>
                   <keep-alive>
                     <component
-                      :is="tabComponents[item]"
+                      :is="tabComponents[item.key]"
                       @update="handleUpdate"
                       :user="user"
                     >
@@ -101,7 +101,7 @@ export default {
     return {
       tabs: {
         active: "details",
-        options: ["general", "details", "contact"],
+        options: [{key: "general", label: 'General'}, {key: "details", label:'Details'}, {key:"contact", label:"Contact"}],
       },
       tabComponents: {
         general: PublicProfileGeneral,

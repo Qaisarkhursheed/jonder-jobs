@@ -10,7 +10,7 @@
     <!-- Upgrade box -->
     <div class="upgrade-box">
       <div class="upgrade-title">
-        Increase account visibility by upgrading account
+        Reichweite Ihres Profils durch einen Premiumplan erweitern.
       </div>
 
       <v-img
@@ -24,7 +24,7 @@
         style="font-size: 13px; justify-content: space-between;"
       >
         <div>
-          Be on the top of search for 3 days
+          3 Tage lang an der Spitze der Suche stehen
         </div>
 
         <div :class="{ 'mt-2': small }">
@@ -36,7 +36,7 @@
             style="color: #55F481; width: 100%; cursor: pointer;"
             @click="toggleModal('UpgradePlan')"
           >
-            Upgrade now
+            Jetzt Upgraden
           </div>
         </div>
       </div>
@@ -52,8 +52,8 @@ export default {
   props: {
     small: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     toggleModal(type) {
@@ -63,24 +63,24 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
+    },
   },
   components: {
     UpgradePlanModal,
-    CardActionableList
+    CardActionableList,
   },
   data: () => ({
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal
-      }
+        component: UpgradePlanModal,
+      },
     },
     fileActions: {
-      UpgradePlan: ["edit", "delete"]
-    }
-  })
+      UpgradePlan: ["edit", "delete"],
+    },
+  }),
 };
 </script>
 

@@ -21,7 +21,7 @@
     <div v-if="user.role === 'Employer'">
       <div class="section mb-8">
         <label class="section-label">
-          About company
+          Über das Unternehmen
         </label>
         <div class="section-value">
           {{ user.about_company }}
@@ -31,7 +31,7 @@
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            Employees
+            Angestellte
           </label>
           <div class="section-value">
             {{ user.company_employees }}
@@ -39,7 +39,7 @@
         </v-col>
         <v-col cols="5">
           <label class="section-label">
-            Industry
+            Branche
           </label>
           <div class="section-value">
             {{ user.branche }}

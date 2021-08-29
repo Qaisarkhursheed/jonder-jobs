@@ -19,9 +19,9 @@
     <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Change personal info
+          Persönliche Daten ändern
         </p>
-        <p class="profile-subtitle"></p>
+        <p class="profile-subtitle">Persönliche Daten</p>
         <v-col cols="6">
           <div class="d-flex align-center">
             <v-avatar
@@ -129,13 +129,13 @@
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Rolle & Branche
+          Position & Branche
         </p>
         <!-- <p class="profile-subtitle">
           Explanation goes here
         </p> -->
         <v-col cols="12">
-          <label class="profile-label">In which branches do you work?</label>
+          <label class="profile-label">In welchen Branchen arbeiten Sie?</label>
           <v-autocomplete
             v-model="formData.branche"
             :items="types.JOB_BRANCHE"
@@ -152,7 +152,7 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label"
-            >What type of role are you looking for?</label
+            >Nach was für eine Position suchen Sie?</label
           >
           <v-autocomplete
             v-model="formData.looking_for"
@@ -163,7 +163,6 @@
             hide-no-data
             :hide-details="true"
           ></v-autocomplete>
-          
         </v-col>
       </v-row>
     </v-card>
@@ -171,14 +170,15 @@
     <v-card flat id="status" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Your status
+          Ihr Status
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Machen Sie den Unternehmen klar, ob Sie derzeit auf Stellensuche sind
+          oder nicht.
+        </p>
         <v-col cols="12">
           <label class="profile-label">
-            Your status on Jonder
+            Ihr Status auf Jonder
           </label>
           <v-select
             v-model="formData.why_jonder"
@@ -194,14 +194,15 @@
     <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          What are you looking for
+          Ihre Erfahrungen & Ausbildungen
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Um potenzielle Unternehmen zu beeindrucken, fügen Sie Ihrem Lebenslauf
+          Erfahrung und Ausbildung hinzu.
+        </p>
         <v-col cols="12">
           <label class="profile-label"
-            >What type of branches are you looking for?</label
+            >Welche Art von Branchen suchen Sie?</label
           >
           <v-autocomplete
             v-model="formData.looking_for_branche"
@@ -219,7 +220,7 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label"
-            >What type of employment are you looking for?</label
+            >Welche Art von Branchen suchen Sie?</label
           >
           <v-select
             outlined
@@ -231,12 +232,12 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">Where would you like to work?</label>
+          <label class="profile-label">Wo würden Sie gerne arbeiten?*</label>
           <GooglePlacesAutocomplete
             :value="formData.address_to_work"
             @select="(e) => (formData.address_to_work = e)"
           />
-           <v-checkbox
+          <v-checkbox
             class="mb-8 mt-0"
             label="Are you also open to working remotely?"
             hide-details="auto"
@@ -247,7 +248,7 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">When can you start?</label>
+          <label class="profile-label">Wann können Sie beginnen?</label>
           <Calendar
             @setDate="formData.ready_for_work = $event"
             :value="formData.ready_for_work"
@@ -284,15 +285,14 @@
     <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Your experience and education
+          Wann können Sie beginnen?
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Um potenzielle Unternehmen zu beeindrucken, fügen Sie Ihrem Lebenslauf
+          Erfahrung und Ausbildung hinzu.
+        </p>
         <v-col cols="10">
-          <label class="profile-label"
-            >Professional experience in years?
-          </label>
+          <label class="profile-label">Berufserfahrungen in Jahren </label>
           <v-row>
             <v-col cols="auto">
               <div class="monthly-salary">
@@ -330,7 +330,7 @@
         />
 
         <v-col cols="12">
-          <label class="profile-label">Your professional experience</label>
+          <label class="profile-label">Ihre Berufserfahrung</label>
           <CardActionableList
             type="Experience"
             @edit="activateEdit('experience', $event)"
@@ -342,13 +342,13 @@
             color="#0253B3"
           >
             <v-icon>mdi-plus</v-icon>
-            Add
+            Hinzufügen
           </v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">Your education</label>
+          <label class="profile-label">Ihre Ausbildung</label>
           <CardActionableList
             type="Education"
             @edit="activateEdit('education', $event)"
@@ -360,7 +360,7 @@
             color="#0253B3"
           >
             <v-icon>mdi-plus</v-icon>
-            Add
+            Hinzufügen
           </v-btn>
         </v-col>
       </v-row>
@@ -369,11 +369,11 @@
     <v-card flat id="documents" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Documents
+          Dokumente
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Bearbeiten Sie Ihre Dokumente.
+        </p>
         <v-col cols="12">
           <div class="mt-6">
             <div class="document-wrap">
@@ -405,17 +405,17 @@
     <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Billing &amp; Invoices
+          Fakturierung &amp; Rechnungen
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Sehen Sie vergangene Rechnungen ein und laden Sie sie herunter.
+        </p>
       </v-row>
 
       <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
         <v-col>
           <div class="invoice-number">
-            Number of invoice: {{ item.invoice_number }}
+            Nummer der Rechnung:: {{ item.invoice_number }}
           </div>
           <div class="invoice-date">
             Date of invoice:
@@ -467,15 +467,15 @@
     <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Change password
+          Passwort ändern
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Ändern Sie Ihr Passwort und erstellen Sie ein neues.
+        </p>
       </v-row>
 
       <v-form ref="passwordForm" v-model="passwordFormValid">
-        <label class="profile-label">Enter old password</label>
+        <label class="profile-label">Neues Passwort eingeben</label>
         <v-text-field
           v-model="passwordFormData.current_password"
           dense
@@ -485,7 +485,7 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">Enter new password</label>
+        <label class="profile-label">Neues Passwort erneut eingeben</label>
         <v-text-field
           v-model="passwordFormData.new_password"
           dense
@@ -495,7 +495,7 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">Repeat new password</label>
+        <label class="profile-label">Altes Passwort eingeben</label>
         <v-text-field
           v-model="passwordFormData.new_confirm_password"
           dense
@@ -518,7 +518,7 @@
               color="primary"
               class="pl-8 pr-8"
               @click="handleChangePassword"
-              >Change Password
+              >Passwort ändern
             </v-btn>
           </v-col>
         </v-row>
@@ -528,11 +528,12 @@
     <v-card flat id="upgradeAccount" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Upgrade account
+          Account upgraden
         </p>
-        <!-- <p class="profile-subtitle">
-          Explanation goes here
-        </p> -->
+        <p class="profile-subtitle">
+          Upgraden Sie Ihr Konto, um Ihre Stellenanzeige sichtbarer zu
+          platzieren.
+        </p>
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
@@ -631,7 +632,7 @@ export default {
       qualifications: null,
       resume: null,
       location_show: "",
-      work_remotely: ""
+      work_remotely: "",
     },
     formResponse: {},
     formLoading: false,
