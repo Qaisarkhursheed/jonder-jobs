@@ -275,6 +275,7 @@
             </v-form>
           </v-card>
         </v-container>
+        <UserPlan v-if="$store.getters['user/userPlan']" />
       </v-col>
     </v-row>
 
@@ -292,9 +293,11 @@
 import { mapActions, mapGetters } from "vuex";
 import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
+import UserPlan from '../../components/user/UserPlan';
 
 export default {
   components: {
+    UserPlan,
     Header,
     AddNewCard,
   },

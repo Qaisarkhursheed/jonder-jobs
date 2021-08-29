@@ -28,14 +28,14 @@
 
     <div class="action mt-6">
       <v-btn
-        color="primary"
+        :color="!userPlan || userPlan.id !== plan.id ? 'primary' : 'grey lighten-3'"
         height="48"
         width="70%"
-        :elevation="false"
+        elevation="0"
         class="font-weight-medium full-w"
-        @click="getTokenId()"
+        @click="!userPlan || userPlan.id !== plan.id ? getTokenId() : null"
       >
-        Upgrade
+        {{ !userPlan || userPlan.id !== plan.id ? $t("general.upgrade") : $t("general.yourCurrentPlan") }}
       </v-btn>
     </div>
   </v-card>
@@ -43,13 +43,14 @@
 
 <script>
 import { loadStripe } from "@stripe/stripe-js";
+import { mapGetters } from "vuex";
 
 export default {
   name: "PackagesPlan",
 
   props: {
     plan: {
-      type: Object,
+      type: Object
     },
     color: {
       type: String
@@ -57,7 +58,7 @@ export default {
   },
   data() {
     return {
-      planToken: "",
+      planToken: ""
     };
   },
   methods: {
@@ -65,7 +66,7 @@ export default {
       try {
         const stripe = await loadStripe(`${process.env.VUE_APP_STRIPE_KEY}`);
         stripe.redirectToCheckout({
-          sessionId: this.planToken,
+          sessionId: this.planToken
         });
       } catch (err) {
         console.log(err);
@@ -75,24 +76,27 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_BASE}/plan`, {
           plan_id: this.plan.id,
-          payment_method: "credit card",
+          payment_method: "credit card"
         })
-        .then((res) => {
+        .then(res => {
           this.planToken = res.data.data.id;
         })
         .finally(() => {
           this.processStripe();
         })
-        .catch((error) => {
+        .catch(error => {
           alert(error);
         });
-    },
+    }
   },
   computed: {
+    ...mapGetters({
+      userPlan: "user/userPlan"
+    }),
     features() {
       return JSON.parse(this.plan.benefits);
     }
-  }
+  },
 };
 </script>
 
