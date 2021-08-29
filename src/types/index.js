@@ -8,12 +8,30 @@ const SELECTION_MANAGEMENT_STATUS = [
 ];
 
 const EMPLOYEMENT_TYPE = [
-  "Vollzeit",
-  "Teilzeit",
-  "Minijob",
-  "Midijob",
-  "Werkstudent",
-  "Kurzfristige Beschäftigung"
+  {
+    text: "Vollzeit",
+    value: "full-time"
+  },
+  {
+    text: "Teilzeit",
+    value: "part-time"
+  },
+  {
+    text: "Minijob",
+    value: "mini-job"
+  },
+  {
+    text: "Midijob",
+    value: "midi-job"
+  },
+  {
+    text: "Werkstudent",
+    value: "working-student"
+  },
+  {
+    text: "Kurzfristige Beschäftigung",
+    value: "short-term"
+  }
 ];
 
 const JOB_POSITION = [

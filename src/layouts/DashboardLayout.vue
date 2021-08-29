@@ -133,7 +133,9 @@
               <p class="about-text">{{ user.about_me }}</p>
 
               <span class="about-info">Status der arbeitssuche</span>
-              <p class="about-text">{{ user.looking_for_employment_type }}</p>
+              <p class="about-text">
+                {{ $t(`employmentTypes.${user.looking_for_employment_type}`) }}
+              </p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.looking_for_branche }}</p>
@@ -207,14 +209,14 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: {
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -226,7 +228,7 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -241,7 +243,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    },
+    }
   },
   watch: {
     search(val) {
@@ -257,8 +259,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

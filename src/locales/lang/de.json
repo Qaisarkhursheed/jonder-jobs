@@ -176,6 +176,14 @@
       "description": "Description"
     }
   },
+  "employmentTypes": {
+    "full-time": "Vollzeit",
+    "part-time": "Teilzeit",
+    "mini-job": "Minijob",
+    "midi-job": "Midijob",
+    "working-student": "Werkstudent",
+    "short-term": "Kurzfristige Beschäftigung"
+  },
   "general": {
     "search": "Suche",
     "dashboard": "Dashboard",

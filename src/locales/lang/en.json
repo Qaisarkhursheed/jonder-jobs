@@ -177,6 +177,14 @@
       "description": "Description"
     }
   },
+  "employmentTypes": {
+    "full-time": "Full-time",
+    "part-time": "Part-time",
+    "mini-job": "Mini-job",
+    "midi-job": "Midi-job",
+    "working-student": "Working student",
+    "short-term": "Short term"
+  },
   "general": {
     "search": "Search",
     "dashboard": "Dashboard",
@@ -203,7 +211,7 @@
     "december": "December",
     "messages": "Messages",
     "typeMessage": "Type a message",
-    "cancel":  "Cancel",
+    "cancel": "Cancel",
     "cancelOption": "Cancel",
     "confirm": "Confirm",
     "confirmOption": "Confirm",
