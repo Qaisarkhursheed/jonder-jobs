@@ -21,7 +21,7 @@
         {{
           conversations.length
             ? "Öffnen Sie den Chat, um zu kommunizieren"
-            : "There is no any messages yet"
+            : "Es sind noch keine Nachrichten vorhanden."
         }}
       </div>
 
