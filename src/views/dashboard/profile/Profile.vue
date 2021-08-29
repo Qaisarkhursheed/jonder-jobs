@@ -579,6 +579,7 @@
         </v-col>
       </v-row>
     </v-card>
+    <footer-legal></footer-legal>
   </div>
 </template>
 
@@ -595,6 +596,7 @@ import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducati
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
+import FooterLegal from "../../../components/parts/FooterLegal.vue";
 
 export default {
   name: "Profile",
@@ -609,6 +611,7 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
+    FooterLegal,
   },
 
   data: () => ({

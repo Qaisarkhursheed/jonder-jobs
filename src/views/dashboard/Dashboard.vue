@@ -1,48 +1,52 @@
 <template>
-  <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
-    <v-col cols="cols" v-if="messagesLoaded && conversations.length">
-      <Chat />
-    </v-col>
-    <v-col
-      cols="cols"
-      v-if="!$store.getters['chat/selectedConversation']"
-      :class="{ 'd-flex flex-column my-auto': !showUpgradeBox }"
-    >
-      <!-- Hello -->
-      <div class="user-name">
-        Hallo,
-        <span style="color:#0253B3;">
-          {{ user.first_name }} {{ user.last_name }}
-        </span>
-      </div>
+  <div>
+    <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
+      <v-col cols="cols" v-if="messagesLoaded && conversations.length">
+        <Chat />
+      </v-col>
+      <v-col
+        cols="cols"
+        v-if="!$store.getters['chat/selectedConversation']"
+        :class="{ 'd-flex flex-column my-auto': !showUpgradeBox }"
+      >
+        <!-- Hello -->
+        <div class="user-name">
+          Hallo,
+          <span style="color:#0253B3;">
+            {{ user.first_name }} {{ user.last_name }}
+          </span>
+        </div>
 
-      <!-- Messages text -->
-      <div class="no-msg">
-        {{
-          conversations.length
-            ? "Öffnen Sie den Chat, um zu kommunizieren"
-            : "Es sind noch keine Nachrichten vorhanden."
-        }}
-      </div>
+        <!-- Messages text -->
+        <div class="no-msg">
+          {{
+            conversations.length
+              ? "Öffnen Sie den Chat, um zu kommunizieren"
+              : "There is no any messages yet"
+          }}
+        </div>
 
-      <!-- Upgrade box -->
-      <UpgradeAccountBox v-if="showUpgradeBox" />
+        <!-- Upgrade box -->
+        <UpgradeAccountBox v-if="showUpgradeBox" />
 
-      <!-- Image -->
-      <div class="mt-5">
-        <v-img
-          :src="require('@/assets/svg/rafiki.svg')"
-          max-width="500"
-        ></v-img>
-      </div>
-    </v-col>
-  </v-row>
+        <!-- Image -->
+        <div class="mt-5">
+          <v-img
+            :src="require('@/assets/svg/rafiki.svg')"
+            max-width="500"
+          ></v-img>
+        </div>
+      </v-col>
+    </v-row>
+    <footer-legal class="mt"></footer-legal>
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import Chat from "@/views/dashboard/Chat";
+import FooterLegal from "../../components/parts/FooterLegal.vue";
 
 export default {
   name: "Dashboard",
@@ -63,6 +67,7 @@ export default {
   components: {
     Chat,
     UpgradeAccountBox,
+    FooterLegal,
   },
 };
 </script>
@@ -100,5 +105,10 @@ export default {
   font-size: 20px;
   line-height: 24px;
   margin-bottom: 20px;
+}
+.mt {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 </style>
