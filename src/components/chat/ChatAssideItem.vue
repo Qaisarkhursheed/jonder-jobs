@@ -98,8 +98,13 @@ export default {
         return null;
       }
 
-      const origin = new URL(process.env.VUE_APP_API_BASE).origin;
-      return `${origin}/storage/avatars/${img}`;
+      try {
+        const url = new URL(img);
+        return url.href;
+      } catch (err) {
+        const origin = new URL(process.env.VUE_APP_API_BASE).origin;
+        return `${origin}/storage/avatars/${img}`;
+      }
     },
     getFullName(conversation) {
       const p = this.getParticipian(conversation);

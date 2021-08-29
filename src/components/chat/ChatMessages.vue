@@ -229,12 +229,19 @@ export default {
       return conversation.user_name.substr(0, 2);
     },
     getProfileImage(conversation) {
-      if (!conversation.profile_img) {
+      const img = conversation.profile_img;
+
+      if (!img) {
         return null;
       }
 
-      const origin = new URL(process.env.VUE_APP_API_BASE).origin;
-      return `${origin}/storage/avatars/${conversation.profile_img}`;
+      try {
+        const url = new URL(img);
+        return url.href;
+      } catch (err) {
+        const origin = new URL(process.env.VUE_APP_API_BASE).origin;
+        return `${origin}/storage/avatars/${img}`;
+      }
     },
     isImage(msg) {
       if (msg.type != "upload") {
