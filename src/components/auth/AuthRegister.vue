@@ -234,7 +234,6 @@ export default {
         .then(() => {
           const time = new Date().getTime().toString();
           localStorage.setItem("user-email", this.formData.email);
-          localStorage.setItem("verificationTime", time);
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
         .catch((err) => {
