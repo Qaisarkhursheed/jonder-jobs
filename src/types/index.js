@@ -4,10 +4,17 @@ const SELECTION_MANAGEMENT_STATUS = [
   "Qualified",
   "Interview",
   "Final round",
-  "Hired",
+  "Hired"
 ];
 
-const EMPLOYEMENT_TYPE = ["Trainee", "Fulltime", "Parttime"];
+const EMPLOYEMENT_TYPE = [
+  "Vollzeit",
+  "Teilzeit",
+  "Minijob",
+  "Midijob",
+  "Werkstudent",
+  "Kurzfristige Beschäftigung"
+];
 
 const JOB_POSITION = [
   "Developer",
@@ -22,7 +29,7 @@ const JOB_POSITION = [
   "Frontend Developer",
   "Backend Developer",
   "Mobile Developer",
-  "DevOps Engineer",
+  "DevOps Engineer"
 ];
 
 const JOB_BRANCHE = [
@@ -31,7 +38,7 @@ const JOB_BRANCHE = [
   "Mechanical engineering",
   "Chemical-pharmaceutical industry",
   "Food industry",
-  "Electrical engineering industry",
+  "Electrical engineering industry"
 ];
 
 const SALARY_RANGE = [
@@ -41,7 +48,7 @@ const SALARY_RANGE = [
   "70000 - 90000",
   "90000 - 110000",
   "110000 - 130000",
-  "130000+",
+  "130000+"
 ];
 
 const WORK_EXPERIENCE = ["0-3", "3-6", "6-10", "10-15", "15-20", "20+"];
@@ -53,15 +60,20 @@ const EMPLOYEE_NUMBER = [
   "100-200",
   "200-500",
   "500-1000",
-  "1000+",
+  "1000+"
 ];
 
-const SCHOOL = ["School example 1", "School example 2", "School example 3"];
+const SCHOOL = [
+  "Abitur",
+  "Fachhochschulreife",
+  "Mittlerer Schulabschluss",
+  "Hauptschulabschluss"
+];
 
 const EDUCATION = [
   "Education example 1",
   "Education example 2",
-  "Education example 3",
+  "Education example 3"
 ];
 
 export default {
@@ -73,5 +85,5 @@ export default {
   WORK_EXPERIENCE,
   SCHOOL,
   EDUCATION,
-  EMPLOYEE_NUMBER,
+  EMPLOYEE_NUMBER
 };
