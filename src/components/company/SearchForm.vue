@@ -239,6 +239,11 @@ export default {
       store.dispatch("company/searchJobseekers", this.prepareData());
       this.$emit("search");
     },
+    removeMessage(delay) {
+      setTimeout(() => {
+        this.errorMessage = false;
+      }, delay);
+    },
     searchSave() {
       let i = 0;
       let isValid = true;
@@ -254,16 +259,17 @@ export default {
         if (count === Object.keys(saveData).length) {
           isValid = false;
           this.errorMessage = "Already saved";
-          setTimeout(() => {
-            this.errorMessage = false;
-          }, 5000);
+          this.removeMessage(5000);
           break;
         } else {
           i++;
         }
       }
       if (isValid) {
-        store.dispatch("company/searchFilterSave", saveData);
+        store.dispatch("company/searchFilterSave", saveData).catch(error => {
+          this.errorMessage = error.response.data.message;
+          this.removeMessage(5000);
+        });
       }
     },
     filterData() {
