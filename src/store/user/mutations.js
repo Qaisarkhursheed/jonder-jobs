@@ -10,5 +10,8 @@ export default {
   },
   SET_JOBSEEKER_EDUCATION(state, value) {
     state.jobseeker.education = value;
+  },
+  SET_PLANS(state, value) {
+    state.plans = value;
   }
 };

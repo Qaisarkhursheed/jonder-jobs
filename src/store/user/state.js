@@ -4,5 +4,6 @@ export default {
   jobseeker: {
     experience: [],
     education: []
-  }
+  },
+  plans: null
 };

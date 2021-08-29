@@ -65,7 +65,9 @@ export default {
     };
   },
   created() {
-    store.dispatch(`user/getAllJobseeker${this.type}`);
+    if (this.type !== "UpgradePlan") {
+      store.dispatch(`user/getAllJobseeker${this.type}`);
+    }
   },
 
   methods: {
