@@ -143,7 +143,10 @@
             <label class="section-label">
               {{ $t("company.search.city") }}
             </label>
-            <GooglePlacesAutocomplete @select="e => (formFields.city = e)" />
+            <GooglePlacesAutocomplete
+              :value="formFields.city"
+              @select="e => (formFields.city = e)"
+            />
           </v-col>
         </v-row>
       </template>
@@ -228,7 +231,8 @@ export default {
         school: "",
         education: "",
         min_salary: "",
-        max_salary: ""
+        max_salary: "",
+        city: ""
       },
       advancedSearch: false,
       errorMessage: ""
@@ -278,21 +282,38 @@ export default {
         : null;
       console.log("meta", searchMeta);
       if (searchMeta) {
-        if (searchMeta.employment_type)
-          this.formFields.employment_type = searchMeta.employment_type;
-        if (searchMeta.job_position)
-          this.formFields.job_position = searchMeta.job_position;
-        if (searchMeta.work_experience)
-          this.formFields.work_experience = searchMeta.work_experience;
-        if (searchMeta.branche) this.formFields.branche = searchMeta.branche;
-        if (searchMeta.school) this.formFields.school = searchMeta.school;
-        if (searchMeta.education)
-          this.formFields.education = searchMeta.education;
-        if (searchMeta.min_salary)
-          this.formFields.min_salary = searchMeta.min_salary;
-        if (searchMeta.max_salary)
-          this.formFields.max_salary = searchMeta.max_salary;
-        if (searchMeta.city) this.formFields.city = searchMeta.city;
+        this.formFields.employment_type =
+          "employment_type" in searchMeta ? searchMeta.employment_type : "";
+        this.formFields.job_position =
+          "job_position" in searchMeta ? searchMeta.job_position : "";
+        this.formFields.work_experience =
+          "work_experience" in searchMeta ? searchMeta.work_experience : "";
+        this.formFields.branche =
+          "branche" in searchMeta ? searchMeta.branche : "";
+        this.formFields.school =
+          "school" in searchMeta ? searchMeta.school : "";
+        this.formFields.education =
+          "education" in searchMeta ? searchMeta.education : "";
+        this.formFields.min_salary =
+          "min_salary" in searchMeta ? searchMeta.min_salary : "";
+        this.formFields.max_salary =
+          "max_salary" in searchMeta ? searchMeta.max_salary : "";
+        this.formFields.city = "city" in searchMeta ? searchMeta.city : "";
+        // if (searchMeta.employment_type)
+        //   this.formFields.employment_type = searchMeta.employment_type;
+        // if (searchMeta.job_position)
+        //   this.formFields.job_position = searchMeta.job_position;
+        // if (searchMeta.work_experience)
+        //   this.formFields.work_experience = searchMeta.work_experience;
+        // if (searchMeta.branche) this.formFields.branche = searchMeta.branche;
+        // if (searchMeta.school) this.formFields.school = searchMeta.school;
+        // if (searchMeta.education)
+        //   this.formFields.education = searchMeta.education;
+        // if (searchMeta.min_salary)
+        //   this.formFields.min_salary = searchMeta.min_salary;
+        // if (searchMeta.max_salary)
+        //   this.formFields.max_salary = searchMeta.max_salary;
+        // if (searchMeta.city) this.formFields.city = searchMeta.city;
       }
     },
     prepareData() {
