@@ -5,16 +5,23 @@
         <PackagesPackage :plan="item" :color="packagesBranding[i]" />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12">
+        <UserPlan />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import PackagesPackage from "@/components/PackagesPlan";
+import UserPlan from './user/UserPlan';
 
 export default {
   name: "Packages",
 
   components: {
+    UserPlan,
     PackagesPackage,
   },
 

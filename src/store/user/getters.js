@@ -59,5 +59,6 @@ export default {
   },
   jobseekerEducation(state) {
     return state.jobseeker.education;
-  }
-}
+  },
+  userPlan: state => state.user?.plan
+};

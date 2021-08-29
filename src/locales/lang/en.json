@@ -216,6 +216,15 @@
     "seeMore": "",
     "areYouSure": "Are you sure?",
     "areYouSureQuestion": "Are you sure that you want to delete user?",
-    "areYouSureAction": "action cannot be undo"
+    "areYouSureAction": "action cannot be undo",
+    "upgrade": "Upgrade",
+    "yourCurrentPlan": "Your current plan",
+    "subscriptionPlan": "Subscription plan",
+    "yourCurrentPlanDescription": "Your package, which allows you the many advantages of Jonder",
+    "month": "Month",
+    "renewsOn": "Renews on",
+    "more": "More",
+    "daysValid": "days valid",
+    "changePackage": "Change package"
   }
 }

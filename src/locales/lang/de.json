@@ -215,6 +215,15 @@
     "seeMore": "",
     "areYouSure": "Sind Sie sicher?",
     "areYouSureQuestion": "Sind Sie ganz sicher? Der Benutzer wird keinen Zugriff mehr auf das System haben.",
-    "areYouSureAction": "action cannot be undo"
+    "areYouSureAction": "action cannot be undo",
+    "upgrade": "Upgrade",
+    "yourCurrentPlan": "Your current plan",
+    "subscriptionPlan": "Abonnement-Plan",
+    "yourCurrentPlanDescription": "Ihr Paket, welches Ihnen die vielen Vorteile von Jonder ermöglicht",
+    "month": "Monat",
+    "renewsOn": "Erneuert sich am",
+    "more": "Mehr",
+    "daysValid": "tage gültig",
+    "changePackage": "Paket ändern"
   }
 }
