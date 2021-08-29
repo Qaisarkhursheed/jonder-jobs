@@ -14,13 +14,16 @@
         v-if="getProfileImage(conversation)"
         :src="getProfileImage(conversation)"
       ></v-img>
-      <span class="white--text full-w text-center d-block" v-else>
+      <span v-else class="white--text full-w text-center d-block">
         {{ getInitials(conversation) }}
       </span>
     </v-list-item-avatar>
 
     <v-list-item-content>
-      <v-list-item-title v-text="getFullName(conversation)"></v-list-item-title>
+      <v-list-item-title
+        v-text="getFullName(conversation)"
+        style="color: #222222; font-weight: 600;"
+      ></v-list-item-title>
       <v-list-item-subtitle
         v-text="getShortMessage(conversation)"
       ></v-list-item-subtitle>

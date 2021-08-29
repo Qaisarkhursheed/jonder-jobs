@@ -12,14 +12,14 @@
             :alt="`${conversationDetails.user_name} avatar`"
             :src="getProfileImage(conversationDetails)"
           ></v-img>
-          <span class="white--text full-w text-center d-block" v-else>{{
-            getInitials(conversationDetails)
-          }}</span>
+          <span v-else class="white--text full-w text-center d-block">
+            {{ getInitials(conversationDetails) }}
+          </span>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title
-            >{{ conversationDetails.user_name }}
+          <v-list-item-title style="font-weight: 600;">
+            {{ conversationDetails.user_name }}
           </v-list-item-title>
           <!--<v-list-item-subtitle>Online now</v-list-item-subtitle>-->
         </v-list-item-content>
@@ -29,13 +29,10 @@
           <v-icon
             v-if="conversationDetails.user.role == 'Jobseeker'"
             class="chat-icon mr-3"
-            :color="conversationDetails.selection_managment ? '#27AAE1' : null"
+            :color="conversationDetails.starred ? '#0253B3' : null"
+            @click="handleStarIconClick"
           >
-            {{
-              conversationDetails.selection_managment
-                ? "mdi-star"
-                : "mdi-star-outline"
-            }}
+            {{ conversationDetails.starred ? "mdi-star" : "mdi-star-outline" }}
           </v-icon>
 
           <!-- Info -->
@@ -58,8 +55,7 @@
           <v-icon
             class="chat-icon"
             @click="
-              $store.commit('chat/FILL_SINGLE_CONVERSATION', null);
-              $store.commit('chat/SET_CONVERSATION_DETAILS', {});
+              $store.commit('chat/CLEAR_SINGLE_CONVERSATION');
               $emit('chat-full', false);
             "
           >
@@ -94,7 +90,7 @@
             class="message rounded-lg"
             :class="[
               { 'my-message': msg.is_sender },
-              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0'],
+              [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0']
             ]"
           >
             <v-card-text>
@@ -133,25 +129,35 @@
       </v-card-text>
     </div>
     <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
-      <v-file-input v-model="newFile" class="pa-0" hide-input></v-file-input>
+      <v-file-input
+        v-model="newFile"
+        class="pa-0"
+        :class="{ 'file-set': newFile }"
+        hide-input
+      ></v-file-input>
 
       <v-textarea
-        class="rounded-lg"
-        style="width: 100%"
+        v-model="newMessage"
+        style="width: 100%; border-radius: 30px"
         label="Nachricht senden"
         outlined
         solo
         flat
         hide-details
         background-color="white"
-        rows="3"
+        rows="1"
         auto-grow
-        v-model="newMessage"
+        @drop.prevent="handleTextareaDrop"
         >Message
       </v-textarea>
 
-      <v-icon v-if="!sending" @click="send" class="message-type-new-send"
-        >mdi-send-circle
+      <v-icon
+        :disabled="sending"
+        size="36"
+        @click="send"
+        class="message-type-new-send ml-2"
+      >
+        mdi-send-circle
       </v-icon>
     </v-card-actions>
   </v-card>
@@ -164,20 +170,18 @@ export default {
   props: {
     messages: {
       type: Array,
-      required: true,
+      required: true
     },
     conversationDetails: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data: () => ({
     newMessage: "",
     newFile: null,
     sending: false,
-    chatFull: false,
-
-    chatMessageDateCache: null,
+    chatFull: false
   }),
   mounted() {
     this.scrollToBottom();
@@ -202,7 +206,7 @@ export default {
       this.sendMessage({
         id: this.conversationDetails.id,
         file: this.newFile,
-        message: this.newMessage,
+        message: this.newMessage
       })
         .then(() => {
           this.newMessage = "";
@@ -242,14 +246,53 @@ export default {
     getFileData(msg) {
       return JSON.parse(msg.body);
     },
+    handleStarIconClick() {
+      if (this.conversationDetails.starred) {
+        this.$store
+          .dispatch(
+            "company/slManagementDeleteCandidate",
+            this.conversationDetails.user_id
+          )
+          .then(() => {
+            this.conversationDetails.starred = false;
+          });
+      } else {
+        this.$store
+          .dispatch("company/slManagementAddCandidate", {
+            jobseeker_id: this.conversationDetails.user_id,
+            managment_status: "Saved candidates"
+          })
+          .then(() => {
+            this.conversationDetails.starred = true;
+          });
+      }
+    },
+    handleTextareaDrop(ev) {
+      if (ev.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+          // If dropped items aren't files, reject them
+          if (ev.dataTransfer.items[i].kind === "file") {
+            this.newFile = ev.dataTransfer.items[i].getAsFile();
+            break;
+          }
+        }
+      } else {
+        // Use DataTransfer interface to access the file(s)
+        for (let i = 0; i < ev.dataTransfer.files.length; i++) {
+          this.newFile = ev.dataTransfer.files[i];
+          break;
+        }
+      }
+    }
   },
   watch: {
     conversationDetails() {
       setTimeout(() => {
         this.scrollToBottom();
       }, 500);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -301,22 +344,39 @@ export default {
     border-color: #d4d4d4 !important;
   }
 
+  .file-set {
+    button {
+      color: #0253b3;
+    }
+  }
+
+  .v-textarea {
+    textarea {
+      margin-top: 15px !important;
+      margin-bottom: 10px;
+    }
+
+    .v-label {
+      top: 18px !important;
+    }
+  }
+
   .message-type-new-send {
-    position: absolute;
-    bottom: 36px;
-    right: 34px;
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-    line-height: 32px;
-    background: #e3f2fb;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    color: $primary-blue-dark;
-    cursor: pointer;
-    z-index: 10;
+    // position: absolute;
+    // bottom: 36px;
+    // right: 34px;
+    // width: 32px;
+    // height: 32px;
+    // font-size: 16px;
+    // line-height: 32px;
+    // background: #e3f2fb;
+    // border-radius: 50%;
+    // overflow: hidden;
+    // padding: 0;
+    // margin: 0;
+    // color: $primary-blue-dark;
+    // cursor: pointer;
+    // z-index: 10;
   }
 }
 </style>

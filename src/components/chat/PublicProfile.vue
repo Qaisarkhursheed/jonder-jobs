@@ -22,8 +22,7 @@
         <v-icon
           color="black"
           @click="
-            $store.commit('chat/FILL_SINGLE_CONVERSATION', null);
-            $store.commit('chat/SET_CONVERSATION_DETAILS', {});
+            $store.commit('chat/CLEAR_SINGLE_CONVERSATION');
             $emit('chat-full', false);
           "
         >
@@ -44,7 +43,7 @@
 import PublicProfileViewAs from "@/components/company/PublicProfileViewAs";
 
 export default {
-  components: { PublicProfileViewAs },
+  components: { PublicProfileViewAs }
 };
 </script>
 
