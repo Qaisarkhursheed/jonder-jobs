@@ -167,8 +167,8 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   computed: {
@@ -187,14 +187,18 @@ export default {
     },
 
     address() {
-      return `${this.user.city}, ${this.user.address}`;
+      if (this.user.city && this.user.address) {
+        return `${this.user.city}, ${this.user.address}`;
+      }
+
+      return this.user.city || this.user.address || "";
     },
 
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
-    },
-  },
+    }
+  }
 };
 </script>
 

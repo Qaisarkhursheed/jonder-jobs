@@ -2,7 +2,7 @@
   <v-row v-if="chatLoading" class="full-h">
     <spinner />
   </v-row>
-  <v-row v-else class="" style="height: calc(100vh - 150px)">
+  <v-row v-else style="height: calc(100vh - 150px); min-height: 500px">
     <v-col v-if="!chatFull" cols="col" class="full-h">
       <chat-asside
         class="full-h flex-grow-1 flex-shrink-1 overflow-list"
@@ -22,7 +22,11 @@
         :conversation-details="conversationDetails"
       />
 
-      <PublicProfile v-else @back="showProfile = false" />
+      <PublicProfile
+        v-else
+        @back="showProfile = false"
+        style="overflow-y: auto"
+      />
     </v-col>
   </v-row>
 </template>
@@ -49,7 +53,7 @@ export default {
     showProfile: false,
     polling: null,
     chatFull: false,
-    chatLoading: false,
+    chatLoading: false
   }),
   methods: {
     ...mapActions("chat", [
@@ -57,7 +61,7 @@ export default {
       "addPlaceholderMessage",
       "getSingleConversation",
       "startChat",
-      "seenMessage",
+      "seenMessage"
     ]),
     async init() {
       this.chatLoading = true;
@@ -78,7 +82,7 @@ export default {
         }
         this.getAllConversations();
       }, 5000);
-    },
+    }
   },
   computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
   components: {
@@ -86,8 +90,8 @@ export default {
     ChatMessages,
     ChatAsside,
     PublicProfile,
-    Spinner,
-  },
+    Spinner
+  }
 };
 </script>
 
