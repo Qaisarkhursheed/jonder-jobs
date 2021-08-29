@@ -428,6 +428,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.name == "Logout") {
     store.dispatch("auth/logout").finally(() => {
+      store.commit("chat/CLEAR_SINGLE_CONVERSATION");
       router.replace({ name: "Home" });
     });
   }

@@ -57,6 +57,10 @@ export default {
     },
     SET_LOADED_STATE(state, value) {
       state.loaded = value;
+    },
+    CLEAR_SINGLE_CONVERSATION(state) {
+      state.selectedConversation = null;
+      state.conversationDetails = {};
     }
   },
 
@@ -86,9 +90,8 @@ export default {
           .then(resp => {
             commit("FILL_SINGLE_CONVERSATION", resp.data);
           })
-          .catch(err => {
-            console.error("Error getting conversation. " + err);
-            commit("FILL_SINGLE_CONVERSATION", null);
+          .catch(() => {
+            commit("CLEAR_SINGLE_CONVERSATION");
           })
       );
     },
@@ -108,31 +111,28 @@ export default {
         return Promise.reject(err.data);
       }
     },
-    async startChat({ state, commit, dispatch }, id) {
+    async startChat({ commit }, id) {
       try {
         const resp = await axios.post("/conversations", {
           ids: [id]
         });
 
-        if (!resp.data.conversation.length) {
-          await dispatch("getAllConversations");
+        const conversationData = resp.data.conversationData;
+        const participant = conversationData.participants.find(p => p.id == id);
+
+        if (!participant) {
+          throw new Error("Participant not found.");
         }
 
-        const conversation = state.conversations.find(
-          c => c.id == resp.data.conversationData.id
-        );
-        const participant =
-          conversation.conversation.participants[1].messageable;
-
         commit("SET_CONVERSATION_DETAILS", {
-          id: conversation.id,
+          id: conversationData.id,
           user_id: participant.id,
           user_name:
             participant.company ||
             participant.first_name + " " + participant.last_name,
-          unread_messages: conversation.unread_messages,
+          unread_messages: conversationData.unread_messages,
           profile_img: participant.profile_img,
-          starred: !!conversation.selection_managment.length,
+          starred: !!conversationData.selection_managment.length,
           user: participant
         });
         commit("FILL_SINGLE_CONVERSATION", resp.data.conversation);
