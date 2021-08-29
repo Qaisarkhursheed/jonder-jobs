@@ -15,16 +15,16 @@
         <v-col cols="12">
           <div class="plan-description">
             <h3>{{ userPlan.name }}</h3>
-            <div>{{ userPlan.price }}&euro; / {{ $t("general.month") }}</div>
+            <div>{{ userPlan.price }}&euro; / {{ userPlan.days_valid }} {{ $t("general.daysValid") }}</div>
             <div>
               {{ $t("general.renewsOn") }}
-              {{ userPlan.updated_at | moment("MMM DD, YYYY") }}
+              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
             </div>
-            <!--            <div>{{ "valid till" }} {{ updateDate | moment("MMM DD, YYYY")}}</div>-->
-            <div class="more-days pb-4">
-              {{ $t("general.more") }} <b>{{ userPlan.days_valid }}</b>
-              {{ $t("general.daysValid") }}
+            <div>
+              {{ "valid till" }}
+              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
             </div>
+            <div class="more-days pb-4"></div>
             <div class="payment-info mt-6">
               <span
                 class="carten-abenden"

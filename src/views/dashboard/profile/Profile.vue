@@ -235,7 +235,7 @@
           <label class="profile-label">Wo würden Sie gerne arbeiten?*</label>
           <GooglePlacesAutocomplete
             :value="formData.address_to_work"
-            @select="(e) => (formData.address_to_work = e)"
+            @select="e => (formData.address_to_work = e)"
           />
           <v-checkbox
             class="mb-8 mt-0"
@@ -378,21 +378,21 @@
           <div class="mt-6">
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.cv = e[0])"
+                @change="e => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.qualifications = e[0])"
+                @change="e => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.resume = e[0])"
+                @change="e => (formData.resume = e[0])"
                 type="Resume"
                 :value="formData.resume"
               />
@@ -429,7 +429,7 @@
             @click="
               $store.dispatch('invoices/downloadInvoice', {
                 id: item.id,
-                number: item.invoice_number,
+                number: item.invoice_number
               })
             "
           ></v-img>
@@ -536,7 +536,8 @@
         </p>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="6" v-for="(plan, index) in plansData"
+               :key="index">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
@@ -544,36 +545,32 @@
           <div class="upgrade" @click="toggleModal('UpgradePlan')">
             <v-img
               class="upgrade-icon"
-              :src="require('@/assets/icons/top-rated.svg')"
+              :style="{order: userPlan.id === plan.id ? 2 : 1}"
+              :src="
+                require(`@/assets/icons/${
+                  index === 0 ? 'top-rated' : 'medal'
+                }.svg`)
+              "
             ></v-img>
 
-            <div>
+            <div class="upgrade-default" v-if="userPlan.id !== plan.id">
               <span class="upgrade-title">
-                Your account is higlighted in company search
+                {{plan.name}}
               </span>
-              <p>3 days active</p>
-              <span class="updgrade-price upgrade-title">10€</span>
+              <p>{{ plan.days_valid }} days active</p>
+              <span class="updgrade-price upgrade-title">{{ plan.price }}€</span>
             </div>
-          </div>
-        </v-col>
-
-        <v-col cols="12" md="6">
-          <CardActionableList
-            type="UpgradePlan"
-            @edit="activateEdit('UpgradePlan', $event)"
-          />
-          <div class="upgrade" @click="toggleModal('UpgradePlan')">
-            <v-img
-              class="upgrade-icon"
-              :src="require('@/assets/icons/medal.svg')"
-            ></v-img>
-
-            <div>
-              <span class="upgrade-title">
-                Your account is higlighted in company search
-              </span>
-              <p>3 days active</p>
-              <span class="updgrade-price upgrade-title">10€</span>
+            <div class="plan-description" v-else>
+              <h3>{{ userPlan.name }}</h3>
+              <div>{{ userPlan.price }}&euro; / {{ plan.days_valid }} {{ $t("general.daysValid") }}</div>
+              <div>
+                {{ $t("general.renewsOn") }}
+                {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
+              </div>
+              <div>
+                {{ "valid till" }}
+                {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
+              </div>
             </div>
           </div>
         </v-col>
@@ -611,7 +608,7 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
-    FooterLegal,
+    FooterLegal
   },
 
   data: () => ({
@@ -632,7 +629,7 @@ export default {
       qualifications: null,
       resume: null,
       location_show: "",
-      work_remotely: "",
+      work_remotely: ""
     },
     formResponse: {},
     formLoading: false,
@@ -644,46 +641,52 @@ export default {
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
-      "I am just curious",
+      "I am just curious"
     ],
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal,
+        component: UpgradePlanModal
       },
       AddNewCard: {
         active: false,
         edit: false,
-        component: AddNewCard,
+        component: AddNewCard
       },
       education: {
         active: false,
         edit: false,
-        component: ModalEducation,
+        component: ModalEducation
       },
       experience: {
         active: false,
         edit: false,
-        component: ModalExperience,
-      },
+        component: ModalExperience
+      }
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
-      education: ["edit", "delete"],
+      education: ["edit", "delete"]
     },
   }),
   created() {
     this.resetFormData(this.user);
-    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter((i) => i.status == "complete");
+      this.invoices = this.invoices.filter(i => i.status === "complete");
     });
   },
   computed: {
-    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    ...mapGetters("user", [
+      "user",
+      "getUserFullName",
+      "getUserInitials",
+      "userPlan",
+      "plans"
+    ]),
     profile_img() {
       if (this.newImage) {
         return URL.createObjectURL(this.newImage);
@@ -694,6 +697,9 @@ export default {
     types() {
       return types;
     },
+    plansData() {
+      return this.plans("jobseeker_paln");
+    }
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -741,10 +747,10 @@ export default {
 
       this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.formResponse = resp.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
@@ -758,7 +764,7 @@ export default {
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -766,7 +772,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.passwordFormResponse = err.data;
         })
         .finally(() => {
@@ -780,13 +786,13 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
+    }
   },
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -829,14 +835,17 @@ export default {
   padding: 25px;
   cursor: pointer;
   display: flex;
+  position: relative;
 
   .upgrade-title {
     font-size: 16px;
     font-weight: 700;
   }
   .updgrade-price {
-    float: right;
     color: $primary-blue-dark;
+    position: absolute;
+    right: 25px;
+    bottom: 23px;
   }
 }
 .profile-section {
@@ -853,6 +862,33 @@ export default {
 
 .document-wrap {
   width: 70%;
+}
+.upgrade-default {
+  order: 1;
+  p {
+    font-size: 11px;
+  }
+}
+.plan-description {
+  order: 1;
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  > div {
+    color: #252525;
+    font-size: 11px;
+    b {
+      color: #27aae1;
+    }
+    &.payment-info {
+      color: #27aae1 !important;
+      font-weight: 600;
+      > span {
+        cursor: pointer;
+      }
+    }
+  }
 }
 @media (max-width: 800px) {
   .document-wrap {

@@ -19,7 +19,7 @@ export default {
     AuthLayout,
     AuthWrap,
     AuthWelcome
-  },
+  }
 };
 </script>
 

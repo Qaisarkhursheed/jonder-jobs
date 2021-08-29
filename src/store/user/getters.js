@@ -1,3 +1,5 @@
+import filter from "lodash/filter";
+
 export default {
   user(state) {
     if (state.user) {
@@ -60,5 +62,6 @@ export default {
   jobseekerEducation(state) {
     return state.jobseeker.education;
   },
-  userPlan: state => state.user?.plan
+  userPlan: state => state.user?.plan,
+  plans: state => type => filter(state.plans, plan => plan.plan_type === type)
 };

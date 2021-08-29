@@ -124,7 +124,7 @@
 
             <UpgradeAccountBox
               class="mt-7"
-              v-if="messagesLoaded && conversations.length"
+              v-if="messagesLoaded && conversations.length && !user.plan"
               small
             />
 

@@ -96,7 +96,7 @@ export default {
     if (this.edit) {
       this.populate();
     }
-    this.fetchPlans();
+    this.data = this.$store.getters["user/plans"]("jobseeker_paln");
   },
   methods: {
     close(type) {
@@ -151,14 +151,7 @@ export default {
     },
     populate() {
       this.form.active_plan = this.edit.active_plan;
-    },
-    fetchPlans() {
-      const baseURI = `${process.env.VUE_APP_API_BASE}/plans/0/100`;
-      this.$http.get(baseURI).then((res) => {
-        this.data = res.data.plans;
-        console.log(this.data);
-      });
-    },
+    }
   },
 };
 </script>

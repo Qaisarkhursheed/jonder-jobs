@@ -136,6 +136,7 @@ export default {
           localStorage.removeItem("user-email");
           localStorage.removeItem("verificationTime");
           this.$router.replace({ name: "Home" });
+          this.$store.dispatch("user/fetchPlans");
         })
         .catch(err => {
           if (err.data.data?.email_not_verified) {
