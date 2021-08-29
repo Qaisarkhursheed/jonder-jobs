@@ -143,7 +143,7 @@
             <label class="section-label">
               {{ $t("company.search.city") }}
             </label>
-            <GooglePlacesAutocomplete @select="(e) => (formFields.city = e)" />
+            <GooglePlacesAutocomplete @select="e => (formFields.city = e)" />
           </v-col>
         </v-row>
       </template>
@@ -173,7 +173,7 @@
                   elevation="0"
                   :class="[
                     'advanced-search-btn full-w mt-md-16 white font-weight-medium',
-                    { active: advancedSearch },
+                    { active: advancedSearch }
                   ]"
                   color="#fff"
                   @click="advancedSearch = !advancedSearch"
@@ -215,7 +215,7 @@ export default {
   name: "SearchForm",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   data() {
@@ -228,10 +228,10 @@ export default {
         school: "",
         education: "",
         min_salary: "",
-        max_salary: "",
+        max_salary: ""
       },
       advancedSearch: false,
-      errorMessage: "",
+      errorMessage: ""
     };
   },
   methods: {
@@ -304,7 +304,7 @@ export default {
         }
       });
       return activatedFields;
-    },
+    }
   },
   computed: {
     searchCountLabel() {
@@ -318,8 +318,8 @@ export default {
     },
     types() {
       return types;
-    },
-  },
+    }
+  }
 };
 </script>
 
