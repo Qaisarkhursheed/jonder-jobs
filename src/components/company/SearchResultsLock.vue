@@ -15,10 +15,10 @@
         mdi-lock
       </v-icon>
       <div class="title">
-        You reached limit of 5 searches.
+        Sie haben das Limit von 3 Suchen erreicht.
       </div>
       <div class="subtitle">
-        Upgrade account to search without any limits.
+        Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen.
       </div>
     </div>
     <Packages />

@@ -109,7 +109,7 @@
           @click="startConversation"
           :loading="startChatLoading"
         >
-          Contact
+          Kontaktieren
         </v-btn>
       </v-col>
     </v-card-actions>
