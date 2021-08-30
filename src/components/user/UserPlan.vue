@@ -13,28 +13,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <div class="plan-description">
-            <h3>{{ userPlan.name }}</h3>
-            <div>{{ userPlan.price }}&euro; / {{ userPlan.days_valid }} {{ $t("general.daysValid") }}</div>
-            <div>
-              {{ $t("general.renewsOn") }}
-              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
-            </div>
-            <div>
-              {{ $t("general.validUntil") }}
-              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
-            </div>
-            <div class="more-days pb-4"></div>
-            <div class="payment-info mt-6">
-              <span
-                class="carten-abenden"
-                v-if="$route.name !== 'CompanyPackagesPricing'"
-                @click="$router.push({ name: 'CompanyPackagesPricing' })"
-              >
-                {{ $t("general.changePackage") }}
-              </span>
-            </div>
-          </div>
+          <UserPlanDescription :border-plan="borderPlan" :payment-info="paymentInfo"/>
         </v-col>
       </v-row>
     </v-container>
@@ -43,9 +22,20 @@
 
 <script>
 import { mapGetters } from "vuex";
+import UserPlanDescription from './UserPlanDescription';
 
 export default {
   name: "UserPlan",
+  components: {UserPlanDescription},
+  props: {
+    paymentInfo: {
+      type: Boolean
+    },
+    borderPlan: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     ...mapGetters({
       userPlan: "user/userPlan"
@@ -64,31 +54,5 @@ export default {
   background-color: #fff;
   border-radius: 18px;
   padding: 40px;
-
-  .plan-description {
-    border: 1px solid #e9e9e9;
-    border-radius: 10px;
-    padding: 20px;
-    h3 {
-      font-weight: 700;
-    }
-    > div {
-      color: #252525;
-      font-size: 11px;
-      b {
-        color: #27aae1;
-      }
-      &.more-days {
-        border-bottom: 1px solid #e9e9e9;
-      }
-      &.payment-info {
-        color: #27aae1 !important;
-        font-weight: 600;
-        > span {
-          cursor: pointer;
-        }
-      }
-    }
-  }
 }
 </style>
