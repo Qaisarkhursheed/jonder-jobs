@@ -1,10 +1,11 @@
 <template>
   <div class="selection-management-table-list d-flex">
     <div class="list-wrapper" :class="{ 'active-profile': activeProfile }">
-      <v-container>
+      <v-container >
         <v-row
           class="smt-list"
           :class="{ active: activeProfile === item.jobseeker.id }"
+          :style="[!activeProfile ? { minWidth: '800px' } : null]"
           v-for="(item, index) in selection"
           :key="index"
           @click="updateActiveProfile(item.jobseeker.id)"
@@ -136,6 +137,7 @@ export default {
 .list-wrapper {
   border: 1px solid #e6e7e9;
   border-radius: 8px;
+  overflow: auto;
   width: 100%;
   &.active-profile {
     margin-right: 24px;
