@@ -233,6 +233,7 @@
     "renewsOn": "Renews on",
     "more": "More",
     "daysValid": "days valid",
-    "changePackage": "Change package"
+    "changePackage": "Change package",
+    "validUntil": "Valid until"
   }
 }

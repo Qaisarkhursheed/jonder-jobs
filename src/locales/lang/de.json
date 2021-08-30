@@ -232,6 +232,7 @@
     "renewsOn": "Erneuert sich am",
     "more": "Mehr",
     "daysValid": "tage gültig",
-    "changePackage": "Paket ändern"
+    "changePackage": "Paket ändern",
+    "validUntil": "Gültig bis"
   }
 }
