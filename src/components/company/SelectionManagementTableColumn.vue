@@ -1,7 +1,7 @@
 <template>
   <div class="selection-management-table-column">
     <div
-      class="column-header d-flex justify-space-between align-center 
+      class="column-header d-flex justify-space-between align-center
                 pt-6 pb-6 pl-6 pr-3"
     >
       <div class="label">
@@ -18,14 +18,14 @@
       @change="add($event)"
     >
       <div
-        class="column-group-item d-flex pa-4 
+        class="column-group-item d-flex pa-4
                  mb-3 full-h align-center justify-start"
         v-for="item in selection"
         :key="item.id"
         @click="
           $router.push({
             name: 'CompanyUser',
-            params: { id: item.jobseeker.id, type: 'selection' },
+            params: { id: item.jobseeker.id, type: 'selection' }
           })
         "
       >
@@ -49,15 +49,15 @@ export default {
 
   props: {
     selection: {
-      type: [Array, Object],
+      type: [Array, Object]
     },
     type: {
-      type: String,
-    },
+      type: String
+    }
   },
   order: 1,
   components: {
-    draggable,
+    draggable
   },
   methods: {
     add(item) {
@@ -65,12 +65,12 @@ export default {
         store.dispatch("company/slManagementMoveCandidate", {
           id: item.added.element.id,
           data: {
-            managment_status: this.type,
-          },
+            managment_status: this.type
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
