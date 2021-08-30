@@ -126,13 +126,15 @@ export default {
   methods: {
     getExperience() {
       this.$http
-        .get(`${process.env.VUE_APP_API_BASE}/jobseeker-experience`)
+        .get(
+          `${process.env.VUE_APP_API_BASE}/jobseeker-experience?per_page=9999`
+        )
         .then((res) => {
           let response = res.data.data.map((obj) => {
             return obj;
           });
           for (let i = 0; i < response.length; i++) {
-            if (res.data.data[i].id === this.user.id) {
+            if (res.data.data[i].user_id === this.user.id) {
               this.experience.push(res.data.data[i]);
             }
           }
