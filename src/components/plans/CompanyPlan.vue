@@ -28,14 +28,20 @@
 
     <div class="action mt-6">
       <v-btn
-        :color="!userPlan || userPlan.id !== plan.id ? 'primary' : 'grey lighten-3'"
+        :color="
+          !userPlan || userPlan.id !== plan.id ? 'primary' : 'grey lighten-3'
+        "
         height="48"
         width="70%"
         elevation="0"
         class="font-weight-medium full-w"
         @click="!userPlan || userPlan.id !== plan.id ? getTokenId() : null"
       >
-        {{ !userPlan || userPlan.id !== plan.id ? $t("general.upgrade") : $t("general.yourCurrentPlan") }}
+        {{
+          !userPlan || userPlan.id !== plan.id
+            ? $t("general.upgrade")
+            : $t("general.yourCurrentPlan")
+        }}
       </v-btn>
     </div>
   </v-card>
@@ -46,8 +52,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PackagesPlan",
-
   props: {
     plan: {
       type: Object
@@ -96,7 +100,7 @@ export default {
     features() {
       return JSON.parse(this.plan.benefits);
     }
-  },
+  }
 };
 </script>
 
