@@ -16,6 +16,7 @@
         outlined
       ></v-select> -->
       <v-autocomplete
+        v-clearable-autocomplete
         v-model="value.looking_for_branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required]"
