@@ -42,7 +42,7 @@
             <p class="upgrade-text">
               {{ plan.plan_description }}
             </p>
-            <span class="updgrade-price">{{ plan.price }}€</span>
+            <span class="updgrade-price">{{ plan.price }}&euro;</span>
           </div>
           <UserPlanDescription v-else />
           <!--          <div class="plan-description" v-else>-->

@@ -1,7 +1,7 @@
 <template>
   <v-card flat class="packages-plan pl-8 pr-8 pt-14 pb-14">
     <div class="price d-flex align-end">
-      <div>{{ plan.price }}</div>
+      <div>{{ plan.price }}&euro;</div>
       <div>/month</div>
     </div>
     <div class="type mt-3">

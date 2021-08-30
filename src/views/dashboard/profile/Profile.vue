@@ -579,7 +579,7 @@
               </span>
               <p>{{ plan.days_valid }} days active</p>
               <span class="updgrade-price upgrade-title"
-                >{{ plan.price }}€</span
+                >{{ plan.price }}&euro;</span
               >
             </div>
             <UserPlanDescription :payment-info="false" v-else />
