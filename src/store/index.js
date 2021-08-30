@@ -9,6 +9,7 @@ import chat from "./chat";
 import company from "./company";
 import teamManagement from "./teamManagement";
 import invoices from "./invoices";
+import plans from "./plans";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default createStore(Vuex.Store, {
     chat,
     company,
     teamManagement,
-    invoices
+    invoices,
+    plans
   }
 });

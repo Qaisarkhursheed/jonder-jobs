@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="heading pb-10">
+  <div class="pb-7">
+    <div class="heading mb-10">
       <div class="title">
         Upgrade your company
       </div>
@@ -8,19 +8,22 @@
         Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen.
       </div>
     </div>
-    <Packages />
+
+    <CompanyPlans class="mb-7" />
+
+    <UserPlan :border-plan="true" :payment-info="false" />
   </div>
 </template>
 
 <script>
-import Packages from "@/components/Packages";
+import CompanyPlans from "@/components/plans/CompanyPlans";
+import UserPlan from "@/components/user/UserPlan";
 
 export default {
-  name: "CompanyPackagesPricing",
-
   components: {
-    Packages,
-  },
+    CompanyPlans,
+    UserPlan
+  }
 };
 </script>
 
