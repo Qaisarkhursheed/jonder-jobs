@@ -565,7 +565,7 @@
           >
             <v-img
               class="upgrade-icon"
-              :style="{ order: userPlan.id === plan.id ? 2 : 1 }"
+              :style="{order: userPlan && userPlan.id === plan.id ? 2 : 1}"
               :src="
                 require(`@/assets/icons/${
                   index === 0 ? 'top-rated' : 'medal'
@@ -573,7 +573,7 @@
               "
             ></v-img>
 
-            <div class="upgrade-default" v-if="userPlan.id !== plan.id">
+            <div class="upgrade-default" v-if="!userPlan || userPlan.id !== plan.id">
               <span class="upgrade-title">
                 {{ plan.name }}
               </span>
@@ -582,21 +582,7 @@
                 >{{ plan.price }}€</span
               >
             </div>
-            <div class="plan-description" v-else>
-              <h3>{{ userPlan.name }}</h3>
-              <div>
-                {{ userPlan.price }}&euro; / {{ plan.days_valid }}
-                {{ $t("general.daysValid") }}
-              </div>
-              <div>
-                {{ $t("general.renewsOn") }}
-                {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
-              </div>
-              <div>
-                {{ $t("general.validUntil") }}
-                {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
-              </div>
-            </div>
+            <UserPlanDescription :payment-info="false" v-else />
           </div>
         </v-col>
       </v-row>
@@ -619,11 +605,13 @@ import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperi
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import FooterLegal from "../../../components/parts/FooterLegal.vue";
+import UserPlanDescription from '../../../components/user/UserPlanDescription';
 
 export default {
   name: "Profile",
 
   components: {
+    UserPlanDescription,
     UpgradePlanModal,
     CardActionableList,
     Calendar,

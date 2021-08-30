@@ -275,7 +275,7 @@
             </v-form>
           </v-card>
         </v-container>
-        <UserPlan v-if="$store.getters['user/userPlan']" />
+        <UserPlan v-if="$store.getters['user/userPlan']" :payment-info="true" :border-plan="true"/>
       </v-col>
     </v-row>
 
