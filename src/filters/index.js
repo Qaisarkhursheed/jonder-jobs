@@ -26,3 +26,11 @@ Vue.filter("initials", user => {
 
   return user.first_name.charAt(0) + user.last_name.charAt(0);
 });
+
+Vue.filter("fullname", user => {
+  if (!user) {
+    return "";
+  }
+
+  return user.company || `${user.first_name} ${user.last_name}`;
+});

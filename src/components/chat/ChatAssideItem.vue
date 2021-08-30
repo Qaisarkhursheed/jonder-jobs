@@ -15,7 +15,7 @@
         :src="getProfileImage(conversation)"
       ></v-img>
       <span v-else class="white--text full-w text-center d-block">
-        {{ getInitials(conversation) }}
+        {{ getParticipian(conversation) | initials }}
       </span>
     </v-list-item-avatar>
 
@@ -109,22 +109,6 @@ export default {
     getFullName(conversation) {
       const p = this.getParticipian(conversation);
       return p.company || p.first_name + " " + p.last_name;
-    },
-    getInitials(conversation) {
-      const participant = this.getParticipian(conversation);
-
-      if (participant.company) {
-        if (participant.company.split(" ").length > 1) {
-          return (
-            participant.company.charAt(0) +
-            participant.company.split(" ")[1].charAt(0)
-          );
-        }
-
-        return participant.company.substr(0, 2);
-      }
-
-      return participant.first_name.charAt(0) + participant.last_name.charAt(0);
     },
     getShortMessage(conversation) {
       if (!conversation.conversation.last_message) {

@@ -6,14 +6,14 @@
   >
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
       <v-list-item class="grow">
-        <v-list-item-avatar color="blue">
+        <v-list-item-avatar color="primary">
           <v-img
             v-if="conversationDetails.profile_img"
             :alt="`${conversationDetails.user_name} avatar`"
             :src="getProfileImage(conversationDetails)"
           ></v-img>
           <span v-else class="white--text full-w text-center d-block">
-            {{ getInitials(conversationDetails) }}
+            {{ conversationDetails.user | initials }}
           </span>
         </v-list-item-avatar>
 
@@ -217,16 +217,6 @@ export default {
         .finally(() => {
           this.sending = false;
         });
-    },
-    getInitials(conversation) {
-      if (conversation.user_name.split(" ").length > 1) {
-        return (
-          conversation.user_name.charAt(0) +
-          conversation.user_name.split(" ")[1].charAt(0)
-        );
-      }
-
-      return conversation.user_name.substr(0, 2);
     },
     getProfileImage(conversation) {
       const img = conversation.profile_img;
