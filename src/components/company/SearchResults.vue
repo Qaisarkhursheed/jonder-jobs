@@ -1,5 +1,16 @@
 <template>
   <div class="search-results">
+    <v-dialog 
+      class="dialog"
+      v-model="blockModalActive"
+      @click:outside="toggleModal"
+      persistent
+      style="z-index: 2222"
+      width="100%"
+      height="100%"
+    >
+      <CompanyPlans class="pa-3" />
+    </v-dialog>
     <template v-if="results.length">
       <div class="heading pb-4">
         {{ searchMeta.total }} {{ $t('company.search.searchResults') }}
@@ -9,9 +20,9 @@
           cols="12"
           md="6"
           lg="4"
-          xl="3"
+          xl="3"  
           v-for="(result, i) in results" :key="i">
-          <SearchResultsCard :candidate="result"/>
+          <SearchResultsCard :candidate="result" @block="toggleModal" />
         </v-col>
       </v-row>
       <v-row>
@@ -38,13 +49,15 @@
 import store from '@/store';
 import SearchResultsCard from '@/components/company/SearchResultsCard';
 import SearchNoResults from '@/components/company/SearchNoResults';
+import CompanyPlans from "@/components/plans/CompanyPlans";
 
 export default {
   name: 'SearchResults',
 
   components: {
     SearchResultsCard,
-    SearchNoResults
+    SearchNoResults,
+    CompanyPlans
   },
 
   props: {
@@ -56,12 +69,16 @@ export default {
   data() {
     return {
       page: 1,
+      blockModalActive: false
     }
   },
   methods: {
     pageChange(ind) {
       this.page = ind;
       store.dispatch('company/searchJobseekerPagination', ind);
+    },
+    toggleModal() {
+      this.blockModalActive = !this.blockModalActive;
     }
   },
   computed: {
