@@ -120,6 +120,7 @@
               <router-link to="/dashboard/profile" class="settings-link">
                 Profil Einstellungen
               </router-link>
+              <DashboardActivePlan v-if="user.plan" />
             </div>
 
             <UpgradeAccountBox
@@ -205,9 +206,11 @@ import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
+import DashboardActivePlan from '../components/dashboard/DashboardActivePlan';
 
 export default {
   components: {
+    DashboardActivePlan,
     CardActionableList,
     UpgradeAccountBox
   },

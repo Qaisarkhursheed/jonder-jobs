@@ -234,6 +234,8 @@
     "more": "More",
     "daysValid": "days valid",
     "changePackage": "Change package",
-    "validUntil": "Valid until"
+    "validUntil": "Valid until",
+    "remainingDays": "Remaining days",
+    "success": "Erfolg"
   }
 }
