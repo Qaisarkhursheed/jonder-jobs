@@ -223,7 +223,7 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label"
-            >Welche Art von Branchen suchen Sie?</label
+            >Welche Art von Beschäftigung suchen Sie?</label
           >
           <v-select
             outlined
