@@ -241,7 +241,7 @@
             @select="e => (formData.address_to_work = e)"
           />
           <v-checkbox
-            class="mb-8 mt-0"
+            class="mb-0 mt-0"
             label="Are you also open to working remotely?"
             hide-details="auto"
             v-model="formData.work_remotely"
@@ -253,9 +253,19 @@
         <v-col cols="12">
           <label class="profile-label">Wann können Sie beginnen?</label>
           <Calendar
+            v-if="!dontKnowWhenToStart"
             @setDate="formData.ready_for_work = $event"
+            :rules="[validations.required]"
             :value="formData.ready_for_work"
+            hide-details="auto"
           />
+
+          <v-checkbox
+            v-model="dontKnowWhenToStart"
+            label="I don't know."
+            class="mt-2 mb-3"
+            hide-details
+          ></v-checkbox>
         </v-col>
       </v-row>
 
@@ -539,15 +549,20 @@
         </p>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6" v-for="(plan, index) in plansData"
-               :key="index">
+        <v-col cols="12" md="6" v-for="(plan, index) in plansData" :key="index">
           <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
           />
-          <div class="upgrade"
-               :class="{'deactive': userPlan && userPlan.id === plan.id}"
-               @click="!userPlan || userPlan.id !== plan.id ? toggleModal('UpgradePlan') : null">
+          <div
+            class="upgrade"
+            :class="{ deactive: userPlan && userPlan.id === plan.id }"
+            @click="
+              !userPlan || userPlan.id !== plan.id
+                ? toggleModal('UpgradePlan')
+                : null
+            "
+          >
             <v-img
               class="upgrade-icon"
               :style="{order: userPlan && userPlan.id === plan.id ? 2 : 1}"
@@ -560,10 +575,12 @@
 
             <div class="upgrade-default" v-if="!userPlan || userPlan.id !== plan.id">
               <span class="upgrade-title">
-                {{plan.name}}
+                {{ plan.name }}
               </span>
               <p>{{ plan.days_valid }} days active</p>
-              <span class="updgrade-price upgrade-title">{{ plan.price }}€</span>
+              <span class="updgrade-price upgrade-title"
+                >{{ plan.price }}€</span
+              >
             </div>
             <UserPlanDescription :payment-info="false" v-else />
           </div>
@@ -633,6 +650,7 @@ export default {
     passwordFormValid: false,
     passwordFormLoading: false,
     passwordFormResponse: {},
+    dontKnowWhenToStart: false,
     invoices: [],
     jonderStatus: [
       "I am actively looking for a job",
@@ -666,7 +684,7 @@ export default {
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
       education: ["edit", "delete"]
-    },
+    }
   }),
   created() {
     this.resetFormData(this.user);
@@ -719,12 +737,19 @@ export default {
       this.formData.why_jonder = user.why_jonder;
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
+      this.dontKnowWhenToStart = !user.ready_for_work;
     },
     handleUpdate() {
       this.formResponse = {};
       let formDataCopy = Object.assign({}, this.formData);
       formDataCopy.branche = formDataCopy.branche.join();
       formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
+
+      if (this.dontKnowWhenToStart) {
+        this.formData.ready_for_work = null;
+        formDataCopy.ready_for_work = "null";
+      }
+
       if (this.newImage) {
         formDataCopy.profile_img = this.newImage;
       }

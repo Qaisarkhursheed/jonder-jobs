@@ -85,7 +85,9 @@ export default {
   async updateUser({ commit, state }, data) {
     let formData = new FormData();
     Object.keys(data).forEach(key => {
-      if (Array.isArray(data[key])) {
+      if (data[key] == "null") {
+        formData.append(key, "");
+      } else if (Array.isArray(data[key])) {
         data[key].forEach(el => formData.append(key + "[]", el));
       } else {
         formData.append(key, data[key]);

@@ -4,7 +4,7 @@
       {{ $t("user.onboarding.whatYouLookinFor") }}
     </p>
 
-    <v-form v-model="formValid" @submit.prevent="nextScreen">
+    <v-form v-model="formValid" @submit.prevent="handleNext">
       <label class="profile-label">
         {{ $t("user.onboarding.lookingForBranche") }}
       </label>
@@ -43,10 +43,10 @@
       <label class="profile-label">
         {{ $t("user.onboarding.whereToWork") }}
       </label>
-      <GooglePlacesAutocomplete @select="e => value.address_to_work = e" />
-      
+      <GooglePlacesAutocomplete @select="e => (value.address_to_work = e)" />
+
       <v-checkbox
-        class="mb-8 mt-0"
+        class="mb-3 mt-0"
         label="Are you also open to working remotely?"
         hide-details="auto"
         v-model="value.work_remotely"
@@ -56,12 +56,20 @@
         {{ $t("user.onboarding.whenToStart") }}
       </label>
       <Calendar
+        v-if="!dontKnowWhenToStart"
         @setDate="value.ready_for_work = $event"
         :rules="[validations.required]"
-        class="mt-1"
         type="date"
         :fromToday="true"
+        hide-details="auto"
       />
+
+      <v-checkbox
+        v-model="dontKnowWhenToStart"
+        label="I don't know."
+        class="mt-1 mb-3"
+        hide-details
+      ></v-checkbox>
 
       <label class="profile-label">
         {{ $t("user.onboarding.monthlySalary") }}
@@ -113,9 +121,9 @@
 </template>
 
 <script>
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete';
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import Calendar from "@/components/Calendar";
-import types from '@/types';
+import types from "@/types";
 
 export default {
   name: "Step4",
@@ -134,14 +142,21 @@ export default {
   },
   data() {
     return {
-      rules: [value => !!value || "Required."],
       formValid: false,
-      cities: ["Zenica", "Visoko"]
+      dontKnowWhenToStart: false
     };
   },
   computed: {
     types() {
       return types;
+    }
+  },
+  methods: {
+    handleNext() {
+      if (this.dontKnowWhenToStart) {
+        this.value.ready_for_work = null;
+      }
+      this.nextScreen();
     }
   }
 };

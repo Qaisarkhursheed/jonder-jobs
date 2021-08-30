@@ -18,6 +18,7 @@
         :placeholder="$t('user.onboarding.choose')"
         v-bind="attrs"
         v-on="on"
+        :hide-details="hideDetails"
       ></v-text-field>
     </template>
 
@@ -43,6 +44,10 @@ export default {
     },
     disabled: {
       type: Boolean,
+      default: false
+    },
+    hideDetails: {
+      type: [Boolean, String],
       default: false
     },
     rules: {
@@ -92,10 +97,9 @@ export default {
   methods: {
     dateSelect(date) {
       let newDate = date;
-      if (this.type==='month') {
+      if (this.type === "month") {
         let [year, month, day] = date.split("-");
-        if(!day)
-          newDate = `${year}-${month}-01`;
+        if (!day) newDate = `${year}-${month}-01`;
       }
       this.$emit("setDate", newDate);
     },
@@ -103,11 +107,11 @@ export default {
       if (!date) return null;
 
       let [year, month, day] = date.split("-");
-      if(!day) {
+      if (!day) {
         return `${month}/${year}`;
       }
-      if(this.type==='month') {
-        return `${month}/${year}`; 
+      if (this.type === "month") {
+        return `${month}/${year}`;
       }
       return `${day}/${month}/${year}`;
     },
@@ -119,7 +123,7 @@ export default {
     // },
     formatServerDate(val) {
       return val.substr(0, 10);
-    },
+    }
   },
   watch: {
     // date() {
