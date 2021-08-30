@@ -11,6 +11,7 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ClearableAutocomplete from "@/directives/clearable-autocomplete";
 import Validations from "@/mixins/validations";
 import axios from "axios";
+import "@/filters";
 
 require("./middleware");
 

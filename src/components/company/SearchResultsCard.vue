@@ -1,19 +1,22 @@
 <template>
-  <v-card :hover="true" class="candidate-card rounded-lg" flat>
+  <v-card
+    :hover="true"
+    class="candidate-card rounded-lg"
+    :class="{ highlighted }"
+    flat
+  >
     <div
       @click="
         $router.push({ name: 'CompanyUser', params: { id: candidate.id } })
       "
     >
       <v-card-text class="d-flex align-center pa-0 pa-6 pb-5">
-        <v-img
-          height="70px"
-          width="70px"
-          max-width="70px"
-          :src="candidate.profile_img"
-          class="image"
-        >
-        </v-img>
+        <v-avatar color="primary" size="64">
+          <v-img v-if="candidate.profile_img" :src="candidate.profile_img" />
+          <span v-else class="white--text display-1">
+            {{ candidate | initials }}
+          </span>
+        </v-avatar>
         <div class="pl-4 align-center">
           <div class="name font-weight-bold pb-1">
             {{ candidate.first_name }} {{ candidate.last_name }}
@@ -88,6 +91,7 @@
         </v-col>
       </v-card-text>
     </div>
+
     <v-card-actions class="pt-0">
       <v-col cols="12" class="d-flex justify-space-between">
         <div class="star-btn mr-3" @click="handleStarIconClick">
@@ -122,14 +126,20 @@ export default {
 
   props: {
     candidate: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
     return {
-      startChatLoading: false,
+      startChatLoading: false
     };
+  },
+
+  computed: {
+    highlighted() {
+      return this.candidate.plan?.plan_slug == "higlighted";
+    }
   },
 
   methods: {
@@ -141,8 +151,8 @@ export default {
           this.$router.push({
             name: "CompanyMessages",
             params: {
-              company: true,
-            },
+              company: true
+            }
           });
         })
         .finally(() => {
@@ -160,18 +170,32 @@ export default {
         this.$store
           .dispatch("company/slManagementAddCandidate", {
             jobseeker_id: this.candidate.id,
-            managment_status: "Saved candidates",
+            managment_status: "Saved candidates"
           })
           .then(() => {
             this.candidate.selection_managment = true;
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.candidate-card:not(.highlighted):hover {
+  background: white !important;
+}
+
+.candidate-card.highlighted {
+  border: 1px solid #27aae1;
+  background: linear-gradient(
+      0deg,
+      rgba(39, 170, 225, 0.04),
+      rgba(39, 170, 225, 0.04)
+    ),
+    #ffffff;
+}
+
 .candidate-details {
   .label {
     font-weight: 400;
