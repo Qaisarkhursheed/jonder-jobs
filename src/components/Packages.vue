@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <UserPlan />
+        <UserPlan :border-plan="true" :payment-info="false"/>
       </v-col>
     </v-row>
   </div>

@@ -12,9 +12,12 @@
         Wähle einen Premiumplan
       </div>
 
-      <div class="options"
-           :class="{'deactive': userPlan && userPlan.id === plan.id}"
-           v-for="plan in data" :key="plan.id">
+      <div
+        class="options"
+        :class="{ deactive: userPlan && userPlan.id === plan.id }"
+        v-for="plan in data"
+        :key="plan.id"
+      >
         <v-btn
           v-if="plan.plan_type === 'jobseeker_paln'"
           @click="
@@ -31,28 +34,32 @@
             :src="require('@/assets/icons/top-rated.svg')"
           ></v-img>
 
-          <div class="upgrade-default" v-if="userPlan.id !== plan.id">
+          <div
+            class="upgrade-default"
+            v-if="!userPlan || userPlan.id !== plan.id"
+          >
             <span class="upgrade-title"> {{ plan.name }} </span>
             <p class="upgrade-text">
               {{ plan.plan_description }}
             </p>
             <span class="updgrade-price">{{ plan.price }}€</span>
           </div>
-          <div class="plan-description" v-else>
-            <h3>{{ userPlan.name }}</h3>
-            <div>
-              {{ userPlan.price }}&euro; / {{ plan.days_valid }}
-              {{ $t("general.daysValid") }}
-            </div>
-            <div>
-              {{ $t("general.renewsOn") }}
-              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
-            </div>
-            <div>
-              {{ $t("general.validUntil") }}
-              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
-            </div>
-          </div>
+          <UserPlanDescription v-else />
+          <!--          <div class="plan-description" v-else>-->
+          <!--            <h3>{{ userPlan.name }}</h3>-->
+          <!--            <div>-->
+          <!--              {{ userPlan.price }}&euro; / {{ plan.days_valid }}-->
+          <!--              {{ $t("general.daysValid") }}-->
+          <!--            </div>-->
+          <!--            <div>-->
+          <!--              {{ $t("general.renewsOn") }}-->
+          <!--              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}-->
+          <!--            </div>-->
+          <!--            <div>-->
+          <!--              {{ $t("general.validUntil") }}-->
+          <!--              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}-->
+          <!--            </div>-->
+          <!--          </div>-->
         </v-btn>
       </div>
 
@@ -84,12 +91,13 @@
 import store from "@/store";
 import { loadStripe } from "@stripe/stripe-js";
 import { mapGetters } from "vuex";
+import UserPlanDescription from "../../components/user/UserPlanDescription";
 // import Vue from "vue";
 // Vue.prototype.$http = axios;
 
 export default {
   name: "UpgradePlanModal",
-
+  components: { UserPlanDescription },
   props: {
     active: {
       type: Boolean,
