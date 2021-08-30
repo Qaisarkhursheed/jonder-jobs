@@ -1,43 +1,117 @@
 <template>
-  <nav class="sidebar-navigation pl-8 pr-5">
-    <router-link :to="{ name: 'CompanySearch'}" >
-      <v-icon>mdi-magnify</v-icon>
-      <span>{{ $t('company.employer.search') }}</span>
-    </router-link>
-    <router-link :to="{ name: 'CompanySelectionManagement'}" >
-      <v-icon>mdi-magnify</v-icon>
-      <span>{{ $t('company.employer.selectionManagement') }}</span>
-    </router-link>
-    <router-link :to="{ name: 'CompanyMessages'}">
-      <v-icon>mdi-email-outline</v-icon>
-      <span>{{ $t('company.employer.messages') }}</span>
-    </router-link>
-    <router-link :to="{ name: 'CompanyTeamManagement'}" >
-      <v-icon>mdi-magnify</v-icon>
-      <span>{{ $t('company.employer.teamManagement') }}</span>
-    </router-link>
-    <router-link :to="{name: 'CompanyPublicProfile'}">
-      <v-icon>mdi-account-outline</v-icon>
-      <span>{{ $t('company.employer.publicProfile') }}</span>
-    </router-link>
-    <router-link :to="{ name: 'CompanyPackagesPricing'}">
-      <v-icon>mdi-currency-usd</v-icon>
-      <span>{{ $t('company.employer.packagesPricing') }}</span>
-    </router-link>
-  </nav>
+  <div class="sidebar-wrap" :class="{ mini: isMini }">
+    <div class="sidebar-inner">
+      <nav class="sidebar-navigation pl-2 pr-2 pl-md-8 pr-md-5"
+        :class="{ mini: isMini }">
+        
+          <v-icon 
+            class="ml-3 mb-4 mt-1"
+            size="26px"
+            style="cursor: pointer; user-select: none;"
+            @click="toggleSidebar"
+            v-if="mobile"
+          >
+            mdi-menu
+          </v-icon>
+        
+        <router-link :to="{ name: 'CompanySearch'}" >
+          <v-icon>mdi-magnify</v-icon>
+          <span>{{ $t('company.employer.search') }}</span>
+        </router-link>
+        <router-link :to="{ name: 'CompanySelectionManagement'}" >
+          <v-icon>mdi-magnify</v-icon>
+          <span>{{ $t('company.employer.selectionManagement') }}</span>
+        </router-link>
+        <router-link :to="{ name: 'CompanyMessages'}">
+          <v-icon>mdi-email-outline</v-icon>
+          <span>{{ $t('company.employer.messages') }}</span>
+        </router-link>
+        <router-link :to="{ name: 'CompanyTeamManagement'}" >
+          <v-icon>mdi-magnify</v-icon>
+          <span>{{ $t('company.employer.teamManagement') }}</span>
+        </router-link>
+        <router-link :to="{name: 'CompanyPublicProfile'}">
+          <v-icon>mdi-account-outline</v-icon>
+          <span>{{ $t('company.employer.publicProfile') }}</span>
+        </router-link>
+        <router-link :to="{ name: 'CompanyPackagesPricing'}">
+          <v-icon>mdi-currency-usd</v-icon>
+          <span>{{ $t('company.employer.packagesPricing') }}</span>
+        </router-link>
+      </nav>
+      <footer-legal class="footer-impressum"></footer-legal>
+    </div>
+  </div>
 </template>
 
 <script>
+
+import FooterLegal from "@/components/parts/FooterLegal.vue";
+
 export default {
   name: 'Sidebar',
+
+  components: {
+    FooterLegal
+  },
+  props: {
+    mobile: {
+      type: Boolean
+    }
+  },
+  data() {
+    return {
+      extended: true,
+    }
+  },
+  mounted() {
+    this.extended = !this.mobile;
+  },
+  methods: {
+    toggleSidebar() {
+      this.extended = !this.extended;
+    }
+  },
+  computed: {
+    isMini() {
+      console.log('is mini');
+      if(!this.mobile) {
+        return false;
+      } else {
+        return this.extended;
+      }
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.sidebar-wrap {
+  height: 100%;
+  position: absolute;
+  background: white;
+  z-index: 1111;
+  overflow: hidden;
+  
+}
+.sidebar-inner {
+  position: relative;
+  height: 100%;
+}
 
 .sidebar-navigation {
   position: sticky;
   top: 2rem;
+  overflow: hidden;
+  width: 360px;
+  min-width: 360px;
+  //transition: width, min-width 0.2s ease-in;
+
+  &.mini {
+    //transition: width, min-width 0.2s ease-in;
+    width: 60px;
+    min-width: 60px;
+  }
 
   a {
     display: block;
@@ -81,5 +155,22 @@ export default {
         font-weight: bold;
       }
     }
+
+    .mini & {
+      span{
+
+        display: none;
+      }
+      }
   }
-}</style>
+  
+}
+.footer-impressum {
+    position: absolute;
+    bottom: 80px;
+
+    .mini & {
+      opacity: 0;
+    }
+  }
+</style>
