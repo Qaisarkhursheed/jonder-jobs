@@ -21,7 +21,7 @@
               {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
             </div>
             <div>
-              {{ "valid till" }}
+              {{ $t("general.validUntil") }}
               {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
             </div>
             <div class="more-days pb-4"></div>

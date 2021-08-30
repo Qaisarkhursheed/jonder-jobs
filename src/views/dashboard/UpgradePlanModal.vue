@@ -12,10 +12,16 @@
         Wähle einen Premiumplan
       </div>
 
-      <div class="options" v-for="plan in data" :key="plan.id">
+      <div class="options"
+           :class="{'deactive': userPlan && userPlan.id === plan.id}"
+           v-for="plan in data" :key="plan.id">
         <v-btn
           v-if="plan.plan_type === 'jobseeker_paln'"
-          @click="(form.active_plan = plan.id), savePlanId(plan.id)"
+          @click="
+            !userPlan || userPlan.id !== plan.id
+              ? ((form.active_plan = plan.id), savePlanId(plan.id))
+              : null
+          "
           v-bind:color="form.active_plan == plan.id ? 'primary' : ''"
           height="104"
           class="upgrade-option"
@@ -25,12 +31,27 @@
             :src="require('@/assets/icons/top-rated.svg')"
           ></v-img>
 
-          <div>
+          <div class="upgrade-default" v-if="userPlan.id !== plan.id">
             <span class="upgrade-title"> {{ plan.name }} </span>
             <p class="upgrade-text">
               {{ plan.plan_description }}
             </p>
             <span class="updgrade-price">{{ plan.price }}€</span>
+          </div>
+          <div class="plan-description" v-else>
+            <h3>{{ userPlan.name }}</h3>
+            <div>
+              {{ userPlan.price }}&euro; / {{ plan.days_valid }}
+              {{ $t("general.daysValid") }}
+            </div>
+            <div>
+              {{ $t("general.renewsOn") }}
+              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
+            </div>
+            <div>
+              {{ $t("general.validUntil") }}
+              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
+            </div>
           </div>
         </v-btn>
       </div>
@@ -62,6 +83,7 @@
 <script>
 import store from "@/store";
 import { loadStripe } from "@stripe/stripe-js";
+import { mapGetters } from "vuex";
 // import Vue from "vue";
 // Vue.prototype.$http = axios;
 
@@ -71,15 +93,15 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     type: {
       type: String,
-      default: "ok",
+      default: "ok"
     },
     edit: {
-      type: [Object, Boolean],
-    },
+      type: [Object, Boolean]
+    }
   },
   data() {
     return {
@@ -88,8 +110,8 @@ export default {
       planId: null,
       stripeId: null,
       form: {
-        active_plan: "",
-      },
+        active_plan: ""
+      }
     };
   },
   created() {
@@ -111,7 +133,7 @@ export default {
         this.isLoading = true;
         const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
         stripe.redirectToCheckout({
-          sessionId: this.stripeId,
+          sessionId: this.stripeId
         });
       } else {
         this.isLoading = false;
@@ -123,9 +145,9 @@ export default {
         this.$http
           .post(`${process.env.VUE_APP_API_BASE}/plan`, {
             plan_id: this.planId,
-            payment_method: "credit card",
+            payment_method: "credit card"
           })
-          .then((res) => {
+          .then(res => {
             this.stripeId = res.data.data.id;
           })
           .finally(() => {
@@ -142,7 +164,7 @@ export default {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form,
+          payload: this.form
         });
       } else {
         console.log();
@@ -153,6 +175,11 @@ export default {
       this.form.active_plan = this.edit.active_plan;
     }
   },
+  computed: {
+    ...mapGetters({
+      userPlan: "user/userPlan"
+    })
+  }
 };
 </script>
 
@@ -169,6 +196,10 @@ export default {
 }
 .options {
   margin: 0 40px;
+
+  &.deactive {
+    cursor: default;
+  }
 
   .upgrade-option {
     background: white;

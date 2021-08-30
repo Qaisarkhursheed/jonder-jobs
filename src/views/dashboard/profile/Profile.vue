@@ -545,7 +545,9 @@
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
           />
-          <div class="upgrade" @click="toggleModal('UpgradePlan')">
+          <div class="upgrade"
+               :class="{'deactive': userPlan && userPlan.id === plan.id}"
+               @click="!userPlan || userPlan.id !== plan.id ? toggleModal('UpgradePlan') : null">
             <v-img
               class="upgrade-icon"
               :style="{order: userPlan.id === plan.id ? 2 : 1}"
@@ -571,7 +573,7 @@
                 {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
               </div>
               <div>
-                {{ "valid till" }}
+                {{ $t("general.validUntil") }}
                 {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
               </div>
             </div>
@@ -613,7 +615,7 @@ export default {
     GooglePlacesAutocomplete,
     FooterLegal
   },
-  
+
   data: () => ({
     newImage: null,
     formData: {
@@ -840,6 +842,9 @@ export default {
   display: flex;
   position: relative;
 
+  &.deactive {
+    cursor: default;
+  }
   .upgrade-title {
     font-size: 16px;
     font-weight: 700;
