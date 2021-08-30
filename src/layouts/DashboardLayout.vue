@@ -130,8 +130,6 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info"> Über mich </span>
-              <p class="about-text">{{ user.about_me }}</p>
 
               <span class="about-info">Status der arbeitssuche</span>
               <p class="about-text">

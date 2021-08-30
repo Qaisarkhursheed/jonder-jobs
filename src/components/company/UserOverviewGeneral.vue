@@ -2,12 +2,6 @@
   <div class="user-overview-general">
     <v-row class="no-gutters">
       <v-col cols="12" md="8" class="left pl-10 pr-10 pt-7 pb-10">
-        <div class="section about-me">
-          <div class="title">Über mich</div>
-          <div class="content">
-            {{ user.about_me }}
-          </div>
-        </div>
         <div class="section experience mt-7">
           <div class="title">Erfahrung</div>
           <div class="content">
