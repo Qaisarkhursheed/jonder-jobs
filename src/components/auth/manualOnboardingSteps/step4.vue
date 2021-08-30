@@ -67,7 +67,7 @@
       <v-checkbox
         v-model="dontKnowWhenToStart"
         label="I don't know."
-        class="mt-1 mb-3"
+        class="mt-2 mb-3"
         hide-details
       ></v-checkbox>
 
