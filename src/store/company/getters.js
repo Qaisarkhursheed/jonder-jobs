@@ -1,4 +1,5 @@
-import groupBy from 'lodash/groupBy';
+import { groupBy, forEach } from "lodash";
+import types from "../../types";
 
 export default {
   userInteractions(state) {
@@ -16,12 +17,17 @@ export default {
   companyInteractionsYearly(state) {
     return state.companyInteractions.yearlyActivity;
   },
-  selectionManagement: (state) => (view) => {
+  selectionManagement: state => view => {
     let data;
-    if (view === 'list') {
+    if (view === "list") {
       data = state.selectionManagement;
     } else {
-      data = groupBy(state.selectionManagement, 'managment_status')
+      data = groupBy(state.selectionManagement, "managment_status");
+      forEach(types.SELECTION_MANAGEMENT_STATUS, item => {
+        if (!(item in data)) {
+          data[item] = [];
+        }
+      });
     }
     return data;
   },

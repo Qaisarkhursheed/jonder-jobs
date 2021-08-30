@@ -79,7 +79,6 @@ export default {
   },
   searchFilterSave({ dispatch }, payload) {
     return axios.post("/jobseeker-filter", payload).then((res) => {
-      console.log(res);
       if (res.status === 200) {
         dispatch("searchFilterFetchAll");
       }
