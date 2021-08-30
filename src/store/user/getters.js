@@ -63,5 +63,6 @@ export default {
     return state.jobseeker.education;
   },
   userPlan: state => state.user?.plan,
+  userPlans: state => state.plans,
   plans: state => type => filter(state.plans, plan => plan.plan_type === type)
 };

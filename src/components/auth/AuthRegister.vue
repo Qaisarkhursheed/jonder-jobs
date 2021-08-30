@@ -143,13 +143,14 @@
         background-color="white"
       ></v-text-field>
 
-      <!-- Show name -->
+      <!-- Policy accept -->
       <v-checkbox
-        class="mt-6 mb-6"
+        v-model="formData.accept_policy"
+        :rules="[validations.required]"
+        class="ma-0"
         color="#333"
         label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
         hide-details="auto"
-        v-model="formData.accept_policy"
       ></v-checkbox>
 
       <!-- <v-checkbox

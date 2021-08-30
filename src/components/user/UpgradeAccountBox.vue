@@ -52,8 +52,8 @@ export default {
   props: {
     small: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     toggleModal(type) {
@@ -63,24 +63,29 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
+    }
   },
   components: {
     UpgradePlanModal,
-    CardActionableList,
+    CardActionableList
+  },
+  mounted() {
+    if (this.$store.getters["user/userPlans"] == null) {
+      this.$store.dispatch("user/fetchPlans");
+    }
   },
   data: () => ({
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal,
-      },
+        component: UpgradePlanModal
+      }
     },
     fileActions: {
-      UpgradePlan: ["edit", "delete"],
-    },
-  }),
+      UpgradePlan: ["edit", "delete"]
+    }
+  })
 };
 </script>
 
