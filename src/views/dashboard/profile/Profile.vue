@@ -137,6 +137,7 @@
         <v-col cols="12">
           <label class="profile-label">In welchen Branchen arbeiten Sie?</label>
           <v-autocomplete
+            v-clearable-autocomplete
             v-model="formData.branche"
             :items="types.JOB_BRANCHE"
             cache
@@ -156,6 +157,7 @@
           >
           <v-autocomplete
             v-model="formData.looking_for"
+            v-clearable-autocomplete
             :items="types.JOB_POSITION"
             multiple
             outlined
@@ -207,6 +209,7 @@
           <v-autocomplete
             v-model="formData.looking_for_branche"
             :items="types.JOB_BRANCHE"
+            v-clearable-autocomplete
             multiple
             cache
             outlined
@@ -610,7 +613,7 @@ export default {
     GooglePlacesAutocomplete,
     FooterLegal
   },
-
+  
   data: () => ({
     newImage: null,
     formData: {

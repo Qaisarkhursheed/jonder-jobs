@@ -1,12 +1,12 @@
 <template>
   <v-container fluid class="full-h pa-0" style="overflow: hidden">
     <Header />
-    <div class="main-wrap full-h">
-      <div class="sidebar-wrap">
-        <Sidebar />
-        <footer-legal class="fix-bottom"></footer-legal>
-      </div>
-      <div class="main-panel-wrap full-h bg-light-gray">
+    <div class="main-wrap full-h" v-resize="onResize">
+      
+      <Sidebar :mobile="mobile" />
+        
+      <div class="main-panel-wrap full-h bg-light-gray"
+          :class="{ 'mobile-layout': !mobile}">
         <v-container :fluid="true" class="company pt-8 pl-7 pr-7 pb-0 full-h">
           <router-view></router-view>
         </v-container>
@@ -18,7 +18,7 @@
 <script>
 import Header from "@/components/company/Header";
 import Sidebar from "@/components/company/Sidebar";
-import FooterLegal from "../components/parts/FooterLegal.vue";
+//import FooterLegal from "../components/parts/FooterLegal.vue";
 
 export default {
   name: "CompanyLayout",
@@ -26,8 +26,27 @@ export default {
   components: {
     Header,
     Sidebar,
-    FooterLegal,
+    //FooterLegal,
   },
+  data() {
+    return {
+      mobile: false
+    }
+  },
+  mounted() {
+    if(window.innerWidth < 900) {
+      this.mobile = true;
+    }
+  },
+  methods: {
+    onResize() {
+       if(window.innerWidth < 900) {
+        this.mobile = true;
+      } else {
+        this.mobile = false;
+      }
+    }
+  }
 };
 </script>
 
@@ -37,16 +56,19 @@ export default {
   overflow: auto;
 }
 .main-wrap {
+  position: relative;
   display: flex;
 }
-.sidebar-wrap {
-  width: 360px;
-  min-width: 360px;
-}
+
 .main-panel-wrap {
   width: 100%;
   overflow: auto;
   padding-bottom: 80px;
+  padding-left: 60px;
+
+  &.mobile-layout {
+    padding-left: 370px;
+  }
 }
 .fix-bottom {
   position: fixed;

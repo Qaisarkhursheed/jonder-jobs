@@ -8,6 +8,7 @@ import VueMoment from "vue-moment";
 // import VueI18n from 'vue-i18n';
 import i18n from "./locales";
 import ResponseAlert from "@/components/ResponseAlert";
+import ClearableAutocomplete from "@/directives/clearable-autocomplete";
 import Validations from "@/mixins/validations";
 import axios from "axios";
 
@@ -15,6 +16,7 @@ require("./middleware");
 
 Vue.use(VueMoment);
 Vue.directive("mask", VueMaskDirective);
+Vue.directive("clearable-autocomplete", ClearableAutocomplete);
 Vue.component("ResponseAlert", ResponseAlert);
 Vue.mixin(Validations);
 Vue.prototype.$http = axios;

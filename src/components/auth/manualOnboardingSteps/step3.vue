@@ -42,6 +42,7 @@
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required]"
+        v-clearable-autocomplete
         outlined
         flat
         hide-no-data
@@ -67,6 +68,7 @@
           :items="types.JOB_POSITION"
           :placeholder="$t('user.onboarding.choose')"
           :rules="[validations.required]"
+          v-clearable-autocomplete
           multiple
           outlined
           flat
