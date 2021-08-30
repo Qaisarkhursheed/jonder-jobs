@@ -233,6 +233,8 @@
     "more": "Mehr",
     "daysValid": "tage gültig",
     "changePackage": "Paket ändern",
-    "validUntil": "Gültig bis"
+    "validUntil": "Gültig bis",
+    "remainingDays": "Tage verbleiben",
+    "success": "Success"
   }
 }
