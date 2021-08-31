@@ -5,13 +5,6 @@
     </h1>
 
     <v-form v-model="formValid">
-      <!-- <v-file-input
-        placeholder="Click to upload logo photo"
-        outlined
-        dense
-        v-model="value.profile_img_file"
-      ></v-file-input> -->
-
       <!-- Avatar upload: Move to component  -->
       <div class="d-flex align-center flex-column mt-8 mb-6">
         <v-avatar
@@ -49,7 +42,8 @@
         placeholder="Describe your company"
         outlined
         background-color="white"
-        :rules="[validations.required]"
+        counter="250"
+        :rules="[validations.required, validations.max.string(250)]"
         v-model="value.about_company"
       ></v-textarea>
 
