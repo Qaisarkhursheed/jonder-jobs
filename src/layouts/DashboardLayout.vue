@@ -133,7 +133,9 @@
 
               <span class="about-info">Status der arbeitssuche</span>
               <p class="about-text">
-                {{ $t(`employmentTypes.${user.looking_for_employment_type}`) }}
+                <span v-for="(item, i) in userEmploymentType" :key="i">
+                  {{ $t(`employmentTypes.${item}`) }}
+                </span>
               </p>
 
               <span class="about-info">Position</span>
@@ -228,6 +230,9 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
+    },
+    userEmploymentType() {
+      return this.user.looking_for_employment_type.split(',');
     }
   },
   methods: {
