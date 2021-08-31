@@ -63,6 +63,7 @@ $status-call: #018d28;
 // 3. Typography
 // -------------
 
+
 //headings
 
 h1,
@@ -150,6 +151,27 @@ h5,
 
 .pull-right {
   float: right;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #E3E3E3 #f6f6f7;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f6f6f7;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #dfdfe1;
+  border-radius: 20px;
+  border: 3px solid #f6f6f7;
 }
 
 // 4. Buttons

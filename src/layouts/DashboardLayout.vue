@@ -137,7 +137,7 @@
               </p>
 
               <span class="about-info">Position</span>
-              <p class="about-text">{{ user.looking_for_branche }}</p>
+              <p class="about-text">{{ user.current_position }}</p>
 
               <span class="about-info">Aktuelle Branche</span>
               <p class="about-text">{{ user.branche }}</p>

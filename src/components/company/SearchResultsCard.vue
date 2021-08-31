@@ -6,9 +6,7 @@
     flat
   >
     <div
-      @click="
-        $router.push({ name: 'CompanyUser', params: { id: candidate.id } })
-      "
+      @click="proceedClick"
     >
       <v-card-text class="d-flex align-center pa-0 pa-6 pb-5">
         <v-avatar color="primary" size="64">
@@ -121,6 +119,8 @@
 </template>
 
 <script>
+import store from '@/store';
+
 export default {
   name: "SearchResultsCard",
 
@@ -144,6 +144,8 @@ export default {
 
   methods: {
     startConversation() {
+      if(!store.getters['user/userPlan'])
+        return;
       this.startChatLoading = true;
       this.$store
         .dispatch("chat/startChat", this.candidate.id)
@@ -175,6 +177,13 @@ export default {
           .then(() => {
             this.candidate.selection_managment = true;
           });
+      }
+    },
+    proceedClick() {
+      if(store.getters['user/userPlan']) {
+        this.$router.push({ name: 'CompanyUser', params: { id: this.candidate.id } })
+      } else {
+        this.$emit('block', true);
       }
     }
   }
