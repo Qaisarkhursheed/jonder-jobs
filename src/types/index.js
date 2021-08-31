@@ -34,6 +34,24 @@ const EMPLOYEMENT_TYPE = [
   }
 ];
 
+const JOB_BRANCHE = [
+  "Bau, Architektur, Vermessung",
+  "Dienstleistung",
+  "Elektro",
+  "Gesundheit",
+  "IT, Computer",
+  "Kunst, Kultur, Gestaltung",
+  "Landwirtschaft, Natur, Umwelt",
+  "Medien",
+  "Metall, Maschinenbau",
+  "Naturwissenschaften",
+  "Produktion, Fertigung",
+  "Soziales, Pädagogik",
+  "Technik, Technologiefelder",
+  "Verkehr, Logistik",
+  "Wirtschaft, Verwaltung"
+];
+
 const JOB_POSITION = [
   "Developer",
   "Project Manager",
@@ -48,15 +66,6 @@ const JOB_POSITION = [
   "Backend Developer",
   "Mobile Developer",
   "DevOps Engineer"
-];
-
-const JOB_BRANCHE = [
-  "Medicine",
-  "Automotive industry",
-  "Mechanical engineering",
-  "Chemical-pharmaceutical industry",
-  "Food industry",
-  "Electrical engineering industry"
 ];
 
 const SALARY_RANGE = [

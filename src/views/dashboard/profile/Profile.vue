@@ -230,6 +230,7 @@
             :items="types.EMPLOYEMENT_TYPE"
             background-color="white"
             v-model="formData.looking_for_employment_type"
+            multiple
           ></v-select>
         </v-col>
       </v-row>
@@ -725,8 +726,7 @@ export default {
       this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
       //this.formData.looking_for_branche = user.looking_for_branche.split(",");
-      this.formData.looking_for_employment_type =
-        user.looking_for_employment_type;
+      this.formData.looking_for_employment_type =user.looking_for_employment_type.split(",");
       this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
@@ -744,7 +744,7 @@ export default {
       let formDataCopy = Object.assign({}, this.formData);
       formDataCopy.branche = formDataCopy.branche.join();
       //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
-
+      formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
       if (this.dontKnowWhenToStart) {
         this.formData.ready_for_work = null;
         formDataCopy.ready_for_work = "null";
