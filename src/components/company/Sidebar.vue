@@ -19,19 +19,19 @@
           <span>{{ $t('company.employer.search') }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanySelectionManagement'}" >
-          <v-icon>mdi-magnify</v-icon>
+          <v-icon>mdi-account-switch</v-icon>
           <span>{{ $t('company.employer.selectionManagement') }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyMessages'}">
-          <v-icon>mdi-email-outline</v-icon>
+          <v-icon>mdi-message</v-icon>
           <span>{{ $t('company.employer.messages') }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyTeamManagement'}" >
-          <v-icon>mdi-magnify</v-icon>
+          <v-icon>mdi-account-group</v-icon>
           <span>{{ $t('company.employer.teamManagement') }}</span>
         </router-link>
         <router-link :to="{name: 'CompanyPublicProfile'}">
-          <v-icon>mdi-account-outline</v-icon>
+          <v-icon>mdi-office-building</v-icon>
           <span>{{ $t('company.employer.publicProfile') }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyPackagesPricing'}">
@@ -74,7 +74,6 @@ export default {
   },
   computed: {
     isMini() {
-      console.log('is mini');
       if(!this.mobile) {
         return false;
       } else {
@@ -114,8 +113,8 @@ export default {
   }
 
   a {
-    display: block;
-    padding: 16px;
+    display: flex;
+    padding: 20px 16px;
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: 500;
@@ -132,7 +131,6 @@ export default {
       //float: left;
       display: inline-block;
       height: 20px;
-      line-height: 22px;
       border: none !important;
     }
 
