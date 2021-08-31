@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="full-h pa-0" v-if="user">
+  <v-container fluid class="pa-0" v-if="user">
     <v-row class="flex-shrink-0 flex-grow-0 search-holder">
       <v-col cols="4">
         <router-link to="/dashboard" class="logo">
@@ -189,7 +189,6 @@
           </v-row>
         </div>
       </v-col>
-
       <v-col class="main col-12 col-md-8 col-xl-9">
         <v-container fluid class="d-flex flex-column">
           <slot />
@@ -210,7 +209,7 @@ export default {
   components: {
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox
+    UpgradeAccountBox,
   },
 
   data: () => ({

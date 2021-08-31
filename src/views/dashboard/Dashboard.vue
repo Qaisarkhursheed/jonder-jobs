@@ -38,7 +38,6 @@
         </div>
       </v-col>
     </v-row>
-    <footer-legal class="mt"></footer-legal>
   </div>
 </template>
 
@@ -46,7 +45,6 @@
 import { mapActions, mapGetters } from "vuex";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import Chat from "@/views/dashboard/Chat";
-import FooterLegal from "../../components/parts/FooterLegal.vue";
 
 export default {
   name: "Dashboard",
@@ -67,7 +65,6 @@ export default {
   components: {
     Chat,
     UpgradeAccountBox,
-    FooterLegal,
   },
 };
 </script>

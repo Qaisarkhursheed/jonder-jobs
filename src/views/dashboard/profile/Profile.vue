@@ -588,14 +588,12 @@
         </v-col>
       </v-row>
     </v-card>
-    <footer-legal></footer-legal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import types from "@/types";
-
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
 import Calendar from "@/components/Calendar";
@@ -605,7 +603,6 @@ import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducati
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
-import FooterLegal from "../../../components/parts/FooterLegal.vue";
 import UserPlanDescription from '../../../components/user/UserPlanDescription';
 
 export default {
@@ -622,7 +619,6 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
-    FooterLegal
   },
 
   data: () => ({

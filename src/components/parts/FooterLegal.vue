@@ -1,5 +1,8 @@
 <template>
-  <v-footer color="white  lighten-1" bottom>
+  <v-footer 
+    :class="['lighten-1', {'white': white}, {'default': !white}]" 
+    bottom
+  >
     <v-row justify="center" no-gutters>
       <v-btn
         v-for="(link, index) in links"
@@ -18,6 +21,13 @@
 
 <script>
 export default {
+  props: {
+    white: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   data: () => ({
     links: [
       {
@@ -37,4 +47,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.default {
+  border-top: 1px solid #C4C4C4;
+}
+</style>
