@@ -189,10 +189,11 @@
                   :loading="searchLoading"
                   color="primary"
                   height="58"
-                  class="full-w mt-md-16 font-weight-medium"
+                  class="full-w mt-md-16 font-weight-medium search-btn"
                   @click="search"
                 >
-                  {{ $t("company.search.findEmployee") }}
+                  <Loop />
+                  <span class="pl-1">{{ $t("company.search.findEmployee") }}</span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -213,11 +214,13 @@ import { forEach } from "lodash";
 import store from "@/store";
 import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
+import Loop from '../../svgs/Loop';
 
 export default {
   name: "SearchForm",
 
   components: {
+    Loop,
     GooglePlacesAutocomplete
   },
 
@@ -349,6 +352,39 @@ export default {
   font-weight: 600;
   font-size: 24px;
   color: #222222;
+}
+.search-form {
+  .search-btn {
+    background-color: $primary-blue-dark !important;
+    color: #fff;
+  }
+  .advanced-search-btn {
+    background-color: $primary-blue-light !important;
+    &.v-btn.white {
+      border: 0 !important;
+    }
+  }
+  @media screen and (max-width: 959px) {
+    .v-card__actions {
+      margin-top: 24px !important;
+    }
+  }
+  @media (min-width: 960px) and (max-width: 1270px) {
+    .v-card__actions {
+      > .row {
+        > .col-md-6 {
+          &:first-child,
+          &:last-child {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            .v-btn {
+              margin-top: 20px !important;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .search-selection {
   height: 86px;

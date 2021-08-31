@@ -28,9 +28,8 @@
     </div>
     <div class="action d-flex justify-end">
       <v-btn
-        color="primary"
         height="55"
-        class="font-weight-medium"
+        class="font-weight-medium main-accept-btn"
         @click="save"
       >
         Änderungen speichern
@@ -47,16 +46,16 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
     return {
       form: {
         branche: "",
-        company_employees: "",
-      },
+        company_employees: ""
+      }
     };
   },
 
@@ -70,14 +69,20 @@ export default {
     },
     save() {
       this.$emit("update", {
-        ...this.form,
+        ...this.form
       });
-    },
+    }
   },
   computed: {
     types() {
       return types;
-    },
-  },
+    }
+  }
 };
 </script>
+<style lang="scss" scoped>
+.v-btn.main-accept-btn {
+  background-color: $primary-blue-dark !important;
+  color: #fff;
+}
+</style>

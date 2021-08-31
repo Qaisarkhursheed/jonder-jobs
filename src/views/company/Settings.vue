@@ -13,7 +13,7 @@
     <!-- Back to home button -->
     <div class="text-center py-3" style="border-top: 1px solid #E3E3E4;">
       <v-btn
-        color="primary"
+          class="font-weight-medium main-accept-btn"
         depressed
         large
         @click="$router.push('/company-dashboard')"
@@ -128,8 +128,7 @@
                     :disabled="!formValid"
                     depressed
                     large
-                    color="primary"
-                    class="pl-8 pr-8"
+                    class="pl-8 pr-8 font-weight-medium main-accept-btn"
                     @click="handleUpdate"
                     >{{ $t("general.save") }}
                   </v-btn>
@@ -393,6 +392,10 @@ export default {
 </script>
 
 <style lang="scss">
+.v-btn.main-accept-btn {
+  background-color: $primary-blue-dark !important;
+  color: #fff;
+}
 .v-application .dashboard-navigation {
   padding: 0 0 0 32px;
   position: sticky;
@@ -485,6 +488,7 @@ export default {
   line-height: 38px;
   margin-bottom: 26px;
   color: #222;
+  word-break: break-all;
 }
 
 .profile-section {

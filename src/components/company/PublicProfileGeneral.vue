@@ -69,7 +69,7 @@
       <v-btn
         color="primary"
         height="55"
-        class="font-weight-medium "
+        class="font-weight-medium main-accept-btn"
         @click="save"
       >
         Änderungen speichern
@@ -145,6 +145,10 @@ label {
   font-size: 16px;
   font-weight: 400;
   color: #82858c;
+}
+.v-btn.main-accept-btn {
+  background-color: $primary-blue-dark !important;
+  color: #fff;
 }
 .user-avatar {
   cursor: pointer;
