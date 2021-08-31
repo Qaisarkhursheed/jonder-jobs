@@ -202,7 +202,7 @@
           Um potenzielle Unternehmen zu beeindrucken, fügen Sie Ihrem Lebenslauf
           Erfahrung und Ausbildung hinzu.
         </p>
-        <v-col cols="12">
+        <!-- <v-col cols="12">
           <label class="profile-label"
             >Welche Art von Branchen suchen Sie?</label
           >
@@ -217,7 +217,7 @@
             hide-no-data
             :hide-details="true"
           ></v-autocomplete>
-        </v-col>
+        </v-col> -->
       </v-row>
 
       <v-row>
@@ -631,7 +631,7 @@ export default {
       last_name: "",
       branche: "",
       looking_for: [],
-      looking_for_branche: [],
+      // looking_for_branche: [],
       looking_for_employment_type: "",
       address_to_work: "",
       ready_for_work: "",
@@ -724,7 +724,7 @@ export default {
       //this.formData.email = user.email;
       this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
-      this.formData.looking_for_branche = user.looking_for_branche.split(",");
+      //this.formData.looking_for_branche = user.looking_for_branche.split(",");
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work;
@@ -743,7 +743,7 @@ export default {
       this.formResponse = {};
       let formDataCopy = Object.assign({}, this.formData);
       formDataCopy.branche = formDataCopy.branche.join();
-      formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
+      //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
 
       if (this.dontKnowWhenToStart) {
         this.formData.ready_for_work = null;

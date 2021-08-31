@@ -5,16 +5,9 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="handleNext">
-      <label class="profile-label">
+      <!-- <label class="profile-label">
         {{ $t("user.onboarding.lookingForBranche") }}
       </label>
-      <!-- <v-select
-        v-model="value.looking_for_branche"
-        :items="positions"
-        :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
-        outlined
-      ></v-select> -->
       <v-autocomplete
         v-clearable-autocomplete
         v-model="value.looking_for_branche"
@@ -26,7 +19,7 @@
         multiple
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
-      ></v-autocomplete>
+      ></v-autocomplete> -->
 
       <label class="profile-label">
         {{ $t("user.onboarding.lookingForEmployement") }}
