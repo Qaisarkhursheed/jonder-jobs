@@ -13,7 +13,7 @@
         <v-btn
           color="primary"
           height="48"
-          class="full-w font-weight-medium "
+          class="full-w font-weight-medium main-accept-btn"
           @click="viewAsTab"
         >
           <template v-if="viewAs">
@@ -160,6 +160,10 @@ export default {
     font-size: 18px;
     color: #7a7a7a;
   }
+}
+.v-btn.main-accept-btn {
+  background-color: $primary-blue-dark !important;
+  color: #fff;
 }
 
 @media (min-width: 960px) {

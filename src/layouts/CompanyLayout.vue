@@ -2,9 +2,9 @@
   <v-container fluid class="full-h pa-0" style="overflow: hidden">
     <Header />
     <div class="main-wrap full-h" v-resize="onResize">
-      
+
       <Sidebar :mobile="mobile" />
-        
+
       <div class="main-panel-wrap full-h bg-light-gray"
           :class="{ 'mobile-layout': !mobile}">
         <v-container :fluid="true" class="company pt-8 pl-7 pr-7 pb-0 full-h">

@@ -120,6 +120,7 @@ export default {
   }
   > div {
     align-items: center;
+    background-color: #fff;
     display: flex;
     height: 46px;
     justify-content: center;

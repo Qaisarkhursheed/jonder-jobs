@@ -109,6 +109,9 @@ h5,
 
 //body
 
+.text-xl {
+  font-size: 18px !important;
+}
 .text-large {
   font-size: 17px !important;
 }
@@ -270,8 +273,8 @@ h5,
 
   &.v-btn--round {
     border-radius: 50%;
-  } 
-  
+  }
+
   &.light-blue {
     color: $primary-blue-dark !important;
     background-color: $primary-blue-light !important;

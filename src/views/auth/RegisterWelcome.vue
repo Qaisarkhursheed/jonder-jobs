@@ -17,17 +17,17 @@
           <jonder-title>
             Welcome to Jonder
           </jonder-title>
-          <p style="color: #222222">
+          <p style="color: #222222; font-size: 17px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
             ultricies felis eu libero.
           </p>
           <v-btn
+            class="dark-blue"
             @click="
               delete $route.query.noAccount;
               step = 2;
             "
             type="button"
-            color="primary"
             large
             block
             height="55"
@@ -83,7 +83,7 @@
           <jonder-title>
             Register
           </jonder-title>
-          <p style="color: #222222">
+          <p style="color: #222222; font-size: 17px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
             ultricies felis eu libero.
           </p>
@@ -137,7 +137,7 @@
           Du bist bereits Mitglied?
         </span>
         <router-link to="/login" style="text-decoration: none">
-          <b>Hier einloggen</b>
+          <b class="tx-blue-darken-4">Hier einloggen</b>
         </router-link>
       </div>
     </v-stepper>
@@ -187,4 +187,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.v-stepper__wrapper {
+  p {
+    color: #222222 !important;
+    font-size: 17px !important;
+  }
+}
+</style>

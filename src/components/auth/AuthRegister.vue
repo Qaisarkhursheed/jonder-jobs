@@ -9,7 +9,7 @@
       Create account
     </jonder-title>
 
-    <div class="text-center mb-2">
+    <div class="text-center mb-2 text-decoration text-xl">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
       felis eu libero.
     </div>
@@ -78,6 +78,17 @@
         background-color="white"
       ></v-text-field>
 
+      <!-- Phone : TO BE REMOVED -->
+      <v-text-field
+          v-model="formData.phone"
+          placeholder="Telefonnummer"
+          :rules="[validations.required, validations.phone]"
+          type="text"
+          dense
+          outlined
+          background-color="white"
+      ></v-text-field>
+
       <!-- Password -->
       <v-text-field
         v-model="formData.password"
@@ -132,22 +143,11 @@
         </template>
       </v-text-field>
 
-      <!-- Phone : TO BE REMOVED -->
-      <v-text-field
-        v-model="formData.phone"
-        placeholder="Telefonnummer"
-        :rules="[validations.required, validations.phone]"
-        type="text"
-        dense
-        outlined
-        background-color="white"
-      ></v-text-field>
-
       <!-- Policy accept -->
       <v-checkbox
         v-model="formData.accept_policy"
         :rules="[validations.required]"
-        class="ma-0"
+        class="checkbox-abn ma-0"
         color="#333"
         label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
         hide-details="auto"
@@ -183,7 +183,7 @@
         Kostenlos registrieren
       </v-btn>
 
-      <div class="login-caption mt-5 text-center">
+      <div class="text-medium mt-5 text-center">
         Du bist bereits Mitglied?
 
         <router-link to="/login" class="login-caption-bold">
@@ -261,10 +261,17 @@ export default {
   font-size: 17px;
   color: rgba(43, 43, 43, 0.5);
 }
+.text-decoration {
+  color: #222 !important;
+  font-weight: 400 !important;
+}
 .login-caption {
   font-size: 14px;
 }
 .login-caption-bold {
   font-weight: 600;
+}
+.checkbox-abn .v-input--selection-controls__input {
+  order: 1 !important;
 }
 </style>
