@@ -9,13 +9,6 @@
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouPosition") }}
       </label>
-      <!-- <v-select
-        v-model="value.current_position"
-        :items="positions"
-        :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
-        outlined
-      ></v-select> -->
       <v-autocomplete
         v-model="value.current_position"
         :items="types.JOB_POSITION"
@@ -31,17 +24,10 @@
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouBranches") }}
       </label>
-      <!-- <v-select
-        v-model="value.branche"
-        :items="branches"
-        :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
-        outlined
-      ></v-select> -->
       <v-autocomplete
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
-        :rules="[validations.required]"
+        :rules="[validations.required, validations.max.selection(3)]"
         v-clearable-autocomplete
         outlined
         flat
@@ -55,19 +41,11 @@
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouRole") }}
       </label>
-      <!-- <v-select
-        v-model="value.looking_for"
-        :items="positions"
-        :placeholder="$t('user.onboarding.choose')"
-        :rules="[validations.required]"
-        multiple
-        outlined
-      ></v-select> -->
        <v-autocomplete
           v-model="value.looking_for"
           :items="types.JOB_POSITION"
           :placeholder="$t('user.onboarding.choose')"
-          :rules="[validations.required]"
+          :rules="[validations.required, validations.max.selection(5)]"
           v-clearable-autocomplete
           multiple
           outlined

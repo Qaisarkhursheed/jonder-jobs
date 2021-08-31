@@ -68,7 +68,9 @@ export default {
 
         max: {
           string: n => v =>
-            !v || v.length <= n || `Darf nicht größer als ${n} Zeichen sein.`
+            !v || v.length <= n || `Darf nicht größer als ${n} Zeichen sein.`,
+          selection: n => v =>
+            !v || v.length <= n || `Darf nicht größer als ${n} Auswahl sein.`,
         },
 
         min: {
