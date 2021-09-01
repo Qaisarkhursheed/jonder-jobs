@@ -235,6 +235,7 @@
     "changePackage": "Paket ändern",
     "validUntil": "Gültig bis",
     "remainingDays": "Tage verbleiben",
-    "success": "Success"
+    "success": "Success",
+    "loginByEmail": "Per E-Mail einloggen"
   }
 }

@@ -24,5 +24,11 @@ export default createStore(Vuex.Store, {
     teamManagement,
     invoices,
     plans
+  },
+  state: {
+    screenSize: null
+  },
+  getters: {
+    screenSize: state => state.screenSize
   }
 });

@@ -50,6 +50,7 @@ export default {
 <style lang="scss" scoped>
 .plan-description {
   order: 1;
+  white-space: normal;
   &.border-plan {
     border: 1px solid #e9e9e9;
     border-radius: 10px;

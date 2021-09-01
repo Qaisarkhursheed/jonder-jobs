@@ -27,8 +27,8 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span> Hello, </span>
-          <span class="name">{{ getUserFullName }}</span>
+          <span class="d-none d-md-inline"> Hello, </span>
+          <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-avatar color="primary" size="38" v-on="on">

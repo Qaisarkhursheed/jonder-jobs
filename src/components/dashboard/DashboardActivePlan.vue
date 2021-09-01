@@ -28,7 +28,7 @@ export default {
       userPlan: "user/userPlan"
     }),
     remainingDays() {
-      const start = new Date(this.userPlan.start_timestamp).getTime();
+      const start = new Date().getTime();
       const end = new Date(this.userPlan.end_timestamp).getTime();
       return Math.floor((end - start) / 86400000);
     }

@@ -107,6 +107,7 @@ export default {
 
   .subtitle {
     line-height: unset !important;
+    font-weight: 400;
   }
 }
 </style>

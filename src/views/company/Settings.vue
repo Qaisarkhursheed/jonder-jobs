@@ -13,7 +13,7 @@
     <!-- Back to home button -->
     <div class="text-center py-3" style="border-top: 1px solid #E3E3E4;">
       <v-btn
-          class="font-weight-medium main-accept-btn"
+        class="font-weight-medium main-accept-btn"
         depressed
         large
         @click="$router.push('/company-dashboard')"
@@ -171,7 +171,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number,
+                      number: item.invoice_number
                     })
                   "
                 ></v-img>
@@ -274,7 +274,11 @@
             </v-form>
           </v-card>
         </v-container>
-        <UserPlan v-if="$store.getters['user/userPlan']" :payment-info="true" :border-plan="true"/>
+        <UserPlan
+          v-if="$store.getters['user/userPlan']"
+          :payment-info="true"
+          :border-plan="true"
+        />
       </v-col>
     </v-row>
 
@@ -292,13 +296,13 @@
 import { mapActions, mapGetters } from "vuex";
 import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
-import UserPlan from '../../components/user/UserPlan';
+import UserPlan from "../../components/user/UserPlan";
 
 export default {
   components: {
     UserPlan,
     Header,
-    AddNewCard,
+    AddNewCard
   },
   data() {
     return {
@@ -313,22 +317,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard,
-        },
+          component: AddNewCard
+        }
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"],
-      },
+        AddNewCard: ["edit", "delete"]
+      }
     };
   },
   computed: {
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("user", ["user"])
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter((i) => i.status == "complete");
+      this.invoices = this.invoices.filter(i => i.status == "complete");
     });
   },
   methods: {
@@ -350,10 +354,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.formResponse = resp.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         });
     },
@@ -362,7 +366,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -370,7 +374,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -386,8 +390,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
-  },
+    }
+  }
 };
 </script>
 

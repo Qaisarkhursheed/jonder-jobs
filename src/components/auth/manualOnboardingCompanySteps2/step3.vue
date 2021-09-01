@@ -4,8 +4,7 @@
       Company contact details.
     </h1>
 
-    <v-form v-model="formValid" ref="form"
-      class="auth-form">
+    <v-form v-model="formValid" ref="form" class="auth-form">
       <label class="profile-label">Company Email Address</label>
       <v-text-field
         class="mt-1"
@@ -32,10 +31,10 @@
       ></v-text-field>
 
       <label class="profile-label">City and address</label>
-      <GooglePlacesAutocomplete 
-        @select="e => value.address = e" 
+      <GooglePlacesAutocomplete
+        @select="e => (value.address = e)"
         type="geocode"
-        :full-address="true" 
+        :full-address="true"
       />
 
       <!-- <label class="profile-label">City</label>
@@ -68,8 +67,7 @@
 </template>
 
 <script>
-
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 
 export default {
   name: "Step3",

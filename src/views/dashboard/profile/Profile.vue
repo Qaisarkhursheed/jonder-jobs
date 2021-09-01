@@ -566,7 +566,7 @@
           >
             <v-img
               class="upgrade-icon"
-              :style="{order: userPlan && userPlan.id === plan.id ? 2 : 1}"
+              :style="{ order: userPlan && userPlan.id === plan.id ? 2 : 1 }"
               :src="
                 require(`@/assets/icons/${
                   index === 0 ? 'top-rated' : 'medal'
@@ -574,7 +574,10 @@
               "
             ></v-img>
 
-            <div class="upgrade-default" v-if="!userPlan || userPlan.id !== plan.id">
+            <div
+              class="upgrade-default"
+              v-if="!userPlan || userPlan.id !== plan.id"
+            >
               <span class="upgrade-title">
                 {{ plan.name }}
               </span>
@@ -603,7 +606,7 @@ import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducati
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
-import UserPlanDescription from '../../../components/user/UserPlanDescription';
+import UserPlanDescription from "../../../components/user/UserPlanDescription";
 
 export default {
   name: "Profile",
@@ -618,7 +621,7 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   data: () => ({
@@ -722,7 +725,9 @@ export default {
       this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
       //this.formData.looking_for_branche = user.looking_for_branche.split(",");
-      this.formData.looking_for_employment_type =user.looking_for_employment_type.split(",");
+      this.formData.looking_for_employment_type = user.looking_for_employment_type.split(
+        ","
+      );
       this.formData.address_to_work = user.address_to_work;
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
