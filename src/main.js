@@ -23,7 +23,8 @@ Vue.mixin(Validations);
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
-
+console.log(window.innerWidth);
+store.state.screenSize = window.innerWidth;
 store.dispatch("user/me").finally(() => {
   new Vue({
     router,

@@ -15,6 +15,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+.v-application .v-input.error--text,
+.v-application .v-messages.error--text {
+  color: $primary-error !important;
+}
+.v-application .v-input.error--text {
+  border-color: $primary-error;
+}
+.options .upgrade-option > span {
+  width: 100% !important;
+}
 </style>
 <script>
 export default {

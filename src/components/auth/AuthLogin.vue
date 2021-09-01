@@ -22,6 +22,7 @@
         class="auth-form"
         @submit.prevent="handleLogin"
       >
+        <p class="login-by-email text-medium">{{ $t("general.loginByEmail") }}</p>
         <label class="profile-label">Email</label>
         <v-text-field
           dense
@@ -49,7 +50,7 @@
         <!--        ></v-checkbox>-->
 
         <p class="text-caption text-left mt-2" style="font-size: 14px">
-          <router-link to="/forgot-password" style="text-decoration: none">
+          <router-link to="/forgot-password" class="text-color-primary-blue-dark" style="text-decoration: none">
             Passwort vergessen?
           </router-link>
         </p>
@@ -92,7 +93,7 @@
 
     <p class="text-center mt-2" style="font-size: 14px">
       Haben Sie kein Konto?
-      <router-link to="/register" style="text-decoration: none">
+      <router-link to="/register" class="text-color-primary-blue-dark" style="text-decoration: none">
         Registrieren
       </router-link>
     </p>
@@ -156,6 +157,11 @@ export default {
 <style lang="scss" scoped>
 .auth-login-wrap {
   max-width: 450px;
+  .profile-label,
+  .login-by-email {
+    color: $medium-grey;
+    font-weight: normal;
+  }
 }
 
 .v-btn:not(.v-btn--round).v-size--default {

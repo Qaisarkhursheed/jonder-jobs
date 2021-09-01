@@ -4,17 +4,20 @@
     v-model="active"
     @click:outside="close('abort')"
     persistent
-    width="750px"
+    :width="$store.getters.screenSize ? '95%' : '750px'"
     max-width="750px"
   >
-    <v-card flat class="rounded-lg wrap upgrade-dialog">
+    <v-card flat class="rounded-lg wrap upgrade-dialog modal-plan">
       <div class="modal-title">
         Wähle einen Premiumplan
       </div>
 
       <div
         class="options"
-        :class="{ deactive: userPlan && userPlan.id === plan.id }"
+        :class="{
+          deactive: userPlan && userPlan.id === plan.id,
+          active: form.active_plan === plan.id
+        }"
         v-for="plan in data"
         :key="plan.id"
       >
@@ -26,8 +29,9 @@
               : null
           "
           v-bind:color="form.active_plan == plan.id ? 'primary' : ''"
-          height="104"
-          class="upgrade-option"
+          min-height="104"
+          :height="$store.getters.screenSize < 500 ? 'auto' : '104'"
+          class="upgrade-option justify-start pa-2"
         >
           <v-img
             class="upgrade-icon"
@@ -44,7 +48,7 @@
             </p>
             <span class="updgrade-price">{{ plan.price }}&euro;</span>
           </div>
-          <UserPlanDescription v-else />
+          <UserPlanDescription class="user-plan-desc" v-else />
           <!--          <div class="plan-description" v-else>-->
           <!--            <h3>{{ userPlan.name }}</h3>-->
           <!--            <div>-->
@@ -127,6 +131,7 @@ export default {
       this.populate();
     }
     this.data = this.$store.getters["user/plans"]("jobseeker_paln");
+    console.log(this.$store.getters.screenSize);
   },
   methods: {
     close(type) {
@@ -195,18 +200,31 @@ export default {
 .dialog {
   font-family: $inter !important;
 }
-
+.modal-plan {
+  padding: 36px !important;
+}
+.upgrade-default,
+.user-plan-desc {
+  padding-left: 18px;
+  width: calc(100% - 30px);
+}
+.upgrade-default {
+  white-space: normal;
+}
 .modal-title {
-  padding: 40px;
+  padding-bottom: 24px;
   font-size: 20px;
   font-weight: 600;
   line-height: 34px;
 }
 .options {
-  margin: 0 40px;
-
   &.deactive {
     cursor: default;
+  }
+  &.active {
+    .updgrade-price {
+      color: #fff !important;
+    }
   }
 
   .upgrade-option {
@@ -217,6 +235,12 @@ export default {
     flex: 0 0 100%;
     box-shadow: none;
     text-align: left;
+    .v-btn__content {
+      width: 100% !important;
+    }
+    .upgrade-icon {
+      margin-right: 0 !important;
+    }
   }
 
   .upgrade-text {
@@ -227,12 +251,25 @@ export default {
     white-space: normal;
     word-break: break-word;
   }
+  .updgrade-price {
+    bottom: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary-blue-dark;
+    position: absolute;
+    right: 0;
+  }
+  button {
+    width: 100%;
+    .v-btn__content {
+      justify-content: flex-start;
+    }
+  }
 }
 
 .buttons {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  padding: 40px;
 }
 </style>
