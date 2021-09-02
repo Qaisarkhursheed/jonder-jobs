@@ -64,28 +64,17 @@
         hide-details
       ></v-checkbox>
 
-      <label class="profile-label">
+      <div class="profile-label mb-3 mt-6">
         {{ $t("user.onboarding.monthlySalary") }}
-      </label>
-      <v-row class="mt-1">
-        <v-col cols="auto mb-2">
-          <div class="monthly-salary ">{{ value.monthly_salary }}k</div>
-        </v-col>
-        <v-col cols="col" class="d-flex">
-          <v-slider
-            class="my-auto"
-            v-model="value.monthly_salary"
-            :rules="[validations.required]"
-            track-color="grey"
-            hide-details
-            color="primary"
-            always-dirty
-            min="1"
-            max="12"
-            step="0.5"
-          ></v-slider>
-        </v-col>
-      </v-row>
+      </div>
+      <SliderInput 
+        :value="value.monthly_salary"
+        suffix="k"
+        min="1"
+        max="12"
+        step="0.5"
+        @change="(val) => (value.monthly_salary = val)"
+      />
 
       <v-row class="mt-5">
         <v-col cols="3">
@@ -114,16 +103,18 @@
 </template>
 
 <script>
+import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import Calendar from "@/components/Calendar";
-import types from "@/types";
+import SliderInput from '@/components/SliderInput';
 
 export default {
   name: "Step4",
 
   components: {
     Calendar,
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
+    SliderInput
   },
 
   props: {

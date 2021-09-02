@@ -297,7 +297,7 @@ h5,
     color: #fff !important;
     background-color: $primary-blue-dark !important;
     border-color: $primary-blue-dark !important;
-
+    filter: drop-shadow(1px 0px 9px rgba(2, 83, 179, 0.3));
     &.active,
     &:active {
       color: #fff !important;

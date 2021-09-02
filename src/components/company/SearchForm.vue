@@ -189,7 +189,7 @@
                   :loading="searchLoading"
                   color="primary"
                   height="58"
-                  class="full-w mt-md-16 font-weight-medium search-btn"
+                  class="full-w mt-md-16 font-weight-medium search-btn dark-blue"
                   @click="search"
                 >
                   <Loop />

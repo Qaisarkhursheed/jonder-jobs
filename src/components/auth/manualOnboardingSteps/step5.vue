@@ -18,28 +18,17 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <label class="profile-label">
+      <div class="profile-label mb-3">
         {{ $t("user.onboarding.experienceInYears") }}
-      </label>
-      <v-row class="d-flex align-center mt-1">
-        <v-col cols="auto">
-          <div class="monthly-salary">{{ value.working_experience }} years</div>
-        </v-col>
-        <v-col cols="cols d-flex">
-          <v-slider
-            v-model="value.working_experience"
-            :rules="[validations.required]"
-            class="my-auto"
-            track-color="grey"
-            color="primary"
-            always-dirty
-            hide-details
-            min="0"
-            max="40"
-            step="0.5"
-          ></v-slider>
-        </v-col>
-      </v-row>
+      </div>
+      <SliderInput 
+        :value="value.working_experience"
+        suffix=" years"
+        min="0"
+        max="40"
+        step="0.5"
+        @change="(val) => (value.working_experience = val)"
+      />
 
       <div class="mt-4">
         <label class="profile-label">
@@ -127,6 +116,7 @@
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
+import SliderInput from '@/components/SliderInput';
 
 export default {
   name: "Step5",
@@ -134,7 +124,8 @@ export default {
   components: {
     ModalEducation,
     ModalExperience,
-    CardActionableList
+    CardActionableList,
+    SliderInput
   },
 
   props: {

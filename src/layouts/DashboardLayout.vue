@@ -54,7 +54,7 @@
       <v-col cols="12">
         <v-btn
           color="primary"
-          class="back-btn"
+          class="back-btn dark-blue"
           @click="navigateTo('/dashboard')"
         >
           Zurück zur Startseite
@@ -73,33 +73,60 @@
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
                 Persönliche Informationen
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('roleAndBranche')" class="nav-item">
                 Position & Branche
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('lookingFor')" class="nav-item">
                 Wonach suchen Sie?
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
                 Erfahrung & Ausbildung
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('documents')" class="nav-item">
                 Dokumente
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
                 Rechnungen
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('paymentMethod')" class="nav-item">
                 Rechnungsstellung
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
                 Passwort ändern
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
               <div @click="scrollToSection('upgradeAccount')" class="nav-item">
                 Account Upgraden
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
               </div>
             </div>
           </div>
@@ -391,6 +418,9 @@ export default {
 }
 
 .nav-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   border-bottom: 0.5px solid #cacaca;
   font-weight: 500;
   font-size: 18px;
@@ -404,6 +434,10 @@ export default {
   &:hover {
     color: #0253b3;
     border-color: #0253b3;
+
+    .v-icon {
+      color: #0253b3 !important;
+    };
   }
 }
 

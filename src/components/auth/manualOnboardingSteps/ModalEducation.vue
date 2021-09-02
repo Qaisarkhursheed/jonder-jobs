@@ -102,7 +102,7 @@
                   type="submit"
                   color="primary"
                   height="58"
-                  class="full-w mt-5 font-weight-medium "
+                  class="full-w mt-5 font-weight-medium dark-blue"
                 >
                   {{ $t("general.save") }}
                 </v-btn>

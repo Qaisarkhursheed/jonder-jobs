@@ -13,7 +13,7 @@
         <v-btn
           color="primary"
           height="48"
-          class="full-w font-weight-medium main-accept-btn"
+          class="full-w font-weight-medium main-accept-btn dark-blue"
           @click="viewAsTab"
         >
           <template v-if="viewAs">

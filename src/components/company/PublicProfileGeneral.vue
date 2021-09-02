@@ -69,7 +69,7 @@
       <v-btn
         color="primary"
         height="55"
-        class="font-weight-medium main-accept-btn"
+        class="font-weight-medium main-accept-btn dark-blue"
         @click="save"
       >
         Änderungen speichern

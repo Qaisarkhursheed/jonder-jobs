@@ -57,7 +57,7 @@
           "
           color="primary"
           height="58"
-          class="full-w mt-16 font-weight-medium "
+          class="full-w mt-16 font-weight-medium dark-blue"
         >
           New note
         </v-btn>

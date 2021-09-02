@@ -107,7 +107,7 @@
           color="primary"
           height="48"
           width="70%"
-          class="font-weight-medium pl-4 pr-4"
+          class="font-weight-medium pl-4 pr-4 dark-blue"
           @click="startConversation"
           :loading="startChatLoading"
         >

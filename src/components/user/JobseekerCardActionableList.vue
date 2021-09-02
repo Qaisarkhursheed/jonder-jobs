@@ -110,4 +110,8 @@ export default {
     font-weight: 400;
   }
 }
+
+.subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
 </style>

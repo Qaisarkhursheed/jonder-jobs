@@ -56,7 +56,7 @@
             :loading="formLoading"
             depressed
             color="primary"
-            class="pl-8 pr-8"
+            class="pl-8 pr-8 dark-blue"
             @click="handleUpdate"
             >{{ $t("general.save") }}
           </v-btn>
@@ -272,26 +272,17 @@
 
       <v-row>
         <v-col cols="10">
-          <label class="profile-label"
+          <div class="profile-label mb-2"
             >Monatliche Netto Gehaltsvorstellung? (€)
-          </label>
-          <v-row>
-            <v-col cols="auto">
-              <div class="monthly-salary">{{ formData.monthly_salary }}k</div>
-            </v-col>
-            <v-col cols="col" class="d-flex my-auto">
-              <v-slider
-                v-model="formData.monthly_salary"
-                hide-details
-                track-color="grey"
-                color="primary"
-                always-dirty
-                min="1"
-                max="20"
-                step="0.5"
-              ></v-slider>
-            </v-col>
-          </v-row>
+          </div>
+          <SliderInput 
+            :value="formData.monthly_salary"
+            suffix="k"
+            min="1"
+            max="20"
+            step="0.5"
+            @change="value => formData.monthly_salary = value"
+          />
         </v-col>
       </v-row>
     </v-card>
@@ -307,25 +298,13 @@
         </p>
         <v-col cols="10">
           <label class="profile-label">Berufserfahrungen in Jahren </label>
-          <v-row>
-            <v-col cols="auto">
-              <div class="monthly-salary">
-                {{ formData.working_experience }}
-              </div>
-            </v-col>
-            <v-col class="d-flex my-auto">
-              <v-slider
-                v-model="formData.working_experience"
-                track-color="grey"
-                color="primary"
-                always-dirty
-                hide-details
-                step="0.5"
-                min="0"
-                max="40"
-              ></v-slider>
-            </v-col>
-          </v-row>
+          <SliderInput 
+            :value="formData.working_experience"
+            min="0"
+            max="40"
+            step="0.5"
+            @change="value => formData.working_experience = value"
+          />
         </v-col>
       </v-row>
 
@@ -349,15 +328,23 @@
             type="Experience"
             @edit="activateEdit('experience', $event)"
           />
-          <v-btn
-            @click="toggleModal('experience')"
-            outlined
-            rounded
-            color="#0253B3"
-          >
-            <v-icon>mdi-plus</v-icon>
-            Hinzufügen
-          </v-btn>
+          <div @click="toggleModal('experience')" 
+            class="d-flex">
+            <v-btn
+              rounded
+              outlined
+              color="#0253B3"
+              height="26"
+              width="26"
+              style="cursor: pointer;"
+              fab
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+              Hinzufügen
+            </div>
+          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -367,15 +354,23 @@
             type="Education"
             @edit="activateEdit('education', $event)"
           />
-          <v-btn
-            @click="toggleModal('education')"
-            outlined
-            rounded
-            color="#0253B3"
-          >
-            <v-icon>mdi-plus</v-icon>
-            Hinzufügen
-          </v-btn>
+          <div @click="toggleModal('education')" 
+            class="d-flex">
+            <v-btn
+              rounded
+              outlined
+              color="#0253B3"
+              height="26"
+              width="26"
+              style="cursor: pointer;"
+              fab
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+              Hinzufügen
+            </div>
+          </div>
         </v-col>
       </v-row>
     </v-card>
@@ -607,6 +602,7 @@ import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperi
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
+import SliderInput from '@/components/SliderInput.vue';
 
 export default {
   name: "Profile",
@@ -621,7 +617,8 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
+    SliderInput
   },
 
   data: () => ({

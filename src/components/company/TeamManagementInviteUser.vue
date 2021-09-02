@@ -5,7 +5,7 @@
         <v-btn
           color="primary"
           height="48"
-          class="full-w font-weight-medium "
+          class="full-w font-weight-medium dark-blue"
           v-bind="attrs"
           v-on="on"
         >
@@ -63,7 +63,7 @@
               type="submit"
               color="primary"
               height="48"
-              class="ml-3 font-weight-medium "
+              class="ml-3 font-weight-medium dark-blue"
               :disabled="!isValid"
               :loading="formLoading"
             >

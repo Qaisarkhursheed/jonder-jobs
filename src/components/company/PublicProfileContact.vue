@@ -110,7 +110,7 @@
         color="primary"
         height="55"
         @click="save"
-        class="font-weight-medium "
+        class="font-weight-medium dark-blue"
       >
         Änderungen speichern
       </v-btn>
