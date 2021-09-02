@@ -20,6 +20,24 @@
             </div>
           </div>
         </div>
+        <div class="section experience mt-7">
+          <div class="title">Ausbildung</div>
+          <div class="content">
+            <div v-for="data in education" :key="data.company">
+              <div class="item pb-5 pt-5">
+                <div class="title">{{ data.university_name }}</div>
+                <div class="subtitle">{{ data.study }}</div>
+                <div class="subtitle">
+                  {{ data.start_time | moment("MMMM YYYY") }} -
+                  <template v-if="data.end_time">
+                    {{ data.end_time | moment("MMMM YYYY") }}
+                  </template>
+                  <template v-else>Present</template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </v-col>
       <v-col cols="12" md="4" class="right pl-10 pr-10 pt-8">
         <div class="d-flex justify-space-between mb-7">
@@ -27,8 +45,11 @@
             <div class="title">
               Status der Arbeitssuche
             </div>
-            <div class="content">
-              Employed
+            <div class="content" v-if="user.job_status === ''">
+              Unemployed
+            </div>
+            <div class="content" v-else>
+              {{ user.job_status }}
             </div>
           </div>
           <div class="section">
@@ -40,25 +61,23 @@
             </div>
           </div>
         </div>
+
         <div class="section mb-7">
           <div class="title">Aktuelle Branche</div>
           <div class="content">
-            <template v-if="user.work_remotely">
-              Yes
-            </template>
-            <template v-else>
-              No
-            </template>
+            {{ user.branche }}
           </div>
         </div>
-        <div class="section mb-7">
+
+        <!-- <div class="section mb-7">
           <div class="title">current industry</div>
           <div class="content">{{ user.branche }}</div>
-        </div>
+        </div> -->
         <div class="section mb-7" v-if="user.location_show">
           <div class="title">Stadt und Adresse</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>
+
         <div class="section mb-7">
           <div class="title">
             DOCUMENTS & CERTIFICATS
@@ -115,6 +134,7 @@ export default {
   data() {
     return {
       experience: [],
+      education: [],
     };
   },
   methods: {
@@ -138,9 +158,35 @@ export default {
           alert(error);
         });
     },
+    getEducation() {
+      this.$http
+        .get(
+          `${process.env.VUE_APP_API_BASE}/jobseeker-education?per_page=9999`
+        )
+        .then((res) => {
+          let response = res.data.data.map((obj) => {
+            return obj;
+          });
+          for (let i = 0; i < response.length; i++) {
+            if (res.data.data[i].user_id === this.user.id) {
+              this.education.push(res.data.data[i]);
+              console.log(this.education);
+            }
+          }
+        })
+
+        .catch((error) => {
+          alert(error);
+        });
+    },
+    logger() {
+      console.log(this.user);
+    },
   },
   beforeMount() {
     this.getExperience();
+    this.getEducation();
+    this.logger();
   },
 };
 </script>
