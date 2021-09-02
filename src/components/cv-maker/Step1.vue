@@ -102,8 +102,7 @@
           large
           class="font-weight-bold"
         >
-          {{ $t('general.cancel') }}
-
+          {{ $t("general.cancel") }}
         </v-btn>
       </v-sheet>
       <v-sheet width="300">
@@ -116,7 +115,7 @@
           @click="nextStep"
           class="font-weight-bold"
         >
-          {{ $t('general.confirm') }}
+          {{ $t("general.confirm") }}
         </v-btn>
       </v-sheet>
     </v-sheet>
@@ -128,13 +127,13 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     day: "",
     month: "",
-    year: ""
+    year: "",
   }),
   computed: {
     isValid() {
@@ -144,7 +143,7 @@ export default {
         this.value.street_address.length > 0 &&
         this.value.birthday.length > 0
       );
-    }
+    },
   },
   methods: {
     nextStep() {
@@ -156,10 +155,10 @@ export default {
         console.log(birthDay);
         this.$emit("input", {
           ...this.value,
-          birthday: birthDay
+          birthday: birthDay,
         });
       }
-    }
+    },
   },
   watch: {
     day(newVal) {
@@ -170,7 +169,7 @@ export default {
     },
     year(newVal) {
       if (newVal) this.updateDate();
-    }
-  }
+    },
+  },
 };
 </script>

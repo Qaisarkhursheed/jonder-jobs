@@ -213,7 +213,7 @@ export default {
         email: "",
         password: "",
         password_confirmation: "",
-        phone: "",
+        phone: "+49",
         company: "",
         role: "company",
         accept_policy: false

@@ -24,7 +24,6 @@
         v-model="value.company_phone"
         :rules="[validations.required, validations.phone]"
         dense
-        placeholder="Enter"
         outlined
         flat
         background-color="white"
@@ -32,7 +31,7 @@
 
       <label class="profile-label">City and address</label>
       <GooglePlacesAutocomplete
-        @select="e => (value.address = e)"
+        @select="(e) => (value.address = e)"
         type="geocode"
         :full-address="true"
       />
@@ -73,20 +72,30 @@ export default {
   name: "Step3",
 
   components: {
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
+  methods: {
+    phonePrefix() {
+      if (this.value.company_phone === null) {
+        return (this.value.company_phone = "+49");
+      }
+    },
+  },
+  beforeMount() {
+    this.phonePrefix();
+  },
 };
 </script>
 
