@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-1">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      Give simple details about your company.
+      {{ $t("company.register.giveUsDetails") }}
     </h1>
 
     <v-form v-model="formValid">
@@ -15,11 +15,7 @@
           @click="$refs.uploadAvatarInput.click()"
         >
           <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-icon
-            size="64"
-            color="#6a9cd4"
-            v-else
-          >
+          <v-icon size="64" color="#6a9cd4" v-else>
             mdi-cloud-upload
           </v-icon>
         </v-avatar>
@@ -30,16 +26,18 @@
           @change="change"
         />
         <div class="avatar-label mt-4">
-          Click to upload photo
+          {{ $t("company.register.uploadPhotoEmployer") }}
         </div>
       </div>
 
-      <label class="profile-label">About company</label>
+      <label class="profile-label">{{
+        $t("company.register.aboutCompanyText")
+      }}</label>
       <v-textarea
         class="mt-3"
         dense
         height="150"
-        placeholder="Describe your company"
+        :placeholder="$t('company.register.aboutCompanyPlaceholder')"
         outlined
         background-color="white"
         counter="250"
@@ -65,14 +63,14 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
       formValid: false,
-      profile_img: false
+      profile_img: false,
     };
   },
   methods: {
@@ -80,7 +78,7 @@ export default {
       this.profile_img = this.value.profile_img_file = e.target.files[0];
       // this.value.profile_img_file = e.target.files[0];
       console.log(e);
-    }
+    },
   },
   computed: {
     avatar_img() {
@@ -88,8 +86,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 

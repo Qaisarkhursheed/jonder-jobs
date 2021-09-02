@@ -4,12 +4,11 @@
       <img :src="require('@/assets/svg/email_sent.svg')" width="230" />
 
       <h1 class="mt-5" style="font-size: 24px">
-        Confirm your account
+        {{ $t("company.register.confirmYourAccount") }}
       </h1>
 
       <p class="mt-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat est
-        purus ipsum.
+        {{ $t("company.register.confirmYourAccountSub") }}
       </p>
 
       <div class="reset-email-btn mb-2">
@@ -26,7 +25,7 @@
       </div>
       <router-link :to="{ name: 'Login' }">
         <v-btn type="button" color="primary" height="55">
-          Back to Login
+          {{ $t("company.register.backToLogin") }}
         </v-btn>
       </router-link>
     </div>
@@ -41,11 +40,11 @@ export default {
     return {
       email: localStorage.getItem("user-email"),
       resendValid: false,
-      interval: null
+      interval: null,
     };
   },
   components: {
-    AuthWrap
+    AuthWrap,
   },
   methods: {
     setInterval() {
@@ -68,11 +67,11 @@ export default {
         localStorage.setItem("verificationTime", time);
         this.setInterval();
       }
-    }
+    },
   },
   mounted() {
     this.setInterval();
-  }
+  },
 };
 </script>
 

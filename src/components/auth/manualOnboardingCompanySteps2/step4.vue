@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-3">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      Links for company websites
+      {{ $t("company.register.linksForWebsites") }}
     </h1>
 
     <v-form v-model="formValid">
@@ -9,7 +9,7 @@
       <v-text-field
         v-model="value.web_url"
         dense
-        placeholder="Enter"
+        placeholder="meinunternehmen.de"
         outlined
         flat
         background-color="white"
@@ -19,7 +19,7 @@
       <v-text-field
         v-model="value.facebook"
         dense
-        placeholder="Enter"
+        placeholder="www.facebook.com/unternehmen"
         outlined
         flat
         background-color="white"
@@ -29,7 +29,7 @@
       <v-text-field
         v-model="value.instagram"
         dense
-        placeholder="Enter"
+        placeholder="www.instagram.com/unternehmen"
         outlined
         flat
         background-color="white"
@@ -39,7 +39,7 @@
       <v-text-field
         v-model="value.twitter"
         dense
-        placeholder="Enter"
+        placeholder="www.twitter.com/unternehmen"
         outlined
         flat
         background-color="white"
@@ -49,7 +49,7 @@
       <v-text-field
         v-model="value.linkedin"
         dense
-        placeholder="Enter"
+        placeholder="www.linkedin.com/company/unternehmen"
         outlined
         flat
         background-color="white"
@@ -59,7 +59,7 @@
       <v-text-field
         v-model="value.youtube"
         dense
-        placeholder="Enter"
+        placeholder="www.youtube.com/user/unternehmen"
         outlined
         flat
         background-color="white"
@@ -100,16 +100,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
     loading: Boolean,
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
 };
 </script>
 
