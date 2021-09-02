@@ -1,24 +1,28 @@
 <template>
   <div class="mo-step-3">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      Company contact details.
+      {{ $t("company.register.companyContact") }}
     </h1>
 
     <v-form v-model="formValid" ref="form" class="auth-form">
-      <label class="profile-label">Company Email Address</label>
+      <label class="profile-label">{{
+        $t("company.register.companyEmail")
+      }}</label>
       <v-text-field
         class="mt-1"
         v-model="value.company_email"
         :rules="[validations.required, validations.email]"
         dense
         type="email"
-        placeholder="Enter"
+        :placeholder="$t('company.register.companyEmailPlaceholder')"
         outlined
         flat
         background-color="white"
       ></v-text-field>
 
-      <label class="profile-label">Company Phone Number</label>
+      <label class="profile-label">{{
+        $t("company.register.companyPhone")
+      }}</label>
       <v-text-field
         class="mt-1"
         v-model="value.company_phone"
@@ -29,11 +33,14 @@
         background-color="white"
       ></v-text-field>
 
-      <label class="profile-label">City and address</label>
+      <label class="profile-label">{{
+        $t("company.register.companyCityandAdress")
+      }}</label>
       <GooglePlacesAutocomplete
         @select="(e) => (value.address = e)"
         type="geocode"
         :full-address="true"
+        :placeholder="$t('company.register.companyCityandAdressPlaceholder')"
       />
 
       <!-- <label class="profile-label">City</label>
@@ -46,7 +53,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            Back
+            {{ $t("user.onboarding.back") }}
           </v-btn>
         </v-col>
         <v-col>

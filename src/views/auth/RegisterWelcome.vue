@@ -39,7 +39,7 @@
         <!-- Step 2 - Account type -->
         <v-stepper-content step="2">
           <jonder-title style="font-size: 28px">
-            Are you a Jobseeker or Employer
+            {{ $t("company.register.chooseStatus") }}
           </jonder-title>
 
           <div class="mx-auto mt-5" style="max-width: 400px">
@@ -51,7 +51,7 @@
               @click="accountType = 'user'"
               :outlined="accountType != 'user'"
             >
-              I'm looking for a Job
+              {{ $t("company.register.ImJobseeker") }}
             </v-btn>
 
             <v-btn
@@ -62,7 +62,7 @@
               :outlined="accountType != 'company'"
               height="55"
             >
-              I'm looking for employee
+              {{ $t("company.register.ImEmployer") }}
             </v-btn>
 
             <v-btn
@@ -73,7 +73,7 @@
               @click="step = 3"
               height="55"
             >
-              Weiter
+              {{ $t("company.register.continue") }}
             </v-btn>
           </div>
         </v-stepper-content>
@@ -81,11 +81,10 @@
         <!-- Step 3 - Register type -->
         <v-stepper-content step="3">
           <jonder-title>
-            Register
+            {{ $t("company.register.register") }}
           </jonder-title>
           <p style="color: #222222; font-size: 17px">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-            ultricies felis eu libero.
+            {{ $t("company.register.registerSubtitleUser") }}
           </p>
 
           <v-btn
@@ -100,7 +99,7 @@
             :href="googleUrl"
           >
             <v-icon left>mdi-google</v-icon>
-            Continue with Google
+            {{ $t("company.register.continueWithGoogle") }}
           </v-btn>
 
           <v-btn
@@ -115,7 +114,7 @@
             :href="facebookUrl"
           >
             <v-icon left>mdi-facebook</v-icon>
-            Continue with Facebook
+            {{ $t("company.register.continueWithFacebook") }}
           </v-btn>
 
           <v-btn
@@ -127,7 +126,7 @@
             large
           >
             <v-icon left>mdi-email</v-icon>
-            Continue with Email
+            {{ $t("company.register.continueWithEmail") }}
           </v-btn>
         </v-stepper-content>
       </v-stepper-items>
@@ -151,12 +150,12 @@ import JonderTitle from "@/components/parts/JonderTitle.vue";
 export default {
   components: {
     AuthWrap,
-    JonderTitle
+    JonderTitle,
   },
   data: () => ({
     img: 1,
     step: 1,
-    accountType: null
+    accountType: null,
   }),
   computed: {
     facebookUrl() {
@@ -170,7 +169,7 @@ export default {
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
 
       return url;
-    }
+    },
   },
   methods: {
     submit() {
@@ -182,8 +181,8 @@ export default {
     },
     changeImage() {
       this.img = 2;
-    }
-  }
+    },
+  },
 };
 </script>
 

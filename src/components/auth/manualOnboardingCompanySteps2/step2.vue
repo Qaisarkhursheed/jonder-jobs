@@ -1,11 +1,13 @@
 <template>
   <div class="mo-step-2">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      Industry of your company and number of employees
+      {{ $t("company.register.companyinfo") }}
     </h1>
 
     <v-form v-model="formValid">
-      <label class="profile-label">Industry</label>
+      <label class="profile-label">
+        {{ $t("company.register.industry") }}
+      </label>
       <!-- <v-select
         v-model="value.branche"
         :items="branches"
@@ -24,7 +26,9 @@
         :placeholder="$t('user.onboarding.choose')"
       ></v-autocomplete>
 
-      <label class="profile-label">Number of employees</label>
+      <label class="profile-label">
+        {{ $t("company.register.numberOfEmployees") }}
+      </label>
       <v-select
         class="mt-1"
         v-model="value.company_employees"
@@ -34,6 +38,11 @@
         outlined
       ></v-select>
 
+      <label class="profile-label">
+        {{ $t("company.register.dateOfEstablishment") }}
+      </label>
+      <!-- Implement date picker component -->
+
       <v-row class="mt-1">
         <v-col cols="3">
           <v-btn
@@ -41,7 +50,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            Back
+            {{ $t("user.onboarding.back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -61,16 +70,16 @@
 </template>
 
 <script>
-import types from '@/types';
+import types from "@/types";
 
 export default {
   name: "Step2",
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
 
   data: () => ({
@@ -81,14 +90,14 @@ export default {
       "10 - 99",
       "100 - 500",
       "500 - 1000",
-      "1000+"
+      "1000+",
     ],
-    branches: ["IT", "Medicine"]
+    branches: ["IT", "Medicine"],
   }),
   computed: {
     types() {
       return types;
-    }
+    },
   },
 };
 </script>

@@ -41,7 +41,7 @@
           @change="profile_img = $event.target.files[0]"
         />
         <div class="avatar-label mt-4">
-          Click to upload photo
+          {{ $t("company.register.uploadPhoto") }}
         </div>
       </div>
 

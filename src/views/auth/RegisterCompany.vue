@@ -5,7 +5,7 @@
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">
           <jonder-title>
-            Welcome to Jonder
+            {{ $t("user.register.jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
@@ -33,11 +33,10 @@
         <!-- Step 2 - Register type -->
         <v-stepper-content step="2">
           <jonder-title>
-            Register
+            {{ $t("company.register.register") }}
           </jonder-title>
           <p style="color: #222222">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-            ultricies felis eu libero.
+            {{ $t("company.register.registerSubtitleCompany") }}
           </p>
 
           <v-btn
@@ -49,7 +48,7 @@
             large
           >
             <v-icon left>mdi-google</v-icon>
-            Continue with Google
+            {{ $t("company.register.continueWithGoogle") }}
           </v-btn>
 
           <v-btn
@@ -61,7 +60,7 @@
             large
           >
             <v-icon left>mdi-facebook</v-icon>
-            Continue with Facebook
+            {{ $t("company.register.continueWithFacebook") }}
           </v-btn>
 
           <v-btn
@@ -73,7 +72,7 @@
             large
           >
             <v-icon left>mdi-email</v-icon>
-            Continue with Email
+            {{ $t("company.register.continueWithEmail") }}
           </v-btn>
 
           <div class="mt-4">
@@ -104,17 +103,17 @@ export default {
   components: {
     AuthWrap,
     AuthRegisterCompany,
-    JonderTitle
+    JonderTitle,
   },
   data: () => ({
     img: 1,
-    step: 3
+    step: 3,
   }),
   methods: {
     changeImage() {
       this.img = 2;
-    }
-  }
+    },
+  },
 };
 </script>
 

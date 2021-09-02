@@ -8,6 +8,40 @@
       "publicProfile": "Öffentliches Firmenprofil",
       "packagesPricing": "Preise für Pakete"
     },
+    "register": {
+      "jonderWelcome": "Herzlich Willkommen bei Jonder!",
+      "chooseStatus": "Wonach suchst du?",
+      "ImJobseeker": "Ich suche einen Job",
+      "ImEmployer": "Ich suche neue Mitarbeiter",
+      "continue": "Fortfahren",
+      "register": "Jonder beitreten",
+      "registerSubtitleUser": "Erstelle ein Jonder-Profil und lass Unternehmen sich direkt bei Dir bewerben.",
+      "registerSubtitleCompany": "Erstelle ein Jonder-Unternehmensprofil und suche in einer großen Datenbank an Bewerbern.",
+      "continueWithGoogleCompany": "Mit Google registrieren",
+      "continueWithFacebook": "Mit Facebook registrieren",
+      "continueWithEmail": "Mit E-mail registrieren",
+      "uploadPhoto": "Profilbild hochladen",
+      "successMessageEmployer": "You have successfully registred your company",
+      "successMessageEmployerSub": " Du hast dein Unternehmen erfolgreich registriert. Starte mit der Jonder Personalsuche noch heute und kontaktiere deine ersten Kandidaten!",
+      "uploadPhotoEmployer": "Unternehmenslogo hochladen (500x500 pixel)",
+      "giveUsDetails": " Gib uns eine kleine Einführung..",
+      "aboutCompanyText": " Unternehmensbeschreibung (250 Wörter Maximum)",
+      "aboutCompanyPlaceholder": "Beschreibe dein Unternehmen – Wer, wo, was, warum?",
+      "companyinfo": "Allgemeine Informationen",
+      "industry": "Industry",
+      "numberOfEmployees": "Unternehmensgröße",
+      "dateOfEstablishment": "Gründungsjahr",
+      "companyContact": "Kontaktinformationen",
+      "companyEmail": "Email Adresse",
+      "companyEmailPlaceholder": "info@musterunternehmen.com",
+      "companyPhone": "Telefonnummer",
+      "companyCityandAdress": "Hauptsitz",
+      "companyCityandAdressPlaceholder": "Gebe hier die Adresse des Hauptsitzes an",
+      "linksForWebsites": "Links zur Digitale Präsenz hinzufügen",
+      "confirmYourAccount": "Bitte überprüfe deine E-Mail",
+      "confirmYourAccountSub": "Um deinen Account zu bestätigen, haben wir dir einen Link per E-Mail gesendet. Öffne diesen Link um deine Registrierung zu bestätigen. Überprüfe auch deinen Spam-Ordner.",
+      "backToLogin": "Jetzt einloggen"
+    },
     "dashboard": {
       "dashboard": "Dashboard",
       "inbox": "Posteingang",
@@ -56,11 +90,13 @@
       "findEmployee": "Mitarbeiter finden"
     },
     "profile": {
-      "email": "E-mail addresse",
+      "email": "E-mail Adresse",
+      "resendEmail": "E-Mail erneut versenden",
+
       "phone": "Telefonnummer",
       "webUrl": "Web-URL",
       "socialLinks": "Soziale Links",
-      "cityAndAddress": "Stadt und addresse",
+      "cityAndAddress": "Stadt und Adresse",
       "workRadius": "Arbeitsradius",
       "lookingFor": "Auf der Suche nach",
       "howManyEmployees": "Wie viele Mitarbeiter hat Ihr Unternehmen ?",
@@ -124,9 +160,10 @@
     "onboarding": {
       "location": "Please let us know where you are located at the moment!",
       "locationPlaceholder": "Enter city",
-      "next": "Next",
-      "choose": "Choose",
+      "next": "Fortfahren",
+      "choose": "Wählen",
       "enter": "Enter",
+      "back": "Zurück",
       "whatBringsYou": "What brings you to Jonder?",
       "whatBringsYouJob": "I am actively looking for a job",
       "whatBringsYouOffer": "I am open to an interesting offer",
@@ -173,7 +210,9 @@
       "company": "Company",
       "position": "Position",
       "type": "Type",
-      "description": "Description"
+      "description": "Description",
+      "companyName": "Unternehmensname",
+      "repeatPassword": " Passwort erneut eingeben"
     }
   },
   "employmentTypes": {

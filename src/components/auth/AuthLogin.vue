@@ -22,7 +22,9 @@
         class="auth-form"
         @submit.prevent="handleLogin"
       >
-        <p class="login-by-email text-medium">{{ $t("general.loginByEmail") }}</p>
+        <p class="login-by-email text-medium">
+          {{ $t("general.loginByEmail") }}
+        </p>
         <label class="profile-label">Email</label>
         <v-text-field
           dense
@@ -50,7 +52,11 @@
         <!--        ></v-checkbox>-->
 
         <p class="text-caption text-left mt-2" style="font-size: 14px">
-          <router-link to="/forgot-password" class="text-color-primary-blue-dark" style="text-decoration: none">
+          <router-link
+            to="/forgot-password"
+            class="text-color-primary-blue-dark"
+            style="text-decoration: none"
+          >
             Passwort vergessen?
           </router-link>
         </p>
@@ -66,7 +72,7 @@
           class="full-w mt-2"
         >
           <v-icon left>mdi-google</v-icon>
-          Continue with Google
+          {{ $t("company.register.continueWithGoogle") }}
         </v-btn>
 
         <v-btn
@@ -77,7 +83,7 @@
           class="full-w mt-4"
         >
           <v-icon left>mdi-facebook</v-icon>
-          Continue with Facebook
+          {{ $t("company.register.continueWithFacebook") }}
         </v-btn>
 
         <v-btn
@@ -93,7 +99,11 @@
 
     <p class="text-center mt-2" style="font-size: 14px">
       Haben Sie kein Konto?
-      <router-link to="/register" class="text-color-primary-blue-dark" style="text-decoration: none">
+      <router-link
+        to="/register"
+        class="text-color-primary-blue-dark"
+        style="text-decoration: none"
+      >
         Registrieren
       </router-link>
     </p>
@@ -108,29 +118,29 @@ export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
   },
   data() {
     return {
       message: {
         show: false,
-        text: ""
+        text: "",
       },
       formData: {
         email: "",
         password: "",
-        privacy: false
+        privacy: false,
       },
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
     };
   },
   methods: {
     async handleLogin() {
       this.formLoading = true;
       this.formResponse = {};
-      localStorage.setItem('user-email', this.formData.email);
+      localStorage.setItem("user-email", this.formData.email);
       this.$store
         .dispatch("auth/login", this.formData)
         .then(() => {
@@ -139,7 +149,7 @@ export default {
           this.$router.replace({ name: "Home" });
           this.$store.dispatch("user/fetchPlans");
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.data.data?.email_not_verified) {
             this.$router.push({ name: "RegisterVerifyEmail" });
           } else {
@@ -149,8 +159,8 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

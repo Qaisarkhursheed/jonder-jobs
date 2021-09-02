@@ -9,11 +9,10 @@
         >
 
         <p class="text-center font-weight-bold mb-7 primary--text text-h6">
-          Du hast dich soeben Erfolgreich registriert!
+          {{ $t("company.register.successMessageEmployer") }}
         </p>
         <p class="text-center text-body-2">
-          Leichter geht Karriere wirklich nicht. Dein Profil wird nun
-          Unternehmen angezeigt!
+          {{ $t("company.register.successMessageEmployerSub") }}
         </p>
         <v-btn
           type="submit"
@@ -33,9 +32,9 @@
 export default {
   props: {
     loading: Boolean,
-    nextScreen: Function
+    nextScreen: Function,
   },
-  name: "StepSucces"
+  name: "StepSucces",
 };
 </script>
 

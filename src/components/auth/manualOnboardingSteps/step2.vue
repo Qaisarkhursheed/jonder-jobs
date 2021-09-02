@@ -12,7 +12,7 @@
         height="55"
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouJob')"
         v-bind="{
-          outlined: value.why_jonder !== $t('user.onboarding.whatBringsYouJob')
+          outlined: value.why_jonder !== $t('user.onboarding.whatBringsYouJob'),
         }"
       >
         {{ $t("user.onboarding.whatBringsYouJob") }}
@@ -25,7 +25,7 @@
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouOffer')"
         v-bind="{
           outlined:
-            value.why_jonder !== $t('user.onboarding.whatBringsYouOffer')
+            value.why_jonder !== $t('user.onboarding.whatBringsYouOffer'),
         }"
         height="55"
       >
@@ -40,7 +40,7 @@
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouCurious')"
         v-bind="{
           outlined:
-            value.why_jonder !== $t('user.onboarding.whatBringsYouCurious')
+            value.why_jonder !== $t('user.onboarding.whatBringsYouCurious'),
         }"
       >
         {{ $t("user.onboarding.whatBringsYouCurious") }}
@@ -53,7 +53,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            Back
+            {{ $t("user.onboarding.back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -78,16 +78,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
 
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
 };
 </script>
 

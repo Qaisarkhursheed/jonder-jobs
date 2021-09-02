@@ -51,7 +51,7 @@
       <!-- Company name -->
       <v-text-field
         dense
-        placeholder="Name der Firma"
+        :placeholder="$t('user.onboarding.companyName')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         hide-details
@@ -124,10 +124,10 @@
       <!-- Password confirmation -->
       <v-text-field
         dense
-        placeholder="Repeat Passwort"
+        :placeholder="$t('user.onboarding.repeatPassword')"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password)
+          validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         outlined
@@ -203,7 +203,7 @@ export default {
   mixins: [Validations],
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
   },
   data() {
     return {
@@ -216,18 +216,18 @@ export default {
         phone: "+49",
         company: "",
         role: "company",
-        accept_policy: false
+        accept_policy: false,
       },
       formResponse: {},
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false
+      showPassConfirm: false,
     };
   },
   methods: {
     ...mapActions({
-      register: "auth/registerCompany"
+      register: "auth/registerCompany",
     }),
 
     async handleRegister() {
@@ -237,15 +237,15 @@ export default {
         .then(() => {
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
           this.$emit("changeImage");
         })
         .finally(() => {
           this.isLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
