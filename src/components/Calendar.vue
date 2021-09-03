@@ -30,6 +30,7 @@
       @change="dateSelect"
       :type="type"
       :min="startDate"
+      locale="de-de"
     ></v-date-picker>
   </v-menu>
 </template>
@@ -108,12 +109,12 @@ export default {
 
       let [year, month, day] = date.split("-");
       if (!day) {
-        return `${month}/${year}`;
+        return `${month}.${year}`;
       }
       if (this.type === "month") {
-        return `${month}/${year}`;
+        return `${month}.${year}`;
       }
-      return `${day}/${month}/${year}`;
+      return `${day}.${month}.${year}`;
     },
     // parseDate(date) {
     //   if (!date) return null;
