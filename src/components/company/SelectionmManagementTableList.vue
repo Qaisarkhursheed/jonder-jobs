@@ -136,6 +136,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.selection-management-table-list {
+  background: #fff;
+}
 .list-wrapper {
   border: 1px solid #e6e7e9;
   border-radius: 8px;
