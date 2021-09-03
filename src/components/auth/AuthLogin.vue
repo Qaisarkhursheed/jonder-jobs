@@ -1,7 +1,7 @@
 <template>
   <v-container class="auth-login-wrap mx-auto" fluid no-gutters>
     <jonder-title>
-      Loggen Sie sich in Ihren Jonder Account ein
+      {{ $t("company.register.loginTitle") }}
     </jonder-title>
 
     <v-alert v-if="$route.query.resetPassword" text type="success">
@@ -25,7 +25,7 @@
         <p class="login-by-email text-medium">
           {{ $t("general.loginByEmail") }}
         </p>
-        <label class="profile-label">Email</label>
+        <label class="profile-label">E-mail</label>
         <v-text-field
           dense
           :rules="[validations.required, validations.email]"
@@ -92,13 +92,14 @@
           :disabled="!formValid"
           :loading="formLoading"
         >
-          Loggen Sie
+          {{ $t("company.register.login") }}
         </v-btn>
       </v-form>
     </div>
 
     <p class="text-center mt-2" style="font-size: 14px">
-      Haben Sie kein Konto?
+      {{ $t("company.register.registerAccount") }}
+
       <router-link
         to="/register"
         class="text-color-primary-blue-dark"

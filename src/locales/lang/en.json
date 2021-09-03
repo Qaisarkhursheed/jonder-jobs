@@ -6,7 +6,8 @@
       "messages": "Messages",
       "teamManagement": "Team Management",
       "publicProfile": "Public Company Profile",
-      "packagesPricing": "Packages Pricing"
+      "packagesPricing": "Packages Pricing",
+      "inviteUser": "Invite Users"
     },
     "register": {
       "jonderWelcome": "Welcome to Jonder",
@@ -40,7 +41,10 @@
       "linksForWebsites": "Links for company websites",
       "confirmYourAccount": "Confirm your account",
       "confirmYourAccountSub": "",
-      "backToLogin": "Back to Login"
+      "backToLogin": "Back to Login",
+      "loginTitle": "Login to your Jonder account",
+      "registerAccount": "No account? ",
+      "login": "Login"
     },
     "dashboard": {
       "dashboard": "Dashboard",
@@ -87,7 +91,11 @@
       "city": "City",
       "advancedSearch": "Advanced Search",
       "findEmployee": "Find employee",
-      "searchResults": "results found"
+      "searchResults": "results found",
+      "enterJobtitle": "Enter Job position",
+      "enterIndustry": "Enter Industry",
+      "enterLocation": "Enter Location",
+      "position": "Position"
     },
     "profile": {
       "email": "E-mail address",
@@ -135,7 +143,11 @@
       "myStatus": "My status",
       "education": "Education",
       "employee": "Employee",
-      "branch": "Branch"
+      "branch": "Branch",
+      "premiumSuggestion": "Reach more employers with Premium",
+      "openChat": "Open chat to communicate",
+      "noMessages": "There is no any messages yet",
+      "upgrade": "Upgrade now"
     },
     "profile": {
       "firstName": "First name",
@@ -154,10 +166,41 @@
       "currentPosition": "What is your current position?",
       "whichBranch": "Which industries do you work in?",
       "workingEnvironment": "Working environment",
-      "whatDescribesYou": "What describes you best?"
+      "whatDescribesYou": "What describes you best?",
+      "searchingFor": "What are you searching for?",
+      "personalInformation": "Personal Information",
+      "positionAndIndustry": "Position & Industry",
+      "experience": "Experience & Education",
+      "documents": "Documents",
+      "billing": "Billing",
+      "invoicing": "Invoicing",
+      "iDontKnow": "I Dont Know",
+
+      "changePassword": "Change Password",
+      "upgradeAccount": "Upgrade your account",
+      "yourBranch": "What industries do you work in?",
+      "whatPosition": "What kind of position are you looking for?",
+      "yourStatus": "Your status",
+      "yourStatusDescription": "Define your current attitude towards the job search",
+      "yourStatusSelect": "Your status on Jonder",
+      "experienceAndEducation": "Experience & Educaiton",
+      "experienceAndEducationDesc": "To impress potential companies, add experience and education to your resume.",
+      "lookingForType": "What kind of employment are you looking for?",
+      "likeToWork": "Where would you like to work? *",
+      "remoteWork": "Are you also open working remotely",
+      "whenCanYouStart": "When can you start to work?",
+      "salaryRequirement": "Monthly net salary requirement",
+      "canStart": "When can you start?",
+      "yourWorkExperience": "Your work experience",
+      "yourEducation": "Your Education",
+      "editDocuments": "Edit your documents",
+      "invoicesDesc": "See a your past invoices and download them.",
+      "passwordDesc": "Change your password and create a new one.",
+      "upgradeDesc": "Upgrade your account to make your profile more visible."
     },
     "onboarding": {
       "location": "Please let us know where you are located at the moment!",
+      "locationChecbox": "Would you like us to show your location to employers?",
       "locationPlaceholder": "Enter city",
       "next": "Next",
       "choose": "Choose",
@@ -169,8 +212,11 @@
       "whatBringsYouCurious": "I am just curious",
       "detailsAboutYou": "Give us details about you",
       "detailsAboutYouPosition": "In which position do you work currently?",
+      "detailsAboutYouPositionPlace": "Enter your position here",
       "detailsAboutYouBranches": "In which branches do you work?",
+      "detailsAboutYouBranchesPlace": " Enter up to 3 occupational fields here",
       "detailsAboutYouRole": "What type of role are you looking for?",
+      "detailsAboutYouRolePlace": "Choose up to 5 desired positions",
       "positionDeveloper": "Developer",
       "positionProjectManager": "Project Manager",
       "positionConstructionManager": "Construction manager",
@@ -186,8 +232,14 @@
       "whatYouLookinFor": "What are you looking for?",
       "lookingForBranche": "What type of Branches are you looking for?",
       "lookingForEmployement": "What type of employment are you looking for?",
+      "lookingForEmployementPlace": "Select the appropriate types",
+
       "whereToWork": "Where would you like to work?*",
+      "whereToWorkPlace": "Choose cities that would come into question",
+
       "whenToStart": "When can you start? ",
+      "whenToStartPlace": "Choose cities that would come into question",
+
       "trainee": "Trainee",
       "fulltime": "Fulltime",
       "parttime": "Parttime",
@@ -211,7 +263,8 @@
       "type": "Type",
       "description": "Description",
       "companyName": "Company Name",
-      "repeatPassword": "Repeat Password"
+      "repeatPassword": "Repeat Password",
+      "add": "Add"
     }
   },
   "employmentTypes": {
@@ -274,6 +327,7 @@
     "validUntil": "Valid until",
     "remainingDays": "Remaining days",
     "success": "Erfolg",
-    "loginByEmail": "Log in by email"
+    "loginByEmail": "Log in by email",
+    "years": "Years"
   }
 }

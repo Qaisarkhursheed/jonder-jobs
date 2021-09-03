@@ -100,7 +100,7 @@
 
       <v-row>
         <v-col cols="12" sm="6">
-          <label class="profile-label">Email</label>
+          <label class="profile-label">E-mail</label>
           <v-text-field
             dense
             disabled
@@ -135,7 +135,9 @@
           Explanation goes here
         </p> -->
         <v-col cols="12">
-          <label class="profile-label">In welchen Branchen arbeiten Sie?</label>
+          <label class="profile-label">{{
+            $t("user.profile.yourBranch")
+          }}</label>
           <v-autocomplete
             v-clearable-autocomplete
             v-model="formData.branche"
@@ -152,9 +154,9 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label"
-            >Nach was für eine Position suchen Sie?</label
-          >
+          <label class="profile-label">{{
+            $t("user.profile.whatPosition")
+          }}</label>
           <v-autocomplete
             v-model="formData.looking_for"
             v-clearable-autocomplete
@@ -172,15 +174,14 @@
     <v-card flat id="status" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Ihr Status
+          {{ $t("user.profile.yourStatus") }}
         </p>
         <p class="profile-subtitle">
-          Machen Sie den Unternehmen klar, ob Sie derzeit auf Stellensuche sind
-          oder nicht.
+          {{ $t("user.profile.yourStatusDescription") }}
         </p>
         <v-col cols="12">
           <label class="profile-label">
-            Ihr Status auf Jonder
+            {{ $t("user.profile.yourStatusSelect") }}
           </label>
           <v-select
             v-model="formData.why_jonder"
@@ -196,11 +197,10 @@
     <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Ihre Erfahrungen & Ausbildungen
+          {{ $t("user.profile.experienceAndEducation") }}
         </p>
         <p class="profile-subtitle">
-          Um potenzielle Unternehmen zu beeindrucken, fügen Sie Ihrem Lebenslauf
-          Erfahrung und Ausbildung hinzu.
+          {{ $t("user.profile.experienceAndEducationDesc") }}
         </p>
         <!-- <v-col cols="12">
           <label class="profile-label"
@@ -222,8 +222,8 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label"
-            >Welche Art von Beschäftigung suchen Sie?</label
+          <label class="profile-label">
+            {{ $t("user.profile.lookingForType") }}</label
           >
           <v-select
             outlined
@@ -236,14 +236,16 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">Wo würden Sie gerne arbeiten?*</label>
+          <label class="profile-label">
+            {{ $t("user.profile.likeToWork") }}</label
+          >
           <GooglePlacesAutocomplete
             :value="formData.address_to_work"
-            @select="e => (formData.address_to_work = e)"
+            @select="(e) => (formData.address_to_work = e)"
           />
           <v-checkbox
             class="mb-0 mt-0"
-            label="Are you also open to working remotely?"
+            :label="$t('user.profile.remoteWork')"
             hide-details="auto"
             v-model="formData.work_remotely"
           ></v-checkbox>
@@ -252,7 +254,9 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">Wann können Sie beginnen?</label>
+          <label class="profile-label">{{
+            $t("user.profile.whenCanYouStart")
+          }}</label>
           <Calendar
             v-if="!dontKnowWhenToStart"
             @setDate="formData.ready_for_work = $event"
@@ -263,7 +267,7 @@
 
           <v-checkbox
             v-model="dontKnowWhenToStart"
-            label="I don't know."
+            :label="$t('user.profile.iDontKnow')"
             class="mt-2 mb-3"
             hide-details
           ></v-checkbox>
@@ -272,16 +276,16 @@
 
       <v-row>
         <v-col cols="10">
-          <div class="profile-label mb-2"
-            >Monatliche Netto Gehaltsvorstellung? (€)
+          <div class="profile-label mb-2">
+            {{ $t("user.profile.salaryRequirement") }} (€)
           </div>
-          <SliderInput 
+          <SliderInput
             :value="formData.monthly_salary"
             suffix="k"
             min="1"
             max="20"
             step="0.5"
-            @change="value => formData.monthly_salary = value"
+            @change="(value) => (formData.monthly_salary = value)"
           />
         </v-col>
       </v-row>
@@ -290,20 +294,19 @@
     <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Wann können Sie beginnen?
+          {{ $t("user.profile.canStart") }}
         </p>
         <p class="profile-subtitle">
-          Um potenzielle Unternehmen zu beeindrucken, fügen Sie Ihrem Lebenslauf
-          Erfahrung und Ausbildung hinzu.
+          {{ $t("user.profile.experienceAndEducationDesc") }}
         </p>
         <v-col cols="10">
           <label class="profile-label">Berufserfahrungen in Jahren </label>
-          <SliderInput 
+          <SliderInput
             :value="formData.working_experience"
             min="0"
             max="40"
             step="0.5"
-            @change="value => formData.working_experience = value"
+            @change="(value) => (formData.working_experience = value)"
           />
         </v-col>
       </v-row>
@@ -323,13 +326,14 @@
         />
 
         <v-col cols="12">
-          <label class="profile-label">Ihre Berufserfahrung</label>
+          <label class="profile-label">{{
+            $t("user.profile.yourWorkExperience")
+          }}</label>
           <CardActionableList
             type="Experience"
             @edit="activateEdit('experience', $event)"
           />
-          <div @click="toggleModal('experience')" 
-            class="d-flex">
+          <div @click="toggleModal('experience')" class="d-flex">
             <v-btn
               rounded
               outlined
@@ -341,7 +345,10 @@
             >
               <v-icon>mdi-plus</v-icon>
             </v-btn>
-            <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            <div
+              class="ml-1"
+              style="cursor: pointer; color: #0253B3; font-weight:600"
+            >
               Hinzufügen
             </div>
           </div>
@@ -349,13 +356,14 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">Ihre Ausbildung</label>
+          <label class="profile-label">{{
+            $t("user.profile.yourEducation")
+          }}</label>
           <CardActionableList
             type="Education"
             @edit="activateEdit('education', $event)"
           />
-          <div @click="toggleModal('education')" 
-            class="d-flex">
+          <div @click="toggleModal('education')" class="d-flex">
             <v-btn
               rounded
               outlined
@@ -367,7 +375,10 @@
             >
               <v-icon>mdi-plus</v-icon>
             </v-btn>
-            <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            <div
+              class="ml-1"
+              style="cursor: pointer; color: #0253B3; font-weight:600"
+            >
               Hinzufügen
             </div>
           </div>
@@ -378,30 +389,30 @@
     <v-card flat id="documents" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Dokumente
+          {{ $t("user.profile.documents") }}
         </p>
         <p class="profile-subtitle">
-          Bearbeiten Sie Ihre Dokumente.
+          {{ $t("user.profile.editDocuments") }}
         </p>
         <v-col cols="12">
           <div class="mt-6">
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.cv = e[0])"
+                @change="(e) => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.qualifications = e[0])"
+                @change="(e) => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="e => (formData.resume = e[0])"
+                @change="(e) => (formData.resume = e[0])"
                 type="Resume"
                 :value="formData.resume"
               />
@@ -414,10 +425,10 @@
     <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Fakturierung &amp; Rechnungen
+          {{ $t("user.profile.invoicing") }}
         </p>
         <p class="profile-subtitle">
-          Sehen Sie vergangene Rechnungen ein und laden Sie sie herunter.
+          {{ $t("user.profile.invoicesDesc") }}
         </p>
       </v-row>
 
@@ -438,7 +449,7 @@
             @click="
               $store.dispatch('invoices/downloadInvoice', {
                 id: item.id,
-                number: item.invoice_number
+                number: item.invoice_number,
               })
             "
           ></v-img>
@@ -476,10 +487,10 @@
     <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Passwort ändern
+          {{ $t("user.profile.changePassword") }}
         </p>
         <p class="profile-subtitle">
-          Ändern Sie Ihr Passwort und erstellen Sie ein neues.
+          {{ $t("user.profile.passwordDesc") }}
         </p>
       </v-row>
 
@@ -537,11 +548,10 @@
     <v-card flat id="upgradeAccount" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Account upgraden
+          {{ $t("user.profile.upgradeAccount") }}
         </p>
         <p class="profile-subtitle">
-          Upgraden Sie Ihr Konto, um Ihre Stellenanzeige sichtbarer zu
-          platzieren.
+          {{ $t("user.profile.upgradeDesc") }}
         </p>
       </v-row>
       <v-row>
@@ -602,7 +612,7 @@ import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperi
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
-import SliderInput from '@/components/SliderInput.vue';
+import SliderInput from "@/components/SliderInput.vue";
 
 export default {
   name: "Profile",
@@ -618,7 +628,7 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
-    SliderInput
+    SliderInput,
   },
 
   data: () => ({
@@ -639,7 +649,7 @@ export default {
       qualifications: null,
       resume: null,
       location_show: "",
-      work_remotely: ""
+      work_remotely: "",
     },
     formResponse: {},
     formLoading: false,
@@ -652,42 +662,42 @@ export default {
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
-      "I am just curious"
+      "I am just curious",
     ],
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal
+        component: UpgradePlanModal,
       },
       AddNewCard: {
         active: false,
         edit: false,
-        component: AddNewCard
+        component: AddNewCard,
       },
       education: {
         active: false,
         edit: false,
-        component: ModalEducation
+        component: ModalEducation,
       },
       experience: {
         active: false,
         edit: false,
-        component: ModalExperience
-      }
+        component: ModalExperience,
+      },
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
-      education: ["edit", "delete"]
-    }
+      education: ["edit", "delete"],
+    },
   }),
   created() {
     this.resetFormData(this.user);
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status === "complete");
+      this.invoices = this.invoices.filter((i) => i.status === "complete");
     });
   },
   computed: {
@@ -696,7 +706,7 @@ export default {
       "getUserFullName",
       "getUserInitials",
       "userPlan",
-      "plans"
+      "plans",
     ]),
     profile_img() {
       if (this.newImage) {
@@ -710,7 +720,7 @@ export default {
     },
     plansData() {
       return this.plans("jobseeker_paln");
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -766,10 +776,10 @@ export default {
 
       this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
@@ -783,7 +793,7 @@ export default {
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -791,7 +801,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         })
         .finally(() => {
@@ -805,13 +815,13 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
+    },
   },
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    }
-  }
+    },
+  },
 };
 </script>
 
