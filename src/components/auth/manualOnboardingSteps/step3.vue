@@ -1,72 +1,90 @@
 <template>
   <div class="mo-step-3">
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.detailsAboutYou") }}
+      {{ $t("user.onboarding.whatYouLookinFor") }}
     </p>
 
-    <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <!-- Current position -->
-      <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouPosition") }}
+    <v-form v-model="formValid" @submit.prevent="handleNext">
+      <!-- <label class="profile-label">
+        {{ $t("user.onboarding.lookingForBranche") }}
       </label>
       <v-autocomplete
-        v-model="value.current_position"
-        :items="types.JOB_POSITION"
-        :rules="[validations.required]"
-        outlined
-        flat
-        hide-no-data
-        :placeholder="$t('user.onboarding.choose')"
-        class="mt-1"
-      >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
-      </v-autocomplete>
-
-      <!-- Branche -->
-      <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouBranches") }}
-      </label>
-      <v-autocomplete
-        v-model="value.branche"
-        :items="types.JOB_BRANCHE"
-        :rules="[validations.required, validations.max.selection(3)]"
         v-clearable-autocomplete
+        v-model="value.looking_for_branche"
+        :items="types.JOB_BRANCHE"
+        :rules="[validations.required]"
         outlined
         flat
         hide-no-data
         multiple
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
+      ></v-autocomplete> -->
+
+      <label class="profile-label">
+        {{ $t("user.onboarding.lookingForEmployement") }}
+      </label>
+      <v-select
+        v-model="value.looking_for_employment_type"
+        :items="types.EMPLOYEMENT_TYPE"
+        :rules="[validations.required]"
+        :placeholder="$t('user.onboarding.choose')"
+        outlined
+        class="mt-1"
       >
         <template v-slot:append-outer>
           <span style="color: red;">*</span>
         </template>
-      </v-autocomplete>
+      </v-select>
 
-      <!-- Looking for role -->
       <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouRole") }}
+        {{ $t("user.onboarding.whereToWork") }}
       </label>
-       <v-autocomplete
-          v-model="value.looking_for"
-          :items="types.JOB_POSITION"
-          :placeholder="$t('user.onboarding.choose')"
-          :rules="[validations.required, validations.max.selection(5)]"
-          v-clearable-autocomplete
-          multiple
-          outlined
-          flat
-          hide-no-data
-          class="mt-1"
-        >
-          <template v-slot:append-outer>
-            <span style="color: red;">*</span>
-          </template>
-        </v-autocomplete>
+      <GooglePlacesAutocomplete 
+        @select="e => (value.address_to_work = e)" 
+        :required="true"
+      />
+      
+      <v-checkbox
+        class="mb-3 mt-0"
+        label="Are you also open to working remotely?"
+        hide-details="auto"
+        v-model="value.work_remotely"
+      ></v-checkbox>
 
-      <v-row class="mt-0">
+      <label class="profile-label">
+        {{ $t("user.onboarding.whenToStart") }}
+      </label>
+      <Calendar
+        v-if="!dontKnowWhenToStart"
+        @setDate="value.ready_for_work = $event"
+        :rules="[validations.required]"
+        type="date"
+        :fromToday="true"
+        hide-details="auto"
+        :required="true"
+      />
+
+      <v-checkbox
+        v-model="dontKnowWhenToStart"
+        label="I don't know."
+        class="mt-2 mb-3"
+        hide-details
+      ></v-checkbox>
+
+      <div class="profile-label mb-3 mt-6">
+        {{ $t("user.onboarding.monthlySalary") }}
+      </div>
+      <SliderInput 
+        :value="value.monthly_salary"
+        suffix="k"
+        min="1"
+        max="12"
+        step="0.5"
+        @change="(val) => (value.monthly_salary = val)"
+      />
+
+      <v-row class="mt-5">
         <v-col cols="3">
           <v-btn
             @click="$emit('prevScreen')"
@@ -81,7 +99,7 @@
             :disabled="!formValid"
             type="submit"
             color="primary"
-            height="58"
+            height="55"
             class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
@@ -93,35 +111,47 @@
 </template>
 
 <script>
-
-import types from '@/types';
+import types from "@/types";
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
+import Calendar from "@/components/Calendar";
+import SliderInput from '@/components/SliderInput';
 
 export default {
   name: "Step3",
+
+  components: {
+    Calendar,
+    GooglePlacesAutocomplete,
+    SliderInput
+  },
+
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
       formValid: false,
+      dontKnowWhenToStart: false
     };
   },
   computed: {
     types() {
       return types;
     }
+  },
+  methods: {
+    handleNext() {
+      if (this.dontKnowWhenToStart) {
+        this.value.ready_for_work = null;
+      }
+      this.nextScreen();
+    }
   }
 };
 </script>
 
-<style scoped lang="scss">
-.info-text {
-  font-size: 12px;
-  position: absolute;
-  bottom: 3.5rem;
-}
-</style>
+<style scoped lang="scss"></style>

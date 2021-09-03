@@ -1,92 +1,20 @@
 <template>
   <div class="mo-step-3">
-    <ModalEducation
-      v-if="modals.education.active"
-      :active="modals.education.active"
-      :edit="modals.education.edit"
-      @close="toggleModal('education')"
-    />
-    <ModalExperience
-      v-if="modals.experience.active"
-      :active="modals.experience.active"
-      :edit="modals.experience.edit"
-      @close="toggleModal('experience')"
-    />
-
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.tellAboutExperience") }}
+      {{ $t("user.onboarding.uploadDocuments") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <div class="profile-label mb-3">
-        {{ $t("user.onboarding.experienceInYears") }}
-      </div>
-      <SliderInput 
-        :value="value.working_experience"
-        suffix=" years"
-        min="0"
-        max="40"
-        step="0.5"
-        @change="(val) => (value.working_experience = val)"
+      <DocumentUploadSection @change="(e) => (cv = e)" type="Cv" />
+
+      <DocumentUploadSection
+        @change="(e) => (qualifications = e)"
+        type="Qualifications"
       />
 
-      <div class="mt-4">
-        <label class="profile-label">
-          {{ $t("user.onboarding.yourProfessionalExperience") }}
-        </label>
-        <CardActionableList
-          class="mt-1"
-          type="Experience"
-          @edit="activateEdit('experience', $event)"
-        />
-        <div @click="toggleModal('experience')" 
-          class="d-flex">
-          <v-btn
-            rounded
-            outlined
-            color="#0253B3"
-            height="26"
-            width="26"
-            style="cursor: pointer;"
-            fab
-          >
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
-            Add
-          </div>
-        </div>
-      </div>
+      <DocumentUploadSection @change="(e) => (resume = e)" type="Resume" />
 
-      <div class="mt-5">
-        <label class="profile-label">
-          {{ $t("user.onboarding.yourEducation") }}
-        </label>
-        <CardActionableList
-          class="mt-1"
-          type="Education"
-          @edit="activateEdit('education', $event)"
-        />
-        <div @click="toggleModal('education')" 
-          class="d-flex">
-          <v-btn
-            rounded
-            outlined
-            color="#0253B3"
-            height="26"
-            width="26"
-            style="cursor: pointer;"
-            fab
-          >
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
-            Add
-          </div>
-        </div>
-      </div>
-
-      <v-row class="mt-5">
+      <v-row class="mt-0">
         <v-col cols="3">
           <v-btn
             @click="$emit('prevScreen')"
@@ -102,7 +30,7 @@
             type="submit"
             color="primary"
             height="55"
-            class="full-w font-weight-medium dark-blue"
+            class="full-w font-weight-medium "
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>
@@ -113,60 +41,51 @@
 </template>
 
 <script>
-import CardActionableList from "@/components/user/JobseekerCardActionableList";
-import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
-import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
-import SliderInput from '@/components/SliderInput';
+import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 
 export default {
   name: "Step5",
 
   components: {
-    ModalEducation,
-    ModalExperience,
-    CardActionableList,
-    SliderInput
+    DocumentUploadSection,
   },
 
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
+    formLoading: Boolean,
   },
   data() {
     return {
-      formValid: false,
-      modals: {
-        education: {
-          active: false,
-          edit: false,
-          component: ModalEducation
-        },
-        experience: {
-          active: false,
-          edit: false,
-          component: ModalExperience
-        }
-      },
-      fileActions: {
-        experience: ["edit", "delete"],
-        education: ["edit", "delete"]
-      }
+      formValid: true,
+      qualifications: null,
+      resume: null,
+      cv: null,
     };
   },
-  methods: {
-    toggleModal(type) {
-      this.modals[type].edit = false;
-      this.modals[type].active = !this.modals[type].active;
+  watch: {
+    cv(val) {
+      console.log(val);
+      this.$emit("input", {
+        ...this.value,
+        cv: val[0],
+      });
     },
-    activateEdit(type, item) {
-      this.toggleModal(type);
-      this.modals[type].edit = item;
-    }
-  }
+    resume(val) {
+      this.$emit("input", {
+        ...this.value,
+        resume: val[0],
+      });
+    },
+    qualifications(val) {
+      this.$emit("input", {
+        ...this.value,
+        qualifications: val[0],
+      });
+    },
+  },
 };
 </script>
-
-<style scoped lang="scss"></style>

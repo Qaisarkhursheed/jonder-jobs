@@ -43,9 +43,7 @@
 
           <v-stepper-step step="5" :complete="complete(5)"></v-stepper-step>
 
-          <v-divider></v-divider>
-
-          <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step>
+          <!-- <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step> -->
         </v-stepper-header>
         <v-stepper-items class="mo-stepper-items">
           <v-stepper-content
@@ -103,7 +101,7 @@
             />
           </v-stepper-content>
 
-          <v-stepper-content
+          <!-- <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
             step="6"
           >
@@ -112,11 +110,11 @@
               @prevScreen="prevStep"
               v-model="formData"
             />
-          </v-stepper-content>
+          </v-stepper-content> -->
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
-            step="7"
+            step="6"
           >
             <step-succes
               :nextScreen="nextStep"
@@ -141,7 +139,7 @@ import Step2 from "@/components/auth/manualOnboardingSteps/step2.vue";
 import Step3 from "@/components/auth/manualOnboardingSteps/step3.vue";
 import Step4 from "@/components/auth/manualOnboardingSteps/step4.vue";
 import Step5 from "@/components/auth/manualOnboardingSteps/step5.vue";
-import Step6 from "@/components/auth/manualOnboardingSteps/step6.vue";
+// import Step6 from "@/components/auth/manualOnboardingSteps/step6.vue";
 import StepSucces from "../../components/auth/manualOnboardingSteps/stepSucces.vue";
 
 import { mapActions, mapGetters } from "vuex";
@@ -155,7 +153,6 @@ export default {
     Step3,
     Step4,
     Step5,
-    Step6,
     StepSucces
   },
   props: {
@@ -219,7 +216,7 @@ export default {
     nextStep() {
       if (this.saveInProgress) return;
 
-      if (this.e1 < 6) {
+      if (this.e1 < 5) {
         this.e1++;
       } else {
         this.saveOnboarding();
@@ -235,7 +232,7 @@ export default {
       this.postOnboardingUser(this.formData)
         .then(() => {
           this.showSteps = false;
-          this.e1 = 7;
+          this.e1 = 6;
           // this.$router.replace("/dashboard");
         })
         .catch(err => {

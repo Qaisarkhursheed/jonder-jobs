@@ -1,88 +1,90 @@
 <template>
   <div class="mo-step-3">
+    <ModalEducation
+      v-if="modals.education.active"
+      :active="modals.education.active"
+      :edit="modals.education.edit"
+      @close="toggleModal('education')"
+    />
+    <ModalExperience
+      v-if="modals.experience.active"
+      :active="modals.experience.active"
+      :edit="modals.experience.edit"
+      @close="toggleModal('experience')"
+    />
+
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.whatYouLookinFor") }}
+      {{ $t("user.onboarding.tellAboutExperience") }}
     </p>
 
-    <v-form v-model="formValid" @submit.prevent="handleNext">
-      <!-- <label class="profile-label">
-        {{ $t("user.onboarding.lookingForBranche") }}
-      </label>
-      <v-autocomplete
-        v-clearable-autocomplete
-        v-model="value.looking_for_branche"
-        :items="types.JOB_BRANCHE"
-        :rules="[validations.required]"
-        outlined
-        flat
-        hide-no-data
-        multiple
-        :placeholder="$t('user.onboarding.choose')"
-        class="mt-1"
-      ></v-autocomplete> -->
-
-      <label class="profile-label">
-        {{ $t("user.onboarding.lookingForEmployement") }}
-      </label>
-      <v-select
-        v-model="value.looking_for_employment_type"
-        :items="types.EMPLOYEMENT_TYPE"
-        :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
-        outlined
-        class="mt-1"
-      >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
-      </v-select>
-
-      <label class="profile-label">
-        {{ $t("user.onboarding.whereToWork") }}
-      </label>
-      <GooglePlacesAutocomplete 
-        @select="e => (value.address_to_work = e)" 
-        :required="true"
-      />
-      
-      <v-checkbox
-        class="mb-3 mt-0"
-        label="Are you also open to working remotely?"
-        hide-details="auto"
-        v-model="value.work_remotely"
-      ></v-checkbox>
-
-      <label class="profile-label">
-        {{ $t("user.onboarding.whenToStart") }}
-      </label>
-      <Calendar
-        v-if="!dontKnowWhenToStart"
-        @setDate="value.ready_for_work = $event"
-        :rules="[validations.required]"
-        type="date"
-        :fromToday="true"
-        hide-details="auto"
-        :required="true"
-      />
-
-      <v-checkbox
-        v-model="dontKnowWhenToStart"
-        label="I don't know."
-        class="mt-2 mb-3"
-        hide-details
-      ></v-checkbox>
-
-      <div class="profile-label mb-3 mt-6">
-        {{ $t("user.onboarding.monthlySalary") }}
+    <v-form v-model="formValid" @submit.prevent="nextScreen">
+      <div class="profile-label mb-3">
+        {{ $t("user.onboarding.experienceInYears") }}
       </div>
       <SliderInput 
-        :value="value.monthly_salary"
-        suffix="k"
-        min="1"
-        max="12"
+        :value="value.working_experience"
+        suffix=" years"
+        min="0"
+        max="40"
         step="0.5"
-        @change="(val) => (value.monthly_salary = val)"
+        @change="(val) => (value.working_experience = val)"
       />
+
+      <div class="mt-4">
+        <label class="profile-label">
+          {{ $t("user.onboarding.yourProfessionalExperience") }}
+        </label>
+        <CardActionableList
+          class="mt-1"
+          type="Experience"
+          @edit="activateEdit('experience', $event)"
+        />
+        <div @click="toggleModal('experience')" 
+          class="d-flex">
+          <v-btn
+            rounded
+            outlined
+            color="#0253B3"
+            height="26"
+            width="26"
+            style="cursor: pointer;"
+            fab
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            Add
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <label class="profile-label">
+          {{ $t("user.onboarding.yourEducation") }}
+        </label>
+        <CardActionableList
+          class="mt-1"
+          type="Education"
+          @edit="activateEdit('education', $event)"
+        />
+        <div @click="toggleModal('education')" 
+          class="d-flex">
+          <v-btn
+            rounded
+            outlined
+            color="#0253B3"
+            height="26"
+            width="26"
+            style="cursor: pointer;"
+            fab
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
+            Add
+          </div>
+        </div>
+      </div>
 
       <v-row class="mt-5">
         <v-col cols="3">
@@ -111,17 +113,18 @@
 </template>
 
 <script>
-import types from "@/types";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
-import Calendar from "@/components/Calendar";
+import CardActionableList from "@/components/user/JobseekerCardActionableList";
+import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
+import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import SliderInput from '@/components/SliderInput';
 
 export default {
   name: "Step4",
 
   components: {
-    Calendar,
-    GooglePlacesAutocomplete,
+    ModalEducation,
+    ModalExperience,
+    CardActionableList,
     SliderInput
   },
 
@@ -135,20 +138,32 @@ export default {
   data() {
     return {
       formValid: false,
-      dontKnowWhenToStart: false
+      modals: {
+        education: {
+          active: false,
+          edit: false,
+          component: ModalEducation
+        },
+        experience: {
+          active: false,
+          edit: false,
+          component: ModalExperience
+        }
+      },
+      fileActions: {
+        experience: ["edit", "delete"],
+        education: ["edit", "delete"]
+      }
     };
   },
-  computed: {
-    types() {
-      return types;
-    }
-  },
   methods: {
-    handleNext() {
-      if (this.dontKnowWhenToStart) {
-        this.value.ready_for_work = null;
-      }
-      this.nextScreen();
+    toggleModal(type) {
+      this.modals[type].edit = false;
+      this.modals[type].active = !this.modals[type].active;
+    },
+    activateEdit(type, item) {
+      this.toggleModal(type);
+      this.modals[type].edit = item;
     }
   }
 };
