@@ -8,7 +8,7 @@
       <v-row>
         <v-col cols="12" md="7">
           <label class="section-label">
-            {{ $t("company.search.jobPosition") }}
+            {{ $t("company.search.position") }}
           </label>
           <v-autocomplete
             v-model="formFields.job_position"
@@ -18,7 +18,7 @@
             flat
             hide-no-data
             :hide-details="true"
-            placeholder="Enter job position"
+            :placeholder="$t('company.search.enterJobtitle')"
           ></v-autocomplete>
         </v-col>
         <v-col cols="12" md="5">
@@ -49,7 +49,7 @@
               flat
               hide-no-data
               :hide-details="true"
-              placeholder="Enter industry "
+              :placeholder="$t('company.search.enterIndustry')"
             ></v-autocomplete>
           </v-col>
           <v-col cols="12" md="4">
@@ -145,7 +145,7 @@
             </label>
             <GooglePlacesAutocomplete
               :value="formFields.city"
-              @select="e => (formFields.city = e)"
+              @select="(e) => (formFields.city = e)"
             />
           </v-col>
         </v-row>
@@ -176,7 +176,7 @@
                   elevation="0"
                   :class="[
                     'advanced-search-btn full-w mt-md-16 white font-weight-medium',
-                    { active: advancedSearch }
+                    { active: advancedSearch },
                   ]"
                   color="#fff"
                   @click="advancedSearch = !advancedSearch"
@@ -193,7 +193,9 @@
                   @click="search"
                 >
                   <Loop />
-                  <span class="pl-1">{{ $t("company.search.findEmployee") }}</span>
+                  <span class="pl-1">{{
+                    $t("company.search.findEmployee")
+                  }}</span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -214,14 +216,14 @@ import { forEach } from "lodash";
 import store from "@/store";
 import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
-import Loop from '../../svgs/Loop';
+import Loop from "../../svgs/Loop";
 
 export default {
   name: "SearchForm",
 
   components: {
     Loop,
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
 
   data() {
@@ -235,10 +237,10 @@ export default {
         education: "",
         min_salary: "",
         max_salary: "",
-        city: ""
+        city: "",
       },
       advancedSearch: false,
-      errorMessage: ""
+      errorMessage: "",
     };
   },
   methods: {
@@ -273,7 +275,7 @@ export default {
         }
       }
       if (isValid) {
-        store.dispatch("company/searchFilterSave", saveData).catch(error => {
+        store.dispatch("company/searchFilterSave", saveData).catch((error) => {
           this.errorMessage = error.response.data.message;
           this.removeMessage(5000);
         });
@@ -328,7 +330,7 @@ export default {
         }
       });
       return activatedFields;
-    }
+    },
   },
   computed: {
     searchCountLabel() {
@@ -342,8 +344,8 @@ export default {
     },
     types() {
       return types;
-    }
-  }
+    },
+  },
 };
 </script>
 

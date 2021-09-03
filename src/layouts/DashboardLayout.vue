@@ -27,7 +27,7 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span class="d-none d-md-inline"> Hello, </span>
+          <span class="d-none d-md-inline"> Hey, </span>
           <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -72,19 +72,20 @@
 
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                Persönliche Informationen
+                {{ $t("user.profile.personalInformation") }}
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('roleAndBranche')" class="nav-item">
-                Position & Branche
+                {{ $t("user.profile.positionAndIndustry") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('lookingFor')" class="nav-item">
-                Wonach suchen Sie?
+                {{ $t("user.profile.searchingFor") }}
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
@@ -93,37 +94,43 @@
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
-                Erfahrung & Ausbildung
+                {{ $t("user.profile.experience") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('documents')" class="nav-item">
-                Dokumente
+                {{ $t("user.profile.documents") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                Rechnungen
+                {{ $t("user.profile.billing") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('paymentMethod')" class="nav-item">
-                Rechnungsstellung
+                {{ $t("user.profile.invoicing") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                Passwort ändern
+                {{ $t("user.profile.changePassword") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('upgradeAccount')" class="nav-item">
-                Account Upgraden
+                {{ $t("user.profile.upgradeAccount") }}
+
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
@@ -157,7 +164,6 @@
             />
 
             <div class="top-info mt-7">
-
               <span class="about-info">Status der arbeitssuche</span>
               <p class="about-text">
                 <span v-for="(item, i) in userEmploymentType" :key="i">
@@ -232,7 +238,7 @@ import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
-import DashboardActivePlan from '../components/dashboard/DashboardActivePlan';
+import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
 
 export default {
   components: {
@@ -245,7 +251,7 @@ export default {
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -259,8 +265,8 @@ export default {
       );
     },
     userEmploymentType() {
-      return this.user.looking_for_employment_type.split(',');
-    }
+      return this.user.looking_for_employment_type.split(",");
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -275,7 +281,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    }
+    },
   },
   watch: {
     search(val) {
@@ -291,8 +297,8 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -437,7 +443,7 @@ export default {
 
     .v-icon {
       color: #0253b3 !important;
-    };
+    }
   }
 }
 

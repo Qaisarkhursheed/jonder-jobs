@@ -28,7 +28,7 @@
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('user.onboarding.lookingForEmployementPlace')"
         outlined
         class="mt-1"
       >
@@ -40,14 +40,14 @@
       <label class="profile-label">
         {{ $t("user.onboarding.whereToWork") }}
       </label>
-      <GooglePlacesAutocomplete 
-        @select="e => (value.address_to_work = e)" 
+      <GooglePlacesAutocomplete
+        @select="(e) => (value.address_to_work = e)"
         :required="true"
       />
-      
+
       <v-checkbox
         class="mb-3 mt-0"
-        label="Are you also open to working remotely?"
+        :label="$t('user.profile.remoteWork')"
         hide-details="auto"
         v-model="value.work_remotely"
       ></v-checkbox>
@@ -67,7 +67,7 @@
 
       <v-checkbox
         v-model="dontKnowWhenToStart"
-        label="I don't know."
+        :label="$t('user.profile.iDontKnow')"
         class="mt-2 mb-3"
         hide-details
       ></v-checkbox>
@@ -75,7 +75,7 @@
       <div class="profile-label mb-3 mt-6">
         {{ $t("user.onboarding.monthlySalary") }}
       </div>
-      <SliderInput 
+      <SliderInput
         :value="value.monthly_salary"
         suffix="k"
         min="1"
@@ -114,7 +114,7 @@
 import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import Calendar from "@/components/Calendar";
-import SliderInput from '@/components/SliderInput';
+import SliderInput from "@/components/SliderInput";
 
 export default {
   name: "Step3",
@@ -122,26 +122,26 @@ export default {
   components: {
     Calendar,
     GooglePlacesAutocomplete,
-    SliderInput
+    SliderInput,
   },
 
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
       formValid: false,
-      dontKnowWhenToStart: false
+      dontKnowWhenToStart: false,
     };
   },
   computed: {
     types() {
       return types;
-    }
+    },
   },
   methods: {
     handleNext() {
@@ -149,8 +149,8 @@ export default {
         this.value.ready_for_work = null;
       }
       this.nextScreen();
-    }
-  }
+    },
+  },
 };
 </script>
 

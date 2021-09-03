@@ -46,7 +46,7 @@ export default {
           width: "25%",
         },
         {
-          text: "Email",
+          text: "E-mail",
           value: "email",
           width: "25%",
         },

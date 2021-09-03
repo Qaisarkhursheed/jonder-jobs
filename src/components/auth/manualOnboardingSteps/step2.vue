@@ -16,7 +16,7 @@
         outlined
         flat
         hide-no-data
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('user.onboarding.detailsAboutYouPositionPlace')"
         class="mt-1"
       >
         <template v-slot:append-outer>
@@ -37,7 +37,7 @@
         flat
         hide-no-data
         multiple
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('user.onboarding.detailsAboutYouBranchesPlace')"
         class="mt-1"
       >
         <template v-slot:append-outer>
@@ -49,35 +49,35 @@
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouRole") }}
       </label>
-       <v-autocomplete
-          v-model="value.looking_for"
-          :items="types.JOB_POSITION"
-          :placeholder="$t('user.onboarding.choose')"
-          :rules="[validations.required, validations.max.selection(5)]"
-          v-clearable-autocomplete
-          multiple
-          outlined
-          flat
-          hide-no-data
-          class="mt-1"
-        >
-          <template v-slot:append-outer>
-            <span style="color: red;">*</span>
-          </template>
-        </v-autocomplete>
-      
+      <v-autocomplete
+        v-model="value.looking_for"
+        :items="types.JOB_POSITION"
+        :placeholder="$t('user.onboarding.detailsAboutYouRolePlace')"
+        :rules="[validations.required, validations.max.selection(5)]"
+        v-clearable-autocomplete
+        multiple
+        outlined
+        flat
+        hide-no-data
+        class="mt-1"
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-autocomplete>
+
       <label class="profile-label">
         {{ $t("user.onboarding.location") }}
       </label>
       <GooglePlacesAutocomplete
-        @select="e => value.city = e" 
+        @select="(e) => (value.city = e)"
         :required="true"
         class="mt-1"
       />
 
       <v-checkbox
         class="mb-5 mt-0"
-        label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+        :label="$t('user.onboarding.locationChecbox')"
         hide-details="auto"
         v-model="value.location_show"
       ></v-checkbox>
@@ -109,15 +109,14 @@
 </template>
 
 <script>
-
-import types from '@/types';
-import GooglePlacesAutocomplete from '@/components/GooglePlacesAutocomplete.vue';
+import types from "@/types";
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 
 export default {
   name: "Step2",
 
   components: {
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
 
   props: {
@@ -135,8 +134,8 @@ export default {
   computed: {
     types() {
       return types;
-    }
-  }
+    },
+  },
 };
 </script>
 

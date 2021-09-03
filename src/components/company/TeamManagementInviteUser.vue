@@ -9,12 +9,14 @@
           v-bind="attrs"
           v-on="on"
         >
-          Neue Nutzer einladen
+          {{ $t("company.employer.inviteUser") }}
         </v-btn>
       </template>
 
       <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4" style="font-size: 28px;">Neue Nutzer einladen</h1>
+        <h1 class="mb-4" style="font-size: 28px;">
+          {{ $t("company.employer.inviteUser") }}
+        </h1>
 
         <v-form
           ref="form"
@@ -57,7 +59,7 @@
                 $refs.form.reset();
               "
             >
-              {{ $t('general.cancelOption') }}
+              {{ $t("general.cancelOption") }}
             </v-btn>
             <v-btn
               type="submit"

@@ -21,11 +21,11 @@
       <div class="profile-label mb-3">
         {{ $t("user.onboarding.experienceInYears") }}
       </div>
-      <SliderInput 
+      <SliderInput
         :value="value.working_experience"
-        suffix=" years"
+        :suffix="$t('general.years')"
         min="0"
-        max="40"
+        max="30"
         step="0.5"
         @change="(val) => (value.working_experience = val)"
       />
@@ -39,8 +39,7 @@
           type="Experience"
           @edit="activateEdit('experience', $event)"
         />
-        <div @click="toggleModal('experience')" 
-          class="d-flex">
+        <div @click="toggleModal('experience')" class="d-flex">
           <v-btn
             rounded
             outlined
@@ -52,8 +51,11 @@
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
-          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
-            Add
+          <div
+            class="ml-1"
+            style="cursor: pointer; color: #0253B3; font-weight:600"
+          >
+            {{ $t("user.onboarding.add") }}
           </div>
         </div>
       </div>
@@ -67,8 +69,7 @@
           type="Education"
           @edit="activateEdit('education', $event)"
         />
-        <div @click="toggleModal('education')" 
-          class="d-flex">
+        <div @click="toggleModal('education')" class="d-flex">
           <v-btn
             rounded
             outlined
@@ -80,8 +81,11 @@
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
-          <div class="ml-1" style="cursor: pointer; color: #0253B3; font-weight:600">
-            Add
+          <div
+            class="ml-1"
+            style="cursor: pointer; color: #0253B3; font-weight:600"
+          >
+            {{ $t("user.onboarding.add") }}
           </div>
         </div>
       </div>
@@ -116,7 +120,7 @@
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
-import SliderInput from '@/components/SliderInput';
+import SliderInput from "@/components/SliderInput";
 
 export default {
   name: "Step4",
@@ -125,15 +129,15 @@ export default {
     ModalEducation,
     ModalExperience,
     CardActionableList,
-    SliderInput
+    SliderInput,
   },
 
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
@@ -142,18 +146,18 @@ export default {
         education: {
           active: false,
           edit: false,
-          component: ModalEducation
+          component: ModalEducation,
         },
         experience: {
           active: false,
           edit: false,
-          component: ModalExperience
-        }
+          component: ModalExperience,
+        },
       },
       fileActions: {
         experience: ["edit", "delete"],
-        education: ["edit", "delete"]
-      }
+        education: ["edit", "delete"],
+      },
     };
   },
   methods: {
@@ -164,8 +168,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
-  }
+    },
+  },
 };
 </script>
 

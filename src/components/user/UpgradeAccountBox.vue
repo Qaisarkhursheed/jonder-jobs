@@ -10,7 +10,7 @@
     <!-- Upgrade box -->
     <div class="upgrade-box">
       <div class="upgrade-title">
-        Reichweite Ihres Profils durch einen Premiumplan erweitern.
+        {{ $t("user.dashboard.premiumSuggestion") }}
       </div>
 
       <v-img
@@ -36,7 +36,7 @@
             style="color: #55F481; width: 100%; cursor: pointer;"
             @click="toggleModal('UpgradePlan')"
           >
-            Jetzt Upgraden
+            {{ $t("user.dashboard.upgrade") }}
           </div>
         </div>
       </div>
@@ -52,8 +52,8 @@ export default {
   props: {
     small: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     toggleModal(type) {
@@ -63,11 +63,11 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
+    },
   },
   components: {
     UpgradePlanModal,
-    CardActionableList
+    CardActionableList,
   },
   mounted() {
     if (this.$store.getters["user/userPlans"] == null) {
@@ -79,13 +79,13 @@ export default {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal
-      }
+        component: UpgradePlanModal,
+      },
     },
     fileActions: {
-      UpgradePlan: ["edit", "delete"]
-    }
-  })
+      UpgradePlan: ["edit", "delete"],
+    },
+  }),
 };
 </script>
 

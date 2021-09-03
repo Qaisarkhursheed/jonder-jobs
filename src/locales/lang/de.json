@@ -6,7 +6,8 @@
       "messages": "Nachrichten",
       "teamManagement": "Team Managment",
       "publicProfile": "Öffentliches Firmenprofil",
-      "packagesPricing": "Preise für Pakete"
+      "packagesPricing": "Preise für Pakete",
+      "inviteUser": "Nutzer einladen"
     },
     "register": {
       "jonderWelcome": "Herzlich Willkommen bei Jonder!",
@@ -40,7 +41,10 @@
       "linksForWebsites": "Links zur Digitale Präsenz hinzufügen",
       "confirmYourAccount": "Bitte überprüfe deine E-Mail",
       "confirmYourAccountSub": "Um deinen Account zu bestätigen, haben wir dir einen Link per E-Mail gesendet. Öffne diesen Link um deine Registrierung zu bestätigen. Überprüfe auch deinen Spam-Ordner.",
-      "backToLogin": "Jetzt einloggen"
+      "backToLogin": "Jetzt einloggen",
+      "loginTitle": "Logge dich in deinen Jonder account ein",
+      "registerAccount": "Du hast kein Konto? ",
+      "login": "Anmelden"
     },
     "dashboard": {
       "dashboard": "Dashboard",
@@ -59,7 +63,7 @@
       "note": "Hinweis"
     },
     "search": {
-      "headingTitle": "Finden sie Ihren Traummitarbeiter. Mithilfe der Jonder Mitarbeitersuche.",
+      "headingTitle": "Finden Sie Ihren Traummitarbeiter. Mithilfe der Jonder Mitarbeitersuche.",
       "lookingFor": "Auf der Suche nach",
       "trainee": "Auszubildender",
       "fulltime": "Vollzeit",
@@ -67,7 +71,7 @@
       "jobTitle": "Berufsbezeichnung",
       "schoolGraduation": "Schulabschluss",
       "employementType": "Art der Anstellung",
-      "city": "Stadt",
+      "city": "Standort eintragen",
       "study": "Ausbildung",
       "industry": "Berufszweig",
       "industryOfProfession": "Berufszweig",
@@ -87,7 +91,10 @@
       "educationStudy": "Ausbildung",
       "workExperience": "Berufserfahrung",
       "contact": "Kontakt",
-      "findEmployee": "Mitarbeiter finden"
+      "findEmployee": "Mitarbeiter finden",
+      "enterJobtitle": "Positionen auswählen",
+      "enterIndustry": " Branche auswählen",
+      "position": "Positionen"
     },
     "profile": {
       "email": "E-mail Adresse",
@@ -136,7 +143,11 @@
       "myStatus": "Mein status",
       "education": "Ausbildung",
       "employee": "Mitarbeiter",
-      "branch": "Branche"
+      "branch": "Branche",
+      "premiumSuggestion": "Erreiche mehr Arbeitgeber mit Premium",
+      "openChat": "Öffnen Sie den Chat, um zu kommunizierenÖffnen Sie den Chat, um zu kommunizieren",
+      "noMessages": " Du hast momentan keine Nachrichten. Geduld!",
+      "upgrade": "Upgraden"
     },
     "profile": {
       "firstName": "Vorname",
@@ -155,23 +166,59 @@
       "currentPosition": "Was ist deine aktuelle Position?",
       "whichBranch": "In welchen Branchen arbeitest du?",
       "workingEnvironment": "Arbeitsumgebung",
-      "whatDescribesYou": "Was beschreibt dich am besten?"
+      "whatDescribesYou": "Was beschreibt dich am besten?",
+      "searchingFor": "Wonach suchst du?",
+      "personalInformation": "Persönliche Informationen",
+      "positionAndIndustry": "Position & Branche",
+      "experience": "Erfahrung & Ausbildung",
+      "documents": "Dokumente",
+      "billing": "Rechnungen",
+      "invoicing": "Rechnungsstellung",
+      "changePassword": "Passwort ändern ",
+      "upgradeAccount": "Account Upgraden",
+      "yourBranch": "In welchen Branchen arbeiten Sie?",
+      "whatPosition": "Nach was für einer Position suchst du?",
+      "yourStatus": " Dein Status ",
+      "yourStatusDescription": "Definiere deine Momentane Einstellung zur Jobsuche",
+      "yourStatusSelect": "Dein Status auf Jonder",
+      "experienceAndEducation": "Deine Erfahrungen und Ausbildungen",
+      "experienceAndEducationDesc": "Um potenzielle Unternehmen zu beeindrucken, füge deinem Lebenslauf Erfahrungen und Ausbildungen hinzu.",
+      "lookingForType": "Welche Art von Beschäftigung suchst du?",
+      "likeToWork": "Wo würdest du gerne arbeiten?*",
+      "remoteWork": " Wärst du auch bereit aus der Ferne zu arbeiten (remote)?",
+      "whenCanYouStart": "Wann kannst du beginnen zu arbeiten?",
+      "iDontKnow": "Keine Ahnung",
+      "salaryRequirement": " Monatliche Nettogehaltsvorstellung",
+      "canStart": "Wann kannst du beginnen?",
+      "yourWorkExperience": "Deine Berufserfahrungen",
+      "yourEducation": "Deine Ausbildungen",
+      "editDocuments": "Bearbeite deine hinterlegten Dokumente.",
+      "invoicesDesc": "Sehe deine vergangenen Rechnungen ein und lade sie herunter.",
+      "passwordDesc": " Änder dein Passwort und erstelle ein neues.",
+      "upgradeDesc": "Upgrade dein Konto, um deine Stellenanzeigen sichtbarer zu platzieren."
     },
     "onboarding": {
-      "location": "Please let us know where you are located at the moment!",
+      "location": "In welcher Stadt wohnst du aktuell?",
+      "locationChecbox": "Möchtest du das wir deinen Standort Arbeitgebern anzeigen?",
       "locationPlaceholder": "Enter city",
       "next": "Fortfahren",
       "choose": "Wählen",
       "enter": "Enter",
       "back": "Zurück",
-      "whatBringsYou": "What brings you to Jonder?",
-      "whatBringsYouJob": "I am actively looking for a job",
-      "whatBringsYouOffer": "I am open to an interesting offer",
-      "whatBringsYouCurious": "I am just curious",
-      "detailsAboutYou": "Give us details about you",
-      "detailsAboutYouPosition": "In which position do you work currently?",
-      "detailsAboutYouBranches": "In which branches do you work?",
-      "detailsAboutYouRole": "What type of role are you looking for?",
+      "whatBringsYou": "Was führt dich zu Jonder?",
+      "whatBringsYouJob": "Ich bin aktiv auf der Jobsuche",
+      "whatBringsYouOffer": "Ich bin offen für ein interessantes Angebot",
+      "whatBringsYouCurious": "Ich bin einfach nur neugierig",
+      "detailsAboutYou": "Was ist der Status Quo?",
+      "detailsAboutYouPosition": "In welcher Position arbeitest du momentan?",
+      "detailsAboutYouPositionPlace": "Gebe hier deine Position an",
+
+      "detailsAboutYouBranches": "In welchem Berufsfeld arbeitest du?",
+      "detailsAboutYouBranchesPlace": " Gebe hier bis zu 3 Berufsfelder an",
+
+      "detailsAboutYouRole": "Wonach suchst du aktuell?",
+      "detailsAboutYouRolePlace": "Wähle bis zu 5 Wunschpositionen",
+
       "positionDeveloper": "Developer",
       "positionProjectManager": "Project Manager",
       "positionConstructionManager": "Construction manager",
@@ -186,21 +233,28 @@
       "branchElectrical": "Electrical engineering industry",
       "whatYouLookinFor": "What are you looking for?",
       "lookingForBranche": "What type of Branches are you looking for?",
-      "lookingForEmployement": "What type of employment are you looking for?",
-      "whereToWork": "Where would you like to work?*",
-      "whenToStart": "When can you start? ",
+
+      "lookingForEmployement": "Welche Beschäftigungsarten sind für dich relevant?",
+      "lookingForEmployementPlace": "Wähle die passenden Arten aus",
+
+      "whereToWork": "Wo würdest du gerne arbeiten?*",
+      "whereToWorkPlace": "Wähle Städte die in Frage kommen würden ",
+
+      "whenToStart": "Wann bist du für deinen neuen Job verfügbar?",
+      "whenToStartPlace": "Wähle Städte die in Frage kommen würden",
+
       "trainee": "Trainee",
       "fulltime": "Fulltime",
       "parttime": "Parttime",
-      "monthlySalary": "Monthly net salary expectations? (€)",
+      "monthlySalary": "Monatliche Netto Gehaltserwartung? (€)",
       "tellAboutExperience": "Tell us about your experience",
       "experienceInYears": "Profesional experience in Years",
       "yourProfessionalExperience": "Your professional experience",
       "yourEducation": "Your education",
-      "uploadDocuments": "Upload your documents",
-      "uploadCv": "Upload CV",
-      "uploadQualifications": "Upload qualifications",
-      "uploadResume": "Upload resume",
+      "uploadDocuments": "Dokumente hochladen",
+      "uploadCv": "UCV/Lebenslauf hochladen",
+      "uploadQualifications": "Portfolio, Qualifikationen, Zertifikate oder sonstiges",
+      "uploadResume": " Weitere Dokumente",
       "addExperience": "Add experience",
       "addEducation": "Add education",
       "university": "University",
@@ -212,7 +266,8 @@
       "type": "Type",
       "description": "Description",
       "companyName": "Unternehmensname",
-      "repeatPassword": " Passwort erneut eingeben"
+      "repeatPassword": " Passwort erneut eingeben",
+      "add": "Hinzufügen"
     }
   },
   "employmentTypes": {
@@ -249,7 +304,7 @@
     "december": "Dezember",
     "messages": "Nachrichten",
     "typeMessage": "Geben Sie eine Nachricht ein",
-    "cancel": "Stornieren",
+    "cancel": "Abbrechen",
     "cancelOption": "Abbrechen",
     "confirm": "Bestätigen",
     "confirmOption": "Fortfahren",
@@ -275,6 +330,7 @@
     "validUntil": "Gültig bis",
     "remainingDays": "Tage verbleiben",
     "success": "Success",
-    "loginByEmail": "Per E-Mail einloggen"
+    "loginByEmail": "Per E-Mail einloggen",
+    "years": "Jahre"
   }
 }

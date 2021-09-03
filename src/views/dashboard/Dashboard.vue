@@ -11,7 +11,7 @@
       >
         <!-- Hello -->
         <div class="user-name">
-          Hallo,
+          Hey,
           <span style="color:#0253B3;">
             {{ user.first_name }} {{ user.last_name }}
           </span>
@@ -21,8 +21,8 @@
         <div class="no-msg">
           {{
             conversations.length
-              ? "Öffnen Sie den Chat, um zu kommunizieren"
-              : "There is no any messages yet"
+              ? `${$t("user.dashboard.openChat")}`
+              : `${$t("user.dashboard.noMessages")}`
           }}
         </div>
 
@@ -57,15 +57,15 @@ export default {
 
     showUpgradeBox() {
       return !(this.messagesLoaded && this.conversations.length);
-    }
+    },
   },
   methods: {
-    ...mapActions("chat", ["getAllConversations"])
+    ...mapActions("chat", ["getAllConversations"]),
   },
   components: {
     Chat,
-    UpgradeAccountBox
-  }
+    UpgradeAccountBox,
+  },
 };
 </script>
 
