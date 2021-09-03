@@ -26,6 +26,9 @@
         {{ item.description }}
       </template>
     </template>
+    <template v-if="required" v-slot:append-outer>
+      <span style="color: red;">*</span>
+    </template>
   </v-combobox>
   </div>
 </template>
@@ -46,6 +49,10 @@ export default {
     fullAddress: {
       type: Boolean,
       default: false
+    },
+    required: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {

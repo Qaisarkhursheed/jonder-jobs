@@ -19,7 +19,11 @@
         v-bind="attrs"
         v-on="on"
         :hide-details="hideDetails"
-      ></v-text-field>
+      >
+        <template v-if="required" v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-text-field>
     </template>
 
     <v-date-picker
@@ -61,6 +65,10 @@ export default {
     },
     fromToday: {
       type: Boolean
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   fromToday: {

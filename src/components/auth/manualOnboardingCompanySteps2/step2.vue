@@ -24,7 +24,11 @@
         flat
         hide-no-data
         :placeholder="$t('user.onboarding.choose')"
-      ></v-autocomplete>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-autocomplete>
 
       <label class="profile-label">
         {{ $t("company.register.numberOfEmployees") }}
@@ -36,7 +40,11 @@
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.choose')"
         outlined
-      ></v-select>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-select>
 
       <label class="profile-label">
         {{ $t("company.register.dateOfEstablishment") }}

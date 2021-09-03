@@ -31,13 +31,20 @@
         :placeholder="$t('user.onboarding.choose')"
         outlined
         class="mt-1"
-      ></v-select>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-select>
 
       <label class="profile-label">
         {{ $t("user.onboarding.whereToWork") }}
       </label>
-      <GooglePlacesAutocomplete @select="e => (value.address_to_work = e)" />
-
+      <GooglePlacesAutocomplete 
+        @select="e => (value.address_to_work = e)" 
+        :required="true"
+      />
+      
       <v-checkbox
         class="mb-3 mt-0"
         label="Are you also open to working remotely?"
@@ -55,6 +62,7 @@
         type="date"
         :fromToday="true"
         hide-details="auto"
+        :required="true"
       />
 
       <v-checkbox

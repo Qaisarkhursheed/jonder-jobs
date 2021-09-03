@@ -18,7 +18,11 @@
         outlined
         flat
         background-color="white"
-      ></v-text-field>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-text-field>
 
       <label class="profile-label">{{
         $t("company.register.companyPhone")
@@ -31,7 +35,11 @@
         outlined
         flat
         background-color="white"
-      ></v-text-field>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-text-field>
 
       <label class="profile-label">{{
         $t("company.register.companyCityandAdress")
@@ -41,6 +49,7 @@
         type="geocode"
         :full-address="true"
         :placeholder="$t('company.register.companyCityandAdressPlaceholder')"
+        :required="true"
       />
 
       <!-- <label class="profile-label">City</label>

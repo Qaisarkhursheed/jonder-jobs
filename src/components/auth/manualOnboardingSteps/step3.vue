@@ -18,7 +18,11 @@
         hide-no-data
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
-      ></v-autocomplete>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-autocomplete>
 
       <!-- Branche -->
       <label class="profile-label">
@@ -35,7 +39,11 @@
         multiple
         :placeholder="$t('user.onboarding.choose')"
         class="mt-1"
-      ></v-autocomplete>
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-autocomplete>
 
       <!-- Looking for role -->
       <label class="profile-label">
@@ -52,7 +60,11 @@
           flat
           hide-no-data
           class="mt-1"
-        ></v-autocomplete>
+        >
+          <template v-slot:append-outer>
+            <span style="color: red;">*</span>
+          </template>
+        </v-autocomplete>
 
       <v-row class="mt-0">
         <v-col cols="3">
