@@ -82,7 +82,7 @@
           color="primary"
           height="56"
           width="178"
-          class="mt-16 font-weight-medium upgrade-btn"
+          class="mt-16 font-weight-medium upgrade-btn dark-blue"
         >
           Next
         </v-btn>
