@@ -21,7 +21,7 @@
       <!-- First name -->
       <v-text-field
         dense
-        placeholder="Vorname"
+        :placeholder="$t('general.name')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         hide-details
@@ -36,7 +36,7 @@
       <!-- Last name -->
       <v-text-field
         dense
-        placeholder="Nachname"
+        :placeholder="$t('general.surname')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         hide-details
@@ -96,7 +96,7 @@
       <!-- Password -->
       <v-text-field
         dense
-        placeholder="Passwort"
+        :placeholder="$t('general.password')"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
         hide-details=""
@@ -164,7 +164,7 @@
         :rules="[validations.required]"
         class="ma-0"
         color="#333"
-        label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
+        :label="$t('general.agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
 
@@ -182,10 +182,10 @@
 
       <!-- Login link -->
       <div class="login-caption mt-5 text-center">
-        Du bist bereits Mitglied?
+        {{ $t("company.register.areYouMember") }}
 
         <router-link to="/login" class="login-caption-bold">
-          Hier einloggen
+          {{ $t("company.register.loginHere") }}
         </router-link>
       </div>
     </v-form>

@@ -94,7 +94,7 @@
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
-                {{ $t("user.profile.experience") }}
+                {{ $t("user.profile.experiences") }}
 
                 <v-icon>
                   mdi-chevron-right
@@ -102,7 +102,6 @@
               </div>
               <div @click="scrollToSection('documents')" class="nav-item">
                 {{ $t("user.profile.documents") }}
-
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
@@ -152,7 +151,7 @@
 
               <span class="dash-name">{{ getUserFullName }}</span>
               <router-link to="/dashboard/profile" class="settings-link">
-                Profil Einstellungen
+                {{ $t("user.profile.profileSettings") }}
               </router-link>
               <DashboardActivePlan v-if="user.plan" />
             </div>
@@ -164,7 +163,9 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info">Status der arbeitssuche</span>
+              <span class="about-info">{{
+                $t("user.profile.searchStatus")
+              }}</span>
               <p class="about-text">
                 <span v-for="(item, i) in userEmploymentType" :key="i">
                   {{ $t(`employmentTypes.${item}`) }}
@@ -174,21 +175,31 @@
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.current_position }}</p>
 
-              <span class="about-info">Aktuelle Branche</span>
+              <span class="about-info">{{
+                $t("user.profile.currentIndustry")
+              }}</span>
               <p class="about-text">{{ user.branche }}</p>
 
-              <span class="about-info"> Stadt & Adresse</span>
+              <span class="about-info"
+                >{{ $t("user.profile.cityAndAddress") }}
+              </span>
               <p class="about-text">{{ user.city }}</p>
 
-              <span class="about-info"> Erfahrung </span>
+              <span class="about-info">
+                {{ $t("user.profile.experiences") }}
+              </span>
               <CardActionableList type="Experience" view-only class="mb-5" />
 
-              <span class="about-info"> Ausbildung </span>
+              <span class="about-info">
+                {{ $t("user.profile.education") }}
+              </span>
               <CardActionableList type="Education" view-only />
             </div>
 
             <div class="top-info">
-              <span class="about-info"> Dokumente </span>
+              <span class="about-info">
+                {{ $t("user.profile.documents") }}
+              </span>
               <div v-if="user.cv" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.cv" target="_blank">

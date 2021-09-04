@@ -6,8 +6,11 @@
       "messages": "Messages",
       "teamManagement": "Team Management",
       "publicProfile": "Public Company Profile",
+      "publicProfileSub": "Edit the information that potential employees will see",
       "packagesPricing": "Packages Pricing",
-      "inviteUser": "Invite Users"
+      "inviteUser": "Invite Users",
+      "viewAs": "View as a jobseeker",
+      "backToEdit": "Back to edit"
     },
     "register": {
       "jonderWelcome": "Welcome to Jonder",
@@ -16,8 +19,8 @@
       "ImEmployer": "I'm looking for a employee",
       "continue": "Continue",
       "register": "Register",
-      "registerSubtitleUser": "Erstelle ein Jonder-Profil und lass Unternehmen sich direkt bei Dir bewerben.",
-      "registerSubtitleCompany": "Erstelle ein Jonder-Unternehmensprofil und suche in einer großen Datenbank an Bewerbern.",
+      "registerSubtitleUser": "Create a Jonder profile and let companies apply directly to you.",
+      "registerSubtitleCompany": "Create a Jonder company profile and search a large database of applicants.",
       "continueWithGoogle": "Continue with Google",
       "continueWithFacebook": "Continue with Facebook",
       "continueWithEmail": "Continue with E-mail",
@@ -42,9 +45,9 @@
       "confirmYourAccount": "Confirm your account",
       "confirmYourAccountSub": "",
       "backToLogin": "Back to Login",
-      "loginTitle": "Login to your Jonder account",
-      "registerAccount": "No account? ",
-      "login": "Login"
+      "getStartedNow": "Get started now",
+      "areYouMember": "Are you already a member?",
+      "loginHere": "Log in here"
     },
     "dashboard": {
       "dashboard": "Dashboard",
@@ -95,7 +98,9 @@
       "enterJobtitle": "Enter Job position",
       "enterIndustry": "Enter Industry",
       "enterLocation": "Enter Location",
-      "position": "Position"
+      "position": "Position",
+      "saveSearch": "Save search",
+      "inviteHelp": "Invite other users to look for potential employees"
     },
     "profile": {
       "email": "E-mail address",
@@ -147,14 +152,22 @@
       "premiumSuggestion": "Reach more employers with Premium",
       "openChat": "Open chat to communicate",
       "noMessages": "There is no any messages yet",
-      "upgrade": "Upgrade now"
+      "upgrade": "Upgrade now",
+      "changePersonalData": "Change personal Data",
+      "showLocation": "Would you like us to show your location?",
+      "choosePlan": "Choose a premium plan"
     },
     "profile": {
+      "profileSettings": "Profile Settings",
+      "searchStatus": "Job search status",
+      "currentIndustry": "Current Industry",
+      "cityAndAddress": "City and Adress",
       "firstName": "First name",
       "lastName": "Last name",
       "jobTitle": "Job title",
       "workExperience": "Work experience",
       "lookingFor": "Looking for",
+      "experiences": "Experience",
       "education": "Education",
       "aboutMe": "About me",
       "editProfileHeading": "What would you like to edit on your profile ?",
@@ -175,7 +188,6 @@
       "billing": "Billing",
       "invoicing": "Invoicing",
       "iDontKnow": "I Dont Know",
-
       "changePassword": "Change Password",
       "upgradeAccount": "Upgrade your account",
       "yourBranch": "What industries do you work in?",
@@ -233,13 +245,10 @@
       "lookingForBranche": "What type of Branches are you looking for?",
       "lookingForEmployement": "What type of employment are you looking for?",
       "lookingForEmployementPlace": "Select the appropriate types",
-
       "whereToWork": "Where would you like to work?*",
       "whereToWorkPlace": "Choose cities that would come into question",
-
       "whenToStart": "When can you start? ",
       "whenToStartPlace": "Choose cities that would come into question",
-
       "trainee": "Trainee",
       "fulltime": "Fulltime",
       "parttime": "Parttime",
@@ -312,6 +321,11 @@
     "modalConfirm": "Are you sure you don't want to save changes ?",
     "modalSuccess": "Your changes have been saved successfully !",
     "seeMore": "",
+    "register": "Register",
+    "login": "Log In",
+    "loginAccount": "Log into your Jonder account",
+    "forgotPassowrd": "Forgot Password?",
+    "dontHaveAccount": "You don't have an account?",
     "areYouSure": "Are you sure?",
     "areYouSureQuestion": "Are you sure that you want to delete user?",
     "areYouSureAction": "action cannot be undo",
@@ -328,6 +342,12 @@
     "remainingDays": "Remaining days",
     "success": "Erfolg",
     "loginByEmail": "Log in by email",
-    "years": "Years"
+    "name": "Name",
+    "surname": "Surname",
+    "email": "E-mail address",
+    "password": "Password",
+    "repeatPassword": "Repeat Password",
+    "agreePolicy": "Yes, I agree to the privacy policy & terms and conditions.",
+    "saveChanges": "Save changes"
   }
 }

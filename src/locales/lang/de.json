@@ -6,8 +6,11 @@
       "messages": "Nachrichten",
       "teamManagement": "Team Managment",
       "publicProfile": "Öffentliches Firmenprofil",
+      "publicProfileSub": " Bearbeiten Sie die Informationen, die potenzielle Angestellte sehen werden.",
       "packagesPricing": "Preise für Pakete",
-      "inviteUser": "Nutzer einladen"
+      "inviteUser": "Nutzer einladen",
+      "viewAs": "Als Arbeitssuchender ansehen",
+      "backToEdit": "Zurück zum Bearbeiten"
     },
     "register": {
       "jonderWelcome": "Herzlich Willkommen bei Jonder!",
@@ -42,9 +45,9 @@
       "confirmYourAccount": "Bitte überprüfe deine E-Mail",
       "confirmYourAccountSub": "Um deinen Account zu bestätigen, haben wir dir einen Link per E-Mail gesendet. Öffne diesen Link um deine Registrierung zu bestätigen. Überprüfe auch deinen Spam-Ordner.",
       "backToLogin": "Jetzt einloggen",
-      "loginTitle": "Logge dich in deinen Jonder account ein",
-      "registerAccount": "Du hast kein Konto? ",
-      "login": "Anmelden"
+      "getStartedNow": "Jetzt durchstarten",
+      "areYouMember": "Du bist bereits Mitglied?",
+      "loginHere": "Hier einloggen"
     },
     "dashboard": {
       "dashboard": "Dashboard",
@@ -94,7 +97,9 @@
       "findEmployee": "Mitarbeiter finden",
       "enterJobtitle": "Positionen auswählen",
       "enterIndustry": " Branche auswählen",
-      "position": "Positionen"
+      "position": "Positionen",
+      "saveSearch": "Suche speichern",
+      "inviteHelp": "Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu suchen"
     },
     "profile": {
       "email": "E-mail Adresse",
@@ -147,14 +152,23 @@
       "premiumSuggestion": "Erreiche mehr Arbeitgeber mit Premium",
       "openChat": "Öffnen Sie den Chat, um zu kommunizierenÖffnen Sie den Chat, um zu kommunizieren",
       "noMessages": " Du hast momentan keine Nachrichten. Geduld!",
-      "upgrade": "Upgraden"
+      "upgrade": "Upgraden",
+      "changePersonalData": "Persönliche Daten ändern",
+      "showLocation": "Möchten Sie, dass wir Ihren Standort anzeigen",
+      "choosePlan": "Wähle einen Premiumplan"
     },
     "profile": {
+      "profileSettings": "Profil Einstellungen",
+      "searchStatus": " Status der Arbeitssuche",
+      "currentIndustry": "Aktuelle Branche",
+      "cityAndAddress": "tadt und Adresse",
+
       "firstName": "Vorname",
       "lastName": "Nachname",
       "jobTitle": "Berufsbezeichnung",
       "workExperience": "Berufserfahrung",
       "lookingFor": "Auf der Suche nach",
+      "experiences": "ERFAHRUNG",
       "education": "Ausbildung",
       "aboutMe": "Uber mich",
       "editProfileHeading": "Was mochtest du an dienem profil bearbeiten ?",
@@ -315,6 +329,12 @@
     "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
     "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !",
     "seeMore": "",
+    "register": "Registrieren",
+    "login": "Loggen Sie",
+    "loginAccount": "Loggen Sie sich in Ihren Jonder Account ein",
+    "forgotPassowrd": "Passwort vergessen?",
+    "dontHaveAccount": "Haben Sie kein Konto?",
+
     "areYouSure": "Sind Sie sicher?",
     "areYouSureQuestion": "Sind Sie ganz sicher? Der Benutzer wird keinen Zugriff mehr auf das System haben.",
     "areYouSureAction": "action cannot be undo",
@@ -331,6 +351,12 @@
     "remainingDays": "Tage verbleiben",
     "success": "Success",
     "loginByEmail": "Per E-Mail einloggen",
-    "years": "Jahre"
+    "name": "Vorname",
+    "surname": "Nachname",
+    "email": "E-mail address",
+    "pasword": "Passwort",
+    "repeatPassword": "Password erneut eingeben",
+    "agreePolicy": "Ja, ich stimme der Datenschutzerklärung & AGB zu.",
+    "saveChanges": "Änderungen speichern"
   }
 }

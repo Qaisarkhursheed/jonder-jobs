@@ -18,14 +18,14 @@
             style="width: 350px"
             large
           >
-            Jetzt durchstarten
+            {{ $t("company.register.getStartedNow") }}
           </v-btn>
           <div class="mt-4">
             <span style="color: #222222">
-              Du bist bereits Mitglied?
+              {{ $t("company.register.areYouMember") }}
             </span>
             <router-link to="/login" style="text-decoration: none">
-              <b>Hier einloggen</b>
+              <b> {{ $t("company.register.loginHere") }} </b>
             </router-link>
           </div>
         </v-stepper-content>
@@ -77,10 +77,10 @@
 
           <div class="mt-4">
             <span style="color: #222222">
-              Du bist bereits Mitglied?
+              {{ $t("company.register.areYouMember") }}
             </span>
             <router-link to="/login" style="text-decoration: none">
-              <b>Hier einloggen</b>
+              <b> {{ $t("company.register.loginHere") }} </b>
             </router-link>
           </div>
         </v-stepper-content>

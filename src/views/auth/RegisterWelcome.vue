@@ -15,7 +15,7 @@
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">
           <jonder-title>
-            Welcome to Jonder
+            {{ $t("company.register.jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222; font-size: 17px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
@@ -32,7 +32,7 @@
             block
             height="55"
           >
-            Jetzt durchstarten
+            {{ $t("company.register.getStartedNow") }}
           </v-btn>
         </v-stepper-content>
 
@@ -133,10 +133,12 @@
 
       <div class="text-center">
         <span style="color: #222222">
-          Du bist bereits Mitglied?
+          {{ $t("company.register.areYouMember") }}
         </span>
         <router-link to="/login" style="text-decoration: none">
-          <b class="tx-blue-darken-4">Hier einloggen</b>
+          <b class="tx-blue-darken-4">
+            {{ $t("company.register.loginHere") }}
+          </b>
         </router-link>
       </div>
     </v-stepper>

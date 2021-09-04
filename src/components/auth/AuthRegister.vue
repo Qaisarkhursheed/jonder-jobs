@@ -48,7 +48,7 @@
       <!-- First name -->
       <v-text-field
         v-model="formData.first_name"
-        placeholder="Vorname"
+        :placeholder="$t('general.name')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
@@ -59,7 +59,7 @@
       <!-- Last name -->
       <v-text-field
         v-model="formData.last_name"
-        placeholder="Nachname"
+        :placeholder="$t('general.surname')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
@@ -92,7 +92,7 @@
       <!-- Password -->
       <v-text-field
         v-model="formData.password"
-        placeholder="Passwort"
+        :placeholder="$t('general.password')"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
         dense
@@ -116,7 +116,7 @@
       <!-- Password confirm -->
       <v-text-field
         v-model="formData.password_confirmation"
-        placeholder="Passwort erneut eingeben"
+        :placeholder="$t('general.repeatPassword')"
         :rules="[
           validations.required,
           validations.same('Passwort', formData.password),
@@ -149,7 +149,7 @@
         :rules="[validations.required]"
         class="checkbox-abn ma-0"
         color="#333"
-        label="Ja, ich stimme der Datenschutzerklärung & AGB zu."
+        :label="$t('general.agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
 
@@ -184,10 +184,10 @@
       </v-btn>
 
       <div class="text-medium mt-5 text-center">
-        Du bist bereits Mitglied?
+        {{ $t("company.register.areYouMember") }}
 
         <router-link to="/login" class="login-caption-bold">
-          Hier einloggen
+          {{ $t("company.register.loginHere") }}
         </router-link>
       </div>
     </v-form>

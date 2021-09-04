@@ -15,12 +15,12 @@
           </router-link>
         </v-col>
         <v-col cols="6" class="links">
-         
           <router-link
             to="/register"
             class="txt-link text-color-primary-blue-dark"
-            >Registrieren</router-link
           >
+            {{ $t("general.register") }}
+          </router-link>
           <router-link to="/login" class="button dark-blue fill"
             >Log in</router-link
           >
@@ -42,36 +42,43 @@
     </v-row>
 
     <v-container fluid>
-        <v-col cols="12" class="box">
-            <div class="inner">
-                <h1 class="faq-title">
-                    FAQ
-                </h1>    
-                <div class="faq-list">
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                    <p class="faq-item">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dui
-                    </p>
-                </div>
-            </div>
-        </v-col>
+      <v-col cols="12" class="box">
+        <div class="inner">
+          <h1 class="faq-title">
+            FAQ
+          </h1>
+          <div class="faq-list">
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+            <p class="faq-item">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo
+              dui
+            </p>
+          </div>
+        </div>
+      </v-col>
     </v-container>
 
     <footer>
@@ -86,12 +93,12 @@
             </router-link>
           </v-col>
           <v-col cols="6" class="links">
-            
             <router-link
               to="/register"
               class="txt-link text-color-primary-blue-dark"
-              >Registrieren</router-link
             >
+              {{ $t("general.register") }}
+            </router-link>
             <router-link to="/login" class="button dark-blue fill"
               >Log in</router-link
             >
@@ -166,21 +173,21 @@
   }
 
   .faq-title {
-      text-align: center;
-      color: $primary-blue-dark !important;
+    text-align: center;
+    color: $primary-blue-dark !important;
   }
 
   .faq-list {
-      background: white;
+    background: white;
   }
 
   .faq-item {
-      padding: 26px 0 26px 50px;
-      font-size: 20px;
-      color: $primary-blue-dark;
-      font-weight: 600;
-      border-bottom: 1px solid $medium-grey;
-      cursor: pointer;
+    padding: 26px 0 26px 50px;
+    font-size: 20px;
+    color: $primary-blue-dark;
+    font-weight: 600;
+    border-bottom: 1px solid $medium-grey;
+    cursor: pointer;
   }
 
   footer {

@@ -3,10 +3,9 @@
     <!-- <UserNoteAdd /> -->
     <v-row class="heading mb-5">
       <v-col cols="12" md="9">
-        <div class="title">Öffentliches Firmenprofil</div>
+        <div class="title">{{ $t("company.employer.publicProfile") }}</div>
         <div class="subtitle">
-          Bearbeiten Sie die Informationen, die potenzielle Angestellte sehen
-          werden.
+          {{ $t("company.employer.publicProfileSub") }}
         </div>
       </v-col>
       <v-col cols="12" md="3">
@@ -17,10 +16,10 @@
           @click="viewAsTab"
         >
           <template v-if="viewAs">
-            Back to Edit
+            {{ $t("company.employer.backToEdit") }}
           </template>
           <template v-else>
-            Als Arbeitssuchender ansehen
+            {{ $t("company.employer.viewAs") }}
           </template>
         </v-btn>
       </v-col>
@@ -41,7 +40,7 @@
               :disabled="viewAs"
               slider-color="#0253B3"
             >
-              {{ $t('company.profile.' + tab.key) }}
+              {{ $t("company.profile." + tab.key) }}
             </v-tab>
           </v-tabs>
         </v-card>
@@ -101,7 +100,11 @@ export default {
     return {
       tabs: {
         active: "details",
-        options: [{key: "general", label: 'General'}, {key: "details", label:'Details'}, {key:"contact", label:"Contact"}],
+        options: [
+          { key: "general", label: "General" },
+          { key: "details", label: "Details" },
+          { key: "contact", label: "Contact" },
+        ],
       },
       tabComponents: {
         general: PublicProfileGeneral,
