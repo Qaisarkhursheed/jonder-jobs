@@ -9,7 +9,7 @@
   >
     <v-card flat class="rounded-lg wrap upgrade-dialog modal-plan">
       <div class="modal-title">
-        Wähle einen Premiumplan
+        {{ $t("user.dashboard.choosePlan") }}
       </div>
 
       <div

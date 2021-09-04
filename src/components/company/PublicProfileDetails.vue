@@ -32,7 +32,7 @@
         class="font-weight-medium main-accept-btn dark-blue"
         @click="save"
       >
-        Änderungen speichern
+        {{ $t("general.saveChanges") }}
       </v-btn>
     </div>
   </div>
@@ -46,16 +46,16 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
       form: {
         branche: "",
-        company_employees: ""
-      }
+        company_employees: "",
+      },
     };
   },
 
@@ -69,15 +69,15 @@ export default {
     },
     save() {
       this.$emit("update", {
-        ...this.form
+        ...this.form,
       });
-    }
+    },
   },
   computed: {
     types() {
       return types;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

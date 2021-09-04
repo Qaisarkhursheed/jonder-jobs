@@ -72,7 +72,7 @@
         class="font-weight-medium main-accept-btn dark-blue"
         @click="save"
       >
-        Änderungen speichern
+        {{ $t("general.saveChanges") }}
       </v-btn>
     </div>
   </div>

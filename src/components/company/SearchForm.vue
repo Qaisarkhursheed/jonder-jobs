@@ -163,7 +163,7 @@
                   class="full-w mt-md-16 font-weight-medium white"
                   @click="searchSave"
                 >
-                  Suche speichern
+                  {{ $t("company.search.saveSearch") }}
                 </v-btn>
               </v-col>
             </v-row>

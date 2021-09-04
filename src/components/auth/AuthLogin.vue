@@ -1,7 +1,7 @@
 <template>
   <v-container class="auth-login-wrap mx-auto" fluid no-gutters>
     <jonder-title>
-      {{ $t("company.register.loginTitle") }}
+      {{ $t("general.loginAccount") }}
     </jonder-title>
 
     <v-alert v-if="$route.query.resetPassword" text type="success">
@@ -57,7 +57,7 @@
             class="text-color-primary-blue-dark"
             style="text-decoration: none"
           >
-            Passwort vergessen?
+            {{ $t("general.forgotPassowrd") }}
           </router-link>
         </p>
 
@@ -92,20 +92,19 @@
           :disabled="!formValid"
           :loading="formLoading"
         >
-          {{ $t("company.register.login") }}
+          {{ $t("general.login") }}
         </v-btn>
       </v-form>
     </div>
 
     <p class="text-center mt-2" style="font-size: 14px">
-      {{ $t("company.register.registerAccount") }}
-
+      {{ $t("general.dontHaveAccount") }}
       <router-link
         to="/register"
         class="text-color-primary-blue-dark"
         style="text-decoration: none"
       >
-        Registrieren
+        {{ $t("general.register") }}
       </router-link>
     </p>
   </v-container>

@@ -4,8 +4,7 @@
       <v-col cols="9">
         <div class="title">Team Management</div>
         <div class="subtitle">
-          Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu
-          suchen
+          {{ $t("company.search.inviteHelp") }}
         </div>
       </v-col>
       <v-col cols="3">

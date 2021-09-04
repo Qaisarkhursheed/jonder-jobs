@@ -21,11 +21,12 @@
           <router-link
             to="/register"
             class="txt-link text-color-primary-blue-dark"
-            >Registrieren</router-link
           >
-          <router-link to="/login" class="button dark-blue fill"
-            >Log in</router-link
-          >
+            {{ $t("general.register") }}
+          </router-link>
+          <router-link to="/login" class="button dark-blue fill">
+            {{ $t("general.login") }}
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -192,11 +193,12 @@
             <router-link
               to="/register"
               class="txt-link text-color-primary-blue-dark"
-              >Registrieren</router-link
             >
-            <router-link to="/login" class="button dark-blue fill"
-              >Log in</router-link
-            >
+              {{ $t("general.register") }}
+            </router-link>
+            <router-link to="/login" class="button dark-blue fill">
+              {{ $t("general.login") }}
+            </router-link>
           </v-col>
         </v-row>
       </v-container>

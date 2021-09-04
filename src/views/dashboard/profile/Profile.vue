@@ -19,9 +19,9 @@
     <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Persönliche Daten ändern
+          {{ $t("user.dashboard.changePersonalData") }}
         </p>
-        <p class="profile-subtitle">Persönliche Daten</p>
+        <p class="profile-subtitle">{{ $t("user.dashboard.personalData") }}</p>
         <v-col cols="6">
           <div class="d-flex align-center">
             <v-avatar
@@ -118,7 +118,7 @@
         <v-col cols="12" sm="6">
           <v-checkbox
             class="mb-0 mt-0"
-            label="Möchten Sie, dass wir Ihren Standort anzeigen?"
+            :label="$t('user.dashboard.showLocation')"
             hide-details="auto"
             v-model="formData.location_show"
           ></v-checkbox>
@@ -349,7 +349,7 @@
               class="ml-1"
               style="cursor: pointer; color: #0253B3; font-weight:600"
             >
-              Hinzufügen
+              {{ $t("user.onboarding.add") }}
             </div>
           </div>
         </v-col>
@@ -379,7 +379,7 @@
               class="ml-1"
               style="cursor: pointer; color: #0253B3; font-weight:600"
             >
-              Hinzufügen
+              {{ $t("user.onboarding.add") }}
             </div>
           </div>
         </v-col>
