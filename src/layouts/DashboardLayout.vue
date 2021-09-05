@@ -147,6 +147,15 @@
                   :src="require('@/assets/icons/profile-placeholder.png')"
                   v-else
                 ></v-img>
+                <v-img
+                  v-if="user.plan"
+                  class="profile-image-badge-icon"
+                  :src="
+                    require(`@/assets/icons/${
+                      user.plan.id === 11 ? 'top-rated' : 'medal'
+                    }.svg`)
+                  "
+                ></v-img>
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
@@ -255,14 +264,14 @@ export default {
   components: {
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -277,7 +286,7 @@ export default {
     },
     userEmploymentType() {
       return this.user.looking_for_employment_type.split(",");
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -292,7 +301,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    },
+    }
   },
   watch: {
     search(val) {
@@ -308,8 +317,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -549,6 +558,12 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
     border-radius: 50px;
     max-width: 5rem;
     max-height: 5rem;
+  }
+  .profile-image-badge-icon {
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+    max-width: 28px;
   }
 }
 </style>
