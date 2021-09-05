@@ -30,6 +30,7 @@
         :rules="[validations.required]"
         :placeholder="$t('user.onboarding.lookingForEmployementPlace')"
         outlined
+        multiple
         class="mt-1"
       >
         <template v-slot:append-outer>
