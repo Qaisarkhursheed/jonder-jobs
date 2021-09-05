@@ -130,6 +130,7 @@ export default {
       company_email: "",
       company_phone: "",
       address: "",
+      establishment_date: new Date().getFullYear(),
       //city: "",
       web_url: "",
       facebook: "",

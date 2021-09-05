@@ -49,6 +49,16 @@
       <label class="profile-label">
         {{ $t("company.register.dateOfEstablishment") }}
       </label>
+      <v-text-field 
+        v-model="value.establishment_date"
+        :rules="[validations.required]"
+        type="number"
+        outlined
+      >
+        <template v-slot:append-outer>
+          <span style="color: red;">*</span>
+        </template>
+      </v-text-field>
       <!-- Implement date picker component -->
 
       <v-row class="mt-1">
