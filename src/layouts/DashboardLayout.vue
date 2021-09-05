@@ -142,8 +142,13 @@
           <v-row class="full-h ma-0">
             <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
               <div class="profile-image">
-                <v-img :src="user.profile_img" v-if="user.profile_img"></v-img>
                 <v-img
+                  class="profile-image-user"
+                  :src="user.profile_img"
+                  v-if="user.profile_img"
+                ></v-img>
+                <v-img
+                  class="profile-image-user"
                   :src="require('@/assets/icons/profile-placeholder.png')"
                   v-else
                 ></v-img>
@@ -558,6 +563,10 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
     border-radius: 50px;
     max-width: 5rem;
     max-height: 5rem;
+  }
+  .profile-image-user {
+    height: 80px;
+    width: 80px;
   }
   .profile-image-badge-icon {
     position: absolute;
