@@ -81,13 +81,15 @@ const SALARY_RANGE = [
 const WORK_EXPERIENCE = ["0-3", "3-6", "6-10", "10-15", "15-20", "20+"];
 
 const EMPLOYEE_NUMBER = [
-  "0-20",
-  "20-50",
-  "50-100",
-  "100-200",
-  "200-500",
-  "500-1000",
-  "1000+"
+  "0 bis 1 Beschäftigte",
+  "2 bis 10 Beschäftigte",
+  "11 bis 50 Beschäftigte",
+  "51 bis 200 Beschäftigte",
+  "201 bis 500 Beschäftigte",
+  "501 bis 1.000 Beschäftigte",
+  "1.001 bis 5.000 Beschäftigte",
+  "5.001 bis 10.000 Beschäftigte",
+  "10.001+ Beschäftigte",
 ];
 
 const SCHOOL = [
