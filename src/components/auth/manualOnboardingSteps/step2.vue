@@ -11,7 +11,7 @@
       </label>
       <v-autocomplete
         v-model="value.current_position"
-        :items="types.JOB_POSITION"
+        :items="$store.getters['professions/items']"
         :rules="[validations.required]"
         outlined
         flat
@@ -51,7 +51,7 @@
       </label>
       <v-autocomplete
         v-model="value.looking_for"
-        :items="types.JOB_POSITION"
+        :items="$store.getters['professions/items']"
         :placeholder="$t('user.onboarding.detailsAboutYouRolePlace')"
         :rules="[validations.required, validations.max.selection(5)]"
         v-clearable-autocomplete
@@ -70,7 +70,7 @@
         {{ $t("user.onboarding.location") }}
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.city = e)"
+        @select="e => (value.city = e)"
         :required="true"
         class="mt-1"
       />
@@ -116,26 +116,29 @@ export default {
   name: "Step2",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
   },
   computed: {
     types() {
       return types;
-    },
+    }
   },
+  created() {
+    this.$store.dispatch("professions/fetch");
+  }
 };
 </script>
 

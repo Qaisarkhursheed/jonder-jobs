@@ -160,7 +160,7 @@
           <v-autocomplete
             v-model="formData.looking_for"
             v-clearable-autocomplete
-            :items="types.JOB_POSITION"
+            :items="$store.getters['professions/items']"
             multiple
             outlined
             flat
@@ -241,7 +241,7 @@
           >
           <GooglePlacesAutocomplete
             :value="formData.address_to_work"
-            @select="(e) => (formData.address_to_work = e)"
+            @select="e => (formData.address_to_work = e)"
           />
           <v-checkbox
             class="mb-0 mt-0"
@@ -285,7 +285,7 @@
             min="1"
             max="20"
             step="0.5"
-            @change="(value) => (formData.monthly_salary = value)"
+            @change="value => (formData.monthly_salary = value)"
           />
         </v-col>
       </v-row>
@@ -306,7 +306,7 @@
             min="0"
             max="40"
             step="0.5"
-            @change="(value) => (formData.working_experience = value)"
+            @change="value => (formData.working_experience = value)"
           />
         </v-col>
       </v-row>
@@ -398,21 +398,21 @@
           <div class="mt-6">
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.cv = e[0])"
+                @change="e => (formData.cv = e[0])"
                 type="Cv"
                 :value="formData.cv"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.qualifications = e[0])"
+                @change="e => (formData.qualifications = e[0])"
                 type="Qualifications"
                 :value="formData.qualifications"
               />
             </div>
             <div class="document-wrap">
               <DocumentUploadSection
-                @change="(e) => (formData.resume = e[0])"
+                @change="e => (formData.resume = e[0])"
                 type="Resume"
                 :value="formData.resume"
               />
@@ -449,7 +449,7 @@
             @click="
               $store.dispatch('invoices/downloadInvoice', {
                 id: item.id,
-                number: item.invoice_number,
+                number: item.invoice_number
               })
             "
           ></v-img>
@@ -628,7 +628,7 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
-    SliderInput,
+    SliderInput
   },
 
   data: () => ({
@@ -649,7 +649,7 @@ export default {
       qualifications: null,
       resume: null,
       location_show: "",
-      work_remotely: "",
+      work_remotely: ""
     },
     formResponse: {},
     formLoading: false,
@@ -662,43 +662,44 @@ export default {
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
-      "I am just curious",
+      "I am just curious"
     ],
     modals: {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal,
+        component: UpgradePlanModal
       },
       AddNewCard: {
         active: false,
         edit: false,
-        component: AddNewCard,
+        component: AddNewCard
       },
       education: {
         active: false,
         edit: false,
-        component: ModalEducation,
+        component: ModalEducation
       },
       experience: {
         active: false,
         edit: false,
-        component: ModalExperience,
-      },
+        component: ModalExperience
+      }
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
-      education: ["edit", "delete"],
-    },
+      education: ["edit", "delete"]
+    }
   }),
   created() {
     this.resetFormData(this.user);
-    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter((i) => i.status === "complete");
+      this.invoices = this.invoices.filter(i => i.status === "complete");
     });
+    this.$store.dispatch("professions/fetch");
   },
   computed: {
     ...mapGetters("user", [
@@ -706,7 +707,7 @@ export default {
       "getUserFullName",
       "getUserInitials",
       "userPlan",
-      "plans",
+      "plans"
     ]),
     profile_img() {
       if (this.newImage) {
@@ -720,7 +721,7 @@ export default {
     },
     plansData() {
       return this.plans("jobseeker_paln");
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["updateUser"]),
@@ -776,10 +777,10 @@ export default {
 
       this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.formResponse = resp.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
@@ -793,7 +794,7 @@ export default {
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -801,7 +802,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.passwordFormResponse = err.data;
         })
         .finally(() => {
@@ -815,13 +816,13 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
+    }
   },
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    },
-  },
+    }
+  }
 };
 </script>
 

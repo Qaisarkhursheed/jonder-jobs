@@ -12,7 +12,7 @@
           </label>
           <v-autocomplete
             v-model="formFields.job_position"
-            :items="types.JOB_POSITION"
+            :items="$store.getters['professions/items']"
             cache-items
             outlined
             flat
@@ -145,7 +145,7 @@
             </label>
             <GooglePlacesAutocomplete
               :value="formFields.city"
-              @select="(e) => (formFields.city = e)"
+              @select="e => (formFields.city = e)"
             />
           </v-col>
         </v-row>
@@ -176,7 +176,7 @@
                   elevation="0"
                   :class="[
                     'advanced-search-btn full-w mt-md-16 white font-weight-medium',
-                    { active: advancedSearch },
+                    { active: advancedSearch }
                   ]"
                   color="#fff"
                   @click="advancedSearch = !advancedSearch"
@@ -223,7 +223,7 @@ export default {
 
   components: {
     Loop,
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   data() {
@@ -237,11 +237,14 @@ export default {
         education: "",
         min_salary: "",
         max_salary: "",
-        city: "",
+        city: ""
       },
       advancedSearch: false,
-      errorMessage: "",
+      errorMessage: ""
     };
+  },
+  created() {
+    this.$store.dispatch("professions/fetch");
   },
   methods: {
     search() {
@@ -275,7 +278,7 @@ export default {
         }
       }
       if (isValid) {
-        store.dispatch("company/searchFilterSave", saveData).catch((error) => {
+        store.dispatch("company/searchFilterSave", saveData).catch(error => {
           this.errorMessage = error.response.data.message;
           this.removeMessage(5000);
         });
@@ -330,7 +333,7 @@ export default {
         }
       });
       return activatedFields;
-    },
+    }
   },
   computed: {
     searchCountLabel() {
@@ -344,8 +347,8 @@ export default {
     },
     types() {
       return types;
-    },
-  },
+    }
+  }
 };
 </script>
 

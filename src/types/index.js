@@ -52,21 +52,21 @@ const JOB_BRANCHE = [
   "Wirtschaft, Verwaltung"
 ];
 
-const JOB_POSITION = [
-  "Developer",
-  "Project Manager",
-  "Construction manager",
-  "Intern",
-  "Apprentice",
-  "Manager",
-  "Architecht",
-  "Social Media Manager",
-  "Marketing Manager",
-  "Frontend Developer",
-  "Backend Developer",
-  "Mobile Developer",
-  "DevOps Engineer"
-];
+// const JOB_POSITION = [
+//   "Developer",
+//   "Project Manager",
+//   "Construction manager",
+//   "Intern",
+//   "Apprentice",
+//   "Manager",
+//   "Architecht",
+//   "Social Media Manager",
+//   "Marketing Manager",
+//   "Frontend Developer",
+//   "Backend Developer",
+//   "Mobile Developer",
+//   "DevOps Engineer"
+// ];
 
 const SALARY_RANGE = [
   "20000 - 30000",
@@ -106,7 +106,7 @@ const EDUCATION = [
 export default {
   SELECTION_MANAGEMENT_STATUS,
   EMPLOYEMENT_TYPE,
-  JOB_POSITION,
+  // JOB_POSITION,
   JOB_BRANCHE,
   SALARY_RANGE,
   WORK_EXPERIENCE,
