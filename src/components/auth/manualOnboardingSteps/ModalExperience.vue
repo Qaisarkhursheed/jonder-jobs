@@ -61,7 +61,7 @@
                 <label>{{ $t("user.onboarding.position") }}</label>
                 <v-autocomplete
                   v-model="form.position"
-                  :items="types.JOB_POSITION"
+                  :items="$store.getters['professions/items']"
                   :rules="[validations.required]"
                   outlined
                   flat
@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import types from '@/types';
+import types from "@/types";
 // Move to generic global component if needed
 import Calendar from "@/components/Calendar";
 
@@ -156,21 +156,21 @@ export default {
   name: "ModalExperience",
 
   components: {
-    Calendar,
+    Calendar
   },
 
   props: {
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     type: {
       type: String,
-      default: "ok",
+      default: "ok"
     },
     edit: {
-      type: [Object, Boolean],
-    },
+      type: [Object, Boolean]
+    }
   },
   data() {
     return {
@@ -184,14 +184,15 @@ export default {
         start_time: "",
         end_time: "",
         description: "",
-        working_here: 0,
-      },
+        working_here: 0
+      }
     };
   },
   created() {
     if (this.edit) {
       this.populate();
     }
+    this.$store.dispatch("professions/fetch");
   },
   methods: {
     close(type) {
@@ -209,12 +210,12 @@ export default {
         this.$store
           .dispatch("user/updateJobseekerExperience", {
             id: this.edit.id,
-            payload: this.form,
+            payload: this.form
           })
           .then(() => {
             this.$emit("close", 1);
           })
-          .catch((err) => {
+          .catch(err => {
             this.formResponse = err.data;
           })
           .finally(() => {
@@ -226,7 +227,7 @@ export default {
           .then(() => {
             this.$emit("close", 1);
           })
-          .catch((err) => {
+          .catch(err => {
             this.formResponse = err.data;
           })
           .finally(() => {
@@ -242,7 +243,7 @@ export default {
       this.form.end_time = this.edit.end_time;
       this.form.description = this.edit.description;
       this.form.working_here = this.edit.working_here;
-    },
+    }
   },
   computed: {
     types() {

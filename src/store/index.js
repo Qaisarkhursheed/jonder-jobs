@@ -10,6 +10,7 @@ import company from "./company";
 import teamManagement from "./teamManagement";
 import invoices from "./invoices";
 import plans from "./plans";
+import professions from "./professions";
 
 Vue.use(Vuex);
 
@@ -23,7 +24,8 @@ export default createStore(Vuex.Store, {
     company,
     teamManagement,
     invoices,
-    plans
+    plans,
+    professions
   },
   state: {
     screenSize: null
