@@ -27,6 +27,10 @@
           <v-icon>mdi-message</v-icon>
           <span>{{ $t("company.employer.messages") }}</span>
         </router-link>
+        <router-link :to="{ name: 'CompanyMessageTemplates' }">
+          <v-icon>mdi-message-bulleted</v-icon>
+          <span>{{ $t("company.messageTemplates.heading") }}</span>
+        </router-link>
         <router-link :to="{ name: 'CompanyTeamManagement' }">
           <v-icon>mdi-account-group</v-icon>
           <span>{{ $t("company.employer.teamManagement") }}</span>
@@ -61,7 +65,7 @@ export default {
   },
   data() {
     return {
-      extended: true,
+      extended: true
     };
   },
   mounted() {
