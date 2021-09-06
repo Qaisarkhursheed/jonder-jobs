@@ -123,6 +123,15 @@
       "general": "General",
       "details": "Details",
       "contact": "Contact"
+    },
+    "messageTemplates": {
+      "heading": "Message Templates",
+      "subheading": "Use message templates to contact job seekers faster.",
+      "templateName": "Template name",
+      "templateContent": "Template content",
+      "createHeading": "Create new Message Template",
+      "editHeading": "Edit Message Template",
+      "deleteText": "Are you sure you want to delete the \"{name}\" message template? This action cannot be undone."
     }
   },
   "user": {
@@ -327,10 +336,14 @@
     "logout": "Logout",
     "save": "Save",
     "edit": "Edit",
+    "delete": "Delete",
+    "createNew": "Create new",
+    "createdAt": "Created at",
     "ok": "OK",
     "modalConfirm": "Are you sure you don't want to save changes ?",
     "modalSuccess": "Your changes have been saved successfully !",
     "seeMore": "",
+    "send": "Send",
     "register": "Register",
     "login": "Log In",
     "loginAccount": "Log into your Jonder account",

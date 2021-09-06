@@ -425,6 +425,14 @@ button {
   height: unset;
 }
 
+.v-dialog {
+  border-radius: 16px;
+}
+
+.v-data-table {
+  border: 1px solid #e6e7e9;
+}
+
 .lang-switcher {
   .v-text-field--rounded > .v-input__control > .v-input__slot {
     padding: 0 15px;
