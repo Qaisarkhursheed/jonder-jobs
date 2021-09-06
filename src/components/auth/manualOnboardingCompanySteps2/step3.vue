@@ -45,7 +45,7 @@
         $t("company.register.companyCityandAdress")
       }}</label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.address = e)"
+        @select="e => (value.address = e)"
         type="geocode"
         :full-address="true"
         :placeholder="$t('company.register.companyCityandAdressPlaceholder')"
@@ -88,18 +88,18 @@ export default {
   name: "Step3",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -107,11 +107,11 @@ export default {
       if (this.value.company_phone === null) {
         return (this.value.company_phone = "+49");
       }
-    },
+    }
   },
   beforeMount() {
     this.phonePrefix();
-  },
+  }
 };
 </script>
 

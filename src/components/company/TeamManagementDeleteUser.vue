@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <v-dialog 
-      v-model="dialog" 
+    <v-dialog
+      v-model="dialog"
       width="500"
       overlay-color="#0253B3"
       overlay-opacity="0.3"
@@ -19,7 +19,9 @@
       </template>
 
       <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4 text-center" style="font-size: 28px;">{{ $t('general.areYouSure') }}</h1>
+        <h1 class="mb-4 text-center" style="font-size: 28px;">
+          {{ $t("general.areYouSure") }}
+        </h1>
 
         <v-form
           ref="form"
@@ -28,7 +30,7 @@
           v-model="isValid"
         >
           <p>
-            {{ $t('general.areYouSureQuestion') }}
+            {{ $t("general.areYouSureQuestion") }}
           </p>
 
           <ResponseAlert :response="formResponse"></ResponseAlert>
@@ -42,7 +44,7 @@
                 $refs.form.reset();
               "
             >
-              {{ $t('general.cancelOption') }}
+              {{ $t("general.cancelOption") }}
             </v-btn>
             <v-btn
               type="submit"
@@ -51,8 +53,7 @@
               class="ml-3 font-weight-medium "
               :disabled="!isValid"
             >
-              {{ $t('general.confirmOption') }}
-
+              {{ $t("general.confirmOption") }}
             </v-btn>
           </div>
         </v-form>
@@ -68,14 +69,14 @@ export default {
   components: { ResponseAlert },
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
       dialog: false,
       isValid: false,
-      formResponse: {},
+      formResponse: {}
     };
   },
   methods: {
@@ -86,10 +87,10 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         });
-    },
-  },
+    }
+  }
 };
 </script>

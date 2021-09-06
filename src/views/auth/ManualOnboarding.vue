@@ -25,23 +25,43 @@
         v-model="e1"
       >
         <v-stepper-header class="elevation-0" v-if="this.showSteps === true">
-          <v-stepper-step step="1" :complete="complete(1)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="1"
+            :complete="complete(1)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="2" :complete="complete(2)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="2"
+            :complete="complete(2)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3" :complete="complete(3)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="3"
+            :complete="complete(3)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4" :complete="complete(4)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="4"
+            :complete="complete(4)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="5" :complete="complete(5)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="5"
+            :complete="complete(5)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <!-- <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step> -->
         </v-stepper-header>

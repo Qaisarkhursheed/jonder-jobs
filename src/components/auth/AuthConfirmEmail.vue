@@ -40,11 +40,11 @@ export default {
     return {
       email: localStorage.getItem("user-email"),
       resendValid: false,
-      interval: null,
+      interval: null
     };
   },
   components: {
-    AuthWrap,
+    AuthWrap
   },
   methods: {
     setInterval() {
@@ -67,11 +67,11 @@ export default {
         localStorage.setItem("verificationTime", time);
         this.setInterval();
       }
-    },
+    }
   },
   mounted() {
     this.setInterval();
-  },
+  }
 };
 </script>
 

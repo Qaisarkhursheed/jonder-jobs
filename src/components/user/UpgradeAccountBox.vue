@@ -14,7 +14,8 @@
         :src="require('@/assets/icons/top-rated.svg')"
         :width="small ? '40' : null"
       ></v-img>
-      <div class="title-description-wrapper"
+      <div
+        class="title-description-wrapper"
         :class="{ 'd-flex': !small }"
         style="font-size: 13px; justify-content: space-between;"
       >
@@ -25,16 +26,15 @@
           {{ $t("general.beOnTheTop") }}
         </div>
       </div>
-      <div class="link-upgrade-wrapper"
-           :class="{ 'mt-2': small }">
+      <div class="link-upgrade-wrapper" :class="{ 'mt-2': small }">
         <CardActionableList
-            type="UpgradePlan"
-            @edit="activateEdit('UpgradePlan', $event)"
+          type="UpgradePlan"
+          @edit="activateEdit('UpgradePlan', $event)"
         />
         <span
-            class="link-upgrade"
-            style="color: #55F481; width: 100%; cursor: pointer;"
-            @click="toggleModal('UpgradePlan')"
+          class="link-upgrade"
+          style="color: #55F481; width: 100%; cursor: pointer;"
+          @click="toggleModal('UpgradePlan')"
         >
           {{ $t("user.dashboard.upgrade") }}
         </span>
@@ -51,8 +51,8 @@ export default {
   props: {
     small: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     toggleModal(type) {
@@ -62,11 +62,11 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
+    }
   },
   components: {
     UpgradePlanModal,
-    CardActionableList,
+    CardActionableList
   },
   mounted() {
     if (this.$store.getters["user/userPlans"] == null) {
@@ -78,13 +78,13 @@ export default {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal,
-      },
+        component: UpgradePlanModal
+      }
     },
     fileActions: {
-      UpgradePlan: ["edit", "delete"],
-    },
-  }),
+      UpgradePlan: ["edit", "delete"]
+    }
+  })
 };
 </script>
 
@@ -107,7 +107,6 @@ export default {
   .badge {
     top: -16px;
   }
-
 }
 .upgrade-box {
   background-color: $primary-blue-dark;

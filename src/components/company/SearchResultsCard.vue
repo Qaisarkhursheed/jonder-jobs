@@ -5,9 +5,7 @@
     :class="{ highlighted }"
     flat
   >
-    <div
-      @click="proceedClick"
-    >
+    <div @click="proceedClick">
       <v-card-text class="d-flex align-center pa-0 pa-6 pb-5">
         <v-avatar color="primary" size="64">
           <v-img v-if="candidate.profile_img" :src="candidate.profile_img" />
@@ -119,7 +117,7 @@
 </template>
 
 <script>
-import store from '@/store';
+import store from "@/store";
 
 export default {
   name: "SearchResultsCard",
@@ -144,8 +142,7 @@ export default {
 
   methods: {
     startConversation() {
-      if(!store.getters['user/userPlan'])
-        return;
+      if (!store.getters["user/userPlan"]) return;
       this.startChatLoading = true;
       this.$store
         .dispatch("chat/startChat", this.candidate.id)
@@ -180,10 +177,13 @@ export default {
       }
     },
     proceedClick() {
-      if(store.getters['user/userPlan']) {
-        this.$router.push({ name: 'CompanyUser', params: { id: this.candidate.id } })
+      if (store.getters["user/userPlan"]) {
+        this.$router.push({
+          name: "CompanyUser",
+          params: { id: this.candidate.id }
+        });
       } else {
-        this.$emit('block', true);
+        this.$emit("block", true);
       }
     }
   }

@@ -1,6 +1,5 @@
-
 export default {
   componentUpdated(el, binding, node) {
-    node.componentInstance.lazySearch = '';
+    node.componentInstance.lazySearch = "";
   }
 };

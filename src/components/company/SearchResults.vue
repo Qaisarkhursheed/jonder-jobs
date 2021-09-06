@@ -1,6 +1,6 @@
 <template>
   <div class="search-results">
-    <v-dialog 
+    <v-dialog
       class="dialog"
       v-model="blockModalActive"
       @click:outside="toggleModal"
@@ -15,15 +15,17 @@
     </v-dialog>
     <template v-if="results.length">
       <div class="heading pb-4">
-        {{ searchMeta.total }} {{ $t('company.search.searchResults') }}
+        {{ searchMeta.total }} {{ $t("company.search.searchResults") }}
       </div>
       <v-row>
-        <v-col 
+        <v-col
           cols="12"
           md="6"
           lg="4"
-          xl="3"  
-          v-for="(result, i) in results" :key="i">
+          xl="3"
+          v-for="(result, i) in results"
+          :key="i"
+        >
           <SearchResultsCard :candidate="result" @block="toggleModal" />
         </v-col>
       </v-row>
@@ -41,20 +43,19 @@
       </v-row>
     </template>
     <template v-else>
-      <SearchNoResults /> 
+      <SearchNoResults />
     </template>
   </div>
-
 </template>
 
 <script>
-import store from '@/store';
-import SearchResultsCard from '@/components/company/SearchResultsCard';
-import SearchNoResults from '@/components/company/SearchNoResults';
+import store from "@/store";
+import SearchResultsCard from "@/components/company/SearchResultsCard";
+import SearchNoResults from "@/components/company/SearchNoResults";
 import CompanyPlans from "@/components/plans/CompanyPlans";
 
 export default {
-  name: 'SearchResults',
+  name: "SearchResults",
 
   components: {
     SearchResultsCard,
@@ -72,12 +73,12 @@ export default {
     return {
       page: 1,
       blockModalActive: false
-    }
+    };
   },
   methods: {
     pageChange(ind) {
       this.page = ind;
-      store.dispatch('company/searchJobseekerPagination', ind);
+      store.dispatch("company/searchJobseekerPagination", ind);
     },
     toggleModal() {
       this.blockModalActive = !this.blockModalActive;
@@ -85,30 +86,26 @@ export default {
   },
   computed: {
     searchMeta() {
-      return store.getters['company/searchMeta'];
+      return store.getters["company/searchMeta"];
     },
     pagination() {
-      return Math.round(
-        this.searchMeta.total/this.searchMeta.per_page
-      );
+      return Math.round(this.searchMeta.total / this.searchMeta.per_page);
     }
   }
-
 };
-
 </script>
 
 <style lang="scss" scoped>
-  .search-results {
-    .heading {
-      font-weight: 600;
-      font-size: 24px;
-      color: #000000;
-    }
+.search-results {
+  .heading {
+    font-weight: 600;
+    font-size: 24px;
+    color: #000000;
   }
-  .search-pagination {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
+}
+.search-pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 </style>

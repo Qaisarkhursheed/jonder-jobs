@@ -89,7 +89,7 @@ const EMPLOYEE_NUMBER = [
   "501 bis 1.000 Beschäftigte",
   "1.001 bis 5.000 Beschäftigte",
   "5.001 bis 10.000 Beschäftigte",
-  "10.001+ Beschäftigte",
+  "10.001+ Beschäftigte"
 ];
 
 const SCHOOL = [

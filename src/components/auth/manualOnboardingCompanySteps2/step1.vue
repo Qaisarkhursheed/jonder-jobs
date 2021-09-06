@@ -63,14 +63,14 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
       formValid: false,
-      profile_img: false,
+      profile_img: false
     };
   },
   methods: {
@@ -78,7 +78,7 @@ export default {
       this.profile_img = this.value.profile_img_file = e.target.files[0];
       // this.value.profile_img_file = e.target.files[0];
       console.log(e);
-    },
+    }
   },
   computed: {
     avatar_img() {
@@ -86,8 +86,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 
