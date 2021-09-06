@@ -372,6 +372,8 @@
     "repeatPassword": "Repeat Password",
     "agreePolicy": "Yes, I agree to the privacy policy & terms and conditions.",
     "saveChanges": "Save changes",
-    "beOnTheTop": "Be on the top of search for 3 days"
+    "beOnTheTop": "Be on the top of search for 3 days",
+    "searchJobseekers": "Find employee",
+    "searchJobseekersFound": "potential Employee found"
   }
 }

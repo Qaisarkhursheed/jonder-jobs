@@ -48,5 +48,8 @@ export default {
   },
   jobseekerNotes(state) {
     return state.jobseekerNotes;
+  },
+  searchType(state) {
+    return state.searchType;
   }
 };

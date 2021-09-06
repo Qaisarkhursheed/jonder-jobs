@@ -10,6 +10,7 @@ export default {
     current_page: 1,
     total: 0
   },
+  searchType: null,
   searchInProgress: false,
   searchFilters: [],
 

@@ -126,6 +126,7 @@ export default {
   methods: {
     filterAction(action) {
       if (action.type === "use") {
+        store.dispatch("company/setSearchType", "from-filter");
         store.dispatch("company/searchJobseekers", this.prepareData());
         this.$emit("filter-search");
       }

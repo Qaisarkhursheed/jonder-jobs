@@ -13,10 +13,9 @@
           <v-autocomplete
             v-model="formFields.job_position"
             :items="$store.getters['professions/items']"
-            cache-items
             outlined
+            clearable
             flat
-            hide-no-data
             :hide-details="true"
             :placeholder="$t('company.search.enterJobtitle')"
           ></v-autocomplete>
@@ -29,6 +28,7 @@
             v-model="formFields.employment_type"
             :items="types.EMPLOYEMENT_TYPE"
             hide-details
+            clearable
             :placeholder="$t('company.search.employementType')"
             outlined
           ></v-select>
@@ -45,6 +45,7 @@
               v-model="formFields.branche"
               :items="types.JOB_BRANCHE"
               cache-items
+              clearable
               outlined
               flat
               hide-no-data
@@ -79,6 +80,7 @@
             <v-select
               v-model="formFields.education"
               :items="types.EDUCATION"
+              clearable
               :hide-details="true"
               :placeholder="$t('company.search.educationStudy')"
               outlined
@@ -135,6 +137,7 @@
               v-model="formFields.work_experience"
               :items="types.WORK_EXPERIENCE"
               :hide-details="true"
+              clearable
               :placeholder="$t('company.search.workExperience')"
               outlined
             ></v-select>
@@ -193,10 +196,10 @@
                   @click="search"
                 >
                   <Loop />
-                  <span class="pl-1">{{
-                    $t("company.search.findEmployee")
-                  }}</span>
-                </v-btn>
+                  <span class="pl-1">
+                    {{ searchButtonStateLabel }}
+                  </span>
+                </v-btn>  
               </v-col>
             </v-row>
           </v-col>
@@ -240,7 +243,8 @@ export default {
         city: ""
       },
       advancedSearch: false,
-      errorMessage: ""
+      errorMessage: "",
+      filterTouched: false
     };
   },
   created() {
@@ -248,8 +252,10 @@ export default {
   },
   methods: {
     search() {
-      store.dispatch("company/searchJobseekers", this.prepareData());
+      store.dispatch("company/setSearchType", "normal");
+      store.dispatch("company/searchJobseekers", this.prepareData(), "normal");
       this.$emit("search");
+      this.filterTouched = false;
     },
     removeMessage(delay) {
       setTimeout(() => {
@@ -336,17 +342,32 @@ export default {
     }
   },
   computed: {
-    searchCountLabel() {
-      return this.searchCount
-        ? `Search (${this.searchCount} results)`
-        : "Search";
+    searchButtonStateLabel() {
+      if (!this.filterTouched && store.getters["company/searchStatus"] == 'results') {
+        return `${store.getters["company/searchMeta"].total} ${this.$t('general.searchJobseekersFound')}`;
+      } else {
+        return this.$t('general.searchJobseekers');
+      }
     },
     searchLoading() {
-      this.filterData();
+      if(store.getters["company/searchType"] === 'from-filter') {
+        this.filterData();
+      }
       return store.getters["company/searchInProgress"];
     },
     types() {
       return types;
+    },
+    searchCount() {
+      return store.getters["company/searchMeta"].total;
+    }
+  },
+  watch: {
+    formFields: {
+      handler: function() {
+        this.filterTouched = true;
+      },
+      deep: true
     }
   }
 };

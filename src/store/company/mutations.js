@@ -50,4 +50,7 @@ export default {
   SET_JOBSEEKER_NOTES(state, value) {
     state.jobseekerNotes = value;
   },
+  SET_SEARCH_TYPE(state, value) {
+    state.searchType = value;
+  }
 };
