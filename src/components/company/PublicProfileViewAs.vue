@@ -21,7 +21,7 @@
     <div v-if="user.role === 'Employer'">
       <div class="section mb-8">
         <label class="section-label">
-          Über das Unternehmen
+          {{ $t("company.employer.aboutCompany") }}
         </label>
         <div class="section-value">
           {{ user.about_company }}
@@ -31,7 +31,7 @@
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            Angestellte
+            {{ $t("company.employer.employees") }}
           </label>
           <div class="section-value">
             {{ user.company_employees }}
@@ -167,8 +167,8 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   computed: {
@@ -197,8 +197,8 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

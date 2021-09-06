@@ -27,7 +27,7 @@
         min="0"
         max="30"
         step="0.5"
-        @change="(val) => (value.working_experience = val)"
+        @change="val => (value.working_experience = val)"
       />
 
       <div class="mt-4">
@@ -129,15 +129,15 @@ export default {
     ModalEducation,
     ModalExperience,
     CardActionableList,
-    SliderInput,
+    SliderInput
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
@@ -146,18 +146,18 @@ export default {
         education: {
           active: false,
           edit: false,
-          component: ModalEducation,
+          component: ModalEducation
         },
         experience: {
           active: false,
           edit: false,
-          component: ModalExperience,
-        },
+          component: ModalExperience
+        }
       },
       fileActions: {
         experience: ["edit", "delete"],
-        education: ["edit", "delete"],
-      },
+        education: ["edit", "delete"]
+      }
     };
   },
   methods: {
@@ -168,8 +168,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
-  },
+    }
+  }
 };
 </script>
 

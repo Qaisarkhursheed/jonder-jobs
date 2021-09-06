@@ -2,18 +2,18 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>{{ $t('user.profile.editProfileHeading') }}</h4>
+        <h4>{{ $t("user.profile.editProfileHeading") }}</h4>
       </v-col>
       <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >{{ $t('general.save') }}
+          >{{ $t("general.save") }}
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.whatCanYouDo') }}</label>
+        <label>{{ $t("user.profile.whatCanYouDo") }}</label>
         <v-text-field
           dense
           :label="$t('user.profile.whatCanYouDo')"
@@ -31,7 +31,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.showUsQualifications') }}</label>
+        <label>{{ $t("user.profile.showUsQualifications") }}</label>
         <v-text-field
           dense
           :label="$t('user.profile.showUsQualifications')"
@@ -49,7 +49,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.showUsWhatYouWant') }}</label>
+        <label>{{ $t("user.profile.showUsWhatYouWant") }}</label>
         <v-text-field
           dense
           :label="$t('user.profile.showUsWhatYouWant')"
@@ -66,7 +66,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.tellUsAboutYou') }}</label>
+        <label>{{ $t("user.profile.tellUsAboutYou") }}</label>
         <v-textarea
           dense
           :label="$t('user.profile.tellUsAboutYou')"

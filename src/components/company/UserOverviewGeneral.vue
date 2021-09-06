@@ -128,13 +128,13 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
       experience: [],
-      education: [],
+      education: []
     };
   },
   methods: {
@@ -143,8 +143,8 @@ export default {
         .get(
           `${process.env.VUE_APP_API_BASE}/jobseeker-experience?per_page=9999`
         )
-        .then((res) => {
-          let response = res.data.data.map((obj) => {
+        .then(res => {
+          let response = res.data.data.map(obj => {
             return obj;
           });
           for (let i = 0; i < response.length; i++) {
@@ -154,7 +154,7 @@ export default {
           }
         })
 
-        .catch((error) => {
+        .catch(error => {
           alert(error);
         });
     },
@@ -163,8 +163,8 @@ export default {
         .get(
           `${process.env.VUE_APP_API_BASE}/jobseeker-education?per_page=9999`
         )
-        .then((res) => {
-          let response = res.data.data.map((obj) => {
+        .then(res => {
+          let response = res.data.data.map(obj => {
             return obj;
           });
           for (let i = 0; i < response.length; i++) {
@@ -175,19 +175,19 @@ export default {
           }
         })
 
-        .catch((error) => {
+        .catch(error => {
           alert(error);
         });
     },
     logger() {
       console.log(this.user);
-    },
+    }
   },
   beforeMount() {
     this.getExperience();
     this.getEducation();
     this.logger();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

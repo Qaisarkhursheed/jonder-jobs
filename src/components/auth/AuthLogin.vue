@@ -72,7 +72,7 @@
           class="full-w mt-2"
         >
           <v-icon left>mdi-google</v-icon>
-          {{ $t("company.register.continueWithGoogle") }}
+          {{ $t("company.register.continueWithGoogleCompany") }}
         </v-btn>
 
         <v-btn

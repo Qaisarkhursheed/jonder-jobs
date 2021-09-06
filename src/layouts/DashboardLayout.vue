@@ -57,7 +57,7 @@
           class="back-btn dark-blue"
           @click="navigateTo('/dashboard')"
         >
-          Zurück zur Startseite
+          {{ $t("user.profile.backToHome") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -67,7 +67,7 @@
         <nav class="dashboard-navigation pl-0 pl-md-8" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
-              Einstellungen
+              {{ $t("user.profile.profileSettings") }}
             </div>
 
             <div class="submenu">
@@ -269,14 +269,14 @@ export default {
   components: {
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox
+    UpgradeAccountBox,
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -291,7 +291,7 @@ export default {
     },
     userEmploymentType() {
       return this.user.looking_for_employment_type.split(",");
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -306,7 +306,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    }
+    },
   },
   watch: {
     search(val) {
@@ -322,8 +322,8 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

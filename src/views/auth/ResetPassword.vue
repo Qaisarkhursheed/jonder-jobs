@@ -16,7 +16,9 @@
       </p>
 
       <v-form v-model="formValid" class="auth-form" @submit.prevent="submit">
-        <label class="profile-label">Neues Passwort</label>
+        <label class="profile-label">{{
+          $t("user.profile.newPassword")
+        }}</label>
         <v-text-field
           v-model="formData.password"
           dense
@@ -32,7 +34,7 @@
           dense
           :rules="[
             validations.required,
-            validations.same('Neues Passwort', formData.password)
+            validations.same('Neues Passwort', formData.password),
           ]"
           type="password"
           outlined
@@ -64,12 +66,12 @@ export default {
     return {
       formData: {},
       formResponse: {},
-      formValid: false
+      formValid: false,
     };
   },
   components: {
     AuthWrap,
-    JonderTitle
+    JonderTitle,
   },
   methods: {
     submit() {
@@ -85,15 +87,15 @@ export default {
           this.$router.push({
             name: "Login",
             query: {
-              resetPassword: 1
-            }
+              resetPassword: 1,
+            },
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

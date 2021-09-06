@@ -48,7 +48,7 @@
           <GooglePlacesAutocomplete
             type="geocode"
             :value="form.address"
-            @select="(e) => (form.address = e)"
+            @select="e => (form.address = e)"
             :full-address="true"
           />
         </v-col>
@@ -56,7 +56,7 @@
           <label class="section-label">
             City
           </label>
-          <GooglePlacesAutocomplete 
+          <GooglePlacesAutocomplete
             :value="form.city"
             @select="e => form.city = e" />
         </v-col> -->
@@ -126,13 +126,13 @@ export default {
   name: "PublicProfileContact",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   created() {
@@ -151,9 +151,9 @@ export default {
         instagram: "",
         youtube: "",
         linkedin: "",
-        twitter: "",
+        twitter: ""
       },
-      social: ["facebook", "instagram", "linkedin", "youtube", "twitter"],
+      social: ["facebook", "instagram", "linkedin", "youtube", "twitter"]
     };
   },
   methods: {
@@ -164,10 +164,10 @@ export default {
     },
     save() {
       this.$emit("update", {
-        ...this.form,
+        ...this.form
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

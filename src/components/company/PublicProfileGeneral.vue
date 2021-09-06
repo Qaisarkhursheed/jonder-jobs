@@ -30,7 +30,7 @@
     </div>
     <div class="section mb-6 mt-5">
       <label class="section-label">
-        Unternehmensname
+        {{ $t("user.onboarding.companyName") }}
       </label>
       <v-text-field
         class="rounded-lg"
@@ -49,7 +49,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Über das Unternehmen
+        {{ $t("company.employer.aboutCompany") }}
       </label>
       <v-textarea
         class="rounded-lg"

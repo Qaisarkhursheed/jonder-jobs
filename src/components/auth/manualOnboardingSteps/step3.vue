@@ -42,7 +42,7 @@
         {{ $t("user.onboarding.whereToWork") }}
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.address_to_work = e)"
+        @select="e => (value.address_to_work = e)"
         :required="true"
       />
 
@@ -82,7 +82,7 @@
         min="1"
         max="12"
         step="0.5"
-        @change="(val) => (value.monthly_salary = val)"
+        @change="val => (value.monthly_salary = val)"
       />
 
       <v-row class="mt-5">
@@ -123,26 +123,26 @@ export default {
   components: {
     Calendar,
     GooglePlacesAutocomplete,
-    SliderInput,
+    SliderInput
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
       formValid: false,
-      dontKnowWhenToStart: false,
+      dontKnowWhenToStart: false
     };
   },
   computed: {
     types() {
       return types;
-    },
+    }
   },
   methods: {
     handleNext() {
@@ -150,8 +150,8 @@ export default {
         this.value.ready_for_work = null;
       }
       this.nextScreen();
-    },
-  },
+    }
+  }
 };
 </script>
 

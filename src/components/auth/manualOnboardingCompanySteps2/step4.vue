@@ -100,16 +100,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
-  },
+  }
 };
 </script>
 

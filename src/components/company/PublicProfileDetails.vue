@@ -17,7 +17,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Anzahl an Angestellten
+        {{ $t("company.employer.numberOfEmployees") }}
       </label>
       <v-select
         v-model="form.company_employees"
@@ -28,13 +28,9 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Gründungsjahr
+        {{ $t("company.employer.foundingYear") }}
       </label>
-      <v-text-field 
-        v-model="form.establishment_date"
-        type="number"
-        outlined
-      >
+      <v-text-field v-model="form.establishment_date" type="number" outlined>
       </v-text-field>
     </div>
     <div class="action d-flex justify-end">
@@ -66,7 +62,7 @@ export default {
       form: {
         branche: "",
         company_employees: "",
-        establishment_date: ""
+        establishment_date: "",
       },
     };
   },

@@ -49,7 +49,7 @@
       <label class="profile-label">
         {{ $t("company.register.dateOfEstablishment") }}
       </label>
-      <v-text-field 
+      <v-text-field
         v-model="value.establishment_date"
         :rules="[validations.required]"
         type="number"
@@ -95,9 +95,9 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
 
   data: () => ({
@@ -108,15 +108,15 @@ export default {
       "10 - 99",
       "100 - 500",
       "500 - 1000",
-      "1000+",
+      "1000+"
     ],
-    branches: ["IT", "Medicine"],
+    branches: ["IT", "Medicine"]
   }),
   computed: {
     types() {
       return types;
-    },
-  },
+    }
+  }
 };
 </script>
 

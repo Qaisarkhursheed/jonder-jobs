@@ -45,15 +45,15 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle,
+    JonderTitle
   },
   data() {
     return {
       formData: {
-        email: "",
+        email: ""
       },
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -63,11 +63,11 @@ export default {
         .then(() => {
           this.$emit("success");
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

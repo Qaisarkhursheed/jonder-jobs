@@ -1,8 +1,11 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" width="500" 
+    <v-dialog
+      v-model="dialog"
+      width="500"
       overlay-color="#0253B3"
-      overlay-opacity="0.3">
+      overlay-opacity="0.3"
+    >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
@@ -93,10 +96,10 @@ export default {
       isValid: false,
       formData: {
         name: "",
-        email: "",
+        email: ""
       },
       formLoading: false,
-      formResponse: {},
+      formResponse: {}
     };
   },
   methods: {
@@ -108,13 +111,13 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>

@@ -90,7 +90,7 @@ export default {
   },
   components: {
     UserOverviewGeneral,
-    UserOverviewNotes,
+    UserOverviewNotes
   },
   data() {
     return {
@@ -130,9 +130,9 @@ export default {
       items: ["general", "notes"],
       tabs: {
         general: UserOverviewGeneral,
-        notes: UserOverviewNotes,
+        notes: UserOverviewNotes
       },
-      startChatLoading: false,
+      startChatLoading: false
     };
   },
   mounted() {
@@ -169,8 +169,8 @@ export default {
           this.$router.push({
             name: "CompanyMessages",
             params: {
-              company: true,
-            },
+              company: true
+            }
           });
         })
         .finally(() => {
@@ -188,7 +188,7 @@ export default {
         this.$store
           .dispatch("company/slManagementAddCandidate", {
             jobseeker_id: this.profile.id,
-            managment_status: "Saved candidates",
+            managment_status: "Saved candidates"
           })
           .then(() => {
             this.profile.selection_managment = true;
@@ -198,11 +198,11 @@ export default {
     back() {
       if (this.$route.params.type && this.$route.params.type === "selection") {
         this.$router.push({
-          name: "CompanySelectionManagement",
+          name: "CompanySelectionManagement"
         });
       } else {
         this.$router.push({
-          name: "CompanySearch",
+          name: "CompanySearch"
         });
       }
     }
