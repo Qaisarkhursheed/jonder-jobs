@@ -9,36 +9,35 @@
 
     <!-- Upgrade box -->
     <div class="upgrade-box">
-      <div class="upgrade-title">
-        {{ $t("user.dashboard.premiumSuggestion") }}
-      </div>
-
       <v-img
         class="badge"
         :src="require('@/assets/icons/top-rated.svg')"
         :width="small ? '40' : null"
       ></v-img>
-
-      <div
+      <div class="title-description-wrapper"
         :class="{ 'd-flex': !small }"
         style="font-size: 13px; justify-content: space-between;"
       >
-        <div>
-          3 Tage lang an der Spitze der Suche stehen
+        <div class="upgrade-title">
+          {{ $t("user.dashboard.premiumSuggestion") }}
         </div>
-
-        <div :class="{ 'mt-2': small }">
-          <CardActionableList
+        <div>
+          {{ $t("general.beOnTheTop") }}
+        </div>
+      </div>
+      <div class="link-upgrade-wrapper"
+           :class="{ 'mt-2': small }">
+        <CardActionableList
             type="UpgradePlan"
             @edit="activateEdit('UpgradePlan', $event)"
-          />
-          <div
+        />
+        <span
+            class="link-upgrade"
             style="color: #55F481; width: 100%; cursor: pointer;"
             @click="toggleModal('UpgradePlan')"
-          >
-            {{ $t("user.dashboard.upgrade") }}
-          </div>
-        </div>
+        >
+          {{ $t("user.dashboard.upgrade") }}
+        </span>
       </div>
     </div>
   </div>
@@ -90,6 +89,26 @@ export default {
 </script>
 
 <style lang="scss">
+.dashboard-upgrade-account-box {
+  .upgrade-box {
+    display: flex;
+    justify-content: space-between;
+    max-width: 412px;
+  }
+  .title-description-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 275px;
+  }
+  .link-upgrade-wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+  .badge {
+    top: -16px;
+  }
+
+}
 .upgrade-box {
   background-color: $primary-blue-dark;
   color: white;
@@ -110,6 +129,11 @@ export default {
 .badge {
   position: absolute;
   right: 17px;
-  top: -20px;
+  top: -11px;
+}
+.link-upgrade {
+  border-bottom: 2px solid;
+  font-size: 13px;
+  font-weight: 700;
 }
 </style>

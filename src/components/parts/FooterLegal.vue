@@ -1,6 +1,6 @@
 <template>
-  <v-footer 
-    :class="['lighten-1', {'white': white}, {'default': !white}]" 
+  <v-footer
+    :class="['lighten-1', { white: white }, { default: !white }]"
     bottom
   >
     <v-row justify="center" no-gutters>
@@ -10,7 +10,7 @@
         color="black"
         text
         rounded
-        class="my-2"
+        class="my-2 footer-links"
         :href="link.link"
       >
         {{ link.name }}
@@ -32,23 +32,30 @@ export default {
     links: [
       {
         name: "Impressum",
-        link: "https://jonder.jobs/impressum",
+        link: "https://jonder.jobs/impressum"
       },
       {
         name: "Datenschutz",
-        link: "https://jonder.jobs/datenschutz",
+        link: "https://jonder.jobs/datenschutz"
       },
       {
         name: "AGB",
-        link: "https://jonder.jobs/agb",
-      },
-    ],
-  }),
+        link: "https://jonder.jobs/agb"
+      }
+    ]
+  })
 };
 </script>
 
 <style scoped lang="scss">
 .default {
-  border-top: 1px solid #C4C4C4;
+  border-top: 1px solid #c4c4c4;
+}
+.footer-links:not(:last-child) {
+  &:after {
+    content: "-";
+    position: absolute;
+    right: -5px;
+  }
 }
 </style>

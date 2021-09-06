@@ -357,6 +357,7 @@
     "pasword": "Passwort",
     "repeatPassword": "Password erneut eingeben",
     "agreePolicy": "Ja, ich stimme der Datenschutzerklärung & AGB zu.",
-    "saveChanges": "Änderungen speichern"
+    "saveChanges": "Änderungen speichern",
+    "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen"
   }
 }
