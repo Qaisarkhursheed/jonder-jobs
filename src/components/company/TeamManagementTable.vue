@@ -36,36 +36,36 @@ export default {
     return {
       params: {
         page: 1,
-        per_page: 15,
+        per_page: 15
       },
       selected: null,
       headers: [
         {
           text: "Nutzer",
           value: "name",
-          width: "25%",
+          width: "25%"
         },
         {
           text: "E-mail",
           value: "email",
-          width: "25%",
+          width: "25%"
         },
         {
           text: "Status",
           value: "status",
-          width: "15%",
+          width: "15%"
         },
         {
           text: "Eingeladen am:",
           value: "created_at",
-          width: "15%",
+          width: "15%"
         },
         {
           text: "",
           value: "actions",
-          width: "10%",
-        },
-      ],
+          width: "10%"
+        }
+      ]
     };
   },
 
@@ -77,8 +77,8 @@ export default {
     fetchData() {
       this.$store.dispatch("teamManagement/fetchUsers", this.params);
     },
-    removeUser() {},
-  },
+    removeUser() {}
+  }
 };
 </script>
 <style lang="scss" scoped>

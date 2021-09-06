@@ -32,9 +32,9 @@
 export default {
   props: {
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
-  name: "StepSucces",
+  name: "StepSucces"
 };
 </script>
 

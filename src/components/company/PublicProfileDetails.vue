@@ -30,11 +30,7 @@
       <label class="section-label">
         Gründungsjahr
       </label>
-      <v-text-field 
-        v-model="form.establishment_date"
-        type="number"
-        outlined
-      >
+      <v-text-field v-model="form.establishment_date" type="number" outlined>
       </v-text-field>
     </div>
     <div class="action d-flex justify-end">
@@ -57,8 +53,8 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
@@ -67,7 +63,7 @@ export default {
         branche: "",
         company_employees: "",
         establishment_date: ""
-      },
+      }
     };
   },
 
@@ -82,15 +78,15 @@ export default {
     },
     save() {
       this.$emit("update", {
-        ...this.form,
+        ...this.form
       });
-    },
+    }
   },
   computed: {
     types() {
       return types;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

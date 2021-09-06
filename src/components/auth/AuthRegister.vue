@@ -119,7 +119,7 @@
         :placeholder="$t('general.repeatPassword')"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password),
+          validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         dense
@@ -199,7 +199,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle,
+    JonderTitle
   },
   data() {
     return {
@@ -213,14 +213,14 @@ export default {
         // show_name: false,
         // show_location: false,
         role: "Jobseeker",
-        accept_policy: false,
+        accept_policy: false
       },
       profile_img: false,
       showPass: false,
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -236,13 +236,13 @@ export default {
           localStorage.setItem("user-email", this.formData.email);
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    },
+    }
   },
   computed: {
     avatar_img() {
@@ -250,8 +250,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 

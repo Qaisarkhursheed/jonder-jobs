@@ -25,19 +25,35 @@
         v-model="e1"
       >
         <v-stepper-header class="elevation-0" v-if="showSteps === true">
-          <v-stepper-step step="1" :complete="complete(1)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="1"
+            :complete="complete(1)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="2" :complete="complete(2)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="2"
+            :complete="complete(2)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3" :complete="complete(3)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="3"
+            :complete="complete(3)"
+            color="#0253B3"
+          ></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4" :complete="complete(4)" color="#0253B3"></v-stepper-step>
+          <v-stepper-step
+            step="4"
+            :complete="complete(4)"
+            color="#0253B3"
+          ></v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items class="mo-stepper-items">
@@ -115,7 +131,7 @@ export default {
     Step2,
     Step3,
     Step4,
-    StepSucces,
+    StepSucces
   },
   data: () => ({
     showSteps: true,
@@ -137,9 +153,9 @@ export default {
       instagram: "",
       twitter: "",
       linkedin: "",
-      youtube: "",
+      youtube: ""
     },
-    formResponse: {},
+    formResponse: {}
   }),
   created() {
     if (this.$store.getters["user/user"].onboarding_finished) {
@@ -152,7 +168,7 @@ export default {
     populateData() {
       const user = this.$store.getters["user/user"];
       if (user) {
-        Object.keys(user).forEach((key) => {
+        Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
           if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
         });
@@ -192,14 +208,14 @@ export default {
           this.e1 = 5;
           // this.$router.replace("/company-dashboard");
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.saveInProgress = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

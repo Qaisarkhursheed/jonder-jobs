@@ -16,23 +16,21 @@
         :max="max"
         :step="step"
         @end="change"
-      ></v-slider>  
+      ></v-slider>
     </v-col>
   </v-row>
 </template>
 
 <script>
-
 export default {
-
-  name: 'SliderInput',
+  name: "SliderInput",
 
   props: {
     value: {
-      required: true,
+      required: true
     },
     suffix: {
-      type: String,
+      type: String
     },
     min: {
       type: [String, Number]
@@ -45,16 +43,16 @@ export default {
     }
   },
   created() {
-    this.model = this.value ? this.value : '';
+    this.model = this.value ? this.value : "";
   },
   data() {
     return {
       model: null
-    }
+    };
   },
   methods: {
     change(value) {
-      this.$emit('change', value);
+      this.$emit("change", value);
     }
   }
 };
@@ -62,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 .slider-input {
-  border: 1px solid #e5e5e5; 
+  border: 1px solid #e5e5e5;
   border-radius: 10px;
 }
 </style>

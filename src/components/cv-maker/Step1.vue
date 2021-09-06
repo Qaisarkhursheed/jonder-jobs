@@ -127,13 +127,13 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data: () => ({
     day: "",
     month: "",
-    year: "",
+    year: ""
   }),
   computed: {
     isValid() {
@@ -143,7 +143,7 @@ export default {
         this.value.street_address.length > 0 &&
         this.value.birthday.length > 0
       );
-    },
+    }
   },
   methods: {
     nextStep() {
@@ -155,10 +155,10 @@ export default {
         console.log(birthDay);
         this.$emit("input", {
           ...this.value,
-          birthday: birthDay,
+          birthday: birthDay
         });
       }
-    },
+    }
   },
   watch: {
     day(newVal) {
@@ -169,7 +169,7 @@ export default {
     },
     year(newVal) {
       if (newVal) this.updateDate();
-    },
-  },
+    }
+  }
 };
 </script>
