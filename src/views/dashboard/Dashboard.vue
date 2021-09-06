@@ -27,7 +27,7 @@
         </div>
 
         <!-- Upgrade box -->
-        <UpgradeAccountBox class="dashboard-upgrade-account-box" v-if="!showUpgradeBox" />
+        <UpgradeAccountBox v-if="showUpgradeBox" />
 
         <!-- Image -->
         <div class="mt-5">
