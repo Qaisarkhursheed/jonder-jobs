@@ -52,16 +52,16 @@ export default {
   name: "Sidebar",
 
   components: {
-    FooterLegal
+    FooterLegal,
   },
   props: {
     mobile: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
-      extended: true
+      extended: true,
     };
   },
   mounted() {
@@ -70,7 +70,7 @@ export default {
   methods: {
     toggleSidebar() {
       this.extended = !this.extended;
-    }
+    },
   },
   computed: {
     isMini() {
@@ -79,8 +79,8 @@ export default {
       } else {
         return this.extended;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
