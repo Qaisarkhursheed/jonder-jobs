@@ -18,7 +18,7 @@
         large
         @click="$router.push('/company-dashboard')"
       >
-        Zurück zur Startseite
+        {{ $t("user.profile.backToHome") }}
       </v-btn>
     </div>
 
@@ -29,7 +29,7 @@
         <nav class="dashboard-navigation">
           <div class="settings-nav">
             <div class="settings-title">
-              Einstellungen
+              {{ $t("user.profile.profileSettings") }}
             </div>
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
@@ -171,7 +171,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number
+                      number: item.invoice_number,
                     })
                   "
                 ></v-img>
@@ -302,7 +302,7 @@ export default {
   components: {
     UserPlan,
     Header,
-    AddNewCard
+    AddNewCard,
   },
   data() {
     return {
@@ -317,22 +317,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard
-        }
+          component: AddNewCard,
+        },
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"]
-      }
+        AddNewCard: ["edit", "delete"],
+      },
     };
   },
   computed: {
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["user"]),
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status == "complete");
+      this.invoices = this.invoices.filter((i) => i.status == "complete");
     });
   },
   methods: {
@@ -354,10 +354,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
     },
@@ -366,7 +366,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -374,7 +374,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -390,8 +390,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
-  }
+    },
+  },
 };
 </script>
 

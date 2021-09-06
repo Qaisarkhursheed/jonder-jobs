@@ -10,7 +10,12 @@
       "packagesPricing": "Preise für Pakete",
       "inviteUser": "Nutzer einladen",
       "viewAs": "Als Arbeitssuchender ansehen",
-      "backToEdit": "Zurück zum Bearbeiten"
+      "backToEdit": "Zurück zum Bearbeiten",
+      "aboutCompany": "Über das Unternehmen",
+      "employees": "Angestellte",
+      "numberOfEmployees": "Anzahl an Angestellten",
+      "foundingYear": "Gründungsjahr",
+      "users": "Nutzer"
     },
     "register": {
       "jonderWelcome": "Herzlich Willkommen bei Jonder!",
@@ -158,7 +163,7 @@
       "choosePlan": "Wähle einen Premiumplan"
     },
     "profile": {
-      "profileSettings": "Profil Einstellungen",
+      "profileSettings": "Einstellungen",
       "searchStatus": " Status der Arbeitssuche",
       "currentIndustry": "Aktuelle Branche",
       "cityAndAddress": "tadt und Adresse",
@@ -209,7 +214,12 @@
       "editDocuments": "Bearbeite deine hinterlegten Dokumente.",
       "invoicesDesc": "Sehe deine vergangenen Rechnungen ein und lade sie herunter.",
       "passwordDesc": " Änder dein Passwort und erstelle ein neues.",
-      "upgradeDesc": "Upgrade dein Konto, um deine Stellenanzeigen sichtbarer zu platzieren."
+      "upgradeDesc": "Upgrade dein Konto, um deine Stellenanzeigen sichtbarer zu platzieren.",
+      "backToHome": "Zurück zur Startseite",
+      "newPassword": "Neues Passwort",
+      "enterNewPassword": "Neues Passwort eingeben",
+      "reEnterPassword": "Neues Passwort erneut eingeben",
+      "enterOldPassword": "Altes Passwort eingeben"
     },
     "onboarding": {
       "location": "In welcher Stadt wohnst du aktuell?",
