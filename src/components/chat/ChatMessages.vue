@@ -138,7 +138,6 @@
 
       <v-textarea
         v-model="newMessage"
-        class="mr-2"
         style="width: 100%; border-radius: 30px"
         label="Nachricht senden"
         outlined

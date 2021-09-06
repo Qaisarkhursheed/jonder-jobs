@@ -6,7 +6,14 @@
     overlay-opacity="0.3"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-icon v-bind="attrs" v-on="on">mdi-message-bulleted</v-icon>
+      <v-icon
+        v-bind="attrs"
+        v-on="on"
+        class="ml-2"
+        :class="{ 'd-none': !templates.length }"
+      >
+        mdi-message-bulleted
+      </v-icon>
     </template>
 
     <v-card
