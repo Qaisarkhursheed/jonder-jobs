@@ -26,6 +26,17 @@
         outlined
       ></v-select>
     </div>
+    <div class="section mb-6">
+      <label class="section-label">
+        Gründungsjahr
+      </label>
+      <v-text-field 
+        v-model="form.establishment_date"
+        type="number"
+        outlined
+      >
+      </v-text-field>
+    </div>
     <div class="action d-flex justify-end">
       <v-btn
         height="55"
@@ -55,6 +66,7 @@ export default {
       form: {
         branche: "",
         company_employees: "",
+        establishment_date: ""
       },
     };
   },
@@ -66,6 +78,7 @@ export default {
     populate() {
       this.form.branche = this.user.branche;
       this.form.company_employees = this.user.company_employees;
+      this.form.establishment_date = this.user.establishment_date;
     },
     save() {
       this.$emit("update", {

@@ -6,6 +6,8 @@
     persistent
     width="750px"
     max-width="750px"
+    overlay-color="#0253B3"
+    overlay-opacity="0.3"
   >
     <v-card flat class="rounded-lg wrap onboarding-dialog">
       <p class="text-left font-weight-bold mb-3 font-size-16 header mb-5">

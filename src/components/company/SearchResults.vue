@@ -8,6 +8,8 @@
       style="z-index: 2222"
       width="100%"
       height="100%"
+      overlay-color="#0253B3"
+      overlay-opacity="0.3"
     >
       <CompanyPlans class="pa-3" />
     </v-dialog>

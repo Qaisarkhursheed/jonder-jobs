@@ -168,7 +168,13 @@
     <v-row>
       <v-col md="6">
         <v-card>
-          <v-dialog v-model="dialog" persistent max-width="310">
+          <v-dialog 
+            v-model="dialog" 
+            persistent 
+            max-width="310"
+            overlay-color="#0253B3"
+            overlay-opacity="0.3"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" outlined v-bind="attrs" v-on="on" block>
                {{ $t('general.cancel') }}
