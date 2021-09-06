@@ -1,10 +1,14 @@
 <template>
-  <v-dialog class="dialog"
-            v-model="active"
-            @click:outside="close('abort')"
-            persistent
-            width="350px"
-            max-width="350px">
+  <v-dialog 
+    class="dialog"
+    v-model="active"
+    @click:outside="close('abort')"
+    persistent
+    width="350px"
+    max-width="350px"
+    overlay-color="#0253B3"
+    overlay-opacity="0.3"
+  >
     <v-card flat class="rounded-lg">
         <v-card>
           <template v-if="type == 'ok'">

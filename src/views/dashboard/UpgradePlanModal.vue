@@ -6,6 +6,8 @@
     persistent
     :width="$store.getters.screenSize ? '95%' : '750px'"
     max-width="750px"
+    overlay-color="#0253B3"
+    overlay-opacity="0.3"
   >
     <v-card flat class="rounded-lg wrap upgrade-dialog modal-plan">
       <div class="modal-title">
