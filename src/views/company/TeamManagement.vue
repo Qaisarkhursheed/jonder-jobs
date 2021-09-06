@@ -26,8 +26,8 @@ export default {
 
   components: {
     TeamManagementTable,
-    TeamManagementInviteUser,
-  },
+    TeamManagementInviteUser
+  }
 };
 </script>
 

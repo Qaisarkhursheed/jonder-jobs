@@ -103,17 +103,17 @@ export default {
   components: {
     AuthWrap,
     AuthRegisterCompany,
-    JonderTitle,
+    JonderTitle
   },
   data: () => ({
     img: 1,
-    step: 3,
+    step: 3
   }),
   methods: {
     changeImage() {
       this.img = 2;
-    },
-  },
+    }
+  }
 };
 </script>
 
