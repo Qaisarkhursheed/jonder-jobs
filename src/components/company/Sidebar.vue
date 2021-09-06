@@ -1,42 +1,47 @@
 <template>
   <div class="sidebar-wrap" :class="{ mini: isMini }">
     <div class="sidebar-inner">
-      <nav class="sidebar-navigation pl-2 pr-2 pl-md-8 pr-md-5"
-        :class="{ mini: isMini }">
-        
-          <v-icon 
-            class="ml-3 mb-4 mt-1"
-            size="26px"
-            style="cursor: pointer; user-select: none;"
-            @click="toggleSidebar"
-            v-if="mobile"
-          >
-            mdi-menu
-          </v-icon>
-        
-        <router-link :to="{ name: 'CompanySearch'}" >
+      <nav
+        class="sidebar-navigation pl-2 pr-2 pl-md-8 pr-md-5"
+        :class="{ mini: isMini }"
+      >
+        <v-icon
+          class="ml-3 mb-4 mt-1"
+          size="26px"
+          style="cursor: pointer; user-select: none;"
+          @click="toggleSidebar"
+          v-if="mobile"
+        >
+          mdi-menu
+        </v-icon>
+
+        <router-link :to="{ name: 'CompanySearch' }">
           <v-icon>mdi-magnify</v-icon>
-          <span>{{ $t('company.employer.search') }}</span>
+          <span>{{ $t("company.employer.search") }}</span>
         </router-link>
-        <router-link :to="{ name: 'CompanySelectionManagement'}" >
+        <router-link :to="{ name: 'CompanySelectionManagement' }">
           <v-icon>mdi-account-switch</v-icon>
-          <span>{{ $t('company.employer.selectionManagement') }}</span>
+          <span>{{ $t("company.employer.selectionManagement") }}</span>
         </router-link>
-        <router-link :to="{ name: 'CompanyMessages'}">
+        <router-link :to="{ name: 'CompanyMessages' }">
           <v-icon>mdi-message</v-icon>
-          <span>{{ $t('company.employer.messages') }}</span>
+          <span>{{ $t("company.employer.messages") }}</span>
         </router-link>
-        <router-link :to="{ name: 'CompanyTeamManagement'}" >
+        <router-link :to="{ name: 'CompanyMessageTemplates' }">
+          <v-icon>mdi-message-bulleted</v-icon>
+          <span>{{ $t("company.messageTemplates.heading") }}</span>
+        </router-link>
+        <router-link :to="{ name: 'CompanyTeamManagement' }">
           <v-icon>mdi-account-group</v-icon>
-          <span>{{ $t('company.employer.teamManagement') }}</span>
+          <span>{{ $t("company.employer.teamManagement") }}</span>
         </router-link>
-        <router-link :to="{name: 'CompanyPublicProfile'}">
+        <router-link :to="{ name: 'CompanyPublicProfile' }">
           <v-icon>mdi-office-building</v-icon>
-          <span>{{ $t('company.employer.publicProfile') }}</span>
+          <span>{{ $t("company.employer.publicProfile") }}</span>
         </router-link>
-        <router-link :to="{ name: 'CompanyPackagesPricing'}">
+        <router-link :to="{ name: 'CompanyPackagesPricing' }">
           <v-icon>mdi-currency-usd</v-icon>
-          <span>{{ $t('company.employer.packagesPricing') }}</span>
+          <span>{{ $t("company.employer.packagesPricing") }}</span>
         </router-link>
       </nav>
       <footer-legal class="footer-impressum"></footer-legal>
@@ -45,11 +50,10 @@
 </template>
 
 <script>
-
 import FooterLegal from "@/components/parts/FooterLegal.vue";
 
 export default {
-  name: 'Sidebar',
+  name: "Sidebar",
 
   components: {
     FooterLegal
@@ -61,8 +65,8 @@ export default {
   },
   data() {
     return {
-      extended: true,
-    }
+      extended: true
+    };
   },
   mounted() {
     this.extended = !this.mobile;
@@ -74,7 +78,7 @@ export default {
   },
   computed: {
     isMini() {
-      if(!this.mobile) {
+      if (!this.mobile) {
         return false;
       } else {
         return this.extended;
@@ -91,7 +95,6 @@ export default {
   background: white;
   z-index: 10;
   overflow: hidden;
-  
 }
 .sidebar-inner {
   position: relative;
@@ -124,7 +127,7 @@ export default {
     @include clearfix;
     font-weight: normal;
     font-size: 18px;
-    color: #7A7A7A;
+    color: #7a7a7a;
 
     span,
     .v-icon {
@@ -155,20 +158,18 @@ export default {
     }
 
     .mini & {
-      span{
-
+      span {
         display: none;
       }
-      }
-  }
-  
-}
-.footer-impressum {
-    position: absolute;
-    bottom: 80px;
-
-    .mini & {
-      opacity: 0;
     }
   }
+}
+.footer-impressum {
+  position: absolute;
+  bottom: 80px;
+
+  .mini & {
+    opacity: 0;
+  }
+}
 </style>

@@ -104,7 +104,6 @@
     "profile": {
       "email": "E-mail Adresse",
       "resendEmail": "E-Mail erneut versenden",
-
       "phone": "Telefonnummer",
       "webUrl": "Web-URL",
       "socialLinks": "Soziale Links",
@@ -118,6 +117,15 @@
       "general": "Generelle Informationen",
       "details": "Details zum Unternehmen",
       "contact": "Kontakt"
+    },
+    "messageTemplates": {
+      "heading": "Nachrichtenvorlagen",
+      "subheading": "Verwenden Sie vorgefertigte Nachrichten, um Stellensuchende schneller zu kontaktieren.",
+      "templateName": "Name der Nachrichtenvorlage",
+      "templateContent": "Inhalt der Nachrichtenvorlage",
+      "createHeading": "Neue Nachrichtenvorlage erstellen",
+      "editHeading": "Nachrichtenvorlage bearbeiten",
+      "deleteText": "Sind Sie sicher, dass Sie die Nachrichtenvorlage \"{name}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
     }
   },
   "user": {
@@ -162,7 +170,6 @@
       "searchStatus": " Status der Arbeitssuche",
       "currentIndustry": "Aktuelle Branche",
       "cityAndAddress": "tadt und Adresse",
-
       "firstName": "Vorname",
       "lastName": "Nachname",
       "jobTitle": "Berufsbezeichnung",
@@ -226,13 +233,10 @@
       "detailsAboutYou": "Was ist der Status Quo?",
       "detailsAboutYouPosition": "In welcher Position arbeitest du momentan?",
       "detailsAboutYouPositionPlace": "Gebe hier deine Position an",
-
       "detailsAboutYouBranches": "In welchem Berufsfeld arbeitest du?",
       "detailsAboutYouBranchesPlace": " Gebe hier bis zu 3 Berufsfelder an",
-
       "detailsAboutYouRole": "Wonach suchst du aktuell?",
       "detailsAboutYouRolePlace": "Wähle bis zu 5 Wunschpositionen",
-
       "positionDeveloper": "Developer",
       "positionProjectManager": "Project Manager",
       "positionConstructionManager": "Construction manager",
@@ -247,16 +251,12 @@
       "branchElectrical": "Electrical engineering industry",
       "whatYouLookinFor": "What are you looking for?",
       "lookingForBranche": "What type of Branches are you looking for?",
-
       "lookingForEmployement": "Welche Beschäftigungsarten sind für dich relevant?",
       "lookingForEmployementPlace": "Wähle die passenden Arten aus",
-
       "whereToWork": "Wo würdest du gerne arbeiten?*",
       "whereToWorkPlace": "Wähle Städte die in Frage kommen würden ",
-
       "whenToStart": "Wann bist du für deinen neuen Job verfügbar?",
       "whenToStartPlace": "Wähle Städte die in Frage kommen würden",
-
       "trainee": "Trainee",
       "fulltime": "Fulltime",
       "parttime": "Parttime",
@@ -325,6 +325,9 @@
     "logout": "Ausloggen",
     "save": "Speichern",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "createNew": "Erstelle neu",
+    "createdAt": "Erstellt am",
     "ok": "OK",
     "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
     "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !",
@@ -334,7 +337,6 @@
     "loginAccount": "Loggen Sie sich in Ihren Jonder Account ein",
     "forgotPassowrd": "Passwort vergessen?",
     "dontHaveAccount": "Haben Sie kein Konto?",
-
     "areYouSure": "Sind Sie sicher?",
     "areYouSureQuestion": "Sind Sie ganz sicher? Der Benutzer wird keinen Zugriff mehr auf das System haben.",
     "areYouSureAction": "action cannot be undo",

@@ -11,6 +11,7 @@ import teamManagement from "./teamManagement";
 import invoices from "./invoices";
 import plans from "./plans";
 import professions from "./professions";
+import messageTemplates from "./messageTemplates";
 
 Vue.use(Vuex);
 
@@ -25,7 +26,8 @@ export default createStore(Vuex.Store, {
     teamManagement,
     invoices,
     plans,
-    professions
+    professions,
+    messageTemplates
   },
   state: {
     screenSize: null
