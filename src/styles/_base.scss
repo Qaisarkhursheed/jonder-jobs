@@ -442,6 +442,20 @@ button {
 .v-stepper__wrapper {
   padding: 10px;
 }
+.theme--light.v-stepper .v-stepper__step:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error) .v-stepper__step__step {
+  background: #fff;
+  border: 2px solid #D4D4D4;
+  box-shadow: none;
+}
+.theme--light.v-stepper .v-stepper__step__step {
+  width: 30px;
+  height: 30px;
+  background: #0253B3;
+  box-shadow: 0px 4px 23px rgba(2, 83, 179, 0.2);
+}
+.v-stepper--alt-labels .v-stepper__header .v-divider {
+  margin: 38px -74px 0;
+}
 // 5. Inputs
 // ---------
 

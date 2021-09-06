@@ -25,19 +25,19 @@
         v-model="e1"
       >
         <v-stepper-header class="elevation-0" v-if="showSteps === true">
-          <v-stepper-step step="1" :complete="complete(1)"></v-stepper-step>
+          <v-stepper-step step="1" :complete="complete(1)" color="#0253B3"></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="2" :complete="complete(2)"></v-stepper-step>
+          <v-stepper-step step="2" :complete="complete(2)" color="#0253B3"></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3" :complete="complete(3)"></v-stepper-step>
+          <v-stepper-step step="3" :complete="complete(3)" color="#0253B3"></v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4" :complete="complete(4)"></v-stepper-step>
+          <v-stepper-step step="4" :complete="complete(4)" color="#0253B3"></v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items class="mo-stepper-items">
