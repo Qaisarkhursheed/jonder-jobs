@@ -2,7 +2,7 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>{{ $t('user.profile.editProfileHeading') }}</h4>
+        <h4>{{ $t("user.profile.editProfileHeading") }}</h4>
       </v-col>
       <!-- <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
@@ -13,7 +13,7 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.currentWork') }}</label>
+        <label>{{ $t("user.profile.currentWork") }}</label>
         <v-text-field
           dense
           :label="$t('user.profile.currentWork')"
@@ -31,13 +31,13 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.currentPosition') }}</label>
+        <label>{{ $t("user.profile.currentPosition") }}</label>
         <v-select
           outlined
-          dense          
+          dense
           :label="$t('user.profile.currentPosition')"
           :rules="rules"
-          :items="currentPosition"          
+          :items="currentPosition"
           background-color="white"
           v-model="formData.current_position"
         ></v-select>
@@ -46,13 +46,13 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.whichBranch') }}</label>
+        <label>{{ $t("user.profile.whichBranch") }}</label>
         <v-select
           outlined
           dense
           :rules="rules"
           :label="$t('user.profile.whichBranch')"
-          :items="branches"      
+          :items="branches"
           v-model="formData.branche"
         ></v-select>
       </v-col>
@@ -60,7 +60,7 @@
 
     <v-row>
       <v-col cols="6">
-        <label>{{ $t('user.profile.workingEnvironment') }}</label>
+        <label>{{ $t("user.profile.workingEnvironment") }}</label>
         <v-text-field
           dense
           :label="$t('user.profile.workingEnvironment')"
@@ -74,7 +74,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>{{ $t('user.profile.whatDescribesYou') }}</label>
+        <label>{{ $t("user.profile.whatDescribesYou") }}</label>
 
         <v-row>
           <v-col>
@@ -168,17 +168,16 @@
     <v-row>
       <v-col md="6">
         <v-card>
-          <v-dialog 
-            v-model="dialog" 
-            persistent 
+          <v-dialog
+            v-model="dialog"
+            persistent
             max-width="310"
             overlay-color="#0253B3"
             overlay-opacity="0.3"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" outlined v-bind="attrs" v-on="on" block>
-               {{ $t('general.cancel') }}
-
+                {{ $t("general.cancel") }}
               </v-btn>
             </template>
             <v-card height="280">
@@ -196,8 +195,7 @@
                 <v-row>
                   <v-col md="6" class="text-center">
                     <v-btn text @click="dialog = false">
-                    {{ $t('general.cancel') }}
-
+                      {{ $t("general.cancel") }}
                     </v-btn></v-col
                   >
                   <v-col md="6" class="text-center">
@@ -207,7 +205,7 @@
                       @click="dialog = false"
                       class="font-weight-bold"
                     >
-                    {{ $t('general.save') }}
+                      {{ $t("general.save") }}
                     </v-btn></v-col
                   >
                 </v-row>
@@ -218,9 +216,9 @@
       </v-col>
       <v-col md="6">
         <v-card>
-          <v-btn block color="primary" @click="handleUpdate"
-            >{{ $t('general.confirm') }}</v-btn
-          ></v-card
+          <v-btn block color="primary" @click="handleUpdate">{{
+            $t("general.confirm")
+          }}</v-btn></v-card
         >
       </v-col>
     </v-row>
@@ -246,8 +244,22 @@ export default {
       value => !!value || "Required.",
       value => (value && value.length >= 3) || "Min 3 characters"
     ],
-    branches: ['Medizin', 'Automobilindustrie', 'Maschinenbau', 'Chemisch-pharmazeutische Industrie','Ernährungsindustrie' , 'Elektrotechnikbranche'],
-    currentPosition: ['Entwickler/in', 'Projektmanager/in', 'Bauleiter/in', 'Praktikant/in', 'Auszubildende/r',  'Geschäftsführer/in']
+    branches: [
+      "Medizin",
+      "Automobilindustrie",
+      "Maschinenbau",
+      "Chemisch-pharmazeutische Industrie",
+      "Ernährungsindustrie",
+      "Elektrotechnikbranche"
+    ],
+    currentPosition: [
+      "Entwickler/in",
+      "Projektmanager/in",
+      "Bauleiter/in",
+      "Praktikant/in",
+      "Auszubildende/r",
+      "Geschäftsführer/in"
+    ]
   }),
   created() {
     this.resetFormData(this.user);

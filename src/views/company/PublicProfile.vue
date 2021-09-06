@@ -92,7 +92,7 @@ export default {
     PublicProfileGeneral,
     PublicProfileDetails,
     PublicProfileContact,
-    PublicProfileViewAs,
+    PublicProfileViewAs
     // UserNoteAdd
   },
 
@@ -103,16 +103,16 @@ export default {
         options: [
           { key: "general", label: "General" },
           { key: "details", label: "Details" },
-          { key: "contact", label: "Contact" },
-        ],
+          { key: "contact", label: "Contact" }
+        ]
       },
       tabComponents: {
         general: PublicProfileGeneral,
         details: PublicProfileDetails,
         contact: PublicProfileContact,
-        viewAs: PublicProfileViewAs,
+        viewAs: PublicProfileViewAs
       },
-      viewAs: false,
+      viewAs: false
     };
   },
   methods: {
@@ -121,8 +121,8 @@ export default {
       store.dispatch("user/updateCompany", {
         id: this.user.id,
         data: {
-          ...input,
-        },
+          ...input
+        }
       });
     },
     viewAsTab() {
@@ -133,17 +133,17 @@ export default {
         .then(() => {
           alert("Success");
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err.data.message);
         });
       //this.updateCompanyUser(formDataCopy);
-    },
+    }
   },
   computed: {
     user() {
       return store.getters["user/user"];
-    },
-  },
+    }
+  }
 };
 </script>
 

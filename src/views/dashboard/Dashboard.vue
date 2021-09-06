@@ -57,15 +57,15 @@ export default {
 
     showUpgradeBox() {
       return !(this.messagesLoaded && this.conversations.length);
-    },
+    }
   },
   methods: {
-    ...mapActions("chat", ["getAllConversations"]),
+    ...mapActions("chat", ["getAllConversations"])
   },
   components: {
     Chat,
-    UpgradeAccountBox,
-  },
+    UpgradeAccountBox
+  }
 };
 </script>
 

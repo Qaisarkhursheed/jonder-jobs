@@ -18,7 +18,7 @@
         class="options"
         :class="{
           deactive: userPlan && userPlan.id === plan.id,
-          active: form.active_plan === plan.id,
+          active: form.active_plan === plan.id
         }"
         v-for="plan in data"
         :key="plan.id"
@@ -30,7 +30,7 @@
               ? ((form.active_plan = plan.id), savePlanId(plan.id))
               : null
           "
-          v-bind:color="form.active_plan == plan.id ? 'primary' : ''"
+          v-bind:color="form.active_plan === plan.id ? 'primary' : ''"
           min-height="104"
           :height="$store.getters.screenSize < 500 ? 'auto' : '104'"
           class="upgrade-option justify-start pa-2"
@@ -107,15 +107,15 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     type: {
       type: String,
-      default: "ok",
+      default: "ok"
     },
     edit: {
-      type: [Object, Boolean],
-    },
+      type: [Object, Boolean]
+    }
   },
   data() {
     return {
@@ -124,8 +124,8 @@ export default {
       planId: null,
       stripeId: null,
       form: {
-        active_plan: "",
-      },
+        active_plan: ""
+      }
     };
   },
   created() {
@@ -148,7 +148,7 @@ export default {
         this.isLoading = true;
         const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
         stripe.redirectToCheckout({
-          sessionId: this.stripeId,
+          sessionId: this.stripeId
         });
       } else {
         this.isLoading = false;
@@ -160,9 +160,9 @@ export default {
         this.$http
           .post(`${process.env.VUE_APP_API_BASE}/plan`, {
             plan_id: this.planId,
-            payment_method: "credit card",
+            payment_method: "credit card"
           })
-          .then((res) => {
+          .then(res => {
             this.stripeId = res.data.data.id;
           })
           .finally(() => {
@@ -179,7 +179,7 @@ export default {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form,
+          payload: this.form
         });
       } else {
         console.log();
@@ -188,13 +188,13 @@ export default {
     },
     populate() {
       this.form.active_plan = this.edit.active_plan;
-    },
+    }
   },
   computed: {
     ...mapGetters({
-      userPlan: "user/userPlan",
-    }),
-  },
+      userPlan: "user/userPlan"
+    })
+  }
 };
 </script>
 

@@ -152,30 +152,30 @@ import JonderTitle from "@/components/parts/JonderTitle.vue";
 export default {
   components: {
     AuthWrap,
-    JonderTitle,
+    JonderTitle
   },
   data: () => ({
     img: 1,
     step: 1,
-    accountType: null,
+    accountType: null
   }),
   computed: {
     facebookUrl() {
-      const urlNumber = this.accountType == "user" ? 1 : 2;
+      const urlNumber = this.accountType === "user" ? 1 : 2;
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/facebook`;
 
       return url;
     },
     googleUrl() {
-      const urlNumber = this.accountType == "user" ? 1 : 2;
+      const urlNumber = this.accountType === "user" ? 1 : 2;
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
 
       return url;
-    },
+    }
   },
   methods: {
     submit() {
-      if (this.accountType == "user") {
+      if (this.accountType === "user") {
         this.$router.push({ name: "RegisterUser" });
       } else {
         this.$router.push({ name: "RegisterCompany" });
@@ -183,8 +183,8 @@ export default {
     },
     changeImage() {
       this.img = 2;
-    },
-  },
+    }
+  }
 };
 </script>
 
