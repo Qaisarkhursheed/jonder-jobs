@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="full-w">
     <UpgradePlanModal
       v-if="modals.UpgradePlan.active"
       :active="modals.UpgradePlan.active"
@@ -123,6 +123,7 @@ export default {
   font-size: 18px;
   line-height: 18px;
   margin-bottom: 7px;
+  width: calc(100% - 24px);
 }
 
 .badge {
