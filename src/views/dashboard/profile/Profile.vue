@@ -496,7 +496,7 @@
 
       <v-form ref="passwordForm" v-model="passwordFormValid">
         <label class="profile-label">{{
-          $t("user.profile.enterNewPassword")
+          $t("user.profile.enterOldPassword")
         }}</label>
         <v-text-field
           v-model="passwordFormData.current_password"
@@ -508,7 +508,7 @@
         ></v-text-field>
 
         <label class="profile-label">{{
-          $t("user.profile.reEnterPassword")
+          $t("user.profile.enterNewPassword")
         }}</label>
         <v-text-field
           v-model="passwordFormData.new_password"
@@ -520,7 +520,7 @@
         ></v-text-field>
 
         <label class="profile-label">{{
-          $t("user.profile.enterOldPassword")
+          $t("user.profile.reEnterPassword")
         }}</label>
         <v-text-field
           v-model="passwordFormData.new_confirm_password"
