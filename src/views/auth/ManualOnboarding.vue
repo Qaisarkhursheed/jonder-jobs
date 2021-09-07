@@ -18,7 +18,7 @@
     </div>
 
     <!-- Content -->
-    <div class="stepper-wrap mt-10">
+    <div class="stepper-wrap mt-10" style="max-width: 500px">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -30,7 +30,7 @@
             :complete="complete(1)"
             color="#0253B3"
           ></v-stepper-step>
-          
+
           <v-divider :class="{ active: e1 >= 2 }"></v-divider>
 
           <v-stepper-step

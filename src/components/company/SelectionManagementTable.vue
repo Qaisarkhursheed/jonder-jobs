@@ -1,17 +1,19 @@
 <template>
   <div class="d-flex pr-4 selection-management-table">
-    <div style="min-width:300px"
-      v-for="(selection, i) in selection" :key="i"
-         :class="[i.toLowerCase().replace(/\s/g, '')]" >
+    <div
+      style="min-width:300px"
+      v-for="(selection, i) in selection"
+      :key="i"
+      :class="[i.toLowerCase().replace(/\s/g, '')]"
+    >
       <SManagementTableColumn :selection="selection" :type="i" />
     </div>
   </div>
 </template>
 <script>
-import SManagementTableColumn from '@/components/company/SelectionManagementTableColumn'
+import SManagementTableColumn from "@/components/company/SelectionManagementTableColumn";
 
 export default {
-
   name: "SelectionManagementTable",
   order: 1,
   components: {

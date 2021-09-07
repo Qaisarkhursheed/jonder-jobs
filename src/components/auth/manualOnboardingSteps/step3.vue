@@ -23,6 +23,7 @@
 
       <label class="profile-label">
         {{ $t("user.onboarding.lookingForEmployement") }}
+        <span style="color: red;">*</span>
       </label>
       <v-select
         v-model="value.looking_for_employment_type"
@@ -33,13 +34,11 @@
         multiple
         class="mt-1"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-select>
 
       <label class="profile-label">
         {{ $t("user.onboarding.whereToWork") }}
+        <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
         @select="e => (value.address_to_work = e)"
@@ -55,6 +54,7 @@
 
       <label class="profile-label">
         {{ $t("user.onboarding.whenToStart") }}
+        <span style="color: red;">*</span>
       </label>
       <Calendar
         v-if="!dontKnowWhenToStart"
@@ -63,7 +63,6 @@
         type="date"
         :fromToday="true"
         hide-details="auto"
-        :required="true"
       />
 
       <v-checkbox

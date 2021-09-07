@@ -18,7 +18,7 @@
     </div>
 
     <!-- Content -->
-    <div class="stepper-wrap mt-10">
+    <div class="stepper-wrap mt-10" style="max-width: 500px">
       <v-stepper
         alt-labels
         class="elevation-0 full-w d-flex flex-column"
@@ -170,7 +170,9 @@ export default {
       if (user) {
         Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
-          if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
+          if (this.formData.hasOwnProperty(key)) {
+            this.formData[key] = user[key] || this.formData[key];
+          }
         });
       }
       console.log("populated-form", this.formData);

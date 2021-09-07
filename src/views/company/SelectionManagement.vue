@@ -3,25 +3,35 @@
     <div class="selection-mgmt-header">
       <div class="search-bar-wrapper">
         <em class="icon"></em>
-        <input type="text" v-model="searchValue" :placeholder="$t('company.dashboard.search')">
+        <input
+          type="text"
+          v-model="searchValue"
+          :placeholder="$t('company.dashboard.search')"
+        />
       </div>
-      <div class="view-wrapper">
-<!--        <div-->
-<!--          v-for="(name, index) in ['list', 'col']"-->
-<!--          :key="index"-->
-<!--          :class="[`${name}-view`, { active: activeView === name }]"-->
-<!--          @click="toggleView(name)"-->
-<!--        ></div>-->
-        <div class="list-view" :class="{ active: activeView === 'list' }" @click="toggleView('list')">
+      <div class="view-wrapper hover-pointer">
+        <div
+          class="list-view"
+          :class="{ active: activeView === 'list' }"
+          @click="toggleView('list')"
+        >
           <ListView :color="activeView === 'list' ? '#fff' : '#000'" />
         </div>
-        <div class="col-view" :class="{ active: activeView === 'col' }" @click="toggleView('col')">
+        <div
+          class="col-view"
+          :class="{ active: activeView === 'col' }"
+          @click="toggleView('col')"
+        >
           <ColView :color="activeView === 'col' ? '#fff' : '#000'" />
         </div>
       </div>
     </div>
     <div class="selection-mgmt-body">
-      <component v-if="$store.getters['company/selectionManagement']" :is="component" :selection="getSelection"></component>
+      <component
+        v-if="$store.getters['company/selectionManagement']"
+        :is="component"
+        :selection="getSelection"
+      ></component>
     </div>
   </div>
 </template>
@@ -29,8 +39,8 @@
 <script>
 import SelectionManagementTable from "@/components/company/SelectionManagementTable";
 import SelectionmManagementTableList from "@/components/company/SelectionmManagementTableList";
-import ColView from '../../svgs/ColView';
-import ListView from '../../svgs/ListView';
+import ColView from "../../svgs/ColView";
+import ListView from "../../svgs/ListView";
 
 export default {
   name: "CompanySelectionManagement",
@@ -51,19 +61,23 @@ export default {
     toggleView(view) {
       if (this.activeView !== view) {
         this.activeView = view;
-        this.component = view === 'list' ? 'SelectionmManagementTableList' : 'SelectionManagementTable';
+        this.component =
+          view === "list"
+            ? "SelectionmManagementTableList"
+            : "SelectionManagementTable";
       }
     }
   },
   computed: {
     getSelection() {
-      const selectionData = this.$store.getters['company/selectionManagement'](this.activeView);
-      console.log('selectionData', selectionData);
+      const selectionData = this.$store.getters["company/selectionManagement"](
+        this.activeView
+      );
       return selectionData;
     }
   },
   created() {
-    this.$store.dispatch('company/slManagementGetAll');
+    this.$store.dispatch("company/slManagementGetAll");
   }
 };
 </script>
@@ -126,7 +140,7 @@ export default {
     justify-content: center;
     width: 56px;
     &.active {
-      background-color: #0253B3;
+      background-color: #0253b3;
     }
   }
 }

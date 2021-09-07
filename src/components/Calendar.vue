@@ -20,9 +20,6 @@
         v-on="on"
         :hide-details="hideDetails"
       >
-        <template v-if="required" v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-text-field>
     </template>
 
@@ -65,10 +62,6 @@ export default {
     },
     fromToday: {
       type: Boolean
-    },
-    required: {
-      type: Boolean,
-      default: false
     }
   },
   fromToday: {

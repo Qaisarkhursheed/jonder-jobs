@@ -171,7 +171,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number,
+                      number: item.invoice_number
                     })
                   "
                 ></v-img>
@@ -217,7 +217,7 @@
           <v-card flat id="changePassword" class="profile-section mb-10">
             <v-row class="mb-0">
               <p class="profile-title">
-                Change password
+                {{ $t("user.profile.changePassword") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -225,17 +225,9 @@
             </v-row>
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
-              <label class="profile-label">Enter old password</label>
-              <v-text-field
-                v-model="passwordFormData.current_password"
-                dense
-                type="password"
-                outlined
-                :rules="[validations.required]"
-                background-color="white"
-              ></v-text-field>
-
-              <label class="profile-label">Enter new password</label>
+              <label class="profile-label">{{
+                $t("user.profile.enterNewPassword")
+              }}</label>
               <v-text-field
                 v-model="passwordFormData.new_password"
                 dense
@@ -245,7 +237,9 @@
                 background-color="white"
               ></v-text-field>
 
-              <label class="profile-label">Repeat new password</label>
+              <label class="profile-label">{{
+                $t("user.profile.reEnterPassword")
+              }}</label>
               <v-text-field
                 v-model="passwordFormData.new_confirm_password"
                 dense
@@ -255,6 +249,17 @@
                 background-color="white"
               ></v-text-field>
 
+              <label class="profile-label">{{
+                $t("user.profile.enterOldPassword")
+              }}</label>
+              <v-text-field
+                v-model="passwordFormData.current_password"
+                dense
+                type="password"
+                outlined
+                :rules="[validations.required]"
+                background-color="white"
+              ></v-text-field>
               <!-- Response alert -->
               <response-alert :response="passwordFormResponse"></response-alert>
 
@@ -267,7 +272,7 @@
                     color="primary"
                     class="pl-8 pr-8"
                     @click="handleChangePassword"
-                    >Change Password
+                    >{{ $t("user.profile.changePassword") }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -302,7 +307,7 @@ export default {
   components: {
     UserPlan,
     Header,
-    AddNewCard,
+    AddNewCard
   },
   data() {
     return {
@@ -317,22 +322,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard,
-        },
+          component: AddNewCard
+        }
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"],
-      },
+        AddNewCard: ["edit", "delete"]
+      }
     };
   },
   computed: {
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("user", ["user"])
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter((i) => i.status == "complete");
+      this.invoices = this.invoices.filter(i => i.status == "complete");
     });
   },
   methods: {
@@ -354,10 +359,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.formResponse = resp.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         });
     },
@@ -366,7 +371,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -374,7 +379,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -390,8 +395,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
-  },
+    }
+  }
 };
 </script>
 

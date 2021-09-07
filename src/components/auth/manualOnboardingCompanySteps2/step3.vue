@@ -5,9 +5,10 @@
     </h1>
 
     <v-form v-model="formValid" ref="form" class="auth-form">
-      <label class="profile-label">{{
-        $t("company.register.companyEmail")
-      }}</label>
+      <label class="profile-label">
+        {{ $t("company.register.companyEmail") }}
+        <span style="color: red;">*</span>
+      </label>
       <v-text-field
         class="mt-1"
         v-model="value.company_email"
@@ -19,14 +20,12 @@
         flat
         background-color="white"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-text-field>
 
-      <label class="profile-label">{{
-        $t("company.register.companyPhone")
-      }}</label>
+      <label class="profile-label">
+        {{ $t("company.register.companyPhone") }}
+        <span style="color: red;">*</span>
+      </label>
       <v-text-field
         class="mt-1"
         v-model="value.company_phone"
@@ -36,14 +35,12 @@
         flat
         background-color="white"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-text-field>
 
-      <label class="profile-label">{{
-        $t("company.register.companyCityandAdress")
-      }}</label>
+      <label class="profile-label">
+        {{ $t("company.register.companyCityandAdress") }}
+        <span style="color: red;">*</span>
+      </label>
       <GooglePlacesAutocomplete
         @select="e => (value.address = e)"
         type="geocode"
@@ -51,9 +48,6 @@
         :placeholder="$t('company.register.companyCityandAdressPlaceholder')"
         :required="true"
       />
-
-      <!-- <label class="profile-label">City</label>
-      <GooglePlacesAutocomplete @select="e => value.city = e" /> -->
 
       <v-row class="mt-1">
         <v-col cols="3">

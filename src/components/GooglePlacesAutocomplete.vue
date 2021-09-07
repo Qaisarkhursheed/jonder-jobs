@@ -26,9 +26,6 @@
           {{ item.description }}
         </template>
       </template>
-      <template v-if="required" v-slot:append-outer>
-        <span style="color: red;">*</span>
-      </template>
     </v-combobox>
   </div>
 </template>
