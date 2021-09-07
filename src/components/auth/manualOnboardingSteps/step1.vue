@@ -1,5 +1,5 @@
 <template>
-  <div class="mo-step-2">
+  <div class="mo-step-2 step-1">
     <p class="text-center font-weight-bold text-h6">
       {{ $t("user.onboarding.whatBringsYou") }}
     </p>
@@ -7,7 +7,7 @@
     <v-form v-model="formValid" @submit.prevent="nextScreen">
       <v-btn
         block
-        color="primary"
+        color="#0253b3"
         class="mb-4"
         height="55"
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouJob')"
@@ -20,7 +20,7 @@
 
       <v-btn
         block
-        color="primary"
+        color="#0253b3"
         class="mb-4"
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouOffer')"
         v-bind="{
@@ -34,7 +34,7 @@
 
       <v-btn
         block
-        color="primary"
+        color="#0253b3"
         class="mb-4"
         height="55"
         @click="value.why_jonder = $t('user.onboarding.whatBringsYouCurious')"
@@ -91,4 +91,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.step-1 {
+  .v-btn--is-elevated {
+    color: $primary-light;
+  }
+}
+</style>

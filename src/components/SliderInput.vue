@@ -10,6 +10,7 @@
         hide-details
         loader-height="30"
         track-color="#e5e5e5"
+        thumb-color="#fff"
         color="#0253b3"
         always-dirty
         :min="min"
@@ -58,9 +59,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .slider-input {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
+  .v-slider__track-container {
+    height: 10px !important;
+  }
+  .v-slider__track-background,
+  .v-slider__track-fill {
+    border-radius: 5px;
+    height: 100%;
+  }
+  .v-slider__thumb-container {
+    color: transparent !important;
+  }
+  .v-slider__thumb {
+    border: 3px solid #0253b3 !important;
+  }
 }
 </style>
