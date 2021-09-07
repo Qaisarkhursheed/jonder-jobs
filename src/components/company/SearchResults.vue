@@ -10,6 +10,7 @@
       height="100%"
       overlay-color="#0253B3"
       overlay-opacity="0.3"
+      content-class="elevation-0"
     >
       <CompanyPlans class="pa-3" />
     </v-dialog>
