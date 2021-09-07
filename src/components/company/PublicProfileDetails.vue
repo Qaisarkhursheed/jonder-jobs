@@ -17,7 +17,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Anzahl an Angestellten
+        {{ $t("company.employer.numberOfEmployees") }}
       </label>
       <v-select
         v-model="form.company_employees"
@@ -28,7 +28,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Gründungsjahr
+        {{ $t("company.employer.foundingYear") }}
       </label>
       <v-text-field v-model="form.establishment_date" type="number" outlined>
       </v-text-field>
@@ -53,8 +53,8 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
@@ -62,8 +62,8 @@ export default {
       form: {
         branche: "",
         company_employees: "",
-        establishment_date: ""
-      }
+        establishment_date: "",
+      },
     };
   },
 
@@ -78,15 +78,15 @@ export default {
     },
     save() {
       this.$emit("update", {
-        ...this.form
+        ...this.form,
       });
-    }
+    },
   },
   computed: {
     types() {
       return types;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -151,12 +151,9 @@
         >Message
       </v-textarea>
 
-      <v-icon
-        :disabled="sending"
-        size="36"
-        @click="send"
-        class="message-type-new-send ml-2"
-      >
+      <MessageTemplatesPicker @submit="msg => send(msg)" />
+
+      <v-icon :disabled="sending" size="30" @click="send(null)" class="ml-2">
         mdi-send-circle
       </v-icon>
     </v-card-actions>
@@ -165,8 +162,10 @@
 
 <script>
 import { mapActions } from "vuex";
+import MessageTemplatesPicker from "@/components/company/message-templates/MessageTemplatesPicker";
 
 export default {
+  components: { MessageTemplatesPicker },
   props: {
     messages: {
       type: Array,
@@ -197,8 +196,10 @@ export default {
         messageListDiv.scrollTo(messageListDiv.scrollLeft, 999999999);
       }, 100);
     },
-    send() {
-      if (!this.newMessage && !this.newFile) {
+    send(msg = null) {
+      const textMessage = msg || this.newMessage;
+
+      if (!textMessage && !this.newFile) {
         return;
       }
 
@@ -206,13 +207,13 @@ export default {
       this.sendMessage({
         id: this.conversationDetails.id,
         file: this.newFile,
-        message: this.newMessage
+        message: textMessage
       })
         .then(() => {
           this.newMessage = "";
           this.newFile = null;
 
-          setTimeout(this.scrollToBottom, 500);
+          setTimeout(this.scrollToBottom, 1000);
         })
         .finally(() => {
           this.sending = false;
@@ -356,24 +357,6 @@ export default {
     .v-label {
       top: 18px !important;
     }
-  }
-
-  .message-type-new-send {
-    // position: absolute;
-    // bottom: 36px;
-    // right: 34px;
-    // width: 32px;
-    // height: 32px;
-    // font-size: 16px;
-    // line-height: 32px;
-    // background: #e3f2fb;
-    // border-radius: 50%;
-    // overflow: hidden;
-    // padding: 0;
-    // margin: 0;
-    // color: $primary-blue-dark;
-    // cursor: pointer;
-    // z-index: 10;
   }
 }
 </style>

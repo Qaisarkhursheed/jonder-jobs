@@ -10,7 +10,12 @@
       "packagesPricing": "Preise für Pakete",
       "inviteUser": "Nutzer einladen",
       "viewAs": "Als Arbeitssuchender ansehen",
-      "backToEdit": "Zurück zum Bearbeiten"
+      "backToEdit": "Zurück zum Bearbeiten",
+      "aboutCompany": "Über das Unternehmen",
+      "employees": "Angestellte",
+      "numberOfEmployees": "Anzahl an Angestellten",
+      "foundingYear": "Gründungsjahr",
+      "users": "Nutzer"
     },
     "register": {
       "jonderWelcome": "Herzlich Willkommen bei Jonder!",
@@ -104,7 +109,6 @@
     "profile": {
       "email": "E-mail Adresse",
       "resendEmail": "E-Mail erneut versenden",
-
       "phone": "Telefonnummer",
       "webUrl": "Web-URL",
       "socialLinks": "Soziale Links",
@@ -118,6 +122,15 @@
       "general": "Generelle Informationen",
       "details": "Details zum Unternehmen",
       "contact": "Kontakt"
+    },
+    "messageTemplates": {
+      "heading": "Nachrichtenvorlagen",
+      "subheading": "Verwenden Sie vorgefertigte Nachrichten, um Stellensuchende schneller zu kontaktieren.",
+      "templateName": "Name der Nachrichtenvorlage",
+      "templateContent": "Inhalt der Nachrichtenvorlage",
+      "createHeading": "Neue Nachrichtenvorlage erstellen",
+      "editHeading": "Nachrichtenvorlage bearbeiten",
+      "deleteText": "Sind Sie sicher, dass Sie die Nachrichtenvorlage \"{name}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
     }
   },
   "user": {
@@ -150,7 +163,7 @@
       "employee": "Mitarbeiter",
       "branch": "Branche",
       "premiumSuggestion": "Erreiche mehr Arbeitgeber mit Premium",
-      "openChat": "Öffnen Sie den Chat, um zu kommunizierenÖffnen Sie den Chat, um zu kommunizieren",
+      "openChat": "Öffnen Sie den Chat, um zu kommunizieren",
       "noMessages": " Du hast momentan keine Nachrichten. Geduld!",
       "upgrade": "Upgraden",
       "changePersonalData": "Persönliche Daten ändern",
@@ -158,17 +171,16 @@
       "choosePlan": "Wähle einen Premiumplan"
     },
     "profile": {
-      "profileSettings": "Profil Einstellungen",
+      "profileSettings": "Einstellungen",
       "searchStatus": " Status der Arbeitssuche",
       "currentIndustry": "Aktuelle Branche",
       "cityAndAddress": "tadt und Adresse",
-
       "firstName": "Vorname",
       "lastName": "Nachname",
       "jobTitle": "Berufsbezeichnung",
       "workExperience": "Berufserfahrung",
       "lookingFor": "Auf der Suche nach",
-      "experiences": "ERFAHRUNG",
+      "experiences": "Erfahrung",
       "education": "Ausbildung",
       "aboutMe": "Uber mich",
       "editProfileHeading": "Was mochtest du an dienem profil bearbeiten ?",
@@ -209,7 +221,12 @@
       "editDocuments": "Bearbeite deine hinterlegten Dokumente.",
       "invoicesDesc": "Sehe deine vergangenen Rechnungen ein und lade sie herunter.",
       "passwordDesc": " Änder dein Passwort und erstelle ein neues.",
-      "upgradeDesc": "Upgrade dein Konto, um deine Stellenanzeigen sichtbarer zu platzieren."
+      "upgradeDesc": "Upgrade dein Konto, um deine Stellenanzeigen sichtbarer zu platzieren.",
+      "backToHome": "Zurück zur Startseite",
+      "newPassword": "Neues Passwort",
+      "enterNewPassword": "Neues Passwort eingeben",
+      "reEnterPassword": "Neues Passwort erneut eingeben",
+      "enterOldPassword": "Altes Passwort eingeben"
     },
     "onboarding": {
       "location": "In welcher Stadt wohnst du aktuell?",
@@ -226,13 +243,10 @@
       "detailsAboutYou": "Was ist der Status Quo?",
       "detailsAboutYouPosition": "In welcher Position arbeitest du momentan?",
       "detailsAboutYouPositionPlace": "Gebe hier deine Position an",
-
       "detailsAboutYouBranches": "In welchem Berufsfeld arbeitest du?",
       "detailsAboutYouBranchesPlace": " Gebe hier bis zu 3 Berufsfelder an",
-
       "detailsAboutYouRole": "Wonach suchst du aktuell?",
       "detailsAboutYouRolePlace": "Wähle bis zu 5 Wunschpositionen",
-
       "positionDeveloper": "Developer",
       "positionProjectManager": "Project Manager",
       "positionConstructionManager": "Construction manager",
@@ -247,16 +261,12 @@
       "branchElectrical": "Electrical engineering industry",
       "whatYouLookinFor": "What are you looking for?",
       "lookingForBranche": "What type of Branches are you looking for?",
-
       "lookingForEmployement": "Welche Beschäftigungsarten sind für dich relevant?",
       "lookingForEmployementPlace": "Wähle die passenden Arten aus",
-
       "whereToWork": "Wo würdest du gerne arbeiten?*",
       "whereToWorkPlace": "Wähle Städte die in Frage kommen würden ",
-
       "whenToStart": "Wann bist du für deinen neuen Job verfügbar?",
       "whenToStartPlace": "Wähle Städte die in Frage kommen würden",
-
       "trainee": "Trainee",
       "fulltime": "Fulltime",
       "parttime": "Parttime",
@@ -325,16 +335,19 @@
     "logout": "Ausloggen",
     "save": "Speichern",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "createNew": "Erstelle neu",
+    "createdAt": "Erstellt am",
     "ok": "OK",
     "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
     "modalSuccess": "Ihre Änderungen wurden erfolgreich gespeichert !",
     "seeMore": "",
+    "send": "Senden",
     "register": "Registrieren",
     "login": "Loggen Sie",
     "loginAccount": "Loggen Sie sich in Ihren Jonder Account ein",
     "forgotPassowrd": "Passwort vergessen?",
     "dontHaveAccount": "Haben Sie kein Konto?",
-
     "areYouSure": "Sind Sie sicher?",
     "areYouSureQuestion": "Sind Sie ganz sicher? Der Benutzer wird keinen Zugriff mehr auf das System haben.",
     "areYouSureAction": "action cannot be undo",
@@ -358,6 +371,8 @@
     "repeatPassword": "Password erneut eingeben",
     "agreePolicy": "Ja, ich stimme der Datenschutzerklärung & AGB zu.",
     "saveChanges": "Änderungen speichern",
-    "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen"
+    "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen",
+    "searchJobseekers": "Mitarbeiter finden",
+    "searchJobseekersFound": "potentielle Mitarbeiter gefunden"
   }
 }

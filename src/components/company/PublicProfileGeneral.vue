@@ -30,7 +30,7 @@
     </div>
     <div class="section mb-6 mt-5">
       <label class="section-label">
-        Unternehmensname
+        {{ $t("user.onboarding.companyName") }}
       </label>
       <v-text-field
         class="rounded-lg"
@@ -49,7 +49,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        Über das Unternehmen
+        {{ $t("company.employer.aboutCompany") }}
       </label>
       <v-textarea
         class="rounded-lg"
@@ -84,8 +84,8 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   created() {
@@ -97,9 +97,9 @@ export default {
       form: {
         profile_img: "",
         company: "",
-        about_company: ""
+        about_company: "",
       },
-      new_img: ""
+      new_img: "",
     };
   },
 
@@ -119,7 +119,7 @@ export default {
     save() {
       let obj = {
         company: this.form.company,
-        about_company: this.form.about_company
+        about_company: this.form.about_company,
       };
 
       if (this.new_img) {
@@ -127,7 +127,7 @@ export default {
       }
 
       this.$emit("update", obj);
-    }
+    },
   },
   computed: {
     display_img() {
@@ -135,8 +135,8 @@ export default {
         return URL.createObjectURL(this.new_img);
       }
       return this.form.profile_img;
-    }
-  }
+    },
+  },
 };
 </script>
 

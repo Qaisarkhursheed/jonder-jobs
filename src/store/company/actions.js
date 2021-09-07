@@ -126,13 +126,13 @@ export default {
       }
     });
   },
-
   searchJobseekers({ commit }, payload) {
     let obj = {
       per_page: 6,
       page: 1,
       ...payload,
     };
+
     commit("SET_SEARCH_INPROGRESS", true);
 
     return axios
@@ -173,4 +173,7 @@ export default {
       }
     });
   },
+  setSearchType({ commit }, data) {
+    commit("SET_SEARCH_TYPE", data);
+  }
 };

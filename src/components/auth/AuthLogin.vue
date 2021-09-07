@@ -72,7 +72,7 @@
           class="full-w mt-2"
         >
           <v-icon left>mdi-google</v-icon>
-          {{ $t("company.register.continueWithGoogle") }}
+          {{ $t("company.register.continueWithGoogleCompany") }}
         </v-btn>
 
         <v-btn
@@ -118,22 +118,22 @@ export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
   },
   data() {
     return {
       message: {
         show: false,
-        text: ""
+        text: "",
       },
       formData: {
         email: "",
         password: "",
-        privacy: false
+        privacy: false,
       },
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
     };
   },
   methods: {
@@ -149,7 +149,7 @@ export default {
           this.$router.replace({ name: "Home" });
           this.$store.dispatch("user/fetchPlans");
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.data.data?.email_not_verified) {
             this.$router.push({ name: "RegisterVerifyEmail" });
           } else {
@@ -159,8 +159,8 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

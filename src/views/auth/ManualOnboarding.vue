@@ -30,8 +30,8 @@
             :complete="complete(1)"
             color="#0253B3"
           ></v-stepper-step>
-
-          <v-divider></v-divider>
+          
+          <v-divider :class="{ active: e1 >= 2 }"></v-divider>
 
           <v-stepper-step
             step="2"
@@ -39,7 +39,7 @@
             color="#0253B3"
           ></v-stepper-step>
 
-          <v-divider></v-divider>
+          <v-divider :class="{ active: e1 >= 3 }"></v-divider>
 
           <v-stepper-step
             step="3"
@@ -47,7 +47,7 @@
             color="#0253B3"
           ></v-stepper-step>
 
-          <v-divider></v-divider>
+          <v-divider :class="{ active: e1 >= 4 }"></v-divider>
 
           <v-stepper-step
             step="4"
@@ -55,7 +55,7 @@
             color="#0253B3"
           ></v-stepper-step>
 
-          <v-divider></v-divider>
+          <v-divider :class="{ active: e1 >= 5 }"></v-divider>
 
           <v-stepper-step
             step="5"

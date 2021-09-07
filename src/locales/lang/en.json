@@ -10,7 +10,12 @@
       "packagesPricing": "Packages Pricing",
       "inviteUser": "Invite Users",
       "viewAs": "View as a jobseeker",
-      "backToEdit": "Back to edit"
+      "backToEdit": "Back to edit",
+      "aboutCompany": "About the company",
+      "employees": "Employees",
+      "numberOfEmployees": "Number of Employees",
+      "foundingYear": "Founding Year",
+      "users": "Users"
     },
     "register": {
       "jonderWelcome": "Welcome to Jonder",
@@ -118,6 +123,15 @@
       "general": "General",
       "details": "Details",
       "contact": "Contact"
+    },
+    "messageTemplates": {
+      "heading": "Message Templates",
+      "subheading": "Use message templates to contact job seekers faster.",
+      "templateName": "Template name",
+      "templateContent": "Template content",
+      "createHeading": "Create new Message Template",
+      "editHeading": "Edit Message Template",
+      "deleteText": "Are you sure you want to delete the \"{name}\" message template? This action cannot be undone."
     }
   },
   "user": {
@@ -208,7 +222,12 @@
       "editDocuments": "Edit your documents",
       "invoicesDesc": "See a your past invoices and download them.",
       "passwordDesc": "Change your password and create a new one.",
-      "upgradeDesc": "Upgrade your account to make your profile more visible."
+      "upgradeDesc": "Upgrade your account to make your profile more visible.",
+      "backToHome": "Back to the home page",
+      "newPassword": "New Password",
+      "enterNewPassword": "Enter a new password",
+      "reEnterPassword": "Enter new password again",
+      "enterOldPassword": "Enter old password"
     },
     "onboarding": {
       "location": "Please let us know where you are located at the moment!",
@@ -317,10 +336,14 @@
     "logout": "Logout",
     "save": "Save",
     "edit": "Edit",
+    "delete": "Delete",
+    "createNew": "Create new",
+    "createdAt": "Created at",
     "ok": "OK",
     "modalConfirm": "Are you sure you don't want to save changes ?",
     "modalSuccess": "Your changes have been saved successfully !",
     "seeMore": "",
+    "send": "Send",
     "register": "Register",
     "login": "Log In",
     "loginAccount": "Log into your Jonder account",
@@ -349,6 +372,8 @@
     "repeatPassword": "Repeat Password",
     "agreePolicy": "Yes, I agree to the privacy policy & terms and conditions.",
     "saveChanges": "Save changes",
-    "beOnTheTop": "Be on the top of search for 3 days"
+    "beOnTheTop": "Be on the top of search for 3 days",
+    "searchJobseekers": "Find employee",
+    "searchJobseekersFound": "potential Employee found"
   }
 }

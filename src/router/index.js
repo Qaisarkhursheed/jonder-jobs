@@ -36,6 +36,8 @@ import CompanyUser from "@/views/company/User";
 import CompanyPublicProfile from "@/views/company/PublicProfile";
 import CompanySettings from "@/views/company/Settings";
 import CompanyPackagesPricing from "@/views/company/PackagesPricing";
+import CompanyMessageTemplates from "@/views/company/MessageTemplates";
+
 import Qualifications from "@/views/dashboard/profile/Qualifications";
 import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 
@@ -322,6 +324,16 @@ const routes = [
         path: "messages",
         name: "CompanyMessages",
         component: Chat,
+        props: true,
+        meta: {
+          requiresAuth: true,
+          requiresCompany: true
+        }
+      },
+      {
+        path: "message-templates",
+        name: "CompanyMessageTemplates",
+        component: CompanyMessageTemplates,
         props: true,
         meta: {
           requiresAuth: true,
