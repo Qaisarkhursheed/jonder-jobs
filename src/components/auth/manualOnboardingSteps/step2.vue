@@ -8,6 +8,7 @@
       <!-- Current position -->
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouPosition") }}
+        <span style="color: red;">*</span>
       </label>
       <v-autocomplete
         v-model="value.current_position"
@@ -19,14 +20,12 @@
         :placeholder="$t('user.onboarding.detailsAboutYouPositionPlace')"
         class="mt-1"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-autocomplete>
 
       <!-- Branche -->
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouBranches") }}
+        <span style="color: red;">*</span>
       </label>
       <v-autocomplete
         v-model="value.branche"
@@ -40,14 +39,12 @@
         :placeholder="$t('user.onboarding.detailsAboutYouBranchesPlace')"
         class="mt-1"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-autocomplete>
 
       <!-- Looking for role -->
       <label class="profile-label">
         {{ $t("user.onboarding.detailsAboutYouRole") }}
+        <span style="color: red;">*</span>
       </label>
       <v-autocomplete
         v-model="value.looking_for"
@@ -61,13 +58,11 @@
         hide-no-data
         class="mt-1"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-autocomplete>
 
       <label class="profile-label">
         {{ $t("user.onboarding.location") }}
+        <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
         @select="e => (value.city = e)"

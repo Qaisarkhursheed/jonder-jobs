@@ -7,6 +7,7 @@
     <v-form v-model="formValid">
       <label class="profile-label">
         {{ $t("company.register.industry") }}
+        <span style="color: red;">*</span>
       </label>
       <!-- <v-select
         v-model="value.branche"
@@ -25,13 +26,11 @@
         hide-no-data
         :placeholder="$t('user.onboarding.choose')"
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-autocomplete>
 
       <label class="profile-label">
         {{ $t("company.register.numberOfEmployees") }}
+        <span style="color: red;">*</span>
       </label>
       <v-select
         class="mt-1"
@@ -41,13 +40,11 @@
         :placeholder="$t('user.onboarding.choose')"
         outlined
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-select>
 
       <label class="profile-label">
         {{ $t("company.register.dateOfEstablishment") }}
+        <span style="color: red;">*</span>
       </label>
       <v-text-field
         v-model="value.establishment_date"
@@ -55,9 +52,6 @@
         type="number"
         outlined
       >
-        <template v-slot:append-outer>
-          <span style="color: red;">*</span>
-        </template>
       </v-text-field>
       <!-- Implement date picker component -->
 
@@ -101,16 +95,7 @@ export default {
   },
 
   data: () => ({
-    formValid: false,
-    numberOfEmployees: [
-      "It's just me",
-      "2 - 9",
-      "10 - 99",
-      "100 - 500",
-      "500 - 1000",
-      "1000+"
-    ],
-    branches: ["IT", "Medicine"]
+    formValid: false
   }),
   computed: {
     types() {
