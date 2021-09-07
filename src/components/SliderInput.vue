@@ -1,7 +1,7 @@
 <template>
   <v-row class="slider-input no-gutters">
     <v-col cols="auto" class="pa-0">
-      <div class="monthly-salary">{{ model }}{{ suffix }}</div>
+      <div class="monthly-salary">{{ model }} {{ suffix }}</div>
     </v-col>
     <v-col cols="col" class="d-flex my-auto">
       <v-slider

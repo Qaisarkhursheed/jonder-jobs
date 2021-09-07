@@ -30,9 +30,10 @@
         </div>
       </div>
 
-      <label class="profile-label">{{
-        $t("company.register.aboutCompanyText")
-      }}</label>
+      <label class="profile-label">
+        {{ $t("company.register.aboutCompanyText") }}
+        <span style="color: red;">*</span>
+      </label>
       <v-textarea
         class="mt-3"
         dense
