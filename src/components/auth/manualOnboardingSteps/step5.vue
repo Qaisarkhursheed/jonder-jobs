@@ -30,7 +30,7 @@
             type="submit"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            class="full-w font-weight-medium dark-blue"
           >
             {{ $t("user.onboarding.next") }}
           </v-btn>

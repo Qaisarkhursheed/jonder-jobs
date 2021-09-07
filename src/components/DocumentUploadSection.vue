@@ -61,16 +61,16 @@ export default {
 
   props: {
     type: {
-      type: String,
+      type: String
     },
     value: {
       type: [Object, Boolean, Array, String],
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
-      inputData: null,
+      inputData: null
     };
   },
   created() {
@@ -78,8 +78,8 @@ export default {
       this.inputData = [
         {
           name: this.value,
-          size: false,
-        },
+          size: false
+        }
       ];
     }
   },
@@ -97,14 +97,14 @@ export default {
       } else {
         this.inputData = null;
       }
-    },
+    }
   },
 
   watch: {
     inputData(val) {
       this.$emit("change", val);
-    },
-  },
+    }
+  }
 };
 </script>
 
