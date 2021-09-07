@@ -1,5 +1,6 @@
 <template>
-  <div class="user-overview" v-if="profile">
+  <CompanyPlans v-if="showUpgradePlans" />
+  <div v-else class="user-overview">
     <div class="heading d-flex mb-5" v-if="!calledFromList" @click="back">
       <v-icon size="25">
         mdi-arrow-left
@@ -75,6 +76,7 @@
 import axios from "axios";
 import UserOverviewGeneral from "@/components/company/UserOverviewGeneral";
 import UserOverviewNotes from "@/components/company/UserOverviewNotes";
+import CompanyPlans from "@/components/plans/CompanyPlans";
 
 export default {
   name: "UserOverview",
@@ -90,68 +92,36 @@ export default {
   },
   components: {
     UserOverviewGeneral,
-    UserOverviewNotes
+    UserOverviewNotes,
+    CompanyPlans
   },
   data() {
     return {
       profile: null,
-      // profile: {
-      //   fullname: {
-      //     label: "",
-      //     value: ""
-      //   },
-      //   email: {
-      //     label: "E-mail address",
-      //     value: ""
-      //   },
-      //   address: {
-      //     label: "City and address",
-      //     value: ""
-      //   },
-      //   about: {
-      //     label: "",
-      //     value:
-      //       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"
-      //   },
-      //   profession: {
-      //     label: "",
-      //     value: "My Profession"
-      //   },
-      //   radius: {
-      //     label: "Work Radius",
-      //     value: "50km"
-      //   },
-      //   profesionsim: {
-      //     label: "Profesionsim",
-      //     value: "Junior"
-      //   }
-      // },
       tab: null,
       items: ["general", "notes"],
       tabs: {
         general: UserOverviewGeneral,
         notes: UserOverviewNotes
       },
-      startChatLoading: false
+      startChatLoading: false,
+      showUpgradePlans: false
     };
   },
-  mounted() {
+  created() {
     this.getUser();
-    // this.addUserProfileView({ user_id: this.$route.params.id });
   },
   methods: {
-    //  ...mapActions("user", ["addUserProfileView"]),
     getUser() {
       const id = this.calledFromList ? this.id : this.$route.params.id;
       console.log(id);
       axios
         .get(`/users/${id}`)
         .then(res => {
-          // this.populateData(res.data);
           this.profile = res.data.data;
         })
         .catch(() => {
-          this.$router.replace({ name: "CompanySearch" });
+          this.showUpgradePlans = true;
         });
     },
     populateData(user) {
