@@ -4,31 +4,31 @@ export default {
   fetchUserInteractions({ commit }) {
     return axios
       .get("/stats/company/user/interactions")
-      .then((res) => {
+      .then(res => {
         if (res.data.success) {
           commit("SET_USER_INTERACTIONS", res.data);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   fetchPeopleReach({ commit }) {
-    return axios.get("/stats/company/people/reach").then((res) => {
+    return axios.get("/stats/company/people/reach").then(res => {
       if (res.data.success) {
         commit("SET_PEOPLE_REACH", res.data.people_reach);
       }
     });
   },
   fetchProfileViews({ commit }) {
-    return axios.get("/stats/company/profile/views").then((res) => {
+    return axios.get("/stats/company/profile/views").then(res => {
       if (res.data.success) {
         commit("SET_PROFILE_VIEWS", res.data.profile_views);
       }
     });
   },
   fetchCompanyInteractions({ commit }) {
-    return axios.get("/stats/company/interactions").then((res) => {
+    return axios.get("/stats/company/interactions").then(res => {
       if (res.data.success) {
         commit("SET_COMPANY_INTERACTIONS", res.data);
       }
@@ -36,7 +36,7 @@ export default {
   },
   //  management
   slManagementGetAll({ commit }) {
-    return axios.get("/selection-managment").then((res) => {
+    return axios.get("/selection-managment").then(res => {
       if (res.data.success) {
         console.log("res", res.data);
         commit("SET_SELECTION_MANAGEMENT", res.data.data);
@@ -46,14 +46,14 @@ export default {
   slManagementMoveCandidate({ dispatch }, payload) {
     return axios
       .patch(`/selection-managment/${payload.id}`, payload.data)
-      .then((res) => {
+      .then(res => {
         if (res.status === 200) {
           dispatch("slManagementGetAll");
         }
       });
   },
   slManagementAddCandidate({ dispatch }, payload) {
-    return axios.post("/selection-managment", payload).then((res) => {
+    return axios.post("/selection-managment", payload).then(res => {
       console.log(res);
       if (res.status === 200) {
         dispatch("slManagementGetAll");
@@ -70,7 +70,7 @@ export default {
   },
   // Saved search filters
   searchFilterFetchAll({ commit }) {
-    return axios.get("/jobseeker-filter").then((res) => {
+    return axios.get("/jobseeker-filter").then(res => {
       console.log(res);
       if (res.status === 200) {
         commit("SET_SEARCH_FILTERS", res.data.data);
@@ -78,14 +78,14 @@ export default {
     });
   },
   searchFilterSave({ dispatch }, payload) {
-    return axios.post("/jobseeker-filter", payload).then((res) => {
+    return axios.post("/jobseeker-filter", payload).then(res => {
       if (res.status === 200) {
         dispatch("searchFilterFetchAll");
       }
     });
   },
   searchFilterDelete({ dispatch }, id) {
-    return axios.delete(`/jobseeker-filter/${id}`).then((res) => {
+    return axios.delete(`/jobseeker-filter/${id}`).then(res => {
       console.log(res);
       if (res.status === 200) {
         dispatch("searchFilterFetchAll");
@@ -96,7 +96,7 @@ export default {
   jobseekerNotesGetAll({ commit }, id) {
     return axios
       .get(`/jobseeker-note?per_page=10&page=1&search=&jobseeker_id=${id}`)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         if (res.status === 200) {
           commit("SET_JOBSEEKER_NOTES", res.data.data);
@@ -104,7 +104,7 @@ export default {
       });
   },
   jobseekerNotesAdd({ dispatch }, payload) {
-    return axios.post("/jobseeker-note/", payload).then((res) => {
+    return axios.post("/jobseeker-note/", payload).then(res => {
       if (res.status === 200) {
         dispatch("jobseekerNotesGetAll", payload.jobseeker_id);
       }
@@ -120,24 +120,24 @@ export default {
     }
   },
   jobseekerNotesDelete({ dispatch }, payload) {
-    return axios.delete(`/jobseeker-note/${payload.id}`).then((res) => {
+    return axios.delete(`/jobseeker-note/${payload.id}`).then(res => {
       if (res.status === 200) {
         dispatch("jobseekerNotesGetAll", payload.userId);
       }
     });
   },
+
   searchJobseekers({ commit }, payload) {
     let obj = {
       per_page: 6,
       page: 1,
-      ...payload,
+      ...payload
     };
-
     commit("SET_SEARCH_INPROGRESS", true);
 
     return axios
       .post("/company/search/", obj)
-      .then((res) => {
+      .then(res => {
         if (res.status === 200) {
           commit("SET_SEARCH_INPROGRESS", false);
           commit("SET_SEARCH_RESULTS", res.data.data);
@@ -145,11 +145,11 @@ export default {
             current_page: res.data.meta.current_page,
             per_page: res.data.meta.per_page,
             total: res.data.meta.total,
-            searchInput: payload,
+            searchInput: payload
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         if (
           JSON.parse(err.request.response).message ==
           "Upgrade your plan to use this action."
@@ -163,17 +163,22 @@ export default {
     let obj = {
       ...getters["searchMeta"].searchInput,
       page: page,
-      per_page: getters["searchMeta"].per_page,
+      per_page: getters["searchMeta"].per_page
     };
     console.log(obj);
-    return axios.post("/company/search/", obj).then((res) => {
+    return axios.post("/company/search/", obj).then(res => {
       if (res.status === 200) {
         commit("SET_SEARCH_INPROGRESS", false);
         commit("SET_SEARCH_RESULTS", res.data.data);
       }
     });
   },
-  setSearchType({ commit }, data) {
-    commit("SET_SEARCH_TYPE", data);
+  async presearchJobseekers(context, payload) {
+    try {
+      const resp = await axios.post("/company/search/?presearch=1", payload);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   }
 };
