@@ -132,6 +132,9 @@
       "billingInvoices": "Abrechnung & Rechnungen",
       "editPaymentMethod": "Zahlungsmethoden bearbeiten"
     },
+    "selectionManagement": {
+      "deleteText": "Möchten Sie {name} wirklich aus der Auswahlverwaltung entfernen?"
+    },
     "messageTemplates": {
       "heading": "Nachrichtenvorlagen",
       "subheading": "Verwenden Sie vorgefertigte Nachrichten, um Stellensuchende schneller zu kontaktieren.",

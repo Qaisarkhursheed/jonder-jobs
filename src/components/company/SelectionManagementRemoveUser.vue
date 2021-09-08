@@ -7,14 +7,8 @@
       overlay-opacity="0.3"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="#F12727"
-          class="full-w font-weight-medium"
-          style="color: #fff"
-          v-bind="attrs"
-          v-on="on"
-        >
-          Entfernen
+        <v-btn icon color="primary" class="ml-3" v-bind="attrs" v-on="on">
+          <v-icon>mdi-trash-can</v-icon>
         </v-btn>
       </template>
 
@@ -30,7 +24,7 @@
           v-model="isValid"
         >
           <p class="text-center">
-            {{ $t("general.areYouSureQuestion") }}
+            {{ $t("company.selectionManagement.deleteText", { name }) }}
           </p>
 
           <ResponseAlert :response="formResponse"></ResponseAlert>
@@ -38,7 +32,6 @@
           <div class="text-center mt-3">
             <v-btn
               height="48"
-              class="font-weight-medium "
               @click="
                 dialog = false;
                 $refs.form.reset();
@@ -46,12 +39,14 @@
             >
               {{ $t("general.cancelOption") }}
             </v-btn>
+
             <v-btn
               type="submit"
               color="primary"
               height="48"
-              class="ml-3 font-weight-medium "
+              class="ml-3"
               :disabled="!isValid"
+              :loading="loading"
             >
               {{ $t("general.confirmOption") }}
             </v-btn>
@@ -76,19 +71,27 @@ export default {
     return {
       dialog: false,
       isValid: false,
+      loading: false,
       formResponse: {}
     };
+  },
+  computed: {
+    name() {
+      return this.$options.filters.fullname(this.user);
+    }
   },
   methods: {
     submit() {
       this.formResponse = {};
+      this.loading = true;
       this.$store
-        .dispatch("teamManagement/deleteUser", this.user.id)
+        .dispatch("company/slManagementDeleteCandidate", this.user.id)
         .then(() => {
+          this.$store.dispatch("company/slManagementGetAll");
           this.dialog = false;
         })
-        .catch(err => {
-          this.formResponse = err.data;
+        .finally(() => {
+          this.loading = false;
         });
     }
   }

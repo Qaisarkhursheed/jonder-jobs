@@ -1,10 +1,7 @@
 <template>
   <div class="search-results">
     <v-dialog
-      class="dialog"
       v-model="blockModalActive"
-      @click:outside="toggleModal"
-      persistent
       style="z-index: 2222"
       width="100%"
       height="100%"
@@ -14,6 +11,7 @@
     >
       <CompanyPlans class="pa-3" />
     </v-dialog>
+
     <template v-if="results.length">
       <div class="heading pb-4">
         {{ searchMeta.total }} {{ $t("company.search.searchResults") }}

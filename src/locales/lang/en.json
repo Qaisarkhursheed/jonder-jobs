@@ -133,6 +133,9 @@
       "billingInvoices": "Billing & Invoices",
       "editPaymentMethod": "Edit payment method"
     },
+    "selectionManagement": {
+      "deleteText": "Are you sure you want to remove {name} from selection management?"
+    },
     "messageTemplates": {
       "heading": "Message Templates",
       "subheading": "Use message templates to contact job seekers faster.",
