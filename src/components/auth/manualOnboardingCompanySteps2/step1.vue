@@ -15,7 +15,11 @@
           @click="$refs.uploadAvatarInput.click()"
         >
           <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-img class="profile_img" src="../../../assets/cloud.svg"></v-img>
+          <v-img
+            v-else
+            class="profile_img"
+            src="../../../assets/cloud.svg"
+          ></v-img>
         </v-avatar>
         <input
           type="file"
