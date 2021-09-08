@@ -30,9 +30,7 @@
           @click="$refs.uploadAvatarInput.click()"
         >
           <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-icon size="64" color="#6a9cd4" v-else>
-            mdi-cloud-upload
-          </v-icon>
+          <v-img class="profile_img" src="../../assets/cloud.svg"></v-img>
         </v-avatar>
         <input
           type="file"
@@ -273,5 +271,11 @@ export default {
 }
 .checkbox-abn .v-input--selection-controls__input {
   order: 1 !important;
+}
+.profile_img {
+  position: absolute;
+  width: 66px;
+  height: 46px;
+  border-radius: 0;
 }
 </style>

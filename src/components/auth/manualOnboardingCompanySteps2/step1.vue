@@ -15,9 +15,7 @@
           @click="$refs.uploadAvatarInput.click()"
         >
           <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-icon size="64" color="#6a9cd4" v-else>
-            mdi-cloud-upload
-          </v-icon>
+          <v-img class="profile_img" src="../../../assets/cloud.svg"></v-img>
         </v-avatar>
         <input
           type="file"
@@ -64,14 +62,14 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
       formValid: false,
-      profile_img: false
+      profile_img: false,
     };
   },
   methods: {
@@ -79,7 +77,7 @@ export default {
       this.profile_img = this.value.profile_img_file = e.target.files[0];
       // this.value.profile_img_file = e.target.files[0];
       console.log(e);
-    }
+    },
   },
   computed: {
     avatar_img() {
@@ -87,8 +85,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -109,5 +107,11 @@ export default {
     position: absolute;
     left: 5px;
   }
+}
+.profile_img {
+  position: absolute;
+  width: 66px;
+  height: 46px;
+  border-radius: 0;
 }
 </style>
