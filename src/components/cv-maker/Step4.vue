@@ -156,7 +156,7 @@
           @click="$emit('back')"
           class="font-weight-bold"
         >
-          Back
+          {{ $t("user.onboarding.back") }}
         </v-btn>
       </v-col>
       <v-col cols="4"></v-col>
@@ -182,8 +182,8 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     isValid() {
@@ -197,13 +197,13 @@ export default {
         this.value.language.length > 0 &&
         this.value.language_level.length > 0
       );
-    }
+    },
   },
   methods: {
     nextStep() {
       if (this.isValid) this.$emit("confirm");
-    }
+    },
   },
-  components: { StepHeader }
+  components: { StepHeader },
 };
 </script>

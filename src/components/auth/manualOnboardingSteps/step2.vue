@@ -65,7 +65,7 @@
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
-        @select="e => (value.city = e)"
+        @select="(e) => (value.city = e)"
         :required="true"
         class="mt-1"
       />
@@ -84,7 +84,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            Back
+            {{ $t("user.onboarding.back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -111,29 +111,29 @@ export default {
   name: "Step2",
 
   components: {
-    GooglePlacesAutocomplete
+    GooglePlacesAutocomplete,
   },
 
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
   },
   computed: {
     types() {
       return types;
-    }
+    },
   },
   created() {
     this.$store.dispatch("professions/fetch");
-  }
+  },
 };
 </script>
 

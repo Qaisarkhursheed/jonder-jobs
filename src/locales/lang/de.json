@@ -15,7 +15,12 @@
       "employees": "Angestellte",
       "numberOfEmployees": "Anzahl an Angestellten",
       "foundingYear": "Gründungsjahr",
-      "users": "Nutzer"
+      "users": "Nutzer",
+      "nickname": "Nutzername",
+      "nicknameplaceholder": "Vorname eintragen",
+      "email": "E-Mail",
+      "emailplaceholder": "E-Mail des Nutzers",
+      "inviteNewUser": "Neuen Nutzer einladen"
     },
     "register": {
       "jonderWelcome": "Herzlich Willkommen bei Jonder!",
@@ -28,9 +33,9 @@
       "registerSubtitleCompany": "Erstelle ein Jonder-Unternehmensprofil und suche in einer großen Datenbank an Bewerbern.",
       "continueWithGoogleCompany": "Mit Google registrieren",
       "continueWithFacebook": "Mit Facebook registrieren",
-      "continueWithEmail": "Mit E-mail registrieren",
+      "continueWithEmail": "Mit E-Mail registrieren",
       "uploadPhoto": "Profilbild hochladen",
-      "successMessageEmployer": "You have successfully registred your company",
+      "successMessageEmployer": "Sie haben Ihr Unternehmen erfolgreich registriert",
       "successMessageEmployerSub": " Du hast dein Unternehmen erfolgreich registriert. Starte mit der Jonder Personalsuche noch heute und kontaktiere deine ersten Kandidaten!",
       "uploadPhotoEmployer": "Unternehmenslogo hochladen (500x500 pixel)",
       "giveUsDetails": " Gib uns eine kleine Einführung..",
@@ -40,7 +45,7 @@
       "industry": "Industry",
       "numberOfEmployees": "Unternehmensgröße",
       "dateOfEstablishment": "Gründungsjahr",
-      "companyContact": "Kontaktinformationen",
+      "companyContact": "Standort eingeben",
       "companyEmail": "Email Adresse",
       "companyEmailPlaceholder": "info@musterunternehmen.com",
       "companyPhone": "Telefonnummer",
@@ -104,10 +109,11 @@
       "enterIndustry": " Branche auswählen",
       "position": "Positionen",
       "saveSearch": "Suche speichern",
-      "inviteHelp": "Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu suchen"
+      "inviteHelp": "Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu suchen",
+      "message": "Nachricht jetzt"
     },
     "profile": {
-      "email": "E-mail Adresse",
+      "email": "E-Mail Adresse",
       "resendEmail": "E-Mail erneut versenden",
       "phone": "Telefonnummer",
       "webUrl": "Web-URL",
@@ -121,7 +127,10 @@
       "editProfile": "Profil Bearbeiten",
       "general": "Generelle Informationen",
       "details": "Details zum Unternehmen",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "changePersonalInfo": "Persönliche Informationen anpassen",
+      "billingInvoices": "Abrechnung & Rechnungen",
+      "editPaymentMethod": "Zahlungsmethoden bearbeiten"
     },
     "messageTemplates": {
       "heading": "Nachrichtenvorlagen",
@@ -337,7 +346,7 @@
     "save": "Speichern",
     "edit": "Bearbeiten",
     "delete": "Löschen",
-    "createNew": "Erstelle neu",
+    "createNew": " Neu erstellen",
     "createdAt": "Erstellt am",
     "ok": "OK",
     "modalConfirm": "Möchten Sie die Änderungen wirklich nicht speichern ?",
@@ -368,12 +377,14 @@
     "name": "Vorname",
     "surname": "Nachname",
     "email": "E-mail address",
-    "pasword": "Passwort",
+    "password": "Passwort",
     "repeatPassword": "Password erneut eingeben",
     "agreePolicy": "Ja, ich stimme der Datenschutzerklärung & AGB zu.",
     "saveChanges": "Änderungen speichern",
     "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen",
     "searchJobseekers": "Mitarbeiter finden",
-    "searchJobseekersFound": "potentielle Mitarbeiter gefunden"
+    "searchJobseekersFound": "potentieller Mitarbeiter gefunden",
+    "createAccount": "Benutzerkonto erstellen",
+    "createAccountSub": "Sie sind nur noch wenige Schritte entfernt Ihre ersten potenziellen Mitarbeiter zu finden."
   }
 }

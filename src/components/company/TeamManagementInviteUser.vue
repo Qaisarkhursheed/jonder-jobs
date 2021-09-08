@@ -29,10 +29,12 @@
           @submit.prevent="submit"
           v-model="isValid"
         >
-          <label class="profile-label">User Name</label>
+          <label class="profile-label">{{
+            $t("company.employer.nickname")
+          }}</label>
           <v-text-field
             dense
-            placeholder="Enter first name"
+            :placeholder="$t('company.employer.nickname')"
             :rules="[validations.required]"
             type="text"
             outlined
@@ -41,10 +43,12 @@
             v-model="formData.name"
           ></v-text-field>
 
-          <label class="profile-label">Email</label>
+          <label class="profile-label">{{
+            $t("company.employer.email")
+          }}</label>
           <v-text-field
             dense
-            placeholder="User's email"
+            :placeholder="$t('company.employer.emailplaceholder')"
             :rules="[validations.required, validations.email]"
             type="email"
             outlined
@@ -74,7 +78,7 @@
               :disabled="!isValid"
               :loading="formLoading"
             >
-              Neue Nutzer einladen
+              {{ $t("company.employer.inviteNewUser") }}
             </v-btn>
           </div>
         </v-form>
@@ -96,10 +100,10 @@ export default {
       isValid: false,
       formData: {
         name: "",
-        email: ""
+        email: "",
       },
       formLoading: false,
-      formResponse: {}
+      formResponse: {},
     };
   },
   methods: {
@@ -111,13 +115,13 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>

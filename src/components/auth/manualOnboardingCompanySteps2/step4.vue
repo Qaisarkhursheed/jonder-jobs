@@ -73,7 +73,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            Back
+            {{ $t("user.onboarding.back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -100,16 +100,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
     loading: Boolean,
-    nextScreen: Function
+    nextScreen: Function,
   },
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
 };
 </script>
 

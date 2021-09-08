@@ -33,16 +33,16 @@
             </div>
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                Persönliche Informationen
+                {{ $t("user.profile.personalInformation") }}
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                Abrechnung &amp; Rechnungen
+                {{ $t("company.profile.billingInvoices") }}
               </div>
               <div @click="scrollToSection('payment')" class="nav-item">
-                Zahlung
+                {{ $t("user.profile.billing") }}
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                Passwort ändern
+                {{ $t("user.profile.changePassword") }}
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@
 
               <v-row>
                 <v-col cols="6">
-                  <label class="profile-label">Email</label>
+                  <label class="profile-label">E-Mail</label>
                   <v-text-field
                     dense
                     disabled
@@ -141,7 +141,7 @@
           <v-card flat id="invoices" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                Billing &amp; Invoices
+                {{ $t("company.profile.billingInvoices") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -171,7 +171,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number
+                      number: item.invoice_number,
                     })
                   "
                 ></v-img>
@@ -183,7 +183,7 @@
           <v-card flat id="payment" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                Edit payment method
+                {{ $t("company.profile.editPaymentMethod") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -307,7 +307,7 @@ export default {
   components: {
     UserPlan,
     Header,
-    AddNewCard
+    AddNewCard,
   },
   data() {
     return {
@@ -322,22 +322,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard
-        }
+          component: AddNewCard,
+        },
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"]
-      }
+        AddNewCard: ["edit", "delete"],
+      },
     };
   },
   computed: {
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["user"]),
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status == "complete");
+      this.invoices = this.invoices.filter((i) => i.status == "complete");
     });
   },
   methods: {
@@ -359,10 +359,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         });
     },
@@ -371,7 +371,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -379,7 +379,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -395,8 +395,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
-  }
+    },
+  },
 };
 </script>
 

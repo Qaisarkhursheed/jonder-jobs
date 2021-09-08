@@ -1,13 +1,12 @@
 <template>
   <div class="auth-register-wrap align-center">
     <jonder-title>
-      Create account
+      {{ $t("general.createAccount") }}
     </jonder-title>
 
     <v-row class="mb-1">
       <v-col cols="12">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-        ultricies felis eu libero.
+        {{ $t("general.createAccountSub") }}
       </v-col>
     </v-row>
 
@@ -127,7 +126,7 @@
         :placeholder="$t('user.onboarding.repeatPassword')"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password)
+          validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         outlined
@@ -203,7 +202,7 @@ export default {
   mixins: [Validations],
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
   },
   data() {
     return {
@@ -216,18 +215,18 @@ export default {
         phone: "+49",
         company: "",
         role: "company",
-        accept_policy: false
+        accept_policy: false,
       },
       formResponse: {},
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false
+      showPassConfirm: false,
     };
   },
   methods: {
     ...mapActions({
-      register: "auth/registerCompany"
+      register: "auth/registerCompany",
     }),
 
     async handleRegister() {
@@ -237,15 +236,15 @@ export default {
         .then(() => {
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
           this.$emit("changeImage");
         })
         .finally(() => {
           this.isLoading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

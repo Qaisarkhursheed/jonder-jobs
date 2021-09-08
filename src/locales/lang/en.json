@@ -15,7 +15,12 @@
       "employees": "Employees",
       "numberOfEmployees": "Number of Employees",
       "foundingYear": "Founding Year",
-      "users": "Users"
+      "users": "Users",
+      "nickname": "User Name",
+      "nicknameplaceholder": "Enter first name",
+      "email": "E-Mail",
+      "emailplaceholder": "User's E-Mail",
+      "inviteNewUser": "Invite new user"
     },
     "register": {
       "jonderWelcome": "Welcome to Jonder",
@@ -105,7 +110,8 @@
       "enterLocation": "Enter Location",
       "position": "Position",
       "saveSearch": "Save search",
-      "inviteHelp": "Invite other users to look for potential employees"
+      "inviteHelp": "Invite other users to look for potential employees",
+      "message": "Message now"
     },
     "profile": {
       "email": "E-mail address",
@@ -122,7 +128,10 @@
       "editProfile": "Edit Profile",
       "general": "General",
       "details": "Details",
-      "contact": "Contact"
+      "contact": "Contact",
+      "changePersonalInfo": "Change persolan info",
+      "billingInvoices": "Billing & Invoices",
+      "editPaymentMethod": "Edit payment method"
     },
     "messageTemplates": {
       "heading": "Message Templates",
@@ -375,6 +384,8 @@
     "saveChanges": "Save changes",
     "beOnTheTop": "Be on the top of search for 3 days",
     "searchJobseekers": "Find employee",
-    "searchJobseekersFound": "potential Employee found"
+    "searchJobseekersFound": "potential Employee found",
+    "createAccount": "Create Account",
+    "createAccountSub": "You are only a few steps away from finding your first potential employee."
   }
 }

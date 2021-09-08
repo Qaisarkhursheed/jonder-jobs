@@ -140,7 +140,7 @@
           @click="$emit('back')"
           class="font-weight-bold"
         >
-          Back
+          {{ $t("user.onboarding.back") }}
         </v-btn>
       </v-col>
       <v-col cols="4"></v-col>
@@ -166,8 +166,8 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     isValid() {
@@ -180,7 +180,7 @@ export default {
         this.value.education_description.length > 0 &&
         this.value.profile_description.length > 0
       );
-    }
+    },
   },
   methods: {
     nextStep() {
@@ -188,8 +188,8 @@ export default {
     },
     dateValidator(date) {
       return /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(date);
-    }
+    },
   },
-  components: { StepHeader }
+  components: { StepHeader },
 };
 </script>
