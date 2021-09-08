@@ -150,7 +150,10 @@ export default {
       }
     },
     startConversation(id) {
-      if (!this.$store.getters["user/userPlan"]) return;
+      if (!this.$store.getters["user/userPlan"]) {
+        this.upgradeModal = true;
+        return;
+      }
 
       this.startChatLoading = id;
       this.$store
