@@ -2,8 +2,6 @@
   <v-container class="selection-management-table-list d-flex">
     <v-dialog
       v-model="upgradeModal"
-      @click:outside="upgradeModal = false"
-      persistent
       style="z-index: 2222"
       width="100%"
       height="100%"
@@ -51,7 +49,7 @@
               :cols="activeProfile ? 8 : 3"
               class="d-flex align-center full-h"
             >
-              <span>{{ fetFirsLastName(item.jobseeker) }}</span>
+              <span>{{ item.jobseeker | fullname }}</span>
             </v-col>
 
             <v-col
@@ -83,15 +81,8 @@
               >
                 <v-icon>mdi-email</v-icon>
               </v-btn>
-              <v-btn
-                @click.stop="deleteCandidate(item.jobseeker.id)"
-                :loading="deleteLoading == item.jobseeker.id"
-                icon
-                color="primary"
-                class="ml-3"
-              >
-                <v-icon>mdi-trash-can</v-icon>
-              </v-btn>
+
+              <SelectionManagementRemoveUser :user="item.jobseeker" />
             </v-col>
           </v-row>
         </v-container>
@@ -112,10 +103,11 @@
 import types from "../../types";
 import UserOverview from "./UserOverview";
 import CompanyPlans from "@/components/plans/CompanyPlans";
+import SelectionManagementRemoveUser from "@/components/company/SelectionManagementRemoveUser";
 
 export default {
   name: "SelectionmManagementTableList",
-  components: { UserOverview, CompanyPlans },
+  components: { UserOverview, CompanyPlans, SelectionManagementRemoveUser },
   props: {
     selection: {
       type: Array
@@ -131,9 +123,6 @@ export default {
     };
   },
   methods: {
-    fetFirsLastName(data) {
-      return `${data.first_name} ${data.last_name}`;
-    },
     updateJobseeker(change, id) {
       this.$store.dispatch("company/slManagementMoveCandidate", {
         id,
@@ -143,11 +132,12 @@ export default {
       });
     },
     updateActiveProfile(id) {
-      if (this.$store.getters["user/userPlan"]) {
-        this.activeProfile = this.activeProfile === id ? null : id;
-      } else {
+      if (!this.$store.getters["user/userPlan"]) {
         this.upgradeModal = true;
+        return;
       }
+
+      this.activeProfile = this.activeProfile === id ? null : id;
     },
     startConversation(id) {
       if (!this.$store.getters["user/userPlan"]) {
@@ -168,17 +158,6 @@ export default {
         })
         .finally(() => {
           this.startChatLoading = false;
-        });
-    },
-    deleteCandidate(id) {
-      this.deleteLoading = id;
-      this.$store
-        .dispatch("company/slManagementDeleteCandidate", id)
-        .then(() => {
-          this.$store.dispatch("company/slManagementGetAll");
-        })
-        .finally(() => {
-          this.deleteLoading = false;
         });
     }
   },
