@@ -29,7 +29,7 @@
           @submit.prevent="submit"
           v-model="isValid"
         >
-          <p>
+          <p class="text-center">
             {{ $t("general.areYouSureQuestion") }}
           </p>
 
