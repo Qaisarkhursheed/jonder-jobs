@@ -20,6 +20,7 @@
             :placeholder="$t('company.search.enterJobtitle')"
           ></v-autocomplete>
         </v-col>
+
         <v-col cols="12" md="5">
           <label class="section-label">
             {{ $t("company.search.employementType") }}
@@ -53,6 +54,7 @@
               :placeholder="$t('company.search.enterIndustry')"
             ></v-autocomplete>
           </v-col>
+
           <v-col cols="12" md="4">
             <label class="section-label">
               {{ $t("company.search.schoolGraduation") }}
@@ -73,6 +75,7 @@
             >
             </v-text-field>
           </v-col>
+
           <v-col cols="12" md="4">
             <label class="section-label">
               {{ $t("company.search.educationStudy") }}
@@ -87,6 +90,7 @@
             ></v-select>
           </v-col>
         </v-row>
+
         <v-row>
           <v-col cols="12" md="4">
             <label class="section-label">
@@ -110,6 +114,7 @@
                 >
                 </v-text-field>
               </v-col>
+
               <v-col cols="6" class="pl-2">
                 <v-text-field
                   v-model="formFields.max_salary"
@@ -129,6 +134,7 @@
               </v-col>
             </v-row>
           </v-col>
+
           <v-col cols="12" md="4">
             <label class="section-label">
               {{ $t("company.search.workExperience") }}
@@ -142,6 +148,7 @@
               outlined
             ></v-select>
           </v-col>
+
           <v-col cols="12" md="4">
             <label class="section-label">
               {{ $t("company.search.city") }}
@@ -156,7 +163,7 @@
 
       <v-card-actions class="no-gutters pa-0 ma-0 mt-3">
         <v-row>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" lg="5" xl="6">
             <v-row>
               <v-col cols="12" md="6">
                 <v-btn
@@ -171,7 +178,8 @@
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="12" md="6">
+
+          <v-col cols="12" md="6" lg="7" xl="6">
             <v-row>
               <v-col cols="12" md="6">
                 <v-btn
@@ -187,47 +195,45 @@
                   {{ $t("company.search.advancedSearch") }}
                 </v-btn>
               </v-col>
+
               <v-col cols="12" md="6">
                 <v-btn
                   :loading="searchLoading"
                   color="primary"
                   height="58"
-                  class="full-w mt-md-16 font-weight-medium search-btn dark-blue"
+                  class="full-w mt-md-16 search-btn"
                   @click="search"
                 >
-                  <Loop />
-                  <span class="pl-1">
-                    {{ searchButtonStateLabel }}
-                  </span>
-                </v-btn>  
+                  <v-icon left>
+                    mdi-magnify
+                  </v-icon>
+                  <template v-if="presearchCount != null">
+                    {{ presearchCount }}
+                  </template>
+                  {{ $t("company.search.findEmployee") }}
+                </v-btn>
               </v-col>
             </v-row>
           </v-col>
         </v-row>
       </v-card-actions>
-      <transition name="fade">
-        <section class="error-message" v-if="errorMessage">
-          <div>{{ errorMessage }}</div>
-        </section>
-      </transition>
+
+      <ResponseAlert
+        class="mt-3"
+        style="max-width: 500px"
+        :response="formResponse"
+      />
     </v-card>
   </div>
 </template>
 
 <script>
 import { forEach } from "lodash";
-import store from "@/store";
 import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
-import Loop from "../../svgs/Loop";
 
 export default {
-  name: "SearchForm",
-
-  components: {
-    Loop,
-    GooglePlacesAutocomplete
-  },
+  components: { GooglePlacesAutocomplete },
 
   data() {
     return {
@@ -242,57 +248,87 @@ export default {
         max_salary: "",
         city: ""
       },
-      advancedSearch: false,
-      errorMessage: "",
-      filterTouched: false
+      formResponse: {},
+      presearchCount: null,
+      advancedSearch: false
     };
   },
+
+  computed: {
+    searchLoading() {
+      this.filterData();
+      return this.$store.getters["company/searchInProgress"];
+    },
+    types() {
+      return types;
+    }
+  },
+
+  watch: {
+    formFields: {
+      handler: function() {
+        this.updatePresearchCount();
+      },
+      deep: true
+    }
+  },
+
   created() {
     this.$store.dispatch("professions/fetch");
+    this.updatePresearchCount();
   },
+
   methods: {
     search() {
-      store.dispatch("company/setSearchType", "normal");
-      store.dispatch("company/searchJobseekers", this.prepareData(), "normal");
+      this.$store.dispatch("company/searchJobseekers", this.prepareData());
       this.$emit("search");
-      this.filterTouched = false;
     },
-    removeMessage(delay) {
-      setTimeout(() => {
-        this.errorMessage = false;
-      }, delay);
-    },
+
     searchSave() {
       let i = 0;
       let isValid = true;
       const saveData = this.prepareData();
-      const searchFilters = store.getters["company/searchFilters"];
+      const searchFilters = this.$store.getters["company/searchFilters"];
+
       while (i < searchFilters.length) {
         let count = 0;
+
         forEach(saveData, (prop, key) => {
           if (searchFilters[i][key] === prop) {
             count += 1;
           }
         });
+
         if (count === Object.keys(saveData).length) {
           isValid = false;
-          this.errorMessage = "Already saved";
-          this.removeMessage(5000);
+          this.formResponse = {
+            message: "Already saved!"
+          };
+          setTimeout(() => {
+            this.formResponse = {};
+          }, 5000);
           break;
         } else {
           i++;
         }
       }
+
       if (isValid) {
-        store.dispatch("company/searchFilterSave", saveData).catch(error => {
-          this.errorMessage = error.response.data.message;
-          this.removeMessage(5000);
-        });
+        this.formResponse = {};
+        this.$store
+          .dispatch("company/searchFilterSave", saveData)
+          .catch(error => {
+            this.formResponse = error.response.data;
+            setTimeout(() => {
+              this.formResponse = {};
+            }, 5000);
+          });
       }
     },
+
     filterData() {
-      let searchMeta = store.getters["company/searchMeta"]
-        ? store.getters["company/searchMeta"].searchInput
+      let searchMeta = this.$store.getters["company/searchMeta"]
+        ? this.$store.getters["company/searchMeta"].searchInput
         : null;
       console.log("meta", searchMeta);
       if (searchMeta) {
@@ -313,23 +349,9 @@ export default {
         this.formFields.max_salary =
           "max_salary" in searchMeta ? searchMeta.max_salary : "";
         this.formFields.city = "city" in searchMeta ? searchMeta.city : "";
-        // if (searchMeta.employment_type)
-        //   this.formFields.employment_type = searchMeta.employment_type;
-        // if (searchMeta.job_position)
-        //   this.formFields.job_position = searchMeta.job_position;
-        // if (searchMeta.work_experience)
-        //   this.formFields.work_experience = searchMeta.work_experience;
-        // if (searchMeta.branche) this.formFields.branche = searchMeta.branche;
-        // if (searchMeta.school) this.formFields.school = searchMeta.school;
-        // if (searchMeta.education)
-        //   this.formFields.education = searchMeta.education;
-        // if (searchMeta.min_salary)
-        //   this.formFields.min_salary = searchMeta.min_salary;
-        // if (searchMeta.max_salary)
-        //   this.formFields.max_salary = searchMeta.max_salary;
-        // if (searchMeta.city) this.formFields.city = searchMeta.city;
       }
     },
+
     prepareData() {
       let activatedFields = {};
 
@@ -339,35 +361,14 @@ export default {
         }
       });
       return activatedFields;
-    }
-  },
-  computed: {
-    searchButtonStateLabel() {
-      if (!this.filterTouched && store.getters["company/searchStatus"] == 'results') {
-        return `${store.getters["company/searchMeta"].total} ${this.$t('general.searchJobseekersFound')}`;
-      } else {
-        return this.$t('general.searchJobseekers');
-      }
     },
-    searchLoading() {
-      if(store.getters["company/searchType"] === 'from-filter') {
-        this.filterData();
-      }
-      return store.getters["company/searchInProgress"];
-    },
-    types() {
-      return types;
-    },
-    searchCount() {
-      return store.getters["company/searchMeta"].total;
-    }
-  },
-  watch: {
-    formFields: {
-      handler: function() {
-        this.filterTouched = true;
-      },
-      deep: true
+
+    updatePresearchCount() {
+      this.$store
+        .dispatch("company/presearchJobseekers", this.prepareData())
+        .then(resp => {
+          this.presearchCount = resp.data.filtered_users_count;
+        });
     }
   }
 };
