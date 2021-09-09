@@ -421,6 +421,15 @@ button {
   height: 55px;
 }
 
+.v-select__slot {
+  height: 55px;
+
+  .v-input__append-inner {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
 .v-textarea .v-text-field__slot {
   height: unset;
 }
@@ -539,6 +548,13 @@ label {
     cursor: pointer;
   }
 }
+
+.hide-menu-icon {
+  .mdi-menu-down {
+    display: none;
+  }
+}
+
 // 5. Layout
 // ---------
 
