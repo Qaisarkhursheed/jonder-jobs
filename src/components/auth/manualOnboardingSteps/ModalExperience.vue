@@ -22,16 +22,21 @@
                 <label class="font-weight-medium">
                   {{ $t("user.onboarding.company") }}
                 </label>
-                <v-text-field
+                <v-combobox
                   v-model="form.company_name"
+                  @update:search-input="fetchCompanySuggestions($event)"
+                  :items="suggestedCompanies"
+                  :loading="$store.getters['northdata/loadingSearch']"
                   :rules="[validations.required]"
                   :placeholder="$t('user.onboarding.choose')"
+                  no-filter
+                  class="hide-menu-icon"
                   type="text"
                   outlined
                   dense
                   background-color="#fff"
                 >
-                </v-text-field>
+                </v-combobox>
               </v-col>
             </v-row>
 
@@ -114,36 +119,27 @@
 
         <ResponseAlert :response="formResponse"></ResponseAlert>
 
-        <v-card-actions class="no-gutters pa-0 ma-0">
-          <v-col cols="6"></v-col>
-          <v-col cols="6">
-            <v-row>
-              <v-col cols="6">
-                <v-btn
-                  @click="close"
-                  height="58"
-                  class="full-w mt-5 font-weight-medium "
-                  color="#fff"
-                  light
-                >
-                  {{ $t("general.cancel") }}
-                </v-btn>
-              </v-col>
-              <v-col cols="6">
-                <v-btn
-                  :disabled="!formValid"
-                  :loading="formLoading"
-                  type="submit"
-                  color="primary"
-                  height="58"
-                  class="full-w mt-5 font-weight-medium dark-blue"
-                >
-                  {{ $t("general.save") }}
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-card-actions>
+        <div class="text-right">
+          <v-btn
+            @click="close"
+            height="58"
+            color="#fff"
+            class="mt-5 px-5"
+            light
+          >
+            {{ $t("general.cancel") }}
+          </v-btn>
+          <v-btn
+            :disabled="!formValid"
+            :loading="formLoading"
+            type="submit"
+            color="primary"
+            height="58"
+            class="px-10 ml-4 mt-5"
+          >
+            {{ $t("general.save") }}
+          </v-btn>
+        </div>
       </v-form>
     </v-card>
   </v-dialog>
@@ -153,6 +149,7 @@
 import types from "@/types";
 // Move to generic global component if needed
 import Calendar from "@/components/Calendar";
+import { debounce } from "lodash";
 
 export default {
   name: "ModalExperience",
@@ -174,8 +171,10 @@ export default {
       type: [Object, Boolean]
     }
   },
+
   data() {
     return {
+      suggestedCompanies: [],
       formValid: false,
       formLoading: false,
       formResponse: {},
@@ -190,52 +189,57 @@ export default {
       }
     };
   },
+
   created() {
     if (this.edit) {
       this.populate();
     }
     this.$store.dispatch("professions/fetch");
   },
+
   methods: {
     close(type) {
       this.$emit("close", type);
     },
     save() {
       this.formLoading = true;
-      this.formResponse = {};
+      // Keep setTimeout here and don't ask why
+      setTimeout(() => {
+        this.formResponse = {};
 
-      if (this.form.working_here) {
-        this.form.end_time = null;
-      }
+        if (this.form.working_here) {
+          this.form.end_time = null;
+        }
 
-      if (this.edit) {
-        this.$store
-          .dispatch("user/updateJobseekerExperience", {
-            id: this.edit.id,
-            payload: this.form
-          })
-          .then(() => {
-            this.$emit("close", 1);
-          })
-          .catch(err => {
-            this.formResponse = err.data;
-          })
-          .finally(() => {
-            this.formLoading = false;
-          });
-      } else {
-        this.$store
-          .dispatch("user/addJobseekerExperience", this.form)
-          .then(() => {
-            this.$emit("close", 1);
-          })
-          .catch(err => {
-            this.formResponse = err.data;
-          })
-          .finally(() => {
-            this.formLoading = false;
-          });
-      }
+        if (this.edit) {
+          this.$store
+            .dispatch("user/updateJobseekerExperience", {
+              id: this.edit.id,
+              payload: this.form
+            })
+            .then(() => {
+              this.$emit("close", 1);
+            })
+            .catch(err => {
+              this.formResponse = err.data;
+            })
+            .finally(() => {
+              this.formLoading = false;
+            });
+        } else {
+          this.$store
+            .dispatch("user/addJobseekerExperience", this.form)
+            .then(() => {
+              this.$emit("close", 1);
+            })
+            .catch(err => {
+              this.formResponse = err.data;
+            })
+            .finally(() => {
+              this.formLoading = false;
+            });
+        }
+      }, 100);
     },
     populate() {
       this.form.company_name = this.edit.company_name;
@@ -245,8 +249,28 @@ export default {
       this.form.end_time = this.edit.end_time;
       this.form.description = this.edit.description;
       this.form.working_here = this.edit.working_here;
-    }
+    },
+    fetchCompanySuggestions: debounce(function(val) {
+      if (!val) {
+        this.suggestedCompanies = [];
+      }
+
+      if (val == this.form.company_name) {
+        return;
+      }
+
+      this.suggestedCompanies = [];
+
+      if (val && val.length > 2) {
+        this.$store.dispatch("northdata/suggestSearch", val).then(resp => {
+          this.suggestedCompanies = resp.data.results?.map(
+            r => r.company.name.name
+          );
+        });
+      }
+    }, 500)
   },
+
   computed: {
     types() {
       return types;
