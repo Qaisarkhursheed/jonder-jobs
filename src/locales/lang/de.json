@@ -37,6 +37,8 @@
       "uploadPhoto": "Profilbild hochladen",
       "successMessageEmployer": "Sie haben Ihr Unternehmen erfolgreich registriert",
       "successMessageEmployerSub": " Du hast dein Unternehmen erfolgreich registriert. Starte mit der Jonder Personalsuche noch heute und kontaktiere deine ersten Kandidaten!",
+      "successMessageJobseeker": "Du hast dich soeben Erfolgreich registriert!",
+      "successMessageJobseekerSub": " Leichter geht Karriere wirklich nicht. Dein Profil wird nun Unternehmen angezeigt!",
       "uploadPhotoEmployer": "Unternehmenslogo hochladen (500x500 pixel)",
       "giveUsDetails": " Gib uns eine kleine Einführung..",
       "aboutCompanyText": " Unternehmensbeschreibung (250 Wörter Maximum)",
@@ -303,7 +305,8 @@
       "description": "Description",
       "companyName": "Unternehmensname",
       "repeatPassword": " Passwort erneut eingeben",
-      "add": "Hinzufügen"
+      "add": "Hinzufügen",
+      "finish": "Abschließen"
     }
   },
   "employmentTypes": {

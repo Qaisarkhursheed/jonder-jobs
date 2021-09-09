@@ -278,8 +278,8 @@ export default {
 }
 .profile_img {
   position: absolute;
-  width: 66px;
-  height: 46px;
-  border-radius: 0;
+  width: 66px !important;
+  height: 48px !important;
+  border-radius: 0 !important;
 }
 </style>

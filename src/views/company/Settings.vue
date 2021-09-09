@@ -59,7 +59,7 @@
           <v-card flat id="personalInfo" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                Change personal info
+                {{ $t("company.profile.changePersonalInfo") }}
               </p>
               <p class="profile-subtitle">
                 <!-- Explanation goes here
