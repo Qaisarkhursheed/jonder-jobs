@@ -29,11 +29,17 @@
               size="80"
               class="flex-grow-0 flex-shrink-0"
             >
-              <input
+              <!-- <input
                 type="file"
                 ref="uploadAvatarInput"
                 style="display: none"
                 @change="newImage = $event.target.files[0]"
+              /> -->
+              <input
+                type="file"
+                ref="uploadAvatarInput"
+                style="display: none"
+                @change="cropper.image = $event.target.files"
               />
               <v-img v-if="profile_img" :src="profile_img"></v-img>
               <v-img
@@ -50,6 +56,10 @@
               mdi-camera
             </v-icon>
           </div>
+            <ImageUploadCropper 
+              :image="cropper.image"
+              @save="(img) => { newImage = img; }"
+            />
         </v-col>
         <v-col cols="6" class="text-right">
           <v-btn
@@ -619,6 +629,7 @@ import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
+import ImageUploadCropper from "@/components/ImageUploadCropper";
 
 export default {
   name: "Profile",
@@ -634,7 +645,8 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     GooglePlacesAutocomplete,
-    SliderInput
+    SliderInput,
+    ImageUploadCropper
   },
 
   data: () => ({
@@ -665,6 +677,10 @@ export default {
     passwordFormResponse: {},
     dontKnowWhenToStart: false,
     invoices: [],
+    cropper: {
+      active: false,
+      image: null
+    },
     jonderStatus: [
       "I am actively looking for a job",
       "I am open to an interesting offer",
@@ -717,6 +733,7 @@ export default {
     ]),
     profile_img() {
       if (this.newImage) {
+        // return this.newImage.canvas.toDataURL("image/jpeg" );
         return URL.createObjectURL(this.newImage);
       }
 
@@ -822,7 +839,7 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    }
+    },
   },
   watch: {
     user(newVal) {
