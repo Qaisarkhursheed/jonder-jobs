@@ -22,8 +22,9 @@ html {
 .v-application .v-input.error--text {
   border-color: $primary-error;
 }
+.v-input__icon.v-input__icon--append,
 .v-file-input.v-text-field--outlined .v-text-field__slot {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .options .upgrade-option > span {
   width: 100% !important;

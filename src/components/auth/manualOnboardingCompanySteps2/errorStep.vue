@@ -19,7 +19,7 @@
         </p>
 
         <v-btn color="primary" block class="font-weight-medium mt-10">
-          Abschließen
+          {{ $t("user.onboarding.finish") }}
         </v-btn>
       </v-sheet>
     </v-card>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "errorStep"
+  name: "errorStep",
 };
 </script>
 

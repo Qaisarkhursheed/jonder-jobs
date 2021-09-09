@@ -12,6 +12,7 @@ import invoices from "./invoices";
 import plans from "./plans";
 import professions from "./professions";
 import messageTemplates from "./messageTemplates";
+import northdata from "./northdata";
 
 Vue.use(Vuex);
 
@@ -27,7 +28,8 @@ export default createStore(Vuex.Store, {
     invoices,
     plans,
     professions,
-    messageTemplates
+    messageTemplates,
+    northdata
   },
   state: {
     screenSize: null

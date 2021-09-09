@@ -48,11 +48,15 @@
       ></v-text-field>
 
       <!-- Company name -->
-      <v-text-field
+      <v-combobox
         dense
         :placeholder="$t('user.onboarding.companyName')"
         :rules="[validations.required, validations.min.string(3)]"
+        :items="suggestedCompanies"
+        :loading="$store.getters['northdata/loadingSearch']"
+        @update:search-input="fetchCompanySuggestions($event)"
         type="text"
+        no-filter
         hide-details
         outlined
         background-color="white"
@@ -60,7 +64,7 @@
         solo
         flat
         class="mb-4"
-      ></v-text-field>
+      ></v-combobox>
 
       <!-- Email -->
       <v-text-field
@@ -126,7 +130,7 @@
         :placeholder="$t('user.onboarding.repeatPassword')"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password),
+          validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         outlined
@@ -196,13 +200,14 @@ import Validations from "@/mixins/validations";
 import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
 import ResponseAlert from "@/components/ResponseAlert";
+import { debounce } from "lodash";
 
 export default {
   name: "AuthRegisterCompany",
   mixins: [Validations],
   components: {
     JonderTitle,
-    ResponseAlert,
+    ResponseAlert
   },
   data() {
     return {
@@ -215,36 +220,60 @@ export default {
         phone: "+49",
         company: "",
         role: "company",
-        accept_policy: false,
+        accept_policy: false
       },
+      suggestedCompanies: [],
       formResponse: {},
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false,
+      showPassConfirm: false
     };
   },
   methods: {
     ...mapActions({
-      register: "auth/registerCompany",
+      register: "auth/registerCompany"
     }),
 
     async handleRegister() {
-      this.formResponse = {};
       this.isLoading = true;
-      this.register(this.formData)
-        .then(() => {
-          this.$router.replace({ name: "RegisterVerifyEmail" });
-        })
-        .catch((err) => {
-          this.formResponse = err.data;
-          this.$emit("changeImage");
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+      // Keep setTimeout here and don't ask why
+      setTimeout(() => {
+        this.formResponse = {};
+        this.register(this.formData)
+          .then(() => {
+            this.$router.replace({ name: "RegisterVerifyEmail" });
+          })
+          .catch(err => {
+            this.formResponse = err.data;
+            this.$emit("changeImage");
+          })
+          .finally(() => {
+            this.isLoading = false;
+          });
+      }, 100);
     },
-  },
+
+    fetchCompanySuggestions: debounce(function(val) {
+      if (!val) {
+        this.suggestedCompanies = [];
+      }
+
+      if (val == this.formData.company) {
+        return;
+      }
+
+      this.suggestedCompanies = [];
+
+      if (val && val.length > 2) {
+        this.$store.dispatch("northdata/universalSearch", val).then(resp => {
+          this.suggestedCompanies = resp.data.results?.map(
+            r => r.company.name.name
+          );
+        });
+      }
+    }, 500)
+  }
 };
 </script>
 

@@ -77,5 +77,9 @@ export default {
   .v-slider__thumb {
     border: 3px solid #0253b3 !important;
   }
+  .v-slider__track-container,
+  .v-slider__thumb {
+    cursor: pointer;
+  }
 }
 </style>

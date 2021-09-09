@@ -2,18 +2,15 @@
   <v-sheet class="px-12">
     <v-card class="d-flex align-center justify-center" flat tile>
       <v-sheet>
-        <v-sheet class="d-flex align-center justify-center mb-16"
-          ><v-icon color="primary" size="100"
-            >mdi-check-circle-outline</v-icon
-          ></v-sheet
-        >
+        <v-sheet class="d-flex align-center justify-center mb-16">
+          <v-img class="checked" src="../../../assets/checked.svg"></v-img>
+        </v-sheet>
 
         <p class="text-center font-weight-bold mb-7 primary--text text-h6">
-          Du hast dich soeben Erfolgreich registriert!
+          {{ $t("company.register.successMessageJobseeker") }}
         </p>
         <p class="text-center text-body-2">
-          Leichter geht Karriere wirklich nicht. Dein Profil wird nun
-          Unternehmen angezeigt!
+          {{ $t("company.register.successMessageJobseekerSub") }}
         </p>
         <v-btn
           type="submit"
@@ -22,7 +19,7 @@
           class="full-w font-weight-medium dark-blue"
           :to="{ name: 'Dashboard' }"
         >
-          Abschließen
+          {{ $t("user.onboarding.finish") }}
         </v-btn>
       </v-sheet>
     </v-card>
@@ -33,14 +30,14 @@
 export default {
   props: {
     nextScreen: Function,
-    formLoading: Boolean
+    formLoading: Boolean,
   },
-  name: "StepSucces"
+  name: "StepSucces",
 };
 </script>
 
 <style scoped>
-.mb {
-  margin-bottom: 4.4rem;
+.checked {
+  max-width: 6rem;
 }
 </style>
