@@ -37,6 +37,8 @@
       "uploadPhoto": "Click to upload photo",
       "successMessageEmployer": "You have successfully registred your company",
       "successMessageEmployerSub": "You have successfully registered your company. Start the Jonder personnel search today and contact your first candidates!",
+      "successMessageJobseeker": "You have just successfully registered!",
+      "successMessageJobseekerSub": "Career really doesn't get any easier. Your profile is now displayed to companies!",
       "uploadPhotoEmployer": "Click to upload photo",
       "giveUsDetails": "Give simple details about your company.",
       "aboutCompanyText": "About company",
@@ -129,7 +131,7 @@
       "general": "General",
       "details": "Details",
       "contact": "Contact",
-      "changePersonalInfo": "Change persolan info",
+      "changePersonalInfo": "Change personal info",
       "billingInvoices": "Billing & Invoices",
       "editPaymentMethod": "Edit payment method"
     },
@@ -304,7 +306,8 @@
       "description": "Description",
       "companyName": "Company Name",
       "repeatPassword": "Repeat Password",
-      "add": "Add"
+      "add": "Add",
+      "finish": "Finish"
     }
   },
   "employmentTypes": {
