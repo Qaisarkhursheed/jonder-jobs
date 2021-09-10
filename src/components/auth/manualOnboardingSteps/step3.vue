@@ -41,7 +41,7 @@
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.address_to_work = e)"
+        @select="e => (value.address_to_work = e)"
         :required="true"
       />
 
@@ -75,13 +75,13 @@
       <div class="profile-label mb-3 mt-6">
         {{ $t("user.onboarding.monthlySalary") }}
       </div>
-      <SliderInput
-        :value="value.monthly_salary"
+      <SliderRangeInput
+        :value="getMonthlySalary"
         suffix="k"
         min="1"
         max="12"
         step="0.5"
-        @change="(val) => (value.monthly_salary = val)"
+        @change="changeMonthlySalary"
       />
 
       <v-row class="mt-5">
@@ -114,34 +114,39 @@
 import types from "@/types";
 import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import Calendar from "@/components/Calendar";
-import SliderInput from "@/components/SliderInput";
+import SliderRangeInput from "../../SliderRangeInput";
 
 export default {
   name: "Step3",
 
   components: {
+    SliderRangeInput,
     Calendar,
-    GooglePlacesAutocomplete,
-    SliderInput,
+    GooglePlacesAutocomplete
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
       formValid: false,
-      dontKnowWhenToStart: false,
+      dontKnowWhenToStart: false
     };
   },
   computed: {
     types() {
       return types;
     },
+    getMonthlySalary() {
+      const min = this.value.monthly_salary?.min || "1";
+      const max = this.value.monthly_salary?.max || "12";
+      return [min, max];
+    }
   },
   methods: {
     handleNext() {
@@ -150,7 +155,13 @@ export default {
       }
       this.nextScreen();
     },
-  },
+    changeMonthlySalary(event) {
+      this.value.monthly_salary = {
+        min: event[0].toString(),
+        max: event[1].toString()
+      };
+    }
+  }
 };
 </script>
 

@@ -160,6 +160,9 @@ export default {
       },
     };
   },
+  mounted() {
+    console.log(this.value);
+  },
   methods: {
     toggleModal(type) {
       this.modals[type].edit = false;

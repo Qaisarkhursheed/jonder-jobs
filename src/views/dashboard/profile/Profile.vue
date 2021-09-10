@@ -56,10 +56,14 @@
               mdi-camera
             </v-icon>
           </div>
-            <ImageUploadCropper 
-              :image="cropper.image"
-              @save="(img) => { newImage = img; }"
-            />
+          <ImageUploadCropper
+            :image="cropper.image"
+            @save="
+              img => {
+                newImage = img;
+              }
+            "
+          />
         </v-col>
         <v-col cols="6" class="text-right">
           <v-btn
@@ -289,13 +293,13 @@
           <div class="profile-label mb-2">
             {{ $t("user.profile.salaryRequirement") }} (€)
           </div>
-          <SliderInput
-            :value="formData.monthly_salary"
+          <SliderRangeInput
+            :value="getMonthlySalary"
             suffix="k"
             min="1"
             max="20"
             step="0.5"
-            @change="value => (formData.monthly_salary = value)"
+            @change="changeMonthlySalary"
           />
         </v-col>
       </v-row>
@@ -630,11 +634,13 @@ import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue"
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
+import SliderRangeInput from "../../../components/SliderRangeInput";
 
 export default {
   name: "Profile",
 
   components: {
+    SliderRangeInput,
     UserPlanDescription,
     UpgradePlanModal,
     CardActionableList,
@@ -660,7 +666,7 @@ export default {
       looking_for_employment_type: "",
       address_to_work: "",
       ready_for_work: "",
-      monthly_salary: "",
+      monthly_salary: null,
       working_experience: "",
       why_jonder: "",
       cv: null,
@@ -744,6 +750,11 @@ export default {
     },
     plansData() {
       return this.plans("jobseeker_paln");
+    },
+    getMonthlySalary() {
+      const min = this.formData.monthly_salary.min;
+      const max = this.formData.monthly_salary.max;
+      return [min, max];
     }
   },
   methods: {
@@ -840,6 +851,12 @@ export default {
       this.toggleModal(type);
       this.modals[type].edit = item;
     },
+    changeMonthlySalary(event) {
+      this.formData.monthly_salary = {
+        min: event[0].toString(),
+        max: event[1].toString()
+      };
+    }
   },
   watch: {
     user(newVal) {

@@ -193,7 +193,7 @@ export default {
       looking_for_employment_type: "",
       address_to_work: "",
       ready_for_work: "",
-      monthly_salary: "",
+      monthly_salary: null,
       working_experience: "",
       cv: "",
       resume: null,
