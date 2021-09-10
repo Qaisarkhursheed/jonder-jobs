@@ -99,7 +99,7 @@
             :href="googleUrl"
           >
             <v-icon left>mdi-google</v-icon>
-            {{ $t("company.register.continueWithGoogleCompany") }}
+            {{ $t("company.register.continueWithGoogle") }}
           </v-btn>
 
           <v-btn
