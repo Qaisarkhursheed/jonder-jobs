@@ -41,6 +41,14 @@ import CompanyMessageTemplates from "@/views/company/MessageTemplates";
 import Qualifications from "@/views/dashboard/profile/Qualifications";
 import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 
+// Admin
+import AdminLayout from "@/layouts/AdminLayout";
+import AdminDashboard from "@/views/admin/Dashboard";
+import AdminCompanies from "@/views/admin/Companies";
+import AdminUsers from "@/views/admin/Users";
+import AdminCMS from "@/views/admin/CMS";
+
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -283,6 +291,35 @@ const routes = [
     ]
   },
   {
+    path: "/admin",
+    component: AdminLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: "dashboard",
+        name: "AdminDashboard",
+        component: AdminDashboard,
+      },
+      {
+        path: "company-management",
+        name: "AdminCompanies",
+        component: AdminCompanies
+      },
+      {
+        path: "user-management",
+        name: "AdminUsers",
+        component: AdminUsers
+      },
+      {
+        path: "cms",
+        name: "AdminCMS",
+        component: AdminCMS
+      }
+    ]
+  },
+  {
     path: "/company-dashboard/settings",
     name: "CompanySettings",
     component: CompanySettings,
@@ -424,7 +461,10 @@ const getDashboardRoute = () => {
       return {
         name: "CompanySearch"
       };
-
+    case "Admin":
+      return {
+        name: "AdminDashboard"
+      };
     default:
       console.log("Err: Unsupported user role.");
       alert("Error");
@@ -437,6 +477,10 @@ const getDashboardRoute = () => {
 router.beforeEach(async (to, from, next) => {
   const isAuth = store.getters["auth/authenticated"];
   const user = store.getters["user/user"];
+  
+  // if(user.role == "Admin") {
+  //   router.replace({ name: "AdminDashboard" });
+  // }
 
   if (to.name == "Logout") {
     store.dispatch("auth/logout").finally(() => {
