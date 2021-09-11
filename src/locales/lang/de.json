@@ -35,7 +35,7 @@
       "continueWithFacebook": "Mit Facebook registrieren",
       "continueWithEmail": "Mit E-Mail registrieren",
       "uploadPhoto": "Profilbild hochladen",
-      "successMessageEmployer": "Sie haben Ihr Unternehmen erfolgreich registriert",
+      "successMessageEmployer": "Sie haben erfolgreich Ihr Unternehmen registriert                                                ",
       "successMessageEmployerSub": " Du hast dein Unternehmen erfolgreich registriert. Starte mit der Jonder Personalsuche noch heute und kontaktiere deine ersten Kandidaten!",
       "successMessageJobseeker": "Du hast dich soeben Erfolgreich registriert!",
       "successMessageJobseekerSub": " Leichter geht Karriere wirklich nicht. Dein Profil wird nun Unternehmen angezeigt!",
@@ -112,7 +112,7 @@
       "position": "Positionen",
       "saveSearch": "Suche speichern",
       "inviteHelp": "Laden Sie andere Nutzer ein, um nach potenziellen Mitarbeitern zu suchen",
-      "message": "Nachricht jetzt"
+      "message": "Nachricht senden"
     },
     "profile": {
       "email": "E-Mail Adresse",
@@ -285,10 +285,10 @@
       "fulltime": "Fulltime",
       "parttime": "Parttime",
       "monthlySalary": "Monatliche Netto Gehaltserwartung? (€)",
-      "tellAboutExperience": "Tell us about your experience",
-      "experienceInYears": "Profesional experience in Years",
-      "yourProfessionalExperience": "Your professional experience",
-      "yourEducation": "Your education",
+      "tellAboutExperience": "Erzähle uns von deinen Erfahrungen",
+      "experienceInYears": "Joberfahrung in Jahren",
+      "yourProfessionalExperience": "Deine Berufserfahrung",
+      "yourEducation": "Deine Ausbildungen und Erfahrungen",
       "uploadDocuments": "Dokumente hochladen",
       "uploadCv": "UCV/Lebenslauf hochladen",
       "uploadQualifications": "Portfolio, Qualifikationen, Zertifikate oder sonstiges",
@@ -360,8 +360,8 @@
     "seeMore": "",
     "send": "Senden",
     "register": "Registrieren",
-    "login": "Loggen Sie",
-    "loginAccount": "Loggen Sie sich in Ihren Jonder Account ein",
+    "login": "Einloggen",
+    "loginAccount": "Einloggen sich in Ihren Jonder Account ein",
     "forgotPassowrd": "Passwort vergessen?",
     "dontHaveAccount": "Haben Sie kein Konto?",
     "areYouSure": "Sind Sie sicher?",
@@ -390,7 +390,8 @@
     "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen",
     "searchJobseekers": "Mitarbeiter finden",
     "searchJobseekersFound": "potentieller Mitarbeiter gefunden",
-    "createAccount": "Benutzerkonto erstellen",
-    "createAccountSub": "Sie sind nur noch wenige Schritte entfernt Ihre ersten potenziellen Mitarbeiter zu finden."
+    "createAccount": "Konto erstellen",
+    "createAccountSub": "Sie sind nur noch wenige Schritte entfernt Ihre ersten potenziellen Mitarbeiter zu finden.",
+    "createAccountSubCompany": "Du bist nur noch wenige Schritte entfernt die Simplizität im finden von Jobs kennenzulernen."
   }
 }
