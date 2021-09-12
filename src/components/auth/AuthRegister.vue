@@ -10,7 +10,7 @@
     </jonder-title>
 
     <div class="text-center mb-2 text-decoration text-xl">
-      {{ $t("general.createAccountSubCompany") }}
+      {{ $t("createAccountSubCompany") }}
     </div>
 
     <v-form
