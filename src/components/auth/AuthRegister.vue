@@ -10,8 +10,7 @@
     </jonder-title>
 
     <div class="text-center mb-2 text-decoration text-xl">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
-      felis eu libero.
+      {{ $t("general.createAccountSubCompany") }}
     </div>
 
     <v-form
