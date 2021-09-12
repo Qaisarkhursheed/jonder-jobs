@@ -15,7 +15,7 @@
           class="full-w mt-5 font-weight-medium dark-blue"
           @click="cropImage"
         >
-          {{ $t("general.save") }}
+          {{ $t("save") }}
         </v-btn>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default {
       type: [String, Object, File, Image, Array, FileList],
     },
   },
-  
+
   components: {
     Cropper,
     Stencil

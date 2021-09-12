@@ -4,11 +4,11 @@
       <img :src="require('@/assets/svg/email_sent.svg')" width="230" />
 
       <h1 class="mt-5" style="font-size: 24px">
-        {{ $t("company.register.confirmYourAccount") }}
+        {{ $t("confirmYourAccount") }}
       </h1>
 
       <p class="mt-2">
-        {{ $t("company.register.confirmYourAccountSub") }}
+        {{ $t("confirmYourAccountSub") }}
       </p>
 
       <div class="reset-email-btn mb-2">
@@ -20,12 +20,12 @@
           large
           @click="verificationEmail()"
         >
-          {{ $t("company.profile.resendEmail") }}
+          {{ $t("resendEmail") }}
         </v-btn>
       </div>
       <router-link :to="{ name: 'Login' }">
         <v-btn type="button" color="primary" height="55">
-          {{ $t("company.register.backToLogin") }}
+          {{ $t("backToLogin") }}
         </v-btn>
       </router-link>
     </div>

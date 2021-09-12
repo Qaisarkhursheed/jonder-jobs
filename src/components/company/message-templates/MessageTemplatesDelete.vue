@@ -7,19 +7,19 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn height="48" v-bind="attrs" v-on="on">
-        {{ $t("general.delete") }}
+        {{ $t("delete") }}
       </v-btn>
     </template>
 
     <v-card class="pa-7" style="border-radius: 16px;">
       <h1 class="mb-4 text-center" style="font-size: 28px;">
-        {{ $t("general.areYouSure") }}
+        {{ $t("areYouSure") }}
       </h1>
 
       <v-form ref="form" action="#" @submit.prevent="submit" v-model="isValid">
         <p class="text-center">
           {{
-            $t("company.messageTemplates.deleteText", {
+            $t("messageTemplatesDeleteText", {
               name: messageTemplate.title
             })
           }}
@@ -36,7 +36,7 @@
               $refs.form.reset();
             "
           >
-            {{ $t("general.cancelOption") }}
+            {{ $t("cancelOption") }}
           </v-btn>
           <v-btn
             type="submit"
@@ -46,7 +46,7 @@
             class="ml-3 font-weight-medium "
             :disabled="!isValid"
           >
-            {{ $t("general.confirmOption") }}
+            {{ $t("confirmOption") }}
           </v-btn>
         </div>
       </v-form>

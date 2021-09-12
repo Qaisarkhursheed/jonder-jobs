@@ -30,7 +30,7 @@
     </div>
     <div class="section mb-6 mt-5">
       <label class="section-label">
-        {{ $t("user.onboarding.companyName") }}
+        {{ $t("companyName") }}
       </label>
       <v-text-field
         class="rounded-lg"
@@ -49,7 +49,7 @@
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        {{ $t("company.employer.aboutCompany") }}
+        {{ $t("aboutCompany") }}
       </label>
       <v-textarea
         class="rounded-lg"
@@ -72,7 +72,7 @@
         class="font-weight-medium main-accept-btn dark-blue"
         @click="save"
       >
-        {{ $t("general.saveChanges") }}
+        {{ $t("saveChanges") }}
       </v-btn>
     </div>
   </div>

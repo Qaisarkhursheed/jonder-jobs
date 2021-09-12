@@ -5,7 +5,7 @@
                 pt-6 pb-6 pl-6 pr-3"
     >
       <div class="label">
-        {{ type }}
+        {{ $t(type) }}
       </div>
       <div class="count d-flex justify-center align-center">
         {{ selection.length }}

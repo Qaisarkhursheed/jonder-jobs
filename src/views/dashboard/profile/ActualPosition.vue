@@ -2,21 +2,21 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>{{ $t("user.profile.editProfileHeading") }}</h4>
+        <h4>{{ $t("editProfileHeading") }}</h4>
       </v-col>
       <!-- <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >{{ $t('general.save') }}
+          >{{ $t('save') }}
         </v-btn>
       </v-col> -->
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.currentWork") }}</label>
+        <label>{{ $t("currentWork") }}</label>
         <v-text-field
           dense
-          :label="$t('user.profile.currentWork')"
+          :label="$t('currentWork')"
           :rules="rules"
           type="text"
           outlined
@@ -31,11 +31,11 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.currentPosition") }}</label>
+        <label>{{ $t("currentPosition") }}</label>
         <v-select
           outlined
           dense
-          :label="$t('user.profile.currentPosition')"
+          :label="$t('currentPosition')"
           :rules="rules"
           :items="currentPosition"
           background-color="white"
@@ -46,12 +46,12 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.whichBranch") }}</label>
+        <label>{{ $t("whichBranch") }}</label>
         <v-select
           outlined
           dense
           :rules="rules"
-          :label="$t('user.profile.whichBranch')"
+          :label="$t('whichBranch')"
           :items="branches"
           v-model="formData.branche"
         ></v-select>
@@ -60,10 +60,10 @@
 
     <v-row>
       <v-col cols="6">
-        <label>{{ $t("user.profile.workingEnvironment") }}</label>
+        <label>{{ $t("workingEnvironment") }}</label>
         <v-text-field
           dense
-          :label="$t('user.profile.workingEnvironment')"
+          :label="$t('workingEnvironment')"
           type="text"
           outlined
           solo
@@ -74,7 +74,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label>{{ $t("user.profile.whatDescribesYou") }}</label>
+        <label>{{ $t("whatDescribesYou") }}</label>
 
         <v-row>
           <v-col>
@@ -177,7 +177,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" outlined v-bind="attrs" v-on="on" block>
-                {{ $t("general.cancel") }}
+                {{ $t("cancel") }}
               </v-btn>
             </template>
             <v-card height="280">
@@ -195,7 +195,7 @@
                 <v-row>
                   <v-col md="6" class="text-center">
                     <v-btn text @click="dialog = false">
-                      {{ $t("general.cancel") }}
+                      {{ $t("cancel") }}
                     </v-btn></v-col
                   >
                   <v-col md="6" class="text-center">
@@ -205,7 +205,7 @@
                       @click="dialog = false"
                       class="font-weight-bold"
                     >
-                      {{ $t("general.save") }}
+                      {{ $t("save") }}
                     </v-btn></v-col
                   >
                 </v-row>
@@ -217,7 +217,7 @@
       <v-col md="6">
         <v-card>
           <v-btn block color="primary" @click="handleUpdate">{{
-            $t("general.confirm")
+            $t("confirm")
           }}</v-btn></v-card
         >
       </v-col>

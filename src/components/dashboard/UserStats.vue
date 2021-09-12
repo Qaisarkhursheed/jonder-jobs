@@ -2,7 +2,7 @@
   <v-row class="dashboard-user-stats">
     <v-col cols="6">
       <h5 class="text-color-primary-blue-dark mb-4">
-        {{ $t('user.dashboard.yourStatistics') }}
+        {{ $t('yourStatistics') }}
       </h5>
       <div class="user-info d-flex flex-row align-center">
         <v-card
@@ -15,7 +15,7 @@
             </h2></v-card-title
           >
           <v-card-text>
-            {{ $t('user.dashboard.searchAppearances') }}
+            {{ $t('searchAppearances') }}
           </v-card-text>
         </v-card>
         <v-card
@@ -28,7 +28,7 @@
             </h2></v-card-title
           >
           <v-card-text>
-            {{ $t('user.dashboard.messagedYou') }}
+            {{ $t('messagedYou') }}
           </v-card-text>
         </v-card>
         <v-card
@@ -41,7 +41,7 @@
             </h2></v-card-title
           >
           <v-card-text>
-            {{ $t('user.dashboard.whoViewedProfile') }}
+            {{ $t('whoViewedProfile') }}
           </v-card-text>
         </v-card>
       </div>
@@ -65,7 +65,7 @@
             }}</span>
 
             <a class="flex-grow-0 flex-shrink-0">
-              {{ $t('user.dashboard.seeMore') }}
+              {{ $t('seeMore') }}
             </a>
           </v-card-text>
         </v-card>
@@ -81,7 +81,7 @@
       >
         <v-card-title>
           <h5 class="text-color-primary-blue-dark">
-            {{ $t('user.dashboard.beFeaturedOnSearch') }}
+            {{ $t('beFeaturedOnSearch') }}
           </h5>
         </v-card-title>
         <v-card-text
@@ -94,19 +94,19 @@
             <v-row>
               <v-col cols="6">
                 <button class="button dark-blue outline full-w pt-2 pb-2">
-                  {{ $t('user.dashboard.forOneDay') }}
+                  {{ $t('forOneDay') }}
                 </button>
               </v-col>
               <v-col cols="6">
                 <button class="button dark-blue fill full-w pt-2 pb-2">
-                  {{ $t('user.dashboard.forTwoDays') }}
+                  {{ $t('forTwoDays') }}
                 </button>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
                 <button class="button dark-blue outline full-w pt-2 pb-2">
-                  {{ $t('user.dashboard.buy') }}
+                  {{ $t('buy') }}
                 </button>
               </v-col>
             </v-row>

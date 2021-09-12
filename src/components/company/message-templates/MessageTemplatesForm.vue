@@ -13,23 +13,23 @@
         v-bind="attrs"
         v-on="on"
       >
-        {{ $t("general.createNew") }}
+        {{ $t("createNew") }}
       </v-btn>
     </template>
 
     <v-card class="pa-7" style="border-radius: 16px;">
       <h1 class="mb-4" style="font-size: 28px;">
         <template v-if="isEdit">
-          {{ $t("company.messageTemplates.editHeading") }}
+          {{ $t("editHeading") }}
         </template>
         <template v-else>
-          {{ $t("company.messageTemplates.createHeading") }}
+          {{ $t("createHeading") }}
         </template>
       </h1>
 
       <v-form ref="form" action="#" @submit.prevent="submit" v-model="isValid">
         <label class="profile-label">
-          {{ $t("company.messageTemplates.templateName") }}
+          {{ $t("templateName") }}
         </label>
         <v-text-field
           v-model="formData.title"
@@ -42,7 +42,7 @@
         ></v-text-field>
 
         <label class="profile-label">
-          {{ $t("company.messageTemplates.templateContent") }}
+          {{ $t("templateContent") }}
         </label>
         <v-textarea
           v-model="formData.text"
@@ -67,7 +67,7 @@
 
           <div>
             <v-btn height="48" @click="close">
-              {{ $t("general.cancel") }}
+              {{ $t("cancel") }}
             </v-btn>
 
             <v-btn
@@ -78,7 +78,7 @@
               color="primary"
               height="48"
             >
-              {{ $t("general.save") }}
+              {{ $t("save") }}
             </v-btn>
           </div>
         </div>

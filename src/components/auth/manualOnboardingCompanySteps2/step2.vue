@@ -1,19 +1,19 @@
 <template>
   <div class="mo-step-2">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      {{ $t("company.register.companyinfo") }}
+      {{ $t("companyInfo") }}
     </h1>
 
     <v-form v-model="formValid">
       <label class="profile-label">
-        {{ $t("company.register.industry") }}
+        {{ $t("industry") }}
         <span style="color: red;">*</span>
       </label>
       <!-- <v-select
         v-model="value.branche"
         :items="branches"
         :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('choose')"
         outlined
       ></v-select> -->
       <v-autocomplete
@@ -24,12 +24,20 @@
         outlined
         flat
         hide-no-data
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('choose')"
       >
+        <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+        <template v-slot:item="{ item }">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
       </v-autocomplete>
 
       <label class="profile-label">
-        {{ $t("company.register.numberOfEmployees") }}
+        {{ $t("numberOfEmployees") }}
         <span style="color: red;">*</span>
       </label>
       <v-select
@@ -37,13 +45,21 @@
         v-model="value.company_employees"
         :items="types.EMPLOYEE_NUMBER"
         :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('choose')"
         outlined
       >
+        <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+        <template v-slot:item="{ item }">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
       </v-select>
 
       <label class="profile-label">
-        {{ $t("company.register.dateOfEstablishment") }}
+        {{ $t("dateOfEstablishment") }}
         <span style="color: red;">*</span>
       </label>
       <v-text-field
@@ -62,7 +78,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -73,7 +89,7 @@
             height="55"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>

@@ -17,7 +17,7 @@
 
       <v-form v-model="formValid" class="auth-form" @submit.prevent="submit">
         <label class="profile-label">{{
-          $t("user.profile.newPassword")
+          $t("newPassword")
         }}</label>
         <v-text-field
           v-model="formData.password"

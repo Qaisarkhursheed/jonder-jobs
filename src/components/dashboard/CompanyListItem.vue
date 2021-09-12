@@ -24,15 +24,15 @@
       <ul>
         <li>
           <v-icon>mdi-shape</v-icon>
-          {{ $t('user.dashboard.branch') }}: <strong>{{ company.branche }}</strong>
+          {{ $t('branch') }}: <strong>{{ company.branche }}</strong>
         </li>
         <li>
           <v-icon>mdi-domain</v-icon>
-          {{ $t('user.dashboard.employee') }}: <strong>{{ company.company_employees }}</strong>
+          {{ $t('employee') }}: <strong>{{ company.company_employees }}</strong>
         </li>
         <li>
           <v-icon>mdi-school</v-icon>
-          {{ $t('user.dashboard.education') }}: <strong>{{ company.department }}</strong>
+          {{ $t('education') }}: <strong>{{ company.department }}</strong>
         </li>
       </ul>
     </div>
@@ -40,7 +40,7 @@
     <div class="pa-4 mt-4 border-top-gray">{{ company.about_company }}</div>
 
     <v-btn @click="sendMessage" block tile color="light-blue">
-      {{ $t('user.dashboard.message') }}
+      {{ $t('message') }}
     </v-btn>
   </v-card>
 </template>

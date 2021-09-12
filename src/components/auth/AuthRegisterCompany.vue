@@ -1,12 +1,12 @@
 <template>
   <div class="auth-register-wrap align-center">
     <jonder-title>
-      {{ $t("general.createAccount") }}
+      {{ $t("createAccount") }}
     </jonder-title>
 
     <v-row class="mb-1">
       <v-col cols="12">
-        {{ $t("general.createAccountSub") }}
+        {{ $t("createAccountSub") }}
       </v-col>
     </v-row>
 
@@ -20,7 +20,7 @@
       <!-- First name -->
       <v-text-field
         dense
-        :placeholder="$t('general.name')"
+        :placeholder="$t('name')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         hide-details
@@ -35,7 +35,7 @@
       <!-- Last name -->
       <v-text-field
         dense
-        :placeholder="$t('general.surname')"
+        :placeholder="$t('surname')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         hide-details
@@ -50,7 +50,7 @@
       <!-- Company name -->
       <v-combobox
         dense
-        :placeholder="$t('user.onboarding.companyName')"
+        :placeholder="$t('companyName')"
         :rules="[validations.required, validations.min.string(3)]"
         :items="suggestedCompanies"
         :loading="$store.getters['northdata/loadingSearch']"
@@ -69,7 +69,7 @@
       <!-- Email -->
       <v-text-field
         dense
-        :placeholder="$t('company.profile.email')"
+        :placeholder="$t('emailAddress')"
         :rules="[validations.required, validations.email]"
         type="email"
         hide-details
@@ -99,7 +99,7 @@
       <!-- Password -->
       <v-text-field
         dense
-        :placeholder="$t('general.password')"
+        :placeholder="$t('password')"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
         hide-details=""
@@ -127,7 +127,7 @@
       <!-- Password confirmation -->
       <v-text-field
         dense
-        :placeholder="$t('user.onboarding.repeatPassword')"
+        :placeholder="$t('repeatPassword')"
         :rules="[
           validations.required,
           validations.same('Passwort', formData.password)
@@ -167,7 +167,7 @@
         :rules="[validations.required]"
         class="ma-0"
         color="#333"
-        :label="$t('general.agreePolicy')"
+        :label="$t('agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
 
@@ -185,10 +185,10 @@
 
       <!-- Login link -->
       <div class="login-caption mt-5 text-center">
-        {{ $t("company.register.areYouMember") }}
+        {{ $t("areYouMember") }}
 
         <router-link to="/login" class="login-caption-bold">
-          {{ $t("company.register.loginHere") }}
+          {{ $t("loginHere") }}
         </router-link>
       </div>
     </v-form>

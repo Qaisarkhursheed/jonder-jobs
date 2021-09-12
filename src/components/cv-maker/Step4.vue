@@ -156,7 +156,7 @@
           @click="$emit('back')"
           class="font-weight-bold"
         >
-          {{ $t("user.onboarding.back") }}
+          {{ $t("back") }}
         </v-btn>
       </v-col>
       <v-col cols="4"></v-col>

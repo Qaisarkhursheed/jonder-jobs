@@ -7,10 +7,10 @@
         ></v-sheet>
 
         <p class="text-center font-weight-bold mb-7 primary--text text-h6">
-          {{ $t("company.register.successMessageEmployer") }}
+          {{ $t("successMessageEmployer") }}
         </p>
         <p class="text-center text-body-2">
-          {{ $t("company.register.successMessageEmployerSub") }}
+          {{ $t("successMessageEmployerSub") }}
         </p>
         <v-btn
           type="submit"
@@ -19,7 +19,7 @@
           class="full-w font-weight-medium dark-blue"
           :to="{ name: 'CompanySearch' }"
         >
-          {{ $t("user.onboarding.finish") }}
+          {{ $t("finish") }}
         </v-btn>
       </v-sheet>
     </v-card>

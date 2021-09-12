@@ -13,22 +13,44 @@
         hide-no-data
         :hide-details="true"
         placeholder="Enter industry "
-      ></v-autocomplete>
+      >
+        <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
+        <template v-slot:item="{ item }">
+          <v-list-item-action>
+            <v-simple-checkbox v-ripple="false" @input="toggleValues($event, item)" :value="form.branche.indexOf(item) >= 0">
+            </v-simple-checkbox>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
+      </v-autocomplete>
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        {{ $t("company.employer.numberOfEmployees") }}
+        {{ $t("numberOfEmployees") }}
       </label>
       <v-select
         v-model="form.company_employees"
         :items="types.EMPLOYEE_NUMBER"
         :hide-details="true"
         outlined
-      ></v-select>
+      >
+        <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+        <template v-slot:item="{ item }">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
+      </v-select>
     </div>
     <div class="section mb-6">
       <label class="section-label">
-        {{ $t("company.employer.foundingYear") }}
+        {{ $t("foundingYear") }}
       </label>
       <v-text-field v-model="form.establishment_date" type="number" outlined>
       </v-text-field>
@@ -39,7 +61,7 @@
         class="font-weight-medium main-accept-btn dark-blue"
         @click="save"
       >
-        {{ $t("general.saveChanges") }}
+        {{ $t("saveChanges") }}
       </v-btn>
     </div>
   </div>
@@ -81,6 +103,14 @@ export default {
         ...this.form,
       });
     },
+    toggleValues(event, name) {
+      const index = this.form.branche.indexOf(name);
+      if (index < 0) {
+        this.form.branche.push(name);
+      } else {
+        this.form.branche.splice(index, 1);
+      }
+    }
   },
   computed: {
     types() {

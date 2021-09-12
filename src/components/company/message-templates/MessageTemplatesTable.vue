@@ -42,17 +42,17 @@ export default {
       },
       headers: [
         {
-          text: this.$t("company.messageTemplates.templateName"),
+          text: this.$t("templateName"),
           value: "title",
           width: "30%"
         },
         {
-          text: this.$t("company.messageTemplates.templateContent"),
+          text: this.$t("templateContent"),
           value: "text",
           width: "50%"
         },
         {
-          text: this.$t("general.createdAt"),
+          text: this.$t("createdAt"),
           value: "created_at",
           width: "20%"
         }

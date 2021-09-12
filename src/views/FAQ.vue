@@ -19,7 +19,7 @@
             to="/register"
             class="txt-link text-color-primary-blue-dark"
           >
-            {{ $t("general.register") }}
+            {{ $t("register") }}
           </router-link>
           <router-link to="/login" class="button dark-blue fill"
             >Log in</router-link
@@ -97,7 +97,7 @@
               to="/register"
               class="txt-link text-color-primary-blue-dark"
             >
-              {{ $t("general.register") }}
+              {{ $t("register") }}
             </router-link>
             <router-link to="/login" class="button dark-blue fill"
               >Log in</router-link

@@ -11,7 +11,7 @@
   >
     <v-card flat class="rounded-lg wrap onboarding-dialog">
       <p class="text-left font-weight-bold mb-3 font-size-16 header mb-5">
-        {{ $t("user.onboarding.addEducation") }}
+        {{ $t("addEducation") }}
       </p>
 
       <v-form v-model="formValid" @submit.prevent="save">
@@ -19,13 +19,13 @@
           <v-col cols="12" md="6">
             <v-row>
               <v-col>
-                <label>{{ $t("user.onboarding.university") }}</label>
+                <label>{{ $t("university") }}</label>
                 <v-text-field
                   v-model="form.university_name"
                   :rules="[validations.required]"
                   type="text"
                   outlined
-                  :placeholder="$t('user.onboarding.enter')"
+                  :placeholder="$t('enter')"
                 >
                 </v-text-field>
               </v-col>
@@ -33,7 +33,7 @@
 
             <v-row>
               <v-col cols="12" sm="6">
-                <label>{{ $t("user.onboarding.startDate") }}</label>
+                <label>{{ $t("startDate") }}</label>
                 <Calendar
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
@@ -41,7 +41,7 @@
                 />
               </v-col>
               <v-col cols="12" sm="6" v-if="!form.study_here">
-                <label>{{ $t("user.onboarding.endDate") }}</label>
+                <label>{{ $t("endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
                   :value="form.end_time"
@@ -55,13 +55,13 @@
           <v-col cols="12" md="6">
             <v-row>
               <v-col>
-                <label>{{ $t("user.onboarding.degreeFieldStudy") }}</label>
+                <label>{{ $t("degreeFieldStudy") }}</label>
                 <v-text-field
                   v-model="form.study"
                   :rules="[validations.required]"
                   type="text"
                   outlined
-                  :placeholder="$t('user.onboarding.enter')"
+                  :placeholder="$t('enter')"
                   background-color="#fff"
                 >
                 </v-text-field>
@@ -94,7 +94,7 @@
                   color="#fff"
                   light
                 >
-                  {{ $t("general.cancel") }}
+                  {{ $t("cancel") }}
                 </v-btn>
               </v-col>
               <v-col cols="6">
@@ -106,7 +106,7 @@
                   height="58"
                   class="full-w mt-5 font-weight-medium dark-blue"
                 >
-                  {{ $t("general.save") }}
+                  {{ $t("save") }}
                 </v-btn>
               </v-col>
             </v-row>

@@ -11,7 +11,7 @@
   >
     <v-card flat class="rounded-lg wrap onboarding-dialog">
       <p class="text-left font-weight-bold mb-5 font-size-16 header">
-        {{ $t("user.onboarding.addExperience") }}
+        {{ $t("addExperience") }}
       </p>
 
       <v-form v-model="formValid" @submit.prevent="save">
@@ -20,7 +20,7 @@
             <v-row>
               <v-col>
                 <label class="font-weight-medium">
-                  {{ $t("user.onboarding.company") }}
+                  {{ $t("company") }}
                 </label>
                 <v-combobox
                   v-model="form.company_name"
@@ -28,7 +28,7 @@
                   :items="suggestedCompanies"
                   :loading="$store.getters['northdata/loadingSearch']"
                   :rules="[validations.required]"
-                  :placeholder="$t('user.onboarding.choose')"
+                  :placeholder="$t('choose')"
                   no-filter
                   class="hide-menu-icon"
                   type="text"
@@ -42,7 +42,7 @@
 
             <v-row>
               <v-col cols="12" sm="6" class="mt-1">
-                <label>{{ $t("user.onboarding.startDate") }}</label>
+                <label>{{ $t("startDate") }}</label>
                 <Calendar
                   @setDate="form.start_time = $event"
                   :value="form.start_time"
@@ -51,7 +51,7 @@
               </v-col>
 
               <v-col cols="12" sm="6" class="mt-1" v-if="!form.working_here">
-                <label>{{ $t("user.onboarding.endDate") }}</label>
+                <label>{{ $t("endDate") }}</label>
                 <Calendar
                   @setDate="form.end_time = $event"
                   :value="form.end_time"
@@ -65,7 +65,7 @@
           <v-col cols="12" md="6">
             <v-row>
               <v-col>
-                <label>{{ $t("user.onboarding.position") }}</label>
+                <label>{{ $t("position") }}</label>
                 <v-autocomplete
                   v-model="form.position"
                   :items="$store.getters['professions/items']"
@@ -73,21 +73,30 @@
                   outlined
                   flat
                   hide-no-data
-                  :placeholder="$t('user.onboarding.choose')"
+                  :placeholder="$t('choose')"
                 ></v-autocomplete>
               </v-col>
             </v-row>
 
             <v-row>
               <v-col>
-                <label>{{ $t("user.onboarding.type") }}</label>
+                <label>{{ $t("type") }}</label>
                 <v-select
                   v-model="form.employment_type"
-                  :placeholder="$t('user.onboarding.choose')"
+                  :placeholder="$t('choose')"
                   :items="types.EMPLOYEMENT_TYPE"
                   :rules="[validations.required]"
                   outlined
-                ></v-select>
+                >
+                  <template v-slot:selection="{ item }"> {{ $t(item.value) }}</template>
+                  <template v-slot:item="{ item }">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t(item.value) }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+                </v-select>
               </v-col>
             </v-row>
           </v-col>
@@ -105,14 +114,14 @@
 
         <v-row>
           <v-col cols="12">
-            <label>{{ $t("user.onboarding.description") }}</label>
+            <label>{{ $t("description") }}</label>
             <v-textarea
               v-model="form.description"
               :rules="[validations.required]"
               outlined
               name="input-7-4"
               height="140px"
-              :placeholder="$t('user.onboarding.enter')"
+              :placeholder="$t('enter')"
             ></v-textarea>
           </v-col>
         </v-row>
@@ -127,7 +136,7 @@
             class="mt-5 px-5"
             light
           >
-            {{ $t("general.cancel") }}
+            {{ $t("cancel") }}
           </v-btn>
           <v-btn
             :disabled="!formValid"
@@ -137,7 +146,7 @@
             height="58"
             class="px-10 ml-4 mt-5"
           >
-            {{ $t("general.save") }}
+            {{ $t("save") }}
           </v-btn>
         </div>
       </v-form>

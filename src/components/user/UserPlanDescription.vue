@@ -3,14 +3,14 @@
     <h3>{{ userPlan.name }}</h3>
     <div>
       {{ userPlan.price }}&euro; / {{ userPlan.days_valid }}
-      {{ $t("general.daysValid") }}
+      {{ $t("daysValid") }}
     </div>
     <div>
-      {{ $t("general.renewsOn") }}
+      {{ $t("renewsOn") }}
       {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
     </div>
     <div>
-      {{ $t("general.validUntil") }}
+      {{ $t("validUntil") }}
       {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
     </div>
     <div class="payment-info mt-6 pt-4" v-if="paymentInfo">
@@ -19,7 +19,7 @@
         v-if="$route.name !== 'CompanyPackagesPricing'"
         @click="$router.push({ name: 'CompanyPackagesPricing' })"
       >
-        {{ $t("general.changePackage") }}
+        {{ $t("changePackage") }}
       </span>
     </div>
   </div>

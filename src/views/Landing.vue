@@ -22,11 +22,12 @@
             to="/register"
             class="txt-link text-color-primary-blue-dark"
           >
-            {{ $t("general.register") }}
+            {{ $t("register") }}
           </router-link>
           <router-link to="/login" class="button dark-blue fill">
-            {{ $t("general.login") }}
+            {{ $t("login") }}
           </router-link>
+          <LanguageDropdown />
         </v-col>
       </v-row>
     </v-container>
@@ -194,10 +195,10 @@
               to="/register"
               class="txt-link text-color-primary-blue-dark"
             >
-              {{ $t("general.register") }}
+              {{ $t("register") }}
             </router-link>
             <router-link to="/login" class="button dark-blue fill">
-              {{ $t("general.login") }}
+              {{ $t("login") }}
             </router-link>
           </v-col>
         </v-row>
@@ -392,3 +393,9 @@
   }
 }
 </style>
+<script>
+import LanguageDropdown from '../components/LanguageDropdown';
+export default {
+  components: {LanguageDropdown}
+}
+</script>

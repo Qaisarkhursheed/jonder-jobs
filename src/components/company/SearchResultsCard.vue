@@ -35,7 +35,7 @@
               mdi-hexagon-multiple-outline
             </v-icon>
             <span class="label pr-2">
-              {{ $t("company.search.branch") }}
+              {{ $t("branch") }}
             </span>
           </v-col>
           <v-col cols="6" class="text-right">
@@ -49,7 +49,7 @@
               mdi-domain
             </v-icon>
             <span class="label pr-2">
-              {{ $t("company.search.graduation") }}
+              {{ $t("graduation") }}
             </span>
           </v-col>
           <v-col cols="6" class="text-right">
@@ -63,7 +63,7 @@
               mdi-school
             </v-icon>
             <span class="label pr-2">
-              {{ $t("company.search.education") }}
+              {{ $t("education") }}
             </span>
           </v-col>
           <v-col cols="6" class="text-right">

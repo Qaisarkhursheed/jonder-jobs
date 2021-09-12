@@ -26,6 +26,11 @@ html {
 .v-file-input.v-text-field--outlined .v-text-field__slot {
   cursor: pointer !important;
 }
+.v-input__slot {
+  .v-select__slot {
+    height: auto !important;
+  }
+}
 .options .upgrade-option > span {
   width: 100% !important;
 }

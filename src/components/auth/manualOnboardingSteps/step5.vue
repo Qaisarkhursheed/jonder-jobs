@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-3">
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.uploadDocuments") }}
+      {{ $t("uploadDocuments") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
@@ -21,7 +21,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -32,7 +32,7 @@
             height="55"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>
