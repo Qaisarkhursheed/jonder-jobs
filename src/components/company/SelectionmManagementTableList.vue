@@ -53,7 +53,7 @@
             </v-col>
 
             <v-col
-              cols="3"
+              cols="4"
               class="d-flex align-center"
               @click.stop
               v-if="!activeProfile"
@@ -65,7 +65,16 @@
                 dense
                 @change="updateJobseeker($event, item.id)"
                 outlined
-              ></v-select>
+              >
+                <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+                <template v-slot:item="{ item }">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ $t(item) }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </template>
+              </v-select>
             </v-col>
 
             <v-col

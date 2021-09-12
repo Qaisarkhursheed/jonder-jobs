@@ -11,7 +11,7 @@
 
         <v-list>
           <v-list-item @click="$router.replace({ name: 'Logout' })">
-            {{ $t("general.logout") }}
+            {{ $t("logout") }}
           </v-list-item>
         </v-list>
       </v-menu>

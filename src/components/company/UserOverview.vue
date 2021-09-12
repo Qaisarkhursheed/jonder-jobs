@@ -1,6 +1,7 @@
 <template>
   <CompanyPlans v-if="showUpgradePlans" />
-  <div v-else class="user-overview">
+  <div v-else
+       class="user-overview">
     <div class="heading d-flex mb-5" v-if="!calledFromList" @click="back">
       <v-icon size="25">
         mdi-arrow-left
@@ -8,7 +9,7 @@
       <span class="pl-4">Zurück zu den Suchergebnissen</span>
     </div>
     <div class="card-back"></div>
-    <v-card class="profile-info rounded-lg" flat>
+    <v-card class="profile-info rounded-lg" flat v-if="profile">
       <v-row class="card-header no-gutters pl-10 pr-10">
         <v-col cols="12" md="8" class="d-flex">
           <v-avatar color="primary" size="150" class="user-avatar">
@@ -42,7 +43,7 @@
             @click="startConversation"
             :loading="startChatLoading"
           >
-            {{ $t("company.search.message") }}
+            {{ $t("messageNow") }}
           </v-btn>
         </v-col>
       </v-row>

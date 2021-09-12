@@ -3,11 +3,11 @@
     <v-row>
       <v-col class="pl-4">
         <span class="text-color-primary-blue-dark">
-          {{ $t('user.dashboard.notepad') }}
+          {{ $t('notepad') }}
         </span>
         <router-link :to="{ path: 'notepad/new' }" append class="pull-right">
           <v-btn color="primary" class="pull-right" outlined small>
-            {{ $t('user.dashboard.new') }} +
+            {{ $t('new') }} +
           </v-btn>
         </router-link>
       </v-col>

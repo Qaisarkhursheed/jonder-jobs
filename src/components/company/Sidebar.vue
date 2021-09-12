@@ -17,31 +17,31 @@
 
         <router-link :to="{ name: 'CompanySearch' }">
           <v-icon>mdi-magnify</v-icon>
-          <span>{{ $t("company.employer.search") }}</span>
+          <span>{{ $t("jonderSearch") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanySelectionManagement' }">
           <v-icon>mdi-account-switch</v-icon>
-          <span>{{ $t("company.employer.selectionManagement") }}</span>
+          <span>{{ $t("selectionManagement") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyMessages' }">
           <v-icon>mdi-message</v-icon>
-          <span>{{ $t("company.employer.messages") }}</span>
+          <span>{{ $t("messages") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyMessageTemplates' }">
           <v-icon>mdi-message-bulleted</v-icon>
-          <span>{{ $t("company.messageTemplates.heading") }}</span>
+          <span>{{ $t("messageTemplates") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyTeamManagement' }">
           <v-icon>mdi-account-group</v-icon>
-          <span>{{ $t("company.employer.teamManagement") }}</span>
+          <span>{{ $t("teamManagement") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyPublicProfile' }">
           <v-icon>mdi-office-building</v-icon>
-          <span>{{ $t("company.employer.publicProfile") }}</span>
+          <span>{{ $t("publicCompanyProfile") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyPackagesPricing' }">
           <v-icon>mdi-currency-usd</v-icon>
-          <span>{{ $t("company.employer.packagesPricing") }}</span>
+          <span>{{ $t("packagesPricing") }}</span>
         </router-link>
       </nav>
       <footer-legal class="footer-impressum"></footer-legal>

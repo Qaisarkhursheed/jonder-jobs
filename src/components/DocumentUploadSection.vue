@@ -3,7 +3,7 @@
     <template v-if="!inputData">
       <v-file-input
         v-model="inputData"
-        :placeholder="$t(`user.onboarding.upload${type}`)"
+        :placeholder="$t(`upload${type}`)"
         multiple
         outlined
         color="#0253B3"

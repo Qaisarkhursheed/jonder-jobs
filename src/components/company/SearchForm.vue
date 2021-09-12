@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="heading-title mb-6">
-      {{ $t("company.search.headingTitle") }}
+      {{ $t("headingTitle") }}
     </div>
 
     <v-card class="search-form rounded-lg pa-8" flat>
       <v-row>
         <v-col cols="12" md="7">
           <label class="section-label">
-            {{ $t("company.search.position") }}
+            {{ $t("position") }}
           </label>
           <v-autocomplete
             v-model="formFields.job_position"
@@ -17,22 +17,31 @@
             clearable
             flat
             :hide-details="true"
-            :placeholder="$t('company.search.enterJobtitle')"
+            :placeholder="$t('enterJobtitle')"
           ></v-autocomplete>
         </v-col>
 
         <v-col cols="12" md="5">
           <label class="section-label">
-            {{ $t("company.search.employementType") }}
+            {{ $t("employementType") }}
           </label>
           <v-select
             v-model="formFields.employment_type"
             :items="types.EMPLOYEMENT_TYPE"
             hide-details
             clearable
-            :placeholder="$t('company.search.employementType')"
+            :placeholder="$t('employementType')"
             outlined
-          ></v-select>
+          >
+            <template v-slot:selection="{ item }"> {{ $t(item.value) }}</template>
+            <template v-slot:item="{ item }">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item.value) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-select>
         </v-col>
       </v-row>
 
@@ -40,7 +49,7 @@
         <v-row>
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.industryOfProfession") }}
+              {{ $t("industryOfProfession") }}
             </label>
             <v-autocomplete
               v-model="formFields.branche"
@@ -51,13 +60,22 @@
               flat
               hide-no-data
               :hide-details="true"
-              :placeholder="$t('company.search.enterIndustry')"
-            ></v-autocomplete>
+              :placeholder="$t('enterIndustry')"
+            >
+              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+              <template v-slot:item="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ $t(item) }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-autocomplete>
           </v-col>
 
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.schoolGraduation") }}
+              {{ $t("schoolGraduation") }}
             </label>
             <v-text-field
               v-model="formFields.school"
@@ -67,7 +85,7 @@
               type="text"
               outlined
               :hide-details="true"
-              :placeholder="$t('company.search.schoolGraduation')"
+              :placeholder="$t('schoolGraduation')"
               flat
               dense
               solo
@@ -78,23 +96,32 @@
 
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.educationStudy") }}
+              {{ $t("educationStudy") }}
             </label>
             <v-select
               v-model="formFields.education"
               :items="types.EDUCATION"
               clearable
               :hide-details="true"
-              :placeholder="$t('company.search.educationStudy')"
+              :placeholder="$t('educationStudy')"
               outlined
-            ></v-select>
+            >
+              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+              <template v-slot:item="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ $t(item) }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-select>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.salaryRange") }}
+              {{ $t("salaryRange") }}
             </label>
             <v-row class="no-gutters justify-space-between">
               <v-col cols="6" class="pr-2">
@@ -137,21 +164,21 @@
 
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.workExperience") }}
+              {{ $t("workExperience") }}
             </label>
             <v-select
               v-model="formFields.work_experience"
               :items="types.WORK_EXPERIENCE"
               :hide-details="true"
               clearable
-              :placeholder="$t('company.search.workExperience')"
+              :placeholder="$t('workExperience')"
               outlined
             ></v-select>
           </v-col>
 
           <v-col cols="12" md="4">
             <label class="section-label">
-              {{ $t("company.search.city") }}
+              {{ $t("city") }}
             </label>
             <GooglePlacesAutocomplete
               :value="formFields.city"
@@ -173,7 +200,7 @@
                   class="full-w mt-md-16 font-weight-medium white"
                   @click="searchSave"
                 >
-                  {{ $t("company.search.saveSearch") }}
+                  {{ $t("saveSearch") }}
                 </v-btn>
               </v-col>
             </v-row>
@@ -192,7 +219,7 @@
                   color="#fff"
                   @click="advancedSearch = !advancedSearch"
                 >
-                  {{ $t("company.search.advancedSearch") }}
+                  {{ $t("advancedSearch") }}
                 </v-btn>
               </v-col>
 
@@ -210,7 +237,7 @@
                   <template v-if="presearchCount != null">
                     {{ presearchCount }}
                   </template>
-                  {{ $t("company.search.findEmployee") }}
+                  {{ $t("findEmployee") }}
                 </v-btn>
               </v-col>
             </v-row>

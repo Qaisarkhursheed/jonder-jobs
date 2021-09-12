@@ -24,7 +24,7 @@
         class="pb-4 mb-4"
         style="font-size: 28px; border-bottom: 1px solid #E9E9E9"
       >
-        {{ $t("company.messageTemplates.heading") }}
+        {{ $t("messageTemplates") }}
       </h1>
 
       <v-row>
@@ -54,7 +54,7 @@
             v-model="isValid"
           >
             <label class="profile-label">
-              {{ $t("company.messageTemplates.templateName") }}
+              {{ $t("templateName") }}
             </label>
             <v-text-field
               v-model="selectedTemplate.title"
@@ -67,7 +67,7 @@
             ></v-text-field>
 
             <label class="profile-label">
-              {{ $t("company.messageTemplates.templateContent") }}
+              {{ $t("templateContent") }}
             </label>
             <v-textarea
               v-model="formData.text"
@@ -83,7 +83,7 @@
 
             <div class="d-flex justify-end">
               <v-btn height="48" @click="close">
-                {{ $t("general.cancel") }}
+                {{ $t("cancel") }}
               </v-btn>
 
               <v-btn
@@ -93,7 +93,7 @@
                 color="primary"
                 height="48"
               >
-                {{ $t("general.send") }}
+                {{ $t("send") }}
               </v-btn>
             </div>
           </v-form>

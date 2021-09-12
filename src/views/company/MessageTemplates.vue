@@ -3,10 +3,10 @@
     <v-row class="heading mb-5">
       <v-col cols="col">
         <div class="title">
-          {{ $t("company.messageTemplates.heading") }}
+          {{ $t("messageTemplates") }}
         </div>
         <div class="subtitle">
-          {{ $t("company.messageTemplates.subheading") }}
+          {{ $t("messageTemplatesSub") }}
         </div>
       </v-col>
       <v-col cols="auto">

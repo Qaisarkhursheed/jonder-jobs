@@ -35,20 +35,20 @@ export default {
   name: "GooglePlacesAutocomplete",
   props: {
     value: {
-      type: [String, Object],
+      type: [String, Object]
     },
     type: {
       type: String,
-      default: "(cities)",
+      default: "(cities)"
     },
     fullAddress: {
       type: Boolean,
-      default: false,
+      default: false
     },
     required: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
@@ -56,7 +56,7 @@ export default {
       entries: [],
       model: null,
       isLoading: false,
-      search: null,
+      search: null
     };
   },
 
@@ -67,18 +67,18 @@ export default {
       if (this.type == "geocode") {
         if (this.fullAddress) {
           this.model = {
-            description: this.value,
+            description: this.value
           };
         } else {
           this.model = {
             structured_formatting: {
-              main_text: this.value,
-            },
+              main_text: this.value
+            }
           };
         }
       } else {
         this.model = {
-          description: this.value,
+          description: this.value
         };
       }
     }
@@ -89,9 +89,9 @@ export default {
       await this.service
         .getPlacePredictions({
           input: this.search,
-          types: [this.type],
+          types: [this.type]
         })
-        .then((res) => {
+        .then(res => {
           this.entries = res.predictions;
           // this.isLoading = false;
         });
@@ -107,14 +107,14 @@ export default {
       } else {
         this.$emit("select", this.model.description);
       }
-    },
+    }
   },
 
   watch: {
     search() {
       if (!this.search) return;
       this.getPlaces();
-    },
-  },
+    }
+  }
 };
 </script>

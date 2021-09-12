@@ -2,21 +2,21 @@
   <div class="pa-8">
     <v-row>
       <v-col cols="6">
-        <h4>{{ $t("user.profile.editProfileHeading") }}</h4>
+        <h4>{{ $t("editProfileHeading") }}</h4>
       </v-col>
       <v-col cols="6" class="text-right">
         <v-btn depressed color="primary" class="pl-8 pr-8" @click="handleUpdate"
-          >{{ $t("general.save") }}
+          >{{ $t("save") }}
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.whatCanYouDo") }}</label>
+        <label>{{ $t("whatCanYouDo") }}</label>
         <v-text-field
           dense
-          :label="$t('user.profile.whatCanYouDo')"
+          :label="$t('whatCanYouDo')"
           :rules="rules"
           type="text"
           outlined
@@ -31,10 +31,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.showUsQualifications") }}</label>
+        <label>{{ $t("showUsQualifications") }}</label>
         <v-text-field
           dense
-          :label="$t('user.profile.showUsQualifications')"
+          :label="$t('showUsQualifications')"
           :rules="rules"
           type="text"
           outlined
@@ -49,10 +49,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.showUsWhatYouWant") }}</label>
+        <label>{{ $t("showUsWhatYouWant") }}</label>
         <v-text-field
           dense
-          :label="$t('user.profile.showUsWhatYouWant')"
+          :label="$t('showUsWhatYouWant')"
           type="text"
           outlined
           solo
@@ -66,10 +66,10 @@
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t("user.profile.tellUsAboutYou") }}</label>
+        <label>{{ $t("tellUsAboutYou") }}</label>
         <v-textarea
           dense
-          :label="$t('user.profile.tellUsAboutYou')"
+          :label="$t('tellUsAboutYou')"
           outlined
           solo
           flat

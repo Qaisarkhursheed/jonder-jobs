@@ -3,11 +3,7 @@
     <div class="selection-mgmt-header">
       <div class="search-bar-wrapper">
         <em class="icon"></em>
-        <input
-          type="text"
-          v-model="searchValue"
-          :placeholder="$t('company.dashboard.search')"
-        />
+        <input type="text" v-model="searchValue" :placeholder="$t('search')" />
       </div>
       <div class="view-wrapper hover-pointer">
         <div
@@ -70,10 +66,9 @@ export default {
   },
   computed: {
     getSelection() {
-      const selectionData = this.$store.getters["company/selectionManagement"](
+      return this.$store.getters["company/selectionManagement"](
         this.activeView
       );
-      return selectionData;
     }
   },
   created() {

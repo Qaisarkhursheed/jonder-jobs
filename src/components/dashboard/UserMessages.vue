@@ -3,12 +3,12 @@
     <v-row>
       <v-col cols="6" class="pl-4">
         <span class="text-color-primary-blue-dark">
-          {{ $t('user.dashboard.replies') }}
+          {{ $t('replies') }}
         </span>
       </v-col>
       <v-col cols="5" class="text-right">
         <span class="text-color-primary-blue-dark">
-          {{ $t('user.dashboard.message') }}
+          {{ $t('message') }}
         </span>
       </v-col>
       <v-col cols="1"></v-col>
@@ -34,7 +34,7 @@
     <v-row>
       <v-col class="text-center pt-6">
         <router-link to="/dashboard/chat" class="text-color-primary-blue-dark"
-          >{{ $t('user.dashboard.seeMore') }}</router-link
+          >{{ $t('seeMore') }}</router-link
         >
       </v-col>
     </v-row>

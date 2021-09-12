@@ -6,7 +6,7 @@
     style="max-width: 450px"
   >
     <jonder-title>
-      {{ $t("general.createAccount") }}
+      {{ $t("createAccount") }}
     </jonder-title>
 
     <div class="text-center mb-2 text-decoration text-xl">
@@ -43,14 +43,14 @@
           @change="profile_img = $event.target.files[0]"
         />
         <div class="avatar-label mt-4">
-          {{ $t("company.register.uploadPhoto") }}
+          {{ $t("uploadPhoto") }}
         </div>
       </div>
 
       <!-- First name -->
       <v-text-field
         v-model="formData.first_name"
-        :placeholder="$t('general.name')"
+        :placeholder="$t('name')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
@@ -61,7 +61,7 @@
       <!-- Last name -->
       <v-text-field
         v-model="formData.last_name"
-        :placeholder="$t('general.surname')"
+        :placeholder="$t('surname')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
         dense
@@ -72,7 +72,7 @@
       <!-- Email -->
       <v-text-field
         v-model="formData.email"
-        :placeholder="$t('company.profile.email')"
+        :placeholder="$t('emailAddress')"
         :rules="[validations.required, validations.email]"
         type="email"
         dense
@@ -94,7 +94,7 @@
       <!-- Password -->
       <v-text-field
         v-model="formData.password"
-        :placeholder="$t('general.password')"
+        :placeholder="$t('password')"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
         dense
@@ -118,7 +118,7 @@
       <!-- Password confirm -->
       <v-text-field
         v-model="formData.password_confirmation"
-        :placeholder="$t('general.repeatPassword')"
+        :placeholder="$t('repeatPassword')"
         :rules="[
           validations.required,
           validations.same('Passwort', formData.password),
@@ -151,7 +151,7 @@
         :rules="[validations.required]"
         class="checkbox-abn ma-0"
         color="#333"
-        :label="$t('general.agreePolicy')"
+        :label="$t('agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
 
@@ -186,10 +186,10 @@
       </v-btn>
 
       <div class="text-medium mt-5 text-center">
-        {{ $t("company.register.areYouMember") }}
+        {{ $t("areYouMember") }}
 
         <router-link to="/login" class="login-caption-bold">
-          {{ $t("company.register.loginHere") }}
+          {{ $t("loginHere") }}
         </router-link>
       </div>
     </v-form>

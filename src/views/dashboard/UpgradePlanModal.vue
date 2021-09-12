@@ -11,7 +11,7 @@
   >
     <v-card flat class="rounded-lg wrap upgrade-dialog modal-plan">
       <div class="modal-title">
-        {{ $t("user.dashboard.choosePlan") }}
+        {{ $t("choosePlan") }}
       </div>
 
       <div
@@ -55,14 +55,14 @@
           <!--            <h3>{{ userPlan.name }}</h3>-->
           <!--            <div>-->
           <!--              {{ userPlan.price }}&euro; / {{ plan.days_valid }}-->
-          <!--              {{ $t("general.daysValid") }}-->
+          <!--              {{ $t("daysValid") }}-->
           <!--            </div>-->
           <!--            <div>-->
-          <!--              {{ $t("general.renewsOn") }}-->
+          <!--              {{ $t("renewsOn") }}-->
           <!--              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}-->
           <!--            </div>-->
           <!--            <div>-->
-          <!--              {{ $t("general.validUntil") }}-->
+          <!--              {{ $t("validUntil") }}-->
           <!--              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}-->
           <!--            </div>-->
           <!--          </div>-->
@@ -76,7 +76,7 @@
           class="mt-16 font-weight-medium upgrade-btn"
           style="margin-right: 20px;"
         >
-          {{ $t("general.cancel") }}
+          {{ $t("cancel") }}
         </v-btn>
         <v-btn
           @click="next()"
@@ -86,7 +86,7 @@
           width="178"
           class="mt-16 font-weight-medium upgrade-btn dark-blue"
         >
-          {{ $t("general.confirmOption") }}
+          {{ $t("confirmOption") }}
         </v-btn>
       </div>
     </v-card>

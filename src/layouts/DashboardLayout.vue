@@ -40,13 +40,14 @@
             </template>
             <v-list class="nav">
               <v-list-item @click="$router.push({ name: 'Profile' })">
-                {{ $t("general.profile") }}
+                {{ $t("profile") }}
               </v-list-item>
               <v-list-item @click="$router.push({ name: 'Logout' })">
-                {{ $t("general.logout") }}
+                {{ $t("logout") }}
               </v-list-item>
             </v-list>
           </v-menu>
+          <LanguageDropdown />
         </div>
       </v-col>
     </v-row>
@@ -57,7 +58,7 @@
           class="back-btn dark-blue"
           @click="navigateTo('/dashboard')"
         >
-          {{ $t("user.profile.backToHome") }}
+          {{ $t("backToHome") }}
         </v-btn>
       </v-col>
     </v-row>
@@ -67,25 +68,25 @@
         <nav class="dashboard-navigation pl-0 pl-md-8" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
-              {{ $t("user.profile.profileSettings") }}
+              {{ $t("profileSettings") }}
             </div>
 
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                {{ $t("user.profile.personalInformation") }}
+                {{ $t("personalInformation") }}
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('roleAndBranche')" class="nav-item">
-                {{ $t("user.profile.positionAndIndustry") }}
+                {{ $t("positionAndIndustry") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('lookingFor')" class="nav-item">
-                {{ $t("user.profile.searchingFor") }}
+                {{ $t("searchingFor") }}
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
@@ -94,41 +95,41 @@
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
-                {{ $t("user.profile.experiences") }}
+                {{ $t("experiences") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('documents')" class="nav-item">
-                {{ $t("user.profile.documents") }}
+                {{ $t("documents") }}
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                {{ $t("user.profile.billing") }}
+                {{ $t("billing") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('paymentMethod')" class="nav-item">
-                {{ $t("user.profile.invoicing") }}
+                {{ $t("invoicing") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                {{ $t("user.profile.changePassword") }}
+                {{ $t("changePassword") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
               </div>
               <div @click="scrollToSection('upgradeAccount')" class="nav-item">
-                {{ $t("user.profile.upgradeAccount") }}
+                {{ $t("upgradeAccount") }}
 
                 <v-icon>
                   mdi-chevron-right
@@ -165,7 +166,7 @@
 
               <span class="dash-name">{{ getUserFullName }}</span>
               <router-link to="/dashboard/profile" class="settings-link">
-                {{ $t("user.profile.profileSettings") }}
+                {{ $t("profileSettings") }}
               </router-link>
               <DashboardActivePlan v-if="user.plan" />
             </div>
@@ -178,7 +179,7 @@
 
             <div class="top-info mt-7">
               <span class="about-info">{{
-                $t("user.profile.searchStatus")
+                $t("searchStatus")
               }}</span>
               <p class="about-text">
                 <span v-for="(item, i) in userEmploymentType" :key="i">
@@ -190,29 +191,29 @@
               <p class="about-text">{{ user.current_position }}</p>
 
               <span class="about-info">{{
-                $t("user.profile.currentIndustry")
+                $t("currentIndustry")
               }}</span>
               <p class="about-text">{{ user.branche }}</p>
 
               <span class="about-info"
-                >{{ $t("user.profile.cityAndAddress") }}
+                >{{ $t("cityAndAddress") }}
               </span>
               <p class="about-text">{{ user.city }}</p>
 
               <span class="about-info">
-                {{ $t("user.profile.experiences") }}
+                {{ $t("experiences") }}
               </span>
               <CardActionableList type="Experience" view-only class="mb-5" />
 
               <span class="about-info">
-                {{ $t("user.profile.education") }}
+                {{ $t("education") }}
               </span>
               <CardActionableList type="Education" view-only />
             </div>
 
             <div class="top-info">
               <span class="about-info">
-                {{ $t("user.profile.documents") }}
+                {{ $t("documents") }}
               </span>
               <div v-if="user.cv" class="row mt-1">
                 <div class="col-auto">
@@ -264,9 +265,11 @@ import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
+import LanguageDropdown from '../components/LanguageDropdown';
 
 export default {
   components: {
+    LanguageDropdown,
     DashboardActivePlan,
     CardActionableList,
     UpgradeAccountBox,

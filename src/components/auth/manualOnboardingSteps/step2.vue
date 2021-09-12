@@ -1,13 +1,13 @@
 <template>
   <div class="mo-step-3">
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.detailsAboutYou") }}
+      {{ $t("detailsAboutYou") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
       <!-- Current position -->
       <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouPosition") }}
+        {{ $t("detailsAboutYouPosition") }}
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
@@ -17,14 +17,14 @@
         outlined
         flat
         hide-no-data
-        :placeholder="$t('user.onboarding.detailsAboutYouPositionPlace')"
+        :placeholder="$t('detailsAboutYouPositionPlace')"
         class="mt-1"
       >
       </v-autocomplete>
 
       <!-- Branche -->
       <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouBranches") }}
+        {{ $t("detailsAboutYouBranches") }}
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
@@ -36,20 +36,36 @@
         flat
         hide-no-data
         multiple
-        :placeholder="$t('user.onboarding.detailsAboutYouBranchesPlace')"
+        :placeholder="$t('detailsAboutYouBranchesPlace')"
         class="mt-1"
       >
+        <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
+        <template v-slot:item="{ item }">
+          <v-list-item-action>
+            <v-simple-checkbox
+              v-ripple="false"
+              @input="toggleValues($event, item)"
+              :value="searchForValue(item)"
+            >
+            </v-simple-checkbox>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
       </v-autocomplete>
 
       <!-- Looking for role -->
       <label class="profile-label">
-        {{ $t("user.onboarding.detailsAboutYouRole") }}
+        {{ $t("detailsAboutYouRole") }}
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
         v-model="value.looking_for"
         :items="$store.getters['professions/items']"
-        :placeholder="$t('user.onboarding.detailsAboutYouRolePlace')"
+        :placeholder="$t('detailsAboutYouRolePlace')"
         :rules="[validations.required, validations.max.selection(5)]"
         v-clearable-autocomplete
         multiple
@@ -61,18 +77,18 @@
       </v-autocomplete>
 
       <label class="profile-label">
-        {{ $t("user.onboarding.location") }}
+        {{ $t("location") }}
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.city = e)"
+        @select="e => (value.city = e)"
         :required="true"
         class="mt-1"
       />
 
       <v-checkbox
         class="mb-5 mt-0"
-        :label="$t('user.onboarding.locationChecbox')"
+        :label="$t('locationChecbox')"
         hide-details="auto"
         v-model="value.location_show"
       ></v-checkbox>
@@ -84,7 +100,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -95,7 +111,7 @@
             height="58"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -111,29 +127,45 @@ export default {
   name: "Step2",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
   },
   computed: {
     types() {
       return types;
-    },
+    }
   },
   created() {
     this.$store.dispatch("professions/fetch");
   },
+  methods: {
+    searchForValue(name) {
+      return !!this.value.branche && this.value.branche.indexOf(name) >= 0;
+    },
+    toggleValues(event, name) {
+      if (!this.value.branche) {
+        this.value.branche = [];
+      }
+      const index = this.value.branche.indexOf(name);
+      if (index < 0) {
+        this.value.branche.push(name);
+      } else {
+        this.value.branche.splice(index, 1);
+      }
+    }
+  }
 };
 </script>
 

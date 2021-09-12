@@ -5,7 +5,7 @@
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">
           <jonder-title>
-            {{ $t("user.register.jonderWelcome") }}
+            {{ $t("jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
@@ -18,14 +18,14 @@
             style="width: 350px"
             large
           >
-            {{ $t("company.register.getStartedNow") }}
+            {{ $t("getStartedNow") }}
           </v-btn>
           <div class="mt-4">
             <span style="color: #222222">
-              {{ $t("company.register.areYouMember") }}
+              {{ $t("areYouMember") }}
             </span>
             <router-link to="/login" style="text-decoration: none">
-              <b> {{ $t("company.register.loginHere") }} </b>
+              <b> {{ $t("loginHere") }} </b>
             </router-link>
           </div>
         </v-stepper-content>
@@ -33,10 +33,10 @@
         <!-- Step 2 - Register type -->
         <v-stepper-content step="2">
           <jonder-title>
-            {{ $t("company.register.register") }}
+            {{ $t("register") }}
           </jonder-title>
           <p style="color: #222222">
-            {{ $t("company.register.registerSubtitleCompany") }}
+            {{ $t("registerSubtitleCompany") }}
           </p>
 
           <v-btn
@@ -48,7 +48,7 @@
             large
           >
             <v-icon left>mdi-google</v-icon>
-            {{ $t("company.register.continueWithGoogle") }}
+            {{ $t("continueWithGoogle") }}
           </v-btn>
 
           <v-btn
@@ -60,7 +60,7 @@
             large
           >
             <v-icon left>mdi-facebook</v-icon>
-            {{ $t("company.register.continueWithFacebook") }}
+            {{ $t("continueWithFacebook") }}
           </v-btn>
 
           <v-btn
@@ -72,15 +72,15 @@
             large
           >
             <v-icon left>mdi-email</v-icon>
-            {{ $t("company.register.continueWithEmail") }}
+            {{ $t("continueWithEmail") }}
           </v-btn>
 
           <div class="mt-4">
             <span style="color: #222222">
-              {{ $t("company.register.areYouMember") }}
+              {{ $t("areYouMember") }}
             </span>
             <router-link to="/login" style="text-decoration: none">
-              <b> {{ $t("company.register.loginHere") }} </b>
+              <b> {{ $t("loginHere") }} </b>
             </router-link>
           </div>
         </v-stepper-content>

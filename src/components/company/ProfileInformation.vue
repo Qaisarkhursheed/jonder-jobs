@@ -25,7 +25,7 @@
         <div>
           <div class="field-wrap d-flex mb-3 align-center">
           <div class="icon-wrap">
-            <v-icon 
+            <v-icon
                     color="#0253B3">
               mdi-email-outline
             </v-icon>
@@ -65,14 +65,14 @@
       <v-col cols="6">
         <div class="no-gutters pa-0 ma-0 mb-7">
           <label class="d-block">
-            {{ $t('company.profile.lookingFor') }}
+            {{ $t('lookingFor') }}
           </label>
 
           <div class="button-box mr-3 mb-2 font-weight-bold text-color-primary-blue-dark"
                v-for="(item, i) in lookingfor" :key="i">
             {{ item }}
           </div>
-          
+
         </div>
         <div class="pb-5">
           <label>{{profile.employees.label}}</label>
@@ -117,7 +117,7 @@
                  color="#E3F2FB"
                  width="40%"
                  dark>
-            {{ $t('general.edit') }}
+            {{ $t('edit') }}
           </v-btn>
         </div>
       </v-col>
@@ -130,7 +130,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  
+
   name: 'ProfileInformation',
 
   data() {
@@ -141,23 +141,23 @@ export default {
           value: ''
         },
         email: {
-          label: this.$t('company.profile.email'),
+          label: this.$t('emailAddress'),
           value: ''
         },
         address: {
-          label: this.$t('company.profile.cityAndAddress'),
+          label: this.$t('cityAndAddress'),
           value: ''
         },
         radius: {
-          label: this.$t('company.profile.workRadius'),
+          label: this.$t('workRadius'),
           value: ''
         },
         employees: {
-          label: this.$t('company.profile.howManyEmployees'),
+          label: this.$t('howManyEmployees'),
           value: ''
         },
         industry: {
-          label: this.$t('company.profile.whichIndustry'),
+          label: this.$t('whichIndustry'),
           value: ''
         },
       }
@@ -185,7 +185,7 @@ export default {
     font-size: 16px;
     color: #3E3E47;
   }
-  label { 
+  label {
     padding-bottom: 12px;
     color: #222222;
     font-weight: 600;

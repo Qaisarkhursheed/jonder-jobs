@@ -7,10 +7,10 @@
         </v-sheet>
 
         <p class="text-center font-weight-bold mb-7 primary--text text-h6">
-          {{ $t("company.register.successMessageJobseeker") }}
+          {{ $t("successMessageJobseeker") }}
         </p>
         <p class="text-center text-body-2">
-          {{ $t("company.register.successMessageJobseekerSub") }}
+          {{ $t("successMessageJobseekerSub") }}
         </p>
         <v-btn
           type="submit"
@@ -19,7 +19,7 @@
           class="full-w font-weight-medium dark-blue"
           :to="{ name: 'Dashboard' }"
         >
-          {{ $t("user.onboarding.finish") }}
+          {{ $t("finish") }}
         </v-btn>
       </v-sheet>
     </v-card>

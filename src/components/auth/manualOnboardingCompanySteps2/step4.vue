@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-3">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      {{ $t("company.register.linksForWebsites") }}
+      {{ $t("linksForWebsites") }}
     </h1>
 
     <v-form v-model="formValid">
@@ -73,7 +73,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -85,7 +85,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>

@@ -19,7 +19,7 @@
         </p>
 
         <v-btn color="primary" block class="font-weight-medium mt-10">
-          {{ $t("user.onboarding.finish") }}
+          {{ $t("finish") }}
         </v-btn>
       </v-sheet>
     </v-card>

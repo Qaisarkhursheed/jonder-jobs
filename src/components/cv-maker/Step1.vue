@@ -102,7 +102,7 @@
           large
           class="font-weight-bold"
         >
-          {{ $t("general.cancel") }}
+          {{ $t("cancel") }}
         </v-btn>
       </v-sheet>
       <v-sheet width="300">
@@ -115,7 +115,7 @@
           @click="nextStep"
           class="font-weight-bold"
         >
-          {{ $t("general.confirm") }}
+          {{ $t("confirm") }}
         </v-btn>
       </v-sheet>
     </v-sheet>

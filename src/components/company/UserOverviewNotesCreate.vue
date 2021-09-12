@@ -32,7 +32,7 @@
                 light
                 elevation="0"
               >
-                {{ $t("general.cancel") }}
+                {{ $t("cancel") }}
               </v-btn>
             </v-col>
             <v-col cols="6">
@@ -42,7 +42,7 @@
                 height="58"
                 class="full-w mt-16 font-weight-medium dark-blue"
               >
-                {{ $t("general.save") }}
+                {{ $t("save") }}
               </v-btn>
             </v-col>
           </v-row>

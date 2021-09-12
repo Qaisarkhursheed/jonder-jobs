@@ -1,59 +1,59 @@
 <template>
   <div class="mo-step-3">
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.whatYouLookinFor") }}
+      {{ $t("whatYouLookinFor") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="handleNext">
-      <!-- <label class="profile-label">
-        {{ $t("user.onboarding.lookingForBranche") }}
-      </label>
-      <v-autocomplete
-        v-clearable-autocomplete
-        v-model="value.looking_for_branche"
-        :items="types.JOB_BRANCHE"
-        :rules="[validations.required]"
-        outlined
-        flat
-        hide-no-data
-        multiple
-        :placeholder="$t('user.onboarding.choose')"
-        class="mt-1"
-      ></v-autocomplete> -->
-
       <label class="profile-label">
-        {{ $t("user.onboarding.lookingForEmployement") }}
+        {{ $t("lookingForEmployement") }}
         <span style="color: red;">*</span>
       </label>
       <v-select
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.required]"
-        :placeholder="$t('user.onboarding.lookingForEmployementPlace')"
+        :placeholder="$t('lookingForEmployementPlace')"
         outlined
         multiple
         class="mt-1"
       >
+        <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
+        <template v-slot:item="{ item }">
+          <v-list-item-action>
+            <v-simple-checkbox
+              v-ripple="false"
+              @input="toggleValues($event, item.value)"
+              :value="searchForValue(item.value)"
+            >
+            </v-simple-checkbox>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t(item.value) }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
       </v-select>
 
       <label class="profile-label">
-        {{ $t("user.onboarding.whereToWork") }}
+        {{ $t("whereToWork") }}
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.address_to_work = e)"
+        @select="e => (value.address_to_work = e)"
         :required="true"
       />
 
       <v-checkbox
         class="mb-3 mt-0"
-        :label="$t('user.profile.remoteWork')"
+        :label="$t('remoteWork')"
         hide-details="auto"
         v-model="value.work_remotely"
       ></v-checkbox>
 
       <label class="profile-label">
-        {{ $t("user.onboarding.whenToStart") }}
+        {{ $t("whenToStart") }}
         <span style="color: red;">*</span>
       </label>
       <Calendar
@@ -67,13 +67,13 @@
 
       <v-checkbox
         v-model="dontKnowWhenToStart"
-        :label="$t('user.profile.iDontKnow')"
+        :label="$t('iDontKnow')"
         class="mt-2 mb-3"
         hide-details
       ></v-checkbox>
 
       <div class="profile-label mb-3 mt-6">
-        {{ $t("user.onboarding.monthlySalary") }}
+        {{ $t("monthlySalary") }}
       </div>
       <SliderInput
         :value="value.monthly_salary"
@@ -81,7 +81,7 @@
         min="1"
         max="12"
         step="0.5"
-        @change="(val) => (value.monthly_salary = val)"
+        @change="val => (value.monthly_salary = val)"
       />
 
       <v-row class="mt-5">
@@ -91,7 +91,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -102,7 +102,7 @@
             height="55"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>
@@ -122,26 +122,26 @@ export default {
   components: {
     Calendar,
     GooglePlacesAutocomplete,
-    SliderInput,
+    SliderInput
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
       formValid: false,
-      dontKnowWhenToStart: false,
+      dontKnowWhenToStart: false
     };
   },
   computed: {
     types() {
       return types;
-    },
+    }
   },
   methods: {
     handleNext() {
@@ -150,7 +150,24 @@ export default {
       }
       this.nextScreen();
     },
-  },
+    searchForValue(name) {
+      return (
+        !!this.value.looking_for_employment_type &&
+        this.value.looking_for_employment_type.indexOf(name) >= 0
+      );
+    },
+    toggleValues(event, name) {
+      if (!this.value.looking_for_employment_type) {
+        this.value.looking_for_employment_type = [];
+      }
+      const index = this.value.looking_for_employment_type.indexOf(name);
+      if (index < 0) {
+        this.value.looking_for_employment_type.push(name);
+      } else {
+        this.value.looking_for_employment_type.splice(index, 1);
+      }
+    }
+  }
 };
 </script>
 
