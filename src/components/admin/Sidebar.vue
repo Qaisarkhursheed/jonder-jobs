@@ -5,7 +5,7 @@
       fixed
     >
       <template v-slot:prepend>
-        <div class="logo ma-6 mb-0 pb-5">
+        <div class="logo ma-6 mb-0 pb-6">
           <router-link :to="{ name: 'AdminDashboard' }">
             <v-img :src="require('@/assets/jonder_white.png')" max-width="128px" />
           </router-link>
@@ -98,8 +98,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.admin-sidebar {
-  background: $admin-primary-color;
+.admin-sidebar.v-navigation-drawer{
+  background-color: #1662CD;
   color: $admin-primary-text;
 }
 .admin-sidebar .theme--light.v-list-item:hover::before,

@@ -1,14 +1,20 @@
 <template>
   <div class="admin-companies">
-    Companies
+    <PageHeader title="Companies" />
   </div>
 </template>
 
 <script>
 
+import PageHeader from "@/components/admin/PageHeader";
+
 export default {
 
-  name: "AdminCompanies"
+  name: "AdminCompanies",
+
+  components: {
+    PageHeader
+  }
   
 };
 

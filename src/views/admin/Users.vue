@@ -1,14 +1,20 @@
 <template>
   <div class="admin-users">
-    Users
+    <PageHeader title="Users" />
   </div>
 </template>
 
 <script>
 
+import PageHeader from "@/components/admin/PageHeader";
+
 export default {
 
-  name: "AdminUsers"
+  name: "AdminUsers",
+
+  components: {
+    PageHeader
+  }
   
 };
 
