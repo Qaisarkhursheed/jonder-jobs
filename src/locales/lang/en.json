@@ -320,7 +320,11 @@
   "yearlyActivity": "Annual activity",
   "request": "Request",
   "negotiation": "Negotiation",
-  "job_branche_constructionArchitecture":  "Construction, architecture, surveying",
+  "alertEmailVerified": "Your email has been verified!",
+  "alertPasswordReset": "Your password has been reset!",
+  "alertPasswordSet": "Your password has been set!",
+  "alertPasswordChanged": "Your password has been changed!",
+  "job_branche_constructionArchitecture": "Construction, architecture, surveying",
   "job_branche_service": "Service",
   "job_branche_electro": "Electro",
   "job_branche_blessYou": "Bless you",
@@ -353,5 +357,4 @@
   "Interview": "Interview",
   "Final round": "Final round",
   "Hired": "Hired"
-
 }

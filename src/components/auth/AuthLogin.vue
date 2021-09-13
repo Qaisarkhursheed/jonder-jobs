@@ -5,15 +5,19 @@
     </jonder-title>
 
     <v-alert v-if="$route.query.resetPassword" text type="success">
-      Ihr Passwort wurde zurückgesetzt!
+      {{ $t("alertPasswordReset") }}
     </v-alert>
 
     <v-alert v-if="$route.query.setPassword" text type="success">
-      Ihr Passwort wurde festgelegt!
+      {{ $t("alertPasswordSet") }}
     </v-alert>
 
     <v-alert v-if="$route.query.changePassword" text type="success">
-      Ihr Passwort wurde geändert!
+      {{ $t("alertPasswordChanged") }}
+    </v-alert>
+
+    <v-alert v-if="$route.query.emailVerified" text type="success">
+      {{ $t("alertEmailVerified") }}
     </v-alert>
 
     <div class="mt-5">
@@ -118,22 +122,22 @@ export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert,
+    ResponseAlert
   },
   data() {
     return {
       message: {
         show: false,
-        text: "",
+        text: ""
       },
       formData: {
         email: "",
         password: "",
-        privacy: false,
+        privacy: false
       },
       formLoading: false,
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -149,7 +153,7 @@ export default {
           this.$router.replace({ name: "Home" });
           this.$store.dispatch("user/fetchPlans");
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.data.data?.email_not_verified) {
             this.$router.push({ name: "RegisterVerifyEmail" });
           } else {
@@ -159,8 +163,8 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
