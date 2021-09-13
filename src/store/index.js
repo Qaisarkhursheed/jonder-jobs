@@ -13,6 +13,7 @@ import plans from "./plans";
 import professions from "./professions";
 import messageTemplates from "./messageTemplates";
 import northdata from "./northdata";
+import google from "./google";
 
 Vue.use(Vuex);
 
@@ -29,7 +30,8 @@ export default createStore(Vuex.Store, {
     plans,
     professions,
     messageTemplates,
-    northdata
+    northdata,
+    google
   },
   state: {
     screenSize: null

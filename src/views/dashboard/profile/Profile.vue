@@ -255,13 +255,19 @@
             v-model="formData.looking_for_employment_type"
             multiple
           >
-            <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
+            <template v-slot:selection="{ item }">
+              {{ $t(item.value) }},
+            </template>
             <template v-slot:item="{ item }">
               <v-list-item-action>
                 <v-simple-checkbox
                   v-ripple="false"
                   @input="
-                    toggleValues($event, item.value, 'looking_for_employment_type')
+                    toggleValues(
+                      $event,
+                      item.value,
+                      'looking_for_employment_type'
+                    )
                   "
                   :value="searchForValue(item.value)"
                 >
@@ -279,10 +285,29 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label"> {{ $t("likeToWork") }}</label>
-          <GooglePlacesAutocomplete
-            :value="formData.address_to_work"
-            @select="e => (formData.address_to_work = e)"
-          />
+          <v-autocomplete
+            v-model="formData.address_to_work"
+            @update:search-input="
+              $store.dispatch('google/places', {
+                input: $event,
+                types: ['(cities)']
+              })
+            "
+            :items="
+              $store.getters['google/places'].concat(
+                formData.address_to_work || []
+              )
+            "
+            :loading="$store.getters['google/loadingPlaces']"
+            :rules="[validations.required]"
+            :placeholder="$t('choose')"
+            multiple
+            small-chips
+            deletable-chips
+            no-filter
+            outlined
+          >
+          </v-autocomplete>
           <v-checkbox
             class="mb-0 mt-0"
             :label="$t('remoteWork')"
@@ -644,7 +669,6 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
@@ -662,7 +686,6 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete,
     SliderInput,
     ImageUploadCropper
   },
@@ -788,6 +811,10 @@ export default {
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
       this.dontKnowWhenToStart = !user.ready_for_work;
+
+      if (!Array.isArray(this.formData.address_to_work)) {
+        this.formData.address_to_work = [this.formData.address_to_work];
+      }
     },
     handleUpdate() {
       this.formResponse = {};
@@ -860,7 +887,8 @@ export default {
     },
     searchForValue(name) {
       return (
-        !!this.formData.looking_for_employment_type && this.formData.looking_for_employment_type.indexOf(name) >= 0
+        !!this.formData.looking_for_employment_type &&
+        this.formData.looking_for_employment_type.indexOf(name) >= 0
       );
     },
     toggleValues(event, name, prop) {
