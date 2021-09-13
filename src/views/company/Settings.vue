@@ -18,7 +18,7 @@
         large
         @click="$router.push('/company-dashboard')"
       >
-        {{ $t("user.profile.backToHome") }}
+        {{ $t("backToHome") }}
       </v-btn>
     </div>
 
@@ -29,20 +29,20 @@
         <nav class="dashboard-navigation">
           <div class="settings-nav">
             <div class="settings-title">
-              {{ $t("user.profile.profileSettings") }}
+              {{ $t("profileSettings") }}
             </div>
             <div class="submenu">
               <div @click="scrollToSection('personalInfo')" class="nav-item">
-                {{ $t("user.profile.personalInformation") }}
+                {{ $t("personalInformation") }}
               </div>
               <div @click="scrollToSection('invoices')" class="nav-item">
-                {{ $t("company.profile.billingInvoices") }}
+                {{ $t("billingInvoices") }}
               </div>
               <div @click="scrollToSection('payment')" class="nav-item">
-                {{ $t("user.profile.billing") }}
+                {{ $t("billing") }}
               </div>
               <div @click="scrollToSection('changePassword')" class="nav-item">
-                {{ $t("user.profile.changePassword") }}
+                {{ $t("changePassword") }}
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
           <v-card flat id="personalInfo" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                {{ $t("company.profile.changePersonalInfo") }}
+                {{ $t("changePersonalInfo") }}
               </p>
               <p class="profile-subtitle">
                 <!-- Explanation goes here
@@ -71,11 +71,11 @@
               <v-row>
                 <v-col cols="6">
                   <label class="profile-label">{{
-                    $t("user.profile.firstName")
+                    $t("firstName")
                   }}</label>
                   <v-text-field
                     dense
-                    :label="$t('user.profile.firstName')"
+                    :label="$t('firstName')"
                     :rules="[validations.required]"
                     type="text"
                     outlined
@@ -88,11 +88,11 @@
                 </v-col>
                 <v-col cols="6">
                   <label class="profile-label">{{
-                    $t("user.profile.lastName")
+                    $t("lastName")
                   }}</label>
                   <v-text-field
                     dense
-                    :label="$t('user.profile.lastName')"
+                    :label="$t('lastName')"
                     :rules="[validations.required]"
                     type="text"
                     outlined
@@ -130,7 +130,7 @@
                     large
                     class="pl-8 pr-8 font-weight-medium main-accept-btn"
                     @click="handleUpdate"
-                    >{{ $t("general.save") }}
+                    >{{ $t("save") }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -141,7 +141,7 @@
           <v-card flat id="invoices" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                {{ $t("company.profile.billingInvoices") }}
+                {{ $t("billingInvoices") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -183,7 +183,7 @@
           <v-card flat id="payment" class="profile-section mb-10">
             <v-row>
               <p class="profile-title">
-                {{ $t("company.profile.editPaymentMethod") }}
+                {{ $t("editPaymentMethod") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -217,7 +217,7 @@
           <v-card flat id="changePassword" class="profile-section mb-10">
             <v-row class="mb-0">
               <p class="profile-title">
-                {{ $t("user.profile.changePassword") }}
+                {{ $t("changePassword") }}
               </p>
               <!-- <p class="profile-subtitle">
                 Explanation goes here
@@ -226,7 +226,7 @@
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
               <label class="profile-label">{{
-                $t("user.profile.enterNewPassword")
+                $t("enterNewPassword")
               }}</label>
               <v-text-field
                 v-model="passwordFormData.new_password"
@@ -238,7 +238,7 @@
               ></v-text-field>
 
               <label class="profile-label">{{
-                $t("user.profile.reEnterPassword")
+                $t("reEnterPassword")
               }}</label>
               <v-text-field
                 v-model="passwordFormData.new_confirm_password"
@@ -250,7 +250,7 @@
               ></v-text-field>
 
               <label class="profile-label">{{
-                $t("user.profile.enterOldPassword")
+                $t("enterOldPassword")
               }}</label>
               <v-text-field
                 v-model="passwordFormData.current_password"
@@ -272,7 +272,7 @@
                     color="primary"
                     class="pl-8 pr-8"
                     @click="handleChangePassword"
-                    >{{ $t("user.profile.changePassword") }}
+                    >{{ $t("changePassword") }}
                   </v-btn>
                 </v-col>
               </v-row>

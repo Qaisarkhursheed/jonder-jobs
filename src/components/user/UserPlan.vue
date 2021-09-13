@@ -3,12 +3,12 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <h2>{{ $t("general.subscriptionPlan") }}</h2>
+          <h2>{{ $t("subscriptionPlan") }}</h2>
         </v-col>
       </v-row>
       <v-row class="mb-8">
         <v-col cols="12">
-          <p>{{ $t("general.yourCurrentPlanDescription") }}</p>
+          <p>{{ $t("yourCurrentPlanDescription") }}</p>
         </v-col>
       </v-row>
       <v-row>

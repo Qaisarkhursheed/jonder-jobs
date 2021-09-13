@@ -19,9 +19,9 @@
     <v-card flat id="personalInfo" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.dashboard.changePersonalData") }}
+          {{ $t("changePersonalData") }}
         </p>
-        <p class="profile-subtitle">{{ $t("user.dashboard.personalData") }}</p>
+        <p class="profile-subtitle">{{ $t("personalInfo") }}</p>
         <v-col cols="6">
           <div class="d-flex align-center">
             <v-avatar
@@ -72,19 +72,17 @@
             color="primary"
             class="pl-8 pr-8 dark-blue"
             @click="handleUpdate"
-            >{{ $t("general.save") }}
+            >{{ $t("save") }}
           </v-btn>
         </v-col>
       </v-row>
 
       <v-row>
         <v-col cols="12" sm="6">
-          <label class="profile-label">{{
-            $t("user.profile.firstName")
-          }}</label>
+          <label class="profile-label">{{ $t("firstName") }}</label>
           <v-text-field
             dense
-            :label="$t('user.profile.firstName')"
+            :label="$t('firstName')"
             :rules="[validations.required]"
             type="text"
             outlined
@@ -96,10 +94,10 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="6">
-          <label class="profile-label">{{ $t("user.profile.lastName") }}</label>
+          <label class="profile-label">{{ $t("lastName") }}</label>
           <v-text-field
             dense
-            :label="$t('user.profile.lastName')"
+            :label="$t('lastName')"
             :rules="[validations.required]"
             type="text"
             outlined
@@ -132,7 +130,7 @@
         <v-col cols="12" sm="6">
           <v-checkbox
             class="mb-0 mt-0"
-            :label="$t('user.dashboard.showLocation')"
+            :label="$t('showLocation')"
             hide-details="auto"
             v-model="formData.location_show"
           ></v-checkbox>
@@ -149,9 +147,7 @@
           Explanation goes here
         </p> -->
         <v-col cols="12">
-          <label class="profile-label">{{
-            $t("user.profile.yourBranch")
-          }}</label>
+          <label class="profile-label">{{ $t("yourBranch") }}</label>
           <v-autocomplete
             v-clearable-autocomplete
             v-model="formData.branche"
@@ -162,15 +158,30 @@
             flat
             hide-no-data
             :hide-details="true"
-          ></v-autocomplete>
+          >
+            <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
+            <template v-slot:item="{ item }">
+              <v-list-item-action>
+                <v-simple-checkbox
+                  v-ripple="false"
+                  @input="toggleValues($event, item, 'branche')"
+                  :value="formData.branche.indexOf(item) >= 0"
+                >
+                </v-simple-checkbox>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-autocomplete>
         </v-col>
       </v-row>
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">{{
-            $t("user.profile.whatPosition")
-          }}</label>
+          <label class="profile-label">{{ $t("whatPosition") }}</label>
           <v-autocomplete
             v-model="formData.looking_for"
             v-clearable-autocomplete
@@ -188,14 +199,14 @@
     <v-card flat id="status" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.yourStatus") }}
+          {{ $t("yourStatus") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.yourStatusDescription") }}
+          {{ $t("yourStatusDescription") }}
         </p>
         <v-col cols="12">
           <label class="profile-label">
-            {{ $t("user.profile.yourStatusSelect") }}
+            {{ $t("yourStatusSelect") }}
           </label>
           <v-select
             v-model="formData.why_jonder"
@@ -211,10 +222,10 @@
     <v-card flat id="lookingFor" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.experienceAndEducation") }}
+          {{ $t("experienceAndEducation") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.experienceAndEducationDesc") }}
+          {{ $t("experienceAndEducationDesc") }}
         </p>
         <!-- <v-col cols="12">
           <label class="profile-label"
@@ -236,30 +247,70 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">
-            {{ $t("user.profile.lookingForType") }}</label
-          >
+          <label class="profile-label"> {{ $t("lookingForType") }}</label>
           <v-select
             outlined
             :items="types.EMPLOYEMENT_TYPE"
             background-color="white"
             v-model="formData.looking_for_employment_type"
             multiple
-          ></v-select>
+          >
+            <template v-slot:selection="{ item }">
+              {{ $t(item.value) }},
+            </template>
+            <template v-slot:item="{ item }">
+              <v-list-item-action>
+                <v-simple-checkbox
+                  v-ripple="false"
+                  @input="
+                    toggleValues(
+                      $event,
+                      item.value,
+                      'looking_for_employment_type'
+                    )
+                  "
+                  :value="searchForValue(item.value)"
+                >
+                </v-simple-checkbox>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item.value) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-select>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">
-            {{ $t("user.profile.likeToWork") }}</label
+          <label class="profile-label"> {{ $t("likeToWork") }}</label>
+          <v-autocomplete
+            v-model="formData.address_to_work"
+            @update:search-input="
+              $store.dispatch('google/places', {
+                input: $event,
+                types: ['(cities)']
+              })
+            "
+            :items="
+              $store.getters['google/places'].concat(
+                formData.address_to_work || []
+              )
+            "
+            :loading="$store.getters['google/loadingPlaces']"
+            :rules="[validations.required]"
+            :placeholder="$t('choose')"
+            multiple
+            small-chips
+            deletable-chips
+            no-filter
+            outlined
           >
-          <GooglePlacesAutocomplete
-            :value="formData.address_to_work"
-            @select="e => (formData.address_to_work = e)"
-          />
+          </v-autocomplete>
           <v-checkbox
             class="mb-0 mt-0"
-            :label="$t('user.profile.remoteWork')"
+            :label="$t('remoteWork')"
             hide-details="auto"
             v-model="formData.work_remotely"
           ></v-checkbox>
@@ -268,9 +319,7 @@
 
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">{{
-            $t("user.profile.whenCanYouStart")
-          }}</label>
+          <label class="profile-label">{{ $t("whenCanYouStart") }}</label>
           <Calendar
             v-if="!dontKnowWhenToStart"
             @setDate="formData.ready_for_work = $event"
@@ -281,7 +330,7 @@
 
           <v-checkbox
             v-model="dontKnowWhenToStart"
-            :label="$t('user.profile.iDontKnow')"
+            :label="$t('iDontKnow')"
             class="mt-2 mb-3"
             hide-details
           ></v-checkbox>
@@ -291,7 +340,7 @@
       <v-row>
         <v-col cols="10">
           <div class="profile-label mb-2">
-            {{ $t("user.profile.salaryRequirement") }} (€)
+            {{ $t("salaryRequirement") }} (€)
           </div>
           <SliderRangeInput
             :value="getMonthlySalary"
@@ -308,10 +357,10 @@
     <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.canStart") }}
+          {{ $t("canStart") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.experienceAndEducationDesc") }}
+          {{ $t("experienceAndEducationDesc") }}
         </p>
         <v-col cols="10">
           <label class="profile-label">Berufserfahrungen in Jahren </label>
@@ -340,9 +389,7 @@
         />
 
         <v-col cols="12">
-          <label class="profile-label">{{
-            $t("user.profile.yourWorkExperience")
-          }}</label>
+          <label class="profile-label">{{ $t("yourWorkExperience") }}</label>
           <CardActionableList
             type="Experience"
             @edit="activateEdit('experience', $event)"
@@ -363,16 +410,14 @@
               class="ml-1"
               style="cursor: pointer; color: #0253B3; font-weight:600"
             >
-              {{ $t("user.onboarding.add") }}
+              {{ $t("add") }}
             </div>
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="profile-label">{{
-            $t("user.profile.yourEducation")
-          }}</label>
+          <label class="profile-label">{{ $t("yourEducation") }}</label>
           <CardActionableList
             type="Education"
             @edit="activateEdit('education', $event)"
@@ -393,7 +438,7 @@
               class="ml-1"
               style="cursor: pointer; color: #0253B3; font-weight:600"
             >
-              {{ $t("user.onboarding.add") }}
+              {{ $t("add") }}
             </div>
           </div>
         </v-col>
@@ -403,10 +448,10 @@
     <v-card flat id="documents" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.documents") }}
+          {{ $t("documents") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.editDocuments") }}
+          {{ $t("editDocuments") }}
         </p>
         <v-col cols="12">
           <div class="mt-6">
@@ -439,10 +484,10 @@
     <v-card flat id="invoices" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.invoicing") }}
+          {{ $t("invoicing") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.invoicesDesc") }}
+          {{ $t("invoicesDesc") }}
         </p>
       </v-row>
 
@@ -501,17 +546,15 @@
     <v-card flat id="changePassword" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.changePassword") }}
+          {{ $t("changePassword") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.passwordDesc") }}
+          {{ $t("passwordDesc") }}
         </p>
       </v-row>
 
       <v-form ref="passwordForm" v-model="passwordFormValid">
-        <label class="profile-label">{{
-          $t("user.profile.enterNewPassword")
-        }}</label>
+        <label class="profile-label">{{ $t("enterNewPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.new_password"
           dense
@@ -521,9 +564,7 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">{{
-          $t("user.profile.reEnterPassword")
-        }}</label>
+        <label class="profile-label">{{ $t("reEnterPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.new_confirm_password"
           dense
@@ -533,9 +574,7 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">{{
-          $t("user.profile.enterOldPassword")
-        }}</label>
+        <label class="profile-label">{{ $t("enterOldPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.current_password"
           dense
@@ -568,10 +607,10 @@
     <v-card flat id="upgradeAccount" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          {{ $t("user.profile.upgradeAccount") }}
+          {{ $t("upgradeAccount") }}
         </p>
         <p class="profile-subtitle">
-          {{ $t("user.profile.upgradeDesc") }}
+          {{ $t("upgradeDesc") }}
         </p>
       </v-row>
       <v-row>
@@ -630,7 +669,6 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
@@ -650,7 +688,6 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete,
     SliderInput,
     ImageUploadCropper
   },
@@ -781,6 +818,10 @@ export default {
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
       this.dontKnowWhenToStart = !user.ready_for_work;
+
+      if (!Array.isArray(this.formData.address_to_work)) {
+        this.formData.address_to_work = [this.formData.address_to_work];
+      }
     },
     handleUpdate() {
       this.formResponse = {};
@@ -856,6 +897,20 @@ export default {
         min: event[0].toString(),
         max: event[1].toString()
       };
+    },
+    searchForValue(name) {
+      return (
+        !!this.formData.looking_for_employment_type &&
+        this.formData.looking_for_employment_type.indexOf(name) >= 0
+      );
+    },
+    toggleValues(event, name, prop) {
+      const index = this.formData[prop].indexOf(name);
+      if (index < 0) {
+        this.formData[prop].push(name);
+      } else {
+        this.formData[prop].splice(index, 1);
+      }
     }
   },
   watch: {

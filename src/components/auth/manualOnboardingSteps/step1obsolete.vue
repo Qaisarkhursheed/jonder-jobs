@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-1">
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.location") }}
+      {{ $t("whereIsYourLocation") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
@@ -21,7 +21,7 @@
         height="55"
         class="full-w mt-5 font-weight-medium dark-blue"
       >
-        {{ $t("user.onboarding.next") }}
+        {{ $t("next") }}
       </v-btn>
     </v-form>
   </div>
@@ -30,8 +30,8 @@
 <script>
 import GooglePlacesAutocomplete from '../../GooglePlacesAutocomplete.vue';
 export default {
-  components: { 
-    GooglePlacesAutocomplete 
+  components: {
+    GooglePlacesAutocomplete
   },
   name: "Step1",
   props: {

@@ -15,7 +15,7 @@
         readonly
         outlined
         height="35px"
-        :placeholder="$t('user.onboarding.choose')"
+        :placeholder="$t('choose')"
         v-bind="attrs"
         v-on="on"
         :hide-details="hideDetails"

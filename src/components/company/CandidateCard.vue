@@ -56,7 +56,7 @@
           v-model="note"
         ></v-textarea>
         <v-btn @click="saveNote" text class="save-btn mt-2" color="white">
-          {{ $t("general.save") }}
+          {{ $t("save") }}
         </v-btn>
       </span>
       <div class="notes-list align-self-start pl-4">

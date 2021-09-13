@@ -14,16 +14,16 @@
     />
 
     <p class="text-center font-weight-bold text-h6">
-      {{ $t("user.onboarding.tellAboutExperience") }}
+      {{ $t("tellAboutExperience") }}
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
       <div class="profile-label mb-3">
-        {{ $t("user.onboarding.experienceInYears") }}
+        {{ $t("experienceInYears") }}
       </div>
       <SliderInput
         :value="value.working_experience"
-        :suffix="$t('general.years')"
+        :suffix="$t('years')"
         min="0"
         max="30"
         step="0.5"
@@ -32,7 +32,7 @@
 
       <div class="mt-4">
         <label class="profile-label">
-          {{ $t("user.onboarding.yourProfessionalExperience") }}
+          {{ $t("yourProfessionalExperience") }}
         </label>
         <CardActionableList
           class="mt-1"
@@ -55,14 +55,14 @@
             class="ml-1"
             style="cursor: pointer; color: #0253B3; font-weight:600"
           >
-            {{ $t("user.onboarding.add") }}
+            {{ $t("add") }}
           </div>
         </div>
       </div>
 
       <div class="mt-5">
         <label class="profile-label">
-          {{ $t("user.onboarding.yourEducation") }}
+          {{ $t("yourEducation") }}
         </label>
         <CardActionableList
           class="mt-1"
@@ -85,7 +85,7 @@
             class="ml-1"
             style="cursor: pointer; color: #0253B3; font-weight:600"
           >
-            {{ $t("user.onboarding.add") }}
+            {{ $t("add") }}
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -108,7 +108,7 @@
             height="55"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>

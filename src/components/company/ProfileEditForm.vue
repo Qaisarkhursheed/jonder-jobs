@@ -5,7 +5,7 @@
                        @close="dialogAction">
     </ProfileEditDialog>
     <v-card-title class="header pa-0 pb-7">
-      {{ $t('company.profile.editProfile') }}
+      {{ $t('editProfile') }}
     </v-card-title>
     <v-row class="d-flex no-gutters">
       <v-col cols="6">
@@ -81,7 +81,7 @@
         <div class="pb-5">
           <label class="d-block">{{form.lookingfor.label}}</label>
             <div class="chip-group">
-              <v-chip v-for="(chip, i) in form.lookingfor.value" :key="i" 
+              <v-chip v-for="(chip, i) in form.lookingfor.value" :key="i"
                       @click:close="chipRemove(chip)"
                       class="ma-2"
                       color="#E3F2FB"
@@ -155,7 +155,7 @@
           color="#0253B3"
           dark
           @click="cancel">
-            {{ $t('general.cancel') }}
+            {{ $t('cancel') }}
         </v-btn>
       </v-col>
       <v-col cols="6" class="d-flex justify-end">
@@ -167,7 +167,7 @@
           color="#0253B3"
           dark
           @click="confirm">
-            {{ $t('general.confirm') }}
+            {{ $t('confirm') }}
         </v-btn>
       </v-col>
     </v-card-actions>
@@ -194,31 +194,31 @@ export default {
       },
       form: {
         employees: {
-          label: this.$t('company.profile.howManyEmployees'),
+          label: this.$t('howManyEmployees'),
           value: ''
         },
         industry: {
-          label: this.$t('company.profile.whichIndustry'),
+          label: this.$t('whichIndustry'),
           value: ''
         },
         lookingfor: {
-          label: this.$t('company.profile.lookingFor'),
+          label: this.$t('lookingFor'),
           value: []
         },
         about: {
-          label: this.$t('company.profile.aboutCompany'),
+          label: this.$t('aboutCompany'),
           value: ''
         },
         email: {
-          label: this.$t('company.profile.email'),
+          label: this.$t('emailAddress'),
           value: ''
         },
         address: {
-          label: this.$t('company.profile.cityAndAddress'),
+          label: this.$t('cityAndAddress'),
           value: ''
         },
         radius: {
-          label: this.$t('company.profile.workRadius'),
+          label: this.$t('workRadius'),
           value: ''
         }
       }
@@ -282,7 +282,7 @@ export default {
 
 <style lang="scss">
   .profile-edit-form {
-    label { 
+    label {
       padding-bottom: 12px;
       color: #222222;
       font-weight: 600;
@@ -307,5 +307,5 @@ export default {
     font-weight: 400;
     font-size: 20px;
   }
-  
+
 </style>

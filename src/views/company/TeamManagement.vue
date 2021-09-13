@@ -4,7 +4,7 @@
       <v-col cols="9">
         <div class="title">Team Management</div>
         <div class="subtitle">
-          {{ $t("company.search.inviteHelp") }}
+          {{ $t("inviteHelp") }}
         </div>
       </v-col>
       <v-col cols="3">

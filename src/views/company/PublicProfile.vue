@@ -3,9 +3,9 @@
     <!-- <UserNoteAdd /> -->
     <v-row class="heading mb-5">
       <v-col cols="12" md="9">
-        <div class="title">{{ $t("company.employer.publicProfile") }}</div>
+        <div class="title">{{ $t("publicCompanyProfile") }}</div>
         <div class="subtitle">
-          {{ $t("company.employer.publicProfileSub") }}
+          {{ $t("publicProfileSub") }}
         </div>
       </v-col>
       <v-col cols="12" md="3">
@@ -16,10 +16,10 @@
           @click="viewAsTab"
         >
           <template v-if="viewAs">
-            {{ $t("company.employer.backToEdit") }}
+            {{ $t("backToEdit") }}
           </template>
           <template v-else>
-            {{ $t("company.employer.viewAs") }}
+            {{ $t("viewAsJobseeker") }}
           </template>
         </v-btn>
       </v-col>
@@ -40,7 +40,7 @@
               :disabled="viewAs"
               slider-color="#0253B3"
             >
-              {{ $t("company.profile." + tab.key) }}
+              {{ $t(tab.key) }}
             </v-tab>
           </v-tabs>
         </v-card>

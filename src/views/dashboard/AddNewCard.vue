@@ -86,7 +86,7 @@
           class="mt-16 font-weight-medium upgrade-btn"
           style="margin-right: 20px;"
         >
-          {{ $t("general.cancel") }}
+          {{ $t("cancel") }}
         </v-btn>
         <v-btn
           @click="save"

@@ -6,7 +6,7 @@
     no-gutters
   >
     <jonder-title>
-      {{ $t("general.forgotPassowrd") }}
+      {{ $t("forgotPassowrd") }}
     </jonder-title>
 
     <p class="p-text mb-7">

@@ -21,8 +21,8 @@
         <div class="no-msg">
           {{
             conversations.length
-              ? `${$t("user.dashboard.openChat")}`
-              : `${$t("user.dashboard.noMessages")}`
+              ? `${$t("openChat")}`
+              : `${$t("noMessages")}`
           }}
         </div>
 

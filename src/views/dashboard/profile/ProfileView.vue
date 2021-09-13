@@ -27,29 +27,29 @@
 
     <v-row>
       <v-col cols="6">
-        <label>{{ $t('user.profile.jobTitle') }}</label>
+        <label>{{ $t('jobTitle') }}</label>
         <strong>{{ userDetails.current_position }}</strong>
       </v-col>
       <v-col cols="6">
-        <label>{{ $t('user.profile.workExperience') }}</label>
+        <label>{{ $t('workExperience') }}</label>
         <strong>{{ userDetails.work_radius }}</strong>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="6">
-        <label>{{ $t('user.profile.lookingFor') }}</label>
+        <label>{{ $t('lookingFor') }}</label>
         <strong>{{ userDetails.looking_for }}</strong>
       </v-col>
       <v-col cols="6">
-        <label>{{ $t('user.profile.education') }}</label>
+        <label>{{ $t('education') }}</label>
         <strong>{{ userDetails.your_qualification }}</strong>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <label>{{ $t('user.profile.aboutMe') }}</label>
+        <label>{{ $t('aboutMe') }}</label>
         <strong>{{ userDetails.describe_yourself }}</strong>
       </v-col>
     </v-row>

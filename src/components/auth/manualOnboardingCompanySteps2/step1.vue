@@ -1,7 +1,7 @@
 <template>
   <div class="mo-step-1">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      {{ $t("company.register.giveUsDetails") }}
+      {{ $t("giveUsDetails") }}
     </h1>
 
     <v-form v-model="formValid">
@@ -28,19 +28,19 @@
           @change="change"
         />
         <div class="avatar-label mt-4">
-          {{ $t("company.register.uploadPhotoEmployer") }}
+          {{ $t("uploadPhotoEmployer") }}
         </div>
       </div>
 
       <label class="profile-label">
-        {{ $t("company.register.aboutCompanyText") }}
+        {{ $t("aboutCompanyText") }}
         <span style="color: red;">*</span>
       </label>
       <v-textarea
         class="mt-3"
         dense
         height="150"
-        :placeholder="$t('company.register.aboutCompanyPlaceholder')"
+        :placeholder="$t('aboutCompanyPlaceholder')"
         outlined
         background-color="white"
         counter="250"
@@ -54,7 +54,7 @@
         height="55"
         class="full-w mt-5 font-weight-medium dark-blue"
       >
-        {{ $t("user.onboarding.next") }}
+        {{ $t("next") }}
       </v-btn>
     </v-form>
   </div>

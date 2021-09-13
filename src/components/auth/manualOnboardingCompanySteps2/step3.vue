@@ -1,12 +1,12 @@
 <template>
   <div class="mo-step-3">
     <h1 class="text-center mb-3" style="font-size: 28px">
-      {{ $t("company.register.companyContact") }}
+      {{ $t("companyContact") }}
     </h1>
 
     <v-form v-model="formValid" ref="form" class="auth-form">
       <label class="profile-label">
-        {{ $t("company.register.companyEmail") }}
+        {{ $t("companyEmail") }}
         <span style="color: red;">*</span>
       </label>
       <v-text-field
@@ -15,7 +15,7 @@
         :rules="[validations.required, validations.email]"
         dense
         type="email"
-        :placeholder="$t('company.register.companyEmailPlaceholder')"
+        :placeholder="$t('companyEmailPlaceholder')"
         outlined
         flat
         background-color="white"
@@ -23,7 +23,7 @@
       </v-text-field>
 
       <label class="profile-label">
-        {{ $t("company.register.companyPhone") }}
+        {{ $t("companyPhone") }}
         <span style="color: red;">*</span>
       </label>
       <v-text-field
@@ -38,14 +38,14 @@
       </v-text-field>
 
       <label class="profile-label">
-        {{ $t("company.register.companyCityandAdress") }}
+        {{ $t("companyCityandAdress") }}
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
         @select="(e) => (value.address = e)"
         type="geocode"
         :full-address="true"
-        :placeholder="$t('company.register.companyCityandAdressPlaceholder')"
+        :placeholder="$t('companyCityandAdressPlaceholder')"
         :required="true"
       />
 
@@ -56,7 +56,7 @@
             height="55"
             class="full-w font-weight-medium "
           >
-            {{ $t("user.onboarding.back") }}
+            {{ $t("back") }}
           </v-btn>
         </v-col>
         <v-col>
@@ -67,7 +67,7 @@
             height="55"
             class="full-w font-weight-medium dark-blue"
           >
-            {{ $t("user.onboarding.next") }}
+            {{ $t("next") }}
           </v-btn>
         </v-col>
       </v-row>

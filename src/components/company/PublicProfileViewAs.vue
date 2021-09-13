@@ -21,7 +21,7 @@
     <div v-if="user.role === 'Employer'">
       <div class="section mb-8">
         <label class="section-label">
-          {{ $t("company.employer.aboutCompany") }}
+          {{ $t("aboutCompany") }}
         </label>
         <div class="section-value">
           {{ user.about_company }}
@@ -31,7 +31,7 @@
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            {{ $t("company.employer.employees") }}
+            {{ $t("employees") }}
           </label>
           <div class="section-value">
             {{ user.company_employees }}

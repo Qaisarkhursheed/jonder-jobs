@@ -39,8 +39,8 @@
       >
         {{
           !userPlan || userPlan.id !== plan.id
-            ? $t("general.upgrade")
-            : $t("general.yourCurrentPlan")
+            ? $t("upgrade")
+            : $t("yourCurrentPlan")
         }}
       </v-btn>
     </div>

@@ -20,10 +20,10 @@
         style="font-size: 13px; justify-content: space-between;"
       >
         <div class="upgrade-title">
-          {{ $t("user.dashboard.premiumSuggestion") }}
+          {{ $t("premiumSuggestion") }}
         </div>
         <div>
-          {{ $t("general.beOnTheTop") }}
+          {{ $t("beOnTheTop") }}
         </div>
       </div>
       <div class="link-upgrade-wrapper" :class="{ 'mt-2': small }">
@@ -36,7 +36,7 @@
           style="color: #55F481; width: 100%; cursor: pointer;"
           @click="toggleModal('UpgradePlan')"
         >
-          {{ $t("user.dashboard.upgrade") }}
+          {{ $t("upgradeNow") }}
         </span>
       </div>
     </div>

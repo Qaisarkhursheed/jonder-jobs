@@ -9,8 +9,8 @@
       ></v-img>
     </div>
     <div class="info-wrapper">
-      <div class="info-title" v-if="userPlan.id === 11">{{ remainingDays }} {{ $t("general.remainingDays") }}</div>
-      <div class="info-title" v-else>{{ $t("general.success") }}!</div>
+      <div class="info-title" v-if="userPlan.id === 11">{{ remainingDays }} {{ $t("remainingDays") }}</div>
+      <div class="info-title" v-else>{{ $t("success") }}!</div>
       <div class="info-desscription">
         {{ userPlan.plan_description }}
       </div>

@@ -43,7 +43,7 @@
         <div class="d-flex justify-space-between mb-7">
           <div class="section">
             <div class="title">
-              {{ $t("user.profile.searchStatus") }}
+              {{ $t("searchStatus") }}
             </div>
             <div class="content" v-if="user.job_status === ''">
               Unemployed
@@ -63,7 +63,7 @@
         </div>
 
         <div class="section mb-7">
-          <div class="title">{{ $t("user.profile.currentIndustry") }}</div>
+          <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content">
             {{ user.branche }}
           </div>
@@ -74,7 +74,7 @@
           <div class="content">{{ user.branche }}</div>
         </div> -->
         <div class="section mb-7" v-if="user.location_show">
-          <div class="title">{{ $t("user.profile.cityAndAddress") }}</div>
+          <div class="title">{{ $t("cityAndAddress") }}</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>
 

@@ -15,7 +15,7 @@
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">
           <jonder-title>
-            {{ $t("company.register.jonderWelcome") }}
+            {{ $t("jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222; font-size: 17px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
@@ -32,14 +32,14 @@
             block
             height="55"
           >
-            {{ $t("company.register.getStartedNow") }}
+            {{ $t("getStartedNow") }}
           </v-btn>
         </v-stepper-content>
 
         <!-- Step 2 - Account type -->
         <v-stepper-content step="2">
           <jonder-title style="font-size: 28px">
-            {{ $t("company.register.chooseStatus") }}
+            {{ $t("chooseStatus") }}
           </jonder-title>
 
           <div class="mx-auto mt-5" style="max-width: 400px">
@@ -51,7 +51,7 @@
               @click="accountType = 'user'"
               :outlined="accountType != 'user'"
             >
-              {{ $t("company.register.ImJobseeker") }}
+              {{ $t("imJobseeker") }}
             </v-btn>
 
             <v-btn
@@ -62,7 +62,7 @@
               :outlined="accountType != 'company'"
               height="55"
             >
-              {{ $t("company.register.ImEmployer") }}
+              {{ $t("imEmployer") }}
             </v-btn>
 
             <v-btn
@@ -73,7 +73,7 @@
               @click="step = 3"
               height="55"
             >
-              {{ $t("company.register.continue") }}
+              {{ $t("continue") }}
             </v-btn>
           </div>
         </v-stepper-content>
@@ -81,10 +81,10 @@
         <!-- Step 3 - Register type -->
         <v-stepper-content step="3">
           <jonder-title>
-            {{ $t("company.register.register") }}
+            {{ $t("register") }}
           </jonder-title>
           <p style="color: #222222; font-size: 17px">
-            {{ $t("company.register.registerSubtitleUser") }}
+            {{ $t("registerSubtitleUser") }}
           </p>
 
           <v-btn
@@ -99,7 +99,7 @@
             :href="googleUrl"
           >
             <v-icon left>mdi-google</v-icon>
-            {{ $t("company.register.continueWithGoogleCompany") }}
+            {{ $t("continueWithGoogle") }}
           </v-btn>
 
           <v-btn
@@ -114,7 +114,7 @@
             :href="facebookUrl"
           >
             <v-icon left>mdi-facebook</v-icon>
-            {{ $t("company.register.continueWithFacebook") }}
+            {{ $t("continueWithFacebook") }}
           </v-btn>
 
           <v-btn
@@ -126,18 +126,18 @@
             large
           >
             <v-icon left>mdi-email</v-icon>
-            {{ $t("company.register.continueWithEmail") }}
+            {{ $t("continueWithEmail") }}
           </v-btn>
         </v-stepper-content>
       </v-stepper-items>
 
       <div class="text-center">
         <span style="color: #222222">
-          {{ $t("company.register.areYouMember") }}
+          {{ $t("areYouMember") }}
         </span>
         <router-link to="/login" style="text-decoration: none">
           <b class="tx-blue-darken-4">
-            {{ $t("company.register.loginHere") }}
+            {{ $t("loginHere") }}
           </b>
         </router-link>
       </div>

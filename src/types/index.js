@@ -35,22 +35,39 @@ const EMPLOYEMENT_TYPE = [
 ];
 
 const JOB_BRANCHE = [
-  "Bau, Architektur, Vermessung",
-  "Dienstleistung",
-  "Elektro",
-  "Gesundheit",
-  "IT, Computer",
-  "Kunst, Kultur, Gestaltung",
-  "Landwirtschaft, Natur, Umwelt",
-  "Medien",
-  "Metall, Maschinenbau",
-  "Naturwissenschaften",
-  "Produktion, Fertigung",
-  "Soziales, Pädagogik",
-  "Technik, Technologiefelder",
-  "Verkehr, Logistik",
-  "Wirtschaft, Verwaltung"
+  "job_branche_constructionArchitecture",
+  "job_branche_service",
+  "job_branche_electro",
+  "job_branche_blessYou",
+  "job_branche_it",
+  "job_branche_art",
+  "job_branche_agriculture",
+  "job_branche_media",
+  "job_branche_metalMechanicalEngineering",
+  "job_branche_naturalSciences",
+  "job_branche_production",
+  "job_branche_socialPedagogy",
+  "job_branche_technology",
+  "job_branche_transportLogistics",
+  "job_branche_economicAdministration"
 ];
+// const JOB_BRANCHE = [
+//   "Bau, Architektur, Vermessung",
+//   "Dienstleistung",
+//   "Elektro",
+//   "Gesundheit",
+//   "IT, Computer",
+//   "Kunst, Kultur, Gestaltung",
+//   "Landwirtschaft, Natur, Umwelt",
+//   "Medien",
+//   "Metall, Maschinenbau",
+//   "Naturwissenschaften",
+//   "Produktion, Fertigung",
+//   "Soziales, Pädagogik",
+//   "Technik, Technologiefelder",
+//   "Verkehr, Logistik",
+//   "Wirtschaft, Verwaltung"
+// ];
 
 // const JOB_POSITION = [
 //   "Developer",
@@ -81,15 +98,15 @@ const SALARY_RANGE = [
 const WORK_EXPERIENCE = ["0-3", "3-6", "6-10", "10-15", "15-20", "20+"];
 
 const EMPLOYEE_NUMBER = [
-  "0 bis 1 Beschäftigte",
-  "2 bis 10 Beschäftigte",
-  "11 bis 50 Beschäftigte",
-  "51 bis 200 Beschäftigte",
-  "201 bis 500 Beschäftigte",
-  "501 bis 1.000 Beschäftigte",
-  "1.001 bis 5.000 Beschäftigte",
-  "5.001 bis 10.000 Beschäftigte",
-  "10.001+ Beschäftigte"
+  "employee_number_0-1",
+  "employee_number_2-10",
+  "employee_number_11-50",
+  "employee_number_51-200",
+  "employee_number_201-500",
+  "employee_number_501-1.000",
+  "employee_number_1.001-5.000",
+  "employee_number_5.001-10.000",
+  "employee_number_10.001+"
 ];
 
 const SCHOOL = [
@@ -100,19 +117,18 @@ const SCHOOL = [
 ];
 
 const EDUCATION = [
-  "Education example 1",
-  "Education example 2",
-  "Education example 3"
+  "education_1",
+  "education_2",
+  "education_3"
 ];
 
 export default {
   SELECTION_MANAGEMENT_STATUS,
   EMPLOYEMENT_TYPE,
-  // JOB_POSITION,
-  JOB_BRANCHE,
   SALARY_RANGE,
   WORK_EXPERIENCE,
   SCHOOL,
   EDUCATION,
+  JOB_BRANCHE,
   EMPLOYEE_NUMBER
 };

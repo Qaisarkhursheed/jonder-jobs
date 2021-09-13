@@ -1,5 +1,5 @@
 <template>
-  <v-dialog 
+  <v-dialog
     class="dialog"
     v-model="active"
     @click:outside="close('abort')"
@@ -21,7 +21,7 @@
               </div>
               <div class="message pl-12 pr-12 pt-5 pb-3 text-justify">
                 <span>
-                  {{ $t('general.modalSuccess') }}
+                  {{ $t('modalSuccess') }}
                 </span>
               </div>
             </v-card-text>
@@ -32,7 +32,7 @@
                     color="#0253B3"
                     text
                     @click="close('ok')">
-                {{ $t('general.ok') }}
+                {{ $t('ok') }}
               </v-btn>
             </v-card-actions>
           </template>
@@ -46,7 +46,7 @@
               </div>
               <div class="message pl-12 pr-12 pt-5 pb-3 text-justify">
                 <span>
-                  {{ $t('general.modalConfirm') }}
+                  {{ $t('modalConfirm') }}
                 </span>
               </div>
             </v-card-text>
@@ -57,19 +57,19 @@
                     color="#999"
                     text
                     @click="close('abort')">
-                {{ $t('general.cancel') }}
+                {{ $t('cancel') }}
               </v-btn>
               <v-btn class="action-btn ma-0 pa-0 pb-7 pt-7"
                     width="50%"
                     color="#0253B3"
                     text
                     @click="close('save')">
-                {{ $t('general.save') }}
+                {{ $t('save') }}
               </v-btn>
             </v-card-actions>
           </template>
         </v-card>
-      
+
     </v-card>
   </v-dialog>
 </template>

@@ -14,13 +14,13 @@
           v-bind="attrs"
           v-on="on"
         >
-          {{ $t("company.employer.inviteUser") }}
+          {{ $t("inviteUser") }}
         </v-btn>
       </template>
 
       <v-card class="pa-7" style="border-radius: 16px;">
         <h1 class="mb-4" style="font-size: 28px;">
-          {{ $t("company.employer.inviteUser") }}
+          {{ $t("inviteUser") }}
         </h1>
 
         <v-form
@@ -30,11 +30,11 @@
           v-model="isValid"
         >
           <label class="profile-label">{{
-            $t("company.employer.nickname")
+            $t("nickname")
           }}</label>
           <v-text-field
             dense
-            :placeholder="$t('company.employer.nickname')"
+            :placeholder="$t('nickname')"
             :rules="[validations.required]"
             type="text"
             outlined
@@ -44,11 +44,11 @@
           ></v-text-field>
 
           <label class="profile-label">{{
-            $t("company.employer.email")
+            $t("email")
           }}</label>
           <v-text-field
             dense
-            :placeholder="$t('company.employer.emailplaceholder')"
+            :placeholder="$t('emailplaceholder')"
             :rules="[validations.required, validations.email]"
             type="email"
             outlined
@@ -68,7 +68,7 @@
                 $refs.form.reset();
               "
             >
-              {{ $t("general.cancelOption") }}
+              {{ $t("cancelOption") }}
             </v-btn>
             <v-btn
               type="submit"
@@ -78,7 +78,7 @@
               :disabled="!isValid"
               :loading="formLoading"
             >
-              {{ $t("company.employer.inviteNewUser") }}
+              {{ $t("inviteNewUser") }}
             </v-btn>
           </div>
         </v-form>

@@ -1,19 +1,23 @@
 <template>
   <v-container class="auth-login-wrap mx-auto" fluid no-gutters>
     <jonder-title>
-      {{ $t("general.loginAccount") }}
+      {{ $t("loginAccount") }}
     </jonder-title>
 
     <v-alert v-if="$route.query.resetPassword" text type="success">
-      Ihr Passwort wurde zurückgesetzt!
+      {{ $t("alertPasswordReset") }}
     </v-alert>
 
     <v-alert v-if="$route.query.setPassword" text type="success">
-      Ihr Passwort wurde festgelegt!
+      {{ $t("alertPasswordSet") }}
     </v-alert>
 
     <v-alert v-if="$route.query.changePassword" text type="success">
-      Ihr Passwort wurde geändert!
+      {{ $t("alertPasswordChanged") }}
+    </v-alert>
+
+    <v-alert v-if="$route.query.emailVerified" text type="success">
+      {{ $t("alertEmailVerified") }}
     </v-alert>
 
     <div class="mt-5">
@@ -23,7 +27,7 @@
         @submit.prevent="handleLogin"
       >
         <p class="login-by-email text-medium">
-          {{ $t("general.loginByEmail") }}
+          {{ $t("loginByEmail") }}
         </p>
         <label class="profile-label">E-mail</label>
         <v-text-field
@@ -57,7 +61,7 @@
             class="text-color-primary-blue-dark"
             style="text-decoration: none"
           >
-            {{ $t("general.forgotPassowrd") }}
+            {{ $t("forgotPassowrd") }}
           </router-link>
         </p>
 
@@ -72,7 +76,7 @@
           class="full-w mt-2"
         >
           <v-icon left>mdi-google</v-icon>
-          {{ $t("company.register.continueWithGoogleCompany") }}
+          {{ $t("continueWithGoogle") }}
         </v-btn>
 
         <v-btn
@@ -83,7 +87,7 @@
           class="full-w mt-4"
         >
           <v-icon left>mdi-facebook</v-icon>
-          {{ $t("company.register.continueWithFacebook") }}
+          {{ $t("continueWithFacebook") }}
         </v-btn>
 
         <v-btn
@@ -92,19 +96,19 @@
           :disabled="!formValid"
           :loading="formLoading"
         >
-          {{ $t("general.login") }}
+          {{ $t("login") }}
         </v-btn>
       </v-form>
     </div>
 
     <p class="text-center mt-2" style="font-size: 14px">
-      {{ $t("general.dontHaveAccount") }}
+      {{ $t("dontHaveAccount") }}
       <router-link
         to="/register"
         class="text-color-primary-blue-dark"
         style="text-decoration: none"
       >
-        {{ $t("general.register") }}
+        {{ $t("register") }}
       </router-link>
     </p>
   </v-container>
@@ -118,22 +122,22 @@ export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert,
+    ResponseAlert
   },
   data() {
     return {
       message: {
         show: false,
-        text: "",
+        text: ""
       },
       formData: {
         email: "",
         password: "",
-        privacy: false,
+        privacy: false
       },
       formLoading: false,
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -149,7 +153,7 @@ export default {
           this.$router.replace({ name: "Home" });
           this.$store.dispatch("user/fetchPlans");
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.data.data?.email_not_verified) {
             this.$router.push({ name: "RegisterVerifyEmail" });
           } else {
@@ -159,8 +163,8 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

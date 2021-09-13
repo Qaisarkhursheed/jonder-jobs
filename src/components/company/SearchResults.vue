@@ -14,7 +14,7 @@
 
     <template v-if="results.length">
       <div class="heading pb-4">
-        {{ searchMeta.total }} {{ $t("company.search.searchResults") }}
+        {{ searchMeta.total }} {{ $t("searchResults") }}
       </div>
       <v-row>
         <v-col

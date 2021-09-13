@@ -14,7 +14,7 @@
 
       <v-card class="pa-7" style="border-radius: 16px;">
         <h1 class="mb-4 text-center" style="font-size: 28px;">
-          {{ $t("general.areYouSure") }}
+          {{ $t("areYouSure") }}
         </h1>
 
         <v-form
@@ -24,7 +24,7 @@
           v-model="isValid"
         >
           <p class="text-center">
-            {{ $t("company.selectionManagement.deleteText", { name }) }}
+            {{ $t("deleteText", { name }) }}
           </p>
 
           <ResponseAlert :response="formResponse"></ResponseAlert>
@@ -37,7 +37,7 @@
                 $refs.form.reset();
               "
             >
-              {{ $t("general.cancelOption") }}
+              {{ $t("cancelOption") }}
             </v-btn>
 
             <v-btn
@@ -48,7 +48,7 @@
               :disabled="!isValid"
               :loading="loading"
             >
-              {{ $t("general.confirmOption") }}
+              {{ $t("confirmOption") }}
             </v-btn>
           </div>
         </v-form>

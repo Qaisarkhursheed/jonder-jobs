@@ -21,13 +21,14 @@
           </template>
           <v-list class="nav">
             <v-list-item @click="$router.push({ name: 'CompanySettings' })">
-              {{ $t("general.profile") }}
+              {{ $t("profile") }}
             </v-list-item>
             <v-list-item @click="$router.push({ name: 'Logout' })">
-              {{ $t("general.logout") }}
+              {{ $t("logout") }}
             </v-list-item>
           </v-list>
         </v-menu>
+        <LanguageDropdown />
       </div>
     </v-col>
   </v-row>
@@ -36,11 +37,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
+import LanguageDropdown from '../LanguageDropdown';
 
 export default {
   name: "Header",
 
-  components: {},
+  components: {LanguageDropdown},
 
   data() {
     return {
