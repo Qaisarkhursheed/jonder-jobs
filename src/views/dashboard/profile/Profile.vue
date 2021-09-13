@@ -342,13 +342,13 @@
           <div class="profile-label mb-2">
             {{ $t("salaryRequirement") }} (€)
           </div>
-          <SliderInput
-            :value="formData.monthly_salary"
+          <SliderRangeInput
+            :value="getMonthlySalary"
             suffix="k"
             min="1"
             max="20"
             step="0.5"
-            @change="value => (formData.monthly_salary = value)"
+            @change="changeMonthlySalary"
           />
         </v-col>
       </v-row>
@@ -672,11 +672,13 @@ import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
+import SliderRangeInput from "../../../components/SliderRangeInput";
 
 export default {
   name: "Profile",
 
   components: {
+    SliderRangeInput,
     UserPlanDescription,
     UpgradePlanModal,
     CardActionableList,
@@ -701,7 +703,7 @@ export default {
       looking_for_employment_type: "",
       address_to_work: "",
       ready_for_work: "",
-      monthly_salary: "",
+      monthly_salary: null,
       working_experience: "",
       why_jonder: "",
       cv: null,
@@ -785,6 +787,11 @@ export default {
     },
     plansData() {
       return this.plans("jobseeker_paln");
+    },
+    getMonthlySalary() {
+      const min = this.formData.monthly_salary.min;
+      const max = this.formData.monthly_salary.max;
+      return [min, max];
     }
   },
   methods: {
@@ -884,6 +891,12 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
+    },
+    changeMonthlySalary(event) {
+      this.formData.monthly_salary = {
+        min: event[0].toString(),
+        max: event[1].toString()
+      };
     },
     searchForValue(name) {
       return (
