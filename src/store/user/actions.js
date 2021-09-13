@@ -10,6 +10,16 @@ export default {
       .get("/me")
       .then(response => {
         commit("auth/SET_AUTHENTICATED", true, { root: true });
+        let monthlySalary = null;
+        try {
+          monthlySalary = JSON.parse(response.data.monthly_salary);
+        } catch (e) {
+          monthlySalary = {
+            min: "",
+            max: ""
+          };
+        }
+        response.data.monthly_salary = monthlySalary;
         commit("SET_USER", response.data);
         dispatch("fetchPlans");
         return response.data;
