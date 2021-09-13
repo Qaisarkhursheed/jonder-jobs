@@ -660,6 +660,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import isString from 'lodash/isString'
 import types from "@/types";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -789,8 +790,11 @@ export default {
       return this.plans("jobseeker_paln");
     },
     getMonthlySalary() {
-      const min = this.formData.monthly_salary.min;
-      const max = this.formData.monthly_salary.max;
+      const monthly_salary = isString(this.formData.monthly_salary)
+        ? this.formData.monthly_salary
+        : this.formData.monthly_salary;
+      const min = monthly_salary.min;
+      const max = monthly_salary.max;
       return [min, max];
     }
   },
@@ -825,7 +829,13 @@ export default {
     },
     handleUpdate() {
       this.formResponse = {};
-      let formDataCopy = Object.assign({}, this.formData);
+      let formDataCopy = {
+        ...this.formData,
+        ...{
+          address_to_work: this.formData.address_to_work.toString()
+        }
+      };
+      formDataCopy.monthly_salary = JSON.stringify(this.formData.monthly_salary);
       formDataCopy.branche = formDataCopy.branche.join();
       //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
       formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
@@ -851,6 +861,7 @@ export default {
       }
 
       this.formLoading = true;
+      console.log("formDataCopy", formDataCopy);
       this.updateUser(formDataCopy)
         .then(resp => {
           this.formResponse = resp.data;
