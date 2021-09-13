@@ -1,5 +1,5 @@
 <template>
-  <auth-wrap :img="e1 + 1">
+  <auth-wrap :have-width="'407'" :img="e1 + 1">
     <!-- Menu options - Logout -->
     <div style="position: absolute; top: 1rem; right: 1rem;">
       <v-menu top right>
