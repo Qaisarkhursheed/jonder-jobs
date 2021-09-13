@@ -29,6 +29,7 @@ html {
 .v-input__slot {
   .v-select__slot {
     height: auto !important;
+    min-height: 55px;
   }
 }
 .options .upgrade-option > span {

@@ -33,7 +33,10 @@
         style="position: relative"
       >
         <div class="auth-wrap d-flex">
-          <div class="my-auto mx-auto">
+          <div
+            class="my-auto mx-auto"
+            :style="{ width: haveWidth ? `${haveWidth}px` : 'auto' }"
+          >
             <!-- Logo -->
             <v-img
               :src="require('@/assets/jonder_blue.png')"
@@ -53,7 +56,7 @@
 <script>
 export default {
   name: "AuthWrap",
-  props: ["img"]
+  props: ["img", "haveWidth"]
 };
 </script>
 
