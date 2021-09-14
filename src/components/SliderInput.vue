@@ -63,6 +63,7 @@ export default {
 .slider-input {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
+  max-width: 335px;
   .monthly-salary {
     font-size: 18px;
     font-weight: 600;

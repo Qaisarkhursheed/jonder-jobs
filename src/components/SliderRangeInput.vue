@@ -90,6 +90,7 @@ export default {
 
 <style lang="scss">
 .slider-range-input {
+  max-width: 335px;
   .v-input--range-slider {
     align-items: center;
     display: flex;
