@@ -27,7 +27,9 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span class="d-none d-md-inline"> Hey, </span>
+          <span class="d-none d-md-inline">
+            {{$t('hello')}},
+          </span>
           <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
