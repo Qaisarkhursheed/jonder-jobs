@@ -76,14 +76,14 @@
         <v-col cols="6" class="experience">
           <div class="label">Erfahrung</div>
           <div class="value">
-            {{ candidate.working_experience }}
+            {{ candidate.working_experience }} {{ $t("years") }}
           </div>
         </v-col>
         <v-col cols="6" class="wage">
           <div class="label">GEHALTSERWARTUNG</div>
-          <div class="value" v-if="candidate.monthly_salary.min && candidate.monthly_salary.max">
-            {{ candidate.monthly_salary.min }} -
-            {{ candidate.monthly_salary.max }}
+          <div class="value" v-if="monthly_salary.min && monthly_salary.max">
+            &euro; {{ monthly_salary.min }} -
+            {{ monthly_salary.max }}
           </div>
           <div v-else>
             {{ $t("didntSet") }}
@@ -135,7 +135,11 @@ export default {
 
   data() {
     return {
-      startChatLoading: false
+      startChatLoading: false,
+      monthly_salary: {
+        min: "",
+        max: ""
+      }
     };
   },
 
@@ -144,10 +148,13 @@ export default {
       return this.candidate.plan?.plan_slug == "higlighted";
     },
     getBranche() {
-      const stringToArray = map(this.candidate.branche.split(","), item => {
-        return this.$t(item);
-      });
-      return stringToArray.join();
+      let branche = "";
+      if (this.candidate.branche) {
+        branche = map(this.candidate.branche.split(","), item => {
+          return this.$t(item);
+        }).join();
+      }
+      return branche;
     }
   },
 
@@ -196,7 +203,29 @@ export default {
       } else {
         this.$emit("block", true);
       }
+    },
+    getMinMax() {
+      try {
+        console.log(typeof this.candidate.monthly_salary);
+        if (typeof this.candidate.monthly_salary === 'string') {
+          this.monthly_salary = JSON.parse(this.candidate.monthly_salary);
+        } else {
+          this.monthly_salary = {
+            min: "1000",
+            max: (this.candidate.monthly_salary * 1000).toString()
+          };
+        }
+      } catch (e) {
+        this.monthly_salary = {
+          min: "1",
+          max: (this.candidate.monthly_salary * 1000).toString()
+        };
+      }
     }
+  },
+  mounted() {
+    console.log('this.candidatte', this.candidate);
+    this.getMinMax();
   }
 };
 </script>
