@@ -64,6 +64,10 @@ export default {
     data.looking_for.forEach((key, i) => {
       formData.append(`looking_for[${i}]`, key);
     });
+    formData.delete("address_to_work");
+    data.address_to_work.forEach((key, i) => {
+      formData.append(`address_to_work[${i}]`, key);
+    });
     try {
       const resp = await axios.post(
         "/user/onboarding/" + state.user.id,

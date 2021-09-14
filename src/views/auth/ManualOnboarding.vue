@@ -191,7 +191,7 @@ export default {
       current_position: "",
       //looking_for_branche: "",
       looking_for_employment_type: "",
-      address_to_work: "",
+      address_to_work: [],
       ready_for_work: "",
       monthly_salary: null,
       working_experience: "",

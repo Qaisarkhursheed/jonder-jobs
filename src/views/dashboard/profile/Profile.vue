@@ -302,6 +302,7 @@
             multiple
             small-chips
             deletable-chips
+            hide-no-data
             no-filter
             outlined
           >
