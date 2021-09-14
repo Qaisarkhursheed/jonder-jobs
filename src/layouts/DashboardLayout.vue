@@ -178,26 +178,20 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info">{{
-                $t("searchStatus")
-              }}</span>
+              <span class="about-info">{{ $t("searchStatus") }}</span>
               <p class="about-text">
                 <span v-for="(item, i) in userEmploymentType" :key="i">
-                  {{ $t(`employmentTypes.${item}`) }}
+                  {{ $t(`${item}`) }}
                 </span>
               </p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.current_position }}</p>
 
-              <span class="about-info">{{
-                $t("currentIndustry")
-              }}</span>
+              <span class="about-info">{{ $t("currentIndustry") }}</span>
               <p class="about-text">{{ user.branche }}</p>
 
-              <span class="about-info"
-                >{{ $t("cityAndAddress") }}
-              </span>
+              <span class="about-info">{{ $t("cityAndAddress") }} </span>
               <p class="about-text">{{ user.city }}</p>
 
               <span class="about-info">
@@ -265,21 +259,21 @@ import debounce from "lodash.debounce";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
-import LanguageDropdown from '../components/LanguageDropdown';
+import LanguageDropdown from "../components/LanguageDropdown";
 
 export default {
   components: {
     LanguageDropdown,
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -294,7 +288,7 @@ export default {
     },
     userEmploymentType() {
       return this.user.looking_for_employment_type.split(",");
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -309,7 +303,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    },
+    }
   },
   watch: {
     search(val) {
@@ -325,8 +319,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
