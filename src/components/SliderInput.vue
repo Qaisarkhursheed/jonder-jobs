@@ -64,6 +64,8 @@ export default {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   .monthly-salary {
+    font-size: 18px;
+    font-weight: 600;
     min-width: 6rem;
   }
   .v-slider__track-container {
