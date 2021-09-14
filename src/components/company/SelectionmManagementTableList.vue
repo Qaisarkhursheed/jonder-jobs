@@ -63,6 +63,7 @@
                 :items="getSelectionOptions"
                 :value="item.managment_status"
                 dense
+                :height="40"
                 @change="updateJobseeker($event, item.id)"
                 outlined
               >
