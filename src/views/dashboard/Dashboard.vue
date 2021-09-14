@@ -11,7 +11,7 @@
       >
         <!-- Hello -->
         <div class="user-name">
-          Hey,
+          {{ $t('hello') }},
           <span style="color:#0253B3;">
             {{ user.first_name }} {{ user.last_name }}
           </span>

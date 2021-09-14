@@ -27,7 +27,9 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span class="d-none d-md-inline"> Hey, </span>
+          <span class="d-none d-md-inline">
+            {{$t('hello')}},
+          </span>
           <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -189,7 +191,7 @@
               <p class="about-text">{{ user.current_position }}</p>
 
               <span class="about-info">{{ $t("currentIndustry") }}</span>
-              <p class="about-text">{{ user.branche }}</p>
+              <p class="about-text">{{ getBranche }}</p>
 
               <span class="about-info">{{ $t("cityAndAddress") }} </span>
               <p class="about-text">{{ user.city }}</p>
@@ -255,7 +257,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import debounce from "lodash.debounce";
+import { debounce, map } from "lodash";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
@@ -288,6 +290,12 @@ export default {
     },
     userEmploymentType() {
       return this.user.looking_for_employment_type.split(",");
+    },
+    getBranche() {
+      const stringToArray = map(this.user.branche.split(","), item => {
+        return this.$t(item);
+      });
+      return stringToArray.join();
     }
   },
   methods: {
