@@ -39,7 +39,7 @@
             </span>
           </v-col>
           <v-col cols="6" class="text-right">
-            <span class="value">{{ candidate.branche }}</span>
+            <span class="value">{{ getBranche }}</span>
           </v-col>
         </v-row>
 
@@ -81,8 +81,12 @@
         </v-col>
         <v-col cols="6" class="wage">
           <div class="label">GEHALTSERWARTUNG</div>
-          <div class="value">
-            {{ candidate.monthly_salary }}
+          <div class="value" v-if="candidate.monthly_salary.min && candidate.monthly_salary.max">
+            {{ candidate.monthly_salary.min }} -
+            {{ candidate.monthly_salary.max }}
+          </div>
+          <div v-else>
+            {{ $t("didntSet") }}
           </div>
         </v-col>
       </v-card-text>
@@ -118,6 +122,7 @@
 
 <script>
 import store from "@/store";
+import {map} from 'lodash';
 
 export default {
   name: "SearchResultsCard",
@@ -137,6 +142,12 @@ export default {
   computed: {
     highlighted() {
       return this.candidate.plan?.plan_slug == "higlighted";
+    },
+    getBranche() {
+      const stringToArray = map(this.candidate.branche.split(","), item => {
+        return this.$t(item);
+      });
+      return stringToArray.join();
     }
   },
 
