@@ -294,9 +294,7 @@
               })
             "
             :items="
-              $store.getters['google/places'].concat(
-                formData.address_to_work || []
-              )
+              $store.getters['google/places'].concat(formData.address_to_work)
             "
             :loading="$store.getters['google/loadingPlaces']"
             :rules="[validations.required]"
@@ -660,7 +658,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import isString from 'lodash/isString'
+import isString from "lodash/isString";
 import types from "@/types";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -702,7 +700,7 @@ export default {
       looking_for: [],
       // looking_for_branche: [],
       looking_for_employment_type: "",
-      address_to_work: "",
+      address_to_work: [],
       ready_for_work: "",
       monthly_salary: null,
       working_experience: "",
@@ -811,7 +809,7 @@ export default {
       this.formData.looking_for_employment_type = user.looking_for_employment_type.split(
         ","
       );
-      this.formData.address_to_work = user.address_to_work;
+      this.formData.address_to_work = user.address_to_work || [];
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.working_experience = user.working_experience;
@@ -822,20 +820,15 @@ export default {
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
       this.dontKnowWhenToStart = !user.ready_for_work;
-
-      if (!Array.isArray(this.formData.address_to_work)) {
-        this.formData.address_to_work = [this.formData.address_to_work];
-      }
     },
     handleUpdate() {
       this.formResponse = {};
       let formDataCopy = {
-        ...this.formData,
-        ...{
-          address_to_work: this.formData.address_to_work.toString()
-        }
+        ...this.formData
       };
-      formDataCopy.monthly_salary = JSON.stringify(this.formData.monthly_salary);
+      formDataCopy.monthly_salary = JSON.stringify(
+        this.formData.monthly_salary
+      );
       formDataCopy.branche = formDataCopy.branche.join();
       //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
       formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
