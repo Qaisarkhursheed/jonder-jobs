@@ -26,6 +26,7 @@ import EditNotepad from "../views/dashboard/EditNotepad";
 import Chat from "../views/dashboard/Chat";
 import ProductPricing from "../views/dashboard/ProductPricing";
 import CvMaker from "../views/dashboard/profile/CvMaker";
+import PersonalityTestJobseeker from "@/views/dashboard/PersonalityTest";
 
 // Company base view
 import CompanyLayout from "@/layouts/CompanyLayout";
@@ -282,6 +283,14 @@ const routes = [
         meta: {
           requiresAuth: true,
           isAdmin: false
+        }
+      },
+      {
+        path: "personality-test",
+        name: "PersonalityTestJobseeker",
+        component: PersonalityTestJobseeker,
+        meta: {
+          requiresAuth: true
         }
       },
       {
