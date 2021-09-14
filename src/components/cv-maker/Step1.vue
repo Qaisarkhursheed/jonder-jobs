@@ -80,7 +80,7 @@
             <v-text-field
               dense
               type="number"
-              :placeholder="$t('general.years')"
+              :placeholder="$t('years')"
               outlined
               solo
               flat
