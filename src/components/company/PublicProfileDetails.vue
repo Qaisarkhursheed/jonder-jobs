@@ -16,10 +16,6 @@
       >
         <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
         <template v-slot:item="{ item }">
-          <v-list-item-action>
-            <v-simple-checkbox v-ripple="false" @input="toggleValues($event, item)" :value="form.branche.indexOf(item) >= 0">
-            </v-simple-checkbox>
-          </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
               {{ $t(item) }}
