@@ -14,7 +14,7 @@
         :hide-details="true"
         placeholder="Enter industry "
       >
-        <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
+        <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
         <template v-slot:item="{ item }">
           <v-list-item-content>
             <v-list-item-title>
