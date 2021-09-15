@@ -18,6 +18,7 @@
         <div class="heading-subtitle">{{ user.city }} {{ user.address }}</div>
       </div>
     </div>
+
     <div v-if="user.role === 'Employer'">
       <div class="section mb-8">
         <label class="section-label">
@@ -158,17 +159,67 @@
         </div>
       </div>
     </div>
+
+    <!-- Northdata widgets -->
+    <div class="section mt-3" v-if="user.role == 'Employer'">
+      <label class="section-label">
+        North Data
+      </label>
+
+      <div class="content pt-4">
+        <div class="row">
+          <!-- History graph -->
+          <div class="col">
+            <v-dialog v-model="historyGraph">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn color="primary" dark v-bind="attrs" v-on="on" block>
+                  {{ $t("northdataHistory") }}
+                </v-btn>
+              </template>
+              <v-card>
+                <NorthDataWidget :user="user" layout="history" />
+              </v-card>
+            </v-dialog>
+          </div>
+
+          <!-- Barchart -->
+          <div class="col">
+            <v-dialog v-model="barChart" width="600">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn color="primary" dark v-bind="attrs" v-on="on" block>
+                  {{ $t("northdataBarChart") }}
+                </v-btn>
+              </template>
+              <v-card>
+                <NorthDataWidget :user="user" layout="barChart" />
+              </v-card>
+            </v-dialog>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import NorthDataWidget from "./NorthDataWidget";
+
 export default {
   name: "PublicProfileViewAs",
 
+  components: { NorthDataWidget },
+
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
+  },
+
+  data() {
+    return {
+      historyGraph: false,
+      barChart: false
+    };
   },
 
   computed: {
@@ -197,8 +248,8 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
-    },
-  },
+    }
+  }
 };
 </script>
 
