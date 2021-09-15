@@ -10,12 +10,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-outline</v-icon
           >
-          Referenzen
+          {{ $t("credentials") }}
         </label>
         <v-text-field
           dense
           type="text"
-          placeholder="Name des Unternehmens"
+          :placeholder="$t('companyName')"
           outlined
           solo
           flat
@@ -31,7 +31,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Kontaktperson"
+          :placeholder="$t('contactPerson')"
           outlined
           solo
           flat
@@ -47,7 +47,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Telefonnummer"
+          :placeholder="$t('phoneNumber')"
           outlined
           solo
           flat
@@ -63,7 +63,7 @@
         <v-text-field
           dense
           type="email"
-          placeholder="E-mail adresse"
+          :placeholder="$t('emailAddress')"
           outlined
           solo
           flat
@@ -80,12 +80,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-check-outline</v-icon
           >
-          Kompetenzen
+          {{ $t("competencies") }}
         </label>
         <v-text-field
           dense
           type="text"
-          placeholder="Kompetenz"
+          :placeholder="$t('competence')"
           outlined
           solo
           flat
@@ -98,7 +98,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Niveau"
+          :placeholder="$t('level')"
           outlined
           solo
           flat
@@ -113,12 +113,12 @@
       <v-col cols="12">
         <label class="text-color-primary-blue-dark font-weight-bold">
           <v-icon class="text-color-primary-blue-dark">mdi-earth</v-icon>
-          Sprachen
+          {{ $t("languages") }}
         </label>
         <v-text-field
           dense
           type="text"
-          placeholder="Sprache"
+          :placeholder="$t('languages')"
           outlined
           solo
           flat
@@ -134,7 +134,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Niveau"
+          :placeholder="$t('level')"
           outlined
           solo
           flat
@@ -170,7 +170,7 @@
           @click="nextStep"
           class="font-weight-bold"
         >
-          Nachester Schritt
+          {{ $t("nextStep") }}
         </v-btn>
       </v-col>
     </v-row>

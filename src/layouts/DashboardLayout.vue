@@ -228,7 +228,7 @@
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">
-                  Qualifications
+                  {{ $t("qualifications") }}
                 </div>
               </div>
 
@@ -239,7 +239,7 @@
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">
-                  Lebenslauf
+                  {{ $t("curriculumVitae") }}
                 </div>
               </div>
             </div>

@@ -59,7 +59,7 @@
           height="58"
           class="full-w mt-16 font-weight-medium dark-blue"
         >
-          New note
+          {{ $t("newNote") }}
         </v-btn>
       </v-col>
     </v-row>

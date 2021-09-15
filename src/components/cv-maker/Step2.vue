@@ -6,8 +6,9 @@
     <v-card-subtitle>
       <div class="step-header-detail pb-2">
         <v-icon>mdi-office-building</v-icon>
-        <span>Bildung & Qualifikationen</span>
+        <span>{{ $t("education") }} & {{ $t("qualifications") }}</span>
       </div>
+      <!-- left hardcoded -->
       <div class="step-header-description">
         <div>Bildung Lore ipsum</div>
         <div class="date">September 2019. - Oktobar 2020.</div>
@@ -18,7 +19,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Abschluss"
+          :placeholder="$t('diploma')"
           outlined
           solo
           flat
@@ -34,7 +35,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Stadt"
+          :placeholder="$t('city')"
           outlined
           solo
           flat
@@ -50,7 +51,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Institut"
+          :placeholder="$t('Institut')"
           outlined
           solo
           flat
@@ -63,7 +64,7 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Begindatum</label>
+        <label class="font-weight-bold">{{ $t("startDate") }}</label>
         <v-text-field
           dense
           type="text"
@@ -78,7 +79,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Enddatum</label>
+        <label class="font-weight-bold">{{ $t("endDate") }}</label>
         <v-text-field
           dense
           type="text"
@@ -99,7 +100,7 @@
         <v-textarea
           dense
           type="text"
-          placeholder="Beschreibung"
+          :placeholder="$t('description')"
           outlined
           solo
           flat
@@ -118,7 +119,7 @@
         <v-textarea
           dense
           type="text"
-          placeholder="Beschreibung"
+          :placeholder="$t('description')"
           outlined
           solo
           flat

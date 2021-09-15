@@ -6,7 +6,7 @@
         max-width="128px"
       ></v-img>
     </router-link>
-    <router-link to="/dashboard">Dashboard</router-link>
+    <router-link to="/dashboard">{{ $t("dashboard") }}</router-link>
   </div>
 </template>
 

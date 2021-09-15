@@ -3,7 +3,7 @@
     <v-row class="no-gutters">
       <v-col cols="12" md="8" class="left pl-10 pr-10 pt-7 pb-10">
         <div class="section experience mt-7">
-          <div class="title">Erfahrung</div>
+          <div class="title">{{ $t("experiences") }}</div>
           <div class="content">
             <div v-for="data in experience" :key="data.company">
               <div class="item pb-5 pt-5">
@@ -14,14 +14,14 @@
                   <template v-if="data.end_time">
                     {{ data.end_time | moment("MMMM YYYY") }}
                   </template>
-                  <template v-else>Present</template>
+                  <template v-else>{{ $t("present") }}</template>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="section experience mt-7">
-          <div class="title">Ausbildung</div>
+          <div class="title">{{ $t("educationStudy") }}</div>
           <div class="content">
             <div v-for="data in education" :key="data.company">
               <div class="item pb-5 pt-5">
@@ -32,7 +32,7 @@
                   <template v-if="data.end_time">
                     {{ data.end_time | moment("MMMM YYYY") }}
                   </template>
-                  <template v-else>Present</template>
+                  <template v-else>{{ $t("present") }}</template>
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@
           </div>
           <div class="section">
             <div class="title">
-              Position
+              {{ $t("position") }}
             </div>
             <div class="content">
               {{ user.current_position }}
@@ -80,7 +80,8 @@
 
         <div class="section mb-7">
           <div class="title">
-            DOCUMENTS & CERTIFICATS
+            {{ $t("documents").toUpperCase() }} &
+            {{ $t("certificates").toUpperCase() }}
           </div>
           <div class="content">
             <div v-if="user.cv" class="row mt-1">
@@ -90,7 +91,7 @@
                 </a>
               </div>
               <div class="col my-auto">
-                CV
+                {{ $t("cv") }}
               </div>
             </div>
 
@@ -101,7 +102,7 @@
                 </a>
               </div>
               <div class="col my-auto">
-                Qualifications
+                {{ $t("qualifications") }}
               </div>
             </div>
 
@@ -112,7 +113,7 @@
                 </a>
               </div>
               <div class="col my-auto">
-                Resume
+                {{ $t("resume") }}
               </div>
             </div>
           </div>

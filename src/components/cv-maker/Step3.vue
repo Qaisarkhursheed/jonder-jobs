@@ -6,7 +6,7 @@
     <v-card-subtitle>
       <div class="step-header-detail pb-2">
         <v-icon>mdi-briefcase-outline</v-icon>
-        <span>Arbeitserfahrung</span>
+        <span>{{ $t("workExperience") }}</span>
       </div>
     </v-card-subtitle>
     <v-row>
@@ -14,7 +14,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Stellenbezeichnung"
+          :placeholder="$t('designation')"
           outlined
           solo
           flat
@@ -30,7 +30,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Stadt"
+          :placeholder="$t('city')"
           outlined
           solo
           flat
@@ -46,7 +46,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Arbeitgeber"
+          :placeholder="$t('employer')"
           outlined
           solo
           flat
@@ -59,7 +59,7 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Begindatum</label>
+        <label class="font-weight-bold">{{ $t("startDate") }}</label>
         <v-text-field
           dense
           type="text"
@@ -74,7 +74,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Enddatum</label>
+        <label class="font-weight-bold">{{ $t("endDate") }}</label>
         <v-text-field
           dense
           type="text"
@@ -95,7 +95,7 @@
         <v-textarea
           dense
           type="text"
-          placeholder="Beschreibung"
+          :placeholder="$t('description')"
           outlined
           solo
           flat
@@ -112,12 +112,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-cards-playing-outline</v-icon
           >
-          Interessen
+          {{ $t("interests") }}
         </label>
         <v-text-field
           dense
           type="text"
-          placeholder="Hobby"
+          :placeholder="$t('hobby')"
           outlined
           solo
           flat
@@ -153,7 +153,7 @@
           @click="nextStep"
           class="font-weight-bold"
         >
-          Nachester Schritt
+          {{ $t("nextStep") }}
         </v-btn>
       </v-col>
     </v-row>

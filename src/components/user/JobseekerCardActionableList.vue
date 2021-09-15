@@ -19,7 +19,7 @@
             <template v-if="value.end_time">
               {{ value.end_time | moment("MMMM YYYY") }}
             </template>
-            <template v-else>Present</template>
+            <template v-else>{{ $t("present") }}</template>
           </div>
         </template>
         <template v-else #default="{ value }">
@@ -30,7 +30,7 @@
             <template v-if="value.end_time">
               {{ value.end_time | moment("MMMM YYYY") }}
             </template>
-            <template v-else>Present</template>
+            <template v-else>{{ $t("present") }}</template>
           </div>
         </template>
       </CardActionable>

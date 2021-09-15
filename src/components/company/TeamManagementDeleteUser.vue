@@ -14,7 +14,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          Entfernen
+          {{ $t("removed") }}
         </v-btn>
       </template>
 
