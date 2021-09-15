@@ -9,12 +9,10 @@
         color="#0253B3"
         :prepend-icon="null"
         prepend-inner-icon="mdi-cloud-upload"
-        class="file-input-jonder text-center"
+        class="file-input-jonder "
       >
         <template v-slot:selection="{ text }">
-          <v-chip small label color="primary">
-            {{ text }}
-          </v-chip>
+          <v-chip small label color="primary"> {{ text }} </v-chip>
         </template>
       </v-file-input>
     </template>
@@ -61,16 +59,16 @@ export default {
 
   props: {
     type: {
-      type: String
+      type: String,
     },
     value: {
       type: [Object, Boolean, Array, String],
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      inputData: null
+      inputData: null,
     };
   },
   created() {
@@ -78,8 +76,8 @@ export default {
       this.inputData = [
         {
           name: this.value,
-          size: false
-        }
+          size: false,
+        },
       ];
     }
   },
@@ -97,14 +95,14 @@ export default {
       } else {
         this.inputData = null;
       }
-    }
+    },
   },
 
   watch: {
     inputData(val) {
       this.$emit("change", val);
-    }
-  }
+    },
+  },
 };
 </script>
 
