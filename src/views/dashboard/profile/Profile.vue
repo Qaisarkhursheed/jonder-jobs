@@ -214,7 +214,17 @@
             :items="jonderStatus"
             background-color="white"
             outlined
-          ></v-select>
+            cache-items
+          >
+            <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
+            <template v-slot:item="{ item }">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-select>
         </v-col>
       </v-row>
     </v-card>
@@ -725,9 +735,9 @@ export default {
       image: null
     },
     jonderStatus: [
-      "I am actively looking for a job",
-      "I am open to an interesting offer",
-      "I am just curious"
+      "whatBringsYouJob",
+      "whatBringsYouOffer",
+      "whatBringsYouCurious"
     ],
     modals: {
       UpgradePlan: {
@@ -765,6 +775,7 @@ export default {
       this.invoices = this.invoices.filter(i => i.status === "complete");
     });
     this.$store.dispatch("professions/fetch");
+    console.log('create profile', this.$i18n.locale);
   },
   computed: {
     ...mapGetters("user", [
