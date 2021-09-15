@@ -111,7 +111,7 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption font-weight-bold mt-1">Junior</p>
+            <p class="text-center caption font-weight-bold mt-1">{{ $t("junior") }}</p>
           </v-col>
 
           <v-col>
@@ -134,7 +134,7 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1 font-weight-bold">Senior</p>
+            <p class="text-center caption mt-1 font-weight-bold">{{ $t("senior") }}</p>
           </v-col>
 
           <v-col>
@@ -160,7 +160,7 @@
               </v-btn>
             </div>
 
-            <p class="text-center caption mt-1 font-weight-bold">Advanced</p>
+            <p class="text-center caption mt-1 font-weight-bold">{{ $t("advanced") }}</p>
           </v-col>
         </v-row>
       </v-col>

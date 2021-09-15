@@ -86,6 +86,7 @@
           <a class="card-link-btn">
             <v-icon>mdi-link</v-icon>
           </a>
+          <!-- left hardcoded -->
           <v-card-title class="pb-0 font-weight-bold">Lorem ipsum</v-card-title>
           <v-card-text
             >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, lorem
@@ -113,8 +114,8 @@ export default {
       describe_yourself: ""
     },
     rules: [
-      value => !!value || "Required.",
-      value => (value && value.length >= 3) || "Min 3 characters"
+      value => !!value || this.$t("required"),
+      value => (value && value.length >= 3) || this.$t("required")
     ]
   }),
   created() {

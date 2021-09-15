@@ -6,7 +6,7 @@
 
     <v-container fluid class="landing-header-container">
       <v-row class="landing-header">
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="4">
           <router-link to="/" class="logo">
             <v-img
               :src="require('@/assets/jonder_blue.png')"
@@ -14,9 +14,9 @@
             />
           </router-link>
         </v-col>
-        <v-col cols="12" md="6" class="links">
+        <v-col cols="12" md="8" class="links">
           <router-link to="/faq" class="txt-link text-color-primary-blue-dark"
-            >FAQ</router-link
+            >{{ $t("faq") }}</router-link
           >
           <router-link
             to="/register"
@@ -62,7 +62,7 @@
             </p>
             <div class="promo-actions">
               <router-link to="/register" class="button dark-blue fill">
-                Registrieren
+                {{ $t("register") }}
               </router-link>
             </div>
           </div>

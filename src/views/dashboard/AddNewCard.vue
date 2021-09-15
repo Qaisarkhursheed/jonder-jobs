@@ -17,7 +17,7 @@
       <div class="card-info">
         <v-col cols="6">
           <label class="profile-label">
-            Kreditkartennummer
+            {{ $t("creditCardNumber") }}
           </label>
           <v-text-field
             dense
@@ -32,7 +32,7 @@
         </v-col>
         <v-col cols="6">
           <label class="profile-label">
-            Karteninhaber
+            {{ $t("cardHolder") }}
           </label>
           <v-text-field
             dense
@@ -49,11 +49,11 @@
       <div class="card-info">
         <v-col cols="3">
           <label class="profile-label">
-            Expiration Date
+            {{ $t("expirationDate") }}
           </label>
           <v-text-field
             dense
-            placeholder="Monat/Jahr"
+            :placeholder="$t('monthYear')"
             type="text"
             outlined
             solo
@@ -64,7 +64,7 @@
         </v-col>
         <v-col cols="3">
           <label class="profile-label">
-            CVC
+            {{ $t("cvv") }}
           </label>
           <v-text-field
             dense
@@ -95,7 +95,7 @@
           width="178"
           class="mt-16 font-weight-medium upgrade-btn"
         >
-          Next
+          {{ $t("next") }}
         </v-btn>
       </div>
     </v-card>
