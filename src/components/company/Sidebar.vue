@@ -16,32 +16,53 @@
         </v-icon>
 
         <router-link :to="{ name: 'CompanySearch' }">
-          <v-icon>mdi-magnify</v-icon>
-          <span>{{ $t("jonderSearch") }}</span>
+          <Loop :color="$route.name === 'CompanySearch' ? '#222' : '#616161'" />
+          <span class="nav-title">{{ $t("jonderSearch") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanySelectionManagement' }">
-          <v-icon>mdi-account-switch</v-icon>
-          <span>{{ $t("selectionManagement") }}</span>
+          <SelectManagement
+            :color="
+              $route.name === 'CompanySelectionManagement' ? '#222' : '#616161'
+            "
+          />
+          <span class="nav-title">{{ $t("selectionManagement") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyMessages' }">
-          <v-icon>mdi-message</v-icon>
-          <span>{{ $t("messages") }}</span>
+          <Messages
+            :color="$route.name === 'CompanyMessages' ? '#222' : '#616161'"
+          />
+          <span class="nav-title">{{ $t("messages") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyMessageTemplates' }">
-          <v-icon>mdi-message-bulleted</v-icon>
-          <span>{{ $t("messageTemplates") }}</span>
+          <v-icon
+            :color="
+              $route.name === 'CompanyMessageTemplates' ? '#222' : '#616161'
+            "
+            >mdi-message-bulleted</v-icon
+          >
+          <span class="nav-title">{{ $t("messageTemplates") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyTeamManagement' }">
-          <v-icon>mdi-account-group</v-icon>
-          <span>{{ $t("teamManagement") }}</span>
+          <TeamManagement
+            :color="
+              $route.name === 'CompanyTeamManagement' ? '#222' : '#616161'
+            "
+          />
+          <span class="nav-title">{{ $t("teamManagement") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyPublicProfile' }">
-          <v-icon>mdi-office-building</v-icon>
-          <span>{{ $t("publicCompanyProfile") }}</span>
+          <PublicCompany
+            :color="$route.name === 'CompanyPublicProfile' ? '#222' : '#616161'"
+          />
+          <span class="nav-title">{{ $t("publicCompanyProfile") }}</span>
         </router-link>
         <router-link :to="{ name: 'CompanyPackagesPricing' }">
-          <v-icon>mdi-currency-usd</v-icon>
-          <span>{{ $t("packagesPricing") }}</span>
+          <Pricing
+            :color="
+              $route.name === 'CompanyPackagesPricing' ? '#222' : '#616161'
+            "
+          />
+          <span class="nav-title">{{ $t("packagesPricing") }}</span>
         </router-link>
       </nav>
       <footer-legal class="footer-impressum"></footer-legal>
@@ -51,17 +72,29 @@
 
 <script>
 import FooterLegal from "@/components/parts/FooterLegal.vue";
+import Loop from "../../svgs/Loop";
+import SelectManagement from "../../svgs/SelectManagement";
+import Messages from "../../svgs/Messages";
+import TeamManagement from "../../svgs/TeamManagement";
+import PublicCompany from "../../svgs/PublicCompany";
+import Pricing from "../../svgs/Pricing";
 
 export default {
   name: "Sidebar",
 
   components: {
-    FooterLegal,
+    Pricing,
+    PublicCompany,
+    TeamManagement,
+    Messages,
+    SelectManagement,
+    Loop,
+    FooterLegal
   },
   props: {
     mobile: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {
@@ -70,11 +103,12 @@ export default {
   },
   mounted() {
     this.extended = !this.mobile;
+    console.log(this.$route);
   },
   methods: {
     toggleSidebar() {
       this.extended = !this.extended;
-    },
+    }
   },
   computed: {
     isMini() {
@@ -83,8 +117,8 @@ export default {
       } else {
         return this.extended;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -161,6 +195,11 @@ export default {
       span {
         display: none;
       }
+    }
+    .nav-title {
+      font-size: 20px;
+      line-height: 20px;
+      padding-left: 16px;
     }
   }
 }
