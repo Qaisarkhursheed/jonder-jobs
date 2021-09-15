@@ -7,16 +7,15 @@
       no-gutters
     >
       <jonder-title>
-        Passwort festlegen
+        {{ $t("setPassword") }}
       </jonder-title>
 
       <p class="p-text mb-7">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-        ultricies felis eu libero.
+        {{ $t("setPasswordDescription") }}
       </p>
 
       <v-form v-model="formValid" class="auth-form" @submit.prevent="submit">
-        <label class="profile-label">Passwort</label>
+        <label class="profile-label">{{ $t("password") }}</label>
         <v-text-field
           v-model="formData.password"
           dense
@@ -26,7 +25,7 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">Bestätige Passwort</label>
+        <label class="profile-label">{{ $t("confirmPassword") }}</label>
         <v-text-field
           v-model="formData.password_confirmation"
           dense
@@ -49,7 +48,7 @@
           :disabled="!formValid"
           :loading="formLoading"
         >
-          Senden
+          {{ $t("send") }}
         </v-btn>
       </v-form>
     </v-container>

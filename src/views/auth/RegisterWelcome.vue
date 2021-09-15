@@ -8,7 +8,7 @@
         class="mt-5 mx-5"
         style="margin-bottom: -10px"
       >
-        No account found, please register first.
+        {{ $t("noAccountFound") }}
       </v-alert>
 
       <v-stepper-items class="text-center" style="max-width: 500px">
@@ -18,8 +18,7 @@
             {{ $t("jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222; font-size: 17px">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-            ultricies felis eu libero.
+            {{ $t("jonderWelcomeDescription") }}
           </p>
           <v-btn
             class="dark-blue"

@@ -8,8 +8,7 @@
             {{ $t("jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-            ultricies felis eu libero.
+            {{$t('jonderWelcomeDescription')}}
           </p>
           <v-btn
             @click="step = 2"

@@ -357,5 +357,15 @@
   "Interview": "Interview",
   "Final round": "Letzte Runde",
   "Hired": "Gemietet",
-  "didntSet": "Nicht eingestellt"
+  "didntSet": "Nicht eingestellt",
+  "jonderWelcomeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.",
+  "emailSentSuccess": "E-Mail erfolgreich gesendet",
+  "emailSentSuccessMessage": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat est purus ipsum.",
+  "noAccountFound": "Kein Konto gefunden, bitte registrieren Sie sich zuerst.",
+  "resetPassword": "Passwort zurücksetzen",
+  "resetPasswordDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.",
+  "confirmNewPassword": "Bestätige neues Passwort",
+  "setPassword": "Passwort festlegen",
+  "setPasswordDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.",
+  "confirmPassword": "Bestätige Passwort"
 }

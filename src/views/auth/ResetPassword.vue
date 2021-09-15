@@ -7,12 +7,11 @@
       no-gutters
     >
       <jonder-title>
-        Passwort zurücksetzen
+        {{ $t("resetPassword") }}
       </jonder-title>
 
       <p class="p-text mb-7">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-        ultricies felis eu libero.
+        {{ $t("resetPasswordDescription") }}
       </p>
 
       <v-form v-model="formValid" class="auth-form" @submit.prevent="submit">
@@ -28,7 +27,9 @@
           background-color="white"
         ></v-text-field>
 
-        <label class="profile-label">Bestätige neues Passwort</label>
+        <label class="profile-label">
+          {{ $("confirmNewPassword") }}
+        </label>
         <v-text-field
           v-model="formData.password_confirmation"
           dense
@@ -50,7 +51,7 @@
           height="55"
           :disabled="!formValid"
         >
-          Senden
+          {{ $("send") }}
         </v-btn>
       </v-form>
     </v-container>
