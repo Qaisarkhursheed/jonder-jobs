@@ -29,7 +29,12 @@ html {
 .v-input__slot {
   .v-select__slot {
     height: auto !important;
+    min-height: 55px;
   }
+}
+.selection-management-table-list .v-input__slot .v-select__slot {
+  height: 40px !important;
+  min-height: 40px !important;
 }
 .options .upgrade-option > span {
   width: 100% !important;

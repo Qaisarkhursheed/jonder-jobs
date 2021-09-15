@@ -27,7 +27,9 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span class="d-none d-md-inline"> Hey, </span>
+          <span class="d-none d-md-inline">
+            {{$t('hello')}},
+          </span>
           <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -178,26 +180,20 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info">{{
-                $t("searchStatus")
-              }}</span>
+              <span class="about-info">{{ $t("searchStatus") }}</span>
               <p class="about-text">
                 <span v-for="(item, i) in userEmploymentType" :key="i">
-                  {{ $t(`employmentTypes.${item}`) }}
+                  {{ $t(`${item}`) }}
                 </span>
               </p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.current_position }}</p>
 
-              <span class="about-info">{{
-                $t("currentIndustry")
-              }}</span>
-              <p class="about-text">{{ user.branche }}</p>
+              <span class="about-info">{{ $t("currentIndustry") }}</span>
+              <p class="about-text">{{ getBranche }}</p>
 
-              <span class="about-info"
-                >{{ $t("cityAndAddress") }}
-              </span>
+              <span class="about-info">{{ $t("cityAndAddress") }} </span>
               <p class="about-text">{{ user.city }}</p>
 
               <span class="about-info">
@@ -264,25 +260,25 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import debounce from "lodash.debounce";
+import { debounce, map } from "lodash";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
-import LanguageDropdown from '../components/LanguageDropdown';
+import LanguageDropdown from "../components/LanguageDropdown";
 
 export default {
   components: {
     LanguageDropdown,
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
@@ -298,6 +294,12 @@ export default {
     userEmploymentType() {
       return this.user.looking_for_employment_type.split(",");
     },
+    getBranche() {
+      const stringToArray = map(this.user.branche.split(","), item => {
+        return this.$t(item);
+      });
+      return stringToArray.join();
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -312,7 +314,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    },
+    }
   },
   watch: {
     search(val) {
@@ -328,8 +330,8 @@ export default {
           this.searchString = null;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

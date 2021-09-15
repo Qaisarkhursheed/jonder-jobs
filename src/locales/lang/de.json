@@ -1,4 +1,7 @@
 {
+  "northdataHistory": "Firmenhistorie",
+  "northdataBarChart": "Finanzkennzahlen",
+  "noDataAvailable": "Keine Daten verfügbar.",
   "jonderSearch": "Jonder Suche",
   "selectionManagement": "Auswahlmanagement",
   "messages": "Nachrichten",
@@ -236,7 +239,7 @@
   "experienceAndEducation": "Deine Erfahrungen und Ausbildungen",
   "experienceAndEducationDesc": "Um potenzielle Unternehmen zu beeindrucken, füge deinem Lebenslauf Erfahrungen und Ausbildungen hinzu.",
   "lookingForType": "Welche Art von Beschäftigung suchst du?",
-  "likeToWork": "Wo würdest du gerne arbeiten?*",
+  "likeToWork": "Wo würdest du gerne arbeiten?",
   "remoteWork": " Wärst du auch bereit aus der Ferne zu arbeiten (remote)?",
   "whenCanYouStart": "Wann kannst du beginnen zu arbeiten?",
   "salaryRequirement": " Monatliche Nettogehaltsvorstellung",
@@ -285,7 +288,7 @@
   "lookingForBranche": "What type of Branches are you looking for?",
   "lookingForEmployement": "Welche Beschäftigungsarten sind für dich relevant?",
   "lookingForEmployementPlace": "Wähle die passenden Arten aus",
-  "whereToWork": "Wo würdest du gerne arbeiten?*",
+  "whereToWork": "Wo würdest du gerne arbeiten?",
   "whereToWorkPlace": "Wähle Städte die in Frage kommen würden ",
   "whenToStart": "Wann bist du für deinen neuen Job verfügbar?",
   "whenToStartPlace": "Wähle Städte die in Frage kommen würden",
@@ -356,5 +359,6 @@
   "Qualified": "Qualifiziert",
   "Interview": "Interview",
   "Final round": "Letzte Runde",
-  "Hired": "Gemietet"
+  "Hired": "Gemietet",
+  "didntSet": "Nicht eingestellt"
 }

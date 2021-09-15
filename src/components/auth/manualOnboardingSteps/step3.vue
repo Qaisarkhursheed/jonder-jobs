@@ -40,10 +40,30 @@
         {{ $t("whereToWork") }}
         <span style="color: red;">*</span>
       </label>
-      <GooglePlacesAutocomplete
-        @select="e => (value.address_to_work = e)"
-        :required="true"
-      />
+      <v-autocomplete
+        v-model="value.address_to_work"
+        @update:search-input="
+          $store.dispatch('google/places', {
+            input: $event,
+            types: ['(cities)']
+          })
+        "
+        :items="
+          $store.getters['google/places'].concat(value.address_to_work || [])
+        "
+        :loading="$store.getters['google/loadingPlaces']"
+        :rules="[validations.required]"
+        :placeholder="$t('choose')"
+        ref="addressToWork"
+        @change="$refs.addressToWork.lazySearch = ''"
+        multiple
+        small-chips
+        deletable-chips
+        hide-no-data
+        no-filter
+        outlined
+      >
+      </v-autocomplete>
 
       <v-checkbox
         class="mb-3 mt-0"
@@ -75,13 +95,13 @@
       <div class="profile-label mb-3 mt-6">
         {{ $t("monthlySalary") }}
       </div>
-      <SliderInput
-        :value="value.monthly_salary"
+      <SliderRangeInput
+        :value="getMonthlySalary"
         suffix="k"
         min="1"
         max="12"
         step="0.5"
-        @change="val => (value.monthly_salary = val)"
+        @change="changeMonthlySalary"
       />
 
       <v-row class="mt-5">
@@ -112,17 +132,15 @@
 
 <script>
 import types from "@/types";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import Calendar from "@/components/Calendar";
-import SliderInput from "@/components/SliderInput";
+import SliderRangeInput from "../../SliderRangeInput";
 
 export default {
   name: "Step3",
 
   components: {
-    Calendar,
-    GooglePlacesAutocomplete,
-    SliderInput
+    SliderRangeInput,
+    Calendar
   },
 
   props: {
@@ -141,6 +159,11 @@ export default {
   computed: {
     types() {
       return types;
+    },
+    getMonthlySalary() {
+      const min = this.value.monthly_salary?.min || "1";
+      const max = this.value.monthly_salary?.max || "12";
+      return [min, max];
     }
   },
   methods: {
@@ -149,6 +172,12 @@ export default {
         this.value.ready_for_work = null;
       }
       this.nextScreen();
+    },
+    changeMonthlySalary(event) {
+      this.value.monthly_salary = {
+        min: event[0].toString(),
+        max: event[1].toString()
+      };
     },
     searchForValue(name) {
       return (

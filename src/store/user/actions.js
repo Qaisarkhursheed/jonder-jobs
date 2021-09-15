@@ -10,6 +10,16 @@ export default {
       .get("/me")
       .then(response => {
         commit("auth/SET_AUTHENTICATED", true, { root: true });
+        let monthlySalary = null;
+        try {
+          monthlySalary = JSON.parse(response.data.monthly_salary);
+        } catch (e) {
+          monthlySalary = {
+            min: "",
+            max: ""
+          };
+        }
+        response.data.monthly_salary = monthlySalary;
         commit("SET_USER", response.data);
         dispatch("fetchPlans");
         return response.data;
@@ -53,6 +63,10 @@ export default {
     formData.delete("looking_for");
     data.looking_for.forEach((key, i) => {
       formData.append(`looking_for[${i}]`, key);
+    });
+    formData.delete("address_to_work");
+    data.address_to_work.forEach((key, i) => {
+      formData.append(`address_to_work[${i}]`, key);
     });
     try {
       const resp = await axios.post(

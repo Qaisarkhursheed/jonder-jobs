@@ -1,4 +1,7 @@
 {
+  "northdataHistory": "Company history",
+  "northdataBarChart": "Financial metrics",
+  "noDataAvailable": "No data available.",
   "jonderSearch": "Jonder Search",
   "selectionManagement": "Selection Management",
   "messages": "Messages",
@@ -236,7 +239,7 @@
   "experienceAndEducation": "Experience & Educaiton",
   "experienceAndEducationDesc": "To impress potential companies, add experience and education to your resume.",
   "lookingForType": "What kind of employment are you looking for?",
-  "likeToWork": "Where would you like to work? *",
+  "likeToWork": "Where would you like to work?",
   "remoteWork": "Are you also open working remotely",
   "whenCanYouStart": "When can you start to work?",
   "salaryRequirement": "Monthly net salary requirement",
@@ -285,7 +288,7 @@
   "lookingForBranche": "What type of Branches are you looking for?",
   "lookingForEmployement": "What type of employment are you looking for?",
   "lookingForEmployementPlace": "Select the appropriate types",
-  "whereToWork": "Where would you like to work?*",
+  "whereToWork": "Where would you like to work?",
   "whereToWorkPlace": "Choose cities that would come into question",
   "whenToStart": "When can you start? ",
   "whenToStartPlace": "Choose cities that would come into question",
@@ -356,5 +359,6 @@
   "Qualified": "Qualified",
   "Interview": "Interview",
   "Final round": "Final round",
-  "Hired": "Hired"
+  "Hired": "Hired",
+  "didntSet": "Didn't set"
 }

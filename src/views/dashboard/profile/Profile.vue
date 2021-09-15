@@ -214,7 +214,17 @@
             :items="jonderStatus"
             background-color="white"
             outlined
-          ></v-select>
+            cache-items
+          >
+            <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
+            <template v-slot:item="{ item }">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-select>
         </v-col>
       </v-row>
     </v-card>
@@ -255,13 +265,19 @@
             v-model="formData.looking_for_employment_type"
             multiple
           >
-            <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
+            <template v-slot:selection="{ item }">
+              {{ $t(item.value) }},
+            </template>
             <template v-slot:item="{ item }">
               <v-list-item-action>
                 <v-simple-checkbox
                   v-ripple="false"
                   @input="
-                    toggleValues($event, item.value, 'looking_for_employment_type')
+                    toggleValues(
+                      $event,
+                      item.value,
+                      'looking_for_employment_type'
+                    )
                   "
                   :value="searchForValue(item.value)"
                 >
@@ -279,10 +295,30 @@
       <v-row>
         <v-col cols="12">
           <label class="profile-label"> {{ $t("likeToWork") }}</label>
-          <GooglePlacesAutocomplete
-            :value="formData.address_to_work"
-            @select="e => (formData.address_to_work = e)"
-          />
+          <v-autocomplete
+            v-model="formData.address_to_work"
+            @update:search-input="
+              $store.dispatch('google/places', {
+                input: $event,
+                types: ['(cities)']
+              })
+            "
+            :items="
+              $store.getters['google/places'].concat(formData.address_to_work)
+            "
+            :loading="$store.getters['google/loadingPlaces']"
+            :rules="[validations.required]"
+            :placeholder="$t('choose')"
+            ref="addressToWork"
+            @change="$refs.addressToWork.lazySearch = ''"
+            multiple
+            small-chips
+            deletable-chips
+            hide-no-data
+            no-filter
+            outlined
+          >
+          </v-autocomplete>
           <v-checkbox
             class="mb-0 mt-0"
             :label="$t('remoteWork')"
@@ -317,13 +353,13 @@
           <div class="profile-label mb-2">
             {{ $t("salaryRequirement") }} (€)
           </div>
-          <SliderInput
-            :value="formData.monthly_salary"
+          <SliderRangeInput
+            :value="getMonthlySalary"
             suffix="k"
             min="1"
             max="20"
             step="0.5"
-            @change="value => (formData.monthly_salary = value)"
+            @change="changeMonthlySalary"
           />
         </v-col>
       </v-row>
@@ -635,6 +671,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import isString from "lodash/isString";
 import types from "@/types";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
@@ -644,15 +681,16 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
 import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperience";
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
+import SliderRangeInput from "../../../components/SliderRangeInput";
 
 export default {
   name: "Profile",
 
   components: {
+    SliderRangeInput,
     UserPlanDescription,
     UpgradePlanModal,
     CardActionableList,
@@ -662,7 +700,6 @@ export default {
     ModalEducation,
     ModalExperience,
     DocumentUploadSection,
-    GooglePlacesAutocomplete,
     SliderInput,
     ImageUploadCropper
   },
@@ -676,9 +713,9 @@ export default {
       looking_for: [],
       // looking_for_branche: [],
       looking_for_employment_type: "",
-      address_to_work: "",
+      address_to_work: [],
       ready_for_work: "",
-      monthly_salary: "",
+      monthly_salary: null,
       working_experience: "",
       why_jonder: "",
       cv: null,
@@ -700,9 +737,9 @@ export default {
       image: null
     },
     jonderStatus: [
-      "I am actively looking for a job",
-      "I am open to an interesting offer",
-      "I am just curious"
+      "whatBringsYouJob",
+      "whatBringsYouOffer",
+      "whatBringsYouCurious"
     ],
     modals: {
       UpgradePlan: {
@@ -740,6 +777,7 @@ export default {
       this.invoices = this.invoices.filter(i => i.status === "complete");
     });
     this.$store.dispatch("professions/fetch");
+    console.log('create profile', this.$i18n.locale);
   },
   computed: {
     ...mapGetters("user", [
@@ -762,6 +800,14 @@ export default {
     },
     plansData() {
       return this.plans("jobseeker_paln");
+    },
+    getMonthlySalary() {
+      const monthly_salary = isString(this.formData.monthly_salary)
+        ? this.formData.monthly_salary
+        : this.formData.monthly_salary;
+      const min = monthly_salary.min;
+      const max = monthly_salary.max;
+      return [min, max];
     }
   },
   methods: {
@@ -777,7 +823,7 @@ export default {
       this.formData.looking_for_employment_type = user.looking_for_employment_type.split(
         ","
       );
-      this.formData.address_to_work = user.address_to_work;
+      this.formData.address_to_work = user.address_to_work || [];
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.working_experience = user.working_experience;
@@ -791,7 +837,12 @@ export default {
     },
     handleUpdate() {
       this.formResponse = {};
-      let formDataCopy = Object.assign({}, this.formData);
+      let formDataCopy = {
+        ...this.formData
+      };
+      formDataCopy.monthly_salary = JSON.stringify(
+        this.formData.monthly_salary
+      );
       formDataCopy.branche = formDataCopy.branche.join();
       //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
       formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
@@ -817,6 +868,7 @@ export default {
       }
 
       this.formLoading = true;
+      console.log("formDataCopy", formDataCopy);
       this.updateUser(formDataCopy)
         .then(resp => {
           this.formResponse = resp.data;
@@ -858,9 +910,16 @@ export default {
       this.toggleModal(type);
       this.modals[type].edit = item;
     },
+    changeMonthlySalary(event) {
+      this.formData.monthly_salary = {
+        min: event[0].toString(),
+        max: event[1].toString()
+      };
+    },
     searchForValue(name) {
       return (
-        !!this.formData.looking_for_employment_type && this.formData.looking_for_employment_type.indexOf(name) >= 0
+        !!this.formData.looking_for_employment_type &&
+        this.formData.looking_for_employment_type.indexOf(name) >= 0
       );
     },
     toggleValues(event, name, prop) {

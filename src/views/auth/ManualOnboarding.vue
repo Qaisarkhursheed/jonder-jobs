@@ -1,5 +1,5 @@
 <template>
-  <auth-wrap :img="e1 + 1">
+  <auth-wrap :have-width="'407'" :img="e1 + 1">
     <!-- Menu options - Logout -->
     <div style="position: absolute; top: 1rem; right: 1rem;">
       <v-menu top right>
@@ -191,9 +191,9 @@ export default {
       current_position: "",
       //looking_for_branche: "",
       looking_for_employment_type: "",
-      address_to_work: "",
+      address_to_work: [],
       ready_for_work: "",
-      monthly_salary: "",
+      monthly_salary: null,
       working_experience: "",
       cv: "",
       resume: null,

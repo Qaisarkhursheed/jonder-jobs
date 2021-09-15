@@ -28,34 +28,34 @@ export default {
 
   props: {
     value: {
-      required: true,
+      required: true
     },
     suffix: {
-      type: String,
+      type: String
     },
     min: {
-      type: [String, Number],
+      type: [String, Number]
     },
     max: {
-      type: [String, Number],
+      type: [String, Number]
     },
     step: {
-      type: [String, Number],
-    },
+      type: [String, Number]
+    }
   },
   created() {
     this.model = this.value ? this.value : "";
   },
   data() {
     return {
-      model: null,
+      model: null
     };
   },
   methods: {
     change(value) {
       this.$emit("change", value);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -63,7 +63,11 @@ export default {
 .slider-input {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
+  max-width: 335px;
+  padding-right: 10px;
   .monthly-salary {
+    font-size: 18px;
+    font-weight: 600;
     min-width: 6rem;
   }
   .v-slider__track-container {

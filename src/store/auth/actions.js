@@ -6,6 +6,16 @@ export default {
     try {
       const resp = await axios.post("/login", credentials);
       const token = resp.data.token;
+      let monthlySalary = null;
+      try {
+        monthlySalary = JSON.parse(resp.data.user.monthly_salary);
+      } catch (e) {
+        monthlySalary = {
+          min: "",
+          max: ""
+        };
+      }
+      resp.data.user.monthly_salary = monthlySalary;
       const user = resp.data.user;
 
       localStorage.setItem("user-token", token);

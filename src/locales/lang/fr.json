@@ -1,4 +1,7 @@
 {
+  "northdataHistory": "Historique de l'entreprise",
+  "northdataBarChart": "Mesures financières",
+  "noDataAvailable": "Pas de données disponibles.",
   "jonderSearch": "Recherche de Jonder",
   "selectionManagement": "Gestion de la sélection",
   "messages": "Messages",
@@ -236,7 +239,7 @@
   "experienceAndEducation": "Experience & Education",
   "experienceAndEducationDesc": "Pour impressionner les entreprises potentielles, ajoutez de l'expérience et de la formation à votre CV.",
   "lookingForType": "Quel type d'emploi recherchez-vous?",
-  "likeToWork": "Où voudriez-vous travailler? *",
+  "likeToWork": "Où voudriez-vous travailler?",
   "remoteWork": "Êtes-vous également ouvert au télétravail",
   "whenCanYouStart": "Quand pouvez-vous commencer à travailler ?",
   "salaryRequirement": "Exigence de salaire net mensuel",
@@ -285,7 +288,7 @@
   "lookingForBranche": "Quel type de succursales recherchez-vous?",
   "lookingForEmployement": "Quel type d'emploi recherchez-vous?",
   "lookingForEmployementPlace": "Sélectionnez les types appropriés",
-  "whereToWork": "Où voudriez-vous travailler?*",
+  "whereToWork": "Où voudriez-vous travailler?",
   "whereToWorkPlace": "Choisissez des villes qui seraient remises en cause",
   "whenToStart": "Quand pouvez-vous commencer ?",
   "whenToStartPlace": "Choisissez des villes qui seraient remises en cause",
@@ -356,5 +359,6 @@
   "Qualified": "Qualifié",
   "Interview": "Entrevue",
   "Final round": "Dernier tour",
-  "Hired": "Engagé"
+  "Hired": "Engagé",
+  "didntSet": "N'a pas défini"
 }
