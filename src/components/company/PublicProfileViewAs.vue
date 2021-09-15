@@ -184,7 +184,7 @@
 
           <!-- Barchart -->
           <div class="col">
-            <v-dialog v-model="barChart">
+            <v-dialog v-model="barChart" width="600">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn color="primary" dark v-bind="attrs" v-on="on" block>
                   {{ $t("northdataBarChart") }}
