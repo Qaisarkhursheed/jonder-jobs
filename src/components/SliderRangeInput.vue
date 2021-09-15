@@ -1,8 +1,8 @@
 <template>
   <v-row class="slider-range-input no-gutters">
-<!--    <v-col cols="auto" class="pa-0">-->
-<!--      <div class="monthly-salary">{{ model }} {{ suffix }}</div>-->
-<!--    </v-col>-->
+    <!--    <v-col cols="auto" class="pa-0">-->
+    <!--      <div class="monthly-salary">{{ model }} {{ suffix }}</div>-->
+    <!--    </v-col>-->
     <v-col cols="col" class="d-flex my-auto">
       <v-range-slider
         v-model="model"
@@ -90,6 +90,8 @@ export default {
 
 <style lang="scss">
 .slider-range-input {
+  // border: 1px solid #e5e5e5;
+  // border-radius: 10px;
   max-width: 335px;
   .v-input--range-slider {
     align-items: center;
@@ -116,7 +118,7 @@ export default {
     margin-top: 0;
   }
   .v-slider__track-container {
-    height: 5px !important;
+    height: 10px !important;
   }
   .v-slider__track-background,
   .v-slider__track-fill {
@@ -130,8 +132,8 @@ export default {
     border: 3px solid #0253b3 !important;
   }
   .v-slider__thumb {
-    height: 20px;
-    width: 20px;
+    height: 22px;
+    width: 22px;
   }
   .v-slider__track-container,
   .v-slider__thumb {

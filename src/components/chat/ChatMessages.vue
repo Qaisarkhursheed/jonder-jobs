@@ -153,7 +153,12 @@
 
       <MessageTemplatesPicker @submit="msg => send(msg)" />
 
-      <v-icon :disabled="sending" size="30" @click="send(null)" class="ml-2">
+      <v-icon
+        :disabled="sending"
+        size="30"
+        @click="send(null)"
+        class="message-send-btn ml-2"
+      >
         mdi-send-circle
       </v-icon>
     </v-card-actions>
@@ -327,6 +332,12 @@ export default {
       padding: 0 10px;
       background: #f7f7f8;
     }
+  }
+}
+
+.message-send-btn {
+  &:hover {
+    color: #0253b3;
   }
 }
 

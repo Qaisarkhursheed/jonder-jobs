@@ -54,6 +54,8 @@
         :loading="$store.getters['google/loadingPlaces']"
         :rules="[validations.required]"
         :placeholder="$t('choose')"
+        ref="addressToWork"
+        @change="$refs.addressToWork.lazySearch = ''"
         multiple
         small-chips
         deletable-chips
