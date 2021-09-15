@@ -21,7 +21,7 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Art der Anstellung;
+                        {{ $t("typeOfEnployment") }}
                       </span>
                       <span class="value">
                         {{ filter.employment_type }}
@@ -31,7 +31,7 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Branche:
+                        {{ $t("branch") }}
                       </span>
                       <span class="value">
                         {{ filter.branche }}
@@ -41,7 +41,7 @@
                   <v-col cols="12" md="3">
                     <div class="section">
                       <span class="label">
-                        Gehaltsspanne
+                        {{ $t("salaryRange") }}
                       </span>
                       <span class="value">
                         {{ filter.min_salary }} - {{ filter.max_salary }}
@@ -50,7 +50,7 @@
                   </v-col>
                   <v-col cols="12" md="3">
                     <div class="section">
-                      <span class="label">Stadt</span>
+                      <span class="label">{{ $t("city") }}</span>
                       <span class="value">{{ filter.city }}</span>
                     </div>
                   </v-col>

@@ -2,7 +2,7 @@
   <v-card flat class="packages-plan pl-8 pr-8 pt-14 pb-14">
     <div class="price d-flex align-end">
       <div>{{ plan.price }}&euro;</div>
-      <div>/month</div>
+      <div>/{{ $t("month") }}</div>
     </div>
     <div class="type mt-3">
       <div class="name" :style="`color: ${color}`">

@@ -22,7 +22,7 @@
             {{ $t("register") }}
           </router-link>
           <router-link to="/login" class="button dark-blue fill"
-            >Log in</router-link
+            >{{ $t("login") }}</router-link
           >
         </v-col>
       </v-row>

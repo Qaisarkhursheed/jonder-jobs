@@ -15,7 +15,7 @@
                 color="primary"
                 class="pl-8 pr-8"
                 @click="handleUpdate"
-                >Save
+                >{{ $t("save") }}
               </v-btn>
             </v-col>
           </v-row>

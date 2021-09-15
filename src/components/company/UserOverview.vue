@@ -6,7 +6,7 @@
       <v-icon size="25">
         mdi-arrow-left
       </v-icon>
-      <span class="pl-4">Zurück zu den Suchergebnissen</span>
+      <span class="pl-4">{{ $t("backToSearchResults") }}</span>
     </div>
     <div class="card-back"></div>
     <v-card class="profile-info rounded-lg" flat v-if="profile">

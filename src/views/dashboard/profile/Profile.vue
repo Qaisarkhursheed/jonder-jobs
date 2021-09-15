@@ -141,7 +141,7 @@
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
       <v-row>
         <p class="profile-title">
-          Position & Branche
+          {{ $t("position") }} & {{ $t("industry") }}
         </p>
         <!-- <p class="profile-subtitle">
           Explanation goes here
@@ -374,7 +374,7 @@
           {{ $t("experienceAndEducationDesc") }}
         </p>
         <v-col cols="10">
-          <label class="profile-label">Berufserfahrungen in Jahren </label>
+          <label class="profile-label">{{ $t("workExperienceInYear") }}</label>
           <SliderInput
             :value="formData.working_experience"
             min="0"
@@ -505,10 +505,10 @@
       <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
         <v-col>
           <div class="invoice-number">
-            Nummer der Rechnung:: {{ item.invoice_number }}
+            {{ $t('numberOfBill') }}: {{ item.invoice_number }}
           </div>
           <div class="invoice-date">
-            Date of invoice:
+            {{ $t("dateOfInvoice") }}:
             {{ item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm") }}
           </div>
         </v-col>
@@ -608,7 +608,7 @@
               color="primary"
               class="pl-8 pr-8"
               @click="handleChangePassword"
-              >Passwort ändern
+              >{{ $t("changePassword") }}
             </v-btn>
           </v-col>
         </v-row>
@@ -777,7 +777,6 @@ export default {
       this.invoices = this.invoices.filter(i => i.status === "complete");
     });
     this.$store.dispatch("professions/fetch");
-    console.log('create profile', this.$i18n.locale);
   },
   computed: {
     ...mapGetters("user", [
@@ -892,7 +891,10 @@ export default {
           this.$refs.passwordForm.reset();
 
           this.$store.dispatch("auth/logout").then(() => {
-            this.$router.push({ name: "Login", query: { changePassword: 1 } });
+            this.$router.push({
+              name: "Login",
+              query: { changePassword: "1" }
+            });
           });
         })
         .catch(err => {

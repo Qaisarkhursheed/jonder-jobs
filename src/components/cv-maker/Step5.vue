@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-subtitle>
       <div class="step-header-description font-weight-bold">
-        <h3>Meine Erfahrungen</h3>
+        <h3>{{ $t("myExperiences") }}</h3>
       </div>
     </v-card-subtitle>
     <v-row>
@@ -14,12 +14,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-outline</v-icon
           >
-          Referenzen
+          {{ $t("credentials") }}
         </label>
         <v-text-field
           dense
           type="text"
-          placeholder="Name des Unternehmens"
+          :placeholder="$t('companyName')"
           outlined
           solo
           flat
@@ -35,7 +35,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Kontaktperson"
+          :placeholder="$t('contactPerson')"
           outlined
           solo
           flat
@@ -51,7 +51,7 @@
         <v-text-field
           dense
           type="text"
-          placeholder="Telefonnummer"
+          :placeholder="$t('phoneNumber')"
           outlined
           solo
           flat
@@ -67,7 +67,7 @@
         <v-text-field
           dense
           type="email"
-          placeholder="E-mail adresse"
+          :placeholder="$t('emailAddress')"
           outlined
           solo
           flat
@@ -84,12 +84,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-account-group-outline</v-icon
           >
-          Erfolge
+          {{ $t("successes") }}
         </label>
         <v-textarea
           dense
           type="text"
-          placeholder="Beschreibung"
+          :placeholder="$t('description')"
           outlined
           solo
           flat
@@ -106,12 +106,12 @@
           <v-icon class="text-color-primary-blue-dark"
             >mdi-share-variant-outline</v-icon
           >
-          Publikationen
+          {{ $t("publications") }}
         </label>
         <v-textarea
           dense
           type="text"
-          placeholder="Beschreibung"
+          :placeholder="$t('description')"
           outlined
           solo
           flat
@@ -147,7 +147,7 @@
           @click="nextStep"
           class="font-weight-bold"
         >
-          Finish
+          {{ $t("finish") }}
         </v-btn>
       </v-col>
     </v-row>

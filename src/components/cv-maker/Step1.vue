@@ -1,9 +1,9 @@
 <template>
   <div class="pa-10">
-    <v-card-title class="pl-0 pt-0">Personliche Daten</v-card-title>
+    <v-card-title class="pl-0 pt-0">{{ $t("personalData") }}</v-card-title>
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">E-mail Adresse</label>
+        <label class="font-weight-bold">{{ $t("emailAddress") }}</label>
         <v-text-field
           dense
           type="email"
@@ -17,7 +17,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Telefonnummer</label>
+        <label class="font-weight-bold">{{ $t("phoneNumber") }}</label>
         <v-text-field
           dense
           type="text"
@@ -34,7 +34,7 @@
 
     <v-row>
       <v-col cols="6">
-        <label class="font-weight-bold">Adresse</label>
+        <label class="font-weight-bold">{{ $t("address") }}</label>
         <v-text-field
           dense
           type="address"
@@ -48,7 +48,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols="6">
-        <label class="font-weight-bold">Geburtsdatum</label>
+        <label class="font-weight-bold">{{ $t("birthDate") }}</label>
         <div class="form-group d-flex">
           <div class="flex-grow-0 flex-shrink-0" style="width: 110px">
             <v-text-field

@@ -2,7 +2,7 @@
   <div class="team-management">
     <v-row class="heading mb-5">
       <v-col cols="9">
-        <div class="title">Team Management</div>
+        <div class="title">{{ $t("teamManagement") }}</div>
         <div class="subtitle">
           {{ $t("inviteHelp") }}
         </div>

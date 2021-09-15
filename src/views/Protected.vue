@@ -1,6 +1,6 @@
 <template>
   <auth-layout>
-    <div>Protected</div>
+    <div>{{ $t("protected") }}</div>
   </auth-layout>
 </template>
 

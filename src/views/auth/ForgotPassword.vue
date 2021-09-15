@@ -5,11 +5,12 @@
     <div v-if="step == 2" class="mt-4 text-center" style="max-width: 400px">
       <img :src="require('@/assets/svg/email_sent.svg')" width="230" />
 
-      <h1 class="mt-5" style="font-size: 24px">E-Mail erfolgreich gesendet</h1>
+      <h1 class="mt-5" style="font-size: 24px">
+        {{ $t("emailSentSuccess") }}
+      </h1>
 
       <p class="mt-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat est
-        purus ipsum.
+        {{ $t("emailSentSuccessMessage") }}
       </p>
     </div>
   </auth-wrap>

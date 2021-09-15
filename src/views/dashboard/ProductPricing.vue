@@ -2,10 +2,10 @@
   <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1">
     <v-col cols="6">
       <v-card class="pricing-box pa-8 pb-4">
-        <v-card-title>Bearbeiten Sie Ihr Paymant</v-card-title>
+        <v-card-title>{{ $t("editYourPayment") }}</v-card-title>
         <v-card-text>
           <div class="form-group">
-            <label>Kreditkartennummer</label>
+            <label>{{ $t("creditCardNumber") }}</label>
             <v-text-field
               v-mask="'####-####-####-####'"
               v-model="paymentDetails.card_number"
@@ -20,7 +20,7 @@
             ></v-text-field>
           </div>
           <div class="form-group">
-            <label>Karteninhaber</label>
+            <label>{{ $t("cardHolder") }}</label>
             <v-text-field
               v-model="paymentDetails.card_name"
               label="Max Mustermann"
@@ -36,7 +36,7 @@
           <v-row>
             <v-col cols="6">
               <div class="form-group">
-                <label>Monat/Jahr</label>
+                <label>{{ $t("monthYear") }}</label>
                 <v-text-field
                   v-model="paymentDetails.card_expiration"
                   v-mask="'##/####'"
@@ -53,7 +53,7 @@
             </v-col>
             <v-col cols="6">
               <div class="form-group">
-                <label>CVV</label>
+                <label>{{ $t("cvv") }}</label>
                 <v-text-field
                   v-model="paymentDetails.card_cvv"
                   label="***"
@@ -73,7 +73,7 @@
               v-model="paymentDetails.save_details"
               inset
               hide-details
-              label="Karteninformationen speichern"
+              :label="$t('saveMapInformation')"
             ></v-switch>
           </div>
         </v-card-text>
@@ -83,27 +83,27 @@
       <v-card class="pricing-box pa-8 pb-4">
         <v-card-text class="price-summary">
           <div class="d-flex">
-            <div class="flex-grow-1">Product</div>
+            <div class="flex-grow-1">{{ $t("product") }}</div>
             <div class="text-right text-color-primary-blue-dark">Weblink</div>
           </div>
           <div class="d-flex">
-            <div class="flex-grow-1">Kosten</div>
+            <div class="flex-grow-1">{{ $t("costs") }}</div>
             <div class="text-right text-color-primary-blue-dark">$9.99</div>
           </div>
           <div class="d-flex">
-            <div class="flex-grow-1">Umsatzsteuer</div>
+            <div class="flex-grow-1">{{ $t("valueAddedTax") }}</div>
             <div class="text-right text-color-primary-blue-dark">$1,89</div>
           </div>
           <v-divider></v-divider>
           <div class="d-flex">
-            <strong class="flex-grow-1">Gesamtsumme</strong>
+            <strong class="flex-grow-1">{{ $t("total") }}</strong>
             <strong class="text-right text-color-primary-blue-dark"
               >$11,88</strong
             >
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn block color="dark-blue">Jetzt bezahien</v-btn>
+          <v-btn block color="dark-blue">{{ $t("payNow") }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
