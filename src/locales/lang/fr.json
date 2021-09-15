@@ -390,5 +390,8 @@
   "workExperienceInYear": "Expériences de travail en années",
   "junior": "Junior",
   "senior": "Sénior",
-  "advanced": "Avancée"
+  "advanced": "Avancée",
+  "numberOfInvoice": "Nombre de factures",
+  "upradeYourCompany": "Mettez à niveau votre entreprise",
+  "upradeYourCompanySubtitle": "Mettez à niveau votre compte à la recherche sans restrictions."
 }

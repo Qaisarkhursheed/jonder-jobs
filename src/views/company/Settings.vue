@@ -107,7 +107,7 @@
 
               <v-row>
                 <v-col cols="6">
-                  <label class="profile-label">E-Mail</label>
+                  <label class="profile-label">{{ $t("email") }}</label>
                   <v-text-field
                     dense
                     disabled
@@ -155,7 +155,7 @@
             >
               <v-col>
                 <div class="invoice-number">
-                  Number of invoice: {{ item.invoice_number }}
+                  {{ $t("numberOfInvoice") }}: {{ item.invoice_number }}
                 </div>
                 <div class="invoice-date">
                   Date of invoice:
@@ -189,7 +189,7 @@
                 Explanation goes here
               </p> -->
             </v-row>
-
+            <!-- left hardcoded -->
             <v-row class="payment-card pa-3">
               <v-col>
                 <div class="card-name">Master card ****3660</div>
@@ -208,7 +208,7 @@
                 color="#0253B3"
               >
                 <v-icon left>mdi-plus</v-icon>
-                Add new card
+                {{ $t("addNewCard") }}
               </v-btn>
             </div>
           </v-card>
@@ -286,7 +286,7 @@
         />
       </v-col>
     </v-row>
-
+    <!-- left hardcoded -->
     <div class="footer text-center py-4" style="border-top: 1px solid #E3E3E4;">
       <a href="#">Impressum</a>
       -

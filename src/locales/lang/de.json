@@ -2,7 +2,7 @@
   "jonderSearch": "Jonder Suche",
   "selectionManagement": "Auswahlmanagement",
   "messages": "Nachrichten",
-  "teamManagement": "Team Managment",
+  "teamManagement": "Team Management",
   "publicCompanyProfile": "Öffentliches Firmenprofil",
   "publicProfileSub": " Bearbeiten Sie die Informationen, die potenzielle Angestellte sehen werden.",
   "packagesPricing": "Preise für Pakete",
@@ -390,5 +390,8 @@
   "workExperienceInYear": "Berufserfahrungen in Jahren",
   "junior": "Junior",
   "senior": "Senior",
-  "advanced": "Fortschrittlich"
+  "advanced": "Fortschrittlich",
+  "numberOfInvoice": "Anzahl der Rechnung.",
+  "upradeYourCompany": "Aktualisieren Sie Ihr Unternehmen",
+  "upradeYourCompanySubtitle": "Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen."
 }

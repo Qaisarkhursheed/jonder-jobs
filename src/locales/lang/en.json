@@ -390,5 +390,8 @@
   "workExperienceInYear": "Work experiences in years",
   "junior": "Junior",
   "senior": "Senior",
-  "advanced": "Advanced"
+  "advanced": "Advanced",
+  "numberOfInvoice": "Number of invoice",
+  "upradeYourCompany": "Upgrade your company",
+  "upradeYourCompanySubtitle": "Upgrade your account to search without restrictions."
 }

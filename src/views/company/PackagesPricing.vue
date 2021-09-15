@@ -2,10 +2,10 @@
   <div class="pb-7">
     <div class="heading mb-10">
       <div class="title">
-        Upgrade your company
+        {{ $t("upradeYourCompany") }}
       </div>
       <div class="subtitle">
-        Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen.
+        {{ $t("upradeYourCompanySubtitle") }}
       </div>
     </div>
 
