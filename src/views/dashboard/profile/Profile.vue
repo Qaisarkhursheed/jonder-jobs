@@ -657,7 +657,7 @@
               <span class="upgrade-title">
                 {{ plan.name }}
               </span>
-              <p>{{ plan.days_valid }} days active</p>
+              <p>{{ $t("nDaysActive", { n: plan.days_valid }) }}</p>
             </div>
             <UserPlanDescription :payment-info="false" v-else />
           </div>

@@ -180,6 +180,7 @@
   "renewsOn": "Erneuert sich am",
   "more": "Mehr",
   "daysValid": "tage gültig",
+  "nDaysActive": "{n} Tage aktiv",
   "changePackage": "Paket ändern",
   "validUntil": "Gültig bis",
   "remainingDays": "Tage verbleiben",
