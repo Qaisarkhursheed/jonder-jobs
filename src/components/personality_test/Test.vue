@@ -71,15 +71,6 @@
           >
             {{ $t("test.next") }}
           </v-btn>
-          <v-btn
-            v-if="development"
-            large
-            color="primary"
-            class="ml-2"
-            @click="SKIP_QUESTIONS"
-          >
-            dev: skip to end
-          </v-btn>
         </div>
 
         <div
@@ -99,7 +90,7 @@
             color="secondary"
             @click="SUBMIT_TEST"
           >
-            {{ $t('test.seeResults') }}
+            Finish test
           </v-btn>
         </div>
       </v-row>
@@ -126,7 +117,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('personalityTest', ['INIT_TEST', 'SET_ANSWER', 'NEXT_QUESTIONS', 'PREVIOUS_QUESTIONS', 'SET_ITEMS_PER_PAGE', 'SKIP_QUESTIONS']),
+    ...mapMutations('personalityTest', ['INIT_TEST', 'SET_ANSWER', 'NEXT_QUESTIONS', 'PREVIOUS_QUESTIONS', 'SET_ITEMS_PER_PAGE']),
     ...mapActions('personalityTest', ['SUBMIT_TEST']),
   },
 

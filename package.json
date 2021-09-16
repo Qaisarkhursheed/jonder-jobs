@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.16.0",
+    "apexcharts": "^3.28.2",
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "core-js": "^3.6.5",
@@ -20,6 +21,7 @@
     "v-mask": "^2.2.4",
     "vue": "^2.6.11",
     "vue-advanced-cropper": "^1.8.2",
+    "vue-apexcharts": "^1.6.2",
     "vue-i18n": "^8.24.4",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.2.0",

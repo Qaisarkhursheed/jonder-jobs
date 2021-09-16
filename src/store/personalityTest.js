@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import types from "@/types";
+import calculateResult from "@/types/calculations";
 
 const getTestData = () => {
   let questions = types.PERSONALITY_QUESTIONS;
@@ -53,6 +54,9 @@ export default {
     },
     BACK_BUTTON_STATE: ({ test }) => {
       return test.position < test.itemsPerPage;
+    },
+    GET_RESULTS: state => {
+      return state.result;
     }
   },
 
@@ -78,9 +82,7 @@ export default {
     },
     SET_ANSWER: async (state, { id, answer }) => {
       const { domain, facet } = state.test.inventory.find(q => q.id === id);
-  
       const lastAnswerId = Object.keys(state.test.answers).slice(-1)[0];
-  
       Vue.set(state.test.answers, id, { questionID: id, score: parseInt(answer), domain, facet });
   
       if (state.test.itemsPerPage === 1) {
@@ -95,7 +97,7 @@ export default {
   
         window.scrollTo(0, 0);
       }
-      console.log(state.test.answers);
+
       if (Object.keys(state.test.answers).length >= state.test.inventory.length) {
         state.test.done = true;
       }
@@ -108,23 +110,6 @@ export default {
     },
     PREVIOUS_QUESTIONS: ({ test }) => {
       test.position -= test.itemsPerPage;
-    },
-    SKIP_QUESTIONS: ({ test }) => {
-      test.inventory.forEach(question => {
-        Vue.set(
-          test.answers,
-          question.id,
-          {
-            questionID: question.id,
-            score: Math.floor(Math.random() * 5) + 1,
-            domain: question.domain,
-            facet: question.facet
-          }
-        )
-      })
-      test.position = test.inventory.length;
-      test.done = true;
-      test.invalid = true;
     },
     SET_RESULT: (state, payload) => {
       state.result = payload;
@@ -141,7 +126,6 @@ export default {
     async SUBMIT_TEST (context) {
       try {
         context.commit('SET_LOADING', true);
-  
         const answers = context.state.test.answers;
   
         const result = {
@@ -151,13 +135,13 @@ export default {
           timeElapsed: 532,// elapsedTimeInSeconds(context.state.test.testStart),
           dateStamp: Date.now()
         };
-  
-        const { id } = await this.$axios.$post(process.env.API_URL + 'save', result);
-        localStorage.setItem('resultId', id);
+
+        let parsed = calculateResult(result);
+        context.commit('SET_RESULT', parsed);
+        // localStorage.setItem('resultId', id);
   
         // context.commit('RESET_STATE')
         // context.commit('SET_LOADING', false)
-        // $nuxt.$router.push({ path: `/result/${id}` })
       } catch (error) {
         // context.commit('SET_SNACKBAR', { msg: error.message, type: 'error' })
         context.commit('SET_LOADING', false);
