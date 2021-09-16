@@ -19,14 +19,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "DashboardActivePlan",
+  props: {
+    userPlan: {
+      type: Object,
+      required: true,
+    }
+  },
   computed: {
-    ...mapGetters({
-      userPlan: "user/userPlan"
-    }),
     remainingDays() {
       const start = new Date().getTime();
       const end = new Date(this.userPlan.end_timestamp).getTime();
