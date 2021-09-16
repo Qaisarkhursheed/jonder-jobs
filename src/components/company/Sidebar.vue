@@ -1,72 +1,57 @@
 <template>
-  <div class="sidebar-wrap" :class="{ mini: isMini }">
-    <div class="sidebar-inner">
-      <nav
-        class="sidebar-navigation pl-2 pr-2 pl-md-8 pr-md-5"
-        :class="{ mini: isMini }"
+  <div class="sidebar-wrap d-flex" :class="{ mini: isMini }">
+    <nav class="sidebar-navigation px-2 px-md-5" :class="{ mini: isMini }">
+      <v-icon
+        class="ml-2 mb-4 mt-1"
+        size="26px"
+        style="cursor: pointer; user-select: none;"
+        @click="toggleSidebar"
+        v-if="mobile"
       >
-        <v-icon
-          class="ml-3 mb-4 mt-1"
-          size="26px"
-          style="cursor: pointer; user-select: none;"
-          @click="toggleSidebar"
-          v-if="mobile"
-        >
-          mdi-menu
-        </v-icon>
+        mdi-menu
+      </v-icon>
 
-        <router-link :to="{ name: 'CompanySearch' }">
-          <Loop :color="$route.name === 'CompanySearch' ? '#222' : '#616161'" />
-          <span class="nav-title">{{ $t("jonderSearch") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanySelectionManagement' }">
-          <SelectManagement
-            :color="
-              $route.name === 'CompanySelectionManagement' ? '#222' : '#616161'
-            "
-          />
-          <span class="nav-title">{{ $t("selectionManagement") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanyMessages' }">
-          <Messages
-            :color="$route.name === 'CompanyMessages' ? '#222' : '#616161'"
-          />
-          <span class="nav-title">{{ $t("messages") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanyMessageTemplates' }">
-          <v-icon
-            :color="
-              $route.name === 'CompanyMessageTemplates' ? '#222' : '#616161'
-            "
-            >mdi-message-bulleted</v-icon
-          >
-          <span class="nav-title">{{ $t("messageTemplates") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanyTeamManagement' }">
-          <TeamManagement
-            :color="
-              $route.name === 'CompanyTeamManagement' ? '#222' : '#616161'
-            "
-          />
-          <span class="nav-title">{{ $t("teamManagement") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanyPublicProfile' }">
-          <PublicCompany
-            :color="$route.name === 'CompanyPublicProfile' ? '#222' : '#616161'"
-          />
-          <span class="nav-title">{{ $t("publicCompanyProfile") }}</span>
-        </router-link>
-        <router-link :to="{ name: 'CompanyPackagesPricing' }">
-          <Pricing
-            :color="
-              $route.name === 'CompanyPackagesPricing' ? '#222' : '#616161'
-            "
-          />
-          <span class="nav-title">{{ $t("packagesPricing") }}</span>
-        </router-link>
-      </nav>
-      <footer-legal class="footer-impressum"></footer-legal>
-    </div>
+      <router-link :to="{ name: 'CompanySearch' }">
+        <Loop :color="getNavIconColor('CompanySearch')" />
+        <span class="nav-title">{{ $t("jonderSearch") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanySelectionManagement' }">
+        <SelectManagement
+          :color="getNavIconColor('CompanySelectionManagement')"
+        />
+        <span class="nav-title">{{ $t("selectionManagement") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanyMessages' }">
+        <Messages :color="getNavIconColor('CompanyMessages')" />
+        <span class="nav-title">{{ $t("messages") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanyMessageTemplates' }">
+        <v-icon :color="getNavIconColor('CompanyMessageTemplates')">
+          mdi-message-bulleted
+        </v-icon>
+        <span class="nav-title">{{ $t("messageTemplates") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanyTeamManagement' }">
+        <TeamManagement :color="getNavIconColor('CompanyTeamManagement')" />
+        <span class="nav-title">{{ $t("teamManagement") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanyPublicProfile' }">
+        <PublicCompany :color="getNavIconColor('CompanyPublicProfile')" />
+        <span class="nav-title">{{ $t("publicCompanyProfile") }}</span>
+      </router-link>
+
+      <router-link :to="{ name: 'CompanyPackagesPricing' }">
+        <Pricing :color="getNavIconColor('CompanyPackagesPricing')" />
+        <span class="nav-title">{{ $t("packagesPricing") }}</span>
+      </router-link>
+    </nav>
+
+    <footer-legal class="footer-impressum"></footer-legal>
   </div>
 </template>
 
@@ -91,25 +76,19 @@ export default {
     Loop,
     FooterLegal
   },
+
   props: {
     mobile: {
       type: Boolean
     }
   },
+
   data() {
     return {
       extended: true
     };
   },
-  mounted() {
-    this.extended = !this.mobile;
-    console.log(this.$route);
-  },
-  methods: {
-    toggleSidebar() {
-      this.extended = !this.extended;
-    }
-  },
+
   computed: {
     isMini() {
       if (!this.mobile) {
@@ -118,33 +97,39 @@ export default {
         return this.extended;
       }
     }
+  },
+
+  mounted() {
+    this.extended = !this.mobile;
+  },
+
+  methods: {
+    toggleSidebar() {
+      this.extended = !this.extended;
+    },
+    getNavIconColor(route) {
+      return this.$route.name === route ? "#222" : "#616161";
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .sidebar-wrap {
-  height: 100%;
-  position: absolute;
   background: white;
-  z-index: 10;
-  overflow: hidden;
-}
-.sidebar-inner {
-  position: relative;
-  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 86px);
 }
 
 .sidebar-navigation {
-  position: sticky;
-  top: 2rem;
-  overflow: hidden;
-  width: 360px;
-  min-width: 360px;
-  //transition: width, min-width 0.2s ease-in;
+  overflow-y: auto;
+  width: 350px;
+  min-width: 350px;
+  transition: width, min-width 0.2s ease-in;
 
   &.mini {
-    //transition: width, min-width 0.2s ease-in;
+    transition: width, min-width 0.2s ease-in;
     width: 60px;
     min-width: 60px;
   }
@@ -163,16 +148,15 @@ export default {
     font-size: 18px;
     color: #7a7a7a;
 
+    .v-icon {
+      width: 20px;
+    }
+
     span,
     .v-icon {
-      //float: left;
       display: inline-block;
       height: 20px;
       border: none !important;
-    }
-
-    .v-icon {
-      margin-right: 10px;
     }
 
     &:hover,
@@ -192,23 +176,24 @@ export default {
     }
 
     .mini & {
+      padding: 14px 10px;
+
       span {
         display: none;
       }
     }
+
     .nav-title {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 20px;
       padding-left: 16px;
     }
   }
 }
-.footer-impressum {
-  position: absolute;
-  bottom: 80px;
 
+.footer-impressum {
   .mini & {
-    opacity: 0;
+    display: none;
   }
 }
 </style>

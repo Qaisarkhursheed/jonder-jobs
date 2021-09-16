@@ -5,6 +5,7 @@
       :items="languages"
       :value="$i18n.locale"
       @change="changeLanguage"
+      hide-details
     ></v-select>
   </div>
 </template>
