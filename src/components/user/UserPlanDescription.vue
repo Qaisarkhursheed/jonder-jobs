@@ -1,17 +1,17 @@
 <template>
   <div class="plan-description" :class="{ 'border-plan': borderPlan }">
-    <h3>{{ userPlan.name }}</h3>
+    <h3>{{ plan.name }}</h3>
     <div>
-      {{ userPlan.price }}&euro; / {{ userPlan.days_valid }}
+      {{ plan.price }}&euro; / {{ plan.days_valid }}
       {{ $t("daysValid") }}
     </div>
     <div>
       {{ $t("renewsOn") }}
-      {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}
+      {{ plan.start_timestamp | moment("MMM DD, YYYY") }}
     </div>
     <div>
       {{ $t("validUntil") }}
-      {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}
+      {{ plan.end_timestamp | moment("MMM DD, YYYY") }}
     </div>
     <div class="payment-info mt-6 pt-4" v-if="paymentInfo">
       <span
@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: "UserPlanDescription",
   props: {
@@ -37,12 +35,11 @@ export default {
     borderPlan: {
       type: Boolean,
       default: false
+    },
+    plan: {
+      type: Object,
+      required: true
     }
-  },
-  computed: {
-    ...mapGetters({
-      userPlan: "user/userPlan"
-    })
   }
 };
 </script>

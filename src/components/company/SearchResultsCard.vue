@@ -160,7 +160,7 @@ export default {
 
   methods: {
     startConversation() {
-      if (!store.getters["user/userPlan"]) return;
+      if (!store.getters["user/userPlan"].length) return;
       this.startChatLoading = true;
       this.$store
         .dispatch("chat/startChat", this.candidate.id)
@@ -195,7 +195,7 @@ export default {
       }
     },
     proceedClick() {
-      if (store.getters["user/userPlan"]) {
+      if (store.getters["user/userPlan"].length) {
         this.$router.push({
           name: "CompanyUser",
           params: { id: this.candidate.id }

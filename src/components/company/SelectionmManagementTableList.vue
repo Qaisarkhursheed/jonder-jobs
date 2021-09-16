@@ -111,7 +111,7 @@ export default {
       });
     },
     updateActiveProfile(id) {
-      if (!this.$store.getters["user/userPlan"]) {
+      if (!this.$store.getters["user/userPlan"].length) {
         this.upgradeModal = true;
         return;
       } else {
@@ -122,7 +122,7 @@ export default {
       }
     },
     startConversation(id) {
-      if (!this.$store.getters["user/userPlan"]) {
+      if (!this.$store.getters["user/userPlan"].length) {
         this.upgradeModal = true;
         return;
       }

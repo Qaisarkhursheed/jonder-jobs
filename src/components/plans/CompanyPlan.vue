@@ -29,16 +29,16 @@
     <div class="action mt-6">
       <v-btn
         :color="
-          !userPlan || userPlan.id !== plan.id ? 'primary' : 'grey lighten-3'
+          !userPlan.length || userPlan[0].id !== plan.id ? 'primary' : 'grey lighten-3'
         "
         height="48"
         width="70%"
         elevation="0"
         class="font-weight-medium full-w"
-        @click="!userPlan || userPlan.id !== plan.id ? getTokenId() : null"
+        @click="!userPlan.length || userPlan[0].id !== plan.id ? getTokenId() : null"
       >
         {{
-          !userPlan || userPlan.id !== plan.id
+          !userPlan.length || userPlan[0].id !== plan.id
             ? $t("upgrade")
             : $t("yourCurrentPlan")
         }}
