@@ -5,8 +5,7 @@
         <p
           class="text-center text-body-2 red--text text--darken-4 pink lighten-5 pa-3 border-special"
         >
-          Leichter geht Karriere wirklich nicht. Dein Profil wird nun
-          Unternehmen angezeigt!
+          {{ $t("yourProfileCompanyWillDisplayed") }}
         </p>
         <v-sheet class="d-flex align-center justify-center my-16">
           <v-icon color="red" size="100" class="border-special"
@@ -15,7 +14,7 @@
         >
 
         <p class="text-center font-weight-bold mb-7 text-h6">
-          Etwas ist falsch, bitte versuchen Sie es erneut!
+          {{ $t("somethingIsWrongPleaseTryAgain") }}
         </p>
 
         <v-btn color="primary" block class="font-weight-medium mt-10">

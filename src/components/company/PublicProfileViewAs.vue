@@ -40,7 +40,7 @@
         </v-col>
         <v-col cols="5">
           <label class="section-label">
-            Branche
+            {{ $t("branch") }}
           </label>
           <div class="section-value">
             {{ user.branche }}
@@ -54,7 +54,7 @@
         <v-row class="mb-8">
           <v-col cols="4">
             <label class="section-label">
-              Jobseeking Status
+              {{ $t("jobseekingStatus") }}
             </label>
             <div class="section-value">
               {{ user.job_status }}
@@ -62,7 +62,7 @@
           </v-col>
           <v-col cols="5">
             <label class="section-label">
-              Position
+              {{ $t("position") }}
             </label>
             <div class="section-value">
               {{ user.current_position }}
@@ -74,13 +74,13 @@
       <v-row class="mb-8">
         <v-col cols="4">
           <label class="section-label">
-            Current Industry
+            {{ $t("currentIndustry") }}
           </label>
           <div class="section-value">{{ user.branche }}</div>
         </v-col>
         <v-col cols="5">
           <label class="section-label">
-            City and adress
+            {{ $t("city") }} and {{ $t("address") }}
           </label>
           <div class="section-value">
             {{ user.city }}
@@ -91,7 +91,7 @@
 
     <div class="section">
       <label class="section-label">
-        Contact
+        {{ $t("contact") }}
       </label>
       <div class="content pt-4">
         <div class="contact-section d-flex pb-5">
@@ -101,7 +101,7 @@
             </v-icon>
           </div>
           <div class="pl-4">
-            <div class="label">Email address</div>
+            <div class="label">{{ $t("emailAddress") }}</div>
             <div class="value">
               <a :href="'mailto:' + user.company_email">
                 {{ user.company_email }}
@@ -117,7 +117,7 @@
             </v-icon>
           </div>
           <div class="pl-4">
-            <div class="label">Phone number</div>
+            <div class="label">{{ $t("phoneNumber") }}</div>
             <div class="value">
               <a :href="'tel:' + user.company_phone">
                 {{ user.company_phone }}
@@ -133,7 +133,7 @@
             </v-icon>
           </div>
           <div class="pl-4">
-            <div class="label">City and address</div>
+            <div class="label">{{ $t("city") }} and {{ $t("address") }}</div>
             <div class="value">
               <a :href="googleMapsLink" target="_blank">
                 {{ address }}
@@ -149,7 +149,7 @@
             </v-icon>
           </div>
           <div class="pl-4">
-            <div class="label">Web</div>
+            <div class="label">{{ $t("web") }}</div>
             <div class="value">
               <a :href="user.web_url" target="_blank">
                 {{ user.web_url }}

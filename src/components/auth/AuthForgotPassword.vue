@@ -10,12 +10,11 @@
     </jonder-title>
 
     <p class="p-text mb-7">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies
-      felis eu libero.
+      {{ $t("forgotPassowrdDescription") }}
     </p>
 
     <v-form v-model="formValid" class="auth-form" @submit.prevent="submit">
-      <label class="profile-label">Ihre E-Mail eingeben</label>
+      <label class="profile-label">{{ $t("enterYourEmail") }}</label>
       <v-text-field
         dense
         placeholder="Email"
@@ -34,7 +33,7 @@
         class="full-w"
         :disabled="!formValid"
       >
-        Email Senden
+        {{ $t("sendEmail") }}
       </v-btn>
     </v-form>
   </v-container>

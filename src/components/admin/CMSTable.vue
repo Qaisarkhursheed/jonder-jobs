@@ -23,7 +23,7 @@
               v-on="on"
             >
               New Item
-            </v-btn> 
+            </v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -65,25 +65,25 @@
                 text
                 @click="close"
               >
-                Cancel
+                {{ $t("cancel") }}
               </v-btn>
               <v-btn
                 color="blue darken-1"
                 text
                 @click="save"
               >
-                Save
+                {{ $t("save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
-            <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+            <v-card-title class="text-h5">{{ $t("deleteThisItem") }}</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{ $t("ok") }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -110,7 +110,7 @@
         color="primary"
         @click="initialize"
       >
-        Reset
+        {{ $t("reset") }}
       </v-btn>
     </template>
   </v-data-table>
