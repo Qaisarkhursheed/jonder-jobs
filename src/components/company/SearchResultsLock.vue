@@ -5,10 +5,10 @@
         mdi-lock
       </v-icon>
       <div class="title">
-        Sie haben das Limit von 3 Suchen erreicht.
+        {{ $t("limitOf3Searches") }}
       </div>
       <div class="subtitle">
-        Upgraden Sie Ihr Konto, um ohne Einschränkungen zu suchen.
+        {{ $t("upgradeAccSearchWithoutRestriction") }}
       </div>
     </div>
 

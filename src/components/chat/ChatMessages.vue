@@ -77,7 +77,7 @@
           <div
             class="day-in-chat"
             v-if="
-              index == 0 ||
+              index === 0 ||
                 msg.created_at.substr(0, 10) !=
                   messages[index - 1].created_at.substr(0, 10)
             "
@@ -148,7 +148,7 @@
         rows="1"
         auto-grow
         @drop.prevent="handleTextareaDrop"
-        >Message
+        >{{ $t("message") }}
       </v-textarea>
 
       <MessageTemplatesPicker @submit="msg => send(msg)" />

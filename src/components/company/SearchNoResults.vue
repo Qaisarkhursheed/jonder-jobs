@@ -1,8 +1,8 @@
 <template>
   <div class="search-no-results d-flex align-center flex-column pt-16 pb-16">
     <img :src="require('@/assets/searchnoresults.png')" class="image">
-    <div class="message-title pt-4">Es liegen keine Ergebnisse vor</div>
-    <div class="message-subtitle">Versuchen Sie, die Filter zu ändern und erneut zu suchen.</div>
+    <div class="message-title pt-4">{{ $t("thereAreNoResults") }}</div>
+    <div class="message-subtitle">{{ $t("changeFiltersAndTryAgain") }}</div>
   </div>
 </template>
 

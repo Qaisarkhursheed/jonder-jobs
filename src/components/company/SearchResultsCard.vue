@@ -74,13 +74,13 @@
 
       <v-card-text class="job-info d-flex pb-0">
         <v-col cols="6" class="experience">
-          <div class="label">Erfahrung</div>
+          <div class="label">{{ $t("experiences") }}</div>
           <div class="value">
             {{ candidate.working_experience }} {{ $t("years") }}
           </div>
         </v-col>
         <v-col cols="6" class="wage">
-          <div class="label">GEHALTSERWARTUNG</div>
+          <div class="label">{{ $t("salaryExpectation") }}</div>
           <div class="value" v-if="monthly_salary.min && monthly_salary.max">
             &euro; {{ monthly_salary.min }} -
             {{ monthly_salary.max }}
@@ -113,7 +113,7 @@
           @click="startConversation"
           :loading="startChatLoading"
         >
-          Kontaktieren
+          {{ $t("toContact") }}
         </v-btn>
       </v-col>
     </v-card-actions>

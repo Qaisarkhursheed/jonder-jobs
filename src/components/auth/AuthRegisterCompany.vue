@@ -180,7 +180,7 @@
         height="56"
         :loading="isLoading"
       >
-        Kostenlos registrieren
+        {{ $t("registerForFree") }}
       </v-btn>
 
       <!-- Login link -->

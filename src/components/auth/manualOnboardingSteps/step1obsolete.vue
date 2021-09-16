@@ -5,7 +5,7 @@
     </p>
 
     <v-form v-model="formValid" @submit.prevent="nextScreen">
-      <GooglePlacesAutocomplete @select="e => value.city = e" />
+      <GooglePlacesAutocomplete @select="e => (value.city = e)" />
 
       <v-checkbox
         class="mb-3"
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import GooglePlacesAutocomplete from '../../GooglePlacesAutocomplete.vue';
+import GooglePlacesAutocomplete from "../../GooglePlacesAutocomplete.vue";
 export default {
   components: {
     GooglePlacesAutocomplete
@@ -37,15 +37,15 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
-  },
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@
   <div class="public-profile-details d-flex flex-column">
     <div class="section mb-6">
       <label class="section-label">
-        Branche
+        {{ $t("branch") }}
       </label>
       <v-autocomplete
         v-model="form.branche"

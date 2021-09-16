@@ -181,7 +181,7 @@
         large
         height="56"
       >
-        Kostenlos registrieren
+        {{ $t("registerForFree") }}
       </v-btn>
 
       <div class="text-medium mt-5 text-center">
