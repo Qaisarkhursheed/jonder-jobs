@@ -140,9 +140,7 @@
 
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
       <v-row>
-        <p class="profile-title">
-          {{ $t("position") }} & {{ $t("industry") }}
-        </p>
+        <p class="profile-title">{{ $t("position") }} & {{ $t("industry") }}</p>
         <!-- <p class="profile-subtitle">
           Explanation goes here
         </p> -->
@@ -505,7 +503,7 @@
       <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
         <v-col>
           <div class="invoice-number">
-            {{ $t('numberOfBill') }}: {{ item.invoice_number }}
+            {{ $t("numberOfBill") }}: {{ item.invoice_number }}
           </div>
           <div class="invoice-date">
             {{ $t("dateOfInvoice") }}:
@@ -639,6 +637,9 @@
                 : null
             "
           >
+            <span class="updgrade-price upgrade-title">
+              {{ plan.price }}&euro;
+            </span>
             <v-img
               class="upgrade-icon"
               :style="{ order: userPlan && userPlan.id === plan.id ? 2 : 1 }"
@@ -657,9 +658,6 @@
                 {{ plan.name }}
               </span>
               <p>{{ plan.days_valid }} days active</p>
-              <span class="updgrade-price upgrade-title"
-                >{{ plan.price }}&euro;</span
-              >
             </div>
             <UserPlanDescription :payment-info="false" v-else />
           </div>
@@ -994,6 +992,7 @@ export default {
     position: absolute;
     right: 25px;
     bottom: 23px;
+    width: auto;
   }
 }
 .profile-section {
