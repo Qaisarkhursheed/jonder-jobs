@@ -9,7 +9,9 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>{{ type }}</v-toolbar-title>
+        <v-toolbar-title style="text-transform: capitalize;">
+          {{ cardTitle }}
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-dialog
           v-model="dialog"
@@ -34,9 +36,7 @@
               <v-container>
                 <v-row>
                   <v-col
-                    cols="12"
-                    sm="2"
-                    md="2"
+                    cols="2"
                   >
                     <v-text-field
                       v-model="editedItem.id"
@@ -46,12 +46,26 @@
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="8"
-                    md="10"
                   >
                     <v-text-field
-                      v-model="editedItem.key"
-                      label="Key"
+                      v-model="editedItem.en"
+                      label="En"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                  >
+                    <v-text-field
+                      v-model="editedItem.de"
+                      label="De"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                  >
+                    <v-text-field
+                      v-model="editedItem.fr"
+                      label="Fr"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -117,6 +131,9 @@
 </template>
 
 <script>
+
+import store from "@/store";
+
 export default {
 
   name: "CMSTable",
@@ -127,7 +144,7 @@ export default {
       default: ""
     },
     list: {
-      type: [Array, Object]
+      type: [Array, Object],
     }
   },
 
@@ -143,18 +160,26 @@ export default {
           value: 'id',
           width: "10%"
         },
-        { text: 'Key', value: 'key', width: "70%" },
+        { text: 'En', value: 'en' },
+        { text: "De", value: 'de' },
+        { text: "Fr", value: 'fr' },
         { text: 'Actions', value: 'actions', width: "15%" ,sortable: false },
       ],
       items: [],
       editedIndex: -1,
       editedItem: {
         id: '',
-        key: '',
+        en: '',
+        de: '',
+        fr: '',
+        type: ''
       },
       defaultItem: {
         id: '',
-        key: '',
+        en: '',
+        de: '',
+        fr: '',
+        type: ''
       },
     }
   },
@@ -163,6 +188,9 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+    cardTitle() {
+      return this.type.split("_").join(" ");
+    }
   },
 
   watch: {
@@ -172,6 +200,9 @@ export default {
     dialogDelete (val) {
       val || this.closeDelete()
     },
+    list(val) {
+      this.items = val || [];
+    }
   },
 
   created () {
@@ -184,46 +215,50 @@ export default {
     },
 
     editItem (item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
+      this.editedIndex = this.items.indexOf(item);
+      this.editedItem = Object.assign({}, item);
       this.dialog = true
     },
 
     deleteItem (item) {
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
+      this.dialogDelete = true;
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
-      this.closeDelete()
+      store.dispatch("admin/cmsDeleteListItem", this.editedItem);
+      this.closeDelete();
     },
 
     close () {
       this.dialog = false
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
       })
     },
 
     closeDelete () {
       this.dialogDelete = false
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
       })
     },
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
+        store.dispatch("admin/cmsUpdateListItem", this.editedItem);
+
       } else {
-        this.items.push(this.editedItem)
+        store.dispatch("admin/cmsAddListItem", 
+          { ...this.editedItem, type: this.type }
+        );
       }
-      this.close()
+      this.close();
     },
   },
+
 };
 </script>
