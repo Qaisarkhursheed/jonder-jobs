@@ -14,6 +14,7 @@ import professions from "./professions";
 import messageTemplates from "./messageTemplates";
 import northdata from "./northdata";
 import google from "./google";
+import admin from "./admin";
 
 Vue.use(Vuex);
 
@@ -31,7 +32,8 @@ export default createStore(Vuex.Store, {
     professions,
     messageTemplates,
     northdata,
-    google
+    google,
+    admin
   },
   state: {
     screenSize: null
