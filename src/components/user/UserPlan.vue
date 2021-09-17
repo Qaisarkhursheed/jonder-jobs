@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import UserPlanDescription from './UserPlanDescription';
 
 export default {
@@ -34,16 +33,6 @@ export default {
     borderPlan: {
       type: Boolean,
       default: false
-    }
-  },
-  computed: {
-    ...mapGetters({
-      userPlan: "user/userPlan"
-    }),
-    updateDate() {
-      const date = new Date(this.userPlan.updated_at); // Now
-      date.setDate(date.getDate() + this.userPlan.days_valid);
-      return date;
     }
   }
 };

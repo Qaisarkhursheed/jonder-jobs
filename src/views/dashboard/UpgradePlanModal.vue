@@ -17,7 +17,7 @@
       <div
         class="options"
         :class="{
-          deactive: userPlan && userPlan.id === plan.id,
+          deactive: userPlan.length && isPlanActive(plan.id),
           active: form.active_plan === plan.id
         }"
         v-for="plan in data"
@@ -26,7 +26,7 @@
         <v-btn
           v-if="plan.plan_type === 'jobseeker_paln'"
           @click="
-            !userPlan || userPlan.id !== plan.id
+            !userPlan.length || !isPlanActive(plan.id)
               ? ((form.active_plan = plan.id), savePlanId(plan.id))
               : null
           "
@@ -42,7 +42,7 @@
 
           <div
             class="upgrade-default"
-            v-if="!userPlan || userPlan.id !== plan.id"
+            v-if="!userPlan.length || !isPlanActive(plan.id)"
           >
             <span class="upgrade-title"> {{ plan.name }} </span>
             <p class="upgrade-text">
@@ -50,7 +50,7 @@
             </p>
             <span class="updgrade-price">{{ plan.price }}&euro;</span>
           </div>
-          <UserPlanDescription class="user-plan-desc" v-else />
+          <UserPlanDescription :plan="getUserPlan(plan.id)[0]" class="user-plan-desc" v-else />
           <!--          <div class="plan-description" v-else>-->
           <!--            <h3>{{ userPlan.name }}</h3>-->
           <!--            <div>-->
@@ -133,7 +133,6 @@ export default {
       this.populate();
     }
     this.data = this.$store.getters["user/plans"]("jobseeker_paln");
-    console.log(this.$store.getters.screenSize);
   },
   methods: {
     close(type) {
@@ -141,7 +140,6 @@ export default {
     },
     savePlanId(id) {
       this.planId = id;
-      console.log(this.planId);
     },
     async processStripe() {
       if (this.stripeId && this.stripeId.length > 5) {
@@ -192,7 +190,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userPlan: "user/userPlan"
+      userPlan: "user/userPlan",
+      getUserPlan: "user/getUserPlan",
+      isPlanActive: "user/isPlanActive"
     })
   }
 };

@@ -627,14 +627,14 @@
           />
           <div
             class="upgrade"
-            :class="{ deactive: userPlan && userPlan.id === plan.id }"
+            :class="{ deactive: userPlan.length && isPlanActive(plan.id) }"
             @click="
-              !userPlan || userPlan.id !== plan.id
+              !userPlan.length || !isPlanActive(plan.id)
                 ? toggleModal('UpgradePlan')
                 : null
             "
           >
-            <span class="updgrade-price upgrade-title">
+            <span class="updgrade-price upgrade-title" v-if="!isPlanActive(plan.id)">
               {{ plan.price }}&euro;
             </span>
             <v-img
@@ -649,14 +649,18 @@
 
             <div
               class="upgrade-default"
-              v-if="!userPlan || userPlan.id !== plan.id"
+              v-if="!userPlan.length || !isPlanActive(plan.id)"
             >
               <span class="upgrade-title">
                 {{ plan.name }}
               </span>
               <p>{{ $t("nDaysActive", { n: plan.days_valid }) }}</p>
             </div>
-            <UserPlanDescription :payment-info="false" v-else />
+            <UserPlanDescription
+              :plan="getUserPlan(plan.id)[0]"
+              :payment-info="false"
+              v-else
+            />
           </div>
         </v-col>
       </v-row>
@@ -776,7 +780,9 @@ export default {
       "getUserFullName",
       "getUserInitials",
       "userPlan",
-      "plans"
+      "plans",
+      "isPlanActive",
+      "getUserPlan"
     ]),
     profile_img() {
       if (this.newImage) {

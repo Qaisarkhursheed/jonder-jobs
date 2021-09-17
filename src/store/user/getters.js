@@ -1,4 +1,4 @@
-import filter from "lodash/filter";
+import { filter, findIndex } from "lodash";
 
 export default {
   user(state) {
@@ -62,7 +62,11 @@ export default {
   jobseekerEducation(state) {
     return state.jobseeker.education;
   },
-  userPlan: state => state.user?.plan,
+  userPlan: state => state.user.plan,
   userPlans: state => state.plans,
+  isPlanActive: (state, getters) => id =>
+    findIndex(getters.userPlan, plan => plan.id === id) >= 0,
+  getUserPlan: (state, getters) => id =>
+    filter(getters.userPlan, plan => plan.id === id),
   plans: state => type => filter(state.plans, plan => plan.plan_type === type)
 };

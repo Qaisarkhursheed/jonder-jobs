@@ -27,9 +27,7 @@
       </v-col>
       <v-col cols="4" class="text-right">
         <div class="dashboard-avatar">
-          <span class="d-none d-md-inline">
-            {{$t('hello')}},
-          </span>
+          <span class="d-none d-md-inline"> {{ $t("hello") }}, </span>
           <span class="name d-none d-md-inline">{{ getUserFullName }}</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -155,27 +153,37 @@
                   :src="require('@/assets/icons/profile-placeholder.png')"
                   v-else
                 ></v-img>
-                <v-img
-                  v-if="user.plan"
-                  class="profile-image-badge-icon"
-                  :src="
-                    require(`@/assets/icons/${
-                      user.plan.id === 11 ? 'top-rated' : 'medal'
-                    }.svg`)
-                  "
-                ></v-img>
+                <div class="profile-image-badge-icons" v-if="userPlan.length">
+                  <v-img
+                    v-for="(plan, index) in userPlan"
+                    :key="index"
+                    class="profile-image-badge-icon"
+                    :style="[userPlan.length > 1 ? { margin: '0 -5px' } : null]"
+                    :src="
+                      require(`@/assets/icons/${
+                        plan.id === 11 ? 'top-rated' : 'medal'
+                      }.svg`)
+                    "
+                  ></v-img>
+                </div>
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
               <router-link to="/dashboard/profile" class="settings-link">
                 {{ $t("profileSettings") }}
               </router-link>
-              <DashboardActivePlan v-if="user.plan" />
+              <template v-if="userPlan.length">
+                <DashboardActivePlan
+                  v-for="(plan, index) in userPlan"
+                  :key="index"
+                  :user-plan="plan"
+                />
+              </template>
             </div>
 
             <UpgradeAccountBox
               class="mt-7"
-              v-if="messagesLoaded && conversations.length && !user.plan"
+              v-if="messagesLoaded && conversations.length && !userPlan.length"
               small
             />
 
@@ -278,7 +286,12 @@ export default {
     search: null
   }),
   computed: {
-    ...mapGetters("user", ["user", "getUserFullName", "getUserInitials"]),
+    ...mapGetters("user", [
+      "user",
+      "getUserFullName",
+      "getUserInitials",
+      "userPlan"
+    ]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
       return this.$route.name === "Profile";
@@ -573,11 +586,14 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
     height: 80px;
     width: 80px;
   }
-  .profile-image-badge-icon {
+  .profile-image-badge-icons {
     position: absolute;
     bottom: 0;
+    display: flex;
     right: -5px;
-    max-width: 28px;
+    .profile-image-badge-icon {
+      max-width: 28px;
+    }
   }
 }
 </style>
