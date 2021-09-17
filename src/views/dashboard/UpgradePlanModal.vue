@@ -133,7 +133,6 @@ export default {
       this.populate();
     }
     this.data = this.$store.getters["user/plans"]("jobseeker_paln");
-    console.log(this.$store.getters.screenSize);
   },
   methods: {
     close(type) {
@@ -141,7 +140,6 @@ export default {
     },
     savePlanId(id) {
       this.planId = id;
-      console.log(this.planId);
     },
     async processStripe() {
       if (this.stripeId && this.stripeId.length > 5) {

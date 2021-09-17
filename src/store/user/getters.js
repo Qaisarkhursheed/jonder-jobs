@@ -62,28 +62,11 @@ export default {
   jobseekerEducation(state) {
     return state.jobseeker.education;
   },
-  userPlan: state => {
-    const plan1 = {
-      id: 11,
-      name: "Your account is higlighted in company search",
-      price: 35,
-      days_valid: 14,
-      plan_slug: "higlighted",
-      created_at: null,
-      updated_at: "2021-08-29T12:56:07.000000Z",
-      plan_description:
-        "Highlights you in the Company-Search by visually highlighting your Search-Profile for 14 Days.",
-      plan_type: "jobseeker_paln",
-      plan_img: null,
-      stripe_id: "price_1JS6laKKMFZvcsxufbEtXEs2",
-      benefits: null,
-      start_timestamp: "2021-09-16T13:17:45.000000Z",
-      end_timestamp: "2021-09-30 15:17:45"
-    };
-    return state.user?.plan ? [plan1,state.user?.plan] : [];
-  },
+  userPlan: state => state.user.plan,
   userPlans: state => state.plans,
-  isPlanActive: (state, getters) => id => findIndex(getters.userPlan, plan => plan.id === id) >= 0,
-  getUserPlan: (state, getters) => id => filter(getters.userPlan, plan => plan.id === id),
+  isPlanActive: (state, getters) => id =>
+    findIndex(getters.userPlan, plan => plan.id === id) >= 0,
+  getUserPlan: (state, getters) => id =>
+    filter(getters.userPlan, plan => plan.id === id),
   plans: state => type => filter(state.plans, plan => plan.plan_type === type)
 };
