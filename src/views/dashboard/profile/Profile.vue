@@ -39,7 +39,7 @@
                 type="file"
                 ref="uploadAvatarInput"
                 style="display: none"
-                @change="cropper.image = $event.target.files"
+                @change="cropperImage = $event.target.files"
               />
               <v-img v-if="profile_img" :src="profile_img"></v-img>
               <v-img
@@ -57,12 +57,9 @@
             </v-icon>
           </div>
           <ImageUploadCropper
-            :image="cropper.image"
-            @save="
-              img => {
-                newImage = img;
-              }
-            "
+            :image="cropperImage"
+            @cancel="$refs.uploadAvatarInput.value = null"
+            @save="newImage = $event"
           />
         </v-col>
         <v-col cols="6" class="text-right">
@@ -657,7 +654,7 @@
               <span class="upgrade-title">
                 {{ plan.name }}
               </span>
-              <p>{{ plan.days_valid }} days active</p>
+              <p>{{ $t("nDaysActive", { n: plan.days_valid }) }}</p>
             </div>
             <UserPlanDescription
               :plan="getUserPlan(plan.id)[0]"
@@ -734,10 +731,7 @@ export default {
     passwordFormResponse: {},
     dontKnowWhenToStart: false,
     invoices: [],
-    cropper: {
-      active: false,
-      image: null
-    },
+    cropperImage: null,
     jonderStatus: [
       "whatBringsYouJob",
       "whatBringsYouOffer",

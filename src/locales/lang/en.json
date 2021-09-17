@@ -180,6 +180,7 @@
   "renewsOn": "Renews on",
   "more": "More",
   "daysValid": "days valid",
+  "nDaysActive": "{n} days active",
   "changePackage": "Change package",
   "validUntil": "Valid until",
   "remainingDays": "Remaining days",

@@ -1,61 +1,86 @@
 <template>
-  <v-dialog v-model="active" @click:outside="active = false">
-    <div class="upload-example">
-      <Cropper
-        ref="cropper"
-        class="upload-example-cropper"
-        :src="img"
-        :stencil-component="$options.components.Stencil"
-      />
-      <div class="button-wrapper">
+  <v-dialog
+    v-model="active"
+    @click:outside="cancel"
+    content-class="cropper-dialog"
+  >
+    <Cropper
+      ref="cropper"
+      style="max-height: 80vh;"
+      :src="img"
+      :stencil-component="$options.components.Stencil"
+    />
+
+    <v-row class="buttons mx-0">
+      <!-- Cancel -->
+      <v-col class="px-0">
+        <v-btn color="secondary" height="55" block @click="cancel">
+          {{ $t("cancel") }}
+        </v-btn>
+      </v-col>
+
+      <!-- Submit -->
+      <v-col class="px-0">
         <v-btn
           type="submit"
           color="primary"
-          height="58"
-          class="full-w mt-5 font-weight-medium dark-blue"
+          height="55"
+          block
           @click="cropImage"
         >
           {{ $t("save") }}
         </v-btn>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </v-dialog>
 </template>
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css';
+import { Cropper } from "vue-advanced-cropper";
+import "vue-advanced-cropper/dist/style.css";
 import Stencil from "@/components/ImageUploadCropperStencil";
 
 export default {
-
-  name: 'ImageUploadCropper',
+  name: "ImageUploadCropper",
 
   props: {
     image: {
-      type: [String, Object, File, Image, Array, FileList],
-    },
+      type: [File, Image, FileList]
+    }
   },
 
-  components: {
-    Cropper,
-    Stencil
-  },
+  components: { Cropper, Stencil },
 
   data() {
     return {
       img: null,
       active: false
+    };
+  },
+
+  watch: {
+    image() {
+      if (this.image && this.image.length) {
+        this.active = true;
+        this.setFile();
+      }
     }
   },
+
   methods: {
+    cancel() {
+      this.img = null;
+      this.$emit("cancel");
+      this.active = false;
+    },
     cropImage() {
       const result = this.$refs.cropper.getResult();
-      let parsed = this.convertImage(result.canvas.toDataURL(
-        "image/jpeg"
-      ), 'image.png');
-      this.$emit('save', parsed);
+      let parsed = this.convertImage(
+        result.canvas.toDataURL("image/jpeg"),
+        "image.png"
+      );
+      this.$emit("save", parsed);
       this.active = false;
     },
     uploadImage(event) {
@@ -66,7 +91,7 @@ export default {
         // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
+        reader.onload = e => {
           // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
           // Read image as base64 and set to imageData
           this.image = e.target.result;
@@ -83,7 +108,7 @@ export default {
         // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
+        reader.onload = e => {
           // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
           // Read image as base64 and set to imageData
           this.img = e.target.result;
@@ -93,53 +118,28 @@ export default {
       }
     },
     convertImage(dataurl, filename) {
-      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new File([u8arr], filename, {type:mime});
-    }
-  },
-  watch: {
-    image() {
-      this.active = true;
-      console.log('image');
-      this.setFile();
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
     }
   }
 };
 </script>
 
-<style>
-.upload-example-cropper {
-  border: solid 1px #EEE;
-  min-height: 300px;
-  width: 100%;
-}
+<style lang="scss">
+.cropper-dialog {
+  overflow: hidden;
 
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 17px;
-}
-
-.button {
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  background: #3fb37f;
-  cursor: pointer;
-  transition: background 0.5s;
-  font-family: Open Sans, Arial;
-  margin: 0 10px;
-}
-
-.button:hover {
-  background: #38d890;
-}
-
-.button input {
-  display: none;
+  .buttons {
+    .v-btn {
+      border-radius: 0;
+    }
+  }
 }
 </style>

@@ -38,7 +38,6 @@ export default {
   slManagementGetAll({ commit }) {
     return axios.get("/selection-managment").then(res => {
       if (res.data.success) {
-        console.log("res", res.data);
         commit("SET_SELECTION_MANAGEMENT", res.data.data);
       }
     });
@@ -71,7 +70,6 @@ export default {
   // Saved search filters
   searchFilterFetchAll({ commit }) {
     return axios.get("/jobseeker-filter").then(res => {
-      console.log(res);
       if (res.status === 200) {
         commit("SET_SEARCH_FILTERS", res.data.data);
       }
@@ -86,7 +84,6 @@ export default {
   },
   searchFilterDelete({ dispatch }, id) {
     return axios.delete(`/jobseeker-filter/${id}`).then(res => {
-      console.log(res);
       if (res.status === 200) {
         dispatch("searchFilterFetchAll");
       }

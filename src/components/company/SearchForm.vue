@@ -33,7 +33,9 @@
             :placeholder="$t('employementType')"
             outlined
           >
-            <template v-slot:selection="{ item }"> {{ $t(item.value) }}</template>
+            <template v-slot:selection="{ item }">
+              {{ $t(item.value) }}</template
+            >
             <template v-slot:item="{ item }">
               <v-list-item-content>
                 <v-list-item-title>
@@ -357,7 +359,6 @@ export default {
       let searchMeta = this.$store.getters["company/searchMeta"]
         ? this.$store.getters["company/searchMeta"].searchInput
         : null;
-      console.log("meta", searchMeta);
       if (searchMeta) {
         this.formFields.employment_type =
           "employment_type" in searchMeta ? searchMeta.employment_type : "";

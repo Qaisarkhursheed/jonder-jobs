@@ -180,6 +180,7 @@
   "renewsOn": "Renouvellement le",
   "more": "plus",
   "daysValid": "jours valides",
+  "nDaysActive": "{n} jours actifs",
   "changePackage": "Modifier le package",
   "validUntil": "Valable jusqu'au",
   "remainingDays": "Jours restants",
