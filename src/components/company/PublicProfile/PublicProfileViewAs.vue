@@ -202,7 +202,7 @@
 </template>
 
 <script>
-import NorthDataWidget from "./NorthDataWidget";
+import NorthDataWidget from "@/components/company/NorthDataWidget";
 
 export default {
   name: "PublicProfileViewAs",

@@ -8,12 +8,10 @@
       </v-col>
       <v-col
         cols="col"
-        class="main-panel-wrap pa-0 full-h bg-light-gray"
+        class="main-panel-wrap pt-7 px-3 px-md-7 full-h bg-light-gray"
         :class="{ 'mobile-layout': !mobile }"
       >
-        <v-container :fluid="true" class="company pt-8 px-sm-7 pb-0 full-h">
-          <router-view></router-view>
-        </v-container>
+        <router-view></router-view>
       </v-col>
     </v-row>
   </v-container>
@@ -53,11 +51,6 @@ export default {
 </script>
 
 <style lang="scss">
-.company {
-  font-family: $inter;
-  overflow: auto;
-}
-
 .main-panel-wrap {
   overflow: auto;
   padding-bottom: 80px;

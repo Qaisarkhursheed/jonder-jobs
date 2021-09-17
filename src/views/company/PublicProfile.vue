@@ -1,20 +1,16 @@
 <template>
   <div class="public-profile">
-    <!-- <UserNoteAdd /> -->
-    <v-row class="heading mb-5">
-      <v-col cols="12" md="9">
+    <!-- Header -->
+    <v-row class="page-heading">
+      <v-col cols="col">
         <div class="title">{{ $t("publicCompanyProfile") }}</div>
         <div class="subtitle">
           {{ $t("publicProfileSub") }}
         </div>
       </v-col>
-      <v-col cols="12" md="3">
-        <v-btn
-          color="primary"
-          height="48"
-          class="full-w font-weight-medium main-accept-btn dark-blue"
-          @click="viewAsTab"
-        >
+
+      <v-col cols="auto">
+        <v-btn color="primary" height="48" @click="viewAsTab">
           <template v-if="viewAs">
             {{ $t("backToEdit") }}
           </template>
@@ -24,154 +20,149 @@
         </v-btn>
       </v-col>
     </v-row>
+
+    <!-- Content -->
     <v-row>
-      <v-col cols="12" md="4">
-        <v-card flat class="public-profile-sidebar rounded-lg pt-5 pb-5">
+      <!-- Sidebar -->
+      <v-col cols="auto">
+        <v-card flat class="public-profile-sidebar">
           <v-tabs
-            class="pl-8 pr-8"
+            class="px-5"
             slider-color="#fff"
             vertical
             v-model="tabs.active"
           >
             <v-tab
-              class="pt-7 pb-7"
+              class="pl-1 py-5"
               v-for="tab in tabs.options"
-              :key="tab.key"
+              :key="tab"
               :disabled="viewAs"
               slider-color="#0253B3"
             >
-              {{ $t(tab.key) }}
+              <span>{{ $t(tab) }}</span>
+              <span class="arrow">&gt;</span>
             </v-tab>
           </v-tabs>
         </v-card>
       </v-col>
-      <v-col cols="12" md="8">
-        <v-card flat class="rounded-lg">
+
+      <!-- Profile -->
+      <v-col cols="col">
+        <v-card flat class="py-8 px-5 px-md-10">
           <v-tabs-items v-model="tabs.active">
             <v-tab-item
               :transition="false"
               v-for="item in tabs.options"
               :key="item.key"
             >
-              <v-card flat class="pa-10">
-                <template v-if="viewAs">
-                  <PublicProfileViewAs :user="user" />
-                </template>
-                <template v-else>
-                  <keep-alive>
-                    <component
-                      :is="tabComponents[item.key]"
-                      @update="handleUpdate"
-                      :user="user"
-                    >
-                    </component>
-                  </keep-alive>
-                </template>
-              </v-card>
+              <template v-if="viewAs">
+                <PublicProfileViewAs :user="user" />
+              </template>
+              <template v-else>
+                <keep-alive>
+                  <component
+                    :is="tabComponents[item]"
+                    @update="handleUpdate"
+                    :user="user"
+                  >
+                  </component>
+                </keep-alive>
+              </template>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
+
+        <ResponseAlert class="mt-3" :response="formResponse" />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import store from "@/store";
-import PublicProfileGeneral from "@/components/company/PublicProfileGeneral";
-import PublicProfileDetails from "@/components/company/PublicProfileDetails";
-import PublicProfileContact from "@/components/company/PublicProfileContact";
-import PublicProfileViewAs from "@/components/company/PublicProfileViewAs";
-// import UserNoteAdd from "@/components/modals/UserNoteAdd";
+import PublicProfileGeneral from "@/components/company/PublicProfile/PublicProfileGeneral";
+import PublicProfileDetails from "@/components/company/PublicProfile/PublicProfileDetails";
+import PublicProfileContact from "@/components/company/PublicProfile/PublicProfileContact";
+import PublicProfileViewAs from "@/components/company/PublicProfile/PublicProfileViewAs";
 
 export default {
-  name: "CompanyPublicProfile",
-
   components: {
     PublicProfileGeneral,
     PublicProfileDetails,
     PublicProfileContact,
     PublicProfileViewAs
-    // UserNoteAdd
   },
 
   data() {
     return {
+      formResponse: {},
       tabs: {
-        active: "details",
-        options: [
-          { key: "general", label: "General" },
-          { key: "details", label: "Details" },
-          { key: "contact", label: "Contact" }
-        ]
+        active: "generalInfo",
+        options: ["generalInfo", "companyDetails", "contact"]
       },
       tabComponents: {
-        general: PublicProfileGeneral,
-        details: PublicProfileDetails,
+        generalInfo: PublicProfileGeneral,
+        companyDetails: PublicProfileDetails,
         contact: PublicProfileContact,
         viewAs: PublicProfileViewAs
       },
       viewAs: false
     };
   },
+
+  computed: {
+    user() {
+      return this.$store.getters["user/user"];
+    }
+  },
+
   methods: {
-    ...mapActions("user", ["updateCompany"]),
-    updateCompanyOld(input) {
-      store.dispatch("user/updateCompany", {
-        id: this.user.id,
-        data: {
-          ...input
-        }
-      });
-    },
     viewAsTab() {
       this.viewAs = !this.viewAs;
     },
     handleUpdate(input) {
-      this.updateCompany(input)
+      this.$store
+        .dispatch("user/updateCompany", input)
         .then(() => {
-          alert("Success");
+          this.formResponse = { success: true, message: this.$t("success") };
         })
         .catch(err => {
-          alert(err.data.message);
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.formResponse = {};
+          }, 3000);
         });
-      //this.updateCompanyUser(formDataCopy);
-    }
-  },
-  computed: {
-    user() {
-      return store.getters["user/user"];
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.heading {
-  font-weight: 600;
-  font-size: 32px;
-  color: #222222;
+.public-profile-sidebar {
+  position: sticky;
+  top: 0px;
 
-  .title {
-    font-weight: 600;
-    font-size: 32px !important;
-    color: #222222;
-  }
-  .subtitle {
-    font-weight: normal;
+  .v-tab {
+    min-width: 300px;
     font-size: 18px;
-    color: #7a7a7a;
-  }
-}
-.v-btn.main-accept-btn {
-  background-color: $primary-blue-dark !important;
-  color: #fff;
-}
+    height: unset;
+    border-bottom: 0.5px solid #cacaca;
+    text-transform: unset;
+    letter-spacing: unset;
+    justify-content: space-between;
 
-@media (min-width: 960px) {
-  .public-profile-sidebar {
-    height: 450px;
+    // &.v-tab--active {
+    //   border-color: #0253b3;
+    // }
+
+    &:last-of-type {
+      border: none;
+    }
+
+    &:not(&.v-tab--active) {
+      color: black;
+    }
   }
 }
 </style>

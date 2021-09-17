@@ -23,45 +23,33 @@
         </p>
         <p class="profile-subtitle">{{ $t("personalInfo") }}</p>
         <v-col cols="6">
-          <div class="d-flex align-center">
-            <v-avatar
-              color="primary"
-              size="80"
-              class="flex-grow-0 flex-shrink-0"
-            >
-              <!-- <input
-                type="file"
-                ref="uploadAvatarInput"
-                style="display: none"
-                @change="newImage = $event.target.files[0]"
-              /> -->
-              <input
-                type="file"
-                ref="uploadAvatarInput"
-                style="display: none"
-                @change="cropperImage = $event.target.files"
-              />
-              <v-img v-if="profile_img" :src="profile_img"></v-img>
-              <v-img
-                :src="require('@/assets/icons/profile-placeholder.png')"
-                v-else
-              ></v-img>
-            </v-avatar>
-            <v-icon
-              @click="$refs.uploadAvatarInput.click()"
-              color="white"
-              size="20"
-              style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%"
-            >
-              mdi-camera
-            </v-icon>
-          </div>
+          <input
+            type="file"
+            ref="uploadAvatarInput"
+            class="d-none"
+            @change="cropperImage = $event.target.files"
+          />
           <ImageUploadCropper
             :image="cropperImage"
             @cancel="$refs.uploadAvatarInput.value = null"
             @save="newImage = $event"
           />
+          <v-avatar color="primary" size="80">
+            <v-img v-if="profile_img" :src="profile_img" />
+            <span v-else class="white--text text-h4">
+              {{ $store.getters["user/getUserInitials"] }}
+            </span>
+          </v-avatar>
+          <v-icon
+            @click="$refs.uploadAvatarInput.click()"
+            color="white"
+            size="20"
+            style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%; border: 2px solid white;"
+          >
+            mdi-camera
+          </v-icon>
         </v-col>
+
         <v-col cols="6" class="text-right">
           <v-btn
             :loading="formLoading"
@@ -634,7 +622,10 @@
                 : null
             "
           >
-            <span class="updgrade-price upgrade-title" v-if="!isPlanActive(plan.id)">
+            <span
+              class="updgrade-price upgrade-title"
+              v-if="!isPlanActive(plan.id)"
+            >
               {{ plan.price }}&euro;
             </span>
             <v-img
