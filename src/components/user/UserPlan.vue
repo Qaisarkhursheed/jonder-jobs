@@ -13,7 +13,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <UserPlanDescription :border-plan="borderPlan" :payment-info="paymentInfo"/>
+          <UserPlanDescription :plan="userPlan[0]" :border-plan="borderPlan" :payment-info="paymentInfo"/>
         </v-col>
       </v-row>
     </v-container>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import UserPlanDescription from './UserPlanDescription';
 
 export default {
@@ -34,6 +35,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      userPlan: "user/userPlan"
+    })
   }
 };
 </script>

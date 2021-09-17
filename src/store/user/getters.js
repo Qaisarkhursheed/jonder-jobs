@@ -62,7 +62,15 @@ export default {
   jobseekerEducation(state) {
     return state.jobseeker.education;
   },
-  userPlan: state => state.user.plan,
+  userPlan: state => {
+    let plans = [];
+    if (state.user.role === "Jobseeker") {
+      plans = state.user.plan;
+    } else if (state.user.plan) {
+      plans = [state.user.plan];
+    }
+    return plans;
+  },
   userPlans: state => state.plans,
   isPlanActive: (state, getters) => id =>
     findIndex(getters.userPlan, plan => plan.id === id) >= 0,
