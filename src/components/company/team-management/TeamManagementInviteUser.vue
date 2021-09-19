@@ -7,13 +7,7 @@
       overlay-opacity="0.3"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          height="48"
-          class="full-w font-weight-medium dark-blue"
-          v-bind="attrs"
-          v-on="on"
-        >
+        <v-btn color="primary" height="48" v-bind="attrs" v-on="on">
           {{ $t("inviteUser") }}
         </v-btn>
       </template>
@@ -29,10 +23,11 @@
           @submit.prevent="submit"
           v-model="isValid"
         >
-          <label class="profile-label">{{
-            $t("nickname")
-          }}</label>
+          <label class="profile-label">
+            {{ $t("nickname") }}
+          </label>
           <v-text-field
+            v-model="formData.name"
             dense
             :placeholder="$t('nickname')"
             :rules="[validations.required]"
@@ -40,13 +35,13 @@
             outlined
             flat
             background-color="white"
-            v-model="formData.name"
           ></v-text-field>
 
-          <label class="profile-label">{{
-            $t("email")
-          }}</label>
+          <label class="profile-label">
+            {{ $t("email") }}
+          </label>
           <v-text-field
+            v-model="formData.email"
             dense
             :placeholder="$t('emailplaceholder')"
             :rules="[validations.required, validations.email]"
@@ -54,7 +49,6 @@
             outlined
             flat
             background-color="white"
-            v-model="formData.email"
           ></v-text-field>
 
           <ResponseAlert :response="formResponse"></ResponseAlert>
@@ -62,19 +56,18 @@
           <div class="text-right mt-3">
             <v-btn
               height="48"
-              class="font-weight-medium "
               @click="
                 dialog = false;
                 $refs.form.reset();
               "
             >
-              {{ $t("cancelOption") }}
+              {{ $t("cancel") }}
             </v-btn>
             <v-btn
               type="submit"
               color="primary"
               height="48"
-              class="ml-3 font-weight-medium dark-blue"
+              class="ml-3"
               :disabled="!isValid"
               :loading="formLoading"
             >
@@ -88,24 +81,20 @@
 </template>
 
 <script>
-import Validations from "@/mixins/validations";
-import ResponseAlert from "@/components/ResponseAlert";
-
 export default {
-  mixins: [Validations],
-  components: { ResponseAlert },
   data() {
     return {
       dialog: false,
       isValid: false,
       formData: {
         name: "",
-        email: "",
+        email: ""
       },
       formLoading: false,
-      formResponse: {},
+      formResponse: {}
     };
   },
+
   methods: {
     submit() {
       this.formLoading = true;
@@ -115,13 +104,13 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>

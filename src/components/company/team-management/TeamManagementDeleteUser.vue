@@ -63,15 +63,13 @@
 </template>
 
 <script>
-import ResponseAlert from "@/components/ResponseAlert";
-
 export default {
-  components: { ResponseAlert },
   props: {
     user: {
       type: Object
     }
   },
+
   data() {
     return {
       dialog: false,
@@ -79,6 +77,7 @@ export default {
       formResponse: {}
     };
   },
+
   methods: {
     submit() {
       this.formResponse = {};
