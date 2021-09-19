@@ -32,7 +32,7 @@ import CompanyLayout from "@/layouts/CompanyLayout";
 import CompanySearch from "@/views/company/Search";
 import CompanySelectionManagement from "@/views/company/SelectionManagement";
 import CompanyTeamManagement from "@/views/company/TeamManagement";
-import CompanyUser from "@/views/company/User";
+import CompanyUserOverview from "@/views/company/UserOverview";
 import CompanyPublicProfile from "@/views/company/PublicProfile";
 import CompanySettings from "@/views/company/Settings";
 import CompanyPackagesPricing from "@/views/company/PackagesPricing";
@@ -47,7 +47,6 @@ import AdminDashboard from "@/views/admin/Dashboard";
 import AdminCompanies from "@/views/admin/Companies";
 import AdminUsers from "@/views/admin/Users";
 import AdminCMS from "@/views/admin/CMS";
-
 
 Vue.use(VueRouter);
 
@@ -294,13 +293,13 @@ const routes = [
     path: "/admin",
     component: AdminLayout,
     meta: {
-      requiresAuth: true,
+      requiresAuth: true
     },
     children: [
       {
         path: "dashboard",
         name: "AdminDashboard",
-        component: AdminDashboard,
+        component: AdminDashboard
       },
       {
         path: "company-management",
@@ -398,8 +397,8 @@ const routes = [
       },
       {
         path: "user/:id",
-        name: "CompanyUser",
-        component: CompanyUser,
+        name: "CompanyUserOverview",
+        component: CompanyUserOverview,
         props: true,
         meta: {
           requiresAuth: true,
@@ -477,7 +476,7 @@ const getDashboardRoute = () => {
 router.beforeEach(async (to, from, next) => {
   const isAuth = store.getters["auth/authenticated"];
   const user = store.getters["user/user"];
-  
+
   // if(user.role == "Admin") {
   //   router.replace({ name: "AdminDashboard" });
   // }

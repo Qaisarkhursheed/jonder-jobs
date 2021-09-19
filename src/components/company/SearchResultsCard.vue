@@ -122,7 +122,7 @@
 
 <script>
 import store from "@/store";
-import {map} from 'lodash';
+import { map } from "lodash";
 
 export default {
   name: "SearchResultsCard",
@@ -197,7 +197,7 @@ export default {
     proceedClick() {
       if (store.getters["user/userPlan"].length) {
         this.$router.push({
-          name: "CompanyUser",
+          name: "CompanyUserOverview",
           params: { id: this.candidate.id }
         });
       } else {
@@ -207,7 +207,7 @@ export default {
     getMinMax() {
       try {
         console.log(typeof this.candidate.monthly_salary);
-        if (typeof this.candidate.monthly_salary === 'string') {
+        if (typeof this.candidate.monthly_salary === "string") {
           this.monthly_salary = JSON.parse(this.candidate.monthly_salary);
         } else {
           this.monthly_salary = {
@@ -224,7 +224,7 @@ export default {
     }
   },
   mounted() {
-    console.log('this.candidatte', this.candidate);
+    console.log("this.candidatte", this.candidate);
     this.getMinMax();
   }
 };

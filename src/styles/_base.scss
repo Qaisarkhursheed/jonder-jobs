@@ -455,6 +455,12 @@ button {
   height: unset;
 }
 
+.v-avatar {
+  &.primary {
+    border-color: white !important;
+  }
+}
+
 .v-card {
   border-radius: 10px;
 }

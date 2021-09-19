@@ -37,12 +37,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
-import LanguageDropdown from '../LanguageDropdown';
+import LanguageDropdown from "../LanguageDropdown";
 
 export default {
   name: "Header",
 
-  components: {LanguageDropdown},
+  components: { LanguageDropdown },
 
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
     },
     searchString(val) {
       if (val) {
-        this.$router.push({ name: "CompanyUser", params: { id: val } });
+        this.$router.push({ name: "CompanyUserOverview", params: { id: val } });
         setTimeout(() => {
           this.search = null;
           this.searchString = null;

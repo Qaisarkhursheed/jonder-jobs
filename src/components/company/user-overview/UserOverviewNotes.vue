@@ -1,5 +1,5 @@
 <template>
-  <div class="user-overview-notes pl-10 pr-10 pt-7 pb-7">
+  <div class="user-overview-notes px-10 py-7">
     <ModalNotesCreate
       :active="modalActive"
       @close="modalActive = false"
@@ -7,6 +7,7 @@
       @edit="editNote"
       :note="selectedNote"
     />
+
     <v-row>
       <v-col cols="12" md="6" v-for="(note, i) in notes" :key="i">
         <v-card
@@ -17,15 +18,26 @@
           <v-card-text class="note">
             {{ note.content }}
           </v-card-text>
+
           <v-card-actions class="pb-5 pl-4 pr-4">
             <v-row class="no-gutters divider pt-4">
               <v-col cols="auto" class="mr-2">
-                <v-avatar color="primary" size="40"></v-avatar>
+                <v-avatar color="primary" size="40">
+                  <img
+                    v-if="note.author.profile_img"
+                    :src="note.author.profile_img"
+                  />
+                  <span v-else class="white--text text-h6">
+                    {{ note.author | initials }}
+                  </span>
+                </v-avatar>
               </v-col>
+
               <v-col cols="cols" class="my-auto">
-                {{ note.author.first_name }} {{ note.author.last_name }}
+                {{ note.author | fullname }}
               </v-col>
-              <v-col cols="auto" class="d-flex justify-end my-auto ml-1">
+
+              <v-col cols="auto" class="d-flex my-auto ml-1">
                 <div
                   class="icon-action"
                   @click="
@@ -33,12 +45,12 @@
                     modalActive = true;
                   "
                 >
-                  <v-icon size="25">
+                  <v-icon size="25" color="black">
                     mdi-pencil
                   </v-icon>
                 </div>
-                <div class="icon-action" @click="deleteNote(note)">
-                  <v-icon size="25">
+                <div class="icon-action ml-2" @click="deleteNote(note)">
+                  <v-icon size="25" color="black">
                     mdi-delete
                   </v-icon>
                 </div>
@@ -48,6 +60,7 @@
         </v-card>
       </v-col>
     </v-row>
+
     <v-row class="justify-end">
       <v-col cols="4">
         <v-btn
@@ -56,8 +69,8 @@
             modalActive = !modalActive;
           "
           color="primary"
-          height="58"
-          class="full-w mt-16 font-weight-medium dark-blue"
+          height="48"
+          class="full-w mt-5"
         >
           {{ $t("newNote") }}
         </v-btn>
@@ -67,7 +80,7 @@
 </template>
 
 <script>
-import ModalNotesCreate from "@/components/company/UserOverviewNotesCreate";
+import ModalNotesCreate from "@/components/company/user-overview/UserOverviewNotesCreate";
 
 export default {
   components: { ModalNotesCreate },

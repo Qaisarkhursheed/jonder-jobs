@@ -23,7 +23,7 @@
         :key="item.id"
         @click="
           $router.push({
-            name: 'CompanyUser',
+            name: 'CompanyUserOverview',
             params: { id: item.jobseeker.id, type: 'selection' }
           })
         "

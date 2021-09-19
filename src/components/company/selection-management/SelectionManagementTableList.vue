@@ -124,7 +124,7 @@ export default {
         return;
       } else {
         this.$router.push({
-          name: "CompanyUser",
+          name: "CompanyUserOverview",
           params: { id, type: "selection" }
         });
       }

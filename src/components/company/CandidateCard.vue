@@ -3,7 +3,10 @@
     <div
       class="main-content pa-6 pb-5"
       @click="
-        $router.push({ name: 'CompanyUser', params: { id: candidate.id } })
+        $router.push({
+          name: 'CompanyUserOverview',
+          params: { id: candidate.id }
+        })
       "
     >
       <v-card-text class="d-flex pa-0">
@@ -77,18 +80,18 @@ export default {
 
   props: {
     candidate: {
-      type: Object,
+      type: Object
     },
     type: {
-      type: String,
-    },
+      type: String
+    }
   },
 
   data() {
     return {
       notingActive: false,
       note: "",
-      notes: "",
+      notes: ""
     };
   },
 
@@ -104,8 +107,8 @@ export default {
       this.addUserNote({
         title: "note",
         content: this.note,
-        user_for: this.candidate.id,
-      }).then((res) => {
+        user_for: this.candidate.id
+      }).then(res => {
         if (res.data.success) {
           this.note = "";
           this.notes = res.data.note;
@@ -113,14 +116,14 @@ export default {
       });
     },
     fetchNotes() {
-      this.fetchUserNotes(this.candidate.id).then((res) => {
+      this.fetchUserNotes(this.candidate.id).then(res => {
         if (res.data.success) {
           this.note = "";
           this.notes = res.data.notepad;
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

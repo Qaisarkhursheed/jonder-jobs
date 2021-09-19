@@ -1,29 +1,40 @@
 <template>
   <CompanyPlans v-if="showUpgradePlans" />
-  <div v-else
-       class="user-overview">
+
+  <div v-else class="user-overview">
     <div class="heading d-flex mb-5" v-if="!calledFromList" @click="back">
       <v-icon size="25">
         mdi-arrow-left
       </v-icon>
-      <span class="pl-4">{{ $t("backToSearchResults") }}</span>
+      <span class="pl-4">{{ $t("back") }}</span>
     </div>
+
     <div class="card-back"></div>
-    <v-card class="profile-info rounded-lg" flat v-if="profile">
+
+    <v-card class="profile-info" flat v-if="profile">
       <v-row class="card-header no-gutters pl-10 pr-10">
         <v-col cols="12" md="8" class="d-flex">
           <v-avatar color="primary" size="150" class="user-avatar">
-            <img :src="profile.profile_img" />
+            <img v-if="profile.profile_img" :src="profile.profile_img" />
+            <span v-else class="white--text text-h3">
+              {{ profile | initials }}
+            </span>
           </v-avatar>
+
           <div class="user-header pl-8 pt-5">
             <div class="name">
               {{ profile.first_name }} {{ profile.last_name }}
             </div>
             <div class="position">
+              <img
+                :src="require('@/assets/icons/briefcase.svg')"
+                style="vertical-align: -2px"
+              />
               {{ profile.current_position }}
             </div>
           </div>
         </v-col>
+
         <v-col cols="12" md="4" class="d-flex justify-end pt-7">
           <div class="star-btn mr-3" @click="handleStarIconClick">
             <v-icon
@@ -35,11 +46,11 @@
               }}
             </v-icon>
           </div>
+
           <v-btn
             color="primary"
             height="48"
-            width="70%"
-            class="font-weight-medium pl-4 pr-4 dark-blue"
+            class="px-10"
             @click="startConversation"
             :loading="startChatLoading"
           >
@@ -47,6 +58,7 @@
           </v-btn>
         </v-col>
       </v-row>
+
       <v-tabs v-model="tab" align-with-title slider-color="#0253B3">
         <v-tabs-slider color="#0253B3"></v-tabs-slider>
 
@@ -56,10 +68,12 @@
           style="text-transform: uppercase;"
           slider-color="#0253B3"
         >
-          {{ item }}
+          {{ $t(item) }}
         </v-tab>
       </v-tabs>
+
       <v-divider></v-divider>
+
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="item in items" :key="item">
           <v-card flat>
@@ -75,27 +89,27 @@
 
 <script>
 import axios from "axios";
-import UserOverviewGeneral from "@/components/company/UserOverviewGeneral";
-import UserOverviewNotes from "@/components/company/UserOverviewNotes";
+import UserOverviewGeneral from "@/components/company/user-overview/UserOverviewGeneral";
+import UserOverviewNotes from "@/components/company/user-overview/UserOverviewNotes";
 import CompanyPlans from "@/components/plans/CompanyPlans";
 
 export default {
-  name: "UserOverview",
-
-  props: {
-    id: {
-      type: [String, Number],
-    },
-    calledFromList: {
-      type: Boolean,
-      default: false,
-    },
-  },
   components: {
     UserOverviewGeneral,
     UserOverviewNotes,
-    CompanyPlans,
+    CompanyPlans
   },
+
+  props: {
+    id: {
+      type: [String, Number]
+    },
+    calledFromList: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   data() {
     return {
       profile: null,
@@ -103,22 +117,23 @@ export default {
       items: ["general", "notes"],
       tabs: {
         general: UserOverviewGeneral,
-        notes: UserOverviewNotes,
+        notes: UserOverviewNotes
       },
       startChatLoading: false,
-      showUpgradePlans: false,
+      showUpgradePlans: false
     };
   },
+
   created() {
     this.getUser();
   },
+
   methods: {
     getUser() {
       const id = this.calledFromList ? this.id : this.$route.params.id;
-      console.log(id);
       axios
         .get(`/users/${id}`)
-        .then((res) => {
+        .then(res => {
           this.profile = res.data.data;
         })
         .catch(() => {
@@ -140,8 +155,8 @@ export default {
           this.$router.push({
             name: "CompanyMessages",
             params: {
-              company: true,
-            },
+              company: true
+            }
           });
         })
         .finally(() => {
@@ -159,7 +174,7 @@ export default {
         this.$store
           .dispatch("company/slManagementAddCandidate", {
             jobseeker_id: this.profile.id,
-            managment_status: "Saved candidates",
+            managment_status: "Saved candidates"
           })
           .then(() => {
             this.profile.selection_managment = true;
@@ -169,22 +184,23 @@ export default {
     back() {
       if (this.$route.params.type && this.$route.params.type === "selection") {
         this.$router.push({
-          name: "CompanySelectionManagement",
+          name: "CompanySelectionManagement"
         });
       } else {
         this.$router.push({
-          name: "CompanySearch",
+          name: "CompanySearch"
         });
       }
-    },
+    }
   },
+
   watch: {
     id() {
       if (this.calledFromList) {
         this.getUser();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -219,6 +235,7 @@ export default {
 .user-avatar {
   position: relative;
   top: -50px;
+  border: 3px solid white;
 }
 .star-btn {
   width: 70px;

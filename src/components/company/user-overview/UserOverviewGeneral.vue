@@ -1,51 +1,60 @@
 <template>
   <div class="user-overview-general">
     <v-row class="no-gutters">
-      <v-col cols="12" md="8" class="left pl-10 pr-10 pt-7 pb-10">
-        <div class="section experience mt-7">
+      <v-col cols="12" md="7" class="left px-10 pt-7 pb-10">
+        <!-- Experience -->
+        <div class="section experience">
           <div class="title">{{ $t("experiences") }}</div>
           <div class="content">
-            <div v-for="data in experience" :key="data.company">
-              <div class="item pb-5 pt-5">
-                <div class="title">{{ data.company_name }}</div>
-                <div class="subtitle">{{ data.position }}</div>
-                <div class="subtitle">
-                  {{ data.start_time | moment("MMMM YYYY") }} -
-                  <template v-if="data.end_time">
-                    {{ data.end_time | moment("MMMM YYYY") }}
-                  </template>
-                  <template v-else>{{ $t("present") }}</template>
-                </div>
+            <div
+              v-for="data in experience"
+              :key="data.company"
+              class="item pb-5 pt-5"
+            >
+              <div class="title">{{ data.company_name }}</div>
+              <div class="subtitle">{{ data.position }}</div>
+              <div class="subtitle">
+                {{ data.start_time | moment("MMMM YYYY") }} -
+                <template v-if="data.end_time">
+                  {{ data.end_time | moment("MMMM YYYY") }}
+                </template>
+                <template v-else>{{ $t("present") }}</template>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Education -->
         <div class="section experience mt-7">
           <div class="title">{{ $t("educationStudy") }}</div>
           <div class="content">
-            <div v-for="data in education" :key="data.company">
-              <div class="item pb-5 pt-5">
-                <div class="title">{{ data.university_name }}</div>
-                <div class="subtitle">{{ data.study }}</div>
-                <div class="subtitle">
-                  {{ data.start_time | moment("MMMM YYYY") }} -
-                  <template v-if="data.end_time">
-                    {{ data.end_time | moment("MMMM YYYY") }}
-                  </template>
-                  <template v-else>{{ $t("present") }}</template>
-                </div>
+            <div
+              v-for="data in education"
+              :key="data.company"
+              class="item pb-5 pt-5"
+            >
+              <div class="title">{{ data.university_name }}</div>
+              <div class="subtitle">{{ data.study }}</div>
+              <div class="subtitle">
+                {{ data.start_time | moment("MMMM YYYY") }} -
+                <template v-if="data.end_time">
+                  {{ data.end_time | moment("MMMM YYYY") }}
+                </template>
+                <template v-else>{{ $t("present") }}</template>
               </div>
             </div>
           </div>
         </div>
       </v-col>
-      <v-col cols="12" md="4" class="right pl-10 pr-10 pt-8">
+
+      <!-- Right col -->
+      <v-col cols="12" md="5" class="right px-10 pt-8">
         <div class="d-flex justify-space-between mb-7">
           <div class="section">
             <div class="title">
               {{ $t("searchStatus") }}
             </div>
-            <div class="content" v-if="user.job_status === ''">
+            <div class="content" v-if="!user.job_status">
               Unemployed
             </div>
             <div class="content" v-else>
@@ -62,60 +71,43 @@
           </div>
         </div>
 
-        <div class="section mb-7">
+        <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content">
-            {{ user.branche }}
+            <span
+              v-for="(branche, index) in user.branche.split(',')"
+              :key="index"
+            >
+              {{ branche }}<span class="zarez">,</span>
+            </span>
           </div>
         </div>
 
-        <!-- <div class="section mb-7">
-          <div class="title">current industry</div>
-          <div class="content">{{ user.branche }}</div>
-        </div> -->
         <div class="section mb-7" v-if="user.location_show">
           <div class="title">{{ $t("cityAndAddress") }}</div>
           <div class="content">{{ user.city }} {{ user.address }}</div>
         </div>
 
-        <div class="section mb-7">
+        <div class="section mb-7 documents-section">
           <div class="title">
-            {{ $t("documents").toUpperCase() }} &
+            {{ $t("documents").toUpperCase() }} &amp;
             {{ $t("certificates").toUpperCase() }}
           </div>
-          <div class="content">
-            <div v-if="user.cv" class="row mt-1">
-              <div class="col-auto">
-                <a :href="user.cv" target="_blank">
+          <div class="content mt-2">
+            <v-row
+              v-for="(document, index) in documents"
+              class="file"
+              :key="index"
+            >
+              <v-col cols="auto">
+                <a :href="document.link" target="_blank">
                   <img :src="require('@/assets/svg/pdf.svg')" />
                 </a>
-              </div>
-              <div class="col my-auto">
-                {{ $t("cv") }}
-              </div>
-            </div>
-
-            <div v-if="user.qualifications" class="row mt-1">
-              <div class="col-auto">
-                <a :href="user.qualifications" target="_blank">
-                  <img :src="require('@/assets/svg/pdf.svg')" />
-                </a>
-              </div>
-              <div class="col my-auto">
-                {{ $t("qualifications") }}
-              </div>
-            </div>
-
-            <div v-if="user.resume" class="row mt-1">
-              <div class="col-auto">
-                <a :href="user.resume" target="_blank">
-                  <img :src="require('@/assets/svg/pdf.svg')" />
-                </a>
-              </div>
-              <div class="col my-auto">
-                {{ $t("resume") }}
-              </div>
-            </div>
+              </v-col>
+              <v-col cols="col" class="my-auto font-weight-bold">
+                {{ $t(document.type) }}
+              </v-col>
+            </v-row>
           </div>
         </div>
       </v-col>
@@ -125,19 +117,41 @@
 
 <script>
 export default {
-  name: "UserOverviewGeneral",
-
   props: {
     user: {
       type: Object
     }
   },
+
   data() {
     return {
       experience: [],
       education: []
     };
   },
+
+  computed: {
+    documents() {
+      const docs = [];
+
+      ["cv", "qualifications", "resume"].forEach(key => {
+        if (this.user[key]) {
+          docs.push({
+            type: key,
+            link: this.user[key]
+          });
+        }
+      });
+
+      return docs;
+    }
+  },
+
+  created() {
+    this.getExperience();
+    this.getEducation();
+  },
+
   methods: {
     getExperience() {
       this.$http
@@ -154,7 +168,6 @@ export default {
             }
           }
         })
-
         .catch(error => {
           alert(error);
         });
@@ -175,25 +188,16 @@ export default {
             }
           }
         })
-
         .catch(error => {
           alert(error);
         });
-    },
-    logger() {
-      console.log(this.user);
     }
-  },
-  beforeMount() {
-    this.getExperience();
-    this.getEducation();
-    this.logger();
   }
 };
 </script>
 <style lang="scss" scoped>
 .section {
-  .title {
+  & > .title {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 12px !important;
@@ -205,9 +209,15 @@ export default {
     color: #222222;
   }
 }
+
 .experience {
   .item {
-    border-bottom: 0.5px solid #cacaca;
+    &:first-of-type {
+      padding-top: 0 !important;
+    }
+
+    border-bottom: 0.5px solid #e9e9e9;
+
     .title {
       font-weight: 600;
       font-size: 14px !important;
@@ -220,16 +230,27 @@ export default {
       font-size: 13px !important;
       color: rgba(0, 0, 0, 0.7);
     }
+    .subtitle {
+      margin-top: 3px;
+    }
   }
 }
+
 .right {
   border-left: 1px solid #e9e9e9;
 }
+
 .file {
-  border-bottom: 0.5px solid #cacaca;
+  border-bottom: 0.5px solid #e9e9e9;
 
   &:last-child {
     border: none;
+  }
+}
+
+.branche-section .content {
+  span:last-child .zarez {
+    display: none;
   }
 }
 </style>
