@@ -1,3 +1,6 @@
+import PERSONALITY_QUESTIONS from './personality_test_questions';
+import PERSONALITY_QUESTION_CHOICES from './personality_test_choices';
+
 const SELECTION_MANAGEMENT_STATUS = [
   "Saved candidates",
   "Candidates",
@@ -130,5 +133,7 @@ export default {
   SCHOOL,
   EDUCATION,
   JOB_BRANCHE,
-  EMPLOYEE_NUMBER
+  EMPLOYEE_NUMBER,
+  PERSONALITY_QUESTIONS,
+  PERSONALITY_QUESTION_CHOICES
 };

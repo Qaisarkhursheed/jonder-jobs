@@ -64,7 +64,7 @@
     </v-row>
 
     <v-row class="full-h ma-0">
-      <v-col class="navigation col-12 col-md-4 col-xl-3">
+      <v-col class="navigation col-12 col-md-4 col-xl-3" v-if="!($route.name === 'PersonalityTestJobseeker')">
         <nav class="dashboard-navigation pl-0 pl-md-8" v-if="profile">
           <div class="settings-nav">
             <div class="settings-title">
@@ -254,7 +254,10 @@
           </v-row>
         </div>
       </v-col>
-      <v-col class="main col-12 col-md-8 col-xl-9">
+      <v-col 
+        class="main col-12 col-md-8 col-xl-9"
+        :class="{ 'col-md-12 col-xl-12': ($route.name === 'PersonalityTestJobseeker') }"
+      >
         <v-container fluid class="d-flex flex-column">
           <slot />
         </v-container>

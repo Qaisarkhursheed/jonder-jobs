@@ -13,6 +13,7 @@ import plans from "./plans";
 import professions from "./professions";
 import messageTemplates from "./messageTemplates";
 import northdata from "./northdata";
+import personalityTest from "./personalityTest";
 import google from "./google";
 import admin from "./admin";
 
@@ -33,7 +34,8 @@ export default createStore(Vuex.Store, {
     messageTemplates,
     northdata,
     google,
-    admin
+    admin,
+    personalityTest
   },
   state: {
     screenSize: null
