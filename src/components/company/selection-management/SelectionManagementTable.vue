@@ -11,14 +11,15 @@
   </div>
 </template>
 <script>
-import SManagementTableColumn from "@/components/company/SelectionManagementTableColumn";
+import SManagementTableColumn from "@/components/company/selection-management/SelectionManagementTableColumn";
 
 export default {
-  name: "SelectionManagementTable",
   order: 1,
+
   components: {
     SManagementTableColumn
   },
+
   props: {
     selection: {
       type: Object
@@ -26,6 +27,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .selection-management-table {
   overflow: auto;

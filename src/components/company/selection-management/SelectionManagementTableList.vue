@@ -81,18 +81,19 @@
 </template>
 
 <script>
-import types from "../../types";
+import types from "@/types";
 import CompanyPlans from "@/components/plans/CompanyPlans";
-import SelectionManagementRemoveUser from "@/components/company/SelectionManagementRemoveUser";
+import SelectionManagementRemoveUser from "@/components/company/selection-management/SelectionManagementRemoveUser";
 
 export default {
-  name: "SelectionmManagementTableList",
   components: { CompanyPlans, SelectionManagementRemoveUser },
+
   props: {
     selection: {
       type: Array
     }
   },
+
   data() {
     return {
       selectionCheckers: {},
@@ -101,6 +102,13 @@ export default {
       upgradeModal: false
     };
   },
+
+  computed: {
+    getSelectionOptions() {
+      return types.SELECTION_MANAGEMENT_STATUS;
+    }
+  },
+
   methods: {
     updateJobseeker(change, id) {
       this.$store.dispatch("company/slManagementMoveCandidate", {
@@ -116,8 +124,8 @@ export default {
         return;
       } else {
         this.$router.push({
-          name: 'CompanyUser',
-          params: { id, type: 'selection' }
+          name: "CompanyUser",
+          params: { id, type: "selection" }
         });
       }
     },
@@ -141,11 +149,6 @@ export default {
         .finally(() => {
           this.startChatLoading = false;
         });
-    }
-  },
-  computed: {
-    getSelectionOptions() {
-      return types.SELECTION_MANAGEMENT_STATUS;
     }
   }
 };

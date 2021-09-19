@@ -1,8 +1,7 @@
 <template>
   <div class="selection-management-table-column">
     <div
-      class="column-header d-flex justify-space-between align-center
-                pt-6 pb-6 pl-6 pr-3"
+      class="column-header d-flex justify-space-between align-center pt-6 pb-6 pl-6 pr-3"
     >
       <div class="label">
         {{ $t(type) }}
@@ -11,6 +10,7 @@
         {{ selection.length }}
       </div>
     </div>
+
     <draggable
       class="list-group pl-6 pr-6 pt-6"
       :list="selection"
@@ -18,8 +18,7 @@
       @change="add($event)"
     >
       <div
-        class="column-group-item d-flex pa-4
-                 mb-3 full-h align-center justify-start"
+        class="column-group-item d-flex pa-4 mb-3 full-h align-center justify-start"
         v-for="item in selection"
         :key="item.id"
         @click="
@@ -41,11 +40,14 @@
 </template>
 
 <script>
-import store from "@/store";
 import draggable from "vuedraggable";
 
 export default {
-  name: "SelectionmManagementTableColumn",
+  components: {
+    draggable
+  },
+
+  order: 1,
 
   props: {
     selection: {
@@ -55,14 +57,11 @@ export default {
       type: String
     }
   },
-  order: 1,
-  components: {
-    draggable
-  },
+
   methods: {
     add(item) {
       if (item.added) {
-        store.dispatch("company/slManagementMoveCandidate", {
+        this.$store.dispatch("company/slManagementMoveCandidate", {
           id: item.added.element.id,
           data: {
             managment_status: this.type

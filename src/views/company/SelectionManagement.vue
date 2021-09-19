@@ -5,6 +5,7 @@
         <em class="icon"></em>
         <input type="text" v-model="searchValue" :placeholder="$t('search')" />
       </div>
+
       <div class="view-wrapper hover-pointer">
         <div
           class="list-view"
@@ -22,6 +23,7 @@
         </div>
       </div>
     </div>
+
     <div class="selection-mgmt-body">
       <component
         v-if="$store.getters['company/selectionManagement']"
@@ -33,37 +35,27 @@
 </template>
 
 <script>
-import SelectionManagementTable from "@/components/company/SelectionManagementTable";
-import SelectionmManagementTableList from "@/components/company/SelectionmManagementTableList";
-import ColView from "../../svgs/ColView";
-import ListView from "../../svgs/ListView";
+import SelectionManagementTable from "@/components/company/selection-management/SelectionManagementTable";
+import SelectionManagementTableList from "@/components/company/selection-management/SelectionManagementTableList";
+import ColView from "@/svgs/ColView";
+import ListView from "@/svgs/ListView";
 
 export default {
-  name: "CompanySelectionManagement",
-  data() {
-    return {
-      component: "SelectionmManagementTableList",
-      activeView: "list",
-      searchValue: ""
-    };
-  },
   components: {
     ListView,
     ColView,
     SelectionManagementTable,
-    SelectionmManagementTableList
+    SelectionManagementTableList
   },
-  methods: {
-    toggleView(view) {
-      if (this.activeView !== view) {
-        this.activeView = view;
-        this.component =
-          view === "list"
-            ? "SelectionmManagementTableList"
-            : "SelectionManagementTable";
-      }
-    }
+
+  data() {
+    return {
+      component: "SelectionManagementTableList",
+      activeView: "list",
+      searchValue: ""
+    };
   },
+
   computed: {
     getSelection() {
       return this.$store.getters["company/selectionManagement"](
@@ -71,11 +63,25 @@ export default {
       );
     }
   },
+
   created() {
     this.$store.dispatch("company/slManagementGetAll");
+  },
+
+  methods: {
+    toggleView(view) {
+      if (this.activeView !== view) {
+        this.activeView = view;
+        this.component =
+          view === "list"
+            ? "SelectionManagementTableList"
+            : "SelectionManagementTable";
+      }
+    }
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .company-selection-management {
   overflow: auto;
