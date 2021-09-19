@@ -308,6 +308,15 @@ export default {
     axios.get(baseURI).then(res => {
       commit("SET_PLANS", res.data.plans);
     });
+  },
+  async setLocale({ state }, locale) {
+    try {
+      const resp = await axios.put("locale", { locale });
+      state.user.locale = locale;
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   }
 };
 

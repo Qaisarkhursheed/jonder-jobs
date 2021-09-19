@@ -64,15 +64,13 @@
               <p class="profile-subtitle">
                 <!-- Explanation goes here
               </p> -->
-              </p></v-row
-            >
+              </p>
+            </v-row>
 
             <v-form v-model="formValid">
               <v-row>
                 <v-col cols="6">
-                  <label class="profile-label">{{
-                    $t("firstName")
-                  }}</label>
+                  <label class="profile-label">{{ $t("firstName") }}</label>
                   <v-text-field
                     dense
                     :label="$t('firstName')"
@@ -87,9 +85,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="6">
-                  <label class="profile-label">{{
-                    $t("lastName")
-                  }}</label>
+                  <label class="profile-label">{{ $t("lastName") }}</label>
                   <v-text-field
                     dense
                     :label="$t('lastName')"
@@ -119,6 +115,10 @@
                     background-color="white"
                     v-model="user.email"
                   ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <label class="profile-label">{{ $t("language") }}</label>
+                  <LanguageDropdown />
                 </v-col>
               </v-row>
 
@@ -171,7 +171,7 @@
                   @click="
                     $store.dispatch('invoices/downloadInvoice', {
                       id: item.id,
-                      number: item.invoice_number,
+                      number: item.invoice_number
                     })
                   "
                 ></v-img>
@@ -225,9 +225,7 @@
             </v-row>
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
-              <label class="profile-label">{{
-                $t("enterNewPassword")
-              }}</label>
+              <label class="profile-label">{{ $t("enterNewPassword") }}</label>
               <v-text-field
                 v-model="passwordFormData.new_password"
                 dense
@@ -237,9 +235,7 @@
                 background-color="white"
               ></v-text-field>
 
-              <label class="profile-label">{{
-                $t("reEnterPassword")
-              }}</label>
+              <label class="profile-label">{{ $t("reEnterPassword") }}</label>
               <v-text-field
                 v-model="passwordFormData.new_confirm_password"
                 dense
@@ -249,9 +245,7 @@
                 background-color="white"
               ></v-text-field>
 
-              <label class="profile-label">{{
-                $t("enterOldPassword")
-              }}</label>
+              <label class="profile-label">{{ $t("enterOldPassword") }}</label>
               <v-text-field
                 v-model="passwordFormData.current_password"
                 dense
@@ -286,7 +280,8 @@
         />
       </v-col>
     </v-row>
-    <!-- left hardcoded -->
+
+    <!-- Footer hardcoded -->
     <div class="footer text-center py-4" style="border-top: 1px solid #E3E3E4;">
       <a href="#">Impressum</a>
       -
@@ -302,12 +297,14 @@ import { mapActions, mapGetters } from "vuex";
 import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
 import UserPlan from "../../components/user/UserPlan";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   components: {
     UserPlan,
     Header,
     AddNewCard,
+    LanguageDropdown
   },
   data() {
     return {
@@ -322,22 +319,22 @@ export default {
         AddNewCard: {
           active: false,
           edit: false,
-          component: AddNewCard,
-        },
+          component: AddNewCard
+        }
       },
       fileActions: {
-        AddNewCard: ["edit", "delete"],
-      },
+        AddNewCard: ["edit", "delete"]
+      }
     };
   },
   computed: {
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("user", ["user"])
   },
   created() {
     this.fillData();
-    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter((i) => i.status == "complete");
+      this.invoices = this.invoices.filter(i => i.status == "complete");
     });
   },
   methods: {
@@ -359,10 +356,10 @@ export default {
       this.formResponse = {};
 
       this.updateCompany(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.formResponse = resp.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         });
     },
@@ -371,7 +368,7 @@ export default {
       this.passwordFormResponse = {};
 
       this.changePassword(formDataCopy)
-        .then((resp) => {
+        .then(resp => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
@@ -379,7 +376,7 @@ export default {
             this.$router.push({ name: "Login", query: { changePassword: 1 } });
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.passwordFormResponse = err.data;
         });
     },
@@ -395,8 +392,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
-  },
+    }
+  }
 };
 </script>
 

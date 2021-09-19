@@ -55,7 +55,8 @@
             :loading="formLoading"
             depressed
             color="primary"
-            class="pl-8 pr-8 dark-blue"
+            class="px-10"
+            height="48"
             @click="handleUpdate"
             >{{ $t("save") }}
           </v-btn>
@@ -110,7 +111,12 @@
             v-model="user.email"
           ></v-text-field>
         </v-col>
+        <v-col cols="6">
+          <label class="profile-label">{{ $t("language") }}</label>
+          <LanguageDropdown />
+        </v-col>
       </v-row>
+
       <v-row>
         <v-col cols="12" sm="6">
           <v-checkbox
@@ -675,6 +681,7 @@ import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
 import SliderRangeInput from "../../../components/SliderRangeInput";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   name: "Profile",
@@ -691,7 +698,8 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     SliderInput,
-    ImageUploadCropper
+    ImageUploadCropper,
+    LanguageDropdown
   },
 
   data: () => ({

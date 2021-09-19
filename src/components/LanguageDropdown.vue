@@ -1,36 +1,60 @@
 <template>
-  <div class="language-toggle">
-    <v-select
-      outlined
-      :items="languages"
-      :value="$i18n.locale"
-      @change="changeLanguage"
-      hide-details
-    ></v-select>
-  </div>
+  <v-select
+    :value="$store.getters['user/user'].locale"
+    :items="items"
+    @change="changeLanguage"
+    outlined
+    hide-details
+  >
+    <template v-slot:selection="{ item }">
+      <img
+        width="20"
+        class="rounded-circle mr-3"
+        :src="require('@/assets/flags/' + item.value + '.svg')"
+      />
+      {{ $t(item.text) }}
+    </template>
+    <template v-slot:item="{ item }">
+      <img
+        width="20"
+        class="rounded-circle mr-3"
+        :src="require('@/assets/flags/' + item.value + '.svg')"
+      />
+      {{ $t(item.text) }}
+    </template>
+  </v-select>
 </template>
 
 <script>
 export default {
-  name: "LanguageDropdown",
   data() {
     return {
-      languages: ["de", "en", "fr"]
+      items: [
+        {
+          text: "english",
+          value: "en"
+        },
+        {
+          text: "german",
+          value: "de"
+        },
+        {
+          text: "french",
+          value: "fr"
+        }
+      ]
     };
   },
+
   methods: {
-    changeLanguage(event) {
-      this.$i18n.locale = event;
-      localStorage.setItem("lang", event);
+    changeLanguage(locale) {
+      this.$store.dispatch("user/setLocale", locale).then(() => {
+        this.$i18n.locale = locale;
+        localStorage.setItem("lang", locale);
+      });
     }
   }
 };
 </script>
 
-<style scoped>
-.language-toggle {
-  display: inline-block;
-  padding-left: 20px;
-  width: 100px;
-}
-</style>
+<style scoped></style>

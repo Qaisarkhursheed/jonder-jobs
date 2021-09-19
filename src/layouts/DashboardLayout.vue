@@ -47,7 +47,6 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <LanguageDropdown />
         </div>
       </v-col>
     </v-row>
@@ -272,11 +271,9 @@ import { debounce, map } from "lodash";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
-import LanguageDropdown from "../components/LanguageDropdown";
 
 export default {
   components: {
-    LanguageDropdown,
     DashboardActivePlan,
     CardActionableList,
     UpgradeAccountBox

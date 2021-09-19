@@ -28,7 +28,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <LanguageDropdown />
       </div>
     </v-col>
   </v-row>
@@ -37,13 +36,8 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import debounce from "lodash.debounce";
-import LanguageDropdown from "../LanguageDropdown";
 
 export default {
-  name: "Header",
-
-  components: { LanguageDropdown },
-
   data() {
     return {
       searchString: null,
