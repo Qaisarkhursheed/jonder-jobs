@@ -1,6 +1,6 @@
 <template>
   <div class="team-management">
-    <v-row class="heading mb-5">
+    <v-row class="page-heading mb-5">
       <v-col cols="col">
         <div class="title">
           {{ $t("messageTemplates") }}
@@ -29,22 +29,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.heading {
-  font-weight: 600;
-  font-size: 32px;
-  color: #222222;
-
-  .title {
-    font-weight: 600;
-    font-size: 32px !important;
-    color: #222222;
-  }
-
-  .subtitle {
-    font-weight: normal;
-    font-size: 18px;
-    color: #7a7a7a;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

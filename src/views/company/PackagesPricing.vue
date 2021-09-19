@@ -1,6 +1,6 @@
 <template>
   <div class="pb-7">
-    <div class="heading mb-10">
+    <div class="page-heading mb-6">
       <div class="title">
         {{ $t("upradeYourCompany") }}
       </div>
@@ -27,17 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.heading {
-  .title {
-    font-weight: 600;
-    font-size: 32px !important;
-    color: #222222;
-  }
-  .subtitle {
-    font-weight: normal;
-    font-size: 18px;
-    color: #7a7a7a;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
