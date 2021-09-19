@@ -5,6 +5,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import { VueMaskDirective } from "v-mask";
 import VueMoment from "vue-moment";
+import Vue2Filters from "vue2-filters";
 // import VueI18n from 'vue-i18n';
 import i18n from "./locales";
 import ResponseAlert from "@/components/ResponseAlert";
@@ -16,6 +17,7 @@ import "@/filters";
 require("./middleware");
 
 Vue.use(VueMoment);
+Vue.use(Vue2Filters);
 Vue.directive("mask", VueMaskDirective);
 Vue.directive("clearable-autocomplete", ClearableAutocomplete);
 Vue.component("ResponseAlert", ResponseAlert);
