@@ -1,6 +1,7 @@
 // move to folder
 
-import result_text from "./personality_test_content";
+import result_text from "./personality_test_content/";
+import store from "@/store";
 
 const calculateResultDefault = (score, count) => {
   const average = score / count;
@@ -70,7 +71,7 @@ const generateResult = (answers, template) => {
 
 const calculateResult = (data) => {
   let score = calculateScore({ answers: data.answers, calculateResult: data.calculateResult });
-  let result = generateResult(score, result_text);
+  let result = generateResult(score, result_text[store.getters['user/user'].locale]);
   return result;
 };
 
