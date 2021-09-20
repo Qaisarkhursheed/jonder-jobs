@@ -309,6 +309,15 @@ export default {
       commit("SET_PLANS", res.data.plans);
     });
   },
+
+  async cancelSubscription(context, payload) {
+    console.log(payload);
+    const baseURI = `/stripe/cancel/${payload}`;
+    const response = await axios.post(baseURI);
+    if (response.status === 200) {
+      console.log("cancelSubscription", response.data);
+    }
+  },
   async setLocale({ state }, locale) {
     try {
       const resp = await axios.put("locale", { locale });
