@@ -3,7 +3,7 @@
     <v-col cols="auto" class="pa-0">
       <div class="monthly-salary">{{ model }} {{ suffix }}</div>
     </v-col>
-    <v-col cols="col" class="d-flex my-auto">
+    <v-col cols="col" class="d-flex my-auto px-2">
       <v-slider
         v-model="model"
         :rules="[validations.required]"
@@ -63,8 +63,7 @@ export default {
 .slider-input {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
-  max-width: 335px;
-  padding-right: 10px;
+  max-width: 350px;
   .monthly-salary {
     font-size: 18px;
     font-weight: 600;
