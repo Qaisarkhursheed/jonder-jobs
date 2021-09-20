@@ -34,7 +34,7 @@
         v-for="question in GET_CURRENT_QUESTIONS"
         :key="question.id"
       >
-        <h2>{{ question.text }}</h2>
+        <h2>{{ $t(`personalityTest.${question.text}`)}}</h2>
         <v-radio-group
           :value="GET_CURRENT_ANSWER(question.id)"
           @change="answer => SET_ANSWER({ id: question.id, answer } )"
@@ -45,7 +45,7 @@
             :name="question.id"
             :value="choice.score"
             color="secondary"
-            :label="choice.text"
+            :label="$t(`personalityTest.${choice.text}`)"
           />
         </v-radio-group>
       </div>

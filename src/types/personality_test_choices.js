@@ -1,54 +1,54 @@
 export default {
   plus: [
     {
-      text: "Very Inaccurate",
+      text: "questionChoice1",
       score: 1,
       color: 1
     },
     {
-      text: "Moderately Inaccurate",
+      text: "questionChoice2",
       score: 2,
       color: 2
     },
     {
-      text: "Neither Accurate Nor Inaccurate",
+      text: "questionChoice3",
       score: 3,
       color: 3
     },
     {
-      text: "Moderately Accurate",
+      text: "questionChoice4",
       score: 4,
       color: 4
     },
     {
-      text: "Very Accurate",
+      text: "questionChoice5",
       score: 5,
       color: 5
     }
   ],
   minus: [
     {
-      text: "Very Inaccurate",
+      text: "questionChoice1",
       score: 5,
       color: 1
     },
     {
-      text: "Moderately Inaccurate",
+      text: "questionChoice2",
       score: 4,
       color: 2
     },
     {
-      text: "Neither Accurate Nor Inaccurate",
+      text: "questionChoice3",
       score: 3,
       color: 3
     },
     {
-      text: "Moderately Accurate",
+      text: "questionChoice4",
       score: 2,
       color: 4
     },
     {
-      text: "Very Accurate",
+      text: "questionChoice5",
       score: 1,
       color: 5
     }
