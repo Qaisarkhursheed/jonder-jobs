@@ -459,6 +459,7 @@
   "somethingIsWrongPleaseTryAgain": "Etwas ist falsch, bitte versuchen Sie es erneut!",
   "deleteThisItem": "Möchten Sie dieses Element wirklich löschen?",
   "reset": "Zurücksetzen",
+  "cancelSubscription": "Abonnement beenden",
   "personalityTest": {
     "question1": "Ich mache mir oft Sorgen",
     "question2": "Ich gewinne leicht Freunde",

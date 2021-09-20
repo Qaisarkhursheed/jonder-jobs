@@ -13,13 +13,19 @@
       {{ $t("validUntil") }}
       {{ plan.end_timestamp | moment("MMM DD, YYYY") }}
     </div>
-    <div class="payment-info mt-6 pt-4" v-if="paymentInfo">
+    <div class="payment-info mt-6 pt-4">
       <span
         class="carten-abenden"
-        v-if="$route.name !== 'CompanyPackagesPricing'"
+        v-if="paymentInfo && $route.name !== 'CompanyPackagesPricing'"
         @click="$router.push({ name: 'CompanyPackagesPricing' })"
       >
         {{ $t("changePackage") }}
+      </span>
+      <span
+        class="payment-action"
+        @click="$store.dispatch('user/cancelSubscription', plan.id)"
+      >
+        {{ $t("cancelSubscription") }}
       </span>
     </div>
   </div>
@@ -66,7 +72,9 @@ export default {
     &.payment-info {
       border-top: 1px solid #e9e9e9;
       color: #27aae1 !important;
+      display: flex;
       font-weight: 600;
+      justify-content: space-between;
       > span {
         cursor: pointer;
       }

@@ -634,29 +634,36 @@
             >
               {{ plan.price }}&euro;
             </span>
-            <v-img
-              class="upgrade-icon"
-              :style="{ order: userPlan && userPlan.id === plan.id ? 2 : 1 }"
-              :src="
-                require(`@/assets/icons/${
-                  index === 0 ? 'top-rated' : 'medal'
-                }.svg`)
-              "
-            ></v-img>
+            <div>
+              <v-img
+                class="upgrade-icon"
+                :style="{ order: userPlan && userPlan.id === plan.id ? 2 : 1 }"
+                :src="
+                  require(`@/assets/icons/${
+                    index === 0 ? 'top-rated' : 'medal'
+                  }.svg`)
+                "
+              ></v-img>
 
-            <div
-              class="upgrade-default"
-              v-if="!userPlan.length || !isPlanActive(plan.id)"
-            >
-              <span class="upgrade-title">
-                {{ plan.name }}
-              </span>
-              <p>{{ $t("nDaysActive", { n: plan.days_valid }) }}</p>
+              <div
+                class="upgrade-default"
+                v-if="!userPlan.length || !isPlanActive(plan.id)"
+              >
+                <span class="upgrade-title">
+                  {{ plan.name }}
+                </span>
+                <p>{{ $t("nDaysActive", { n: plan.days_valid }) }}</p>
+              </div>
+              <UserPlanDescription
+                :plan="getUserPlan(plan.id)[0]"
+                :payment-info="false"
+                :payment-actions="true"
+                v-else
+              />
             </div>
-            <UserPlanDescription
-              :plan="getUserPlan(plan.id)[0]"
-              :payment-info="false"
-              v-else
+            <CancelSubscription
+              v-if="userPlan.length && isPlanActive(plan.id)"
+              :plan="plan.id"
             />
           </div>
         </v-col>
@@ -682,11 +689,13 @@ import SliderInput from "@/components/SliderInput.vue";
 import ImageUploadCropper from "@/components/ImageUploadCropper";
 import SliderRangeInput from "../../../components/SliderRangeInput";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import CancelSubscription from "../../../components/plans/CancelSubscription";
 
 export default {
   name: "Profile",
 
   components: {
+    CancelSubscription,
     SliderRangeInput,
     UserPlanDescription,
     UpgradePlanModal,
@@ -977,7 +986,12 @@ export default {
   padding: 25px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   position: relative;
+
+  > div:first-child {
+    display: flex;
+  }
 
   &.deactive {
     cursor: default;

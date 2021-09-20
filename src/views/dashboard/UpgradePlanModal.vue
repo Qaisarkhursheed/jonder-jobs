@@ -51,21 +51,6 @@
             <span class="updgrade-price">{{ plan.price }}&euro;</span>
           </div>
           <UserPlanDescription :plan="getUserPlan(plan.id)[0]" class="user-plan-desc" v-else />
-          <!--          <div class="plan-description" v-else>-->
-          <!--            <h3>{{ userPlan.name }}</h3>-->
-          <!--            <div>-->
-          <!--              {{ userPlan.price }}&euro; / {{ plan.days_valid }}-->
-          <!--              {{ $t("daysValid") }}-->
-          <!--            </div>-->
-          <!--            <div>-->
-          <!--              {{ $t("renewsOn") }}-->
-          <!--              {{ userPlan.start_timestamp | moment("MMM DD, YYYY") }}-->
-          <!--            </div>-->
-          <!--            <div>-->
-          <!--              {{ $t("validUntil") }}-->
-          <!--              {{ userPlan.end_timestamp | moment("MMM DD, YYYY") }}-->
-          <!--            </div>-->
-          <!--          </div>-->
         </v-btn>
       </div>
 

@@ -459,6 +459,7 @@
   "somethingIsWrongPleaseTryAgain": "Something is wrong, please try again!",
   "deleteThisItem": "Are you sure you want to delete this item?",
   "reset": "Reset",
+  "cancelSubscription": "Cancel subscription",
   "personalityTest": {
     "question1": "Worry about things",
     "question2": "Make friends easily",
