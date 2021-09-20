@@ -11,7 +11,7 @@
 
     <CompanyPlans class="mb-7" />
 
-    <UserPlan :border-plan="true" :payment-info="false" />
+    <UserPlan :border-plan="true" :payment-info="false" :payment-action="true" />
   </div>
 </template>
 

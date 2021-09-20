@@ -13,7 +13,7 @@
       {{ $t("validUntil") }}
       {{ plan.end_timestamp | moment("MMM DD, YYYY") }}
     </div>
-    <div class="payment-info mt-6 pt-4">
+    <div class="payment-info mt-6 pt-4" v-if="paymentInfo || paymentAction">
       <span
         class="carten-abenden"
         v-if="paymentInfo && $route.name !== 'CompanyPackagesPricing'"
@@ -37,6 +37,10 @@ export default {
   props: {
     paymentInfo: {
       type: Boolean
+    },
+    paymentAction: {
+      type: Boolean,
+      default: false
     },
     borderPlan: {
       type: Boolean,
