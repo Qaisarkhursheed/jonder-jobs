@@ -38,7 +38,11 @@ export default {
       try {
         commit("SET_LOADING", true);
         const resp = await axios.get("/team-managment", { params });
-        commit("SET_USERS", resp.data.data);
+        const users = resp.data.data;
+        if (params.page === 1) {
+          users.unshift(resp.data.owner);
+        }
+        commit("SET_USERS", users);
         commit("SET_TOTAL_USERS", resp.data.meta.total);
         return resp;
       } catch (error) {

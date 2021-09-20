@@ -16,8 +16,20 @@
       flat
       class="table"
     >
+      <template v-slot:item.data-table-select="{ item, isSelected, select }">
+        <v-simple-checkbox
+          v-if="item.type !== 'Owner'"
+          :value="isSelected"
+          v-ripple="false"
+          color="#27aae1"
+          @input="select($event)"
+        ></v-simple-checkbox>
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <TeamManagementDeleteUser :user="item"></TeamManagementDeleteUser>
+        <TeamManagementDeleteUser
+          v-if="item.type !== 'Owner'"
+          :user="item"
+        ></TeamManagementDeleteUser>
       </template>
       <template v-slot:[`item.created_at`]="{ item }">
         {{ item.created_at | moment("MMM DD, HH:mm") }}
