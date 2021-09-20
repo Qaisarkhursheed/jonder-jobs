@@ -17,11 +17,13 @@
     <response-alert :response="formResponse"></response-alert>
 
     <v-card flat id="personalInfo" class="profile-section mb-10">
+      <h2 class="profile-title">
+        {{ $t("changePersonalData") }}
+      </h2>
+      <p class="profile-subtitle">{{ $t("personalInfo") }}</p>
+
       <v-row>
-        <p class="profile-title">
-          {{ $t("changePersonalData") }}
-        </p>
-        <p class="profile-subtitle">{{ $t("personalInfo") }}</p>
+        <!-- Avatar -->
         <v-col cols="6">
           <input
             type="file"
@@ -50,6 +52,7 @@
           </v-icon>
         </v-col>
 
+        <!-- Save button -->
         <v-col cols="6" class="text-right">
           <v-btn
             :loading="formLoading"
@@ -61,64 +64,92 @@
             >{{ $t("save") }}
           </v-btn>
         </v-col>
-      </v-row>
 
-      <v-row>
+        <!-- First name -->
         <v-col cols="12" sm="6">
-          <label class="profile-label">{{ $t("firstName") }}</label>
+          <label class="profile-label">
+            {{ $t("firstName") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-text-field
-            dense
-            :label="$t('firstName')"
-            :rules="[validations.required]"
-            type="text"
-            outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
             v-model="formData.first_name"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <label class="profile-label">{{ $t("lastName") }}</label>
-          <v-text-field
-            dense
-            :label="$t('lastName')"
             :rules="[validations.required]"
-            type="text"
             outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="formData.last_name"
+            hide-details="auto"
           ></v-text-field>
         </v-col>
-      </v-row>
 
-      <v-row>
+        <!-- Last name -->
         <v-col cols="12" sm="6">
-          <label class="profile-label">E-mail</label>
+          <label class="profile-label">
+            {{ $t("lastName") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-text-field
-            dense
-            disabled
-            type="text"
+            v-model="formData.last_name"
+            :rules="[validations.required]"
             outlined
-            solo
-            flat
-            hide-details
-            background-color="white"
-            v-model="user.email"
+            hide-details="auto"
           ></v-text-field>
         </v-col>
+
+        <!-- Email -->
+        <v-col cols="12" sm="6">
+          <label class="profile-label">
+            {{ $t("email") }}
+            <span style="color: red;">*</span>
+          </label>
+          <v-text-field
+            v-model="user.email"
+            :rules="[validations.required]"
+            disabled
+            outlined
+            hide-details="auto"
+          ></v-text-field>
+        </v-col>
+
+        <!-- Language picker -->
         <v-col cols="6">
           <label class="profile-label">{{ $t("language") }}</label>
           <LanguageDropdown />
         </v-col>
-      </v-row>
 
-      <v-row>
+        <!-- City -->
         <v-col cols="12" sm="6">
+          <label class="profile-label">
+            {{ $t("location") }}
+            <span style="color: red;">*</span>
+          </label>
+          <v-autocomplete
+            v-model="formData.city"
+            @update:search-input="
+              $store.dispatch('google/places', {
+                input: $event,
+                types: ['(cities)']
+              })
+            "
+            :items="
+              $store.getters['google/places'].concat(
+                formData.city ? [formData.city] : []
+              )
+            "
+            :loading="$store.getters['google/loadingPlaces']"
+            :rules="[validations.required]"
+            :placeholder="$t('choose')"
+            ref="city"
+            hide-details="auto"
+            @change="$refs.city.lazySearch = ''"
+            hide-no-data
+            no-filter
+            outlined
+          >
+          </v-autocomplete>
+        </v-col>
+
+        <v-col cols="12" sm="6">
+          <label class="profile-label">
+            <span style="visibility: hidden">.</span>
+          </label>
           <v-checkbox
             class="mb-0 mt-0"
             :label="$t('showLocation')"
@@ -126,27 +157,64 @@
             v-model="formData.location_show"
           ></v-checkbox>
         </v-col>
+
+        <v-col cols="12">
+          <label class="profile-label">
+            {{ $t("aboutMe") }}
+          </label>
+          <v-textarea
+            v-model="formData.about_me"
+            dense
+            outlined
+            hide-details
+          ></v-textarea>
+        </v-col>
       </v-row>
     </v-card>
 
     <v-card flat id="roleAndBranche" class="profile-section mb-10">
-      <v-row>
-        <p class="profile-title">{{ $t("position") }} & {{ $t("industry") }}</p>
-        <!-- <p class="profile-subtitle">
+      <h2 class="profile-title mb-3">
+        {{ $t("position") }} &amp; {{ $t("industry") }}
+      </h2>
+
+      <!-- <p class="profile-subtitle">
           Explanation goes here
         </p> -->
+
+      <v-row>
+        <!-- current_position -->
         <v-col cols="12">
-          <label class="profile-label">{{ $t("yourBranch") }}</label>
+          <label class="profile-label">
+            {{ $t("detailsAboutYouPosition") }}
+            <span style="color: red;">*</span>
+          </label>
+          <v-autocomplete
+            v-model="formData.current_position"
+            :items="$store.getters['professions/items']"
+            :rules="[validations.required]"
+            outlined
+            hide-no-data
+            hide-details="auto"
+          >
+          </v-autocomplete>
+        </v-col>
+
+        <!-- Branche -->
+        <v-col cols="12">
+          <label class="profile-label">
+            {{ $t("yourBranch") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-autocomplete
             v-clearable-autocomplete
             v-model="formData.branche"
             :items="types.JOB_BRANCHE"
+            :rules="[validations.required]"
             cache
             outlined
             multiple
-            flat
             hide-no-data
-            :hide-details="true"
+            hide-details="auto"
           >
             <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
             <template v-slot:item="{ item }">
@@ -166,93 +234,76 @@
             </template>
           </v-autocomplete>
         </v-col>
-      </v-row>
 
-      <v-row>
+        <!-- looking_for -->
         <v-col cols="12">
-          <label class="profile-label">{{ $t("whatPosition") }}</label>
+          <label class="profile-label">
+            {{ $t("whatPosition") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-autocomplete
             v-model="formData.looking_for"
             v-clearable-autocomplete
             :items="$store.getters['professions/items']"
+            :rules="[validations.required]"
             multiple
             outlined
-            flat
             hide-no-data
-            :hide-details="true"
+            hide-details="auto"
           ></v-autocomplete>
         </v-col>
       </v-row>
     </v-card>
 
     <v-card flat id="status" class="profile-section mb-10">
+      <h2 class="profile-title">
+        {{ $t("yourStatus") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("yourStatusDescription") }}
+      </p>
+
       <v-row>
-        <p class="profile-title">
-          {{ $t("yourStatus") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("yourStatusDescription") }}
-        </p>
+        <!-- Status (why_jonder) -->
         <v-col cols="12">
           <label class="profile-label">
             {{ $t("yourStatusSelect") }}
+            <span style="color: red;">*</span>
           </label>
           <v-select
             v-model="formData.why_jonder"
             :rules="[validations.required]"
             :items="jonderStatus"
-            background-color="white"
             outlined
             cache-items
-          >
-            <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
-            <template v-slot:item="{ item }">
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ $t(item) }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </template>
-          </v-select>
+            hide-details="auto"
+          />
         </v-col>
       </v-row>
     </v-card>
 
     <v-card flat id="lookingFor" class="profile-section mb-10">
-      <v-row>
-        <p class="profile-title">
-          {{ $t("experienceAndEducation") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("experienceAndEducationDesc") }}
-        </p>
-        <!-- <v-col cols="12">
-          <label class="profile-label"
-            >Welche Art von Branchen suchen Sie?</label
-          >
-          <v-autocomplete
-            v-model="formData.looking_for_branche"
-            :items="types.JOB_BRANCHE"
-            v-clearable-autocomplete
-            multiple
-            cache
-            outlined
-            flat
-            hide-no-data
-            :hide-details="true"
-          ></v-autocomplete>
-        </v-col> -->
-      </v-row>
+      <h2 class="profile-title">
+        {{ $t("experienceAndEducation") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("experienceAndEducationDesc") }}
+      </p>
 
       <v-row>
+        <!-- looking_for_employment_type -->
         <v-col cols="12">
-          <label class="profile-label"> {{ $t("lookingForType") }}</label>
+          <label class="profile-label">
+            {{ $t("lookingForType") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-select
-            outlined
-            :items="types.EMPLOYEMENT_TYPE"
-            background-color="white"
             v-model="formData.looking_for_employment_type"
+            :items="types.EMPLOYEMENT_TYPE"
+            :rules="[validations.required]"
+            outlined
             multiple
+            hide-details="auto"
           >
             <template v-slot:selection="{ item }">
               {{ $t(item.value) }},
@@ -280,10 +331,13 @@
             </template>
           </v-select>
         </v-col>
-      </v-row>
-      <v-row>
+
+        <!-- address_to_work -->
         <v-col cols="12">
-          <label class="profile-label"> {{ $t("likeToWork") }}</label>
+          <label class="profile-label">
+            {{ $t("likeToWork") }}
+            <span style="color: red;">*</span>
+          </label>
           <v-autocomplete
             v-model="formData.address_to_work"
             @update:search-input="
@@ -306,41 +360,46 @@
             hide-no-data
             no-filter
             outlined
+            hide-details="auto"
           >
           </v-autocomplete>
           <v-checkbox
-            class="mb-0 mt-0"
             :label="$t('remoteWork')"
             hide-details="auto"
             v-model="formData.work_remotely"
           ></v-checkbox>
         </v-col>
-      </v-row>
 
-      <v-row>
-        <v-col cols="12">
-          <label class="profile-label">{{ $t("whenCanYouStart") }}</label>
+        <!-- ready_for_work -->
+        <v-col cols="6">
+          <label class="profile-label">
+            {{ $t("whenCanYouStart") }}
+          </label>
           <Calendar
-            v-if="!dontKnowWhenToStart"
             @setDate="formData.ready_for_work = $event"
-            :rules="[validations.required]"
             :value="formData.ready_for_work"
+            :rules="!dontKnowWhenToStart ? [validations.required] : []"
+            :disabled="dontKnowWhenToStart"
             hide-details="auto"
           />
+        </v-col>
 
+        <!-- ready_for_work checkbox -->
+        <v-col cols="6">
+          <label class="profile-label">
+            <span style="visibility: hidden">.</span>
+          </label>
           <v-checkbox
             v-model="dontKnowWhenToStart"
             :label="$t('iDontKnow')"
-            class="mt-2 mb-3"
             hide-details
           ></v-checkbox>
         </v-col>
-      </v-row>
 
-      <v-row>
-        <v-col cols="10">
+        <!-- Monthly salary slider -->
+        <v-col cols="12">
           <div class="profile-label mb-2">
-            {{ $t("salaryRequirement") }} (€)
+            {{ $t("salaryRequirement") }} (&euro;)
           </div>
           <SliderRangeInput
             :value="getMonthlySalary"
@@ -355,15 +414,19 @@
     </v-card>
 
     <v-card flat id="experienceAndEducation" class="profile-section mb-10">
+      <h2 class="profile-title">
+        {{ $t("canStart") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("experienceAndEducationDesc") }}
+      </p>
+
       <v-row>
-        <p class="profile-title">
-          {{ $t("canStart") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("experienceAndEducationDesc") }}
-        </p>
-        <v-col cols="10">
-          <label class="profile-label">{{ $t("workExperienceInYear") }}</label>
+        <!-- Working experience slider -->
+        <v-col cols="12">
+          <label class="profile-label">
+            {{ $t("workExperienceInYear") }}
+          </label>
           <SliderInput
             :value="formData.working_experience"
             min="0"
@@ -372,9 +435,7 @@
             @change="value => (formData.working_experience = value)"
           />
         </v-col>
-      </v-row>
 
-      <v-row>
         <ModalEducation
           v-if="modals.education.active"
           :active="modals.education.active"
@@ -388,8 +449,11 @@
           @close="toggleModal('experience')"
         />
 
+        <!-- Experience -->
         <v-col cols="12">
-          <label class="profile-label">{{ $t("yourWorkExperience") }}</label>
+          <label class="profile-label">
+            {{ $t("yourWorkExperience") }}
+          </label>
           <CardActionableList
             type="Experience"
             @edit="activateEdit('experience', $event)"
@@ -414,8 +478,8 @@
             </div>
           </div>
         </v-col>
-      </v-row>
-      <v-row>
+
+        <!-- Education -->
         <v-col cols="12">
           <label class="profile-label">{{ $t("yourEducation") }}</label>
           <CardActionableList
@@ -446,51 +510,50 @@
     </v-card>
 
     <v-card flat id="documents" class="profile-section mb-10">
+      <h2 class="profile-title">
+        {{ $t("documents") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("editDocuments") }}
+      </p>
+
       <v-row>
-        <p class="profile-title">
-          {{ $t("documents") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("editDocuments") }}
-        </p>
+        <!-- Documents -->
         <v-col cols="12">
-          <div class="mt-6">
-            <div class="document-wrap">
-              <DocumentUploadSection
-                @change="e => (formData.cv = e[0])"
-                type="Cv"
-                :value="formData.cv"
-              />
-            </div>
-            <div class="document-wrap">
-              <DocumentUploadSection
-                @change="e => (formData.qualifications = e[0])"
-                type="Qualifications"
-                :value="formData.qualifications"
-              />
-            </div>
-            <div class="document-wrap">
-              <DocumentUploadSection
-                @change="e => (formData.resume = e[0])"
-                type="Resume"
-                :value="formData.resume"
-              />
-            </div>
+          <div class="document-wrap">
+            <DocumentUploadSection
+              @change="e => (formData.cv = e[0])"
+              type="Cv"
+              :value="formData.cv"
+            />
+          </div>
+          <div class="document-wrap">
+            <DocumentUploadSection
+              @change="e => (formData.qualifications = e[0])"
+              type="Qualifications"
+              :value="formData.qualifications"
+            />
+          </div>
+          <div class="document-wrap">
+            <DocumentUploadSection
+              @change="e => (formData.resume = e[0])"
+              type="Resume"
+              :value="formData.resume"
+            />
           </div>
         </v-col>
       </v-row>
     </v-card>
 
     <v-card flat id="invoices" class="profile-section mb-10">
-      <v-row>
-        <p class="profile-title">
-          {{ $t("invoicing") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("invoicesDesc") }}
-        </p>
-      </v-row>
+      <h2 class="profile-title">
+        {{ $t("invoicing") }}
+      </h2>
+      <p class="profile-subtitle mb-8">
+        {{ $t("invoicesDesc") }}
+      </p>
 
+      <!-- Invoices -->
       <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
         <v-col>
           <div class="invoice-number">
@@ -544,75 +607,63 @@
     </v-card> -->
 
     <v-card flat id="changePassword" class="profile-section mb-10">
-      <v-row>
-        <p class="profile-title">
-          {{ $t("changePassword") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("passwordDesc") }}
-        </p>
-      </v-row>
+      <h2 class="profile-title">
+        {{ $t("changePassword") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("passwordDesc") }}
+      </p>
 
+      <!-- Password change -->
       <v-form ref="passwordForm" v-model="passwordFormValid">
         <label class="profile-label">{{ $t("enterNewPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.new_password"
-          dense
+          :rules="[validations.required, validations.min.string(6)]"
           type="password"
           outlined
-          :rules="[validations.required, validations.min.string(6)]"
-          background-color="white"
         ></v-text-field>
 
         <label class="profile-label">{{ $t("reEnterPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.new_confirm_password"
-          dense
+          :rules="[validations.required]"
           type="password"
           outlined
-          :rules="[validations.required]"
-          background-color="white"
         ></v-text-field>
 
         <label class="profile-label">{{ $t("enterOldPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.current_password"
-          dense
+          :rules="[validations.required]"
           type="password"
           outlined
-          :rules="[validations.required]"
-          background-color="white"
         ></v-text-field>
 
         <!-- Response alert -->
         <response-alert :response="passwordFormResponse"></response-alert>
 
-        <v-row>
-          <v-col cols="6">
-            <v-btn
-              :loading="passwordFormLoading"
-              :disabled="!passwordFormValid"
-              depressed
-              large
-              color="primary"
-              class="pl-8 pr-8"
-              @click="handleChangePassword"
-              >{{ $t("changePassword") }}
-            </v-btn>
-          </v-col>
-        </v-row>
+        <v-btn
+          :loading="passwordFormLoading"
+          :disabled="!passwordFormValid"
+          depressed
+          large
+          color="primary"
+          class="pl-8 pr-8"
+          @click="handleChangePassword"
+          >{{ $t("changePassword") }}
+        </v-btn>
       </v-form>
     </v-card>
 
     <v-card flat id="upgradeAccount" class="profile-section mb-10">
-      <v-row>
-        <p class="profile-title">
-          {{ $t("upgradeAccount") }}
-        </p>
-        <p class="profile-subtitle">
-          {{ $t("upgradeDesc") }}
-        </p>
-      </v-row>
+      <h2 class="profile-title">
+        {{ $t("upgradeAccount") }}
+      </h2>
+      <p class="profile-subtitle">
+        {{ $t("upgradeDesc") }}
+      </p>
+
       <v-row>
         <v-col cols="12" md="6" v-for="(plan, index) in plansData" :key="index">
           <CardActionableList
@@ -692,8 +743,6 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import CancelSubscription from "../../../components/plans/CancelSubscription";
 
 export default {
-  name: "Profile",
-
   components: {
     CancelSubscription,
     SliderRangeInput,
@@ -716,6 +765,9 @@ export default {
     formData: {
       first_name: "",
       last_name: "",
+      about_me: "",
+      city: "",
+      current_position: "",
       branche: "",
       looking_for: [],
       // looking_for_branche: [],
@@ -728,8 +780,8 @@ export default {
       cv: null,
       qualifications: null,
       resume: null,
-      location_show: "",
-      work_remotely: ""
+      location_show: false,
+      work_remotely: false
     },
     formResponse: {},
     formLoading: false,
@@ -740,11 +792,6 @@ export default {
     dontKnowWhenToStart: false,
     invoices: [],
     cropperImage: null,
-    jonderStatus: [
-      "whatBringsYouJob",
-      "whatBringsYouOffer",
-      "whatBringsYouCurious"
-    ],
     modals: {
       UpgradePlan: {
         active: false,
@@ -774,14 +821,7 @@ export default {
       education: ["edit", "delete"]
     }
   }),
-  created() {
-    this.resetFormData(this.user);
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
-      this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status === "complete");
-    });
-    this.$store.dispatch("professions/fetch");
-  },
+
   computed: {
     ...mapGetters("user", [
       "user",
@@ -793,15 +833,28 @@ export default {
       "getUserPlan"
     ]),
     profile_img() {
-      if (this.newImage) {
-        // return this.newImage.canvas.toDataURL("image/jpeg" );
-        return URL.createObjectURL(this.newImage);
-      }
-
-      return this.user.profile_img;
+      return this.newImage
+        ? URL.createObjectURL(this.newImage)
+        : this.user.profile_img;
     },
     types() {
       return types;
+    },
+    jonderStatus() {
+      return [
+        {
+          text: this.$t("whatBringsYouJob"),
+          value: "whatBringsYouJob"
+        },
+        {
+          text: this.$t("whatBringsYouOffer"),
+          value: "whatBringsYouOffer"
+        },
+        {
+          text: this.$t("whatBringsYouCurious"),
+          value: "whatBringsYouCurious"
+        }
+      ];
     },
     plansData() {
       return this.plans("jobseeker_paln");
@@ -815,13 +868,31 @@ export default {
       return [min, max];
     }
   },
+
+  watch: {
+    user(newVal) {
+      this.resetFormData(newVal);
+    }
+  },
+
+  created() {
+    this.resetFormData(this.user);
+    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+      this.invoices = resp.data.data;
+      this.invoices = this.invoices.filter(i => i.status === "complete");
+    });
+    this.$store.dispatch("professions/fetch");
+  },
+
   methods: {
     ...mapActions("user", ["updateUser"]),
     resetFormData(user) {
       if (!user) return;
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
-      //this.formData.email = user.email;
+      this.formData.about_me = user.about_me;
+      this.formData.current_position = user.current_position;
+      this.formData.city = user.city;
       this.formData.branche = user.branche.split(",");
       this.formData.looking_for = user.looking_for;
       //this.formData.looking_for_branche = user.looking_for_branche.split(",");
@@ -845,35 +916,25 @@ export default {
       let formDataCopy = {
         ...this.formData
       };
-      formDataCopy.monthly_salary = JSON.stringify(
-        this.formData.monthly_salary
-      );
+
       formDataCopy.branche = formDataCopy.branche.join();
-      //formDataCopy.looking_for_branche = formDataCopy.looking_for_branche.join();
       formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
+
       if (this.dontKnowWhenToStart) {
         this.formData.ready_for_work = null;
-        formDataCopy.ready_for_work = "null";
       }
 
       if (this.newImage) {
         formDataCopy.profile_img = this.newImage;
       }
 
-      if (!(this.formData.cv instanceof File)) {
-        delete formDataCopy.cv;
-      }
-
-      if (!(this.formData.resume instanceof File)) {
-        delete formDataCopy.resume;
-      }
-
-      if (!(this.formData.qualifications instanceof File)) {
-        delete formDataCopy.qualifications;
-      }
+      ["cv", "resume", "qualifications"].forEach(key => {
+        if (!(this.formData[key] instanceof File)) {
+          delete formDataCopy[key];
+        }
+      });
 
       this.formLoading = true;
-      console.log("formDataCopy", formDataCopy);
       this.updateUser(formDataCopy)
         .then(resp => {
           this.formResponse = resp.data;
@@ -938,11 +999,6 @@ export default {
         this.formData[prop].splice(index, 1);
       }
     }
-  },
-  watch: {
-    user(newVal) {
-      this.resetFormData(newVal);
-    }
   }
 };
 </script>
@@ -953,12 +1009,12 @@ export default {
   width: 100%;
   line-height: 24px;
   font-weight: 600;
-  margin: 15px 0 0 15px;
+  // margin: 15px 0 0 15px;
 }
 
 .profile-subtitle {
   width: 100%;
-  margin-left: 15px;
+  // margin-left: 15px;
 }
 
 .profile-label {

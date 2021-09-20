@@ -1,4 +1,5 @@
 import axios from "axios";
+import { serialize } from "object-to-formdata";
 
 export default {
   me({ state, commit, dispatch }) {
@@ -53,21 +54,13 @@ export default {
   },
 
   async postOnboardingUser({ commit, state }, data) {
-    let formData = new FormData();
-    Object.keys(data).forEach(key => {
-      if (data[key] || data[key] == 0) {
-        formData.append(key, data[key]);
-      }
-    });
+    console.log(data);
+    data.branche = data.branche.join();
+    data.looking_for_employment_type = data.looking_for_employment_type.join();
+    console.log(data);
+    let formData = serialize(data, { booleansAsIntegers: true });
     formData.append("_method", "PATCH");
-    formData.delete("looking_for");
-    data.looking_for.forEach((key, i) => {
-      formData.append(`looking_for[${i}]`, key);
-    });
-    formData.delete("address_to_work");
-    data.address_to_work.forEach((key, i) => {
-      formData.append(`address_to_work[${i}]`, key);
-    });
+
     try {
       const resp = await axios.post(
         "/user/onboarding/" + state.user.id,
@@ -97,16 +90,7 @@ export default {
   },
 
   async updateUser({ commit, state }, data) {
-    let formData = new FormData();
-    Object.keys(data).forEach(key => {
-      if (data[key] == "null") {
-        formData.append(key, "");
-      } else if (Array.isArray(data[key])) {
-        data[key].forEach(el => formData.append(key + "[]", el));
-      } else {
-        formData.append(key, data[key]);
-      }
-    });
+    let formData = serialize(data, { booleansAsIntegers: true });
     formData.append("_method", "PATCH");
 
     try {

@@ -166,13 +166,19 @@
         North Data
       </label>
 
-      <div class="content pt-4">
+      <div class="content pt-3">
         <div class="row">
           <!-- History graph -->
           <div class="col">
             <v-dialog v-model="historyGraph">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" dark v-bind="attrs" v-on="on" block>
+                <v-btn
+                  color="primary"
+                  height="48"
+                  v-bind="attrs"
+                  v-on="on"
+                  block
+                >
                   {{ $t("northdataHistory") }}
                 </v-btn>
               </template>
@@ -186,7 +192,13 @@
           <div class="col">
             <v-dialog v-model="barChart" width="600">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" dark v-bind="attrs" v-on="on" block>
+                <v-btn
+                  color="primary"
+                  height="48"
+                  v-bind="attrs"
+                  v-on="on"
+                  block
+                >
                   {{ $t("northdataBarChart") }}
                 </v-btn>
               </template>

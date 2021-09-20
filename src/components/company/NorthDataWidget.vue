@@ -59,6 +59,7 @@ export default {
       success: () => {
         this.isLoading = false;
         this.$emit("success");
+        this.fixOverflow();
       },
       error: () => {
         this.isError = true;
@@ -66,6 +67,19 @@ export default {
         this.$emit("error");
       }
     });
+  },
+
+  methods: {
+    fixOverflow() {
+      document.querySelectorAll("#widget svg").forEach(el => {
+        const viewBox = el.getAttribute("viewBox")?.split(" ");
+
+        if (viewBox) {
+          viewBox[0] = -25;
+          el.setAttribute("viewBox", viewBox.join(" "));
+        }
+      });
+    }
   }
 };
 </script>

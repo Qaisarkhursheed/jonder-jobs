@@ -88,7 +88,9 @@
                   :rules="[validations.required]"
                   outlined
                 >
-                  <template v-slot:selection="{ item }"> {{ $t(item.value) }}</template>
+                  <template v-slot:selection="{ item }">
+                    {{ $t(item.value) }}
+                  </template>
                   <template v-slot:item="{ item }">
                     <v-list-item-content>
                       <v-list-item-title>
@@ -277,7 +279,7 @@ export default {
           );
         });
       }
-    }, 500)
+    }, 0)
   },
 
   computed: {

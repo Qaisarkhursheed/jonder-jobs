@@ -1,5 +1,6 @@
 /* eslint-disable no-unreachable */
 import axios from "axios";
+import i18n from "@/locales";
 
 export default {
   async login({ commit }, credentials) {
@@ -17,6 +18,10 @@ export default {
       }
       resp.data.user.monthly_salary = monthlySalary;
       const user = resp.data.user;
+
+      if (user.locale) {
+        i18n.locale = user.locale;
+      }
 
       localStorage.setItem("user-token", token);
       commit("SET_AUTHENTICATED", true);
