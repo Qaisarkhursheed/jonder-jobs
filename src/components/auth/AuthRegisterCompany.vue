@@ -49,21 +49,20 @@
 
       <!-- Company name -->
       <v-combobox
-        dense
+        v-model="formData.company"
         :placeholder="$t('companyName')"
         :rules="[validations.required, validations.min.string(3)]"
         :items="suggestedCompanies"
         :loading="$store.getters['northdata/loadingSearch']"
         @update:search-input="fetchCompanySuggestions($event)"
-        type="text"
+        class="hide-menu-icon mb-4"
+        dense
         no-filter
         hide-details
         outlined
         background-color="white"
-        v-model="formData.company"
         solo
         flat
-        class="mb-4"
       ></v-combobox>
 
       <!-- Email -->
@@ -266,13 +265,13 @@ export default {
       this.suggestedCompanies = [];
 
       if (val && val.length > 2) {
-        this.$store.dispatch("northdata/universalSearch", val).then(resp => {
+        this.$store.dispatch("northdata/suggestSearch", val).then(resp => {
           this.suggestedCompanies = resp.data.results?.map(
             r => r.company.name.name
           );
         });
       }
-    }, 500)
+    }, 0)
   }
 };
 </script>

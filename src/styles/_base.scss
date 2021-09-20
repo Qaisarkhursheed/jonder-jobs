@@ -586,7 +586,7 @@ label {
 }
 
 .hide-menu-icon {
-  .mdi-menu-down {
+  .v-select__slot .v-input__append-inner {
     display: none;
   }
 }
