@@ -200,6 +200,7 @@
   "saveChanges": "Änderungen speichern",
   "beOnTheTop": "3 Tage lang an der Spitze der Suche stehen",
   "searchJobseekers": "Mitarbeiter finden",
+  "searchNJobseekers": "Suche {n} Mitarbeiter",
   "searchJobseekersFound": "potentieller Mitarbeiter gefunden",
   "createAccount": "Konto erstellen",
   "createAccountSub": "Sie sind nur noch wenige Schritte entfernt Ihre ersten potenziellen Mitarbeiter zu finden.",

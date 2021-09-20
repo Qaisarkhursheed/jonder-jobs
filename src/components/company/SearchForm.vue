@@ -237,9 +237,11 @@
                     mdi-magnify
                   </v-icon>
                   <template v-if="presearchCount != null">
-                    {{ presearchCount }}
+                    {{ $t("searchNJobseekers", { n: presearchCount }) }}
                   </template>
-                  {{ $t("findEmployee") }}
+                  <template v-else>
+                    {{ $t("searchJobseekers") }}
+                  </template>
                 </v-btn>
               </v-col>
             </v-row>
