@@ -657,13 +657,13 @@
               <UserPlanDescription
                 :plan="getUserPlan(plan.id)[0]"
                 :payment-info="false"
-                :payment-actions="true"
+                :payment-actions="false"
                 v-else
               />
             </div>
             <CancelSubscription
               v-if="userPlan.length && isPlanActive(plan.id)"
-              :plan="plan.id"
+              :id="plan.id"
             />
           </div>
         </v-col>
