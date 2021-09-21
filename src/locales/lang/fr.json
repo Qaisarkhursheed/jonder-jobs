@@ -466,6 +466,8 @@
   "en": "EN",
   "fr": "FR",
   "de": "DE",
+  "contentOfNote": "Contenu de la note",
+  "writeContent": "Écrire du contenu",
   "personalityTest": {
     "question1": "Je m'inquiète à propos de choses",
     "question2": "Je me fais des amis facilement",

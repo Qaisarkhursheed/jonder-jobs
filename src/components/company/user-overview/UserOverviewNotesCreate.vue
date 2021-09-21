@@ -13,10 +13,12 @@
       <p class="text-left font-weight-bold mb-3 font-size-16 header">
         {{ $t("newNote") }}
       </p>
-
+      <p class="content-of-note">
+        {{ $t("contentOfNote") }}
+      </p>
       <v-row>
         <v-col cols="12">
-          <v-textarea v-model="content" outlined> </v-textarea>
+          <v-textarea v-model="content" :placeholder="$t('writeContent')" outlined> </v-textarea>
         </v-col>
       </v-row>
 
@@ -76,5 +78,9 @@ export default {
 <style lang="scss" scoped>
 .header {
   font-size: 28px;
+}
+.content-of-note {
+  color: #222222;
+  font-weight: 600;
 }
 </style>

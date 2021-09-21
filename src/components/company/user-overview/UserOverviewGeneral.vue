@@ -2,6 +2,30 @@
   <div class="user-overview-general">
     <v-row class="no-gutters">
       <v-col cols="12" md="7" class="left px-10 pt-7 pb-10">
+        <!-- status of candidate -->
+        <div class="status-of-candidate">
+          <div class="status-title"></div>
+          <div class="status-selection">
+<!--            <v-select-->
+<!--                class="d-flex align-center"-->
+<!--                :items="getSelectionOptions"-->
+<!--                :value="item.managment_status"-->
+<!--                dense-->
+<!--                :height="40"-->
+<!--                @change="updateJobseeker($event, item.id)"-->
+<!--                outlined-->
+<!--            >-->
+<!--              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>-->
+<!--              <template v-slot:item="{ item }">-->
+<!--                <v-list-item-content>-->
+<!--                  <v-list-item-title>-->
+<!--                    {{ $t(item) }}-->
+<!--                  </v-list-item-title>-->
+<!--                </v-list-item-content>-->
+<!--              </template>-->
+<!--            </v-select>-->
+          </div>
+        </div>
         <!-- Experience -->
         <div class="section experience">
           <div class="title">{{ $t("experiences") }}</div>
@@ -15,10 +39,15 @@
               <div class="subtitle">{{ data.position }}</div>
               <div class="subtitle">
                 {{ data.start_time | moment("MMMM YYYY") }} -
-                <template v-if="data.end_time">
+                <template v-if="data.end_time && (new Date(data.end_time).getTime() <= new Date().getTime())">
                   {{ data.end_time | moment("MMMM YYYY") }}
                 </template>
                 <template v-else>{{ $t("present") }}</template>
+              </div>
+              <div class="description mt-2">
+                <ul>
+                  <li>{{ data.description }}</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -37,7 +66,7 @@
               <div class="subtitle">{{ data.study }}</div>
               <div class="subtitle">
                 {{ data.start_time | moment("MMMM YYYY") }} -
-                <template v-if="data.end_time">
+                <template v-if="data.end_time && (new Date(data.end_time).getTime() <= new Date().getTime())">
                   {{ data.end_time | moment("MMMM YYYY") }}
                 </template>
                 <template v-else>{{ $t("present") }}</template>
@@ -116,6 +145,8 @@
 </template>
 
 <script>
+import types from "@/types";
+
 export default {
   props: {
     user: {
@@ -144,6 +175,9 @@ export default {
       });
 
       return docs;
+    },
+    getSelectionOptions() {
+      return types.SELECTION_MANAGEMENT_STATUS;
     }
   },
 
@@ -209,7 +243,11 @@ export default {
     color: #222222;
   }
 }
-
+.description {
+  color: #222;
+  font-size: 14px;
+  font-weight: 400;
+}
 .experience {
   .item {
     &:first-of-type {
