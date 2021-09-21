@@ -460,6 +460,9 @@
   "deleteThisItem": "Möchten Sie dieses Element wirklich löschen?",
   "reset": "Zurücksetzen",
   "cancelSubscription": "Abonnement beenden",
+  "en": "EN",
+  "fr": "FR",
+  "de": "DE",
   "personalityTest": {
     "question1": "Ich mache mir oft Sorgen",
     "question2": "Ich gewinne leicht Freunde",

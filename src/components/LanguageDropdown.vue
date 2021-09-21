@@ -49,9 +49,11 @@ export default {
   },
   computed: {
     getLanguage() {
-      return this.$store.getters["user/user"]
-        ? this.$store.getters["user/user"].locale
-        : localStorage.getItem("lang") || "de";
+      let lang = localStorage.getItem("lang");
+      if (this.$store.getters["user/user"] && !lang) {
+        lang = this.$store.getters["user/user"].locale;
+      }
+      return lang || "de";
     }
   },
   methods: {
@@ -70,6 +72,6 @@ export default {
 .language-toggle {
   display: inline-block;
   padding-left: 20px;
-  width: 120px;
+  width: 130px;
 }
 </style>
