@@ -240,8 +240,6 @@ export default {
         });
     },
     getManagementSelection() {
-      // eslint-disable-next-line no-debugger
-      debugger;
       const usersList = this.$store.getters["company/selectionManagement"](
         "list"
       );
