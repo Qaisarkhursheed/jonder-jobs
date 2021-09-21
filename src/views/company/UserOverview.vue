@@ -65,7 +65,7 @@
         <v-tab
           v-for="item in items"
           :key="item"
-          style="text-transform: uppercase;"
+          style="font-size: 16px; color: #000; font-weight: 400; text-transform: capitalize"
           slider-color="#0253B3"
         >
           {{ $t(item) }}
@@ -225,6 +225,7 @@ export default {
     font-weight: bold;
     font-size: 32px;
     color: #222222;
+    text-transform: capitalize;
   }
   .position {
     font-weight: 500;

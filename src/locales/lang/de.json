@@ -463,6 +463,8 @@
   "en": "EN",
   "fr": "FR",
   "de": "DE",
+  "contentOfNote": "Inhalt der notiz",
+  "writeContent": "Inhalt schreiben",
   "personalityTest": {
     "question1": "Ich mache mir oft Sorgen",
     "question2": "Ich gewinne leicht Freunde",
