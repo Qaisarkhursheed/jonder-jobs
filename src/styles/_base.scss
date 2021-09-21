@@ -516,6 +516,9 @@ button {
 .user-overview .v-tabs-slider-wrapper {
   height: 3px !important;
 }
+.status-of-candidate .v-input__slot .v-select__slot {
+  min-height: auto;
+}
 
 .tooltip.ui {
   z-index: 300;
