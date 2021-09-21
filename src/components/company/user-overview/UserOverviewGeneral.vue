@@ -3,27 +3,27 @@
     <v-row class="no-gutters">
       <v-col cols="12" md="7" class="left px-10 pt-7 pb-10">
         <!-- status of candidate -->
-        <div class="status-of-candidate">
-          <div class="status-title"></div>
+        <div class="status-of-candidate" v-if="userManagementData">
+          <div class="status-title">{{ $t("statusOfCandidate") }}</div>
           <div class="status-selection">
-<!--            <v-select-->
-<!--                class="d-flex align-center"-->
-<!--                :items="getSelectionOptions"-->
-<!--                :value="item.managment_status"-->
-<!--                dense-->
-<!--                :height="40"-->
-<!--                @change="updateJobseeker($event, item.id)"-->
-<!--                outlined-->
-<!--            >-->
-<!--              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>-->
-<!--              <template v-slot:item="{ item }">-->
-<!--                <v-list-item-content>-->
-<!--                  <v-list-item-title>-->
-<!--                    {{ $t(item) }}-->
-<!--                  </v-list-item-title>-->
-<!--                </v-list-item-content>-->
-<!--              </template>-->
-<!--            </v-select>-->
+            <v-select
+              class="d-flex align-center"
+              :items="getSelectionOptions"
+              :value="userManagementData.managment_status"
+              dense
+              :height="40"
+              @change="updateJobseeker($event)"
+              outlined
+            >
+              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+              <template v-slot:item="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ $t(item) }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-select>
           </div>
         </div>
         <!-- Experience -->
@@ -39,7 +39,12 @@
               <div class="subtitle">{{ data.position }}</div>
               <div class="subtitle">
                 {{ data.start_time | moment("MMMM YYYY") }} -
-                <template v-if="data.end_time && (new Date(data.end_time).getTime() <= new Date().getTime())">
+                <template
+                  v-if="
+                    data.end_time &&
+                      new Date(data.end_time).getTime() <= new Date().getTime()
+                  "
+                >
                   {{ data.end_time | moment("MMMM YYYY") }}
                 </template>
                 <template v-else>{{ $t("present") }}</template>
@@ -66,7 +71,12 @@
               <div class="subtitle">{{ data.study }}</div>
               <div class="subtitle">
                 {{ data.start_time | moment("MMMM YYYY") }} -
-                <template v-if="data.end_time && (new Date(data.end_time).getTime() <= new Date().getTime())">
+                <template
+                  v-if="
+                    data.end_time &&
+                      new Date(data.end_time).getTime() <= new Date().getTime()
+                  "
+                >
                   {{ data.end_time | moment("MMMM YYYY") }}
                 </template>
                 <template v-else>{{ $t("present") }}</template>
@@ -145,6 +155,7 @@
 </template>
 
 <script>
+import filter from "lodash/filter";
 import types from "@/types";
 
 export default {
@@ -157,7 +168,8 @@ export default {
   data() {
     return {
       experience: [],
-      education: []
+      education: [],
+      userManagementData: null
     };
   },
 
@@ -184,6 +196,7 @@ export default {
   created() {
     this.getExperience();
     this.getEducation();
+    this.getManagementSelection();
   },
 
   methods: {
@@ -225,6 +238,26 @@ export default {
         .catch(error => {
           alert(error);
         });
+    },
+    getManagementSelection() {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      const usersList = this.$store.getters["company/selectionManagement"](
+        "list"
+      );
+      this.userManagementData = filter(
+        usersList,
+        user => user.jobseeker.id === this.user.id
+      )[0];
+      console.log(this.userManagementData);
+    },
+    updateJobseeker(change) {
+      this.$store.dispatch("company/slManagementMoveCandidate", {
+        id: this.userManagementData.id,
+        data: {
+          managment_status: change
+        }
+      });
     }
   }
 };
@@ -241,6 +274,16 @@ export default {
     font-weight: normal;
     font-size: 16px;
     color: #222222;
+  }
+}
+.status-of-candidate {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  > div:nth-child(2) {
+    height: 100% !important;
+    max-width: 300px;
   }
 }
 .description {
