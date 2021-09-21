@@ -62,7 +62,7 @@ export default {
       this.$i18n.locale = locale;
       localStorage.setItem("lang", locale);
     }
-  },
+  }
 };
 </script>
 
