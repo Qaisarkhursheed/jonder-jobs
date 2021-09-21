@@ -1,5 +1,6 @@
 import axios from "axios";
 import { serialize } from "object-to-formdata";
+import i18n from "@/locales";
 
 export default {
   me({ state, commit, dispatch }) {
@@ -10,18 +11,14 @@ export default {
     return axios
       .get("/me")
       .then(response => {
-        commit("auth/SET_AUTHENTICATED", true, { root: true });
-        let monthlySalary = null;
-        try {
-          monthlySalary = JSON.parse(response.data.monthly_salary);
-        } catch (e) {
-          monthlySalary = {
-            min: "",
-            max: ""
-          };
+        const user = response.data;
+
+        if (user.locale) {
+          i18n.locale = user.locale;
         }
-        response.data.monthly_salary = monthlySalary;
-        commit("SET_USER", response.data);
+
+        commit("auth/SET_AUTHENTICATED", true, { root: true });
+        commit("SET_USER", user);
         dispatch("fetchPlans");
         return response.data;
       })
