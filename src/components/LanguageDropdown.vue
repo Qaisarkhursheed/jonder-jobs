@@ -1,25 +1,26 @@
 <template>
   <div class="language-toggle">
     <v-select
-        :value="getLanguage"
-        :items="items"
-        @change="changeLanguage"
-        outlined
-        hide-details
+      :value="language"
+      :items="items"
+      @change="changeLanguage"
+      outlined
+      background-color="white"
+      hide-details
     >
       <template v-slot:selection="{ item }">
         <img
-            width="20"
-            class="rounded-circle mr-3"
-            :src="require('@/assets/flags/' + item.value + '.svg')"
+          width="20"
+          class="rounded-circle mr-3"
+          :src="require('@/assets/flags/' + item.value + '.svg')"
         />
-        {{ $t(item.value) }}
+        {{ $t(item.text) }}
       </template>
       <template v-slot:item="{ item }">
         <img
-            width="20"
-            class="rounded-circle mr-3"
-            :src="require('@/assets/flags/' + item.value + '.svg')"
+          width="20"
+          class="rounded-circle mr-3"
+          :src="require('@/assets/flags/' + item.value + '.svg')"
         />
         {{ $t(item.text) }}
       </template>
@@ -47,20 +48,23 @@ export default {
       ]
     };
   },
+
   computed: {
-    getLanguage() {
-      let lang = localStorage.getItem("lang");
-      if (this.$store.getters["user/user"] && !lang) {
-        lang = this.$store.getters["user/user"].locale;
-      }
-      return lang || "de";
+    language() {
+      return (
+        this.$store.getters["user/user"]?.locale ||
+        localStorage.getItem("lang") ||
+        "de"
+      );
     }
   },
+
   methods: {
     changeLanguage(locale) {
       if (this.$store.getters["user/user"]) {
         this.$store.dispatch("user/setLocale", locale);
       }
+
       this.$i18n.locale = locale;
       localStorage.setItem("lang", locale);
     }
@@ -68,10 +72,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.language-toggle {
-  display: inline-block;
-  padding-left: 20px;
-  width: 130px;
-}
-</style>
+<style lang="scss"></style>

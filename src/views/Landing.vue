@@ -15,7 +15,9 @@
           </router-link>
         </v-col>
         <v-col cols="12" md="8" class="links">
-          <router-link to="/faq" class="txt-link text-color-primary-blue-dark"
+          <router-link
+            to="/faq"
+            class="txt-link text-color-primary-blue-dark"
             >{{ $t("faq") }}</router-link
           >
           <router-link
@@ -27,7 +29,9 @@
           <router-link to="/login" class="button dark-blue fill">
             {{ $t("login") }}
           </router-link>
-          <LanguageDropdown />
+          <div style="width: 150px; display: inline-block; margin-left: 15px">
+            <LanguageDropdown />
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -394,8 +398,8 @@
 }
 </style>
 <script>
-import LanguageDropdown from '../components/LanguageDropdown';
+import LanguageDropdown from "../components/LanguageDropdown";
 export default {
-  components: {LanguageDropdown}
-}
+  components: { LanguageDropdown }
+};
 </script>
