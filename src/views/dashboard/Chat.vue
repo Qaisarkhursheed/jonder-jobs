@@ -2,6 +2,13 @@
   <v-row v-if="chatLoading" class="full-h">
     <spinner />
   </v-row>
+
+  <v-row v-else-if="isCompany && isChatEmpty">
+    <v-col>
+      <ChatEmpty />
+    </v-col>
+  </v-row>
+
   <v-row v-else style="height: calc(100vh - 150px); min-height: 500px">
     <v-col v-if="!chatFull" cols="col" class="full-h">
       <chat-asside
@@ -9,6 +16,7 @@
         @item-click="showProfile = false"
       />
     </v-col>
+
     <v-col
       cols="col"
       class="full-h"
@@ -35,18 +43,23 @@
 import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
 import PublicProfile from "@/components/chat/PublicProfile";
+import ChatEmpty from "@/components/chat/ChatEmpty";
 import Spinner from "@/components/loaders/Spinner";
 import { mapActions, mapGetters } from "vuex";
-//import UserPreview from "@/components/parts/UserPreview";
 
 export default {
-  name: "Chat",
   created() {
     this.init();
     this.pollData();
   },
   beforeDestroy() {
     clearInterval(this.polling);
+  },
+  props: {
+    isCompany: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     messages: null,
@@ -74,23 +87,32 @@ export default {
     },
     async pollData() {
       this.polling = setInterval(async () => {
-        // this.getAllConversations();
         if (this.conversationDetails && this.conversationDetails.user_id) {
-          // if (this.conversationDetails.unread_messages > 0)
-          //   await this.seenMessage(this.conversationDetails.user_id);
           this.getSingleConversation({ id: this.conversationDetails.id });
         }
         this.getAllConversations();
       }, 5000);
     }
   },
-  computed: mapGetters("chat", ["selectedConversation", "conversationDetails"]),
+  computed: {
+    ...mapGetters("chat", [
+      "conversations",
+      "selectedConversation",
+      "conversationDetails"
+    ]),
+    isChatEmpty() {
+      return (
+        this.conversations &&
+        this.conversations.filter(c => c.conversation.last_message).length == 0
+      );
+    }
+  },
   components: {
-    //UserPreview,
     ChatMessages,
     ChatAsside,
     PublicProfile,
-    Spinner
+    Spinner,
+    ChatEmpty
   }
 };
 </script>
@@ -99,9 +121,7 @@ export default {
 .chat-holder {
   overflow: hidden;
 }
-// .chat-container {
-//   height: 800px;
-// }
+
 .overflow-list {
   overflow: auto;
 }

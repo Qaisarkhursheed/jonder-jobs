@@ -26,10 +26,11 @@
 
     <div class="selection-mgmt-body">
       <component
-        v-if="$store.getters['company/selectionManagement']"
+        v-if="$store.getters['company/selectionManagement'] && !isEmpty"
         :is="component"
         :selection="getSelection"
       ></component>
+      <SelectionManagementEmpty v-else-if="!isLoading" />
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@
 <script>
 import SelectionManagementTable from "@/components/company/selection-management/SelectionManagementTable";
 import SelectionManagementTableList from "@/components/company/selection-management/SelectionManagementTableList";
+import SelectionManagementEmpty from "@/components/company/selection-management/SelectionManagementEmpty";
 import ColView from "@/svgs/ColView";
 import ListView from "@/svgs/ListView";
 
@@ -45,18 +47,25 @@ export default {
     ListView,
     ColView,
     SelectionManagementTable,
-    SelectionManagementTableList
+    SelectionManagementTableList,
+    SelectionManagementEmpty
   },
 
   data() {
     return {
       component: "SelectionManagementTableList",
       activeView: "list",
-      searchValue: ""
+      searchValue: "",
+      isLoading: true
     };
   },
 
   computed: {
+    isEmpty() {
+      return (
+        this.$store.getters["company/selectionManagement"]("list")?.length == 0
+      );
+    },
     getSelection() {
       return this.$store.getters["company/selectionManagement"](
         this.activeView
@@ -65,7 +74,9 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("company/slManagementGetAll");
+    this.$store
+      .dispatch("company/slManagementGetAll")
+      .finally(() => (this.isLoading = false));
   },
 
   methods: {
