@@ -125,7 +125,7 @@
             @update:search-input="
               $store.dispatch('google/places', {
                 input: $event,
-                types: ['(cities)']
+                types: ['(cities)'],
               })
             "
             :items="
@@ -343,7 +343,7 @@
             @update:search-input="
               $store.dispatch('google/places', {
                 input: $event,
-                types: ['(cities)']
+                types: ['(cities)'],
               })
             "
             :items="
@@ -432,7 +432,7 @@
             min="0"
             max="40"
             step="0.5"
-            @change="value => (formData.working_experience = value)"
+            @change="(value) => (formData.working_experience = value)"
           />
         </v-col>
 
@@ -522,21 +522,21 @@
         <v-col cols="12">
           <div class="document-wrap">
             <DocumentUploadSection
-              @change="e => (formData.cv = e[0])"
+              @change="(e) => (formData.cv = e[0])"
               type="Cv"
               :value="formData.cv"
             />
           </div>
           <div class="document-wrap">
             <DocumentUploadSection
-              @change="e => (formData.qualifications = e[0])"
+              @change="(e) => (formData.qualifications = e[0])"
               type="Qualifications"
               :value="formData.qualifications"
             />
           </div>
           <div class="document-wrap">
             <DocumentUploadSection
-              @change="e => (formData.resume = e[0])"
+              @change="(e) => (formData.resume = e[0])"
               type="Resume"
               :value="formData.resume"
             />
@@ -571,7 +571,7 @@
             @click="
               $store.dispatch('invoices/downloadInvoice', {
                 id: item.id,
-                number: item.invoice_number
+                number: item.invoice_number,
               })
             "
           ></v-img>
@@ -757,7 +757,7 @@ export default {
     DocumentUploadSection,
     SliderInput,
     ImageUploadCropper,
-    LanguageDropdown
+    LanguageDropdown,
   },
 
   data: () => ({
@@ -781,7 +781,7 @@ export default {
       qualifications: null,
       resume: null,
       location_show: false,
-      work_remotely: false
+      work_remotely: false,
     },
     formResponse: {},
     formLoading: false,
@@ -796,30 +796,30 @@ export default {
       UpgradePlan: {
         active: false,
         edit: false,
-        component: UpgradePlanModal
+        component: UpgradePlanModal,
       },
       AddNewCard: {
         active: false,
         edit: false,
-        component: AddNewCard
+        component: AddNewCard,
       },
       education: {
         active: false,
         edit: false,
-        component: ModalEducation
+        component: ModalEducation,
       },
       experience: {
         active: false,
         edit: false,
-        component: ModalExperience
-      }
+        component: ModalExperience,
+      },
     },
     fileActions: {
       UpgradePlan: ["edit", "delete"],
       AddNewCard: ["edit", "delete"],
       experience: ["edit", "delete"],
-      education: ["edit", "delete"]
-    }
+      education: ["edit", "delete"],
+    },
   }),
 
   computed: {
@@ -830,7 +830,7 @@ export default {
       "userPlan",
       "plans",
       "isPlanActive",
-      "getUserPlan"
+      "getUserPlan",
     ]),
     profile_img() {
       return this.newImage
@@ -844,16 +844,16 @@ export default {
       return [
         {
           text: this.$t("whatBringsYouJob"),
-          value: "whatBringsYouJob"
+          value: "whatBringsYouJob",
         },
         {
           text: this.$t("whatBringsYouOffer"),
-          value: "whatBringsYouOffer"
+          value: "whatBringsYouOffer",
         },
         {
           text: this.$t("whatBringsYouCurious"),
-          value: "whatBringsYouCurious"
-        }
+          value: "whatBringsYouCurious",
+        },
       ];
     },
     plansData() {
@@ -866,20 +866,20 @@ export default {
       const min = monthly_salary.min;
       const max = monthly_salary.max;
       return [min, max];
-    }
+    },
   },
 
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
-    }
+    },
   },
 
   created() {
     this.resetFormData(this.user);
-    this.$store.dispatch("invoices/fetchInvoices").then(resp => {
+    this.$store.dispatch("invoices/fetchInvoices").then((resp) => {
       this.invoices = resp.data.data;
-      this.invoices = this.invoices.filter(i => i.status === "complete");
+      this.invoices = this.invoices.filter((i) => i.status === "complete");
     });
     this.$store.dispatch("professions/fetch");
   },
@@ -914,7 +914,7 @@ export default {
     handleUpdate() {
       this.formResponse = {};
       let formDataCopy = {
-        ...this.formData
+        ...this.formData,
       };
 
       formDataCopy.branche = formDataCopy.branche.join();
@@ -928,7 +928,7 @@ export default {
         formDataCopy.profile_img = this.newImage;
       }
 
-      ["cv", "resume", "qualifications"].forEach(key => {
+      ["cv", "resume", "qualifications"].forEach((key) => {
         if (!(this.formData[key] instanceof File)) {
           delete formDataCopy[key];
         }
@@ -936,10 +936,10 @@ export default {
 
       this.formLoading = true;
       this.updateUser(formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.formResponse = resp.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.formResponse = err.data;
         })
         .finally(() => {
@@ -953,18 +953,18 @@ export default {
 
       this.$store
         .dispatch("user/changePassword", formDataCopy)
-        .then(resp => {
+        .then((resp) => {
           this.passwordFormResponse = resp.data;
           this.$refs.passwordForm.reset();
 
           this.$store.dispatch("auth/logout").then(() => {
             this.$router.push({
               name: "Login",
-              query: { changePassword: "1" }
+              query: { changePassword: "1" },
             });
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.passwordFormResponse = err.data;
         })
         .finally(() => {
@@ -982,7 +982,7 @@ export default {
     changeMonthlySalary(event) {
       this.formData.monthly_salary = {
         min: event[0].toString(),
-        max: event[1].toString()
+        max: event[1].toString(),
       };
     },
     searchForValue(name) {
@@ -998,8 +998,8 @@ export default {
       } else {
         this.formData[prop].splice(index, 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

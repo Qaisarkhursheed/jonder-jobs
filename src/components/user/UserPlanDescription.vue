@@ -7,11 +7,11 @@
     </div>
     <div>
       {{ $t("renewsOn") }}
-      {{ plan.start_timestamp | moment("MMM DD, YYYY") }}
+      {{ plan.start_timestamp | moment("DD MMM, YYYY") }}
     </div>
     <div>
       {{ $t("validUntil") }}
-      {{ plan.end_timestamp | moment("MMM DD, YYYY") }}
+      {{ plan.end_timestamp | moment("DD MMM, YYYY") }}
     </div>
     <div class="payment-info mt-6 pt-4" v-if="paymentInfo || paymentAction">
       <span
@@ -36,21 +36,21 @@ export default {
   name: "UserPlanDescription",
   props: {
     paymentInfo: {
-      type: Boolean
+      type: Boolean,
     },
     paymentAction: {
       type: Boolean,
-      default: false
+      default: false,
     },
     borderPlan: {
       type: Boolean,
-      default: false
+      default: false,
     },
     plan: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
