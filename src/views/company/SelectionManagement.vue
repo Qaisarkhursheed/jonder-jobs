@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { filter } from "lodash";
 import SelectionManagementTable from "@/components/company/selection-management/SelectionManagementTable";
 import SelectionManagementTableList from "@/components/company/selection-management/SelectionManagementTableList";
 import SelectionManagementEmpty from "@/components/company/selection-management/SelectionManagementEmpty";
@@ -67,9 +68,27 @@ export default {
       );
     },
     getSelection() {
-      return this.$store.getters["company/selectionManagement"](
+      let filteredUsers = null;
+      const users = this.$store.getters["company/selectionManagement"](
         this.activeView
       );
+      if (this.activeView === "list") {
+        filteredUsers = this.searchValue
+          ? filter(users, user => {
+              const nameLastname = `${user.jobseeker.first_name.toLowerCase()} ${user.jobseeker.last_name.toLowerCase()}`;
+              return nameLastname.includes(this.searchValue.toLowerCase());
+            })
+          : users;
+      } else {
+        for (const user in users) {
+          users[user] = filter(users[user], item => {
+            const nameLastname = `${item.jobseeker.first_name.toLowerCase()} ${item.jobseeker.last_name.toLowerCase()}`;
+            return nameLastname.includes(this.searchValue.toLowerCase());
+          });
+        }
+        filteredUsers = users;
+      }
+      return filteredUsers;
     }
   },
 
