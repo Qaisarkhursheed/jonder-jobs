@@ -460,6 +460,9 @@
   "deleteThisItem": "Êtes-vous sûr de bien vouloir supprimer cet élément?",
   "reset": "Réinitialiser",
   "cancelSubscription": "Annuler l'abonnement",
+  "en": "EN",
+  "fr": "FR",
+  "de": "DE",
   "personalityTest": {
     "question1": "Je m'inquiète à propos de choses",
     "question2": "Je me fais des amis facilement",
