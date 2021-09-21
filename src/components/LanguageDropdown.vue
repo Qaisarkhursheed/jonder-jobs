@@ -50,7 +50,6 @@ export default {
   computed: {
     getLanguage() {
       let lang = localStorage.getItem("lang");
-      console.log(lang, this.$i18n);
       if (this.$store.getters["user/user"] && !lang) {
         lang = this.$store.getters["user/user"].locale;
       }
