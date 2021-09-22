@@ -24,6 +24,7 @@
                   v-model="form.university_name"
                   :rules="[validations.required]"
                   type="text"
+                  solo
                   outlined
                   :placeholder="$t('enter')"
                 >

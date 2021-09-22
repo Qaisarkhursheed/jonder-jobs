@@ -36,6 +36,7 @@
           type="text"
           :rules="[validations.required]"
           dense
+          solo
           outlined
           flat
           background-color="white"
