@@ -25,7 +25,7 @@
     <!-- Main -->
     <v-row class="main ma-0">
       <!-- Left nav -->
-      <v-col class="col-12 col-sm-3 col-xl-3">
+      <v-col class="col-12 col-sm-4 col-xl-3">
         <nav class="dashboard-navigation">
           <div class="settings-nav">
             <div class="settings-title">
@@ -50,7 +50,7 @@
       </v-col>
 
       <!-- Right side -->
-      <v-col class="col-12 col-sm-9 col-xl-9">
+      <v-col class="col-12 col-sm-8 col-xl-9">
         <v-container fluid class="d-flex flex-column">
           <!-- Response alert -->
           <response-alert :response="formResponse"></response-alert>
