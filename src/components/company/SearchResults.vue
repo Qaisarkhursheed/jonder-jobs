@@ -90,6 +90,11 @@ export default {
     pagination() {
       return Math.round(this.searchMeta.total / this.searchMeta.per_page);
     }
+  },
+  created() {
+    this.$store
+      .dispatch("company/slManagementGetAll")
+      .finally(() => (this.isLoading = false));
   }
 };
 </script>

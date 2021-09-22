@@ -82,8 +82,7 @@
         <v-col cols="6" class="wage">
           <div class="label">{{ $t("salaryExpectation") }}</div>
           <div class="value" v-if="monthly_salary.min && monthly_salary.max">
-            &euro; {{ monthly_salary.min }} -
-            {{ monthly_salary.max }}
+            &euro; {{ getMoney }}
           </div>
           <div v-else>
             {{ $t("didntSet") }}
@@ -145,7 +144,7 @@ export default {
 
   computed: {
     highlighted() {
-      return this.candidate.plan?.plan_slug == "higlighted";
+      return this.candidate.plan?.plan_slug === "higlighted";
     },
     getBranche() {
       let branche = "";
@@ -155,6 +154,11 @@ export default {
         }).join();
       }
       return branche;
+    },
+    getMoney() {
+      return +this.monthly_salary.min !== +this.monthly_salary.max
+        ? `${this.monthly_salary.min} - ${this.monthly_salary.max}`
+        : this.monthly_salary.min;
     }
   },
 
@@ -181,7 +185,7 @@ export default {
         this.$store
           .dispatch("company/slManagementDeleteCandidate", this.candidate.id)
           .then(() => {
-            this.candidate.selection_managment = false;
+            this.candidate.selection_managment = null;
           });
       } else {
         this.$store
@@ -190,7 +194,7 @@ export default {
             managment_status: "Saved candidates"
           })
           .then(() => {
-            this.candidate.selection_managment = true;
+            this.candidate.selection_managment = "Saved candidates";
           });
       }
     },
@@ -209,6 +213,14 @@ export default {
         console.log(typeof this.candidate.monthly_salary);
         if (typeof this.candidate.monthly_salary === "string") {
           this.monthly_salary = JSON.parse(this.candidate.monthly_salary);
+        } else if (
+          "min" in this.candidate.monthly_salary &&
+          "max" in this.candidate.monthly_salary
+        ) {
+          this.monthly_salary = {
+            min: (+this.candidate.monthly_salary.min * 1000).toString(),
+            max: (+this.candidate.monthly_salary.max * 1000).toString()
+          };
         } else {
           this.monthly_salary = {
             min: "1000",
@@ -217,7 +229,7 @@ export default {
         }
       } catch (e) {
         this.monthly_salary = {
-          min: "1",
+          min: "1000",
           max: (this.candidate.monthly_salary * 1000).toString()
         };
       }

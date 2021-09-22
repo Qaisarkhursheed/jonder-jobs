@@ -9,7 +9,7 @@
             <v-select
               class="d-flex align-center"
               :items="getSelectionOptions"
-              :value="userManagementData.managment_status"
+              :value="user.selection_managment"
               dense
               :height="40"
               @change="updateJobseeker($event)"
@@ -247,7 +247,6 @@ export default {
         usersList,
         user => user.jobseeker.id === this.user.id
       )[0];
-      console.log(this.userManagementData);
     },
     updateJobseeker(change) {
       this.$store.dispatch("company/slManagementMoveCandidate", {
