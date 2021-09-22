@@ -52,6 +52,7 @@
         :placeholder="$t('name')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
+        solo
         dense
         outlined
         background-color="white"
@@ -63,6 +64,7 @@
         :placeholder="$t('surname')"
         :rules="[validations.required, validations.min.string(3)]"
         type="text"
+        solo
         dense
         outlined
         background-color="white"
@@ -74,6 +76,7 @@
         :placeholder="$t('emailAddress')"
         :rules="[validations.required, validations.email]"
         type="email"
+        solo
         dense
         outlined
         background-color="white"
@@ -85,6 +88,7 @@
         placeholder="Telefonnummer"
         :rules="[validations.required, validations.phone]"
         type="text"
+        solo
         dense
         outlined
         background-color="white"
@@ -96,6 +100,7 @@
         :placeholder="$t('password')"
         :rules="[validations.required, validations.min.string(6)]"
         :type="showPass ? 'text' : 'password'"
+        solo
         dense
         outlined
         background-color="white"
@@ -123,6 +128,7 @@
           validations.same('Passwort', formData.password),
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
+        solo
         dense
         outlined
         background-color="white"
