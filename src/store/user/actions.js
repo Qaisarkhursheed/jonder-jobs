@@ -13,7 +13,7 @@ export default {
       .then(response => {
         const user = response.data;
 
-        if (user.locale && !localStorage.getItem("lang")) {
+        if (user.locale) {
           i18n.locale = user.locale;
         }
 
