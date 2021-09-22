@@ -112,7 +112,7 @@
 
         <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
-          <div class="content">
+          <div class="content" v-if="user.branche">
             <span
               v-for="(branche, index) in user.branche.split(',')"
               :key="index"
