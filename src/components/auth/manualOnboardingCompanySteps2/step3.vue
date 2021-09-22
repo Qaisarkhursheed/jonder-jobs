@@ -14,6 +14,7 @@
         v-model="value.company_email"
         :rules="[validations.required, validations.email]"
         dense
+        solo
         type="email"
         :placeholder="$t('companyEmailPlaceholder')"
         outlined
@@ -32,6 +33,7 @@
         :rules="[validations.required, validations.phone]"
         dense
         outlined
+        solo
         flat
         background-color="white"
       >

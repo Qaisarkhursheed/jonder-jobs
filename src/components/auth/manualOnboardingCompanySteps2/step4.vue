@@ -9,6 +9,7 @@
       <v-text-field
         v-model="value.web_url"
         dense
+        solo
         placeholder="meinunternehmen.de"
         outlined
         flat
@@ -19,6 +20,7 @@
       <v-text-field
         v-model="value.facebook"
         dense
+        solo
         placeholder="www.facebook.com/unternehmen"
         outlined
         flat
@@ -29,6 +31,7 @@
       <v-text-field
         v-model="value.instagram"
         dense
+        solo
         placeholder="www.instagram.com/unternehmen"
         outlined
         flat
@@ -39,6 +42,7 @@
       <v-text-field
         v-model="value.twitter"
         dense
+        solo
         placeholder="www.twitter.com/unternehmen"
         outlined
         flat
@@ -49,6 +53,7 @@
       <v-text-field
         v-model="value.linkedin"
         dense
+        solo
         placeholder="www.linkedin.com/company/unternehmen"
         outlined
         flat
@@ -59,6 +64,7 @@
       <v-text-field
         v-model="value.youtube"
         dense
+        solo
         placeholder="www.youtube.com/user/unternehmen"
         outlined
         flat

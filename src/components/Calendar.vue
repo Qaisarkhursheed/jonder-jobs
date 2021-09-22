@@ -12,6 +12,7 @@
         v-model="dateFormatted"
         :rules="rules"
         :disabled="disabled"
+        solo
         readonly
         outlined
         height="35px"

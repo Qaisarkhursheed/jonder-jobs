@@ -21,6 +21,7 @@
         <v-text-field
           v-model="formData.password"
           dense
+          solo
           :rules="[validations.required, validations.min.string(6)]"
           type="password"
           outlined
@@ -33,6 +34,7 @@
         <v-text-field
           v-model="formData.password_confirmation"
           dense
+          solo
           :rules="[
             validations.required,
             validations.same('Neues Passwort', formData.password),

@@ -229,6 +229,7 @@
               <v-text-field
                 v-model="passwordFormData.new_password"
                 dense
+                solo
                 type="password"
                 outlined
                 :rules="[validations.required, validations.min.string(6)]"
@@ -239,6 +240,7 @@
               <v-text-field
                 v-model="passwordFormData.new_confirm_password"
                 dense
+                solo
                 type="password"
                 outlined
                 :rules="[validations.required]"
@@ -249,6 +251,7 @@
               <v-text-field
                 v-model="passwordFormData.current_password"
                 dense
+                solo
                 type="password"
                 outlined
                 :rules="[validations.required]"

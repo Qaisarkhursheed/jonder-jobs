@@ -61,6 +61,7 @@
               type="text"
               disabled
               dense
+              solo
               outlined
               flat
               background-color="white"
