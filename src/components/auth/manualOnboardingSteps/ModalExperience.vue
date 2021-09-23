@@ -74,6 +74,7 @@
                   flat
                   hide-no-data
                   :placeholder="$t('choose')"
+                  append-icon="mdi-chevron-down"
                 ></v-autocomplete>
               </v-col>
             </v-row>
@@ -87,6 +88,7 @@
                   :items="types.EMPLOYEMENT_TYPE"
                   :rules="[validations.required]"
                   outlined
+                  append-icon="mdi-chevron-down"
                 >
                   <template v-slot:selection="{ item }">
                     {{ $t(item.value) }}

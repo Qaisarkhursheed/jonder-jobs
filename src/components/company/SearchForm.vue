@@ -18,6 +18,7 @@
             flat
             :hide-details="true"
             :placeholder="$t('enterJobtitle')"
+            append-icon="mdi-chevron-down"
           ></v-autocomplete>
         </v-col>
 
@@ -32,6 +33,7 @@
             clearable
             :placeholder="$t('employementType')"
             outlined
+            append-icon="mdi-chevron-down"
           >
             <template v-slot:selection="{ item }">
               {{ $t(item.value) }}</template
@@ -63,6 +65,7 @@
               hide-no-data
               :hide-details="true"
               :placeholder="$t('enterIndustry')"
+              append-icon="mdi-chevron-down"
             >
               <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
               <template v-slot:item="{ item }">
@@ -107,6 +110,7 @@
               :hide-details="true"
               :placeholder="$t('educationStudy')"
               outlined
+              append-icon="mdi-chevron-down"
             >
               <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
               <template v-slot:item="{ item }">
@@ -175,6 +179,7 @@
               clearable
               :placeholder="$t('workExperience')"
               outlined
+              append-icon="mdi-chevron-down"
             ></v-select>
           </v-col>
 

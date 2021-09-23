@@ -19,8 +19,8 @@
         hide-no-data
         :placeholder="$t('detailsAboutYouPositionPlace')"
         class="mt-1"
-      >
-      </v-autocomplete>
+        append-icon="mdi-chevron-down"
+      ></v-autocomplete>
 
       <!-- Branche -->
       <label class="profile-label">
@@ -38,6 +38,7 @@
         multiple
         :placeholder="$t('detailsAboutYouBranchesPlace')"
         class="mt-1"
+        append-icon="mdi-chevron-down"
       >
         <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
         <template v-slot:item="{ item }">
@@ -73,8 +74,8 @@
         flat
         hide-no-data
         class="mt-1"
-      >
-      </v-autocomplete>
+        append-icon="mdi-chevron-down"
+      ></v-autocomplete>
 
       <label class="profile-label">
         {{ $t("location") }}

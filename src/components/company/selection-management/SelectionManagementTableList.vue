@@ -49,6 +49,7 @@
                 :height="40"
                 @change="updateJobseeker($event, item.id)"
                 outlined
+                append-icon="mdi-chevron-down"
               >
                 <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
                 <template v-slot:item="{ item }">

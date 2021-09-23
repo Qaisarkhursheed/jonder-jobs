@@ -13,6 +13,7 @@
           cache-items
           outlined
           hide-no-data
+          append-icon="mdi-chevron-down"
         >
           <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
           <template v-slot:item="{ item }">
@@ -35,6 +36,7 @@
           :items="types.EMPLOYEE_NUMBER"
           :rules="[validations.required]"
           outlined
+          append-icon="mdi-chevron-down"
         >
           <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
           <template v-slot:item="{ item }">
