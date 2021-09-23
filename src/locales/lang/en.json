@@ -595,5 +595,6 @@
     "questionChoice3": "Neither Accurate Nor Inaccurate",
     "questionChoice4": "Moderately Accurate",
     "questionChoice5": "Very Accurate"
-  }
+  },
+  "user": "User"
 }

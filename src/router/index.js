@@ -46,8 +46,12 @@ import ActualPosition from "@/views/dashboard/profile/ActualPosition";
 // Admin
 import AdminLayout from "@/layouts/AdminLayout";
 import AdminDashboard from "@/views/admin/Dashboard";
-import AdminCompanies from "@/views/admin/Companies";
-import AdminUsers from "@/views/admin/Users";
+import AdminCompanyManagement from "@/views/admin/CompanyManagement";
+import AdminCompanyManagementUser from "@/views/admin/CompanyManagementUser";
+
+import AdminJobseekerManagement from "@/views/admin/JobseekerManagement";
+import AdminJobseekerManagementUser from "@/views/admin/JobseekerManagementUser";
+
 import AdminCMS from "@/views/admin/CMS";
 
 Vue.use(VueRouter);
@@ -313,13 +317,25 @@ const routes = [
       },
       {
         path: "company-management",
-        name: "AdminCompanies",
-        component: AdminCompanies
+        name: "AdminCompanyManagement",
+        component: AdminCompanyManagement
       },
       {
-        path: "user-management",
-        name: "AdminUsers",
-        component: AdminUsers
+        path: "company-management/:id",
+        name: "AdminCompanyManagementUser",
+        component: AdminCompanyManagementUser,
+        props: true,
+      },
+      {
+        path: "jobseeker-management",
+        name: "AdminJobseekerManagement",
+        component: AdminJobseekerManagement
+      },
+      {
+        path: "jobseeker-management/:id",
+        name: "AdminJobseekerManagementUser",
+        component: AdminJobseekerManagementUser,
+        props: true,
       },
       {
         path: "cms",

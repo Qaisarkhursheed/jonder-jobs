@@ -595,5 +595,6 @@
     "questionChoice3": "Weder zutreffend noch unzutreffend",
     "questionChoice4": "Zutreffend",
     "questionChoice5": "Sehr zutreffend"
-  }
+  },
+  "user": "Nutzer"
 }
