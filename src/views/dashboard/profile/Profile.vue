@@ -142,8 +142,8 @@
             hide-no-data
             no-filter
             outlined
-          >
-          </v-autocomplete>
+            append-icon="mdi-chevron-down"
+          ></v-autocomplete>
         </v-col>
 
         <v-col cols="12" sm="6">
@@ -195,8 +195,8 @@
             outlined
             hide-no-data
             hide-details="auto"
-          >
-          </v-autocomplete>
+            append-icon="mdi-chevron-down"
+          ></v-autocomplete>
         </v-col>
 
         <!-- Branche -->
@@ -215,6 +215,7 @@
             multiple
             hide-no-data
             hide-details="auto"
+            append-icon="mdi-chevron-down"
           >
             <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
             <template v-slot:item="{ item }">
@@ -250,6 +251,7 @@
             outlined
             hide-no-data
             hide-details="auto"
+            append-icon="mdi-chevron-down"
           ></v-autocomplete>
         </v-col>
       </v-row>
@@ -277,7 +279,8 @@
             outlined
             cache-items
             hide-details="auto"
-          />
+            append-icon="mdi-chevron-down"
+            ></v-select>
         </v-col>
       </v-row>
     </v-card>
@@ -304,6 +307,7 @@
             outlined
             multiple
             hide-details="auto"
+            append-icon="mdi-chevron-down"
           >
             <template v-slot:selection="{ item }">
               {{ $t(item.value) }},
@@ -361,8 +365,8 @@
             no-filter
             outlined
             hide-details="auto"
-          >
-          </v-autocomplete>
+            append-icon="mdi-chevron-down"
+          ></v-autocomplete>
           <v-checkbox
             :label="$t('remoteWork')"
             hide-details="auto"

@@ -7,6 +7,7 @@
       outlined
       background-color="white"
       hide-details
+      append-icon="mdi-chevron-down"
     >
       <template v-slot:selection="{ item }">
         <img

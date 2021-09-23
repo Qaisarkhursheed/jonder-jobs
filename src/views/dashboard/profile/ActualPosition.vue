@@ -40,6 +40,7 @@
           :items="currentPosition"
           background-color="white"
           v-model="formData.current_position"
+          append-icon="mdi-chevron-down"
         ></v-select>
       </v-col>
     </v-row>
@@ -54,6 +55,7 @@
           :label="$t('whichBranch')"
           :items="branches"
           v-model="formData.branche"
+          append-icon="mdi-chevron-down"
         ></v-select>
       </v-col>
     </v-row>

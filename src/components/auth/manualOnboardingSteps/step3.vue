@@ -16,6 +16,7 @@
         :placeholder="$t('lookingForEmployementPlace')"
         outlined
         multiple
+        append-icon="mdi-chevron-down"
         class="mt-1"
       >
         <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
@@ -62,8 +63,8 @@
         hide-no-data
         no-filter
         outlined
-      >
-      </v-autocomplete>
+        append-icon="mdi-chevron-down"
+      ></v-autocomplete>
 
       <v-checkbox
         class="mb-3 mt-0"

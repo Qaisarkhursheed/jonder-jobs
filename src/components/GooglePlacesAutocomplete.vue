@@ -14,6 +14,7 @@
       hide-no-data
       placeholder="Enter location"
       @input="select"
+      append-icon="mdi-chevron-down"
     >
       <template v-slot:item="{ item }">
         {{ item.description }}

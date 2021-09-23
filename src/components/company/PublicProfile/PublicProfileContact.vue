@@ -45,8 +45,8 @@
           hide-no-data
           no-filter
           outlined
-        >
-        </v-autocomplete>
+          append-icon="mdi-chevron-down"
+        ></v-autocomplete>
       </div>
 
       <!-- Web -->

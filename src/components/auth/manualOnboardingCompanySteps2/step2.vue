@@ -24,6 +24,7 @@
         outlined
         flat
         hide-no-data
+        append-icon="mdi-chevron-down"
         :placeholder="$t('choose')"
       >
         <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
@@ -46,6 +47,7 @@
         :items="types.EMPLOYEE_NUMBER"
         :rules="[validations.required]"
         :placeholder="$t('choose')"
+        append-icon="mdi-chevron-down"
         outlined
       >
         <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
