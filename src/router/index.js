@@ -1,58 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-
-// Components
-import Landing from "../views/Landing.vue";
-import FAQ from "../views/FAQ.vue";
-// import Home from "../views/Home.vue";
-import Login from "../views/auth/Login.vue";
-import RegisterWelcome from "../views/auth/RegisterWelcome";
-import RegisterUser from "../views/auth/RegisterUser";
-import RegisterCompany from "../views/auth/RegisterCompany";
-import RegisterVerifyEmail from "@/components/auth/AuthConfirmEmail";
-import ForgotPassword from "../views/auth/ForgotPassword.vue";
-import ResetPassword from "../views/auth/ResetPassword.vue";
-import SetPassword from "../views/auth/SetPassword.vue";
-import Protected from "../views/Protected";
-import ManualOnboarding from "../views/auth/ManualOnboarding";
-import ManualOnboardingCompany from "../views/auth/ManualOnboardingCompany";
-import DashboardWrap from "../views/Dashboard";
-import Dashboard from "../views/dashboard/Dashboard";
-import ProfileWrap from "../views/dashboard/ProfileWrap";
-import Profile from "../views/dashboard/profile/Profile";
-import ProfileView from "../views/dashboard/profile/ProfileView";
-import EditNotepad from "../views/dashboard/EditNotepad";
-import Chat from "../views/dashboard/Chat";
-import ProductPricing from "../views/dashboard/ProductPricing";
-import CvMaker from "../views/dashboard/profile/CvMaker";
-import PersonalityTestJobseeker from "@/views/dashboard/PersonalityTest";
-
-// Company base view
-import CompanyLayout from "@/layouts/CompanyLayout";
-import CompanySearch from "@/views/company/Search";
-import CompanySelectionManagement from "@/views/company/SelectionManagement";
-import CompanyTeamManagement from "@/views/company/TeamManagement";
-import CompanyUserOverview from "@/views/company/UserOverview";
-import CompanyPublicProfile from "@/views/company/PublicProfile";
-import CompanySettings from "@/views/company/Settings";
-import CompanyPackagesPricing from "@/views/company/PackagesPricing";
-import CompanyMessages from "@/views/company/Messages";
-import CompanyMessageTemplates from "@/views/company/MessageTemplates";
-
-import Qualifications from "@/views/dashboard/profile/Qualifications";
-import ActualPosition from "@/views/dashboard/profile/ActualPosition";
-
-// Admin
-import AdminLayout from "@/layouts/AdminLayout";
-import AdminDashboard from "@/views/admin/Dashboard";
-import AdminCompanyManagement from "@/views/admin/CompanyManagement";
-import AdminCompanyManagementUser from "@/views/admin/CompanyManagementUser";
-
-import AdminJobseekerManagement from "@/views/admin/JobseekerManagement";
-import AdminJobseekerManagementUser from "@/views/admin/JobseekerManagementUser";
-
-import AdminCMS from "@/views/admin/CMS";
+import Landing from "@/views/Landing.vue";
 
 Vue.use(VueRouter);
 
@@ -68,7 +17,7 @@ const routes = [
   {
     path: "/faq",
     name: "FAQ",
-    component: FAQ,
+    component: () => import(/* webpackChunkName: "FAQ" */ "@/views/FAQ"),
     meta: {
       guest: true
     }
@@ -76,7 +25,8 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "@/views/auth/Login"),
     meta: {
       guest: true
     }
@@ -91,7 +41,10 @@ const routes = [
   {
     path: "/register",
     name: "Register",
-    component: RegisterWelcome,
+    component: () =>
+      import(
+        /* webpackChunkName: "RegisterWelcome" */ "@/views/auth/RegisterWelcome"
+      ),
     meta: {
       guest: true
     }
@@ -99,7 +52,10 @@ const routes = [
   {
     path: "/register-user",
     name: "RegisterUser",
-    component: RegisterUser,
+    component: () =>
+      import(
+        /* webpackChunkName: "RegisterUser" */ "@/views/auth/RegisterUser"
+      ),
     meta: {
       guest: true
     }
@@ -107,7 +63,10 @@ const routes = [
   {
     path: "/register-company",
     name: "RegisterCompany",
-    component: RegisterCompany,
+    component: () =>
+      import(
+        /* webpackChunkName: "RegisterCompany" */ "@/views/auth/RegisterCompany"
+      ),
     meta: {
       guest: true
     }
@@ -115,7 +74,10 @@ const routes = [
   {
     path: "/forgot-password",
     name: "ForgotPassword",
-    component: ForgotPassword,
+    component: () =>
+      import(
+        /* webpackChunkName: "ForgotPassword" */ "@/views/auth/ForgotPassword"
+      ),
     meta: {
       guest: true
     }
@@ -123,7 +85,10 @@ const routes = [
   {
     path: "/reset-password/:email/:expires/:token/:signature",
     name: "ResetPassword",
-    component: ResetPassword,
+    component: () =>
+      import(
+        /* webpackChunkName: "ResetPassword" */ "@/views/auth/ResetPassword"
+      ),
     meta: {
       requiresAuth: false,
       guest: true
@@ -132,7 +97,8 @@ const routes = [
   {
     path: "/set-password/:token/:expires/:signature",
     name: "SetPassword",
-    component: SetPassword,
+    component: () =>
+      import(/* webpackChunkName: "SetPassword" */ "@/views/auth/SetPassword"),
     meta: {
       requiresAuth: false,
       guest: true
@@ -141,7 +107,10 @@ const routes = [
   {
     path: "/verify-email",
     name: "RegisterVerifyEmail",
-    component: RegisterVerifyEmail,
+    component: () =>
+      import(
+        /* webpackChunkName: "AuthConfirmEmail" */ "@/components/auth/AuthConfirmEmail"
+      ),
     meta: {
       requiresAuth: false,
       verify: true,
@@ -151,7 +120,10 @@ const routes = [
   {
     path: "/onboarding",
     name: "ManualOnboarding",
-    component: ManualOnboarding,
+    component: () =>
+      import(
+        /* webpackChunkName: "ManualOnboarding" */ "@/views/auth/ManualOnboarding"
+      ),
     meta: {
       requiresAuth: true,
       requiresUser: true,
@@ -161,7 +133,10 @@ const routes = [
   {
     path: "/onboarding-company",
     name: "ManualOnboardingCompany",
-    component: ManualOnboardingCompany,
+    component: () =>
+      import(
+        /* webpackChunkName: "ManualOnboardingCompany" */ "@/views/auth/ManualOnboardingCompany"
+      ),
     meta: {
       requiresAuth: true,
       requiresCompany: true,
@@ -170,7 +145,8 @@ const routes = [
   },
   {
     path: "/dashboard",
-    component: DashboardWrap,
+    component: () =>
+      import(/* webpackChunkName: "Dashboard" */ "@/views/Dashboard"),
     meta: {
       requiresAuth: true,
       requiresUser: true,
@@ -180,7 +156,10 @@ const routes = [
       {
         path: "",
         name: "Dashboard",
-        component: Dashboard,
+        component: () =>
+          import(
+            /* webpackChunkName: "DashboardDashboard" */ "@/views/dashboard/Dashboard"
+          ),
         meta: {
           requiresAuth: true,
           requiresUser: true,
@@ -190,7 +169,10 @@ const routes = [
       {
         path: "notepad/:id",
         name: "Notepad",
-        component: EditNotepad,
+        component: () =>
+          import(
+            /* webpackChunkName: "EditNotepad" */ "@/views/dashboard/EditNotepad"
+          ),
         meta: {
           requiresAuth: true,
           requiresUser: true,
@@ -199,7 +181,10 @@ const routes = [
       },
       {
         path: "profile",
-        component: ProfileWrap,
+        component: () =>
+          import(
+            /* webpackChunkName: "ProfileWrap" */ "@/views/dashboard/ProfileWrap"
+          ),
         meta: {
           requiresAuth: true,
           requiresUser: true,
@@ -209,7 +194,10 @@ const routes = [
           {
             path: "",
             name: "Profile",
-            component: Profile,
+            component: () =>
+              import(
+                /* webpackChunkName: "Profile" */ "@/views/dashboard/profile/Profile"
+              ),
             meta: {
               requiresAuth: true,
               requiresUser: true,
@@ -219,7 +207,10 @@ const routes = [
           {
             path: "view/:id",
             name: "ProfileView",
-            component: ProfileView,
+            component: () =>
+              import(
+                /* webpackChunkName: "ProfileView" */ "@/views/dashboard/profile/ProfileView"
+              ),
             meta: {
               requiresAuth: true,
               requiresUser: true,
@@ -229,7 +220,10 @@ const routes = [
           {
             path: "cv-maker",
             name: "CvMaker",
-            component: CvMaker,
+            component: () =>
+              import(
+                /* webpackChunkName: "CvMaker" */ "@/views/dashboard/profile/CvMaker"
+              ),
             meta: {
               requiresAuth: true,
               requiresUser: true,
@@ -239,7 +233,10 @@ const routes = [
           {
             path: "qualifications",
             name: "Qualifications",
-            component: Qualifications,
+            component: () =>
+              import(
+                /* webpackChunkName: "Qualifications" */ "@/views/dashboard/profile/Qualifications"
+              ),
             meta: {
               requiresAuth: true,
               requiresUser: true,
@@ -249,7 +246,10 @@ const routes = [
           {
             path: "actual-position",
             name: "ActualPosition",
-            component: ActualPosition,
+            component: () =>
+              import(
+                /* webpackChunkName: "ActualPosition" */ "@/views/dashboard/profile/ActualPosition"
+              ),
             meta: {
               requiresAuth: true,
               requiresUser: true,
@@ -265,7 +265,8 @@ const routes = [
       {
         path: "chat",
         name: "Chat",
-        component: Chat,
+        component: () =>
+          import(/* webpackChunkName: "Chat" */ "@/views/dashboard/Chat"),
         meta: {
           requiresAuth: true,
           isAdmin: false
@@ -274,7 +275,8 @@ const routes = [
       {
         path: "chat/:id/:type",
         name: "ChatDetail",
-        component: Chat,
+        component: () =>
+          import(/* webpackChunkName: "Chat" */ "@/views/dashboard/Chat"),
         meta: {
           requiresAuth: true,
           isAdmin: false
@@ -283,7 +285,10 @@ const routes = [
       {
         path: "product-pricing",
         name: "ProductPricing",
-        component: ProductPricing,
+        component: () =>
+          import(
+            /* webpackChunkName: "ProductPricing" */ "@/views/dashboard/ProductPricing"
+          ),
         meta: {
           requiresAuth: true,
           isAdmin: false
@@ -292,7 +297,10 @@ const routes = [
       {
         path: "personality-test",
         name: "PersonalityTestJobseeker",
-        component: PersonalityTestJobseeker,
+        component: () =>
+          import(
+            /* webpackChunkName: "PersonalityTestJobseeker" */ "@/views/dashboard/PersonalityTest"
+          ),
         meta: {
           requiresAuth: true
         }
@@ -305,7 +313,8 @@ const routes = [
   },
   {
     path: "/admin",
-    component: AdminLayout,
+    component: () =>
+      import(/* webpackChunkName: "AdminLayout" */ "@/layouts/AdminLayout"),
     meta: {
       requiresAuth: true
     },
@@ -313,41 +322,58 @@ const routes = [
       {
         path: "dashboard",
         name: "AdminDashboard",
-        component: AdminDashboard
+        component: () =>
+          import(
+            /* webpackChunkName: "AdminDashboard" */ "@/views/admin/Dashboard"
+          )
       },
       {
         path: "company-management",
         name: "AdminCompanyManagement",
-        component: AdminCompanyManagement
+        component: () =>
+          import(
+            /* webpackChunkName: "CompanyManagement" */ "@/views/admin/CompanyManagement"
+          )
       },
       {
         path: "company-management/:id",
         name: "AdminCompanyManagementUser",
-        component: AdminCompanyManagementUser,
-        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "CompanyManagementUser" */ "@/views/admin/CompanyManagementUser"
+          ),
+        props: true
       },
       {
         path: "jobseeker-management",
         name: "AdminJobseekerManagement",
-        component: AdminJobseekerManagement
+        component: () =>
+          import(
+            /* webpackChunkName: "JobseekerManagement" */ "@/views/admin/JobseekerManagement"
+          )
       },
       {
         path: "jobseeker-management/:id",
         name: "AdminJobseekerManagementUser",
-        component: AdminJobseekerManagementUser,
-        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "JobseekerManagementUser" */ "@/views/admin/JobseekerManagementUser"
+          ),
+        props: true
       },
       {
         path: "cms",
         name: "AdminCMS",
-        component: AdminCMS
+        component: () =>
+          import(/* webpackChunkName: "CMS" */ "@/views/admin/CMS")
       }
     ]
   },
   {
     path: "/company-dashboard/settings",
     name: "CompanySettings",
-    component: CompanySettings,
+    component: () =>
+      import(/* webpackChunkName: "Settings" */ "@/views/company/Settings"),
     props: true,
     meta: {
       requiresAuth: true,
@@ -356,7 +382,8 @@ const routes = [
   },
   {
     path: "/company-dashboard",
-    component: CompanyLayout,
+    component: () =>
+      import(/* webpackChunkName: "CompanyLayout" */ "@/layouts/CompanyLayout"),
     meta: {
       requiresAuth: true,
       requiresCompany: true
@@ -366,7 +393,8 @@ const routes = [
       {
         path: "",
         name: "CompanySearch",
-        component: CompanySearch,
+        component: () =>
+          import(/* webpackChunkName: "Search" */ "@/views/company/Search"),
         meta: {
           requiresAuth: true,
           requiresCompany: true
@@ -375,7 +403,10 @@ const routes = [
       {
         path: "selection-management",
         name: "CompanySelectionManagement",
-        component: CompanySelectionManagement,
+        component: () =>
+          import(
+            /* webpackChunkName: "SelectionManagement" */ "@/views/company/SelectionManagement"
+          ),
         props: true,
         meta: {
           requiresAuth: true,
@@ -385,7 +416,8 @@ const routes = [
       {
         path: "messages",
         name: "CompanyMessages",
-        component: CompanyMessages,
+        component: () =>
+          import(/* webpackChunkName: "Messages" */ "@/views/company/Messages"),
         props: true,
         meta: {
           requiresAuth: true,
@@ -395,7 +427,10 @@ const routes = [
       {
         path: "message-templates",
         name: "CompanyMessageTemplates",
-        component: CompanyMessageTemplates,
+        component: () =>
+          import(
+            /* webpackChunkName: "MessageTemplates" */ "@/views/company/MessageTemplates"
+          ),
         props: true,
         meta: {
           requiresAuth: true,
@@ -405,7 +440,10 @@ const routes = [
       {
         path: "team-management",
         name: "CompanyTeamManagement",
-        component: CompanyTeamManagement,
+        component: () =>
+          import(
+            /* webpackChunkName: "TeamManagement" */ "@/views/company/TeamManagement"
+          ),
         props: true,
         meta: {
           requiresAuth: true,
@@ -415,7 +453,10 @@ const routes = [
       {
         path: "profile",
         name: "CompanyPublicProfile",
-        component: CompanyPublicProfile,
+        component: () =>
+          import(
+            /* webpackChunkName: "PublicProfile" */ "@/views/company/PublicProfile"
+          ),
         meta: {
           requiresAuth: true,
           requiresCompany: true
@@ -424,7 +465,10 @@ const routes = [
       {
         path: "user/:id",
         name: "CompanyUserOverview",
-        component: CompanyUserOverview,
+        component: () =>
+          import(
+            /* webpackChunkName: "UserOverview" */ "@/views/company/UserOverview"
+          ),
         props: true,
         meta: {
           requiresAuth: true,
@@ -435,7 +479,10 @@ const routes = [
       {
         path: "packages",
         name: "CompanyPackagesPricing",
-        component: CompanyPackagesPricing,
+        component: () =>
+          import(
+            /* webpackChunkName: "PackagesPricing" */ "@/views/company/PackagesPricing"
+          ),
         props: true,
         meta: {
           requiresAuth: true,
@@ -447,7 +494,8 @@ const routes = [
   {
     path: "/protected",
     name: "Protected",
-    component: Protected,
+    component: () =>
+      import(/* webpackChunkName: "Protected" */ "@/views/Protected"),
     meta: {
       requiresAuth: true,
       isAdmin: true
@@ -503,11 +551,11 @@ router.beforeEach(async (to, from, next) => {
   const isAuth = store.getters["auth/authenticated"];
   const user = store.getters["user/user"];
 
-  // if(user.role == "Admin") {
+  // if(user.role === "Admin") {
   //   router.replace({ name: "AdminDashboard" });
   // }
 
-  if (to.name == "Logout") {
+  if (to.name === "Logout") {
     store.dispatch("auth/logout").finally(() => {
       store.commit("chat/CLEAR_SINGLE_CONVERSATION");
       router.replace({ name: "Home" });
@@ -515,7 +563,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.meta.requiresAuth && isAuth && !user.email_verified_at) {
-    if (to.name != "RegisterVerifyEmail") {
+    if (to.name !== "RegisterVerifyEmail") {
       return router.replace({ name: "RegisterVerifyEmail" });
     }
   }
@@ -528,15 +576,15 @@ router.beforeEach(async (to, from, next) => {
     return router.replace(getDashboardRoute());
   }
 
-  if (to.name == "Home" && isAuth) {
+  if (to.name === "Home" && isAuth) {
     return router.replace(getDashboardRoute());
   }
 
   if (
     (to.meta.requiresCompany &&
-      user.role != "Employer" &&
-      user.role != "Employee") ||
-    (to.meta.requiresUser && user.role != "Jobseeker")
+      user.role !== "Employer" &&
+      user.role !== "Employee") ||
+    (to.meta.requiresUser && user.role !== "Jobseeker")
   ) {
     return next({ name: "Home" });
   }
@@ -549,9 +597,9 @@ router.beforeEach(async (to, from, next) => {
   ) {
     const userRole = store.getters["user/user"].role;
 
-    if (userRole == "Jobseeker") {
+    if (userRole === "Jobseeker") {
       router.replace({ name: "ManualOnboarding" });
-    } else if (userRole == "Employer") {
+    } else if (userRole === "Employer") {
       router.replace({ name: "ManualOnboardingCompany" });
     } else {
       console.log("Err: Onboarding error for unsupported role.");
