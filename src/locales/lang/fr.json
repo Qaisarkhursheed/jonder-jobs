@@ -586,5 +586,6 @@
     "questionChoice3": "Ni en accord ni en désaccord",
     "questionChoice4": "Plutot en accord",
     "questionChoice5": "Fortement en accord"
-  }
+  },
+  "user": "Usager"
 }

@@ -30,7 +30,13 @@ export default {
   },
   
   created() {
-    store.dispatch("admin/cmsFetchLists");
+    },
+  beforeRouteEnter(to, from, next) {
+    store
+      .dispatch("admin/cmsFetchLists")
+      .then(() => {
+          next();
+      });
   },
 };
 </script>

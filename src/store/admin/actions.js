@@ -59,4 +59,22 @@ export default {
       });
   },
 
+  fetchCompanies({ commit }, params) {
+    return axios
+      .get("/copmanies", { params })
+      .then(res => {
+        commit(`SET_COMPANIES`, res.data.data);
+        commit(`SET_COMPANIES_TOTAL`, res.data.meta.total);
+      })
+  },
+
+  fetchJobseekers({ commit }, params) {
+    return axios
+      .get("/users", { params })
+      .then(res => {
+        commit(`SET_JOBSEEKERS`, res.data.data);
+        commit(`SET_JOBSEEKERS_TOTAL`, res.data.meta.total);
+      })
+  }
+
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="admin-dashboard">
-    <PageHeader title="Dashboard" />
+    <PageHeader :title="$t('dashboard')" />
   </div>
 </template>
 

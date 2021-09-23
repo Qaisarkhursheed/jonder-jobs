@@ -26,7 +26,7 @@
 
         <v-list-item-content>
           <v-list-item-title>
-            {{ item.title }}
+            {{ $t(item.title) }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -64,18 +64,18 @@ export default {
     return {
       items: [
         {
-          title: "Dashboard",
+          title: "dashboard",
           name: "AdminDashboard",
           icon: "mdi-chart-bar-stacked"
         },
         {
-          title: "Unternehmen",
-          name: "AdminCompanies",
+          title: "company",
+          name: "AdminCompanyManagement",
           icon: "mdi-office-building-outline"
         },
         {
-          title: "Nutzer",
-          name: "AdminUsers",
+          title: "user",
+          name: "AdminJobseekerManagement",
           icon: "mdi-account-group-outline"
         },
         {

@@ -5,7 +5,9 @@
       class="admin-wrap" 
       fluid>
         <div class="pa-5">
-          <router-view></router-view>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
         </div>
     </v-container>
   </div>
@@ -31,5 +33,17 @@ export default {
   padding-left: 256px;
   padding-top: 20px;
   background: #f7f7f8;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 </style>
