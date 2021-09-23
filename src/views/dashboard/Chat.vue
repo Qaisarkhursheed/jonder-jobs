@@ -124,33 +124,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.chat-holder {
-  overflow: hidden;
-}
-
-.overflow-list {
-  overflow: auto;
-}
-
-.dashboard-holder {
-  position: relative;
-}
-
-.short-message {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.message-row {
-  border-bottom: 1px solid $light-grey;
-  font-size: 14px;
-  color: $dark-grey;
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-</style>

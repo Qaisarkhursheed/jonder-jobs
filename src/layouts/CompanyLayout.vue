@@ -49,10 +49,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.main-panel-wrap {
-  overflow: auto;
-  padding-bottom: 80px;
-}
-</style>

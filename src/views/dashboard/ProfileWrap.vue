@@ -18,26 +18,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.profile-holder {
-  .card-link {
-    overflow: hidden;
-  }
-
-  .card-link-btn {
-    display: inline-block;
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    background: rgba(2, 83, 179, 0.1);
-    border-radius: 50% !important;
-    transform: rotate(43deg);
-    overflow: hidden;
-  }
-}
-</style>
