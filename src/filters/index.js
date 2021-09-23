@@ -24,7 +24,8 @@ Vue.filter("initials", user => {
     return user.company.substr(0, 2);
   }
 
-  return user.first_name.charAt(0) + user.last_name.charAt(0);
+  const initials = user.first_name.charAt(0) + user.last_name.charAt(0);
+  return initials.toUpperCase();
 });
 
 Vue.filter("fullname", user => {

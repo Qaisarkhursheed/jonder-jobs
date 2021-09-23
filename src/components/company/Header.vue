@@ -15,7 +15,7 @@
             <v-avatar color="primary" size="38" v-on="on">
               <v-img v-if="user.profile_img" :src="user.profile_img"></v-img>
               <span v-else class="white--text">
-                {{ $store.getters["user/getUserInitials"] }}
+                {{ $store.getters["user/user"] | initials }}
               </span>
             </v-avatar>
           </template>

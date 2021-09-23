@@ -101,9 +101,17 @@ export default {
       "conversationDetails"
     ]),
     isChatEmpty() {
+      const selectedConversationId = this.$store.getters[
+        "chat/conversationDetails"
+      ].id;
+
       return (
         this.conversations &&
-        this.conversations.filter(c => c.conversation.last_message).length == 0
+        this.conversations.filter(
+          c =>
+            c.conversation.last_message ||
+            c.conversation.id == selectedConversationId
+        ).length == 0
       );
     }
   },
