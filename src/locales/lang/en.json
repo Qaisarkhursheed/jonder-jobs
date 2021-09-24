@@ -607,5 +607,6 @@
     "questionChoice4": "Moderately Accurate",
     "questionChoice5": "Very Accurate"
   },
-  "user": "User"
+  "user": "User",
+  "areYouSureCancelSubscription": "Are you sure that you want to cancel subscription?"
 }

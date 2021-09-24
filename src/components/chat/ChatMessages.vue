@@ -3,6 +3,7 @@
     flat
     class="messages-holder full-h d-flex flex-column"
     style="border-radius: 10px"
+    v-if="conversationDetails"
   >
     <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
       <v-list-item class="grow">
@@ -202,6 +203,7 @@ export default {
   }),
   mounted() {
     this.scrollToBottom();
+    console.log('this.conversationDetails', this.conversationDetails);
   },
   methods: {
     ...mapActions("chat", ["sendMessage", "getSingleConversation"]),

@@ -21,12 +21,68 @@
       >
         {{ $t("changePackage") }}
       </span>
-      <span
+      <v-dialog
+        v-model="dialog"
         class="payment-action"
-        @click="$store.dispatch('user/cancelSubscription', plan.id)"
+        width="500"
+        overlay-color="#0253B3"
+        overlay-opacity="0.3"
       >
-        {{ $t("cancelSubscription") }}
-      </span>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            plain
+            color="inherit"
+            class="font-weight-medium main-text"
+            v-bind="attrs"
+            v-ripple="false"
+            v-on="on"
+          >
+            {{ $t("cancelSubscription") }}
+          </v-btn>
+        </template>
+
+        <v-card class="pa-7" style="border-radius: 16px;">
+          <h1 class="mb-4 text-center" style="font-size: 28px;">
+            {{ $t("areYouSure") }}
+          </h1>
+
+          <v-form
+            ref="form"
+            action="#"
+            @submit.prevent="submit"
+            v-model="isValid"
+          >
+            <p class="text-center">
+              {{ $t("areYouSureCancelSubscription") }}
+            </p>
+
+            <ResponseAlert :response="formResponse"></ResponseAlert>
+
+            <div class="text-center mt-3">
+              <v-btn
+                height="48"
+                class="font-weight-medium "
+                @click="
+                  dialog = false;
+                  $refs.form.reset();
+                "
+              >
+                {{ $t("cancelOption") }}
+              </v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                height="48"
+                class="ml-3 font-weight-medium "
+                :disabled="!isValid"
+              >
+                {{ $t("confirmOption") }}
+              </v-btn>
+            </div>
+          </v-form>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>
@@ -36,25 +92,38 @@ export default {
   name: "UserPlanDescription",
   props: {
     paymentInfo: {
-      type: Boolean,
+      type: Boolean
     },
     paymentAction: {
       type: Boolean,
-      default: false,
+      default: false
     },
     borderPlan: {
       type: Boolean,
-      default: false,
+      default: false
     },
     plan: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
+  data() {
+    return {
+      dialog: false,
+      isValid: false,
+      formResponse: {}
+    };
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch("user/cancelSubscription", this.plan.id);
+      this.dialog = false;
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .plan-description {
   order: 1;
   white-space: normal;
@@ -81,6 +150,26 @@ export default {
       justify-content: space-between;
       > span {
         cursor: pointer;
+      }
+      .main-text {
+        align-items: center;
+        color: #27aae1 !important;
+        cursor: default;
+        display: flex;
+        font-size: 11px;
+        font-weight: 600;
+        height: auto;
+        justify-content: flex-end;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: auto !important;
+        > .v-btn__content {
+          display: inline !important;
+          cursor: pointer !important;
+          opacity: 1 !important;
+          flex: none !important;
+          font-weight: 600 !important;
+        }
       }
     }
   }
