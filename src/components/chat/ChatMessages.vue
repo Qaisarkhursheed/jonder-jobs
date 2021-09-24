@@ -85,7 +85,17 @@
             <span>{{ msg.created_at | moment("ddd, DD/MM") }}</span>
           </div>
 
+          <!-- Meeting -->
+          <MeetingChatBox
+            v-if="msg.type == 'meeting'"
+            class="mx-auto mb-4"
+            style="max-width: 360px"
+            :meeting="JSON.parse(msg.body)"
+            :reciever="$store.getters['user/user'].role.toLowerCase()"
+          />
+
           <v-card
+            v-else
             flat
             class="message rounded-lg"
             :class="[
@@ -128,6 +138,7 @@
         </div>
       </v-card-text>
     </div>
+
     <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
       <v-file-input
         v-model="newFile"
@@ -151,14 +162,14 @@
         >{{ $t("message") }}
       </v-textarea>
 
+      <MeetingForm
+        v-if="$store.getters['user/user'].role == 'Employer'"
+        :jobseeker="conversationDetails.user"
+      />
+
       <MessageTemplatesPicker @submit="msg => send(msg)" />
 
-      <v-icon
-        :disabled="sending"
-        size="30"
-        @click="send(null)"
-        class="message-send-btn ml-2"
-      >
+      <v-icon :disabled="sending" size="30" @click="send(null)" class="ml-2">
         mdi-send-circle
       </v-icon>
     </v-card-actions>
@@ -168,9 +179,11 @@
 <script>
 import { mapActions } from "vuex";
 import MessageTemplatesPicker from "@/components/company/message-templates/MessageTemplatesPicker";
+import MeetingForm from "@/components/meetings/MeetingForm";
+import MeetingChatBox from "@/components/meetings/MeetingChatBox";
 
 export default {
-  components: { MessageTemplatesPicker },
+  components: { MessageTemplatesPicker, MeetingForm, MeetingChatBox },
   props: {
     messages: {
       type: Array,
@@ -335,12 +348,6 @@ export default {
   }
 }
 
-.message-send-btn {
-  &:hover {
-    color: #0253b3;
-  }
-}
-
 .message-type-new {
   position: relative;
   border-radius: 62px !important;
@@ -355,6 +362,12 @@ export default {
 
   .file-set {
     button {
+      color: #0253b3;
+    }
+  }
+
+  .v-icon {
+    &:hover {
       color: #0253b3;
     }
   }

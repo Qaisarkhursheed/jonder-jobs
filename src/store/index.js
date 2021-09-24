@@ -16,6 +16,7 @@ import northdata from "./northdata";
 import personalityTest from "./personalityTest";
 import google from "./google";
 import admin from "./admin";
+import meetings from "./meetings";
 
 Vue.use(Vuex);
 
@@ -35,7 +36,8 @@ export default createStore(Vuex.Store, {
     northdata,
     google,
     admin,
-    personalityTest
+    personalityTest,
+    meetings
   },
   state: {
     screenSize: null
