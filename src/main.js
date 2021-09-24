@@ -15,8 +15,13 @@ import axios from "axios";
 import "@/filters";
 
 require("./middleware");
-
-Vue.use(VueMoment);
+const moment = require("moment");
+require("moment/locale/fr");
+require("moment/locale/de");
+moment.locale(i18n.locale);
+Vue.use(VueMoment, {
+  moment
+});
 Vue.use(Vue2Filters);
 Vue.directive("mask", VueMaskDirective);
 Vue.directive("clearable-autocomplete", ClearableAutocomplete);
