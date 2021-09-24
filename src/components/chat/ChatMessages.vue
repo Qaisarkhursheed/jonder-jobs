@@ -139,7 +139,7 @@
       <v-textarea
         v-model="newMessage"
         style="width: 100%; border-radius: 30px"
-        label="Nachricht senden"
+        :label="$t('messageNow')"
         outlined
         solo
         flat
