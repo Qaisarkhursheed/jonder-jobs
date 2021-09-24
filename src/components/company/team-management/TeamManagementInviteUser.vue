@@ -43,7 +43,7 @@
           <v-text-field
             v-model="formData.email"
             dense
-            :placeholder="$t('emailplaceholder')"
+            :placeholder="$t('emailAddress')"
             :rules="[validations.required, validations.email]"
             type="email"
             outlined
