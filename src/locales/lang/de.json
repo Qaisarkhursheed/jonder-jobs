@@ -607,5 +607,6 @@
     "questionChoice4": "Zutreffend",
     "questionChoice5": "Sehr zutreffend"
   },
-  "user": "Nutzer"
+  "user": "Nutzer",
+  "areYouSureCancelSubscription": "Sind Sie sicher, dass Sie das Abonnement kündigen möchten?"
 }
