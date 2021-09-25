@@ -1,6 +1,9 @@
 {
   "accept": "Akzeptieren",
   "decline": "Ablehnen",
+  "file": "Datei",
+  "meeting": "Besprechung",
+  "meetings": "Besprechungen",
   "meetingProposeDate": "Zeit & Datum vorschlagen",
   "meetingProposeDiffDate": "Andere Uhrzeit & Datum vorschlagen",
   "meetingRequest": "Besprechungsanfrage",
