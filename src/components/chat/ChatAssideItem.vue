@@ -116,7 +116,11 @@ export default {
       }
 
       if (conversation.conversation.last_message.type == "upload") {
-        return "File";
+        return this.$t("file");
+      }
+
+      if (conversation.conversation.last_message.type == "meeting") {
+        return this.$t("meeting");
       }
 
       return conversation.conversation.last_message

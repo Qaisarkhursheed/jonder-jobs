@@ -41,7 +41,7 @@
         target="_blank"
         rel="noopener noreferrer"
         style="font-weight: 600; text-decoration: none"
-        >{{ meetingLocal.link }}
+        >{{ visibleLink }}
       </a>
     </div>
 
@@ -107,6 +107,16 @@ export default {
   },
 
   computed: {
+    visibleLink() {
+      if (this.meetingLocal.link.length > 50) {
+        return this.meetingLocal.link.replace(
+          "jonder-staging.plutuswork.com",
+          "jonder.jobs"
+        );
+      }
+
+      return this.meetingLocal.link;
+    },
     status() {
       switch (this.meetingLocal.status) {
         case "pending":

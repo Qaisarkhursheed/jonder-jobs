@@ -1,6 +1,9 @@
 {
   "accept": "Accept",
   "decline": "Decline",
+  "file": "File",
+  "meeting": "Meeting",
+  "meetings": "Meetings",
   "meetingProposeDate": "Propose time & date",
   "meetingProposeDiffDate": "Propose different time & date",
   "meetingRequest": "Meeting request",
