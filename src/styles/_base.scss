@@ -526,6 +526,9 @@ button {
     }
   }
 }
+.search-pagination .primary {
+  background: $primary-blue-dark !important;
+}
 
 .tooltip.ui {
   z-index: 300;

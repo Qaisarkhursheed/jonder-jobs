@@ -4,7 +4,7 @@
     <SearchSavedFilters @search="search" />
 
     <component :is="searchComponents[searchStatus]"
-      :results="searchResults" 
+      :results="searchResults"
     />
   </div>
 </template>
@@ -39,10 +39,18 @@ export default {
     }
   },
   beforeDestroy() {
-    store.commit('company/SET_SEARCH_RESULTS', []);
-    this.searchExecuted = false;
-    // this.searchStatus.current = 'default';
-    store.commit('company/SET_SEARCH_STATUS', 'default');
+    if (this.$route.name !== "CompanyUserOverview") {
+      console.log("erase user results serach");
+      store.commit('company/SET_SEARCH_RESULTS', []);
+      store.commit('company/SET_SEARCH_META', {
+        per_page: 6,
+        current_page: 1,
+        total: 0
+      });
+      this.searchExecuted = false;
+      // this.searchStatus.current = 'default';
+      store.commit('company/SET_SEARCH_STATUS', 'default');
+    }
   },
   methods: {
     search() {

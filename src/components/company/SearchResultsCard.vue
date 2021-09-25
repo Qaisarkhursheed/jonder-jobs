@@ -210,7 +210,6 @@ export default {
     },
     getMinMax() {
       try {
-        console.log(typeof this.candidate.monthly_salary);
         if (typeof this.candidate.monthly_salary === "string") {
           this.monthly_salary = JSON.parse(this.candidate.monthly_salary);
         } else if (
@@ -236,7 +235,6 @@ export default {
     }
   },
   mounted() {
-    console.log("this.candidatte", this.candidate);
     this.getMinMax();
   }
 };

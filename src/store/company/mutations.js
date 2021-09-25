@@ -45,7 +45,7 @@ export default {
     state.searchFilters = value;
   },
   SET_SEARCH_INPROGRESS(state, value) {
-    state.searchInProgress = value
+    state.searchInProgress = value;
   },
   SET_JOBSEEKER_NOTES(state, value) {
     state.jobseekerNotes = value;

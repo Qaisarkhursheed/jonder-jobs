@@ -8,7 +8,7 @@
       </v-col>
       <v-col
         cols="col"
-        class="main-panel-wrap pt-7 px-3 px-md-7 full-h bg-light-gray"
+        class="main-panel-wrap pt-7 px-3 px-md-7 bg-light-gray"
         :class="{ 'mobile-layout': !mobile }"
       >
         <router-view></router-view>

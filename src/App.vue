@@ -191,6 +191,7 @@ html {
 // end dashboard/Dashboard
 // Company Layout
 .main-panel-wrap {
+  height: calc(100% - 100px) !important;
   overflow: auto;
   padding-bottom: 80px;
 }
