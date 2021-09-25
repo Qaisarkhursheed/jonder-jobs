@@ -91,6 +91,9 @@ export default {
       return Math.round(this.searchMeta.total / this.searchMeta.per_page);
     }
   },
+  mounted() {
+    this.page = this.searchMeta.current_page;
+  },
   created() {
     this.$store
       .dispatch("company/slManagementGetAll")

@@ -131,7 +131,6 @@ export default {
       ...payload
     };
     commit("SET_SEARCH_INPROGRESS", true);
-
     return axios
       .post("/company/search/", obj)
       .then(res => {
@@ -167,6 +166,12 @@ export default {
       if (res.status === 200) {
         commit("SET_SEARCH_INPROGRESS", false);
         commit("SET_SEARCH_RESULTS", res.data.data);
+        commit("SET_SEARCH_META", {
+          current_page: res.data.meta.current_page,
+          per_page: res.data.meta.per_page,
+          total: res.data.meta.total,
+          searchInput: getters.searchMeta.searchInput
+        });
       }
     });
   },
