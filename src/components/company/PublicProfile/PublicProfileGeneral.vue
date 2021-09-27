@@ -37,6 +37,7 @@
           v-model="formData.company"
           :rules="[validations.required]"
           outlined
+          solo
         />
       </div>
 

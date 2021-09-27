@@ -75,6 +75,7 @@
             v-model="formData.first_name"
             :rules="[validations.required]"
             outlined
+            solo
             hide-details="auto"
           ></v-text-field>
         </v-col>
@@ -89,6 +90,7 @@
             v-model="formData.last_name"
             :rules="[validations.required]"
             outlined
+            solo
             hide-details="auto"
           ></v-text-field>
         </v-col>
@@ -103,6 +105,7 @@
             v-model="user.email"
             :rules="[validations.required]"
             disabled
+            solo
             outlined
             hide-details="auto"
           ></v-text-field>
@@ -633,6 +636,7 @@
           :rules="[validations.required, validations.min.string(6)]"
           type="password"
           outlined
+          solo
         ></v-text-field>
 
         <label class="profile-label">{{ $t("reEnterPassword") }}</label>
@@ -640,6 +644,7 @@
           v-model="passwordFormData.new_confirm_password"
           :rules="[validations.required]"
           type="password"
+          solo
           outlined
         ></v-text-field>
 
@@ -649,6 +654,7 @@
           :rules="[validations.required]"
           type="password"
           outlined
+          solo
         ></v-text-field>
 
         <!-- Response alert -->

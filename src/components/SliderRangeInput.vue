@@ -23,6 +23,7 @@
             :value="model[0]"
             readonly
             disabled
+            solo
             class="mt-0 pa-0 monthly-salary"
             hide-details
             single-line
@@ -34,6 +35,7 @@
         <template v-slot:append>
           <v-text-field
             :value="model[1]"
+            solo
             readonly
             disabled
             class="mt-0 pa-0 monthly-salary"

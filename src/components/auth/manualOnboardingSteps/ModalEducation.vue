@@ -62,6 +62,7 @@
                   :rules="[validations.required]"
                   type="text"
                   outlined
+                  solo
                   :placeholder="$t('enter')"
                   background-color="#fff"
                 >

@@ -73,6 +73,7 @@
         :rules="[validations.required]"
         type="number"
         outlined
+        solo
       >
       </v-text-field>
       <!-- Implement date picker component -->
