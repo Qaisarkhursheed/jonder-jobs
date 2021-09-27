@@ -11,6 +11,7 @@
           :rules="[validations.required]"
           type="email"
           outlined
+          solo
         />
       </div>
 
@@ -23,6 +24,7 @@
           v-model="form.company_phone"
           :rules="[validations.required, validations.phone]"
           outlined
+          solo
         />
       </div>
 
@@ -54,7 +56,7 @@
         <label class="section-label">
           {{ $t("webUrl") }}
         </label>
-        <v-text-field v-model="form.web_url" outlined> </v-text-field>
+        <v-text-field v-model="form.web_url" outlined solo> </v-text-field>
       </div>
 
       <!-- Social links -->
@@ -67,7 +69,7 @@
         <label class="section-label">
           {{ item }}
         </label>
-        <v-text-field v-model="form[item]" outlined hide-details />
+        <v-text-field v-model="form[item]" outlined hide-details solo />
       </div>
     </v-form>
 

@@ -40,6 +40,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.id"
+                      solo
                       disabled
                       label="ID"
                     ></v-text-field>
@@ -49,6 +50,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.en"
+                      solo
                       label="En"
                     ></v-text-field>
                   </v-col>
@@ -57,6 +59,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.de"
+                      solo
                       label="De"
                     ></v-text-field>
                   </v-col>
@@ -65,6 +68,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.fr"
+                      solo
                       label="Fr"
                     ></v-text-field>
                   </v-col>
@@ -252,7 +256,7 @@ export default {
         store.dispatch("admin/cmsUpdateListItem", this.editedItem);
 
       } else {
-        store.dispatch("admin/cmsAddListItem", 
+        store.dispatch("admin/cmsAddListItem",
           { ...this.editedItem, type: this.type }
         );
       }

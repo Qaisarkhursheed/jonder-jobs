@@ -35,6 +35,7 @@
           :rules="[validations.required, validations.email]"
           type="email"
           outlined
+          solo
           background-color="white"
           v-model="formData.email"
         ></v-text-field>
@@ -45,6 +46,7 @@
           :rules="[validations.required]"
           type="password"
           outlined
+          solo
           hide-details="auto"
           background-color="white"
           v-model="formData.password"

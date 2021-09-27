@@ -59,6 +59,7 @@
           :rules="[validations.required]"
           type="number"
           outlined
+          solo
         />
       </div>
     </v-form>

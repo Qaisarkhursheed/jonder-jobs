@@ -34,6 +34,7 @@
             type="text"
             outlined
             flat
+            solo
             background-color="white"
           ></v-text-field>
 
@@ -48,6 +49,7 @@
             type="email"
             outlined
             flat
+            solo
             background-color="white"
           ></v-text-field>
 

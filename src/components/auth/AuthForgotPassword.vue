@@ -22,6 +22,7 @@
         type="email"
         outlined
         background-color="white"
+        solo
         v-model="formData.email"
       ></v-text-field>
 
