@@ -27,7 +27,7 @@
       <!-- Left nav -->
       <v-col class="col-12 col-sm-4 col-xl-3">
         <nav class="dashboard-navigation">
-          <div class="settings-nav">
+          <v-card flat class="settings-nav" style="margin-top: 12px">
             <div class="settings-title">
               {{ $t("profileSettings") }}
             </div>
@@ -45,7 +45,7 @@
                 {{ $t("changePassword") }}
               </div>
             </div>
-          </div>
+          </v-card>
         </nav>
       </v-col>
 
@@ -400,3 +400,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.company-settings {
+  .profile-section {
+    padding: 40px;
+  }
+}
+</style>
