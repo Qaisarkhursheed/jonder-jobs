@@ -21,20 +21,22 @@
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required]"
+         item-value="id"
+        :item-text="$i18n.locale"
         outlined
         flat
         hide-no-data
         append-icon="mdi-chevron-down"
         :placeholder="$t('choose')"
       >
-        <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
         <template v-slot:item="{ item }">
           <v-list-item-content>
             <v-list-item-title>
               {{ $t(item) }}
             </v-list-item-title>
           </v-list-item-content>
-        </template>
+        </template> -->
       </v-autocomplete>
 
       <label class="profile-label">
@@ -45,19 +47,21 @@
         class="mt-1"
         v-model="value.company_employees"
         :items="types.EMPLOYEE_NUMBER"
+        item-value="id"
+        :item-text="$i18n.locale"
         :rules="[validations.required]"
         :placeholder="$t('choose')"
         append-icon="mdi-chevron-down"
         outlined
       >
-        <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
         <template v-slot:item="{ item }">
           <v-list-item-content>
             <v-list-item-title>
               {{ $t(item) }}
             </v-list-item-title>
           </v-list-item-content>
-        </template>
+        </template> -->
       </v-select>
 
       <label class="profile-label">

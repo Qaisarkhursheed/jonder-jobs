@@ -144,6 +144,14 @@ const routes = [
     }
   },
   {
+    path: "/meet/:meet_id",
+    name: "Meet",
+    component: () => import("@/views/Meet"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/dashboard",
     component: () =>
       import(/* webpackChunkName: "Dashboard" */ "@/views/Dashboard"),
@@ -569,7 +577,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.meta.requiresAuth && !isAuth) {
-    return next({ name: "Login", params: { nextUrl: to.fullPath } });
+    return next({ name: "Login", query: { redirect: to.fullPath } });
   }
 
   if (to.meta.guest && isAuth) {

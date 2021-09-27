@@ -114,12 +114,7 @@
         <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content" v-if="user.branche">
-            <span
-              v-for="(branche, index) in user.branche.split(',')"
-              :key="index"
-            >
-              {{ branche }}<span class="zarez">,</span>
-            </span>
+            {{getBranche}}
           </div>
         </div>
 
@@ -156,7 +151,7 @@
 </template>
 
 <script>
-import filter from "lodash/filter";
+import { filter, map } from "lodash/filter";
 import types from "@/types";
 
 export default {
@@ -191,6 +186,13 @@ export default {
     },
     getSelectionOptions() {
       return types.SELECTION_MANAGEMENT_STATUS;
+    },
+    getBranche() {
+      const stringToArray = map(this.user.branche, item => {
+        let el =  find(types.JOB_BRANCHE, { id: parseInt(item) })
+        return el[this.$i18n.locale];
+      });
+      return stringToArray.join();
     }
   },
 

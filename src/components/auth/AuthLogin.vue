@@ -152,7 +152,13 @@ export default {
         .then(() => {
           localStorage.removeItem("user-email");
           localStorage.removeItem("verificationTime");
-          this.$router.replace({ name: "Home" });
+
+          if (this.$route.query.redirect) {
+            this.$router.replace(this.$route.query.redirect);
+          } else {
+            this.$router.replace({ name: "Home" });
+          }
+
           this.$store.dispatch("user/fetchPlans");
         })
         .catch(err => {

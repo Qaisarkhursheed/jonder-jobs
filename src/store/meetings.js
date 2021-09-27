@@ -4,16 +4,21 @@ export default {
   namespaced: true,
 
   state: {
+    loadingFetch: false,
     loadingCreate: false,
     loadingUpdate: false
   },
 
   getters: {
+    loadingFetch: state => state.loadingFetch,
     loadingCreate: state => state.loadingCreate,
     loadingUpdate: state => state.loadingUpdate
   },
 
   mutations: {
+    SET_LOADING_FETCH: (state, value) => {
+      state.loadingFetch = value;
+    },
     SET_LOADING_CREATE: (state, value) => {
       state.loadingCreate = value;
     },
@@ -23,6 +28,18 @@ export default {
   },
 
   actions: {
+    async fetchByMeetId({ commit }, id) {
+      try {
+        commit("SET_LOADING_FETCH", true);
+        const resp = await axios.get("/meetings/meet/" + id);
+        return resp;
+      } catch (err) {
+        return Promise.reject(err.response);
+      } finally {
+        commit("SET_LOADING_FETCH", false);
+      }
+    },
+
     async create({ commit }, data) {
       try {
         commit("SET_LOADING_CREATE", true);

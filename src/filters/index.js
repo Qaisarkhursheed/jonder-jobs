@@ -28,10 +28,14 @@ Vue.filter("initials", user => {
   return initials.toUpperCase();
 });
 
-Vue.filter("fullname", user => {
+Vue.filter("fullname", (user, considerCompany = false) => {
   if (!user) {
     return "";
   }
 
-  return user.company || `${user.first_name} ${user.last_name}`;
+  if (considerCompany && user.company) {
+    return user.company;
+  }
+
+  return `${user.first_name} ${user.last_name}`;
 });

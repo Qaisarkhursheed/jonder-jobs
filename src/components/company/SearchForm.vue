@@ -21,7 +21,7 @@
             append-icon="mdi-chevron-down"
           ></v-autocomplete>
         </v-col>
-
+        
         <v-col cols="12" md="5">
           <label class="section-label">
             {{ $t("employementType") }}
@@ -29,22 +29,26 @@
           <v-select
             v-model="formFields.employment_type"
             :items="types.EMPLOYEMENT_TYPE"
+            item-value="id"
+            :item-text="$i18n.locale"
             hide-details
             clearable
             :placeholder="$t('employementType')"
             outlined
             append-icon="mdi-chevron-down"
           >
-            <template v-slot:selection="{ item }">
-              {{ $t(item.value) }}</template
+            <!-- <template v-slot:selection="{ item }">
+              {{ $t(item[$i18n.locale]) }}</template
             >
             <template v-slot:item="{ item }">
               <v-list-item-content>
                 <v-list-item-title>
                   {{ $t(item.value) }}
+                  {{ item[$i18n.locale] }}
+                  {{ item }}
                 </v-list-item-title>
               </v-list-item-content>
-            </template>
+            </template> -->
           </v-select>
         </v-col>
       </v-row>
@@ -58,6 +62,8 @@
             <v-autocomplete
               v-model="formFields.branche"
               :items="types.JOB_BRANCHE"
+              :item-text="$i18n.locale"
+              item-value="id"
               cache-items
               clearable
               outlined
@@ -67,14 +73,14 @@
               :placeholder="$t('enterIndustry')"
               append-icon="mdi-chevron-down"
             >
-              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+              <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
               <template v-slot:item="{ item }">
                 <v-list-item-content>
                   <v-list-item-title>
                     {{ $t(item) }}
                   </v-list-item-title>
                 </v-list-item-content>
-              </template>
+              </template> -->
             </v-autocomplete>
           </v-col>
 
@@ -175,6 +181,8 @@
             <v-select
               v-model="formFields.work_experience"
               :items="types.WORK_EXPERIENCE"
+              :item-text="$i18n.locale"
+              item-value="id"
               :hide-details="true"
               clearable
               :placeholder="$t('workExperience')"

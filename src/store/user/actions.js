@@ -52,8 +52,8 @@ export default {
 
   async postOnboardingUser({ commit, state }, data) {
     console.log(data);
-    data.branche = data.branche.join();
-    data.looking_for_employment_type = data.looking_for_employment_type.join();
+    //data.branche = data.branche.join();
+    //data.looking_for_employment_type = data.looking_for_employment_type.join();
     console.log(data);
     let formData = serialize(data, { booleansAsIntegers: true });
     formData.append("_method", "PATCH");
