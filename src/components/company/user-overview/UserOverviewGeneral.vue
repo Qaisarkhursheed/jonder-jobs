@@ -151,7 +151,7 @@
 </template>
 
 <script>
-import { filter, map } from "lodash/filter";
+import { filter, map, find } from "lodash";
 import types from "@/types";
 
 export default {

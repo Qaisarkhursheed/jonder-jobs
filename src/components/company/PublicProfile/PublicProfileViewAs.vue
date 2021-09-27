@@ -35,7 +35,7 @@
             {{ $t("employees") }}
           </label>
           <div class="section-value">
-            {{ user.company_employees }}
+            {{ getEmployeesNumber }}
           </div>
         </v-col>
         <v-col cols="5">
@@ -43,7 +43,7 @@
             {{ $t("branch") }}
           </label>
           <div class="section-value">
-            {{ user.branche }}
+            {{ getBranche }}
           </div>
         </v-col>
       </v-row>
@@ -76,7 +76,9 @@
           <label class="section-label">
             {{ $t("currentIndustry") }}
           </label>
-          <div class="section-value">{{ user.branche }}</div>
+          <div class="section-value">
+            {{ user.branche }}
+          </div>
         </v-col>
         <v-col cols="5">
           <label class="section-label">
@@ -214,6 +216,8 @@
 </template>
 
 <script>
+import types from "@/types";
+import { find } from "lodash";
 import NorthDataWidget from "@/components/company/NorthDataWidget";
 
 export default {
@@ -260,6 +264,19 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
+    },
+    getBranche() {
+      let obj = find(types.JOB_BRANCHE, (el) => {
+        return el.id == parseInt(this.user.branche);
+      });
+
+      return obj[this.$i18n.locale];
+    },
+    getEmployeesNumber() {
+      let obj = find(types.EMPLOYEE_NUMBER, (el) => {
+        return el.id == parseInt(this.user.company_employees);
+      });
+      return obj[this.$i18n.locale];
     }
   }
 };
