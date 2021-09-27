@@ -29,7 +29,7 @@
         <p class="login-by-email text-medium">
           {{ $t("loginByEmail") }}
         </p>
-        <label class="profile-label">E-mail</label>
+        <label class="profile-label">{{ $t("email") }}</label>
         <v-text-field
           dense
           :rules="[validations.required, validations.email]"
@@ -40,7 +40,7 @@
           v-model="formData.email"
         ></v-text-field>
 
-        <label class="profile-label">Passwort</label>
+        <label class="profile-label">{{ $t("password") }}</label>
         <v-text-field
           dense
           :rules="[validations.required]"
