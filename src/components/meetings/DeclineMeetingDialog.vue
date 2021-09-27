@@ -15,9 +15,9 @@
       </div>
     </template>
 
-    <v-card class="pa-7">
+    <v-card>
       <!-- Heading -->
-      <h1 class="mb-4" style="font-size: 28px;">
+      <h1 class="mb-4">
         {{ $t("meetingDecline") }}
       </h1>
 

@@ -18,8 +18,8 @@
         </v-btn>
       </template>
 
-      <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4 text-center" style="font-size: 28px;">
+      <v-card>
+        <h1 class="mb-4 text-center">
           {{ $t("areYouSure") }}
         </h1>
 
@@ -37,6 +37,7 @@
 
           <div class="text-center mt-3">
             <v-btn
+              text
               height="48"
               class="font-weight-medium "
               @click="

@@ -17,13 +17,10 @@
     </template>
 
     <v-card
-      class="message-templates-picker pa-7"
+      class="message-templates-picker"
       v-if="!$store.getters['messageTemplates/loadingFetch']"
     >
-      <h1
-        class="pb-4 mb-4"
-        style="font-size: 28px; border-bottom: 1px solid #E9E9E9"
-      >
+      <h1 class="pb-4 mb-4" style="border-bottom: 1px solid #E9E9E9">
         {{ $t("messageTemplates") }}
       </h1>
 
@@ -83,7 +80,7 @@
             <ResponseAlert :response="formResponse"></ResponseAlert>
 
             <div class="d-flex justify-end">
-              <v-btn height="48" @click="close">
+              <v-btn text height="48" @click="close">
                 {{ $t("cancel") }}
               </v-btn>
 

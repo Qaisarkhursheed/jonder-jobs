@@ -2,7 +2,7 @@
   <v-card
     flat
     class="messages-holder full-h d-flex flex-column"
-    style="background: white; border-radius: 10px"
+    style="background: white;"
   >
     <v-row
       class="pt-8 px-5 pb-4 mx-0"

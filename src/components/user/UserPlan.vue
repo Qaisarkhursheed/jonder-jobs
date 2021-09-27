@@ -1,5 +1,5 @@
 <template>
-  <div class="user-plan">
+  <v-card flat class="user-plan">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -22,7 +22,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -53,10 +53,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.user-plan {
-  background-color: #fff;
-  border-radius: 18px;
-  padding: 40px;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -25,21 +25,17 @@
     <v-row>
       <!-- Sidebar -->
       <v-col cols="auto">
-        <v-card flat class="public-profile-sidebar">
-          <v-tabs
-            class="px-5"
-            slider-color="#fff"
-            vertical
-            v-model="tabs.active"
-          >
+        <v-card flat class="public-profile-sidebar pa-0">
+          <v-tabs slider-color="#fff" vertical v-model="tabs.active">
             <v-tab
               class="pl-1 py-5"
+              style="height: unset"
               v-for="tab in tabs.options"
               :key="tab"
               :disabled="viewAs"
               slider-color="#0253B3"
             >
-              <span>{{ $t(tab) }}</span>
+              <span class="pl-3">{{ $t(tab) }}</span>
               <span class="arrow">&gt;</span>
             </v-tab>
           </v-tabs>
@@ -48,7 +44,7 @@
 
       <!-- Profile -->
       <v-col cols="col">
-        <v-card flat class="py-8 px-5 px-md-10">
+        <v-card flat class="">
           <v-tabs-items v-model="tabs.active">
             <v-tab-item
               :transition="false"

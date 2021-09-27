@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="packages-plan pl-8 pr-8 pt-14 pb-14">
+  <v-card flat class="packages-plan">
     <div class="price d-flex align-end">
       <div>{{ plan.price }}&euro;</div>
       <div>/{{ $t("month") }}</div>
@@ -29,13 +29,17 @@
     <div class="action mt-6">
       <v-btn
         :color="
-          !userPlan.length || userPlan[0].id !== plan.id ? 'primary' : 'grey lighten-3'
+          !userPlan.length || userPlan[0].id !== plan.id
+            ? 'primary'
+            : 'grey lighten-3'
         "
         height="48"
         width="70%"
         elevation="0"
         class="font-weight-medium full-w"
-        @click="!userPlan.length || userPlan[0].id !== plan.id ? getTokenId() : null"
+        @click="
+          !userPlan.length || userPlan[0].id !== plan.id ? getTokenId() : null
+        "
       >
         {{
           !userPlan.length || userPlan[0].id !== plan.id

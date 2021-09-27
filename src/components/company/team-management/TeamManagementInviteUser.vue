@@ -12,8 +12,8 @@
         </v-btn>
       </template>
 
-      <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4" style="font-size: 28px;">
+      <v-card>
+        <h1 class="mb-4">
           {{ $t("inviteUser") }}
         </h1>
 
@@ -57,6 +57,7 @@
 
           <div class="text-right mt-3">
             <v-btn
+              text
               height="48"
               @click="
                 dialog = false;

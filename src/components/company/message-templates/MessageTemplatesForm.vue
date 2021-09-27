@@ -17,8 +17,8 @@
       </v-btn>
     </template>
 
-    <v-card class="pa-7" style="border-radius: 16px;">
-      <h1 class="mb-4" style="font-size: 28px;">
+    <v-card>
+      <h1 class="mb-4">
         <template v-if="isEdit">
           {{ $t("editHeading") }}
         </template>
@@ -67,7 +67,7 @@
           </div>
 
           <div>
-            <v-btn height="48" @click="close">
+            <v-btn text height="48" @click="close">
               {{ $t("cancel") }}
             </v-btn>
 

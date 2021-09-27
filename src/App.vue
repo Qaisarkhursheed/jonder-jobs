@@ -100,10 +100,6 @@ html {
     width: auto;
   }
 }
-.profile-section {
-  padding: 40px;
-  border-radius: 10px;
-}
 
 .upgrade-icon {
   width: 30px;
@@ -383,67 +379,6 @@ html {
   background-color: $lighter-grey;
 }
 
-.v-application .dashboard-navigation {
-  padding: 0 0 0 32px;
-  position: sticky;
-  top: 2rem;
-
-  a {
-    display: block;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 500;
-    text-align: left;
-    clear: both;
-    color: black;
-    text-decoration: none;
-    @include clearfix;
-
-    &.with-submenu {
-      margin-bottom: 10px;
-      border: none !important;
-
-      & i,
-      span {
-        border: none !important;
-      }
-    }
-
-    span,
-    .v-icon {
-      //float: left;
-      display: inline-block;
-      height: 20px;
-      line-height: 22px;
-      border: none !important;
-    }
-
-    .v-icon {
-      margin-right: 10px;
-      line-height: 20px;
-    }
-
-    &:hover,
-    &.router-link-exact-active {
-      &,
-      span,
-      .v-icon {
-        color: $primary-blue-dark;
-        text-decoration: none;
-        border-bottom: 1px solid $primary-blue-dark;
-      }
-    }
-
-    &.router-link-exact-active {
-      span {
-        font-weight: bold;
-      }
-    }
-  }
-}
-
 .logo {
   margin-bottom: 20px;
   border: none !important;
@@ -482,9 +417,9 @@ html {
 }
 
 .search-holder
-.v-select.v-select--is-menu-active
-.v-input__icon--append
-.v-icon {
+  .v-select.v-select--is-menu-active
+  .v-input__icon--append
+  .v-icon {
   transform: rotate(0) !important;
 }
 
@@ -515,13 +450,6 @@ html {
       color: #0253b3 !important;
     }
   }
-}
-
-.settings-nav {
-  background-color: white;
-  padding: 32px;
-  border-radius: 10px;
-  margin-top: 40px;
 }
 
 .settings-title {
@@ -625,10 +553,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 }
 // end Dasboard Layout
 // Settings
-.v-btn.main-accept-btn {
-  background-color: $primary-blue-dark !important;
-  color: #fff !important;
-}
 .v-application .dashboard-navigation {
   padding: 0 0 0 32px;
   position: sticky;
@@ -707,13 +631,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   }
 }
 
-.settings-nav {
-  background-color: white;
-  padding: 32px;
-  border-radius: 10px;
-  margin-top: 12px;
-}
-
 .settings-title {
   font-size: 32px;
   font-weight: 600;
@@ -722,10 +639,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   margin-bottom: 26px;
   color: #222;
   word-break: break-all;
-}
-
-.profile-section {
-  border-radius: 10px !important;
 }
 
 .invoice-row {
@@ -764,15 +677,14 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 // end Settings
 </style>
 <script>
-
 import axios from "axios";
-import types from  "@/types";
+import types from "@/types";
 
 export default {
   data() {
     return {
-      loaded: false,
-    }
+      loaded: false
+    };
   },
   created: function() {
     var Tawk_API = Tawk_API || {};
@@ -784,13 +696,10 @@ export default {
     s1.setAttribute("crossorigin", "*");
     s0.parentNode.insertBefore(s1, s0);
 
-    axios
-      .get("/admin/cms-lists")
-      .then(res => {
-        types.initData(res.data.data[0]);
-        this.loaded = true;
-      })
-
+    axios.get("/admin/cms-lists").then(res => {
+      types.initData(res.data.data[0]);
+      this.loaded = true;
+    });
   }
 };
 </script>

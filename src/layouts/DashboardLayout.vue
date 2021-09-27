@@ -63,9 +63,12 @@
     </v-row>
 
     <v-row class="full-h ma-0">
-      <v-col class="navigation col-12 col-md-4 col-xl-3" v-if="!($route.name === 'PersonalityTestJobseeker')">
+      <v-col
+        class="navigation col-12 col-md-4 col-xl-3"
+        v-if="!($route.name === 'PersonalityTestJobseeker')"
+      >
         <nav class="dashboard-navigation pl-0 pl-md-8" v-if="profile">
-          <div class="settings-nav">
+          <v-card flat class="settings-nav" style="margin-top: 12px;">
             <div class="settings-title">
               {{ $t("profileSettings") }}
             </div>
@@ -135,7 +138,7 @@
                 </v-icon>
               </div>
             </div>
-          </div>
+          </v-card>
         </nav>
 
         <div class="dashboard-about" v-if="dashboard">
@@ -188,7 +191,7 @@
 
             <div class="top-info mt-7">
               <span class="about-info">{{ $t("searchStatus") }}</span>
-                <p class="about-text">{{ userEmploymentType }}</p>
+              <p class="about-text">{{ userEmploymentType }}</p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.current_position }}</p>
@@ -251,7 +254,9 @@
       </v-col>
       <v-col
         class="main col-12 col-md-8 col-xl-9"
-        :class="{ 'col-md-12 col-xl-12': ($route.name === 'PersonalityTestJobseeker') }"
+        :class="{
+          'col-md-12 col-xl-12': $route.name === 'PersonalityTestJobseeker'
+        }"
       >
         <v-container fluid class="d-flex flex-column">
           <slot />
@@ -300,14 +305,14 @@ export default {
     },
     userEmploymentType() {
       const stringToArray = map(this.user.looking_for_employment_type, item => {
-        let el =  find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) })
+        let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
         return el[this.$i18n.locale];
       });
       return stringToArray.join();
     },
     getBranche() {
       const stringToArray = map(this.user.branche, item => {
-        let el =  find(types.JOB_BRANCHE, { id: parseInt(item) })
+        let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
         return el[this.$i18n.locale];
       });
       return stringToArray.join();

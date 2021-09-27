@@ -20,8 +20,8 @@
         </v-btn>
       </template>
 
-      <v-card class="pa-7" style="border-radius: 16px;">
-        <h1 class="mb-4 text-center" style="font-size: 28px;">
+      <v-card>
+        <h1 class="mb-4 text-center">
           {{ $t("areYouSure") }}
         </h1>
 

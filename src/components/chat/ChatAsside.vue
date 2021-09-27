@@ -1,7 +1,7 @@
 <template>
-  <v-card class="chat-conversations" flat>
+  <v-card class="chat-conversations pa-0" flat>
     <v-card-title class="chat-conversations-title pl-7 pr-7">
-      {{ $t('messages') }}
+      {{ $t("messages") }}
     </v-card-title>
     <v-divider></v-divider>
     <v-list subheader class="pb-0">
@@ -61,7 +61,6 @@ export default {
 <style lang="scss">
 .chat-conversations {
   position: relative;
-  border-radius: 10px !important;
   height: 500px;
 
   .overlay {

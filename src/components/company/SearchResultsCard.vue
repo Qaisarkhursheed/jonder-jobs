@@ -1,7 +1,7 @@
 <template>
   <v-card
     :hover="true"
-    class="candidate-card rounded-lg"
+    class="candidate-card pa-0"
     :class="{ highlighted }"
     flat
   >

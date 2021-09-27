@@ -13,7 +13,7 @@
     <!-- Back to home button -->
     <div class="text-center py-3" style="border-top: 1px solid #E3E3E4;">
       <v-btn
-        class="font-weight-medium main-accept-btn"
+        color="primary"
         depressed
         large
         @click="$router.push('/company-dashboard')"
@@ -128,7 +128,8 @@
                     :disabled="!formValid"
                     depressed
                     large
-                    class="pl-8 pr-8 font-weight-medium main-accept-btn"
+                    color="primary"
+                    class="pl-8 pr-8"
                     @click="handleUpdate"
                     >{{ $t("save") }}
                   </v-btn>
