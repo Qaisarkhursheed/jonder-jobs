@@ -10,19 +10,21 @@
           v-model="formData.branche"
           :items="types.JOB_BRANCHE"
           :rules="[validations.required]"
+          item-value="id"
+          :item-text="$i18n.locale"
           cache-items
           outlined
           hide-no-data
           append-icon="mdi-chevron-down"
         >
-          <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
+          <!-- <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
           <template v-slot:item="{ item }">
             <v-list-item-content>
               <v-list-item-title>
                 {{ $t(item) }}
               </v-list-item-title>
             </v-list-item-content>
-          </template>
+          </template> -->
         </v-autocomplete>
       </div>
 
@@ -34,18 +36,20 @@
         <v-select
           v-model="formData.company_employees"
           :items="types.EMPLOYEE_NUMBER"
+          item-value="id"
+          :item-text="$i18n.locale"
           :rules="[validations.required]"
           outlined
           append-icon="mdi-chevron-down"
         >
-          <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+          <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
           <template v-slot:item="{ item }">
             <v-list-item-content>
               <v-list-item-title>
                 {{ $t(item) }}
               </v-list-item-title>
             </v-list-item-content>
-          </template>
+          </template> -->
         </v-select>
       </div>
 
@@ -101,8 +105,8 @@ export default {
 
   methods: {
     populateData() {
-      this.formData.branche = this.user.branche;
-      this.formData.company_employees = this.user.company_employees;
+      this.formData.branche = parseInt(this.user.branche);
+      this.formData.company_employees = parseInt(this.user.company_employees);
       this.formData.establishment_date = this.user.establishment_date;
     },
     save() {

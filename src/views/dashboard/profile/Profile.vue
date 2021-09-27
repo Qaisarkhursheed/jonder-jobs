@@ -196,7 +196,8 @@
             hide-no-data
             hide-details="auto"
             append-icon="mdi-chevron-down"
-          ></v-autocomplete>
+          > 
+          </v-autocomplete> 
         </v-col>
 
         <!-- Branche -->
@@ -208,8 +209,11 @@
           <v-autocomplete
             v-clearable-autocomplete
             v-model="formData.branche"
+            item-value="id"
+            :item-text="$i18n.locale"
             :items="types.JOB_BRANCHE"
             :rules="[validations.required]"
+            v-stringify-selection 
             cache
             outlined
             multiple
@@ -217,22 +221,22 @@
             hide-details="auto"
             append-icon="mdi-chevron-down"
           >
-            <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
-            <template v-slot:item="{ item }">
+            <!-- <template v-slot:selection="{ item }"> {{ item[$i18n.locale] }}, </template> -->
+            <!-- <template v-slot:item="{ item }">
               <v-list-item-action>
                 <v-simple-checkbox
                   v-ripple="false"
                   @input="toggleValues($event, item, 'branche')"
-                  :value="formData.branche.indexOf(item) >= 0"
+                  :value="formData.branche.indexOf(item.id) >= 0"
                 >
                 </v-simple-checkbox>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ $t(item) }}
+                  {{ item[$i18n.locale] }}
                 </v-list-item-title>
               </v-list-item-content>
-            </template>
+            </template> -->
           </v-autocomplete>
         </v-col>
 
@@ -304,22 +308,25 @@
             v-model="formData.looking_for_employment_type"
             :items="types.EMPLOYEMENT_TYPE"
             :rules="[validations.required]"
+            :item-text="$i18n.locale"
+            v-stringify-selection
+            item-value="id"
             outlined
             multiple
             hide-details="auto"
             append-icon="mdi-chevron-down"
           >
-            <template v-slot:selection="{ item }">
-              {{ $t(item.value) }},
-            </template>
-            <template v-slot:item="{ item }">
+            <!-- <template v-slot:selection="{ item }">
+              {{ item[$i18n.locale] }},
+            </template> -->
+            <!-- <template v-slot:item="{ item }">
               <v-list-item-action>
                 <v-simple-checkbox
                   v-ripple="false"
                   @input="
                     toggleValues(
                       $event,
-                      item.value,
+                      item.id,
                       'looking_for_employment_type'
                     )
                   "
@@ -329,10 +336,10 @@
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ $t(item.value) }}
+                  {{ item[$i18n.locale] }}
                 </v-list-item-title>
               </v-list-item-content>
-            </template>
+            </template> -->
           </v-select>
         </v-col>
 
@@ -897,12 +904,10 @@ export default {
       this.formData.about_me = user.about_me;
       this.formData.current_position = user.current_position;
       this.formData.city = user.city;
-      this.formData.branche = user.branche.split(",");
+      this.formData.branche = user.branche;
       this.formData.looking_for = user.looking_for;
       //this.formData.looking_for_branche = user.looking_for_branche.split(",");
-      this.formData.looking_for_employment_type = user.looking_for_employment_type.split(
-        ","
-      );
+      this.formData.looking_for_employment_type = user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work || [];
       this.formData.ready_for_work = user.ready_for_work;
       this.formData.monthly_salary = user.monthly_salary;
@@ -920,9 +925,6 @@ export default {
       let formDataCopy = {
         ...this.formData,
       };
-
-      formDataCopy.branche = formDataCopy.branche.join();
-      formDataCopy.looking_for_employment_type = this.formData.looking_for_employment_type.join();
 
       if (this.dontKnowWhenToStart) {
         this.formData.ready_for_work = null;

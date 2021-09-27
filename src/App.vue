@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-if="loaded">
     <router-view />
   </v-app>
 </template>
@@ -763,7 +763,16 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 // end Settings
 </style>
 <script>
+
+import axios from "axios";
+import types from  "@/types";
+
 export default {
+  data() {
+    return {
+      loaded: false,
+    }
+  },
   created: function() {
     var Tawk_API = Tawk_API || {};
     var s1 = document.createElement("script"),
@@ -773,6 +782,14 @@ export default {
     s1.charset = "UTF-8";
     s1.setAttribute("crossorigin", "*");
     s0.parentNode.insertBefore(s1, s0);
+
+    axios
+      .get("/admin/cms-lists")
+      .then(res => {
+        types.initData(res.data.data[0]);
+        this.loaded = true;
+      })
+
   }
 };
 </script>
