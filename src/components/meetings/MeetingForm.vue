@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="435"
+    width="450"
     overlay-color="#0253B3"
     overlay-opacity="0.3"
     content-class="meeting-form"
@@ -17,7 +17,7 @@
       </div>
     </template>
 
-    <v-card class="pa-7">
+    <v-card>
       <!-- Heading -->
       <h1 class="mb-4" style="font-size: 26px;">
         {{ meeting ? $t("meetingProposeDiffDate") : $t("meetingRequest") }}
@@ -49,22 +49,20 @@
           </v-col>
 
           <!-- Start -->
-          <v-col cols="auto">
+          <v-col cols="col">
             <TimePicker
               v-model="formData.startTime"
               :rules="[validations.required]"
-              text-field-style="max-width: 150px"
             />
           </v-col>
 
           <v-col cols="auto" class="px-0">&dash;</v-col>
 
           <!-- End -->
-          <v-col cols="auto">
+          <v-col cols="col">
             <TimePicker
               v-model="formData.endTime"
               :rules="[validations.required]"
-              text-field-style="max-width: 150px"
             />
           </v-col>
         </v-row>
@@ -80,7 +78,7 @@
             type="submit"
             color="primary"
             height="48"
-            class="ml-3 px-15"
+            class="ml-3 px-10 px-md-15"
             :disabled="!isValid"
             :loading="
               $store.getters['meetings/loadingCreate'] ||
@@ -98,6 +96,7 @@
 <script>
 import DatePicker from "@/components/controls/DatePicker";
 import TimePicker from "@/components/controls/TimePicker";
+import moment from "moment";
 
 export default {
   components: { DatePicker, TimePicker },
@@ -128,20 +127,11 @@ export default {
 
   watch: {
     dialog(val) {
-      if (!val) {
+      if (val) {
         this.formResponse = {};
-
-        if (this.meeting) {
-          this.populateData();
-        } else {
-          this.$refs.form.reset();
-        }
+        this.populateData();
       }
     }
-  },
-
-  created() {
-    this.populateData();
   },
 
   methods: {
@@ -150,6 +140,19 @@ export default {
         this.formData.startTime = this.moment(this.meeting.date_start, "HH:mm");
         this.formData.endTime = this.moment(this.meeting.date_end, "HH:mm");
         this.formData.date = this.moment(this.meeting.date_start, "YYYY-MM-DD");
+      } else {
+        // Default values
+        const rounded = Math.ceil(moment().minute() / 5) * 5;
+        this.formData.startTime = moment()
+          .minute(rounded)
+          .second(0)
+          .format("HH:mm");
+        this.formData.endTime = moment()
+          .minute(rounded)
+          .second(0)
+          .add("30", "minutes")
+          .format("HH:mm");
+        this.formData.date = moment().format("YYYY-MM-DD");
       }
     },
     submit() {
