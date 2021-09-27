@@ -31,6 +31,8 @@
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required, validations.max.selection(3)]"
+        item-value="id"
+        :item-text="$i18n.locale"
         v-clearable-autocomplete
         outlined
         flat
@@ -40,7 +42,7 @@
         class="mt-1"
         append-icon="mdi-chevron-down"
       >
-        <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
+        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
         <template v-slot:item="{ item }">
           <v-list-item-action>
             <v-simple-checkbox
@@ -55,7 +57,7 @@
               {{ $t(item) }}
             </v-list-item-title>
           </v-list-item-content>
-        </template>
+        </template> -->
       </v-autocomplete>
 
       <!-- Looking for role -->

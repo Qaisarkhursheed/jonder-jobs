@@ -13,13 +13,15 @@
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.required]"
+        :item-text="$i18n.locale"
+        item-value="id"
         :placeholder="$t('lookingForEmployementPlace')"
         outlined
         multiple
         append-icon="mdi-chevron-down"
         class="mt-1"
       >
-        <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
+        <!-- <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
         <template v-slot:item="{ item }">
           <v-list-item-action>
             <v-simple-checkbox
@@ -34,7 +36,7 @@
               {{ $t(item.value) }}
             </v-list-item-title>
           </v-list-item-content>
-        </template>
+        </template> -->
       </v-select>
 
       <label class="profile-label">

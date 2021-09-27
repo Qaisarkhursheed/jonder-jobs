@@ -188,11 +188,7 @@
 
             <div class="top-info mt-7">
               <span class="about-info">{{ $t("searchStatus") }}</span>
-              <p class="about-text">
-                <span v-for="(item, i) in userEmploymentType" :key="i">
-                  {{ $t(`${item}`) }}
-                </span>
-              </p>
+                <p class="about-text">{{ userEmploymentType }}</p>
 
               <span class="about-info">Position</span>
               <p class="about-text">{{ user.current_position }}</p>
@@ -266,8 +262,9 @@
 </template>
 
 <script>
+import types from "@/types";
+import { debounce, map, find } from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import { debounce, map } from "lodash";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import DashboardActivePlan from "../components/dashboard/DashboardActivePlan";
@@ -302,11 +299,16 @@ export default {
       );
     },
     userEmploymentType() {
-      return this.user.looking_for_employment_type.split(",");
+      const stringToArray = map(this.user.looking_for_employment_type, item => {
+        let el =  find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) })
+        return el[this.$i18n.locale];
+      });
+      return stringToArray.join();
     },
     getBranche() {
-      const stringToArray = map(this.user.branche.split(","), item => {
-        return this.$t(item);
+      const stringToArray = map(this.user.branche, item => {
+        let el =  find(types.JOB_BRANCHE, { id: parseInt(item) })
+        return el[this.$i18n.locale];
       });
       return stringToArray.join();
     }

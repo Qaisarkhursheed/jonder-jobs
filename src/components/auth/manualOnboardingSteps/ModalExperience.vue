@@ -86,17 +86,19 @@
                   v-model="form.employment_type"
                   :placeholder="$t('choose')"
                   :items="types.EMPLOYEMENT_TYPE"
+                  item-value="id"
+                  :item-text="$i18n.locale" 
                   :rules="[validations.required]"
                   outlined
                   append-icon="mdi-chevron-down"
                 >
                   <template v-slot:selection="{ item }">
-                    {{ $t(item.value) }}
+                    {{ item[$i18n.locale] }}
                   </template>
                   <template v-slot:item="{ item }">
                     <v-list-item-content>
                       <v-list-item-title>
-                        {{ $t(item.value) }}
+                        {{ item[$i18n.locale] }}
                       </v-list-item-title>
                     </v-list-item-content>
                   </template>
@@ -224,6 +226,8 @@ export default {
           this.form.end_time = null;
         }
 
+        this.form.employment_type = this.form.employment_type.toString();
+
         if (this.edit) {
           this.$store
             .dispatch("user/updateJobseekerExperience", {
@@ -257,7 +261,7 @@ export default {
     populate() {
       this.form.company_name = this.edit.company_name;
       this.form.position = this.edit.position;
-      this.form.employment_type = this.edit.employment_type;
+      this.form.employment_type = parseInt(this.edit.employment_type);
       this.form.start_time = this.edit.start_time;
       this.form.end_time = this.edit.end_time;
       this.form.description = this.edit.description;
