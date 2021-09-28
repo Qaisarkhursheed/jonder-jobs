@@ -194,7 +194,7 @@
               <p class="about-text">{{ userEmploymentType }}</p>
 
               <span class="about-info">Position</span>
-              <p class="about-text">{{ user.current_position }}</p>
+              <p class="about-text">{{ userCurrentPosition }}</p>
 
               <span class="about-info">{{ $t("currentIndustry") }}</span>
               <p class="about-text">{{ getBranche }}</p>
@@ -316,6 +316,13 @@ export default {
         return el[this.$i18n.locale];
       });
       return stringToArray.join();
+    },
+    userCurrentPosition() {
+       let obj = find(types.JOB_POSITION, (el) => {
+        return el.id == parseInt(this.user.current_position);
+      });
+
+      return obj[this.$i18n.locale];
     }
   },
   methods: {

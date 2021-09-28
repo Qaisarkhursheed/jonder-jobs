@@ -12,8 +12,10 @@
       </label>
       <v-autocomplete
         v-model="value.current_position"
-        :items="$store.getters['professions/items']"
+        :items="types.JOB_POSITION"
         :rules="[validations.required]"
+        item-value="id"
+        :item-text="$i18n.locale"
         outlined
         flat
         hide-no-data
@@ -67,7 +69,9 @@
       </label>
       <v-autocomplete
         v-model="value.looking_for"
-        :items="$store.getters['professions/items']"
+        :items="types.JOB_POSITION"
+        item-value="id"
+        :item-text="$i18n.locale"
         :placeholder="$t('detailsAboutYouRolePlace')"
         :rules="[validations.required, validations.max.selection(5)]"
         v-clearable-autocomplete

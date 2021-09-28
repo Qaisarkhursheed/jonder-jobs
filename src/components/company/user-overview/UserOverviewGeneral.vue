@@ -106,7 +106,7 @@
               {{ $t("position") }}
             </div>
             <div class="content">
-              {{ user.current_position }}
+              {{ currentPosition }}
             </div>
           </div>
         </div>
@@ -193,6 +193,13 @@ export default {
         return el[this.$i18n.locale];
       });
       return stringToArray.join();
+    },
+    currentPosition() {
+      let obj = find(types.JOB_POSITION, (el) => {
+        return el.id == parseInt(this.user.current_position);
+      });
+
+      return obj[this.$i18n.locale];
     }
   },
 

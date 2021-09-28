@@ -193,7 +193,9 @@
           </label>
           <v-autocomplete
             v-model="formData.current_position"
-            :items="$store.getters['professions/items']"
+            :items="types.JOB_POSITION"
+            item-value="id"
+            :item-text="$i18n.locale"
             :rules="[validations.required]"
             outlined
             hide-no-data
@@ -216,7 +218,6 @@
             :item-text="$i18n.locale"
             :items="types.JOB_BRANCHE"
             :rules="[validations.required]"
-            v-stringify-selection
             cache
             outlined
             multiple
@@ -252,7 +253,9 @@
           <v-autocomplete
             v-model="formData.looking_for"
             v-clearable-autocomplete
-            :items="$store.getters['professions/items']"
+            :items="types.JOB_POSITION"
+            item-value="id"
+            :item-text="$i18n.locale"
             :rules="[validations.required]"
             multiple
             outlined
@@ -312,7 +315,6 @@
             :items="types.EMPLOYEMENT_TYPE"
             :rules="[validations.required]"
             :item-text="$i18n.locale"
-            v-stringify-selection
             item-value="id"
             outlined
             multiple
@@ -908,7 +910,7 @@ export default {
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
       this.formData.about_me = user.about_me;
-      this.formData.current_position = user.current_position;
+      this.formData.current_position = parseInt(user.current_position);
       this.formData.city = user.city;
       this.formData.branche = user.branche;
       this.formData.looking_for = user.looking_for;

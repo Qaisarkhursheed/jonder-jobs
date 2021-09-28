@@ -12,7 +12,9 @@
           </label>
           <v-autocomplete
             v-model="formFields.job_position"
-            :items="$store.getters['professions/items']"
+            :items="types.JOB_POSITION"
+            item-value="id"
+            :item-text="$i18n.locale"
             outlined
             clearable
             flat
