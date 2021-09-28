@@ -8,8 +8,10 @@
       {{ $t("welocomeDescription") }}
     </p>
 
-    <router-link to="/login">
-      <v-btn color="primary" class="full-w mt-15">{{ $t("getStartedNow") }}</v-btn>
+    <router-link :to="{ name: 'Login' }">
+      <v-btn color="primary" class="full-w mt-15">
+        {{ $t("getStartedNow") }}
+      </v-btn>
     </router-link>
   </v-container>
 </template>

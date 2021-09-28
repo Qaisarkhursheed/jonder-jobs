@@ -6,7 +6,7 @@
 
     <v-container fluid class="landing-header-container">
       <v-row class="landing-header">
-        <v-col cols="6">
+        <v-col cols="3">
           <router-link to="/" class="logo">
             <v-img
               :src="require('@/assets/jonder_blue.png')"
@@ -14,16 +14,16 @@
             />
           </router-link>
         </v-col>
-        <v-col cols="6" class="links">
+        <v-col cols="9" class="links d-flex align-center justify-end">
           <router-link
             to="/register"
             class="txt-link text-color-primary-blue-dark"
           >
             {{ $t("register") }}
           </router-link>
-          <router-link to="/login" class="button dark-blue fill"
-            >{{ $t("login") }}</router-link
-          >
+          <router-link :to="{ name: 'Login' }" class="button dark-blue fill">{{
+            $t("login")
+          }}</router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -84,7 +84,7 @@
     <footer>
       <v-container fluid class="landing-header-container">
         <v-row class="landing-header">
-          <v-col cols="6">
+          <v-col cols="3">
             <router-link to="/" class="logo">
               <v-img
                 :src="require('@/assets/jonder_blue.png')"
@@ -92,14 +92,14 @@
               />
             </router-link>
           </v-col>
-          <v-col cols="6" class="links">
+          <v-col cols="9" class="links d-flex align-center justify-end">
             <router-link
               to="/register"
               class="txt-link text-color-primary-blue-dark"
             >
               {{ $t("register") }}
             </router-link>
-            <router-link to="/login" class="button dark-blue fill"
+            <router-link :to="{ name: 'Login' }" class="button dark-blue fill"
               >Log in</router-link
             >
           </v-col>

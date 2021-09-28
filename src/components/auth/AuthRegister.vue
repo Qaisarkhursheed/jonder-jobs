@@ -125,7 +125,7 @@
         :placeholder="$t('repeatPassword')"
         :rules="[
           validations.required,
-          validations.same('Passwort', formData.password),
+          validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
         solo
@@ -193,7 +193,7 @@
       <div class="text-medium mt-5 text-center">
         {{ $t("areYouMember") }}
 
-        <router-link to="/login" class="login-caption-bold">
+        <router-link :to="{ name: 'Login' }" class="login-caption-bold">
           {{ $t("loginHere") }}
         </router-link>
       </div>
@@ -206,7 +206,7 @@ import JonderTitle from "../parts/JonderTitle.vue";
 
 export default {
   components: {
-    JonderTitle,
+    JonderTitle
   },
   data() {
     return {
@@ -220,14 +220,14 @@ export default {
         // show_name: false,
         // show_location: false,
         role: "Jobseeker",
-        accept_policy: false,
+        accept_policy: false
       },
       profile_img: false,
       showPass: false,
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -243,13 +243,13 @@ export default {
           localStorage.setItem("user-email", this.formData.email);
           this.$router.replace({ name: "RegisterVerifyEmail" });
         })
-        .catch((err) => {
+        .catch(err => {
           this.formResponse = err.data;
         })
         .finally(() => {
           this.formLoading = false;
         });
-    },
+    }
   },
   computed: {
     avatar_img() {
@@ -257,8 +257,8 @@ export default {
         return URL.createObjectURL(this.profile_img);
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 

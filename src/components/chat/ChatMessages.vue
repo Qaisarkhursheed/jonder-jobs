@@ -97,7 +97,7 @@
           <v-card
             v-else
             flat
-            class="message rounded-lg"
+            class="message rounded-lg pa-0"
             :class="[
               { 'my-message': msg.is_sender },
               [msg.is_sender ? 'rounded-tr-0' : 'rounded-tl-0']

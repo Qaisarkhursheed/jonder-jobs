@@ -59,7 +59,7 @@
 
         <p class="text-caption text-left mt-2" style="font-size: 14px">
           <router-link
-            to="/forgot-password"
+            :to="{ name: 'ForgotPassword' }"
             class="text-color-primary-blue-dark"
             style="text-decoration: none"
           >
@@ -106,7 +106,7 @@
     <p class="text-center mt-2" style="font-size: 14px">
       {{ $t("dontHaveAccount") }}
       <router-link
-        to="/register"
+        :to="{ name: 'Register' }"
         class="text-color-primary-blue-dark"
         style="text-decoration: none"
       >

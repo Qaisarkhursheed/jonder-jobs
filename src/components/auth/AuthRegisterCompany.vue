@@ -186,7 +186,7 @@
       <div class="login-caption mt-5 text-center">
         {{ $t("areYouMember") }}
 
-        <router-link to="/login" class="login-caption-bold">
+        <router-link :to="{ name: 'Login' }" class="login-caption-bold">
           {{ $t("loginHere") }}
         </router-link>
       </div>

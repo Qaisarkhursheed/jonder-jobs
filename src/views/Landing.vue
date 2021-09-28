@@ -6,7 +6,7 @@
 
     <v-container fluid class="landing-header-container">
       <v-row class="landing-header">
-        <v-col cols="12" md="4">
+        <v-col cols="3">
           <router-link to="/" class="logo">
             <v-img
               :src="require('@/assets/jonder_blue.png')"
@@ -14,19 +14,19 @@
             />
           </router-link>
         </v-col>
-        <v-col cols="12" md="8" class="links">
+        <v-col cols="9" class="links d-flex align-center justify-end">
           <router-link
             to="/faq"
             class="txt-link text-color-primary-blue-dark"
             >{{ $t("faq") }}</router-link
           >
           <router-link
-            to="/register"
+            :to="{ name: 'Register' }"
             class="txt-link text-color-primary-blue-dark"
           >
             {{ $t("register") }}
           </router-link>
-          <router-link to="/login" class="button dark-blue fill">
+          <router-link :to="{ name: 'Login' }" class="button dark-blue fill">
             {{ $t("login") }}
           </router-link>
           <div style="width: 150px; display: inline-block; margin-left: 15px">
@@ -65,7 +65,10 @@
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
             <div class="promo-actions">
-              <router-link to="/register" class="button dark-blue fill">
+              <router-link
+                :to="{ name: 'Register' }"
+                class="button dark-blue fill"
+              >
                 {{ $t("register") }}
               </router-link>
             </div>
@@ -91,7 +94,7 @@
                 nulla non
                 <div class="promo-actions">
                   <router-link
-                    to="/register-company"
+                    :to="{ name: 'RegisterCompany' }"
                     class="button dark-blue fill"
                     >Registrieren</router-link
                   >
@@ -116,9 +119,12 @@
                 feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim
                 nulla non
                 <div class="promo-actions">
-                  <router-link to="/register-user" class="button dark-blue fill"
-                    >Registrieren</router-link
+                  <router-link
+                    :to="{ name: 'RegisterUser' }"
+                    class="button dark-blue fill"
                   >
+                    Registrieren
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -136,7 +142,10 @@
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
             <div class="promo-actions">
-              <router-link to="/register" class="button dark-blue fill">
+              <router-link
+                :to="{ name: 'Register' }"
+                class="button dark-blue fill"
+              >
                 Registrieren
               </router-link>
             </div>
@@ -183,7 +192,7 @@
     <footer>
       <v-container fluid class="landing-header-container">
         <v-row class="landing-header">
-          <v-col cols="12" md="6">
+          <v-col cols="3">
             <router-link to="/" class="logo">
               <v-img
                 :src="require('@/assets/jonder_blue.png')"
@@ -191,7 +200,7 @@
               />
             </router-link>
           </v-col>
-          <v-col cols="12" md="6" class="links">
+          <v-col cols="9" class="links d-flex align-center justify-end">
             <router-link to="/faq" class="txt-link text-color-primary-blue-dark"
               >FAQ</router-link
             >
@@ -201,7 +210,7 @@
             >
               {{ $t("register") }}
             </router-link>
-            <router-link to="/login" class="button dark-blue fill">
+            <router-link :to="{ name: 'Login' }" class="button dark-blue fill">
               {{ $t("login") }}
             </router-link>
           </v-col>
@@ -210,7 +219,17 @@
     </footer>
   </div>
 </template>
-
+<script>
+import LanguageDropdown from "../components/LanguageDropdown";
+export default {
+  data() {
+    return {
+      drawer: false
+    };
+  },
+  components: { LanguageDropdown }
+};
+</script>
 <style lang="scss">
 .landing-page {
   position: relative;
@@ -237,7 +256,7 @@
   }
 
   .landing-header {
-    padding: 20px 60px;
+    padding: 20px;
 
     .links {
       text-align: right;
@@ -254,7 +273,7 @@
     min-height: 740px;
     .box {
       background: rgba(2, 83, 179, 0.8);
-      padding: 42px 42px 42px 82px;
+      padding: 42px;
       height: 540px;
       color: white;
 
@@ -323,12 +342,12 @@
         background: rgba(2, 83, 179, 0.8);
         font-size: 32px;
         font-weight: 700;
-        padding: 38px 57px;
+        padding: 38px 42px;
         color: white;
       }
 
       .promo-content {
-        padding: 80px 57px;
+        padding: 80px 42px;
       }
 
       .promo-actions {
@@ -387,7 +406,22 @@
     background: white;
   }
 }
-
+@media (min-width: 768px) {
+  .landing-hero {
+    .box {
+      padding-left: 82px !important;
+    }
+  }
+  .landing-promo-blocks .promo-block {
+    .promo-header {
+      padding-left: 57px;
+      padding-right: 57px;
+    }
+  }
+  .landing-header {
+    padding: 20px 60px;
+  }
+}
 @media (max-width: 450px) {
   .links {
     > a {
@@ -397,9 +431,3 @@
   }
 }
 </style>
-<script>
-import LanguageDropdown from "../components/LanguageDropdown";
-export default {
-  components: { LanguageDropdown }
-};
-</script>

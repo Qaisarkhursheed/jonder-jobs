@@ -134,7 +134,7 @@
         <span style="color: #222222">
           {{ $t("areYouMember") }}
         </span>
-        <router-link to="/login" style="text-decoration: none">
+        <router-link :to="{ name: 'Login' }" style="text-decoration: none">
           <b class="tx-blue-darken-4">
             {{ $t("loginHere") }}
           </b>
@@ -151,12 +151,12 @@ import JonderTitle from "@/components/parts/JonderTitle.vue";
 export default {
   components: {
     AuthWrap,
-    JonderTitle,
+    JonderTitle
   },
   data: () => ({
     img: 1,
     step: 1,
-    accountType: null,
+    accountType: null
   }),
   computed: {
     facebookUrl() {
@@ -170,7 +170,7 @@ export default {
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
 
       return url;
-    },
+    }
   },
   methods: {
     submit() {
@@ -182,8 +182,8 @@ export default {
     },
     changeImage() {
       this.img = 2;
-    },
-  },
+    }
+  }
 };
 </script>
 
