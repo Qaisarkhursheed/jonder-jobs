@@ -1,5 +1,5 @@
 <template>
-  <main-layout>
+  <jobseeker-layout>
     <div class="d-flex full-h justify-center align-center text-center">
       <!-- Loading spinner -->
       <v-progress-circular
@@ -37,14 +37,14 @@
       >
       </v-card>
     </div>
-  </main-layout>
+  </jobseeker-layout>
 </template>
 
 <script>
-import MainLayout from "@/layouts/MainLayout";
+import JobseekerLayout from "@/layouts/JobseekerLayout";
 
 export default {
-  components: { MainLayout },
+  components: { JobseekerLayout },
 
   data() {
     return {
