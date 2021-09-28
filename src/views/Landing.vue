@@ -21,12 +21,12 @@
             >{{ $t("faq") }}</router-link
           >
           <router-link
-            to="/register"
+            :to="{ name: 'Register' }"
             class="txt-link text-color-primary-blue-dark"
           >
             {{ $t("register") }}
           </router-link>
-          <router-link to="/login" class="button dark-blue fill">
+          <router-link :to="{ name: 'Login' }" class="button dark-blue fill">
             {{ $t("login") }}
           </router-link>
           <div style="width: 150px; display: inline-block; margin-left: 15px">
@@ -65,7 +65,10 @@
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
             <div class="promo-actions">
-              <router-link to="/register" class="button dark-blue fill">
+              <router-link
+                :to="{ name: 'Register' }"
+                class="button dark-blue fill"
+              >
                 {{ $t("register") }}
               </router-link>
             </div>
@@ -91,7 +94,7 @@
                 nulla non
                 <div class="promo-actions">
                   <router-link
-                    to="/register-company"
+                    :to="{ name: 'RegisterCompany' }"
                     class="button dark-blue fill"
                     >Registrieren</router-link
                   >
@@ -116,9 +119,12 @@
                 feugiat. Amet, ac vulputate sed elit felis. Nulla iaculis enim
                 nulla non
                 <div class="promo-actions">
-                  <router-link to="/register-user" class="button dark-blue fill"
-                    >Registrieren</router-link
+                  <router-link
+                    :to="{ name: 'RegisterUser' }"
+                    class="button dark-blue fill"
                   >
+                    Registrieren
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -136,7 +142,10 @@
               morbi nibh. Mi nam suscipit pulvinar amet. Suspendisse sed morbi
             </p>
             <div class="promo-actions">
-              <router-link to="/register" class="button dark-blue fill">
+              <router-link
+                :to="{ name: 'Register' }"
+                class="button dark-blue fill"
+              >
                 Registrieren
               </router-link>
             </div>
@@ -201,7 +210,7 @@
             >
               {{ $t("register") }}
             </router-link>
-            <router-link to="/login" class="button dark-blue fill">
+            <router-link :to="{ name: 'Login' }" class="button dark-blue fill">
               {{ $t("login") }}
             </router-link>
           </v-col>

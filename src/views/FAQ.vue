@@ -21,9 +21,9 @@
           >
             {{ $t("register") }}
           </router-link>
-          <router-link to="/login" class="button dark-blue fill"
-            >{{ $t("login") }}</router-link
-          >
+          <router-link :to="{ name: 'Login' }" class="button dark-blue fill">{{
+            $t("login")
+          }}</router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -99,7 +99,7 @@
             >
               {{ $t("register") }}
             </router-link>
-            <router-link to="/login" class="button dark-blue fill"
+            <router-link :to="{ name: 'Login' }" class="button dark-blue fill"
               >Log in</router-link
             >
           </v-col>

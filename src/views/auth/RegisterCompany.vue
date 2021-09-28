@@ -8,7 +8,7 @@
             {{ $t("jonderWelcome") }}
           </jonder-title>
           <p style="color: #222222">
-            {{$t('jonderWelcomeDescription')}}
+            {{ $t("jonderWelcomeDescription") }}
           </p>
           <v-btn
             @click="step = 2"
@@ -23,7 +23,7 @@
             <span style="color: #222222">
               {{ $t("areYouMember") }}
             </span>
-            <router-link to="/login" style="text-decoration: none">
+            <router-link :to="{ name: 'Login' }" style="text-decoration: none">
               <b> {{ $t("loginHere") }} </b>
             </router-link>
           </div>
@@ -78,7 +78,7 @@
             <span style="color: #222222">
               {{ $t("areYouMember") }}
             </span>
-            <router-link to="/login" style="text-decoration: none">
+            <router-link :to="{ name: 'Login' }" style="text-decoration: none">
               <b> {{ $t("loginHere") }} </b>
             </router-link>
           </div>
@@ -102,17 +102,17 @@ export default {
   components: {
     AuthWrap,
     AuthRegisterCompany,
-    JonderTitle,
+    JonderTitle
   },
   data: () => ({
     img: 1,
-    step: 3,
+    step: 3
   }),
   methods: {
     changeImage() {
       this.img = 2;
-    },
-  },
+    }
+  }
 };
 </script>
 
