@@ -68,7 +68,9 @@
                 <label>{{ $t("position") }}</label>
                 <v-autocomplete
                   v-model="form.position"
-                  :items="$store.getters['professions/items']"
+                  :items="types.JOB_POSITION"
+                  item-value="id"
+                  :item-text="$i18n.locale"
                   :rules="[validations.required]"
                   outlined
                   flat

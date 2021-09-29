@@ -65,7 +65,7 @@
               {{ $t("position") }}
             </label>
             <div class="section-value">
-              {{ user.current_position }}
+              {{ currentPosition }}
             </div>
           </v-col>
         </v-row>
@@ -77,7 +77,7 @@
             {{ $t("currentIndustry") }}
           </label>
           <div class="section-value">
-            {{ user.branche }}
+            {{ getBranche }}
           </div>
         </v-col>
         <v-col cols="5">
@@ -268,6 +268,13 @@ export default {
     getBranche() {
       let obj = find(types.JOB_BRANCHE, (el) => {
         return el.id == parseInt(this.user.branche);
+      });
+
+      return obj[this.$i18n.locale];
+    },
+    currentPosition() {
+      let obj = find(types.JOB_POSITION, (el) => {
+        return el.id == parseInt(this.user.current_position);
       });
 
       return obj[this.$i18n.locale];

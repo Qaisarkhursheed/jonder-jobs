@@ -22,7 +22,7 @@
               mdi-briefcase
             </v-icon>
             <span>
-              {{ candidate.current_position }}
+              {{ currentPosition }}
             </span>
           </div>
         </div>
@@ -120,6 +120,7 @@
 </template>
 
 <script>
+import { find } from "lodash";
 import store from "@/store";
 import types from "@/types";
 
@@ -165,6 +166,12 @@ export default {
       return +this.monthly_salary.min !== +this.monthly_salary.max
         ? `${this.monthly_salary.min} - ${this.monthly_salary.max}`
         : this.monthly_salary.min;
+    },
+    currentPosition() {
+      let obj = find(types.JOB_POSITION, (el) => {
+        return el.id == parseInt(this.candidate.current_position);
+      });
+      return obj[this.$i18n.locale];
     }
   },
 

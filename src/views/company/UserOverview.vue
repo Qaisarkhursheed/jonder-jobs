@@ -89,6 +89,7 @@
 
 <script>
 import axios from "axios";
+import { find } from "lodash";
 import types from "@/types";
 import UserOverviewGeneral from "@/components/company/user-overview/UserOverviewGeneral";
 import UserOverviewNotes from "@/components/company/user-overview/UserOverviewNotes";
