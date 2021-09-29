@@ -58,20 +58,20 @@ export default {
   props: {
     value: {
       type: Array,
-      required: true
+      required: true,
     },
     suffix: {
-      type: String
+      type: String,
     },
     min: {
-      type: [String, Number]
+      type: [String, Number],
     },
     max: {
-      type: [String, Number]
+      type: [String, Number],
     },
     step: {
-      type: [String, Number]
-    }
+      type: [String, Number],
+    },
   },
   created() {
     const value = ["0", "10"];
@@ -79,14 +79,14 @@ export default {
   },
   data() {
     return {
-      model: null
+      model: null,
     };
   },
   methods: {
     change(value) {
       this.$emit("change", value);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,7 +99,7 @@ export default {
     align-items: center;
     display: flex;
     .monthly-salary {
-      height: 55px;
+      height: 58px;
       width: 57px !important;
       input {
         color: $primary-blue-dark !important;

@@ -12,7 +12,7 @@
         height="55"
         @click="value.why_jonder = $t('whatBringsYouJob')"
         v-bind="{
-          outlined: value.why_jonder !== $t('whatBringsYouJob')
+          outlined: value.why_jonder !== $t('whatBringsYouJob'),
         }"
       >
         {{ $t("whatBringsYouJob") }}
@@ -24,8 +24,7 @@
         class="mb-4"
         @click="value.why_jonder = $t('whatBringsYouOffer')"
         v-bind="{
-          outlined:
-            value.why_jonder !== $t('whatBringsYouOffer')
+          outlined: value.why_jonder !== $t('whatBringsYouOffer'),
         }"
         height="55"
       >
@@ -39,15 +38,14 @@
         height="55"
         @click="value.why_jonder = $t('whatBringsYouCurious')"
         v-bind="{
-          outlined:
-            value.why_jonder !== $t('whatBringsYouCurious')
+          outlined: value.why_jonder !== $t('whatBringsYouCurious'),
         }"
       >
         {{ $t("whatBringsYouCurious") }}
       </v-btn>
 
       <v-row class="mt-5">
-        <v-col cols="3">
+        <!-- <v-col cols="3">
           <v-btn
             @click="$emit('prevScreen')"
             height="55"
@@ -55,7 +53,7 @@
           >
             {{ $t("back") }}
           </v-btn>
-        </v-col>
+        </v-col> -->
         <v-col>
           <v-btn
             :disabled="!formValid || !value.why_jonder"
@@ -78,16 +76,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true
+      required: true,
     },
-    nextScreen: Function
+    nextScreen: Function,
   },
 
   data() {
     return {
-      formValid: false
+      formValid: false,
     };
-  }
+  },
 };
 </script>
 
