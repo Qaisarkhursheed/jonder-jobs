@@ -3,7 +3,11 @@
     <v-row class="flex-shrink-0 flex-grow-0 search-holder">
       <v-col cols="4">
         <router-link to="/dashboard" class="logo">
-          <v-img :src="require('@/assets/jonder-logo.svg')" max-width="128px" />
+          <v-img
+            :src="require('@/assets/jonder-logo.svg')"
+            max-width="128px"
+            max-height="42px"
+          />
         </router-link>
       </v-col>
       <v-col cols="4">

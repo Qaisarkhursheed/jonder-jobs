@@ -2,7 +2,11 @@
   <v-row class="header">
     <v-col cols="auto">
       <router-link to="/dashboard" class="logo">
-        <v-img :src="require('@/assets/jonder-logo.svg')" max-width="128px" />
+        <v-img
+          :src="require('@/assets/jonder-logo.svg')"
+          max-width="128px"
+          max-height="42px"
+        />
       </router-link>
     </v-col>
 

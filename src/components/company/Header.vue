@@ -4,7 +4,11 @@
   >
     <v-col cols="6" md="3">
       <router-link to="" class="logo">
-        <v-img :src="require('@/assets/jonder_blue.png')" max-width="128px" />
+        <v-img
+          :src="require('@/assets/jonder_blue.png')"
+          max-width="128px"
+          max-height="42px"
+        />
       </router-link>
     </v-col>
     <v-col cols="6" md="4" class="text-right">
