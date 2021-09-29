@@ -121,7 +121,7 @@
 
 <script>
 import store from "@/store";
-import { map } from "lodash";
+import types from "@/types";
 
 export default {
   name: "SearchResultsCard",
@@ -147,13 +147,19 @@ export default {
       return this.candidate.plan?.plan_slug === "higlighted";
     },
     getBranche() {
-      let branche = "";
+      const branches = [];
+
       if (this.candidate.branche) {
-        branche = map(this.candidate.branche.split(","), item => {
-          return this.$t(item);
-        }).join();
+        this.candidate.branche.forEach(branchId => {
+          const branchObj = types.JOB_POSITION.find(b => b.id == branchId);
+
+          if (branchObj) {
+            branches.push(branchObj[this.$i18n.locale]);
+          }
+        });
       }
-      return branche;
+
+      return branches.join();
     },
     getMoney() {
       return +this.monthly_salary.min !== +this.monthly_salary.max
