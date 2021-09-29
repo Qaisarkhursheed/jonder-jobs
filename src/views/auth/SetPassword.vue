@@ -19,7 +19,7 @@
         <v-text-field
           v-model="formData.password"
           dense
-          :rules="[validations.required, validations.min.string(6)]"
+          :rules="[validations.required, validations.password]"
           type="password"
           outlined
           background-color="white"

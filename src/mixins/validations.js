@@ -44,6 +44,11 @@ export default {
             parseInt(compareValue.replace(":", "")) ||
           `Muss kleiner als ${compareValue} sein.`,
 
+        password: v =>
+          !v ||
+          /^(?=.*[a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(v) ||
+          "Mindestens 8 Zeichen, muss eine Zahl und ein Sonderzeichen enthalten.",
+
         phone: v =>
           !v ||
           validatePhoneNumber(v) ||

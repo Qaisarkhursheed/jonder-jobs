@@ -233,7 +233,7 @@
                 solo
                 type="password"
                 outlined
-                :rules="[validations.required, validations.min.string(6)]"
+                :rules="[validations.required, validations.password]"
                 background-color="white"
               ></v-text-field>
 

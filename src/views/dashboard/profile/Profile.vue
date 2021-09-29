@@ -635,7 +635,7 @@
         <label class="profile-label">{{ $t("enterNewPassword") }}</label>
         <v-text-field
           v-model="passwordFormData.new_password"
-          :rules="[validations.required, validations.min.string(6)]"
+          :rules="[validations.required, validations.password]"
           type="password"
           outlined
           solo

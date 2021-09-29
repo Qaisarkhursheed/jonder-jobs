@@ -98,7 +98,7 @@
       <v-text-field
         v-model="formData.password"
         :placeholder="$t('password')"
-        :rules="[validations.required, validations.min.string(6)]"
+        :rules="[validations.required, validations.password]"
         :type="showPass ? 'text' : 'password'"
         solo
         dense

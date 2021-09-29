@@ -19,32 +19,20 @@
     >
       <!-- First name -->
       <v-text-field
-        dense
+        v-model="formData.first_name"
         :placeholder="$t('name')"
         :rules="[validations.required, validations.min.string(3)]"
-        type="text"
-        hide-details
+        hide-details="auto"
         outlined
-        background-color="white"
-        v-model="formData.first_name"
-        solo
-        flat
-        class="mb-4"
       ></v-text-field>
 
       <!-- Last name -->
       <v-text-field
-        dense
+        v-model="formData.last_name"
         :placeholder="$t('surname')"
         :rules="[validations.required, validations.min.string(3)]"
-        type="text"
-        hide-details
+        hide-details="auto"
         outlined
-        background-color="white"
-        v-model="formData.last_name"
-        solo
-        flat
-        class="mb-4"
       ></v-text-field>
 
       <!-- Company name -->
@@ -52,66 +40,46 @@
         v-model="formData.company"
         :placeholder="$t('companyName')"
         :rules="[validations.required, validations.min.string(3)]"
+        hide-details="auto"
         :items="suggestedCompanies"
         :loading="$store.getters['northdata/loadingSearch']"
         @update:search-input="fetchCompanySuggestions($event)"
-        class="hide-menu-icon mb-4"
-        dense
+        class="hide-menu-icon"
         no-filter
-        hide-details
         outlined
-        background-color="white"
-        solo
-        flat
       ></v-combobox>
 
       <!-- Email -->
       <v-text-field
-        dense
+        v-model="formData.email"
+        type="email"
         :placeholder="$t('emailAddress')"
         :rules="[validations.required, validations.email]"
-        type="email"
-        hide-details
+        hide-details="auto"
         outlined
-        background-color="white"
-        v-model="formData.email"
-        solo
-        flat
-        class="mb-4"
       ></v-text-field>
 
       <!-- Phone number -->
       <v-text-field
-        dense
-        placeholder="Telefonnummer"
-        type="text"
-        :rules="[validations.required, validations.phone]"
-        hide-details
-        outlined
-        background-color="white"
         v-model="formData.phone"
-        solo
-        flat
-        class="mb-4"
+        placeholder="Telefonnummer"
+        :rules="[validations.required, validations.phone]"
+        hide-details="auto"
+        outlined
       ></v-text-field>
 
       <!-- Password -->
       <v-text-field
-        dense
-        :placeholder="$t('password')"
-        :rules="[validations.required, validations.min.string(6)]"
-        :type="showPass ? 'text' : 'password'"
-        hide-details=""
-        outlined
-        background-color="white"
         v-model="formData.password"
-        solo
-        flat
-        class="mb-4"
+        :placeholder="$t('password')"
+        :rules="[validations.required, validations.password]"
+        :type="showPass ? 'text' : 'password'"
+        hide-details="auto"
+        outlined
       >
         <template v-slot:append>
           <div class="d-flex align-center">
-            <v-icon style="line-height: 1.5" @click="showPass = !showPass">
+            <v-icon @click="showPass = !showPass">
               <template v-if="showPass">
                 mdi-eye
               </template>
@@ -125,27 +93,19 @@
 
       <!-- Password confirmation -->
       <v-text-field
-        dense
+        v-model="formData.password_confirmation"
         :placeholder="$t('repeatPassword')"
         :rules="[
           validations.required,
           validations.same('Passwort', formData.password)
         ]"
         :type="showPassConfirm ? 'text' : 'password'"
+        hide-details="auto"
         outlined
-        hide-details
-        background-color="white"
-        v-model="formData.password_confirmation"
-        solo
-        flat
-        class="mb-4"
       >
         <template v-slot:append>
           <div class="d-flex align-center">
-            <v-icon
-              style="line-height: 1.5"
-              @click="showPassConfirm = !showPassConfirm"
-            >
+            <v-icon @click="showPassConfirm = !showPassConfirm">
               <template v-if="showPassConfirm">
                 mdi-eye
               </template>
@@ -164,8 +124,8 @@
       <v-checkbox
         v-model="formData.accept_policy"
         :rules="[validations.required]"
-        class="ma-0"
-        color="#333"
+        class="ma-0 pa-0"
+        color="primary"
         :label="$t('agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
@@ -173,17 +133,18 @@
       <v-btn
         :disabled="!isValid"
         type="submit"
-        class="dark-blue mt-3"
+        color="primary"
+        class="mt-3"
         block
         large
-        height="56"
+        height="55"
         :loading="isLoading"
       >
         {{ $t("registerForFree") }}
       </v-btn>
 
       <!-- Login link -->
-      <div class="login-caption mt-5 text-center">
+      <div class="login-caption mt-3 text-center">
         {{ $t("areYouMember") }}
 
         <router-link :to="{ name: 'Login' }" class="login-caption-bold">
@@ -282,5 +243,8 @@ export default {
 }
 .login-caption-bold {
   font-weight: 600;
+}
+.v-input:not(.error--text) {
+  margin-bottom: 15px;
 }
 </style>
