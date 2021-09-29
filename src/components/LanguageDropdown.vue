@@ -67,6 +67,7 @@ export default {
       }
 
       this.$i18n.locale = locale;
+      this.$vuetify.lang.current = locale;
       this.$moment.locale(locale);
       localStorage.setItem("lang", locale);
     }

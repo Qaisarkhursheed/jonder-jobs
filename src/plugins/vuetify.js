@@ -16,6 +16,7 @@ export default new Vuetify({
   },
   lang: {
     locales: { en, de, fr },
-    current: localStorage.getItem("lang") || "de"
+    current: localStorage.getItem("lang") || "de",
+    defaultLocale: "de"
   }
 });
