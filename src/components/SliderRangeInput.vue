@@ -100,7 +100,7 @@ export default {
     display: flex;
     .monthly-salary {
       height: 58px;
-      width: 57px !important;
+      width: 63px !important;
       input {
         color: $primary-blue-dark !important;
         font-size: 18px !important;
