@@ -318,11 +318,11 @@ export default {
       return stringToArray.join();
     },
     userCurrentPosition() {
-       let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.user.current_position);
       });
 
-      return obj[this.$i18n.locale];
+      return obj ? obj[this.$i18n.locale] : null;
     }
   },
   methods: {
