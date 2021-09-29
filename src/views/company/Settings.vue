@@ -129,7 +129,7 @@
                     depressed
                     large
                     color="primary"
-                    class="pl-8 pr-8"
+                    class="px-8"
                     @click="handleUpdate"
                     >{{ $t("save") }}
                   </v-btn>
@@ -276,12 +276,28 @@
               </v-row>
             </v-form>
           </v-card>
+
+          <!-- Response alert -->
+          <response-alert :response="formResponse"></response-alert>
+
+          <div class="text-right mb-10">
+            <v-btn
+              :disabled="!formValid"
+              depressed
+              large
+              color="primary"
+              class="px-8"
+              @click="handleUpdate"
+              >{{ $t("save") }}
+            </v-btn>
+          </div>
+
+          <UserPlan
+            v-if="$store.getters['user/userPlan']"
+            :payment-info="true"
+            :border-plan="true"
+          />
         </v-container>
-        <UserPlan
-          v-if="$store.getters['user/userPlan']"
-          :payment-info="true"
-          :border-plan="true"
-        />
       </v-col>
     </v-row>
 

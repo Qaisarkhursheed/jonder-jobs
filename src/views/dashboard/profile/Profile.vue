@@ -739,6 +739,21 @@
         </v-col>
       </v-row>
     </v-card>
+
+    <!-- Response alert -->
+    <response-alert :response="formResponse"></response-alert>
+
+    <div class="text-right">
+      <v-btn
+        :loading="formLoading"
+        depressed
+        color="primary"
+        class="px-10"
+        height="48"
+        @click="handleUpdate"
+        >{{ $t("save") }}
+      </v-btn>
+    </div>
   </div>
 </template>
 
