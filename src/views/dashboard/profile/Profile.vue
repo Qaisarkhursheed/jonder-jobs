@@ -930,8 +930,8 @@ export default {
         this.formData.ready_for_work = null;
       }
 
-      if (this.formData.profile_img instanceof File) {
-        formDataCopy.profile_img = this.formData.profile_img;
+      if (!(formDataCopy.profile_img instanceof File)) {
+        delete formDataCopy.profile_img;
       }
 
       ["cv", "resume", "qualifications"].forEach(key => {
