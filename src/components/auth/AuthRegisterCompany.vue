@@ -202,7 +202,12 @@ export default {
         this.formResponse = {};
         this.register(this.formData)
           .then(() => {
-            this.$router.replace({ name: "RegisterVerifyEmail" });
+            this.$router.replace({
+              name: "RegisterVerifyEmail",
+              query: {
+                email: this.formData.email
+              }
+            });
           })
           .catch(err => {
             this.formResponse = err.data;

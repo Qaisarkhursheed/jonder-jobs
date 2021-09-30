@@ -87,7 +87,7 @@ export default {
 
   sendVerificationEmail(context, data) {
     try {
-      const resp = axios.post("/resend-by-email", { email: data });
+      const resp = axios.post("/resend-verification-email", { email: data });
       return resp;
     } catch (err) {
       return Promise.reject(err.response);

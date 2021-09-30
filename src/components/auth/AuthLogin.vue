@@ -146,11 +146,9 @@ export default {
     async handleLogin() {
       this.formLoading = true;
       this.formResponse = {};
-      localStorage.setItem("user-email", this.formData.email);
       this.$store
         .dispatch("auth/login", this.formData)
         .then(() => {
-          localStorage.removeItem("user-email");
           localStorage.removeItem("verificationTime");
 
           if (this.$route.query.redirect) {
@@ -163,7 +161,12 @@ export default {
         })
         .catch(err => {
           if (err.data.data?.email_not_verified) {
-            this.$router.push({ name: "RegisterVerifyEmail" });
+            this.$router.replace({
+              name: "RegisterVerifyEmail",
+              query: {
+                email: this.formData.email
+              }
+            });
           } else {
             this.formResponse = err.data;
           }

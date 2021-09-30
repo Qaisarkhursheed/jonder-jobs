@@ -7,27 +7,32 @@
         {{ $t("confirmYourAccount") }}
       </h1>
 
-      <p class="mt-2">
+      <p class="mt-2 mb-5">
         {{ $t("confirmYourAccountSub") }}
       </p>
 
-      <div class="reset-email-btn mb-2">
-        <v-btn
-          color="blue darken-4"
-          text
-          :disabled="!resendValid"
-          elevation="0"
-          large
-          @click="verificationEmail()"
-        >
-          {{ $t("resendEmail") }}
-        </v-btn>
-      </div>
       <router-link :to="{ name: 'Login' }">
         <v-btn type="button" color="primary" height="55">
           {{ $t("backToLogin") }}
         </v-btn>
       </router-link>
+
+      <br />
+
+      <v-btn
+        v-if="!successBox"
+        text
+        @click="verificationEmail"
+        :loading="loading"
+        height="55"
+        class="mt-3"
+      >
+        {{ $t("resendEmail") }}
+      </v-btn>
+
+      <div v-else class="mt-3 d-block" style="color: #4caf50">
+        {{ $t("emailSentSuccess") }}!
+      </div>
     </div>
   </auth-wrap>
 </template>
@@ -38,9 +43,10 @@ import AuthWrap from "@/components/auth/AuthWrap.vue";
 export default {
   data() {
     return {
-      email: localStorage.getItem("user-email"),
       resendValid: false,
-      interval: null
+      interval: null,
+      successBox: false,
+      loading: false
     };
   },
   components: {
@@ -61,12 +67,17 @@ export default {
       }
     },
     verificationEmail() {
-      if (this.resendValid) {
-        this.$store.dispatch("auth/sendVerificationEmail", this.email);
-        const time = new Date().getTime().toString();
-        localStorage.setItem("verificationTime", time);
-        this.setInterval();
-      }
+      this.loading = true;
+      this.$store
+        .dispatch("auth/sendVerificationEmail", this.$route.query.email)
+        .then(() => {
+          this.successBox = true;
+          setInterval(() => (this.successBox = false), 5000);
+        })
+        .finally(() => (this.loading = false));
+      const time = new Date().getTime().toString();
+      localStorage.setItem("verificationTime", time);
+      this.setInterval();
     }
   },
   mounted() {
@@ -75,10 +86,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.reset-email-btn {
-  .v-btn:before {
-    display: none;
-  }
-}
-</style>
+<style lang="scss"></style>

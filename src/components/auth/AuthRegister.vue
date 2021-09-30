@@ -219,8 +219,13 @@ export default {
       this.$store
         .dispatch("auth/register", this.formData)
         .then(() => {
-          localStorage.setItem("user-email", this.formData.email);
-          this.$router.replace({ name: "RegisterVerifyEmail" });
+          console.log("sending", this.formData.email);
+          this.$router.replace({
+            name: "RegisterVerifyEmail",
+            query: {
+              email: this.formData.email
+            }
+          });
         })
         .catch(err => {
           this.formResponse = err.data;
