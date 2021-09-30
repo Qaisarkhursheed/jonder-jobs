@@ -1,7 +1,11 @@
 <template>
-  <div class="d-flex pr-4 selection-management-table">
+  <!--  Transforms are used to make scrollbar on top -->
+  <div
+    class="d-flex pr-4 selection-management-table"
+    style="transform: rotateX(180deg); overflow-x: auto;"
+  >
     <div
-      style="min-width:300px"
+      style="min-width:300px; transform: rotateX(180deg);"
       v-for="(selection, i) in selection"
       :key="i"
       :class="[i.toLowerCase().replace(/\s/g, '')]"
