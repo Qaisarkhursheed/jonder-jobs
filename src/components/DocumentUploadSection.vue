@@ -19,7 +19,9 @@
     <template v-else>
       <div class="d-flex justify-space-between pt-4 pb-4">
         <div class="d-flex">
-          <img :src="require('@/assets/svg/pdf.svg')" />
+          <img
+            :src="require(`@/assets/file-icons/${extension || '_blank'}.png`)"
+          />
           <div class="pl-3">
             <div class="pdf-name">{{ type }}</div>
             <!-- <div class="pdf-size" v-if="inputData[0].size">
@@ -59,25 +61,30 @@ export default {
 
   props: {
     type: {
-      type: String,
+      type: String
     },
     value: {
       type: [Object, Boolean, Array, String],
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
-      inputData: null,
+      inputData: null
     };
+  },
+  computed: {
+    extension() {
+      return this.value.name ? this.value.name.split(".").pop() : null;
+    }
   },
   created() {
     if (this.value) {
       this.inputData = [
         {
           name: this.value,
-          size: false,
-        },
+          size: false
+        }
       ];
     }
   },
@@ -95,14 +102,14 @@ export default {
       } else {
         this.inputData = null;
       }
-    },
+    }
   },
 
   watch: {
     inputData(val) {
       this.$emit("change", val);
-    },
-  },
+    }
+  }
 };
 </script>
 
