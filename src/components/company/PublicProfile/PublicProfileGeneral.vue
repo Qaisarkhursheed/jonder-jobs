@@ -1,33 +1,12 @@
 <template>
   <div class="public-profile-general">
     <v-form v-model="formValid">
-      <div class="avatar-input">
-        <input
-          type="file"
-          ref="uploadAvatarInput"
-          class="d-none"
-          @change="cropperImage = $event.target.files"
-        />
-        <ImageUploadCropper
-          :image="cropperImage"
-          @cancel="$refs.uploadAvatarInput.value = null"
-          @save="newProfileImg = $event"
-        />
-        <v-avatar color="primary" size="120">
-          <img v-if="avatarImage" :src="avatarImage" />
-          <span v-else class="white--text text-h3">
-            {{ user | initials }}
-          </span>
-        </v-avatar>
-        <v-icon
-          @click="$refs.uploadAvatarInput.click()"
-          color="white"
-          size="20"
-          style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%; border: 2px solid white;"
-        >
-          mdi-camera
-        </v-icon>
-      </div>
+      <AvatarInput
+        v-model="formData.profile_img"
+        size="120"
+        with-icon
+        :user="user"
+      />
 
       <div class="section mt-5">
         <label class="section-label">
@@ -62,10 +41,10 @@
 </template>
 
 <script>
-import ImageUploadCropper from "@/components/ImageUploadCropper";
+import AvatarInput from "@/components/controls/AvatarInput";
 
 export default {
-  components: { ImageUploadCropper },
+  components: { AvatarInput },
 
   props: {
     user: {
@@ -77,18 +56,8 @@ export default {
   data() {
     return {
       formValid: false,
-      formData: {},
-      newProfileImg: null,
-      cropperImage: null
+      formData: {}
     };
-  },
-
-  computed: {
-    avatarImage() {
-      return this.newProfileImg
-        ? URL.createObjectURL(this.newProfileImg)
-        : this.formData.profile_img;
-    }
   },
 
   created() {
@@ -107,8 +76,8 @@ export default {
         about_company: this.formData.about_company
       };
 
-      if (this.newProfileImg) {
-        obj["profile_img"] = this.newProfileImg;
+      if (this.formData.profile_img instanceof File) {
+        obj["profile_img"] = this.formData.profile_img;
       }
 
       this.$emit("update", obj);

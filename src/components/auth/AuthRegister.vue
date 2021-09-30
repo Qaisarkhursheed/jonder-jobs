@@ -21,26 +21,8 @@
     >
       <!-- Avatar upload -->
       <div class="d-flex align-center flex-column mt-8 mb-6">
-        <v-avatar
-          color="#E3F2FB"
-          size="120"
-          class="flex-grow-0 flex-shrink-0"
-          style="cursor: pointer"
-          @click="$refs.uploadAvatarInput.click()"
-        >
-          <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-img
-            v-else
-            class="profile_img"
-            src="../../assets/cloud.svg"
-          ></v-img>
-        </v-avatar>
-        <input
-          type="file"
-          ref="uploadAvatarInput"
-          style="display: none"
-          @change="profile_img = $event.target.files[0]"
-        />
+        <AvatarInput v-model="formData.profile_img" size="120" />
+
         <div class="avatar-label mt-4">
           {{ $t("uploadPhoto") }}
         </div>
@@ -155,7 +137,7 @@
         v-model="formData.accept_policy"
         :rules="[validations.required]"
         class="checkbox-abn ma-0"
-        color="#333"
+        color="primary"
         :label="$t('agreePolicy')"
         hide-details="auto"
       ></v-checkbox>
@@ -182,7 +164,7 @@
       <v-btn
         type="submit"
         class="full-w mt-3 dark-blue"
-        :disabled="!formValid"
+        :disabled="!formValid || !formData.accept_policy"
         :loading="formLoading"
         large
         height="56"
@@ -203,11 +185,10 @@
 
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
+import AvatarInput from "@/components/controls/AvatarInput";
 
 export default {
-  components: {
-    JonderTitle
-  },
+  components: { JonderTitle, AvatarInput },
   data() {
     return {
       formData: {
@@ -220,9 +201,9 @@ export default {
         // show_name: false,
         // show_location: false,
         role: "Jobseeker",
-        accept_policy: false
+        accept_policy: false,
+        profile_img: null
       },
-      profile_img: false,
       showPass: false,
       showPassConfirm: false,
       formLoading: false,
@@ -234,9 +215,7 @@ export default {
     async handleRegister() {
       this.formResponse = {};
       this.formLoading = true;
-      if (this.profile_img) {
-        this.formData["profile_img"] = this.profile_img;
-      }
+
       this.$store
         .dispatch("auth/register", this.formData)
         .then(() => {
@@ -249,14 +228,6 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-    }
-  },
-  computed: {
-    avatar_img() {
-      if (this.profile_img) {
-        return URL.createObjectURL(this.profile_img);
-      }
-      return false;
     }
   }
 };
@@ -280,11 +251,5 @@ export default {
 }
 .checkbox-abn .v-input--selection-controls__input {
   order: 1 !important;
-}
-.profile_img {
-  position: absolute;
-  width: 66px !important;
-  height: 48px !important;
-  border-radius: 0 !important;
 }
 </style>

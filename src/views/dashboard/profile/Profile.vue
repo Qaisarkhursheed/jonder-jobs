@@ -25,31 +25,12 @@
       <v-row>
         <!-- Avatar -->
         <v-col cols="6">
-          <input
-            type="file"
-            ref="uploadAvatarInput"
-            class="d-none"
-            @change="cropperImage = $event.target.files"
+          <AvatarInput
+            v-model="formData.profile_img"
+            size="80"
+            with-icon
+            :user="$store.getters['user/user']"
           />
-          <ImageUploadCropper
-            :image="cropperImage"
-            @cancel="$refs.uploadAvatarInput.value = null"
-            @save="newImage = $event"
-          />
-          <v-avatar color="primary" size="80">
-            <v-img v-if="profile_img" :src="profile_img" />
-            <span v-else class="white--text text-h4">
-              {{ $store.getters["user/getUserInitials"] }}
-            </span>
-          </v-avatar>
-          <v-icon
-            @click="$refs.uploadAvatarInput.click()"
-            color="white"
-            size="20"
-            style="position: relative; bottom: -30px; right: 30px; background-color: #0253B3; padding: 7px; border-radius: 50%; border: 2px solid white;"
-          >
-            mdi-camera
-          </v-icon>
         </v-col>
 
         <!-- Save button -->
@@ -771,10 +752,10 @@ import ModalExperience from "@/components/auth/manualOnboardingSteps/ModalExperi
 import DocumentUploadSection from "@/components/DocumentUploadSection.vue";
 import UserPlanDescription from "../../../components/user/UserPlanDescription";
 import SliderInput from "@/components/SliderInput.vue";
-import ImageUploadCropper from "@/components/ImageUploadCropper";
 import SliderRangeInput from "../../../components/SliderRangeInput";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import CancelSubscription from "../../../components/plans/CancelSubscription";
+import AvatarInput from "@/components/controls/AvatarInput";
 
 export default {
   components: {
@@ -790,15 +771,15 @@ export default {
     ModalExperience,
     DocumentUploadSection,
     SliderInput,
-    ImageUploadCropper,
-    LanguageDropdown
+    LanguageDropdown,
+    AvatarInput
   },
 
   data: () => ({
-    newImage: null,
     formData: {
       first_name: "",
       last_name: "",
+      profile_img: null,
       about_me: "",
       city: "",
       current_position: "",
@@ -825,7 +806,6 @@ export default {
     passwordFormResponse: {},
     dontKnowWhenToStart: false,
     invoices: [],
-    cropperImage: null,
     modals: {
       UpgradePlan: {
         active: false,
@@ -866,11 +846,6 @@ export default {
       "isPlanActive",
       "getUserPlan"
     ]),
-    profile_img() {
-      return this.newImage
-        ? URL.createObjectURL(this.newImage)
-        : this.user.profile_img;
-    },
     types() {
       return types;
     },
@@ -924,6 +899,7 @@ export default {
       if (!user) return;
       this.formData.first_name = user.first_name;
       this.formData.last_name = user.last_name;
+      this.formData.profile_img = user.profile_img;
       this.formData.about_me = user.about_me;
       this.formData.current_position = parseInt(user.current_position);
       this.formData.city = user.city;
@@ -954,8 +930,8 @@ export default {
         this.formData.ready_for_work = null;
       }
 
-      if (this.newImage) {
-        formDataCopy.profile_img = this.newImage;
+      if (this.formData.profile_img instanceof File) {
+        formDataCopy.profile_img = this.formData.profile_img;
       }
 
       ["cv", "resume", "qualifications"].forEach(key => {

@@ -131,7 +131,7 @@
       ></v-checkbox>
 
       <v-btn
-        :disabled="!isValid"
+        :disabled="!isValid || !formData.accept_policy"
         type="submit"
         color="primary"
         class="mt-3"
