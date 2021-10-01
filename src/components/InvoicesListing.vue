@@ -1,5 +1,5 @@
 <template>
-  <div class="invoice-listing">
+  <div class="invoice-listing" :class="{ 'limit-height': invoices.length > 4 }">
     <div v-if="!invoices.length">
       <i>{{ $t("noDataAvailable") }}</i>
     </div>
@@ -64,10 +64,13 @@ export default {
 
 <style lang="scss">
 .invoice-listing {
-  max-height: 290px;
   padding-right: 15px;
-  overflow-x: hidden;
-  overflow-y: auto;
+
+  &.limit-height {
+    max-height: 290px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
   .invoice-row {
     border-bottom: 1px solid #dedede;
