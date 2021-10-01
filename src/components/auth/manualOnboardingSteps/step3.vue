@@ -10,6 +10,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-select
+        :attach="true"
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.required]"
@@ -44,6 +45,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
+        :attach="true"
         v-model="value.address_to_work"
         @update:search-input="
           $store.dispatch('google/places', {

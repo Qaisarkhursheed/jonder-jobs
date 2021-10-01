@@ -7,6 +7,7 @@
           <div class="status-title">{{ $t("statusOfCandidate") }}</div>
           <div class="status-selection">
             <v-select
+              :attach="true"
               class="d-flex align-center"
               :items="getSelectionOptions"
               :value="user.selection_managment"

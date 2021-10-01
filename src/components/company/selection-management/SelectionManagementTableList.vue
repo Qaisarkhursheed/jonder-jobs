@@ -42,6 +42,7 @@
 
             <v-col cols="4" class="d-flex align-center" @click.stop>
               <v-select
+                :attach="true"
                 class="d-flex align-center"
                 :items="getSelectionOptions"
                 :value="item.managment_status"

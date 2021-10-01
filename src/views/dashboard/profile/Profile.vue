@@ -105,6 +105,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-autocomplete
+            :attach="true"
             v-model="formData.city"
             @update:search-input="
               $store.dispatch('google/places', {
@@ -173,6 +174,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-autocomplete
+            :attach="true"
             v-model="formData.current_position"
             :items="types.JOB_POSITION"
             item-value="id"
@@ -193,6 +195,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-autocomplete
+            :attach="true"
             v-clearable-autocomplete
             v-model="formData.branche"
             item-value="id"
@@ -232,6 +235,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-autocomplete
+            :attach="true"
             v-model="formData.looking_for"
             v-clearable-autocomplete
             :items="types.JOB_POSITION"
@@ -264,6 +268,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-select
+            :attach="true"
             v-model="formData.why_jonder"
             :rules="[validations.required]"
             :items="jonderStatus"
@@ -292,6 +297,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-select
+            :attach="true"
             v-model="formData.looking_for_employment_type"
             :items="types.EMPLOYEMENT_TYPE"
             :rules="[validations.required]"
@@ -336,6 +342,7 @@
             <span style="color: red;">*</span>
           </label>
           <v-autocomplete
+            :attach="true"
             v-model="formData.address_to_work"
             @update:search-input="
               $store.dispatch('google/places', {

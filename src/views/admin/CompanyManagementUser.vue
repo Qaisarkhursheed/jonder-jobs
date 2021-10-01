@@ -40,6 +40,7 @@
               {{ $t("branch") }}
             </label>
             <v-autocomplete
+              :attach="true"
               v-model="company.branche"
               :items="types.JOB_BRANCHE"
               cache-items
@@ -62,6 +63,7 @@
               {{ $t("numberOfEmployees") }}
             </label>
             <v-select
+              :attach="true"
               v-model="company.company_employees"
               :items="types.EMPLOYEE_NUMBER"
               outlined
@@ -138,7 +140,7 @@
             </label>
             <v-text-field v-model="company.web_url" outlined readonly> </v-text-field>
           </div>
-          
+
           <!-- Social links -->
           <div class="social-links mb-3">
             {{ $t("socialLinks") }}
@@ -177,7 +179,7 @@ export default {
       company: {},
       social: ["facebook", "instagram", "linkedin", "youtube", "twitter"]
     }
-  },  
+  },
   created() {
     axios
       .get(`/copmanies/${this.id}`)

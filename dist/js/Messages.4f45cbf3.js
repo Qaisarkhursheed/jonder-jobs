@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["Messages"],{5801:function(e,t,n){"use strict";n.r(t);var s=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("Chat",{attrs:{isCompany:""}})},a=[],c=n("bcd3"),o={components:{Chat:c["default"]}},r=o,u=n("2877"),l=Object(u["a"])(r,s,a,!1,null,"c08e5d5e",null);t["default"]=l.exports}}]);
-//# sourceMappingURL=Messages.4f45cbf3.js.map

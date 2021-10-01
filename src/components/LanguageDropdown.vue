@@ -1,6 +1,7 @@
 <template>
   <div class="language-toggle">
     <v-select
+      :attach="true"
       :value="language"
       :items="items"
       @change="changeLanguage"

@@ -7,6 +7,7 @@
           {{ $t("branch") }}
         </label>
         <v-autocomplete
+          :attach="true"
           v-model="formData.branche"
           :items="types.JOB_BRANCHE"
           :rules="[validations.required]"
@@ -34,6 +35,7 @@
           {{ $t("numberOfEmployees") }}
         </label>
         <v-select
+          :attach="true"
           v-model="formData.company_employees"
           :items="types.EMPLOYEE_NUMBER"
           item-value="id"
