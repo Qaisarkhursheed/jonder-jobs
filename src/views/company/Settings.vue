@@ -57,15 +57,13 @@
 
           <!-- Personal info -->
           <v-card flat id="personalInfo" class="profile-section mb-10">
-            <v-row>
-              <p class="profile-title">
-                {{ $t("changePersonalInfo") }}
-              </p>
-              <p class="profile-subtitle">
-                <!-- Explanation goes here
-              </p> -->
-              </p>
-            </v-row>
+            <p class="profile-title">
+              {{ $t("changePersonalInfo") }}
+            </p>
+            <p class="profile-subtitle">
+              <!-- Explanation goes here
+            </p> -->
+            </p>
 
             <v-form v-model="formValid">
               <v-row>
@@ -140,58 +138,27 @@
 
           <!-- Billing & Invoices -->
           <v-card flat id="invoices" class="profile-section mb-10">
-            <v-row>
-              <p class="profile-title">
-                {{ $t("billingInvoices") }}
-              </p>
-              <!-- <p class="profile-subtitle">
-                Explanation goes here
-              </p> -->
-            </v-row>
+            <p class="profile-title">
+              {{ $t("billingInvoices") }}
+            </p>
+            <!-- <p class="profile-subtitle">
+              Explanation goes here
+            </p> -->
 
-            <v-row
-              v-for="item in invoices"
-              :key="item.id"
-              class="invoice-row py-1"
-            >
-              <v-col>
-                <div class="invoice-number">
-                  {{ $t("numberOfInvoice") }}: {{ item.invoice_number }}
-                </div>
-                <div class="invoice-date">
-                  Date of invoice:
-                  {{
-                    item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm")
-                  }}
-                </div>
-              </v-col>
-              <v-col cols="auto d-flex align-center">
-                <v-img
-                  class="hover-pointer"
-                  :src="require('@/assets/icons/download.svg')"
-                  @click="
-                    $store.dispatch('invoices/downloadInvoice', {
-                      id: item.id,
-                      number: item.invoice_number
-                    })
-                  "
-                ></v-img>
-              </v-col>
-            </v-row>
+            <InvoicesListing :invoices="invoices || []" />
           </v-card>
 
           <!-- Payment -->
           <v-card flat id="payment" class="profile-section mb-10">
-            <v-row>
-              <p class="profile-title">
-                {{ $t("editPaymentMethod") }}
-              </p>
-              <!-- <p class="profile-subtitle">
-                Explanation goes here
-              </p> -->
-            </v-row>
+            <p class="profile-title">
+              {{ $t("editPaymentMethod") }}
+            </p>
+            <!-- <p class="profile-subtitle">
+              Explanation goes here
+            </p> -->
+
             <!-- left hardcoded -->
-            <v-row class="payment-card pa-3">
+            <v-row class="payment-card pa-3 ma-0">
               <v-col>
                 <div class="card-name">Master card ****3660</div>
                 <div class="card-expiration">{{ $t("expires") }} 02/24</div>
@@ -216,14 +183,12 @@
 
           <!-- Password -->
           <v-card flat id="changePassword" class="profile-section mb-10">
-            <v-row class="mb-0">
-              <p class="profile-title">
-                {{ $t("changePassword") }}
-              </p>
-              <!-- <p class="profile-subtitle">
-                Explanation goes here
-              </p> -->
-            </v-row>
+            <p class="profile-title">
+              {{ $t("changePassword") }}
+            </p>
+            <!-- <p class="profile-subtitle">
+              Explanation goes here
+            </p> -->
 
             <v-form ref="passwordForm" v-model="passwordFormValid">
               <label class="profile-label">{{ $t("enterNewPassword") }}</label>
@@ -318,13 +283,15 @@ import Header from "@/components/company/Header";
 import AddNewCard from "@/views/dashboard/AddNewCard";
 import UserPlan from "../../components/user/UserPlan";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import InvoicesListing from "@/components/InvoicesListing";
 
 export default {
   components: {
     UserPlan,
     Header,
     AddNewCard,
-    LanguageDropdown
+    LanguageDropdown,
+    InvoicesListing
   },
   data() {
     return {

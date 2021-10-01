@@ -546,34 +546,11 @@
       <h2 class="profile-title">
         {{ $t("invoicing") }}
       </h2>
-      <p class="profile-subtitle mb-8">
+      <p class="profile-subtitle">
         {{ $t("invoicesDesc") }}
       </p>
 
-      <!-- Invoices -->
-      <v-row v-for="item in invoices" :key="item.id" class="invoice-row py-1">
-        <v-col>
-          <div class="invoice-number">
-            {{ $t("numberOfBill") }}: {{ item.invoice_number }}
-          </div>
-          <div class="invoice-date">
-            {{ $t("dateOfInvoice") }}:
-            {{ item.transaction_completed_at | moment("DD.MM.YYYY / HH:mm") }}
-          </div>
-        </v-col>
-        <v-col cols="auto d-flex align-center">
-          <v-img
-            class="hover-pointer"
-            :src="require('@/assets/icons/download.svg')"
-            @click="
-              $store.dispatch('invoices/downloadInvoice', {
-                id: item.id,
-                number: item.invoice_number
-              })
-            "
-          ></v-img>
-        </v-col>
-      </v-row>
+      <InvoicesListing :invoices="invoices || []" />
     </v-card>
 
     <!-- <v-card flat id="paymentMethod" class="profile-section mb-10">
@@ -756,6 +733,7 @@ import SliderRangeInput from "../../../components/SliderRangeInput";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import CancelSubscription from "../../../components/plans/CancelSubscription";
 import AvatarInput from "@/components/controls/AvatarInput";
+import InvoicesListing from "@/components/InvoicesListing";
 
 export default {
   components: {
@@ -772,7 +750,8 @@ export default {
     DocumentUploadSection,
     SliderInput,
     LanguageDropdown,
-    AvatarInput
+    AvatarInput,
+    InvoicesListing
   },
 
   data: () => ({

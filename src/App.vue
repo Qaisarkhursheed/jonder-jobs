@@ -640,23 +640,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   word-break: break-all;
 }
 
-.invoice-row {
-  border-top: 1px solid #dedede;
-
-  .invoice-number {
-    font-weight: 500;
-    font-size: 13px;
-    color: #000000;
-    opacity: 0.7;
-  }
-
-  .invoice-date {
-    font-weight: 500;
-    font-size: 16px;
-    color: #101010;
-  }
-}
-
 .payment-card {
   border: 1px solid #e9e9e9;
   border-radius: 10px !important;
