@@ -494,6 +494,14 @@ button {
   border-radius: 10px;
 }
 
+.v-menu__content {
+  border-radius: 16px;
+}
+
+.v-picker {
+  padding: 0;
+}
+
 .lang-switcher {
   .v-text-field--rounded > .v-input__control > .v-input__slot {
     padding: 0 15px;
