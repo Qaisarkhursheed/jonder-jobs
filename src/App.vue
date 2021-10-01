@@ -472,7 +472,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 
 .dashboard-about {
   background: white;
-  border-radius: 10px;
   padding: 20px;
   margin-top: 40px;
 }
