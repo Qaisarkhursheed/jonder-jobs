@@ -194,7 +194,7 @@
             <v-row class="payment-card pa-3">
               <v-col>
                 <div class="card-name">Master card ****3660</div>
-                <div class="card-expiration">Expires 02/24</div>
+                <div class="card-expiration">{{ $t("expires") }} 02/24</div>
               </v-col>
               <v-col cols="auto">
                 <v-img :src="require('@/assets/icons/three-dots.svg')"></v-img>

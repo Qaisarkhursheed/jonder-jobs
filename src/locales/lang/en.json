@@ -414,6 +414,7 @@
   "total": "Total",
   "payNow": "Pay now",
   "addNewCard": "Add new card",
+  "expires": "Expires",
   "expirationDate": "Expiration Date",
   "required": "Required",
   "min3Characters": "Min 3 characters",

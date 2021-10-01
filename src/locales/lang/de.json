@@ -414,6 +414,7 @@
   "total": "Gesamtstummente",
   "payNow": "Jetzt Bezüllen",
   "addNewCard": "Neue Karte hinzufügen",
+  "expires": "Verfällt am",
   "expirationDate": "Haltbarkeitsdatum",
   "required": "Erforderlich",
   "min3Characters": "Min 3 Zeichen",
