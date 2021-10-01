@@ -67,6 +67,7 @@
               <v-col>
                 <label>{{ $t("position") }}</label>
                 <v-autocomplete
+                  :attach="true"
                   v-model="form.position"
                   :items="types.JOB_POSITION"
                   item-value="id"
@@ -85,11 +86,12 @@
               <v-col>
                 <label>{{ $t("type") }}</label>
                 <v-select
+                  :attach="true"
                   v-model="form.employment_type"
                   :placeholder="$t('choose')"
                   :items="types.EMPLOYEMENT_TYPE"
                   item-value="id"
-                  :item-text="$i18n.locale" 
+                  :item-text="$i18n.locale"
                   :rules="[validations.required]"
                   outlined
                   append-icon="mdi-chevron-down"

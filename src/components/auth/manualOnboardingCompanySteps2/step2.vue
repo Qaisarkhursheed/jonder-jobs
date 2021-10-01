@@ -10,6 +10,7 @@
         <span style="color: red;">*</span>
       </label>
       <!-- <v-select
+        :attach="true"
         v-model="value.branche"
         :items="branches"
         :rules="[validations.required]"
@@ -17,11 +18,12 @@
         outlined
       ></v-select> -->
       <v-autocomplete
+        :attach="true"
         class="mt-1"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required]"
-         item-value="id"
+        item-value="id"
         :item-text="$i18n.locale"
         outlined
         flat
@@ -44,6 +46,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-select
+        :attach="true"
         class="mt-1"
         v-model="value.company_employees"
         :items="types.EMPLOYEE_NUMBER"

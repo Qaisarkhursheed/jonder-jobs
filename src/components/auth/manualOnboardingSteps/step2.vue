@@ -11,6 +11,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
+        :attach="true"
         v-model="value.current_position"
         :items="types.JOB_POSITION"
         :rules="[validations.required]"
@@ -30,6 +31,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
+        :attach="true"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.required, validations.max.selection(3)]"
@@ -68,6 +70,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
+        :attach="true"
         v-model="value.looking_for"
         :items="types.JOB_POSITION"
         item-value="id"

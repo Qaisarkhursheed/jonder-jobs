@@ -12,6 +12,7 @@
       </v-col>
       <v-col cols="4">
         <!-- <v-autocomplete
+        :attach="true"
           v-if="!profile"
           v-model="searchString"
           :loading="searchLoading"

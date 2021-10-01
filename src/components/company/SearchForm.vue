@@ -11,6 +11,7 @@
             {{ $t("position") }}
           </label>
           <v-autocomplete
+            :attach="true"
             v-model="formFields.job_position"
             :items="types.JOB_POSITION"
             item-value="id"
@@ -23,12 +24,13 @@
             append-icon="mdi-chevron-down"
           ></v-autocomplete>
         </v-col>
-        
+
         <v-col cols="12" md="5">
           <label class="section-label">
             {{ $t("employementType") }}
           </label>
           <v-select
+            :attach="true"
             v-model="formFields.employment_type"
             :items="types.EMPLOYEMENT_TYPE"
             item-value="id"
@@ -62,6 +64,7 @@
               {{ $t("industryOfProfession") }}
             </label>
             <v-autocomplete
+              :attach="true"
               v-model="formFields.branche"
               :items="types.JOB_BRANCHE"
               :item-text="$i18n.locale"
@@ -112,6 +115,7 @@
               {{ $t("educationStudy") }}
             </label>
             <v-select
+              :attach="true"
               v-model="formFields.education"
               :items="types.EDUCATION"
               clearable
@@ -181,6 +185,7 @@
               {{ $t("workExperience") }}
             </label>
             <v-select
+              :attach="true"
               v-model="formFields.work_experience"
               :items="types.WORK_EXPERIENCE"
               :item-text="$i18n.locale"

@@ -110,6 +110,7 @@
               {{ $t("detailsAboutYouBranchesPlace") }}
             </label>
             <v-autocomplete
+              :attach="true"
               v-model="user.branche"
               :items="types.JOB_BRANCHE"
               outlined
@@ -129,6 +130,7 @@
               {{ $t("detailsAboutYouRolePlace") }}
             </label>
             <v-autocomplete
+              :attach="true"
               v-model="user.looking_for"
               :items="$store.getters['professions/items']"
               :placeholder="$t('detailsAboutYouRolePlace')"
@@ -146,6 +148,7 @@
               {{ $t("lookingForEmployementPlace") }}
             </label>
             <v-select
+              :attach="true"
                 v-model="user.looking_for_employment_type"
                 :items="types.EMPLOYEMENT_TYPE"
                 :placeholder="$t('lookingForEmployementPlace')"

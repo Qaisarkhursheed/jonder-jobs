@@ -34,6 +34,7 @@
           {{ $t("cityAndAddress") }}
         </label>
         <v-autocomplete
+          :attach="true"
           v-model="form.address"
           @update:search-input="
             $store.dispatch('google/places', {

@@ -33,6 +33,7 @@
       <v-col cols="12">
         <label>{{ $t("currentPosition") }}</label>
         <v-select
+          :attach="true"
           outlined
           dense
           :label="$t('currentPosition')"
@@ -49,6 +50,7 @@
       <v-col cols="12">
         <label>{{ $t("whichBranch") }}</label>
         <v-select
+          :attach="true"
           outlined
           dense
           :rules="rules"
