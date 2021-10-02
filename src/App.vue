@@ -470,12 +470,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   height: 48px;
 }
 
-.dashboard-about {
-  background: white;
-  padding: 20px;
-  margin-top: 40px;
-}
-
 .top-info {
   width: 100%;
   display: flex;

@@ -463,11 +463,11 @@ button {
 }
 
 .v-alert {
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .v-card {
-  border-radius: 16px !important;
+  border-radius: 10px !important;
   padding: 28px;
 
   @media (max-width: 575px) {
@@ -481,7 +481,7 @@ button {
 }
 
 .v-dialog {
-  border-radius: 16px !important;
+  border-radius: 10px !important;
 
   @media (max-width: 575px) {
     margin-left: 10px;
@@ -495,7 +495,7 @@ button {
 }
 
 .v-menu__content {
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .v-picker {

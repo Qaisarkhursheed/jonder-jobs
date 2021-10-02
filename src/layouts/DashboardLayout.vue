@@ -146,7 +146,12 @@
           </v-card>
         </nav>
 
-        <div class="dashboard-about" v-if="dashboard">
+        <v-card
+          flat
+          class="dashboard-about"
+          v-if="dashboard"
+          style="padding: 20px; margin-top: 40px"
+        >
           <v-row class="full-h ma-0">
             <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
               <div class="profile-image">
@@ -255,7 +260,7 @@
               </div>
             </div>
           </v-row>
-        </div>
+        </v-card>
       </v-col>
       <v-col
         class="main col-12 col-md-8 col-xl-9"
