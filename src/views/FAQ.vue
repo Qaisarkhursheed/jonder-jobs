@@ -16,7 +16,7 @@
         </v-col>
         <v-col cols="9" class="links d-flex align-center justify-end">
           <router-link
-            to="/register"
+            :to="{ name: 'Register' }"
             class="txt-link text-color-primary-blue-dark"
           >
             {{ $t("register") }}

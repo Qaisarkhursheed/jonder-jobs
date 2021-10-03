@@ -94,7 +94,7 @@
                 nulla non
                 <div class="promo-actions">
                   <router-link
-                    :to="{ name: 'RegisterCompany' }"
+                    :to="{ name: 'Register', query: { type: 'employer' } }"
                     class="button dark-blue fill"
                     >Registrieren</router-link
                   >
@@ -120,7 +120,7 @@
                 nulla non
                 <div class="promo-actions">
                   <router-link
-                    :to="{ name: 'RegisterUser' }"
+                    :to="{ name: 'Register', query: { type: 'jobseeker' } }"
                     class="button dark-blue fill"
                   >
                     Registrieren

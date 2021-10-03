@@ -47,8 +47,8 @@
               color="primary"
               class="mb-4"
               height="55"
-              @click="accountType = 'user'"
-              :outlined="accountType != 'user'"
+              @click="accountType = 'jobseeker'"
+              :outlined="accountType != 'jobseeker'"
             >
               {{ $t("imJobseeker") }}
             </v-btn>
@@ -57,8 +57,8 @@
               block
               color="primary"
               class="mb-4"
-              @click="accountType = 'company'"
-              :outlined="accountType != 'company'"
+              @click="accountType = 'employer'"
+              :outlined="accountType != 'employer'"
               height="55"
             >
               {{ $t("imEmployer") }}
@@ -172,9 +172,15 @@ export default {
       return url;
     }
   },
+  created() {
+    const type = this.$route.query.type;
+    if (type && (type == "jobseeker" || type == "employer")) {
+      this.accountType = type;
+    }
+  },
   methods: {
     submit() {
-      if (this.accountType === "user") {
+      if (this.accountType === "jobseeker") {
         this.$router.push({ name: "RegisterUser" });
       } else {
         this.$router.push({ name: "RegisterCompany" });
