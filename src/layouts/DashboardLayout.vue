@@ -92,6 +92,13 @@
                   mdi-chevron-right
                 </v-icon>
               </div>
+              <div @click="scrollToSection('status')" class="nav-item">
+                {{ $t("yourStatus") }}
+
+                <v-icon>
+                  mdi-chevron-right
+                </v-icon>
+              </div>
               <div @click="scrollToSection('lookingFor')" class="nav-item">
                 {{ $t("searchingFor") }}
                 <v-icon>
@@ -102,7 +109,7 @@
                 @click="scrollToSection('experienceAndEducation')"
                 class="nav-item"
               >
-                {{ $t("experiences") }}
+                {{ $t("experienceAndEducation") }}
 
                 <v-icon>
                   mdi-chevron-right
@@ -114,15 +121,15 @@
                   mdi-chevron-right
                 </v-icon>
               </div>
-              <div @click="scrollToSection('invoices')" class="nav-item">
+              <!-- <div @click="scrollToSection('paymentMethod')" class="nav-item">
                 {{ $t("billing") }}
 
                 <v-icon>
                   mdi-chevron-right
                 </v-icon>
-              </div>
-              <div @click="scrollToSection('paymentMethod')" class="nav-item">
-                {{ $t("invoicing") }}
+              </div> -->
+              <div @click="scrollToSection('invoices')" class="nav-item">
+                {{ $t("billingInvoices") }}
 
                 <v-icon>
                   mdi-chevron-right

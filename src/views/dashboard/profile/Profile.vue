@@ -151,7 +151,10 @@
             v-model="formData.about_me"
             dense
             outlined
-            hide-details
+            rows="4"
+            hide-details="auto"
+            counter="250"
+            maxlength="250"
           ></v-textarea>
         </v-col>
       </v-row>
@@ -283,10 +286,10 @@
 
     <v-card flat id="lookingFor" class="profile-section mb-10">
       <h2 class="profile-title">
-        {{ $t("experienceAndEducation") }}
+        {{ $t("searchingFor") }}
       </h2>
       <p class="profile-subtitle">
-        {{ $t("experienceAndEducationDesc") }}
+        {{ $t("lookingForDesc") }}
       </p>
 
       <v-row>
@@ -419,7 +422,7 @@
 
     <v-card flat id="experienceAndEducation" class="profile-section mb-10">
       <h2 class="profile-title">
-        {{ $t("canStart") }}
+        {{ $t("experienceAndEducation") }}
       </h2>
       <p class="profile-subtitle">
         {{ $t("experienceAndEducationDesc") }}
@@ -551,7 +554,7 @@
 
     <v-card flat id="invoices" class="profile-section mb-10">
       <h2 class="profile-title">
-        {{ $t("invoicing") }}
+        {{ $t("billingInvoices") }}
       </h2>
       <p class="profile-subtitle">
         {{ $t("invoicesDesc") }}

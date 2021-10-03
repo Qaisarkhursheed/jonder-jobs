@@ -104,6 +104,7 @@
   "cityAndAddress": "Ville et adresse",
   "workRadius": "Rayon de travail",
   "lookingFor": "Recherche",
+  "lookingForDesc": "Ajoutez plus d'informations sur votre recherche d'emploi",
   "howManyEmployees": "Combien d'employés votre entreprise compte-t-elle?",
   "whichIndustry": "Dans quel secteur êtes-vous?",
   "editProfile": "Modifier le profil",
