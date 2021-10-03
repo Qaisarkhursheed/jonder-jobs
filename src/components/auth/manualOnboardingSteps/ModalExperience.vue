@@ -70,7 +70,6 @@
                   :attach="true"
                   v-model="form.position"
                   :items="types.JOB_POSITION"
-                  item-value="id"
                   :item-text="$i18n.locale"
                   :rules="[validations.required]"
                   outlined
