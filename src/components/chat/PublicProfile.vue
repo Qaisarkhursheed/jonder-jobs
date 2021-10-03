@@ -1,7 +1,7 @@
 <template>
   <v-card
     flat
-    class="messages-holder full-h d-flex flex-column"
+    class="messages-holder full-h d-flex flex-column pa-0"
     style="background: white;"
   >
     <v-row

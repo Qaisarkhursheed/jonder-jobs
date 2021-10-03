@@ -1,6 +1,6 @@
 <template>
   <div class="user-preview" v-if="userData">
-    <v-card flat class="messages-holder full-h d-flex flex-column">
+    <v-card flat class="messages-holder full-h d-flex flex-column pa-0">
       <v-card-title class="flex-grow-0 flex-shrink-0 pb-2">
         <v-list-item class="grow">
           <v-list-item-avatar @click="$emit('show-profile')">
