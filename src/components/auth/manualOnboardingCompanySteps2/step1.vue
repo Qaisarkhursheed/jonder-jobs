@@ -5,28 +5,9 @@
     </h1>
 
     <v-form v-model="formValid">
-      <!-- Avatar upload: Move to component  -->
       <div class="d-flex align-center flex-column mt-8 mb-6">
-        <v-avatar
-          color="#E3F2FB"
-          size="120"
-          class="flex-grow-0 flex-shrink-0"
-          style="cursor: pointer"
-          @click="$refs.uploadAvatarInput.click()"
-        >
-          <v-img v-if="avatar_img" :src="avatar_img"></v-img>
-          <v-img
-            v-else
-            class="profile_img"
-            src="../../../assets/cloud.svg"
-          ></v-img>
-        </v-avatar>
-        <input
-          type="file"
-          ref="uploadAvatarInput"
-          style="display: none"
-          @change="change"
-        />
+        <AvatarInput v-model="value.profile_img_file" size="120" />
+
         <div class="avatar-label mt-4">
           {{ $t("uploadPhotoEmployer") }}
         </div>
@@ -53,7 +34,9 @@
         @click="nextScreen"
         :disabled="!formValid"
         height="55"
-        class="full-w mt-5 font-weight-medium dark-blue"
+        color="primary"
+        block
+        class="mt-5"
       >
         {{ $t("next") }}
       </v-btn>
@@ -62,8 +45,11 @@
 </template>
 
 <script>
+import AvatarInput from "@/components/controls/AvatarInput";
+
 export default {
   name: "Step1",
+  components: { AvatarInput },
   props: {
     value: {
       type: Object,
@@ -73,50 +59,16 @@ export default {
   },
   data() {
     return {
-      formValid: false,
-      profile_img: false
+      formValid: false
     };
-  },
-  methods: {
-    change(e) {
-      this.profile_img = this.value.profile_img_file = e.target.files[0];
-      // this.value.profile_img_file = e.target.files[0];
-      console.log(e);
-    }
-  },
-  computed: {
-    avatar_img() {
-      if (this.profile_img) {
-        return URL.createObjectURL(this.profile_img);
-      }
-      return false;
-    }
   }
 };
 </script>
-
-<style lang="scss">
-.mo-step-1 .v-input__prepend-outer {
-  margin-top: 15px !important;
-}
-</style>
 
 <style scoped lang="scss">
 .avatar-label {
   font-weight: normal;
   font-size: 17px;
   color: rgba(43, 43, 43, 0.5);
-}
-.mo-step-1 {
-  &__btn-icon {
-    position: absolute;
-    left: 5px;
-  }
-}
-.profile_img {
-  position: absolute;
-  width: 66px;
-  height: 46px;
-  border-radius: 0;
 }
 </style>
