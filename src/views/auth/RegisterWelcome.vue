@@ -160,13 +160,13 @@ export default {
   }),
   computed: {
     facebookUrl() {
-      const urlNumber = this.accountType === "user" ? 1 : 2;
+      const urlNumber = this.accountType === "jobseeker" ? 1 : 2;
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/facebook`;
 
       return url;
     },
     googleUrl() {
-      const urlNumber = this.accountType === "user" ? 1 : 2;
+      const urlNumber = this.accountType === "jobseeker" ? 1 : 2;
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
 
       return url;
