@@ -207,17 +207,54 @@
             />
 
             <div class="top-info mt-7">
-              <span class="about-info">{{ $t("searchStatus") }}</span>
-              <p class="about-text">{{ userEmploymentType }}</p>
-
               <span class="about-info">Position</span>
               <p class="about-text">{{ userCurrentPosition }}</p>
 
               <span class="about-info">{{ $t("currentIndustry") }}</span>
-              <p class="about-text">{{ getBranche }}</p>
+              <div class="about-text">
+                <v-chip
+                  class="py-1 mr-1 mb-1"
+                  v-for="(item, i) in getBranche"
+                  :key="i"
+                >
+                  {{ item }}
+                </v-chip>
+              </div>
 
-              <span class="about-info">{{ $t("cityAndAddress") }} </span>
-              <p class="about-text">{{ user.city }}</p>
+              <span class="about-info">{{ $t("whatPosition") }}</span>
+              <div class="about-text">
+                <v-chip
+                  class="py-1 mr-1 mb-1"
+                  v-for="(item, i) in getJobPositions"
+                  :key="i"
+                >
+                  {{ item }}
+                </v-chip>
+              </div>
+
+              <span class="about-info">{{ $t("searchStatus") }}</span>
+              <p class="about-text">
+                {{ user.job_search_status | jobSearchStatus }}
+              </p>
+
+              <span class="about-info">{{ $t("lookingForType") }}</span>
+              <div class="about-text">
+                <v-chip
+                  class="py-1 mr-1 mb-1"
+                  v-for="(item, i) in userEmploymentType"
+                  :key="i"
+                >
+                  {{ item }}
+                </v-chip>
+              </div>
+
+              <!-- <span class="about-info">{{ $t("cityAndAddress") }} </span>
+              <p class="about-text">{{ user.city }}</p> -->
+
+              <span class="about-info">{{ $t("experienceInYears") }}</span>
+              <p class="about-text">
+                {{ user.working_experience }} {{ $t("years") }}
+              </p>
 
               <span class="about-info">
                 {{ $t("experiences") }}
@@ -272,7 +309,7 @@
       <v-col
         class="main col-12 col-md-8 col-xl-9"
         :class="{
-          'col-md-12 col-xl-12': $route.name === 'PersonalityTestJobseeker',
+          'col-md-12 col-xl-12': $route.name === 'PersonalityTestJobseeker'
         }"
       >
         <v-container fluid class="d-flex flex-column">
@@ -295,21 +332,21 @@ export default {
   components: {
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox,
+    UpgradeAccountBox
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null,
+    search: null
   }),
   computed: {
     ...mapGetters("user", [
       "user",
       "getUserFullName",
       "getUserInitials",
-      "userPlan",
+      "userPlan"
     ]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
@@ -321,29 +358,36 @@ export default {
       );
     },
     userEmploymentType() {
-      const stringToArray = map(
-        this.user.looking_for_employment_type,
-        (item) => {
-          let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
-          return el[this.$i18n.locale];
-        }
-      );
-      return stringToArray.join();
+      const stringToArray = map(this.user.looking_for_employment_type, item => {
+        let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
+        return el[this.$i18n.locale];
+      });
+      return stringToArray;
+      // return stringToArray.join();
     },
     getBranche() {
-      const stringToArray = map(this.user.branche, (item) => {
+      const stringToArray = map(this.user.branche, item => {
         let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
         return el[this.$i18n.locale];
       });
-      return stringToArray.join();
+      return stringToArray;
+      // return stringToArray.join();
+    },
+    getJobPositions() {
+      const stringToArray = map(this.user.looking_for_position, item => {
+        let el = find(types.JOB_POSITION, { id: parseInt(item) });
+        return el[this.$i18n.locale];
+      });
+      return stringToArray;
+      // return stringToArray.join();
     },
     userCurrentPosition() {
-      let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.user.current_position);
       });
 
       return obj ? obj[this.$i18n.locale] : null;
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -358,7 +402,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    },
+    }
   },
   watch: {
     search(val) {
@@ -374,10 +418,10 @@ export default {
           this.searchString = null;
         });
       }
-    },
+    }
   },
   beforeMount() {
     console.log(this.user);
-  },
+  }
 };
 </script>

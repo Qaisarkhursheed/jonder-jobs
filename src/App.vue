@@ -505,7 +505,7 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
 .about-text {
   font-size: 16px;
   line-height: 19px;
-  margin-bottom: 34px !important;
+  margin-bottom: 25px !important;
   color: $dark-grey;
 }
 
