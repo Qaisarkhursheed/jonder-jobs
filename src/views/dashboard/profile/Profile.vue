@@ -264,7 +264,7 @@
       </p>
 
       <v-row>
-        <!-- Status (why_jonder) -->
+        <!-- Status (job_search_status) -->
         <v-col cols="12">
           <label class="profile-label">
             {{ $t("yourStatusSelect") }}
@@ -272,7 +272,7 @@
           </label>
           <v-select
             :attach="true"
-            v-model="formData.why_jonder"
+            v-model="formData.job_search_status"
             :rules="[validations.required]"
             :items="jonderStatus"
             outlined
@@ -780,7 +780,7 @@ export default {
       ready_for_work: "",
       monthly_salary: null,
       working_experience: "",
-      why_jonder: "",
+      job_search_status: "",
       cv: null,
       qualifications: null,
       resume: null,
@@ -904,7 +904,7 @@ export default {
       this.formData.cv = user.cv;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
-      this.formData.why_jonder = user.why_jonder;
+      this.formData.job_search_status = user.job_search_status;
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
       this.dontKnowWhenToStart = !user.ready_for_work;

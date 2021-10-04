@@ -10,21 +10,21 @@
         color="#0253b3"
         class="mb-4"
         height="55"
-        @click="value.why_jonder = $t('whatBringsYouJob')"
+        @click="value.job_search_status = 'active'"
         v-bind="{
-          outlined: value.why_jonder !== $t('whatBringsYouJob'),
+          outlined: value.job_search_status !== 'active'
         }"
       >
-        {{ $t("whatBringsYouJob") }}
+        {{ $t("jobSearchStatusActive") }}
       </v-btn>
 
       <v-btn
         block
         color="#0253b3"
         class="mb-4"
-        @click="value.why_jonder = $t('whatBringsYouOffer')"
+        @click="value.job_search_status = 'passive'"
         v-bind="{
-          outlined: value.why_jonder !== $t('whatBringsYouOffer'),
+          outlined: value.job_search_status !== 'passive'
         }"
         height="55"
       >
@@ -36,9 +36,9 @@
         color="#0253b3"
         class="mb-4"
         height="55"
-        @click="value.why_jonder = $t('whatBringsYouCurious')"
+        @click="value.job_search_status = 'curious'"
         v-bind="{
-          outlined: value.why_jonder !== $t('whatBringsYouCurious'),
+          outlined: value.job_search_status !== 'curious'
         }"
       >
         {{ $t("whatBringsYouCurious") }}
@@ -56,7 +56,7 @@
         </v-col> -->
         <v-col>
           <v-btn
-            :disabled="!formValid || !value.why_jonder"
+            :disabled="!formValid || !value.job_search_status"
             type="submit"
             color="primary"
             height="55"
@@ -76,16 +76,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
 
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
-  },
+  }
 };
 </script>
 

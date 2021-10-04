@@ -185,7 +185,7 @@ export default {
     formResponse: {},
     formData: {
       city: "",
-      why_jonder: "",
+      job_search_status: "",
       looking_for: [],
       branche: "",
       current_position: "",
