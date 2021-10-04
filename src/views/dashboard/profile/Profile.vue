@@ -274,7 +274,8 @@
             :attach="true"
             v-model="formData.job_search_status"
             :rules="[validations.required]"
-            :items="jonderStatus"
+            :item-text="i => $t(i.text)"
+            :items="types.JOB_SEARCH_STATUS"
             outlined
             cache-items
             hide-details="auto"
@@ -837,22 +838,6 @@ export default {
     ]),
     types() {
       return types;
-    },
-    jonderStatus() {
-      return [
-        {
-          text: this.$t("whatBringsYouJob"),
-          value: "whatBringsYouJob"
-        },
-        {
-          text: this.$t("whatBringsYouOffer"),
-          value: "whatBringsYouOffer"
-        },
-        {
-          text: this.$t("whatBringsYouCurious"),
-          value: "whatBringsYouCurious"
-        }
-      ];
     },
     plansData() {
       return this.plans("jobseeker_paln");
