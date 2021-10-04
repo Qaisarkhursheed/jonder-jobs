@@ -106,7 +106,7 @@
             <div class="label">{{ $t("emailAddress") }}</div>
             <div class="value">
               <a :href="'mailto:' + user.company_email">
-                {{ user.company_email }}
+                {{ user.email }}
               </a>
             </div>
           </div>
@@ -121,8 +121,8 @@
           <div class="pl-4">
             <div class="label">{{ $t("phoneNumber") }}</div>
             <div class="value">
-              <a :href="'tel:' + user.company_phone">
-                {{ user.company_phone }}
+              <a :href="'tel:' + user.phone">
+                {{ user.phone }}
               </a>
             </div>
           </div>
@@ -144,7 +144,7 @@
           </div>
         </div>
 
-        <div class="contact-section d-flex pb-5">
+        <div v-if="user.web_url" class="contact-section d-flex pb-5">
           <div class="icon-wrap">
             <v-icon color="#fff">
               mdi-web
@@ -227,14 +227,14 @@ export default {
 
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
       historyGraph: false,
-      barChart: false
+      barChart: false,
     };
   },
 
@@ -284,8 +284,11 @@ export default {
         return el.id == parseInt(this.user.company_employees);
       });
       return obj[this.$i18n.locale];
-    }
-  }
+    },
+  },
+  beforeMount() {
+    console.log(this.user);
+  },
 };
 </script>
 

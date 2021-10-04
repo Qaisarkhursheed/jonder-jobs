@@ -272,7 +272,7 @@
       <v-col
         class="main col-12 col-md-8 col-xl-9"
         :class="{
-          'col-md-12 col-xl-12': $route.name === 'PersonalityTestJobseeker'
+          'col-md-12 col-xl-12': $route.name === 'PersonalityTestJobseeker',
         }"
       >
         <v-container fluid class="d-flex flex-column">
@@ -295,21 +295,21 @@ export default {
   components: {
     DashboardActivePlan,
     CardActionableList,
-    UpgradeAccountBox
+    UpgradeAccountBox,
   },
 
   data: () => ({
     searchString: null,
     searchLoading: false,
     searchItems: [],
-    search: null
+    search: null,
   }),
   computed: {
     ...mapGetters("user", [
       "user",
       "getUserFullName",
       "getUserInitials",
-      "userPlan"
+      "userPlan",
     ]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
     profile() {
@@ -321,26 +321,29 @@ export default {
       );
     },
     userEmploymentType() {
-      const stringToArray = map(this.user.looking_for_employment_type, item => {
-        let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
-        return el[this.$i18n.locale];
-      });
+      const stringToArray = map(
+        this.user.looking_for_employment_type,
+        (item) => {
+          let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
+          return el[this.$i18n.locale];
+        }
+      );
       return stringToArray.join();
     },
     getBranche() {
-      const stringToArray = map(this.user.branche, item => {
+      const stringToArray = map(this.user.branche, (item) => {
         let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
         return el[this.$i18n.locale];
       });
       return stringToArray.join();
     },
     userCurrentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
+      let obj = find(types.JOB_POSITION, (el) => {
         return el.id == parseInt(this.user.current_position);
       });
 
       return obj ? obj[this.$i18n.locale] : null;
-    }
+    },
   },
   methods: {
     ...mapActions("user", ["searchUsers"]),
@@ -355,7 +358,7 @@ export default {
     },
     navigateTo(url) {
       this.$router.push(url);
-    }
+    },
   },
   watch: {
     search(val) {
@@ -371,7 +374,10 @@ export default {
           this.searchString = null;
         });
       }
-    }
-  }
+    },
+  },
+  beforeMount() {
+    console.log(this.user);
+  },
 };
 </script>
