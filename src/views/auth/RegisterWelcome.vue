@@ -11,6 +11,16 @@
         {{ $t("noAccountFound") }}
       </v-alert>
 
+      <v-alert
+        v-if="$route.query.facebookError && step == 1"
+        text
+        type="error"
+        class="mt-5 mx-5"
+        style="margin-bottom: -10px; width: 450px"
+      >
+        {{ $t("registerFacebookError") }}
+      </v-alert>
+
       <v-stepper-items class="text-center" style="max-width: 500px">
         <!-- Step 1 - Welcome -->
         <v-stepper-content step="1">

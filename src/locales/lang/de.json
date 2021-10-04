@@ -395,6 +395,7 @@
   "emailSentSuccess": "E-Mail erfolgreich gesendet",
   "emailSentSuccessMessage": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat est purus ipsum.",
   "noAccountFound": "Kein Konto gefunden, bitte registrieren Sie sich zuerst.",
+  "registerFacebookError": "Es ist nicht möglich, sich mit einem bestimmten Facebook-Konto zu registrieren, E-Mail ist nicht verfügbar.",
   "resetPassword": "Passwort zurücksetzen",
   "resetPasswordDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ultricies felis eu libero.",
   "confirmNewPassword": "Bestätige neues Passwort",
