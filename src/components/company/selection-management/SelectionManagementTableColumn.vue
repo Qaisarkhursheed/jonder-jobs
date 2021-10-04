@@ -24,14 +24,18 @@
         @click="
           $router.push({
             name: 'CompanyUserOverview',
-            params: { id: item.jobseeker.id, type: 'selection' }
+            params: { id: item.jobseeker.id, type: 'selection' },
           })
         "
       >
-        <v-avatar color="#f1f1f1" size="32" class="user-avatar mr-3">
-          <v-icon class="camera-icon">
-            mdi-account
-          </v-icon>
+        <v-avatar color="primary" size="30">
+          <img
+            v-if="item.jobseeker.profile_img"
+            :src="item.jobseeker.profile_img"
+          />
+          <span v-else class="white--text ">
+            {{ item.jobseeker | initials }}
+          </span>
         </v-avatar>
         {{ item.jobseeker.first_name }} {{ item.jobseeker.last_name }}
       </div>
@@ -44,18 +48,18 @@ import draggable from "vuedraggable";
 
 export default {
   components: {
-    draggable
+    draggable,
   },
 
   order: 1,
 
   props: {
     selection: {
-      type: [Array, Object]
+      type: [Array, Object],
     },
     type: {
-      type: String
-    }
+      type: String,
+    },
   },
 
   methods: {
@@ -64,12 +68,12 @@ export default {
         this.$store.dispatch("company/slManagementMoveCandidate", {
           id: item.added.element.id,
           data: {
-            managment_status: this.type
-          }
+            managment_status: this.type,
+          },
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

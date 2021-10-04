@@ -17,7 +17,7 @@
         class="options mb-5"
         :class="{
           deactive: userPlan.length && isPlanActive(plan.id),
-          active: form.active_plan === plan.id
+          active: form.active_plan === plan.id,
         }"
         v-for="plan in data"
         :key="plan.id"
@@ -29,42 +29,43 @@
           class="upgrade-option text-left pa-5"
           block
         >
-        <v-row>
-          <v-col cols="auto">
-            <v-img
-              class="upgrade-icon mr-0"
-              :src="require('@/assets/icons/top-rated.svg')"
-            ></v-img>
-          </v-col>
+          <v-row>
+            <v-col cols="auto">
+              <v-img
+                class="upgrade-icon mr-0"
+                :src="require('@/assets/icons/top-rated.svg')"
+              ></v-img>
+            </v-col>
 
-          <v-col cols="cols">
-            <template
+            <v-col cols="cols">
+              <template v-if="!userPlan.length || !isPlanActive(plan.id)">
+                <span class="upgrade-title"> {{ plan.name }} </span>
+                <p class="upgrade-text mt-2 mb-0">
+                  {{ plan.plan_description }}
+                </p>
+              </template>
+
+              <UserPlanDescription
+                :plan="getUserPlan(plan.id)[0]"
+                class="user-plan-desc"
+                v-else
+              />
+            </v-col>
+
+            <v-col
+              cols="auto"
               v-if="!userPlan.length || !isPlanActive(plan.id)"
             >
-              <span class="upgrade-title"> {{ plan.name }} </span>
-              <p class="upgrade-text mt-2 mb-0">
-                {{ plan.plan_description }}
-              </p>
-            </template>
-
-            <UserPlanDescription :plan="getUserPlan(plan.id)[0]" class="user-plan-desc" v-else />
-          </v-col>
-
-          <v-col cols="auto" v-if="!userPlan.length || !isPlanActive(plan.id)">
-              <span class="upgrade-price primary--text">{{ plan.price }}&euro;</span>
-          </v-col>
-        </v-row>
-
+              <span class="upgrade-price primary--text"
+                >{{ plan.price }}&euro;</span
+              >
+            </v-col>
+          </v-row>
         </v-btn>
       </div>
 
       <div class="text-right">
-        <v-btn
-          @click="close"
-          height="56"
-          text
-          class="mr-4"
-        >
+        <v-btn @click="close" height="56" text class="mr-4">
           {{ $t("cancel") }}
         </v-btn>
         <v-btn
@@ -94,15 +95,15 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: "ok"
+      default: "ok",
     },
     edit: {
-      type: [Object, Boolean]
-    }
+      type: [Object, Boolean],
+    },
   },
 
   data() {
@@ -112,8 +113,8 @@ export default {
       planId: null,
       stripeId: null,
       form: {
-        active_plan: ""
-      }
+        active_plan: "",
+      },
     };
   },
 
@@ -139,7 +140,7 @@ export default {
         this.isLoading = true;
         const stripe = await loadStripe(process.env.VUE_APP_STRIPE_KEY);
         stripe.redirectToCheckout({
-          sessionId: this.stripeId
+          sessionId: this.stripeId,
         });
       } else {
         this.isLoading = false;
@@ -150,9 +151,9 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_BASE}/plan`, {
           plan_id: this.planId,
-          payment_method: "credit card"
+          payment_method: "credit card",
         })
-        .then(res => {
+        .then((res) => {
           this.stripeId = res.data.data.id;
         })
         .finally(() => {
@@ -165,7 +166,7 @@ export default {
       if (this.edit) {
         store.dispatch("user/updateUser", {
           id: this.edit.id,
-          payload: this.form
+          payload: this.form,
         });
       } else {
         console.log();
@@ -174,15 +175,15 @@ export default {
     },
     populate() {
       this.form.active_plan = this.edit.active_plan;
-    }
+    },
   },
   computed: {
     ...mapGetters({
       userPlan: "user/userPlan",
       getUserPlan: "user/getUserPlan",
-      isPlanActive: "user/isPlanActive"
-    })
-  }
+      isPlanActive: "user/isPlanActive",
+    }),
+  },
 };
 </script>
 
@@ -228,5 +229,4 @@ export default {
     font-weight: 700;
   }
 }
-
 </style>
