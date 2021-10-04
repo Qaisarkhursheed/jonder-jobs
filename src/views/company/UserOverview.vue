@@ -11,7 +11,7 @@
 
     <div class="card-back"></div>
 
-    <v-card class="profile-info" flat v-if="profile">
+    <v-card class="profile-info pa-0" flat v-if="profile">
       <v-row class="card-header no-gutters pl-10 pr-10">
         <v-col cols="12" md="8" class="d-flex">
           <v-avatar color="primary" size="150" class="user-avatar">
@@ -197,7 +197,7 @@ export default {
   },
   computed: {
     currentPosition() {
-      let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.profile.current_position);
       });
       return obj[this.$i18n.locale];
