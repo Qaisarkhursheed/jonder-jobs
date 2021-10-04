@@ -246,8 +246,8 @@ export default {
     this.form.email.value = this.user.email;
     this.form.address.value = this.user.address;
     this.form.radius.value = this.user.work_radius;
-    this.form.lookingfor.value = this.user.looking_for
-      ? this.user.looking_for.split(",")
+    this.form.lookingfor.value = this.user.looking_for_position
+      ? this.user.looking_for_position.split(",")
       : false;
   },
   methods: {
@@ -267,7 +267,7 @@ export default {
         company_employees: this.form.employees.value,
         work_radius: this.form.radius.value,
         department: this.form.industry.value,
-        looking_for: this.form.lookingfor.value
+        looking_for_position: this.form.lookingfor.value
           ? this.form.lookingfor.value.join(", ")
           : ""
       }).then(() => {

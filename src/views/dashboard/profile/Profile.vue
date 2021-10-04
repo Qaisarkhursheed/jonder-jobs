@@ -231,7 +231,7 @@
           </v-autocomplete>
         </v-col>
 
-        <!-- looking_for -->
+        <!-- looking_for_position -->
         <v-col cols="12">
           <label class="profile-label">
             {{ $t("whatPosition") }}
@@ -239,7 +239,7 @@
           </label>
           <v-autocomplete
             :attach="true"
-            v-model="formData.looking_for"
+            v-model="formData.looking_for_position"
             v-clearable-autocomplete
             :items="types.JOB_POSITION"
             item-value="id"
@@ -774,7 +774,7 @@ export default {
       city: "",
       current_position: "",
       branche: "",
-      looking_for: [],
+      looking_for_position: [],
       // looking_for_branche: [],
       looking_for_employment_type: "",
       address_to_work: [],
@@ -878,7 +878,7 @@ export default {
       this.formData.current_position = parseInt(user.current_position);
       this.formData.city = user.city;
       this.formData.branche = user.branche;
-      this.formData.looking_for = user.looking_for;
+      this.formData.looking_for_position = user.looking_for_position;
       //this.formData.looking_for_branche = user.looking_for_branche.split(",");
       this.formData.looking_for_employment_type =
         user.looking_for_employment_type;

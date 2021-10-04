@@ -39,7 +39,7 @@
     <v-row>
       <v-col cols="6">
         <label>{{ $t('lookingFor') }}</label>
-        <strong>{{ userDetails.looking_for }}</strong>
+        <strong>{{ userDetails.looking_for_position }}</strong>
       </v-col>
       <v-col cols="6">
         <label>{{ $t('education') }}</label>

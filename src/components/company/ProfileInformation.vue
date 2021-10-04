@@ -169,7 +169,7 @@ export default {
   computed: {
     ...mapGetters("user", ["user"]),
     lookingfor() {
-      return this.user.lookingfor ? this.user.looking_for.split(",") : false;
+      return this.user.lookingfor ? this.user.looking_for_position.split(",") : false;
     }
   }
 };

@@ -186,7 +186,7 @@ export default {
     formData: {
       city: "",
       job_search_status: "",
-      looking_for: [],
+      looking_for_position: [],
       branche: "",
       current_position: "",
       //looking_for_branche: "",

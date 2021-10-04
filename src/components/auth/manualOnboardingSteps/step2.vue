@@ -71,7 +71,7 @@
       </label>
       <v-autocomplete
         :attach="true"
-        v-model="value.looking_for"
+        v-model="value.looking_for_position"
         :items="types.JOB_POSITION"
         item-value="id"
         :item-text="$i18n.locale"

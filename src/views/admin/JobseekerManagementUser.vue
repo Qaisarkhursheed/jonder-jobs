@@ -131,7 +131,7 @@
             </label>
             <v-autocomplete
               :attach="true"
-              v-model="user.looking_for"
+              v-model="user.looking_for_position"
               :items="$store.getters['professions/items']"
               :placeholder="$t('detailsAboutYouRolePlace')"
               multiple

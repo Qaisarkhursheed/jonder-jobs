@@ -59,7 +59,7 @@
           flat
           hide-details
           background-color="white"
-          v-model="formData.looking_for"
+          v-model="formData.looking_for_position"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -110,7 +110,7 @@ export default {
     formData: {
       work_experience: "",
       your_qualification: "",
-      looking_for: "",
+      looking_for_position: "",
       describe_yourself: ""
     },
     rules: [
@@ -130,7 +130,7 @@ export default {
       if (!user) return;
       this.formData.work_experience = user.work_experience;
       this.formData.your_qualification = user.your_qualification;
-      this.formData.looking_for = user.looking_for;
+      this.formData.looking_for_position = user.looking_for_position;
       this.formData.describe_yourself = user.describe_yourself;
     },
     handleUpdate() {
