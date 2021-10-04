@@ -1,41 +1,39 @@
 <template>
-  <div class="team-management-table">
-    <v-data-table
-      v-model="selected"
-      :loading="$store.getters['teamManagement/loading']"
-      :headers="headers"
-      :items="$store.getters['teamManagement/users']"
-      :server-items-length="$store.getters['teamManagement/totalUsers']"
-      :items-per-page.sync="params.per_page"
-      :page.sync="params.page"
-      :single-select="true"
-      @update:page="fetchData()"
-      @update:items-per-page="fetchData()"
-      item-key="name"
-      show-select
-      flat
-      class="table"
-    >
-      <template v-slot:item.data-table-select="{ item, isSelected, select }">
-        <v-simple-checkbox
-          v-if="item.type !== 'Owner'"
-          :value="isSelected"
-          v-ripple="false"
-          color="#27aae1"
-          @input="select($event)"
-        ></v-simple-checkbox>
-      </template>
-      <template v-slot:[`item.actions`]="{ item }">
-        <TeamManagementDeleteUser
-          v-if="item.type !== 'Owner'"
-          :user="item"
-        ></TeamManagementDeleteUser>
-      </template>
-      <template v-slot:[`item.created_at`]="{ item }">
-        {{ item.created_at | moment("MMM DD, HH:mm") }}
-      </template>
-    </v-data-table>
-  </div>
+  <v-data-table
+    v-model="selected"
+    :loading="$store.getters['teamManagement/loading']"
+    :headers="headers"
+    :items="$store.getters['teamManagement/users']"
+    :server-items-length="$store.getters['teamManagement/totalUsers']"
+    :items-per-page.sync="params.per_page"
+    :page.sync="params.page"
+    :single-select="true"
+    @update:page="fetchData()"
+    @update:items-per-page="fetchData()"
+    item-key="name"
+    show-select
+    flat
+    class="team-management-table"
+  >
+    <template v-slot:item.data-table-select="{ item, isSelected, select }">
+      <v-simple-checkbox
+        v-if="item.type !== 'Owner'"
+        :value="isSelected"
+        v-ripple="false"
+        color="primary"
+        @input="select($event)"
+      ></v-simple-checkbox>
+    </template>
+    <template v-slot:[`item.actions`]="{ item }">
+      <TeamManagementDeleteUser
+        v-if="item.type !== 'Owner'"
+        :user="item"
+      ></TeamManagementDeleteUser>
+    </template>
+    <template v-slot:[`item.created_at`]="{ item }">
+      {{ item.created_at | moment("MMM DD, HH:mm") }}
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -93,10 +91,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .team-management-table {
-  .table {
-    border: 1px solid #e6e7e9;
+  tr td:first-of-type {
+    width: 1% !important;
+    padding-right: 0 !important;
   }
 }
 </style>

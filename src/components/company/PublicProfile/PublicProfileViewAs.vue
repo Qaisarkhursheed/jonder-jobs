@@ -14,7 +14,7 @@
         </v-avatar>
       </div>
       <div class="pl-4">
-        <div class="heading-title">{{ user.company }}</div>
+        <div class="heading-title">{{ user | fullname(true) }}</div>
         <div class="heading-subtitle">{{ user.city }} {{ user.address }}</div>
       </div>
     </div>
@@ -57,7 +57,7 @@
               {{ $t("jobseekingStatus") }}
             </label>
             <div class="section-value">
-              {{ user.job_status }}
+              {{ user.job_search_status | jobSearchStatus }}
             </div>
           </v-col>
           <v-col cols="5">
@@ -227,14 +227,14 @@ export default {
 
   props: {
     user: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
     return {
       historyGraph: false,
-      barChart: false,
+      barChart: false
     };
   },
 
@@ -266,29 +266,29 @@ export default {
       return `https://www.google.com/maps/search/${address}`;
     },
     getBranche() {
-      let obj = find(types.JOB_BRANCHE, (el) => {
+      let obj = find(types.JOB_BRANCHE, el => {
         return el.id == parseInt(this.user.branche);
       });
 
       return obj[this.$i18n.locale];
     },
     currentPosition() {
-      let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.user.current_position);
       });
 
       return obj[this.$i18n.locale];
     },
     getEmployeesNumber() {
-      let obj = find(types.EMPLOYEE_NUMBER, (el) => {
+      let obj = find(types.EMPLOYEE_NUMBER, el => {
         return el.id == parseInt(this.user.company_employees);
       });
       return obj[this.$i18n.locale];
-    },
+    }
   },
   beforeMount() {
     console.log(this.user);
-  },
+  }
 };
 </script>
 

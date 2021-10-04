@@ -17,14 +17,7 @@
         {{ searchMeta.total }} {{ $t("searchResults") }}
       </div>
       <v-row>
-        <v-col
-          cols="12"
-          md="6"
-          lg="4"
-          xl="3"
-          v-for="(result, i) in results"
-          :key="i"
-        >
+        <v-col cols="12" md="6" lg="4" v-for="(result, i) in results" :key="i">
           <SearchResultsCard :candidate="result" @block="toggleModal" />
         </v-col>
       </v-row>

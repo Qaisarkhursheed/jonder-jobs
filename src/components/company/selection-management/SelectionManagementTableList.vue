@@ -1,5 +1,5 @@
 <template>
-  <v-container class="selection-management-table-list d-flex">
+  <div class="selection-management-table-list full-h">
     <v-dialog
       v-model="upgradeModal"
       style="z-index: 2222"
@@ -12,74 +12,76 @@
       <CompanyPlans class="pa-3" />
     </v-dialog>
 
-    <v-row>
-      <v-col class="list-wrapper col-12">
-        <v-container>
-          <v-row
-            class="smt-list hover-pointer"
-            :style="{ minWidth: '800px' }"
-            v-for="(item, index) in selection"
-            :key="index"
-            @click="updateActiveProfile(item.jobseeker.id)"
+    <div class="list-wrapper full-h">
+      <v-row
+        class="smt-list hover-pointer ma-0 pa-3"
+        :style="{ minWidth: '800px' }"
+        v-for="(item, index) in selection"
+        :key="index"
+        @click="updateActiveProfile(item.jobseeker.id)"
+      >
+        <v-col cols="auto" class="d-flex align-center full-h" @click.stop>
+          <v-checkbox
+            v-model="selectionCheckers[item.id]"
+            dense
+            hide-details
+            class="ma-0 pa-0"
+          />
+        </v-col>
+
+        <v-col cols="auto" class="d-flex align-center full-h">
+          <v-avatar color="primary" size="35">
+            <v-img
+              v-if="item.jobseeker.profile_img"
+              :src="item.jobseeker.profile_img"
+            ></v-img>
+            <small v-else class="white--text">
+              {{ item.jobseeker | initials }}
+            </small>
+          </v-avatar>
+        </v-col>
+
+        <v-col class="d-flex align-center full-h">
+          <span>{{ item.jobseeker | fullname }}</span>
+        </v-col>
+
+        <v-col cols="4" class="d-flex align-center pa-0" @click.stop>
+          <v-select
+            :attach="true"
+            :items="getSelectionOptions"
+            :value="item.managment_status"
+            dense
+            @change="updateJobseeker($event, item.id)"
+            outlined
+            append-icon="mdi-chevron-down"
+            hide-details
           >
-            <v-col cols="auto" class="d-flex align-center full-h" @click.stop>
-              <v-checkbox v-model="selectionCheckers[item.id]" dense />
-            </v-col>
+            <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
+            <template v-slot:item="{ item }">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(item) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+          </v-select>
+        </v-col>
 
-            <v-col cols="auto" class="d-flex align-center full-h">
-              <v-avatar>
-                <v-img
-                  :src="item.jobseeker.profile_img"
-                  max-height="32"
-                  max-width="32"
-                ></v-img>
-              </v-avatar>
-            </v-col>
+        <v-col cols="col" class="d-flex align-center full-h justify-end">
+          <v-btn
+            @click.stop="startConversation(item.jobseeker.id)"
+            :loading="startChatLoading == item.jobseeker.id"
+            icon
+            color="primary"
+          >
+            <v-icon>mdi-email</v-icon>
+          </v-btn>
 
-            <v-col class="d-flex align-center full-h">
-              <span>{{ item.jobseeker | fullname }}</span>
-            </v-col>
-
-            <v-col cols="4" class="d-flex align-center" @click.stop>
-              <v-select
-                :attach="true"
-                class="d-flex align-center"
-                :items="getSelectionOptions"
-                :value="item.managment_status"
-                dense
-                :height="40"
-                @change="updateJobseeker($event, item.id)"
-                outlined
-                append-icon="mdi-chevron-down"
-              >
-                <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-                <template v-slot:item="{ item }">
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      {{ $t(item) }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </template>
-              </v-select>
-            </v-col>
-
-            <v-col cols="col" class="d-flex align-center full-h justify-end">
-              <v-btn
-                @click.stop="startConversation(item.jobseeker.id)"
-                :loading="startChatLoading == item.jobseeker.id"
-                icon
-                color="primary"
-              >
-                <v-icon>mdi-email</v-icon>
-              </v-btn>
-
-              <SelectionManagementRemoveUser :user="item.jobseeker" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-col>
-    </v-row>
-  </v-container>
+          <SelectionManagementRemoveUser :user="item.jobseeker" />
+        </v-col>
+      </v-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -168,6 +170,10 @@ export default {
   border-bottom: 1px solid #e6e7e9;
   height: 64px;
   padding: 0 24px;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 
   &.active {
     background-color: rgba(39, 170, 225, 0.11);

@@ -76,7 +76,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="item in items" :key="item">
-          <v-card flat>
+          <v-card flat class="pa-0">
             <keep-alive>
               <component :is="tabs[item]" :user="profile"></component>
             </keep-alive>

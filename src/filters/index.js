@@ -1,4 +1,5 @@
 import Vue from "vue";
+import i18n from "../locales";
 
 Vue.filter("EUR", number => {
   if (!number) {
@@ -38,4 +39,8 @@ Vue.filter("fullname", (user, considerCompany = false) => {
   }
 
   return `${user.first_name} ${user.last_name}`;
+});
+
+Vue.filter("jobSearchStatus", status => {
+  return i18n.t("jobSearchStatus" + Vue.options.filters.capitalize(status));
 });

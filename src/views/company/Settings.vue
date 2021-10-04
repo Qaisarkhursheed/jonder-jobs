@@ -387,7 +387,6 @@ export default {
 <style lang="scss">
 .company-settings {
   .profile-section {
-    padding: 40px;
   }
 }
 </style>

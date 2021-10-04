@@ -28,10 +28,13 @@
             </v-select>
           </div>
         </div>
+
         <!-- Experience -->
         <div class="section experience">
           <div class="title">{{ $t("experiences") }}</div>
           <div class="content">
+            <i v-if="!experience.length">{{ $t("noDataAvailable") }}</i>
+
             <div
               v-for="data in experience"
               :key="data.company"
@@ -64,6 +67,8 @@
         <div class="section experience mt-7">
           <div class="title">{{ $t("educationStudy") }}</div>
           <div class="content">
+            <i v-if="!education.length">{{ $t("noDataAvailable") }}</i>
+
             <div
               v-for="data in education"
               :key="data.company"
@@ -115,7 +120,7 @@
         <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content" v-if="user.branche">
-            {{getBranche}}
+            {{ getBranche }}
           </div>
         </div>
 
@@ -190,13 +195,13 @@ export default {
     },
     getBranche() {
       const stringToArray = map(this.user.branche, item => {
-        let el =  find(types.JOB_BRANCHE, { id: parseInt(item) })
+        let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
         return el[this.$i18n.locale];
       });
       return stringToArray.join();
     },
     currentPosition() {
-      let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.user.current_position);
       });
 

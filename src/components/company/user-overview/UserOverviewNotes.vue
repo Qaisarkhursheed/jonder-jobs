@@ -11,7 +11,7 @@
     <v-row>
       <v-col cols="12" md="6" v-for="(note, i) in notes" :key="i">
         <v-card
-          class="full-h d-flex flex-column justify-space-between"
+          class="full-h d-flex flex-column justify-space-between pa-0"
           flat
           style="border: 1px solid #E9E9E9; border-radius: 10px"
         >
@@ -27,9 +27,9 @@
                     v-if="note.author.profile_img"
                     :src="note.author.profile_img"
                   />
-                  <span v-else class="white--text text-h6">
+                  <small v-else class="white--text">
                     {{ note.author | initials }}
-                  </span>
+                  </small>
                 </v-avatar>
               </v-col>
 
@@ -61,21 +61,19 @@
       </v-col>
     </v-row>
 
-    <v-row class="justify-end">
-      <v-col cols="4">
-        <v-btn
-          @click="
-            selectedNote = null;
-            modalActive = !modalActive;
-          "
-          color="primary"
-          height="48"
-          class="full-w mt-5"
-        >
-          {{ $t("newNote") }}
-        </v-btn>
-      </v-col>
-    </v-row>
+    <div class="text-right">
+      <v-btn
+        @click="
+          selectedNote = null;
+          modalActive = !modalActive;
+        "
+        color="primary"
+        height="48"
+        class="px-15 mt-5"
+      >
+        {{ $t("newNote") }}
+      </v-btn>
+    </div>
   </div>
 </template>
 

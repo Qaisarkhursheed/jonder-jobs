@@ -6,7 +6,7 @@
     flat
   >
     <div @click="proceedClick">
-      <v-card-text class="d-flex align-center pa-0 pa-6 pb-5">
+      <v-card-text class="d-flex align-center pa-6 pb-5">
         <v-avatar color="primary" size="64">
           <v-img v-if="candidate.profile_img" :src="candidate.profile_img" />
           <span v-else class="white--text display-1">
@@ -30,7 +30,7 @@
 
       <v-card-text class="candidate-details">
         <v-row class="no-gutters">
-          <v-col cols="6">
+          <v-col cols="5">
             <v-icon class="pr-3" color="#0253B3">
               mdi-hexagon-multiple-outline
             </v-icon>
@@ -38,13 +38,13 @@
               {{ $t("branch") }}
             </span>
           </v-col>
-          <v-col cols="6" class="text-right">
+          <v-col cols="col" class="text-right">
             <span class="value">{{ getBranche }}</span>
           </v-col>
         </v-row>
 
         <v-row class="no-gutters">
-          <v-col cols="6">
+          <v-col cols="5">
             <v-icon class="pr-3" color="#0253B3">
               mdi-domain
             </v-icon>
@@ -52,13 +52,13 @@
               {{ $t("graduation") }}
             </span>
           </v-col>
-          <v-col cols="6" class="text-right">
+          <v-col cols="col" class="text-right">
             <span class="value">{{ candidate.training_studies }}</span>
           </v-col>
         </v-row>
 
         <v-row class="no-gutters">
-          <v-col cols="6">
+          <v-col cols="5">
             <v-icon class="pr-3" color="#0253B3">
               mdi-school
             </v-icon>
@@ -66,7 +66,7 @@
               {{ $t("education") }}
             </span>
           </v-col>
-          <v-col cols="6" class="text-right">
+          <v-col cols="col" class="text-right">
             <span class="value">{{ candidate.your_qualification }}</span>
           </v-col>
         </v-row>
@@ -91,30 +91,33 @@
       </v-card-text>
     </div>
 
-    <v-card-actions class="pt-0">
-      <v-col cols="12" class="d-flex justify-space-between">
-        <div class="star-btn mr-3" @click="handleStarIconClick">
-          <v-icon
-            size="25"
-            :color="candidate.selection_managment ? '#27AAE1' : '#000'"
-          >
-            {{
-              candidate.selection_managment ? "mdi-star" : "mdi-star-outline"
-            }}
-          </v-icon>
-        </div>
+    <v-card-actions class="pa-6 pt-2 ma-0">
+      <v-row>
+        <v-col cols="auto">
+          <div class="star-btn" @click="handleStarIconClick">
+            <v-icon
+              size="25"
+              :color="candidate.selection_managment ? '#27AAE1' : '#000'"
+            >
+              {{
+                candidate.selection_managment ? "mdi-star" : "mdi-star-outline"
+              }}
+            </v-icon>
+          </div>
+        </v-col>
 
-        <v-btn
-          color="primary"
-          height="48"
-          width="70%"
-          class="font-weight-medium pl-4 pr-4 dark-blue"
-          @click="startConversation"
-          :loading="startChatLoading"
-        >
-          {{ $t("toContact") }}
-        </v-btn>
-      </v-col>
+        <v-col cols="col">
+          <v-btn
+            color="primary"
+            height="48"
+            block
+            @click="startConversation"
+            :loading="startChatLoading"
+          >
+            {{ $t("toContact") }}
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-card-actions>
   </v-card>
 </template>
@@ -145,7 +148,7 @@ export default {
 
   computed: {
     highlighted() {
-      return this.candidate.plan?.plan_slug === "higlighted";
+      return this.candidate.plan[0]?.plan_slug === "highlighted";
     },
     getBranche() {
       const branches = [];
@@ -168,7 +171,7 @@ export default {
         : this.monthly_salary.min;
     },
     currentPosition() {
-      let obj = find(types.JOB_POSITION, (el) => {
+      let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.candidate.current_position);
       });
       return obj[this.$i18n.locale];

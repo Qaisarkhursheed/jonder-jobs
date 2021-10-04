@@ -1,27 +1,14 @@
 <template>
   <v-card flat class="user-plan">
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <h2>{{ $t("subscriptionPlan") }}</h2>
-        </v-col>
-      </v-row>
-      <v-row class="mb-8">
-        <v-col cols="12">
-          <p>{{ $t("yourCurrentPlanDescription") }}</p>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <UserPlanDescription
-            :plan="userPlan[0]"
-            :border-plan="borderPlan"
-            :payment-info="paymentInfo"
-            :payment-action="paymentAction"
-          />
-        </v-col>
-      </v-row>
-    </v-container>
+    <h2>{{ $t("subscriptionPlan") }}</h2>
+    <p>{{ $t("yourCurrentPlanDescription") }}</p>
+
+    <UserPlanDescription
+      :plan="userPlan[0]"
+      :border-plan="borderPlan"
+      :payment-info="paymentInfo"
+      :payment-action="paymentAction"
+    />
   </v-card>
 </template>
 

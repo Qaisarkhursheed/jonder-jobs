@@ -1,8 +1,6 @@
 <template>
-  <div class="selection-management-table-column">
-    <div
-      class="column-header d-flex justify-space-between align-center pt-6 pb-6 pl-6 pr-3"
-    >
+  <div class="selection-management-table-column full-h">
+    <div class="column-header d-flex justify-space-between align-center pa-4">
       <div class="label">
         {{ $t(type) }}
       </div>
@@ -12,30 +10,30 @@
     </div>
 
     <draggable
-      class="list-group pl-6 pr-6 pt-6"
+      class="list-group pa-3"
       :list="selection"
       group="people"
       @change="add($event)"
     >
       <div
-        class="column-group-item d-flex pa-4 mb-3 full-h align-center justify-start"
+        class="column-group-item d-flex pa-3 mb-3 full-h align-center justify-start"
         v-for="item in selection"
         :key="item.id"
         @click="
           $router.push({
             name: 'CompanyUserOverview',
-            params: { id: item.jobseeker.id, type: 'selection' },
+            params: { id: item.jobseeker.id, type: 'selection' }
           })
         "
       >
-        <v-avatar color="primary" size="30">
+        <v-avatar color="primary" size="30" class="mr-2">
           <img
             v-if="item.jobseeker.profile_img"
             :src="item.jobseeker.profile_img"
           />
-          <span v-else class="white--text ">
+          <small v-else class="white--text">
             {{ item.jobseeker | initials }}
-          </span>
+          </small>
         </v-avatar>
         {{ item.jobseeker.first_name }} {{ item.jobseeker.last_name }}
       </div>
@@ -48,18 +46,18 @@ import draggable from "vuedraggable";
 
 export default {
   components: {
-    draggable,
+    draggable
   },
 
   order: 1,
 
   props: {
     selection: {
-      type: [Array, Object],
+      type: [Array, Object]
     },
     type: {
-      type: String,
-    },
+      type: String
+    }
   },
 
   methods: {
@@ -68,12 +66,12 @@ export default {
         this.$store.dispatch("company/slManagementMoveCandidate", {
           id: item.added.element.id,
           data: {
-            managment_status: this.type,
-          },
+            managment_status: this.type
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -82,6 +80,10 @@ export default {
   border: 1px solid #e1e1e1;
   border-right: 0;
   box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.01);
+
+  &:last-child {
+    border-right: 1px solid #e1e1e1;
+  }
 }
 .column-header {
   background: #ffffff;

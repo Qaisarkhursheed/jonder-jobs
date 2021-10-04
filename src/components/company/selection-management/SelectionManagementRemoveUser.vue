@@ -32,6 +32,7 @@
           <div class="text-center mt-3">
             <v-btn
               height="48"
+              text
               @click="
                 dialog = false;
                 $refs.form.reset();

@@ -986,7 +986,6 @@ export default {
 <style lang="scss">
 .user-profile {
   .profile-section {
-    padding: 40px;
   }
 }
 </style>
