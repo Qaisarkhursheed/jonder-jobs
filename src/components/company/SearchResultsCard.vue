@@ -111,7 +111,7 @@
             color="primary"
             height="48"
             block
-            @click="startConversation"
+            @click="proceedClick('contact')"
             :loading="startChatLoading"
           >
             {{ $t("toContact") }}
@@ -214,12 +214,16 @@ export default {
           });
       }
     },
-    proceedClick() {
+    proceedClick(type) {
       if (store.getters["user/userPlan"].length) {
-        this.$router.push({
-          name: "CompanyUserOverview",
-          params: { id: this.candidate.id }
-        });
+        if (type == "contact") {
+          this.startConversation();
+        } else {
+          this.$router.push({
+            name: "CompanyUserOverview",
+            params: { id: this.candidate.id }
+          });
+        }
       } else {
         this.$emit("block", true);
       }
