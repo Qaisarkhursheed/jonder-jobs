@@ -34,9 +34,8 @@
             : 'grey lighten-3'
         "
         height="48"
-        width="70%"
-        elevation="0"
-        class="font-weight-medium full-w"
+        block
+        :loading="isLoading"
         @click="
           !userPlan.length || userPlan[0].id !== plan.id ? getTokenId() : null
         "
@@ -66,7 +65,8 @@ export default {
   },
   data() {
     return {
-      planToken: ""
+      planToken: "",
+      isLoading: false
     };
   },
   methods: {
@@ -77,10 +77,12 @@ export default {
           sessionId: this.planToken
         });
       } catch (err) {
+        this.isLoading = false;
         console.log(err);
       }
     },
     getTokenId() {
+      this.isLoading = true;
       this.$http
         .post(`${process.env.VUE_APP_API_BASE}/plan`, {
           plan_id: this.plan.id,
@@ -88,11 +90,10 @@ export default {
         })
         .then(res => {
           this.planToken = res.data.data.id;
-        })
-        .finally(() => {
           this.processStripe();
         })
         .catch(error => {
+          this.isLoading = false;
           alert(error);
         });
     }
