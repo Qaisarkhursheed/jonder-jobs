@@ -107,7 +107,11 @@
                   v-model="formFields.min_salary"
                   placeholder="Min"
                   outlined
-                  :hide-details="true"
+                  type="number"
+                  min="1000"
+                  max="50000"
+                  hide-details
+                  clearable
                   flat
                   dense
                   solo
@@ -119,7 +123,11 @@
                   v-model="formFields.max_salary"
                   placeholder="Max"
                   outlined
-                  :hide-details="true"
+                  type="number"
+                  min="1000"
+                  max="50000"
+                  hide-details
+                  clearable
                   flat
                   dense
                   solo
