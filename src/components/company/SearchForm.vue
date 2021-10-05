@@ -137,8 +137,8 @@
               :attach="true"
               v-model="formFields.working_experience"
               :items="types.WORK_EXPERIENCE"
-              :item-text="$i18n.locale"
-              item-value="id"
+              :item-text="i => `${i[$i18n.locale]} ${$t('years')}`"
+              :item-value="$i18n.locale"
               :hide-details="true"
               clearable
               :placeholder="$t('workExperience')"
@@ -360,6 +360,19 @@ export default {
           activatedFields[key] = item;
         }
       });
+
+      // Split working experience into two fields
+      if (activatedFields["working_experience"]) {
+        const arr = activatedFields["working_experience"].split("-");
+        activatedFields["working_experience_min"] = parseInt(arr[0]);
+
+        if (arr[1]) {
+          activatedFields["working_experience_max"] = parseInt(arr[1]);
+        }
+
+        delete activatedFields["working_experience"];
+      }
+
       return activatedFields;
     },
 
