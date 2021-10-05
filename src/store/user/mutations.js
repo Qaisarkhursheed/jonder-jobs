@@ -17,10 +17,10 @@ export default {
     state.plans = value;
   },
   SET_USER_SUBSCRIPTION_RENEWAL(state, payload) {
-    if (!payload) {
-      Vue.set(state.user.plan, "renewal", 0);
-    } else {
+    if (payload || payload === 0) {
       Vue.set(state.user.plan[payload], "renewal", 0);
+    } else {
+      Vue.set(state.user.plan, "renewal", 0);
     }
   }
 };
