@@ -1,10 +1,11 @@
 import {
   parsePhoneNumber,
   isPossiblePhoneNumber,
-  isValidPhoneNumber
+  isValidPhoneNumber,
 } from "libphonenumber-js";
+import i18n from "@/locales";
 
-const validatePhoneNumber = number => {
+const validatePhoneNumber = (number) => {
   let isValid = false;
   try {
     const numberResult = parsePhoneNumber(number);
@@ -25,50 +26,48 @@ export default {
   computed: {
     validations() {
       return {
-        email: v =>
+        email: (v) =>
           !v ||
           /\S+@\S+\.\S+/.test(v) ||
           "Muss eine gültige E-Mail-Adresse sein.",
 
-        greater: compareValue => v =>
+        greater: (compareValue) => (v) =>
           !v ||
           !compareValue ||
           parseInt(v.replace(":", "")) >
             parseInt(compareValue.replace(":", "")) ||
           `Muss größer als ${compareValue} sein.`,
 
-        less: compareValue => v =>
+        less: (compareValue) => (v) =>
           !v ||
           !compareValue ||
           parseInt(v.replace(":", "")) <
             parseInt(compareValue.replace(":", "")) ||
           `Muss kleiner als ${compareValue} sein.`,
 
-        password: v =>
+        password: (v) =>
           !v ||
           /^(?=.*[a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(v) ||
-          "Mindestens 8 Zeichen, muss eine Zahl und ein Sonderzeichen enthalten.",
+          i18n.t("passwordCheck"),
 
-        phone: v =>
-          !v ||
-          validatePhoneNumber(v) ||
-          "Muss eine gültige Telefonnummer sein und beginnen mit Ländernummer Beispiel (+49)",
+        phone: (v) => !v || validatePhoneNumber(v) || i18n.t("phoneWarning"),
 
-        time24: v =>
+        time24: (v) =>
           !v ||
           /^([01]\d|2[0-3]):([0-5]\d)$/.test(v) ||
           "Die Zeit muss im Format hh:mm sein",
 
-        required: v => !!v || "Dieses Feld ist erforderlich um fortzufahren.",
+        required: (v) => !!v || i18n.t("errorField"),
 
-        same: (field, fieldVal) => v =>
-          v === fieldVal || `Muss mit ${field} identisch sein.`,
+        same: (field, fieldVal) => (v) =>
+          v === fieldVal || i18n.t("samePasswordCheck"),
 
         size: {
-          string: n => v => (v && v.length == n) || `Muss ${n} Zeichen sein.`
+          string: (n) => (v) =>
+            (v && v.length == n) || `Muss ${n} Zeichen sein.`,
         },
 
-        url: v =>
+        url: (v) =>
           !v ||
           /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi.test(
             v
@@ -76,17 +75,17 @@ export default {
           "Muss eine gültige URL sein.",
 
         max: {
-          string: n => v =>
+          string: (n) => (v) =>
             !v || v.length <= n || `Darf nicht größer als ${n} Zeichen sein.`,
-          selection: n => v =>
-            !v || v.length <= n || `Darf nicht größer als ${n} Auswahl sein.`
+          selection: (n) => (v) =>
+            !v || v.length <= n || `Darf nicht größer als ${n} Auswahl sein.`,
         },
 
         min: {
-          string: n => v =>
-            !v || v.length >= n || `Muss mindestens ${n} Zeichen lang sein.`
-        }
+          string: (n) => (v) =>
+            !v || v.length >= n || `Muss mindestens ${n} Zeichen lang sein.`,
+        },
       };
-    }
-  }
+    },
+  },
 };
