@@ -12,6 +12,7 @@ import ResponseAlert from "@/components/ResponseAlert";
 import ClearableAutocomplete from "@/directives/clearable-autocomplete";
 import StringifySelection from "@/directives/stringify-selection";
 import Validations from "@/mixins/validations";
+import methods from "@/mixins/methods";
 import axios from "axios";
 import "@/filters";
 
@@ -29,6 +30,7 @@ Vue.directive("clearable-autocomplete", ClearableAutocomplete);
 Vue.directive("stringify-selection", StringifySelection);
 Vue.component("ResponseAlert", ResponseAlert);
 Vue.mixin(Validations);
+Vue.mixin(methods);
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
