@@ -22,6 +22,7 @@
         {{ $t("changePackage") }}
       </span>
       <v-dialog
+        v-if="plan.renewal"
         v-model="dialog"
         class="payment-action"
         width="500"

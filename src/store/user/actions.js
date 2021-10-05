@@ -1,6 +1,7 @@
 import axios from "axios";
 import { serialize } from "object-to-formdata";
 import i18n from "@/locales";
+import { findIndex } from "lodash";
 
 export default {
   me({ state, commit, dispatch }) {
@@ -291,12 +292,20 @@ export default {
     });
   },
 
-  async cancelSubscription(context, payload) {
+  async cancelSubscription({ commit, getters }, payload) {
     console.log(payload);
     const baseURI = `/stripe/cancel/${payload}`;
     const response = await axios.post(baseURI);
     if (response.status === 200) {
-      console.log("cancelSubscription", response.data);
+      const user = getters.user;
+      if (user.role === "Employer") {
+        commit("SET_USER_SUBSCRIPTION_RENEWAL");
+      } else {
+        const index = findIndex(user.plan, plan => plan.id === payload);
+        if (index >= 0) {
+          commit("SET_USER_SUBSCRIPTION_RENEWAL", index);
+        }
+      }
     }
   },
   async setLocale({ state }, locale) {

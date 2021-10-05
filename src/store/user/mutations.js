@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export default {
   SET_USER(state, value) {
     state.user = value;
@@ -13,5 +15,12 @@ export default {
   },
   SET_PLANS(state, value) {
     state.plans = value;
+  },
+  SET_USER_SUBSCRIPTION_RENEWAL(state, payload) {
+    if (!payload) {
+      Vue.set(state.user.plan, "renewal", 0);
+    } else {
+      Vue.set(state.user.plan[payload], "renewal", 0);
+    }
   }
 };
