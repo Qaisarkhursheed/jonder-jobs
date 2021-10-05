@@ -15,6 +15,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+#app.v-application {
+  overflow: auto;
+  .v-application--wrap {
+    overflow: visible !important;
+  }
+}
 .v-application .v-input.error--text,
 .v-application .v-messages.error--text {
   color: $primary-error !important;

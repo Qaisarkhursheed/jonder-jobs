@@ -1,6 +1,7 @@
 <template>
   <v-menu
     v-model="menu"
+    :attach="true"
     :close-on-content-click="false"
     :nudge-right="40"
     transition="scale-transition"
