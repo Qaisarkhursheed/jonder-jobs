@@ -5,6 +5,7 @@
       :items="items"
       @change="changeLanguage"
       outlined
+      :attach="true"
       background-color="white"
       hide-details
       append-icon="mdi-chevron-down"
