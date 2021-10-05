@@ -30,6 +30,8 @@ export default {
   async register(context, data) {
     try {
       const formData = serialize(data);
+      formData.set("locale", localStorage.getItem("lang") || "de");
+
       const resp = await axios.post("/register", formData);
       return resp;
     } catch (err) {
@@ -39,6 +41,8 @@ export default {
 
   async registerCompany(context, data) {
     try {
+      data.locale = localStorage.getItem("lang") || "de";
+
       const resp = await axios.post("/company/register", data);
       return resp;
     } catch (error) {
