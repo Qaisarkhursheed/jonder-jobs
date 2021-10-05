@@ -4,15 +4,15 @@
       {{ $t("headingTitle") }}
     </div>
 
-    <v-card class="search-form rounded-lg pa-8" flat>
+    <v-card class="search-form" flat>
       <v-row>
         <v-col cols="12" md="7">
           <label class="section-label">
             {{ $t("position") }}
           </label>
           <v-autocomplete
-            :attach="true"
             v-model="formFields.job_position"
+            :attach="true"
             :items="types.JOB_POSITION"
             item-value="id"
             :item-text="$i18n.locale"
@@ -22,7 +22,7 @@
             :hide-details="true"
             :placeholder="$t('enterJobtitle')"
             append-icon="mdi-chevron-down"
-          ></v-autocomplete>
+          />
         </v-col>
 
         <v-col cols="12" md="5">
@@ -30,8 +30,8 @@
             {{ $t("employementType") }}
           </label>
           <v-select
-            :attach="true"
             v-model="formFields.employment_type"
+            :attach="true"
             :items="types.EMPLOYEMENT_TYPE"
             item-value="id"
             :item-text="$i18n.locale"
@@ -40,20 +40,7 @@
             :placeholder="$t('employementType')"
             outlined
             append-icon="mdi-chevron-down"
-          >
-            <!-- <template v-slot:selection="{ item }">
-              {{ $t(item[$i18n.locale]) }}</template
-            >
-            <template v-slot:item="{ item }">
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ $t(item.value) }}
-                  {{ item[$i18n.locale] }}
-                  {{ item }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </template> -->
-          </v-select>
+          />
         </v-col>
       </v-row>
 
@@ -64,8 +51,8 @@
               {{ $t("industryOfProfession") }}
             </label>
             <v-autocomplete
-              :attach="true"
               v-model="formFields.branche"
+              :attach="true"
               :items="types.JOB_BRANCHE"
               :item-text="$i18n.locale"
               item-value="id"
@@ -77,16 +64,7 @@
               :hide-details="true"
               :placeholder="$t('enterIndustry')"
               append-icon="mdi-chevron-down"
-            >
-              <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-              <template v-slot:item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ $t(item) }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </template> -->
-            </v-autocomplete>
+            />
           </v-col>
 
           <v-col cols="12" md="4">
@@ -94,45 +72,27 @@
               {{ $t("schoolGraduation") }}
             </label>
             <v-text-field
-              v-model="formFields.school"
-              class="rounded-lg"
-              style="height: 50px;"
-              height="100%"
-              type="text"
+              v-model="formFields.university_name"
               outlined
               :hide-details="true"
               :placeholder="$t('schoolGraduation')"
               flat
-              dense
               solo
-              background-color="#fff"
-            >
-            </v-text-field>
+            />
           </v-col>
 
           <v-col cols="12" md="4">
             <label class="section-label">
               {{ $t("educationStudy") }}
             </label>
-            <v-select
-              :attach="true"
-              v-model="formFields.education"
-              :items="types.EDUCATION"
-              clearable
+            <v-text-field
+              v-model="formFields.study"
+              outlined
               :hide-details="true"
               :placeholder="$t('educationStudy')"
-              outlined
-              append-icon="mdi-chevron-down"
-            >
-              <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-              <template v-slot:item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ $t(item) }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </template>
-            </v-select>
+              flat
+              solo
+            />
           </v-col>
         </v-row>
 
@@ -146,34 +106,23 @@
                 <v-text-field
                   v-model="formFields.min_salary"
                   placeholder="Min"
-                  class="rounded-lg"
-                  style="height: 50px;"
-                  height="100%"
-                  type="text"
                   outlined
                   :hide-details="true"
                   flat
                   dense
                   solo
-                  background-color="#fff"
-                >
-                </v-text-field>
+                />
               </v-col>
 
               <v-col cols="6" class="pl-2">
                 <v-text-field
                   v-model="formFields.max_salary"
                   placeholder="Max"
-                  class="rounded-lg"
-                  style="height: 50px;"
-                  height="100%"
-                  type="text"
                   outlined
                   :hide-details="true"
                   flat
                   dense
                   solo
-                  background-color="#fff"
                 >
                 </v-text-field>
               </v-col>
@@ -293,8 +242,8 @@ export default {
         job_position: "",
         work_experience: "",
         branche: "",
-        school: "",
-        education: "",
+        university_name: "",
+        study: "",
         min_salary: "",
         max_salary: "",
         city: ""
@@ -390,10 +339,9 @@ export default {
           "work_experience" in searchMeta ? searchMeta.work_experience : "";
         this.formFields.branche =
           "branche" in searchMeta ? searchMeta.branche : "";
-        this.formFields.school =
-          "school" in searchMeta ? searchMeta.school : "";
-        this.formFields.education =
-          "education" in searchMeta ? searchMeta.education : "";
+        this.formFields.university_name =
+          "university_name " in searchMeta ? searchMeta.university_name : "";
+        this.formFields.study = "study" in searchMeta ? searchMeta.study : "";
         this.formFields.min_salary =
           "min_salary" in searchMeta ? searchMeta.min_salary : "";
         this.formFields.max_salary =
