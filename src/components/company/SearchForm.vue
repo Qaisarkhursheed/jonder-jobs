@@ -135,7 +135,7 @@
             </label>
             <v-select
               :attach="true"
-              v-model="formFields.work_experience"
+              v-model="formFields.working_experience"
               :items="types.WORK_EXPERIENCE"
               :item-text="$i18n.locale"
               item-value="id"
@@ -240,7 +240,7 @@ export default {
       formFields: {
         employment_type: "",
         job_position: "",
-        work_experience: "",
+        working_experience: "",
         branche: "",
         university_name: "",
         study: "",
@@ -335,8 +335,10 @@ export default {
           "employment_type" in searchMeta ? searchMeta.employment_type : "";
         this.formFields.job_position =
           "job_position" in searchMeta ? searchMeta.job_position : "";
-        this.formFields.work_experience =
-          "work_experience" in searchMeta ? searchMeta.work_experience : "";
+        this.formFields.working_experience =
+          "working_experience" in searchMeta
+            ? searchMeta.working_experience
+            : "";
         this.formFields.branche =
           "branche" in searchMeta ? searchMeta.branche : "";
         this.formFields.university_name =
