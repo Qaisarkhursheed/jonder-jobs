@@ -700,7 +700,7 @@
               />
             </div>
             <CancelSubscription
-              v-if="userPlan.length && isPlanActive(plan.id)"
+              v-if="userPlan.length && isPlanActive(plan.id) && plan.renewal"
               :id="plan.id"
             />
           </div>
