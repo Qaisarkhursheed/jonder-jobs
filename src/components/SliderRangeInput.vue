@@ -28,7 +28,6 @@
             hide-details
             single-line
             type="text"
-            style="width: 60px"
             @change="$set(model, 0, $event)"
           ></v-text-field>
         </template>
@@ -42,7 +41,6 @@
             hide-details
             single-line
             type="text"
-            style="width: 60px"
             @change="$set(model, 1, $event)"
           ></v-text-field>
         </template>
@@ -58,20 +56,20 @@ export default {
   props: {
     value: {
       type: Array,
-      required: true,
+      required: true
     },
     suffix: {
-      type: String,
+      type: String
     },
     min: {
-      type: [String, Number],
+      type: [String, Number]
     },
     max: {
-      type: [String, Number],
+      type: [String, Number]
     },
     step: {
-      type: [String, Number],
-    },
+      type: [String, Number]
+    }
   },
   created() {
     const value = ["0", "10"];
@@ -79,14 +77,14 @@ export default {
   },
   data() {
     return {
-      model: null,
+      model: null
     };
   },
   methods: {
     change(value) {
       this.$emit("change", value);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -95,15 +93,16 @@ export default {
   // border: 1px solid #e5e5e5;
   // border-radius: 10px;
   max-width: 335px;
+
   .v-input--range-slider {
     align-items: center;
     display: flex;
     .monthly-salary {
       height: 58px;
-      width: 63px !important;
+      min-width: 63px !important;
       input {
         color: $primary-blue-dark !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 600;
         text-align: center;
       }

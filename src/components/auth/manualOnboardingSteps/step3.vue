@@ -102,10 +102,9 @@
       </div>
       <SliderRangeInput
         :value="getMonthlySalary"
-        suffix="k"
-        min="1"
-        max="12"
-        step="0.5"
+        min="1000"
+        max="20000"
+        step="500"
         @change="changeMonthlySalary"
       />
 
@@ -166,8 +165,8 @@ export default {
       return types;
     },
     getMonthlySalary() {
-      const min = this.value.monthly_salary?.min || "1";
-      const max = this.value.monthly_salary?.max || "12";
+      const min = this.value.monthly_salary.min;
+      const max = this.value.monthly_salary.max;
       return [min, max];
     }
   },
@@ -180,8 +179,8 @@ export default {
     },
     changeMonthlySalary(event) {
       this.value.monthly_salary = {
-        min: event[0].toString(),
-        max: event[1].toString()
+        min: parseInt(event[0].toString()),
+        max: parseInt(event[1].toString())
       };
     },
     searchForValue(name) {

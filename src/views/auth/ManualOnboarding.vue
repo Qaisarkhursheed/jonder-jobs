@@ -193,20 +193,16 @@ export default {
       looking_for_employment_type: "",
       address_to_work: [],
       ready_for_work: "",
-      monthly_salary: null,
+      monthly_salary: {
+        min: 1000,
+        max: 10000
+      },
       working_experience: "",
       cv: "",
       resume: null,
       qualifications: null,
       location_show: 1,
       work_remotely: false
-      // address: "",
-      // working_in: "",
-      // describe_yourself: "",
-      // training_studies: "",
-      // your_qualification: "",
-      // additional_training: "",
-      // dream_job: "",
     }
   }),
   created() {
@@ -222,11 +218,12 @@ export default {
   methods: {
     ...mapActions("user", ["postOnboardingUser"]),
     populateData(user) {
-      console.log("populateData", user);
       if (user) {
         Object.keys(user).forEach(key => {
           // eslint-disable-next-line no-prototype-builtins
-          if (this.formData.hasOwnProperty(key)) this.formData[key] = user[key];
+          if (this.formData.hasOwnProperty(key) && user[key] != null) {
+            this.formData[key] = user[key];
+          }
         });
       }
     },

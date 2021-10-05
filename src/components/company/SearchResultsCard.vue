@@ -81,8 +81,11 @@
         </v-col>
         <v-col cols="6" class="wage">
           <div class="label">{{ $t("salaryExpectation") }}</div>
-          <div class="value" v-if="monthly_salary.min && monthly_salary.max">
-            &euro; {{ getMoney }}
+          <div class="value" v-if="candidate.monthly_salary">
+            &euro;
+            {{
+              `${this.candidate.monthly_salary.min} - ${this.candidate.monthly_salary.max}`
+            }}
           </div>
           <div v-else>
             {{ $t("didntSet") }}
@@ -165,11 +168,6 @@ export default {
 
       return branches.join();
     },
-    getMoney() {
-      return +this.monthly_salary.min !== +this.monthly_salary.max
-        ? `${this.monthly_salary.min} - ${this.monthly_salary.max}`
-        : this.monthly_salary.min;
-    },
     currentPosition() {
       let obj = find(types.JOB_POSITION, el => {
         return el.id == parseInt(this.candidate.current_position);
@@ -227,35 +225,7 @@ export default {
       } else {
         this.$emit("block", true);
       }
-    },
-    getMinMax() {
-      try {
-        if (typeof this.candidate.monthly_salary === "string") {
-          this.monthly_salary = JSON.parse(this.candidate.monthly_salary);
-        } else if (
-          "min" in this.candidate.monthly_salary &&
-          "max" in this.candidate.monthly_salary
-        ) {
-          this.monthly_salary = {
-            min: (+this.candidate.monthly_salary.min * 1000).toString(),
-            max: (+this.candidate.monthly_salary.max * 1000).toString()
-          };
-        } else {
-          this.monthly_salary = {
-            min: "1000",
-            max: (this.candidate.monthly_salary * 1000).toString()
-          };
-        }
-      } catch (e) {
-        this.monthly_salary = {
-          min: "1000",
-          max: (this.candidate.monthly_salary * 1000).toString()
-        };
-      }
     }
-  },
-  mounted() {
-    this.getMinMax();
   }
 };
 </script>
