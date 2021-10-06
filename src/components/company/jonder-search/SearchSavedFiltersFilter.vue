@@ -6,10 +6,10 @@
           <v-row class="no-gutters">
             <v-col cols="12">
               <div class="title">
-                {{ filter.job_position }}
+                {{ idToString("JOB_POSITION", filter.job_position) }}
               </div>
               <div class="subtitle">
-                02/07/2021
+                {{ filter.created_at | moment("DD/MM/YYYY") }}
               </div>
             </v-col>
           </v-row>
@@ -24,7 +24,9 @@
                         {{ $t("typeOfEnployment") }}
                       </span>
                       <span class="value">
-                        {{ filter.employment_type }}
+                        {{
+                          idToString("EMPLOYEMENT_TYPE", filter.employment_type)
+                        }}
                       </span>
                     </div>
                   </v-col>
@@ -34,7 +36,7 @@
                         {{ $t("branch") }}
                       </span>
                       <span class="value">
-                        {{ filter.branche }}
+                        {{ idToString("JOB_BRANCHE", filter.branche) }}
                       </span>
                     </div>
                   </v-col>
@@ -44,7 +46,8 @@
                         {{ $t("salaryRange") }}
                       </span>
                       <span class="value">
-                        {{ filter.min_salary }} - {{ filter.max_salary }}
+                        {{ filter.min_salary }}&euro; -
+                        {{ filter.max_salary }}&euro;
                       </span>
                     </div>
                   </v-col>
@@ -104,8 +107,8 @@ export default {
 
   props: {
     filter: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
@@ -113,13 +116,13 @@ export default {
       actions: [
         {
           type: "delete",
-          label: "Delete",
+          label: "Delete"
         },
         {
           type: "use",
-          label: "Use filter",
-        },
-      ],
+          label: "Use filter"
+        }
+      ]
     };
   },
 
@@ -142,8 +145,8 @@ export default {
         }
       });
       return activatedFields;
-    },
-  },
+    }
+  }
 };
 </script>
 
