@@ -672,10 +672,10 @@
             >
               {{ plan.price }}&euro;
             </span>
-            <div>
+            <div class="plan-content">
               <v-img
                 class="upgrade-icon"
-                :style="{ order: userPlan && userPlan.id === plan.id ? 2 : 1 }"
+                :style="{ order: userPlan && getUserPlanId(plan.id, 'id') === plan.id ? 2 : 1 }"
                 :src="
                   require(`@/assets/icons/${
                     index === 0 ? 'top-rated' : 'medal'
@@ -700,7 +700,7 @@
               />
             </div>
             <CancelSubscription
-              v-if="userPlan.length && isPlanActive(plan.id) && plan.renewal"
+              v-if="userPlan.length && isPlanActive(plan.id) && getUserPlanId(plan.id, 'renewal')"
               :id="plan.id"
             />
           </div>
@@ -847,7 +847,6 @@ export default {
       return [min, max];
     }
   },
-
   watch: {
     user(newVal) {
       this.resetFormData(newVal);
@@ -974,6 +973,10 @@ export default {
       } else {
         this.formData[prop].splice(index, 1);
       }
+    },
+    getUserPlanId(id, name) {
+      const plan = this.getUserPlan(id)[0];
+      return plan ? plan[name] : null;
     }
   }
 };

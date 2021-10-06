@@ -87,7 +87,8 @@ html {
   flex-direction: column;
   position: relative;
 
-  > div:first-child {
+  > div:first-child,
+  > div.plan-content {
     display: flex;
   }
 
