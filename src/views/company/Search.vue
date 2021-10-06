@@ -1,24 +1,21 @@
 <template>
   <div>
-    <SearchForm class="mb-10" @search="search"/>
+    <SearchForm class="mb-10" @search="search" />
     <SearchSavedFilters @search="search" />
 
-    <component :is="searchComponents[searchStatus]"
-      :results="searchResults"
-    />
+    <component :is="searchComponents[searchStatus]" :results="searchResults" />
   </div>
 </template>
 
 <script>
-import store from '@/store'
-import SearchForm from '@/components/company/SearchForm';
-import SearchSavedFilters from '@/components/company/SearchSavedFilters';
-import SearchResults from '@/components/company/SearchResults';
-import SearchResultsLock from '@/components/company/SearchResultsLock';
+import store from "@/store";
+import SearchForm from "@/components/company/jonder-search/SearchForm";
+import SearchSavedFilters from "@/components/company/jonder-search/SearchSavedFilters";
+import SearchResults from "@/components/company/jonder-search/SearchResults";
+import SearchResultsLock from "@/components/company/jonder-search/SearchResultsLock";
 
 export default {
-
-  name: 'CompanySearch',
+  name: "CompanySearch",
 
   components: {
     SearchForm,
@@ -34,39 +31,38 @@ export default {
       searchComponents: {
         results: SearchResults,
         limited: SearchResultsLock,
-        default: false,
+        default: false
       }
-    }
+    };
   },
   beforeDestroy() {
     if (this.$route.name !== "CompanyUserOverview") {
       console.log("erase user results serach");
-      store.commit('company/SET_SEARCH_RESULTS', []);
-      store.commit('company/SET_SEARCH_META', {
+      store.commit("company/SET_SEARCH_RESULTS", []);
+      store.commit("company/SET_SEARCH_META", {
         per_page: 6,
         current_page: 1,
         total: 0
       });
       this.searchExecuted = false;
       // this.searchStatus.current = 'default';
-      store.commit('company/SET_SEARCH_STATUS', 'default');
+      store.commit("company/SET_SEARCH_STATUS", "default");
     }
   },
   methods: {
     search() {
       this.searchExecuted = true;
       // this.searchStatus.current = 'results';
-      store.commit('company/SET_SEARCH_STATUS', 'results');
+      store.commit("company/SET_SEARCH_STATUS", "results");
     }
   },
   computed: {
     searchResults() {
-      return store.getters['company/searchResults']
+      return store.getters["company/searchResults"];
     },
     searchStatus() {
-      return store.getters['company/searchStatus'];
+      return store.getters["company/searchStatus"];
     }
   }
 };
-
 </script>

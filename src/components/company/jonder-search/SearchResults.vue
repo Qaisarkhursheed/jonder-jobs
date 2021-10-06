@@ -42,8 +42,8 @@
 
 <script>
 import store from "@/store";
-import SearchResultsCard from "@/components/company/SearchResultsCard";
-import SearchNoResults from "@/components/company/SearchNoResults";
+import SearchResultsCard from "@/components/company/jonder-search/SearchResultsCard";
+import SearchNoResults from "@/components/company/jonder-search/SearchNoResults";
 import CompanyPlans from "@/components/plans/CompanyPlans";
 
 export default {
