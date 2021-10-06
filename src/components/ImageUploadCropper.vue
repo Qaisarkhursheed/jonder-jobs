@@ -135,6 +135,8 @@ export default {
 <style lang="scss">
 .cropper-dialog {
   overflow: hidden;
+  width: unset !important;
+  min-width: 350px;
 
   .buttons {
     .v-btn {
