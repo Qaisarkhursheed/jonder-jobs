@@ -220,10 +220,6 @@
   "repeatPassword": "Password erneut eingeben",
   "agreePolicy": "Ja, ich stimme der Datenschutzerklärung & AGB zu.",
   "saveChanges": "Änderungen speichern",
-  "errorField": "Dieses Feld ist erforderlich um fortzufahren.",
-  "phoneWarning": "Muss eine gültige Telefonnummer sein und beginnen mit Ländernummer Beispiel (+49)",
-  "passwordCheck": "Mindestens 8 Zeichen, muss eine Zahl und ein Sonderzeichen enthalten.",
-  "samePasswordCheck": "Muss mit Passwort identisch sein.",
   "beOnTheTop": "Buche dir upgrades und erhöhe die Sichtbarkeit deines Profils.",
   "searchJobseekers": "Mitarbeiter finden",
   "searchNJobseekers": "Suche {n} Mitarbeiter",
@@ -623,6 +619,28 @@
     "questionChoice3": "Weder zutreffend noch unzutreffend",
     "questionChoice4": "Zutreffend",
     "questionChoice5": "Sehr zutreffend"
+  },
+  "validations": {
+    "email": "Muss eine gültige E-Mail-Adresse sein.",
+    "greater": "Muss größer als {n} sein.",
+    "less": "Muss kleiner als {n} sein.",
+    "password": "Mindestens 8 Zeichen, muss eine Zahl und ein Sonderzeichen enthalten.",
+    "phone": "Muss eine gültige Telefonnummer sein und mit Ländervorwahl beginnen (z. B. +49).",
+    "required": "Dieses Feld wird benötigt.",
+    "time24": "Die Uhrzeit muss im Format hh:mm vorliegen.",
+    "same": "Muss mit {field} identisch sein.",
+    "size": {
+      "string": "Muss {n} Zeichen lang sein."
+    },
+    "url": "Muss eine gültige URL sein.",
+    "max": {
+      "string": "Maximal {n} Zeichen.",
+      "selection": "Maximale {n} Auswahl."
+    },
+    "min": {
+      "string": "Mindestens {n} Zeichen.",
+      "selection": "Mindestens {n} Auswahl."
+    }
   },
   "user": "Nutzer",
   "areYouSureCancelSubscription": "Sind Sie sicher, dass Sie das Abonnement kündigen möchten?"

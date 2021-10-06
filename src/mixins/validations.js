@@ -1,91 +1,77 @@
-import {
-  parsePhoneNumber,
-  isPossiblePhoneNumber,
-  isValidPhoneNumber,
-} from "libphonenumber-js";
+import { parsePhoneNumber } from "libphonenumber-js";
 import i18n from "@/locales";
 
-const validatePhoneNumber = (number) => {
-  let isValid = false;
+const isValidPhoneNumber = number => {
   try {
-    const numberResult = parsePhoneNumber(number);
-    console.log("numberResult", numberResult);
-    if (numberResult) {
-      isValid =
-        numberResult.isValid() &&
-        isPossiblePhoneNumber(number, numberResult.country) === true &&
-        isValidPhoneNumber(number, numberResult.country) === true;
-    }
+    return parsePhoneNumber(number).isValid();
   } catch {
-    isValid = false;
+    return false;
   }
-  return isValid;
 };
 
 export default {
   computed: {
     validations() {
       return {
-        email: (v) =>
-          !v ||
-          /\S+@\S+\.\S+/.test(v) ||
-          "Muss eine gültige E-Mail-Adresse sein.",
+        email: v => !v || /\S+@\S+\.\S+/.test(v) || i18n.t("validations.email"),
 
-        greater: (compareValue) => (v) =>
+        greater: compareValue => v =>
           !v ||
           !compareValue ||
           parseInt(v.replace(":", "")) >
             parseInt(compareValue.replace(":", "")) ||
-          `Muss größer als ${compareValue} sein.`,
+          i18n.t("validations.greater", { n: compareValue }),
 
-        less: (compareValue) => (v) =>
+        less: compareValue => v =>
           !v ||
           !compareValue ||
           parseInt(v.replace(":", "")) <
             parseInt(compareValue.replace(":", "")) ||
-          `Muss kleiner als ${compareValue} sein.`,
+          i18n.t("validations.less", { n: compareValue }),
 
-        password: (v) =>
+        password: v =>
           !v ||
           /^(?=.*[a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(v) ||
-          i18n.t("passwordCheck"),
+          i18n.t("validations.password"),
 
-        phone: (v) => !v || validatePhoneNumber(v) || i18n.t("phoneWarning"),
+        phone: v => !v || isValidPhoneNumber(v) || i18n.t("validations.phone"),
 
-        time24: (v) =>
+        time24: v =>
           !v ||
           /^([01]\d|2[0-3]):([0-5]\d)$/.test(v) ||
-          "Die Zeit muss im Format hh:mm sein",
+          i18n.t("validations.time24"),
 
-        required: (v) => !!v || i18n.t("errorField"),
+        required: v => !!v || i18n.t("validations.required"),
 
-        same: (field, fieldVal) => (v) =>
-          v === fieldVal || i18n.t("samePasswordCheck"),
+        same: (fieldName, fieldVal) => v =>
+          v === fieldVal || i18n.t("validations.same", { field: fieldName }),
 
         size: {
-          string: (n) => (v) =>
-            (v && v.length == n) || `Muss ${n} Zeichen sein.`,
+          string: n => v =>
+            (v && v.length == n) || i18n.t("validations.size", { n })
         },
 
-        url: (v) =>
+        url: v =>
           !v ||
           /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi.test(
             v
           ) ||
-          "Muss eine gültige URL sein.",
+          i18n.t("validations.url"),
 
         max: {
-          string: (n) => (v) =>
-            !v || v.length <= n || `Darf nicht größer als ${n} Zeichen sein.`,
-          selection: (n) => (v) =>
-            !v || v.length <= n || `Darf nicht größer als ${n} Auswahl sein.`,
+          string: n => v =>
+            !v || v.length <= n || i18n.t("validations.max.string", { n }),
+          selection: n => v =>
+            !v || v.length <= n || i18n.t("validations.max.selection", { n })
         },
 
         min: {
-          string: (n) => (v) =>
-            !v || v.length >= n || `Muss mindestens ${n} Zeichen lang sein.`,
-        },
+          string: n => v =>
+            !v || v.length >= n || i18n.t("validations.min.string", { n }),
+          selection: n => v =>
+            !v || v.length >= n || i18n.t("validations.min.selection", { n })
+        }
       };
-    },
-  },
+    }
+  }
 };

@@ -617,6 +617,28 @@
     "questionChoice4": "Plutot en accord",
     "questionChoice5": "Fortement en accord"
   },
+  "validations": {
+    "email": "Doit être une adresse e-mail valide.",
+    "greater": "Doit être supérieur à {n}.",
+    "less": "Doit être inférieur à {n}.",
+    "password": "Au moins 8 caractères, doit contenir un chiffre et un caractère spécial.",
+    "phone": "Doit être un numéro de téléphone valide et commencer par le code du pays (par exemple +49).",
+    "required": "Ce champ est obligatoire.",
+    "time24": "L'heure doit être au format hh:mm.",
+    "same": "Doit être identique à {field}.",
+    "size": {
+      "string": "Doit comporter {n} caractères."
+    },
+    "url": "Doit être une URL valide.",
+    "max": {
+      "string": "Maximum {n} caractères.",
+      "selection": "Maximum {n} sélections."
+    },
+    "min": {
+      "string": "Minimum {n} caractères.",
+      "selection": "Minimum {n} sélections."
+    }
+  },
   "user": "Usager",
   "areYouSureCancelSubscription": "Êtes-vous sûr de vouloir annuler l'abonnement?"
 }
