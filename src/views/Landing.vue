@@ -248,11 +248,12 @@ export default {
     width: 820px;
     height: 740px;
   }
-
+  .landing-header-container {
+    z-index: 10;
+  }
   .landing-header-container,
   .landing-hero {
     position: relative;
-    z-index: 10;
   }
 
   .landing-header {
