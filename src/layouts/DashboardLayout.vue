@@ -162,29 +162,32 @@
           <v-row class="full-h ma-0">
             <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
               <div class="profile-image">
-                <v-img
-                  class="profile-image-user"
-                  :src="user.profile_img"
-                  v-if="user.profile_img"
-                ></v-img>
-                <v-img
-                  class="profile-image-user"
-                  :src="require('@/assets/icons/profile-placeholder.png')"
-                  v-else
-                ></v-img>
-                <div class="profile-image-badge-icons" v-if="userPlan.length">
+                <v-avatar color="primary" size="80">
                   <v-img
-                    v-for="(plan, index) in userPlan"
-                    :key="index"
-                    class="profile-image-badge-icon"
-                    :style="[userPlan.length > 1 ? { margin: '0 -5px' } : null]"
-                    :src="
-                      require(`@/assets/icons/${
-                        plan.id === 11 ? 'top-rated' : 'medal'
-                      }.svg`)
-                    "
+                    class="profile-image-user"
+                    :src="user.profile_img"
+                    v-if="user.profile_img"
                   ></v-img>
-                </div>
+                  <span v-else class="white--text text-h4">
+                    {{ user | initials }}
+                  </span>
+
+                  <div class="profile-image-badge-icons" v-if="userPlan.length">
+                    <v-img
+                      v-for="(plan, index) in userPlan"
+                      :key="index"
+                      class="profile-image-badge-icon"
+                      :style="[
+                        userPlan.length > 1 ? { margin: '0 -5px' } : null
+                      ]"
+                      :src="
+                        require(`@/assets/icons/${
+                          plan.id === 11 ? 'top-rated' : 'medal'
+                        }.svg`)
+                      "
+                    ></v-img>
+                  </div>
+                </v-avatar>
               </div>
 
               <span class="dash-name">{{ getUserFullName }}</span>
