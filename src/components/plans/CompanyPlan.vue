@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="packages-plan">
+  <v-card flat class="packages-plan d-flex flex-column full-h">
     <div class="price d-flex align-end">
       <div>{{ plan.price }}&euro;</div>
       <div>/{{ $t("month") }}</div>
@@ -15,7 +15,7 @@
 
     <v-divider class="mb-10 mt-10"></v-divider>
 
-    <div class="features">
+    <div class="features flex-grow-1">
       <div class="feature pb-5" v-for="(feature, i) in features" :key="i">
         <v-icon size="25" :color="color">
           mdi-check
