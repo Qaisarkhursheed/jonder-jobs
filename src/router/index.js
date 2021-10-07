@@ -61,6 +61,39 @@ const routes = [
           isAdmin: false
         }
       },
+
+      {
+        path: "profile",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProfileWrap" */ "@/views/dashboard/ProfileWrap"
+          ),
+        meta: {
+          requiresAuth: true,
+          requiresUser: true,
+          isAdmin: false
+        },
+        children: [
+          {
+            path: "",
+            name: "Profile",
+            component: () =>
+              import(
+                /* webpackChunkName: "Profile" */ "@/views/dashboard/profile/Profile"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+
+          {
+            path: "*",
+            redirect: "/dashboard/profile"
+          }
+        ]
+      },
       {
         path: "chat",
         name: "Chat",
@@ -81,6 +114,7 @@ const routes = [
           isAdmin: false
         }
       },
+
       {
         path: "personality-test",
         name: "PersonalityTestJobseeker",
