@@ -13,7 +13,9 @@
       >
         <template v-if="type === 'Experience'" #default="{ value }">
           <div class="title">{{ value.company_name }}</div>
-          <div class="subtitle">{{ value.position }}</div>
+          <div class="subtitle">
+            {{ idToString("JOB_POSITION", value.position) }}
+          </div>
           <div class="subtitle">
             {{ value.start_time | moment("MMMM YYYY") }} -
             <template v-if="value.end_time">

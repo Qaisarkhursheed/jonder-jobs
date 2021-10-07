@@ -71,6 +71,7 @@
                   v-model="form.position"
                   :items="types.JOB_POSITION"
                   :item-text="$i18n.locale"
+                  item-value="id"
                   :rules="[validations.required]"
                   outlined
                   flat
@@ -94,18 +95,7 @@
                   :rules="[validations.required]"
                   outlined
                   append-icon="mdi-chevron-down"
-                >
-                  <template v-slot:selection="{ item }">
-                    {{ item[$i18n.locale] }}
-                  </template>
-                  <template v-slot:item="{ item }">
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ item[$i18n.locale] }}
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </template>
-                </v-select>
+                />
               </v-col>
             </v-row>
           </v-col>
@@ -138,13 +128,7 @@
         <ResponseAlert :response="formResponse"></ResponseAlert>
 
         <div class="text-right">
-          <v-btn
-            @click="close"
-            height="58"
-            color="#fff"
-            class="mt-5 px-5"
-            light
-          >
+          <v-btn @click="close" height="58" class="mt-5 px-5" text>
             {{ $t("cancel") }}
           </v-btn>
           <v-btn
