@@ -104,7 +104,7 @@
             <v-row class="no-gutters justify-space-between">
               <v-col cols="6" class="pr-2">
                 <v-text-field
-                  v-model="formFields.min_salary"
+                  v-model.number="formFields.min_salary"
                   placeholder="Min"
                   outlined
                   type="number"
@@ -120,7 +120,7 @@
 
               <v-col cols="6" class="pl-2">
                 <v-text-field
-                  v-model="formFields.max_salary"
+                  v-model.number="formFields.max_salary"
                   placeholder="Max"
                   outlined
                   type="number"
@@ -141,18 +141,40 @@
             <label class="section-label">
               {{ $t("workExperience") }}
             </label>
-            <v-select
-              :attach="true"
-              v-model="formFields.working_experience"
-              :items="types.WORK_EXPERIENCE"
-              :item-text="i => `${i[$i18n.locale]} ${$t('years')}`"
-              :item-value="$i18n.locale"
-              :hide-details="true"
-              clearable
-              :placeholder="$t('workExperience')"
-              outlined
-              append-icon="mdi-chevron-down"
-            ></v-select>
+            <v-row class="no-gutters justify-space-between">
+              <v-col cols="6" class="pr-2">
+                <v-text-field
+                  v-model.number="formFields.working_experience_min"
+                  placeholder="Min"
+                  outlined
+                  type="number"
+                  min="0"
+                  max="50"
+                  hide-details
+                  clearable
+                  flat
+                  dense
+                  solo
+                />
+              </v-col>
+
+              <v-col cols="6" class="pl-2">
+                <v-text-field
+                  v-model.number="formFields.working_experience_max"
+                  placeholder="Max"
+                  outlined
+                  type="number"
+                  min="0"
+                  max="50"
+                  hide-details
+                  clearable
+                  flat
+                  dense
+                  solo
+                >
+                </v-text-field>
+              </v-col>
+            </v-row>
           </v-col>
 
           <v-col cols="12" md="4">
@@ -256,7 +278,8 @@ export default {
       formFields: {
         employment_type: "",
         job_position: "",
-        working_experience: "",
+        working_experience_min: "",
+        working_experience_max: "",
         branche: "",
         university_name: "",
         study: "",
@@ -330,9 +353,13 @@ export default {
           "employment_type" in searchMeta ? searchMeta.employment_type : "";
         this.formFields.job_position =
           "job_position" in searchMeta ? searchMeta.job_position : "";
-        this.formFields.working_experience =
-          "working_experience" in searchMeta
-            ? searchMeta.working_experience
+        this.formFields.working_experience_min =
+          "working_experience_min" in searchMeta
+            ? searchMeta.working_experience_min
+            : "";
+        this.formFields.working_experience_max =
+          "working_experience_max" in searchMeta
+            ? searchMeta.working_experience_max
             : "";
         this.formFields.branche =
           "branche" in searchMeta ? searchMeta.branche : "";
@@ -351,22 +378,10 @@ export default {
       let activatedFields = {};
 
       forEach(this.formFields, (item, key) => {
-        if (item) {
+        if (item || item == 0) {
           activatedFields[key] = item;
         }
       });
-
-      // Split working experience into two fields
-      if (activatedFields["working_experience"]) {
-        const arr = activatedFields["working_experience"].split("-");
-        activatedFields["working_experience_min"] = parseInt(arr[0]);
-
-        if (arr[1]) {
-          activatedFields["working_experience_max"] = parseInt(arr[1]);
-        }
-
-        delete activatedFields["working_experience"];
-      }
 
       return activatedFields;
     },

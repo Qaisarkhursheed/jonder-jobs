@@ -95,7 +95,8 @@
               md="3"
               cols="6"
               v-if="
-                filter.working_experience_min && filter.working_experience_max
+                filter.working_experience_min != null ||
+                  filter.working_experience_max != null
               "
               class="infobar"
             >
