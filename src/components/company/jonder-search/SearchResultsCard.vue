@@ -1,11 +1,11 @@
 <template>
   <v-card
     :hover="true"
-    class="candidate-card pa-0"
+    class="candidate-card full-h pa-0 d-flex flex-column"
     :class="{ highlighted }"
     flat
   >
-    <div @click="proceedClick">
+    <div @click="proceedClick" class="flex-grow-1 d-flex flex-column">
       <v-card-text class="d-flex align-center pa-6 pb-5">
         <v-avatar color="primary" size="64">
           <v-img v-if="candidate.profile_img" :src="candidate.profile_img" />
@@ -28,7 +28,7 @@
         </div>
       </v-card-text>
 
-      <v-card-text class="candidate-details">
+      <v-card-text class="candidate-details flex-grow-1">
         <v-row class="no-gutters">
           <v-col cols="5">
             <v-icon class="pr-3" color="#0253B3">
