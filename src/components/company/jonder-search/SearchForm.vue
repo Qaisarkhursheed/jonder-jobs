@@ -178,6 +178,7 @@
                   elevation="0"
                   class="full-w mt-md-16 font-weight-medium white"
                   @click="searchSave"
+                  :disabled="!isSaveable"
                 >
                   {{ $t("saveSearch") }}
                 </v-btn>
@@ -243,6 +244,13 @@ import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue"
 export default {
   components: { GooglePlacesAutocomplete },
 
+  props: {
+    selectedFilter: {
+      type: Object,
+      required: null
+    }
+  },
+
   data() {
     return {
       formFields: {
@@ -269,6 +277,9 @@ export default {
     },
     types() {
       return types;
+    },
+    isSaveable() {
+      return this.formFields.job_position && this.formFields.employment_type;
     }
   },
 
@@ -278,6 +289,11 @@ export default {
         this.updatePresearchCount();
       },
       deep: true
+    },
+    selectedFilter(val) {
+      if (val) {
+        this.useFilter(val);
+      }
     }
   },
 
@@ -292,46 +308,17 @@ export default {
       this.$emit("search");
     },
 
+    useFilter(filter) {
+      this.formFields = filter;
+    },
+
     searchSave() {
-      let i = 0;
-      let isValid = true;
-      const saveData = this.prepareData();
-      const searchFilters = this.$store.getters["company/searchFilters"];
-
-      while (i < searchFilters.length) {
-        let count = 0;
-
-        forEach(saveData, (prop, key) => {
-          if (searchFilters[i][key] === prop) {
-            count += 1;
-          }
+      this.formResponse = {};
+      this.$store
+        .dispatch("company/searchFilterSave", this.prepareData())
+        .catch(error => {
+          this.formResponse = error.response.data;
         });
-
-        if (count === Object.keys(saveData).length) {
-          isValid = false;
-          this.formResponse = {
-            message: "Already saved!"
-          };
-          setTimeout(() => {
-            this.formResponse = {};
-          }, 5000);
-          break;
-        } else {
-          i++;
-        }
-      }
-
-      if (isValid) {
-        this.formResponse = {};
-        this.$store
-          .dispatch("company/searchFilterSave", saveData)
-          .catch(error => {
-            this.formResponse = error.response.data;
-            setTimeout(() => {
-              this.formResponse = {};
-            }, 5000);
-          });
-      }
     },
 
     filterData() {

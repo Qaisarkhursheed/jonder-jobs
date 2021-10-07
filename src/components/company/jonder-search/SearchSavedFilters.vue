@@ -1,9 +1,10 @@
 <template>
   <div class="search-saved-filters">
     <div v-for="(filter, i) in searchFilters" :key="i">
-      <SearchFilter
+      <SearchSavedFilter
         class="mb-5"
         :filter="filter"
+        @use-filter="$emit('use-filter', $event)"
         @filter-search="$emit('search')"
       />
     </div>
@@ -12,14 +13,10 @@
 
 <script>
 import store from "@/store";
-import SearchFilter from "@/components/company/jonder-search/SearchSavedFiltersFilter";
+import SearchSavedFilter from "@/components/company/jonder-search/SearchSavedFilter";
 
 export default {
-  name: "SearchSavedFilters",
-
-  components: {
-    SearchFilter
-  },
+  components: { SearchSavedFilter },
 
   created() {
     store.dispatch("company/searchFilterFetchAll");

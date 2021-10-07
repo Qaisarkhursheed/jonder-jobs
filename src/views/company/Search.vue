@@ -1,7 +1,14 @@
 <template>
   <div>
-    <SearchForm class="mb-10" @search="search" />
-    <SearchSavedFilters @search="search" />
+    <SearchForm
+      class="mb-10"
+      @search="search"
+      :selected-filter="selectedFilter"
+    />
+    <SearchSavedFilters
+      @search="search"
+      @use-filter="selectedFilter = $event"
+    />
 
     <component :is="searchComponents[searchStatus]" :results="searchResults" />
   </div>
@@ -26,6 +33,7 @@ export default {
 
   data() {
     return {
+      selectedFilter: null,
       advancedSearch: false,
       searchExecuted: false,
       searchComponents: {
