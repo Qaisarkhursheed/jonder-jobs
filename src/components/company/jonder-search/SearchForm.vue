@@ -378,7 +378,7 @@ export default {
       let activatedFields = {};
 
       forEach(this.formFields, (item, key) => {
-        if (item || item == 0) {
+        if (item || item === 0) {
           activatedFields[key] = item;
         }
       });
