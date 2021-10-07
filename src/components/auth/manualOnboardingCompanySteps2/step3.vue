@@ -44,7 +44,7 @@
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesAutocomplete
-        @select="(e) => (value.address = e)"
+        @select="e => (value.address = e)"
         type="geocode"
         :full-address="true"
         :placeholder="$t('companyCityandAdressPlaceholder')"
@@ -53,11 +53,7 @@
 
       <v-row class="mt-1">
         <v-col cols="3">
-          <v-btn
-            @click="$emit('prevScreen')"
-            height="55"
-            class="full-w font-weight-medium "
-          >
+          <v-btn @click="$emit('prevScreen')" height="55" text block>
             {{ $t("back") }}
           </v-btn>
         </v-col>
@@ -67,7 +63,7 @@
             :disabled="!formValid"
             color="primary"
             height="55"
-            class="full-w font-weight-medium dark-blue"
+            block
           >
             {{ $t("next") }}
           </v-btn>
@@ -84,18 +80,18 @@ export default {
   name: "Step3",
 
   components: {
-    GooglePlacesAutocomplete,
+    GooglePlacesAutocomplete
   },
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
   },
   methods: {
@@ -103,11 +99,11 @@ export default {
       if (this.value.company_phone === "") {
         return (this.value.company_phone = "+49");
       }
-    },
+    }
   },
   beforeMount() {
     this.phonePrefix();
-  },
+  }
 };
 </script>
 

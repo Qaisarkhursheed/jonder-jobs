@@ -56,16 +56,7 @@
         :placeholder="$t('choose')"
         append-icon="mdi-chevron-down"
         outlined
-      >
-        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-        <template v-slot:item="{ item }">
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ $t(item) }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </template> -->
-      </v-select>
+      />
 
       <label class="profile-label">
         {{ $t("dateOfEstablishment") }}
@@ -79,15 +70,10 @@
         solo
       >
       </v-text-field>
-      <!-- Implement date picker component -->
 
       <v-row class="mt-1">
         <v-col cols="3">
-          <v-btn
-            @click="$emit('prevScreen')"
-            height="55"
-            class="full-w font-weight-medium "
-          >
+          <v-btn @click="$emit('prevScreen')" height="55" text block>
             {{ $t("back") }}
           </v-btn>
         </v-col>
@@ -97,7 +83,7 @@
             :disabled="!formValid"
             color="primary"
             height="55"
-            class="full-w font-weight-medium dark-blue"
+            block
           >
             {{ $t("next") }}
           </v-btn>

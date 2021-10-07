@@ -105,11 +105,7 @@
 
       <v-row class="mt-0">
         <v-col cols="3">
-          <v-btn
-            @click="$emit('prevScreen')"
-            height="55"
-            class="full-w font-weight-medium "
-          >
+          <v-btn @click="$emit('prevScreen')" height="55" text block>
             {{ $t("back") }}
           </v-btn>
         </v-col>
@@ -119,7 +115,7 @@
             type="submit"
             color="primary"
             height="58"
-            class="full-w font-weight-medium dark-blue"
+            block
           >
             {{ $t("next") }}
           </v-btn>

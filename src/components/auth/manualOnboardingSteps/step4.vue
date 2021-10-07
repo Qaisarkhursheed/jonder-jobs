@@ -27,7 +27,7 @@
         min="0"
         max="30"
         step="0.5"
-        @change="(val) => (value.working_experience = val)"
+        @change="val => (value.working_experience = val)"
       />
 
       <div class="mt-4">
@@ -92,11 +92,7 @@
 
       <v-row class="mt-5">
         <v-col cols="3">
-          <v-btn
-            @click="$emit('prevScreen')"
-            height="55"
-            class="full-w font-weight-medium "
-          >
+          <v-btn @click="$emit('prevScreen')" height="55" text block>
             {{ $t("back") }}
           </v-btn>
         </v-col>
@@ -106,7 +102,7 @@
             type="submit"
             color="primary"
             height="55"
-            class="full-w font-weight-medium dark-blue"
+            block
           >
             {{ $t("next") }}
           </v-btn>
@@ -129,15 +125,15 @@ export default {
     ModalEducation,
     ModalExperience,
     CardActionableList,
-    SliderInput,
+    SliderInput
   },
 
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
@@ -146,18 +142,18 @@ export default {
         education: {
           active: false,
           edit: false,
-          component: ModalEducation,
+          component: ModalEducation
         },
         experience: {
           active: false,
           edit: false,
-          component: ModalExperience,
-        },
+          component: ModalExperience
+        }
       },
       fileActions: {
         experience: ["edit", "delete"],
-        education: ["edit", "delete"],
-      },
+        education: ["edit", "delete"]
+      }
     };
   },
   mounted() {
@@ -171,8 +167,8 @@ export default {
     activateEdit(type, item) {
       this.toggleModal(type);
       this.modals[type].edit = item;
-    },
-  },
+    }
+  }
 };
 </script>
 

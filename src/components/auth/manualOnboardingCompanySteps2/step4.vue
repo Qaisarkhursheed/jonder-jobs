@@ -77,7 +77,8 @@
             @click="$emit('prevScreen')"
             :loading="loading"
             height="55"
-            class="full-w font-weight-medium "
+            text
+            block
           >
             {{ $t("back") }}
           </v-btn>
@@ -89,7 +90,7 @@
             :loading="loading"
             color="primary"
             height="55"
-            class="full-w font-weight-medium "
+            block
           >
             {{ $t("next") }}
           </v-btn>
@@ -106,16 +107,16 @@ export default {
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
   data() {
     return {
-      formValid: false,
+      formValid: false
     };
-  },
+  }
 };
 </script>
 
