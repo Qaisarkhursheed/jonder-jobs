@@ -62,6 +62,102 @@ const routes = [
         }
       },
       {
+        path: "notepad/:id",
+        name: "Notepad",
+        component: () =>
+          import(
+            /* webpackChunkName: "EditNotepad" */ "@/views/dashboard/EditNotepad"
+          ),
+        meta: {
+          requiresAuth: true,
+          requiresUser: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "profile",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProfileWrap" */ "@/views/dashboard/ProfileWrap"
+          ),
+        meta: {
+          requiresAuth: true,
+          requiresUser: true,
+          isAdmin: false
+        },
+        children: [
+          {
+            path: "",
+            name: "Profile",
+            component: () =>
+              import(
+                /* webpackChunkName: "Profile" */ "@/views/dashboard/profile/Profile"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "view/:id",
+            name: "ProfileView",
+            component: () =>
+              import(
+                /* webpackChunkName: "ProfileView" */ "@/views/dashboard/profile/ProfileView"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "cv-maker",
+            name: "CvMaker",
+            component: () =>
+              import(
+                /* webpackChunkName: "CvMaker" */ "@/views/dashboard/profile/CvMaker"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "qualifications",
+            name: "Qualifications",
+            component: () =>
+              import(
+                /* webpackChunkName: "Qualifications" */ "@/views/dashboard/profile/Qualifications"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "actual-position",
+            name: "ActualPosition",
+            component: () =>
+              import(
+                /* webpackChunkName: "ActualPosition" */ "@/views/dashboard/profile/ActualPosition"
+              ),
+            meta: {
+              requiresAuth: true,
+              requiresUser: true,
+              isAdmin: false
+            }
+          },
+          {
+            path: "*",
+            redirect: "/dashboard/profile"
+          }
+        ]
+      },
+      {
         path: "chat",
         name: "Chat",
         component: () =>
@@ -76,6 +172,18 @@ const routes = [
         name: "ChatDetail",
         component: () =>
           import(/* webpackChunkName: "Chat" */ "@/views/dashboard/Chat"),
+        meta: {
+          requiresAuth: true,
+          isAdmin: false
+        }
+      },
+      {
+        path: "product-pricing",
+        name: "ProductPricing",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProductPricing" */ "@/views/dashboard/ProductPricing"
+          ),
         meta: {
           requiresAuth: true,
           isAdmin: false
