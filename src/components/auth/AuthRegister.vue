@@ -142,21 +142,6 @@
         hide-details="auto"
       ></v-checkbox>
 
-      <!-- <v-checkbox
-        class="mt-0"
-        label="Möchten Sie, dass wir Ihren Namen anzeigen?"
-        hide-details="auto"
-        v-model="formData.show_name"
-      ></v-checkbox> -->
-
-      <!-- Show location -->
-      <!-- <v-checkbox
-        class="mb-3"
-        label="Möchten Sie, dass wir Ihren Standort anzeigen?"
-        hide-details="auto"
-        v-model="formData.show_location"
-      ></v-checkbox> -->
-
       <!-- ResponseAlert -->
       <ResponseAlert :response="formResponse" />
 
@@ -198,8 +183,6 @@ export default {
         password: "",
         password_confirmation: "",
         phone: "+49",
-        // show_name: false,
-        // show_location: false,
         role: "Jobseeker",
         accept_policy: false,
         profile_img: null

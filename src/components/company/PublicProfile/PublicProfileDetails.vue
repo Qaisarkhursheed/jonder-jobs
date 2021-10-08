@@ -17,16 +17,7 @@
           outlined
           hide-no-data
           append-icon="mdi-chevron-down"
-        >
-          <!-- <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
-          <template v-slot:item="{ item }">
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ $t(item) }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </template> -->
-        </v-autocomplete>
+        />
       </div>
 
       <!-- Number of employees -->
@@ -43,16 +34,7 @@
           :rules="[validations.required]"
           outlined
           append-icon="mdi-chevron-down"
-        >
-          <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-          <template v-slot:item="{ item }">
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ $t(item) }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </template> -->
-        </v-select>
+        />
       </div>
 
       <!-- Establishment date -->
@@ -116,14 +98,6 @@ export default {
       this.$emit("update", {
         ...this.formData
       });
-    },
-    toggleValues(event, name) {
-      const index = this.formData.branche.indexOf(name);
-      if (index < 0) {
-        this.formData.branche.push(name);
-      } else {
-        this.formData.branche.splice(index, 1);
-      }
     }
   }
 };

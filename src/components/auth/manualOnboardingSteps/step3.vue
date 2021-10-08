@@ -21,24 +21,7 @@
         multiple
         append-icon="mdi-chevron-down"
         class="mt-1"
-      >
-        <!-- <template v-slot:selection="{ item }"> {{ $t(item.value) }}, </template>
-        <template v-slot:item="{ item }">
-          <v-list-item-action>
-            <v-simple-checkbox
-              v-ripple="false"
-              @input="toggleValues($event, item.value)"
-              :value="searchForValue(item.value)"
-            >
-            </v-simple-checkbox>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ $t(item.value) }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </template> -->
-      </v-select>
+      />
 
       <label class="profile-label">
         {{ $t("whereToWork") }}
@@ -161,23 +144,6 @@ export default {
         min: parseInt(event[0].toString()),
         max: parseInt(event[1].toString())
       };
-    },
-    searchForValue(name) {
-      return (
-        !!this.value.looking_for_employment_type &&
-        this.value.looking_for_employment_type.indexOf(name) >= 0
-      );
-    },
-    toggleValues(event, name) {
-      if (!this.value.looking_for_employment_type) {
-        this.value.looking_for_employment_type = [];
-      }
-      const index = this.value.looking_for_employment_type.indexOf(name);
-      if (index < 0) {
-        this.value.looking_for_employment_type.push(name);
-      } else {
-        this.value.looking_for_employment_type.splice(index, 1);
-      }
     }
   }
 };

@@ -62,9 +62,8 @@
             :complete="complete(5)"
             color="#0253B3"
           ></v-stepper-step>
-
-          <!-- <v-stepper-step step="6" :complete="complete(6)"></v-stepper-step> -->
         </v-stepper-header>
+
         <v-stepper-items class="mo-stepper-items">
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"
@@ -120,17 +119,6 @@
               v-model="formData"
             />
           </v-stepper-content>
-
-          <!-- <v-stepper-content
-            class="px-0 mo-stepper-items__step-content"
-            step="6"
-          >
-            <step-6
-              :nextScreen="nextStep"
-              @prevScreen="prevStep"
-              v-model="formData"
-            />
-          </v-stepper-content> -->
 
           <v-stepper-content
             class="px-0 mo-stepper-items__step-content"

@@ -192,24 +192,7 @@
             hide-no-data
             hide-details="auto"
             append-icon="mdi-chevron-down"
-          >
-            <!-- <template v-slot:selection="{ item }"> {{ item[$i18n.locale] }}, </template> -->
-            <!-- <template v-slot:item="{ item }">
-              <v-list-item-action>
-                <v-simple-checkbox
-                  v-ripple="false"
-                  @input="toggleValues($event, item, 'branche')"
-                  :value="formData.branche.indexOf(item.id) >= 0"
-                >
-                </v-simple-checkbox>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ item[$i18n.locale] }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </template> -->
-          </v-autocomplete>
+          />
         </v-col>
 
         <!-- looking_for_position -->
@@ -292,32 +275,7 @@
             multiple
             hide-details="auto"
             append-icon="mdi-chevron-down"
-          >
-            <!-- <template v-slot:selection="{ item }">
-              {{ item[$i18n.locale] }},
-            </template> -->
-            <!-- <template v-slot:item="{ item }">
-              <v-list-item-action>
-                <v-simple-checkbox
-                  v-ripple="false"
-                  @input="
-                    toggleValues(
-                      $event,
-                      item.id,
-                      'looking_for_employment_type'
-                    )
-                  "
-                  :value="searchForValue(item.value)"
-                >
-                </v-simple-checkbox>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ item[$i18n.locale] }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </template> -->
-          </v-select>
+          />
         </v-col>
 
         <!-- address_to_work -->
@@ -930,20 +888,6 @@ export default {
         max: parseInt(event[1].toString())
       };
     },
-    searchForValue(name) {
-      return (
-        !!this.formData.looking_for_employment_type &&
-        this.formData.looking_for_employment_type.indexOf(name) >= 0
-      );
-    },
-    toggleValues(event, name, prop) {
-      const index = this.formData[prop].indexOf(name);
-      if (index < 0) {
-        this.formData[prop].push(name);
-      } else {
-        this.formData[prop].splice(index, 1);
-      }
-    },
     getUserPlanId(id, name) {
       const plan = this.getUserPlan(id)[0];
       return plan ? plan[name] : null;
@@ -952,9 +896,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.user-profile {
-  .profile-section {
-  }
-}
-</style>
+<style lang="scss"></style>

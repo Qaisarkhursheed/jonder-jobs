@@ -89,18 +89,6 @@ export default {
     return {
       formValid: false
     };
-  },
-
-  methods: {
-    phonePrefix() {
-      if (this.value.company_phone === "") {
-        return (this.value.company_phone = "+49");
-      }
-    }
-  },
-
-  beforeMount() {
-    this.phonePrefix();
   }
 };
 </script>

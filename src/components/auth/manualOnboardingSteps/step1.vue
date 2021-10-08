@@ -45,15 +45,6 @@
       </v-btn>
 
       <v-row class="mt-5">
-        <!-- <v-col cols="3">
-          <v-btn
-            @click="$emit('prevScreen')"
-            height="55"
-            class="full-w font-weight-medium "
-          >
-            {{ $t("back") }}
-          </v-btn>
-        </v-col> -->
         <v-col>
           <v-btn
             :disabled="!formValid || !value.job_search_status"

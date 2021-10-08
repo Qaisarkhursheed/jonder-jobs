@@ -144,7 +144,7 @@ export default {
       branche: "",
       company_employees: "",
       company_email: "",
-      company_phone: "",
+      company_phone: "+49",
       address: "",
       establishment_date: new Date().getFullYear(),
       //city: "",
