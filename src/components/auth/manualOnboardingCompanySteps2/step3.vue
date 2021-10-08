@@ -40,12 +40,11 @@
         {{ $t("companyCityandAdress") }}
         <span style="color: red;">*</span>
       </label>
-      <GooglePlacesAutocomplete
-        @select="e => (value.address = e)"
-        type="geocode"
-        :full-address="true"
+      <GooglePlacesInput
+        v-model="value.address"
+        :types="['geocode']"
         :placeholder="$t('companyCityandAdressPlaceholder')"
-        :required="true"
+        :rules="[validations.required]"
       />
 
       <v-row class="mt-1">
@@ -71,14 +70,13 @@
 </template>
 
 <script>
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
   name: "Step3",
 
-  components: {
-    GooglePlacesAutocomplete
-  },
+  components: { GooglePlacesInput },
+
   props: {
     value: {
       type: Object,
@@ -86,11 +84,13 @@ export default {
     },
     nextScreen: Function
   },
+
   data() {
     return {
       formValid: false
     };
   },
+
   methods: {
     phonePrefix() {
       if (this.value.company_phone === "") {
@@ -98,6 +98,7 @@ export default {
       }
     }
   },
+
   beforeMount() {
     this.phonePrefix();
   }

@@ -33,23 +33,11 @@
         <label class="section-label">
           {{ $t("cityAndAddress") }}
         </label>
-        <v-autocomplete
-          :attach="true"
+        <GooglePlacesInput
           v-model="form.address"
-          @update:search-input="
-            $store.dispatch('google/places', {
-              input: $event,
-              types: ['address']
-            })
-          "
-          :items="$store.getters['google/places'].concat([form.address])"
-          :loading="$store.getters['google/loadingPlaces']"
+          :types="['address']"
           :rules="[validations.required]"
-          hide-no-data
-          no-filter
-          outlined
-          append-icon="mdi-chevron-down"
-        ></v-autocomplete>
+        />
       </div>
 
       <!-- Web -->
@@ -84,8 +72,11 @@
 
 <script>
 import { forEach } from "lodash";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
+  components: { GooglePlacesInput },
+
   props: {
     user: {
       type: Object

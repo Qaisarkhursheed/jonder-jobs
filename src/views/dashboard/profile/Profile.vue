@@ -104,31 +104,12 @@
             {{ $t("location") }}
             <span style="color: red;">*</span>
           </label>
-          <v-autocomplete
-            :attach="true"
+          <GooglePlacesInput
             v-model="formData.city"
-            @update:search-input="
-              $store.dispatch('google/places', {
-                input: $event,
-                types: ['(cities)']
-              })
-            "
-            :items="
-              $store.getters['google/places'].concat(
-                formData.city ? [formData.city] : []
-              )
-            "
-            :loading="$store.getters['google/loadingPlaces']"
+            :types="['(cities)']"
             :rules="[validations.required]"
-            :placeholder="$t('choose')"
-            ref="city"
             hide-details="auto"
-            @change="$refs.city.lazySearch = ''"
-            hide-no-data
-            no-filter
-            outlined
-            append-icon="mdi-chevron-down"
-          ></v-autocomplete>
+          />
         </v-col>
 
         <v-col cols="12" sm="6">
@@ -345,32 +326,12 @@
             {{ $t("likeToWork") }}
             <span style="color: red;">*</span>
           </label>
-          <v-autocomplete
-            :attach="true"
+          <GooglePlacesInput
             v-model="formData.address_to_work"
-            @update:search-input="
-              $store.dispatch('google/places', {
-                input: $event,
-                types: ['(cities)']
-              })
-            "
-            :items="
-              $store.getters['google/places'].concat(formData.address_to_work)
-            "
-            :loading="$store.getters['google/loadingPlaces']"
-            :rules="[validations.required]"
-            :placeholder="$t('choose')"
-            ref="addressToWork"
-            @change="$refs.addressToWork.lazySearch = ''"
+            :types="['(cities)']"
+            :rules="[validations.min.selection(1)]"
             multiple
-            small-chips
-            deletable-chips
-            hide-no-data
-            no-filter
-            outlined
-            hide-details="auto"
-            append-icon="mdi-chevron-down"
-          ></v-autocomplete>
+          />
           <v-checkbox
             :label="$t('remoteWork')"
             hide-details="auto"
@@ -675,7 +636,10 @@
             <div class="plan-content">
               <v-img
                 class="upgrade-icon"
-                :style="{ order: userPlan && getUserPlanId(plan.id, 'id') === plan.id ? 2 : 1 }"
+                :style="{
+                  order:
+                    userPlan && getUserPlanId(plan.id, 'id') === plan.id ? 2 : 1
+                }"
                 :src="
                   require(`@/assets/icons/${
                     index === 0 ? 'top-rated' : 'medal'
@@ -700,7 +664,11 @@
               />
             </div>
             <CancelSubscription
-              v-if="userPlan.length && isPlanActive(plan.id) && getUserPlanId(plan.id, 'renewal')"
+              v-if="
+                userPlan.length &&
+                  isPlanActive(plan.id) &&
+                  getUserPlanId(plan.id, 'renewal')
+              "
               :id="plan.id"
             />
           </div>
@@ -743,6 +711,7 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import CancelSubscription from "../../../components/plans/CancelSubscription";
 import AvatarInput from "@/components/controls/AvatarInput";
 import InvoicesListing from "@/components/InvoicesListing";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
   components: {
@@ -760,7 +729,8 @@ export default {
     SliderInput,
     LanguageDropdown,
     AvatarInput,
-    InvoicesListing
+    InvoicesListing,
+    GooglePlacesInput
   },
 
   data: () => ({

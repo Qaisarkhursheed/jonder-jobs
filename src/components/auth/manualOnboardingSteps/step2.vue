@@ -45,24 +45,7 @@
         :placeholder="$t('detailsAboutYouBranchesPlace')"
         class="mt-1"
         append-icon="mdi-chevron-down"
-      >
-        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}, </template>
-        <template v-slot:item="{ item }">
-          <v-list-item-action>
-            <v-simple-checkbox
-              v-ripple="false"
-              @input="toggleValues($event, item)"
-              :value="searchForValue(item)"
-            >
-            </v-simple-checkbox>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ $t(item) }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </template> -->
-      </v-autocomplete>
+      />
 
       <!-- Looking for role -->
       <label class="profile-label">
@@ -90,10 +73,10 @@
         {{ $t("location") }}
         <span style="color: red;">*</span>
       </label>
-      <GooglePlacesAutocomplete
-        @select="e => (value.city = e)"
-        :required="true"
-        class="mt-1"
+      <GooglePlacesInput
+        v-model="value.city"
+        :rules="[validations.required]"
+        :types="['(cities)']"
       />
 
       <v-checkbox
@@ -127,14 +110,12 @@
 
 <script>
 import types from "@/types";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
   name: "Step2",
 
-  components: {
-    GooglePlacesAutocomplete
-  },
+  components: { GooglePlacesInput },
 
   props: {
     value: {
@@ -155,22 +136,6 @@ export default {
   },
   created() {
     this.$store.dispatch("professions/fetch");
-  },
-  methods: {
-    searchForValue(name) {
-      return !!this.value.branche && this.value.branche.indexOf(name) >= 0;
-    },
-    toggleValues(event, name) {
-      if (!this.value.branche) {
-        this.value.branche = [];
-      }
-      const index = this.value.branche.indexOf(name);
-      if (index < 0) {
-        this.value.branche.push(name);
-      } else {
-        this.value.branche.splice(index, 1);
-      }
-    }
   }
 };
 </script>

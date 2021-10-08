@@ -44,31 +44,12 @@
         {{ $t("whereToWork") }}
         <span style="color: red;">*</span>
       </label>
-      <v-autocomplete
-        :attach="true"
+      <GooglePlacesInput
         v-model="value.address_to_work"
-        @update:search-input="
-          $store.dispatch('google/places', {
-            input: $event,
-            types: ['(cities)']
-          })
-        "
-        :items="
-          $store.getters['google/places'].concat(value.address_to_work || [])
-        "
-        :loading="$store.getters['google/loadingPlaces']"
+        :types="['(cities)']"
         :rules="[validations.required]"
-        :placeholder="$t('choose')"
-        ref="addressToWork"
-        @change="$refs.addressToWork.lazySearch = ''"
         multiple
-        small-chips
-        deletable-chips
-        hide-no-data
-        no-filter
-        outlined
-        append-icon="mdi-chevron-down"
-      ></v-autocomplete>
+      />
 
       <v-checkbox
         class="mb-3 mt-0"
@@ -134,13 +115,15 @@
 import types from "@/types";
 import Calendar from "@/components/Calendar";
 import SliderRangeInput from "../../SliderRangeInput";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
   name: "Step3",
 
   components: {
     SliderRangeInput,
-    Calendar
+    Calendar,
+    GooglePlacesInput
   },
 
   props: {

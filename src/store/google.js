@@ -26,15 +26,20 @@ export default {
         }
 
         commit("SET_LOADING_PLACES", true);
-        const autocompleteService = new window.google.maps.places.AutocompleteService();
-        const resp = await autocompleteService.getPredictions({ input, types });
-        commit(
-          "SET_PLACES",
-          resp.predictions.map(i => i.description)
-        );
-        return resp;
+
+        const service = new window.google.maps.places.AutocompleteService();
+        const resp = await service.getPlacePredictions({
+          input,
+          types
+        });
+
+        const result = resp.predictions?.map(i => i.description) || [];
+        commit("SET_PLACES", result);
+
+        return result;
       } catch (err) {
-        return Promise.reject(err.response);
+        console.log(err);
+        return Promise.reject(err);
       } finally {
         commit("SET_LOADING_PLACES", false);
       }

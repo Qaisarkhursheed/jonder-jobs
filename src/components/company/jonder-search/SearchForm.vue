@@ -181,9 +181,10 @@
             <label class="section-label">
               {{ $t("city") }}
             </label>
-            <GooglePlacesAutocomplete
-              :value="formFields.city"
-              @select="e => (formFields.city = e)"
+            <GooglePlacesInput
+              v-model="formFields.city"
+              :types="['(cities)']"
+              clearable
             />
           </v-col>
         </v-row>
@@ -261,10 +262,10 @@
 <script>
 import { forEach } from "lodash";
 import types from "@/types";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete.vue";
+import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 
 export default {
-  components: { GooglePlacesAutocomplete },
+  components: { GooglePlacesInput },
 
   props: {
     selectedFilter: {
