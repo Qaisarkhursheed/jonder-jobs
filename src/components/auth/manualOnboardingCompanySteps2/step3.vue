@@ -18,8 +18,6 @@
         type="email"
         :placeholder="$t('companyEmailPlaceholder')"
         outlined
-        flat
-        background-color="white"
       >
       </v-text-field>
 
@@ -34,8 +32,7 @@
         dense
         outlined
         solo
-        flat
-        background-color="white"
+        :placeholder="$t('enter')"
       >
       </v-text-field>
 

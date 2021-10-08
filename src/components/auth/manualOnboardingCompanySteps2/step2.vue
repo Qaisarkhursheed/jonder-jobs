@@ -9,14 +9,6 @@
         {{ $t("industry") }}
         <span style="color: red;">*</span>
       </label>
-      <!-- <v-select
-        :attach="true"
-        v-model="value.branche"
-        :items="branches"
-        :rules="[validations.required]"
-        :placeholder="$t('choose')"
-        outlined
-      ></v-select> -->
       <v-autocomplete
         :attach="true"
         class="mt-1"
@@ -30,16 +22,7 @@
         hide-no-data
         append-icon="mdi-chevron-down"
         :placeholder="$t('choose')"
-      >
-        <!-- <template v-slot:selection="{ item }"> {{ $t(item) }}</template>
-        <template v-slot:item="{ item }">
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ $t(item) }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </template> -->
-      </v-autocomplete>
+      />
 
       <label class="profile-label">
         {{ $t("numberOfEmployees") }}

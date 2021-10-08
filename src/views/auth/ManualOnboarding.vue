@@ -264,18 +264,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.mo-back-button {
-  position: absolute;
-  top: 40px;
-  left: 25%;
-  z-index: 100;
-}
-.step-five-back-button {
-  position: absolute;
-  bottom: 245px;
-  left: 215px;
-  z-index: 100;
-}
 .mo-stepper-items {
   overflow: auto;
 }
