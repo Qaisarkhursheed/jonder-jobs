@@ -112,7 +112,7 @@
               {{ $t("position") }}
             </div>
             <div class="content">
-              {{ currentPosition }}
+              {{ idToString("JOB_POSITION", user.current_position) }}
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
         <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content" v-if="user.branche">
-            {{ getBranche }}
+            {{ idToString("JOB_BRANCHE", user.branche) }}
           </div>
         </div>
 
@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import { filter, map, find } from "lodash";
+import { filter } from "lodash";
 import types from "@/types";
 
 export default {
@@ -192,20 +192,6 @@ export default {
     },
     getSelectionOptions() {
       return types.SELECTION_MANAGEMENT_STATUS;
-    },
-    getBranche() {
-      const stringToArray = map(this.user.branche, item => {
-        let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
-        return el[this.$i18n.locale];
-      });
-      return stringToArray.join();
-    },
-    currentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
-        return el.id == parseInt(this.user.current_position);
-      });
-
-      return obj[this.$i18n.locale];
     }
   },
 

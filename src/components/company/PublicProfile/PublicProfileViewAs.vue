@@ -35,7 +35,7 @@
             {{ $t("employees") }}
           </label>
           <div class="section-value">
-            {{ getEmployeesNumber }}
+            {{ idToString("EMPLOYEE_NUMBER", user.company_employees) }}
           </div>
         </v-col>
         <v-col cols="5">
@@ -43,7 +43,7 @@
             {{ $t("branch") }}
           </label>
           <div class="section-value">
-            {{ getBranche }}
+            {{ idToString("JOB_BRANCHE", user.branche) }}
           </div>
         </v-col>
       </v-row>
@@ -65,7 +65,7 @@
               {{ $t("position") }}
             </label>
             <div class="section-value">
-              {{ currentPosition }}
+              {{ idToString("JOB_POSITION", user.current_position) }}
             </div>
           </v-col>
         </v-row>
@@ -77,7 +77,7 @@
             {{ $t("currentIndustry") }}
           </label>
           <div class="section-value">
-            {{ getBranche }}
+            {{ idToString("JOB_BRANCHE", user.branche) }}
           </div>
         </v-col>
         <v-col cols="5">
@@ -216,8 +216,6 @@
 </template>
 
 <script>
-import types from "@/types";
-import { find } from "lodash";
 import NorthDataWidget from "@/components/company/NorthDataWidget";
 
 export default {
@@ -264,30 +262,7 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
-    },
-    getBranche() {
-      let obj = find(types.JOB_BRANCHE, el => {
-        return el.id == parseInt(this.user.branche);
-      });
-
-      return obj[this.$i18n.locale];
-    },
-    currentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
-        return el.id == parseInt(this.user.current_position);
-      });
-
-      return obj[this.$i18n.locale];
-    },
-    getEmployeesNumber() {
-      let obj = find(types.EMPLOYEE_NUMBER, el => {
-        return el.id == parseInt(this.user.company_employees);
-      });
-      return obj[this.$i18n.locale];
     }
-  },
-  beforeMount() {
-    console.log(this.user);
   }
 };
 </script>

@@ -30,7 +30,7 @@
                 :src="require('@/assets/icons/briefcase.svg')"
                 style="vertical-align: -2px"
               />
-              {{ currentPosition }}
+              {{ idToString("JOB_POSITION", profile.current_position) }}
             </div>
           </div>
         </v-col>
@@ -89,8 +89,6 @@
 
 <script>
 import axios from "axios";
-import { find } from "lodash";
-import types from "@/types";
 import UserOverviewGeneral from "@/components/company/user-overview/UserOverviewGeneral";
 import UserOverviewNotes from "@/components/company/user-overview/UserOverviewNotes";
 import CompanyPlans from "@/components/plans/CompanyPlans";
@@ -195,14 +193,7 @@ export default {
       }
     }
   },
-  computed: {
-    currentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
-        return el.id == parseInt(this.profile.current_position);
-      });
-      return obj[this.$i18n.locale];
-    }
-  },
+
   watch: {
     id() {
       if (this.calledFromList) {

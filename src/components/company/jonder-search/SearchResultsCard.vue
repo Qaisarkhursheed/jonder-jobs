@@ -22,7 +22,7 @@
               mdi-briefcase
             </v-icon>
             <span>
-              {{ currentPosition }}
+              {{ idToString("JOB_POSITION", candidate.current_position) }}
             </span>
           </div>
         </div>
@@ -39,7 +39,9 @@
             </span>
           </v-col>
           <v-col cols="col" class="text-right">
-            <span class="value">{{ getBranche }}</span>
+            <span class="value">
+              {{ idsToArray("JOB_BRANCHE", candidate.branche).join(", ") }}
+            </span>
           </v-col>
         </v-row>
 
@@ -126,10 +128,6 @@
 </template>
 
 <script>
-import { find } from "lodash";
-import store from "@/store";
-import types from "@/types";
-
 export default {
   name: "SearchResultsCard",
 
@@ -152,33 +150,13 @@ export default {
   computed: {
     highlighted() {
       return this.candidate.plan[0]?.plan_slug === "highlighted";
-    },
-    getBranche() {
-      const branches = [];
-
-      if (this.candidate.branche) {
-        this.candidate.branche.forEach(branchId => {
-          const branchObj = types.JOB_POSITION.find(b => b.id == branchId);
-
-          if (branchObj) {
-            branches.push(branchObj[this.$i18n.locale]);
-          }
-        });
-      }
-
-      return branches.join();
-    },
-    currentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
-        return el.id == parseInt(this.candidate.current_position);
-      });
-      return obj[this.$i18n.locale];
     }
   },
 
   methods: {
     startConversation() {
-      if (!store.getters["user/userPlan"].length) return;
+      if (!this.$store.getters["user/userPlan"].length) return;
+
       this.startChatLoading = true;
       this.$store
         .dispatch("chat/startChat", this.candidate.id)
@@ -213,7 +191,7 @@ export default {
       }
     },
     proceedClick(type) {
-      if (store.getters["user/userPlan"].length) {
+      if (this.$store.getters["user/userPlan"].length) {
         if (type == "contact") {
           this.startConversation();
         } else {

@@ -211,13 +211,15 @@
 
             <div class="top-info mt-7">
               <span class="about-info">Position</span>
-              <p class="about-text">{{ userCurrentPosition }}</p>
+              <p class="about-text">
+                {{ idToString("JOB_POSITION", user.current_position) }}
+              </p>
 
               <span class="about-info">{{ $t("currentIndustry") }}</span>
               <div class="about-text">
                 <v-chip
                   class="py-1 mr-1 mb-1"
-                  v-for="(item, i) in getBranche"
+                  v-for="(item, i) in idsToArray('JOB_BRANCHE', user.branche)"
                   :key="i"
                 >
                   {{ item }}
@@ -228,7 +230,10 @@
               <div class="about-text">
                 <v-chip
                   class="py-1 mr-1 mb-1"
-                  v-for="(item, i) in getJobPositions"
+                  v-for="(item, i) in idsToArray(
+                    'JOB_POSITION',
+                    user.looking_for_position
+                  )"
                   :key="i"
                 >
                   {{ item }}
@@ -244,7 +249,10 @@
               <div class="about-text">
                 <v-chip
                   class="py-1 mr-1 mb-1"
-                  v-for="(item, i) in userEmploymentType"
+                  v-for="(item, i) in idsToArray(
+                    'EMPLOYEMENT_TYPE',
+                    user.looking_for_employment_type
+                  )"
                   :key="i"
                 >
                   {{ item }}
@@ -324,8 +332,7 @@
 </template>
 
 <script>
-import types from "@/types";
-import { debounce, map, find } from "lodash";
+import { debounce } from "lodash";
 import { mapActions, mapGetters } from "vuex";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
@@ -359,37 +366,6 @@ export default {
       return (
         this.$route.path === "/dashboard" || this.$route.path === "/dashboard/"
       );
-    },
-    userEmploymentType() {
-      const stringToArray = map(this.user.looking_for_employment_type, item => {
-        let el = find(types.EMPLOYEMENT_TYPE, { id: parseInt(item) });
-        return el[this.$i18n.locale];
-      });
-      return stringToArray;
-      // return stringToArray.join();
-    },
-    getBranche() {
-      const stringToArray = map(this.user.branche, item => {
-        let el = find(types.JOB_BRANCHE, { id: parseInt(item) });
-        return el[this.$i18n.locale];
-      });
-      return stringToArray;
-      // return stringToArray.join();
-    },
-    getJobPositions() {
-      const stringToArray = map(this.user.looking_for_position, item => {
-        let el = find(types.JOB_POSITION, { id: parseInt(item) });
-        return el[this.$i18n.locale];
-      });
-      return stringToArray;
-      // return stringToArray.join();
-    },
-    userCurrentPosition() {
-      let obj = find(types.JOB_POSITION, el => {
-        return el.id == parseInt(this.user.current_position);
-      });
-
-      return obj ? obj[this.$i18n.locale] : null;
     }
   },
   methods: {
@@ -422,9 +398,6 @@ export default {
         });
       }
     }
-  },
-  beforeMount() {
-    console.log(this.user);
   }
 };
 </script>
