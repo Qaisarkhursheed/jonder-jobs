@@ -31,10 +31,10 @@
       <v-card-text class="candidate-details flex-grow-1">
         <v-row class="no-gutters">
           <v-col cols="5">
-            <v-icon class="pr-3" color="#0253B3">
+            <v-icon class="pr-1" color="#0253B3">
               mdi-hexagon-multiple-outline
             </v-icon>
-            <span class="label pr-2">
+            <span class="label pr-1">
               {{ $t("branch") }}
             </span>
           </v-col>
@@ -47,10 +47,10 @@
 
         <v-row class="no-gutters">
           <v-col cols="5">
-            <v-icon class="pr-3" color="#0253B3">
+            <v-icon class="pr-1" color="#0253B3">
               mdi-domain
             </v-icon>
-            <span class="label pr-2">
+            <span class="label pr-1">
               {{ $t("graduation") }}
             </span>
           </v-col>
@@ -61,10 +61,10 @@
 
         <v-row class="no-gutters">
           <v-col cols="5">
-            <v-icon class="pr-3" color="#0253B3">
+            <v-icon class="pr-1" color="#0253B3">
               mdi-school
             </v-icon>
-            <span class="label pr-2">
+            <span class="label pr-1">
               {{ $t("education") }}
             </span>
           </v-col>
