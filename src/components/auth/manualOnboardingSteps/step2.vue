@@ -70,7 +70,7 @@
       ></v-autocomplete>
 
       <label class="profile-label">
-        {{ $t("location") }}
+        {{ $t("city") }}
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesInput

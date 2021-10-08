@@ -101,7 +101,7 @@
         <!-- City -->
         <v-col cols="12" sm="6">
           <label class="profile-label">
-            {{ $t("location") }}
+            {{ $t("city") }}
             <span style="color: red;">*</span>
           </label>
           <GooglePlacesInput
