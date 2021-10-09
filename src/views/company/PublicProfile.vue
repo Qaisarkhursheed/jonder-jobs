@@ -75,10 +75,10 @@
 </template>
 
 <script>
-import PublicProfileGeneral from "@/components/company/PublicProfile/PublicProfileGeneral";
-import PublicProfileDetails from "@/components/company/PublicProfile/PublicProfileDetails";
-import PublicProfileContact from "@/components/company/PublicProfile/PublicProfileContact";
-import PublicProfileViewAs from "@/components/company/PublicProfile/PublicProfileViewAs";
+import PublicProfileGeneral from "@/components/company/public-profile/PublicProfileGeneral";
+import PublicProfileDetails from "@/components/company/public-profile/PublicProfileDetails";
+import PublicProfileContact from "@/components/company/public-profile/PublicProfileContact";
+import PublicProfileViewAs from "@/components/company/public-profile/PublicProfileViewAs";
 
 export default {
   components: {

@@ -118,11 +118,11 @@
 <script>
 import AuthWrap from "@/components/auth/AuthWrap.vue";
 // Steps
-import Step1 from "@/components/auth/manualOnboardingCompanySteps2/step1.vue";
-import Step2 from "@/components/auth/manualOnboardingCompanySteps2/step2.vue";
-import Step3 from "@/components/auth/manualOnboardingCompanySteps2/step3.vue";
-import Step4 from "@/components/auth/manualOnboardingCompanySteps2/step4.vue";
-import StepSucces from "../../components/auth/manualOnboardingCompanySteps2/stepSucces.vue";
+import Step1 from "@/components/auth/manualOnboardingCompanySteps/step1.vue";
+import Step2 from "@/components/auth/manualOnboardingCompanySteps/step2.vue";
+import Step3 from "@/components/auth/manualOnboardingCompanySteps/step3.vue";
+import Step4 from "@/components/auth/manualOnboardingCompanySteps/step4.vue";
+import StepSucces from "../../components/auth/manualOnboardingCompanySteps/stepSucces.vue";
 
 export default {
   components: {

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import PublicProfileViewAs from "@/components/company/PublicProfile/PublicProfileViewAs";
+import PublicProfileViewAs from "@/components/company/public-profile/PublicProfileViewAs";
 
 export default {
   components: { PublicProfileViewAs }
