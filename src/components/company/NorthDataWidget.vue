@@ -1,6 +1,13 @@
 <template>
   <div>
-    <spinner v-if="isLoading" />
+    <div class="d-flex justify-center">
+      <v-progress-circular
+        v-if="isLoading"
+        indeterminate
+        size="75"
+        color="primary"
+      ></v-progress-circular>
+    </div>
 
     <figure id="widget"></figure>
 
@@ -11,11 +18,7 @@
 </template>
 
 <script>
-import Spinner from "@/components/loaders/Spinner";
-
 export default {
-  components: { Spinner },
-
   props: {
     layout: {
       type: String,

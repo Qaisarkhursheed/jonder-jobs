@@ -1,6 +1,10 @@
 <template>
-  <v-row v-if="chatLoading" class="full-h">
-    <spinner />
+  <v-row v-if="chatLoading" class="full-h d-flex justify-center align-center">
+    <v-progress-circular
+      indeterminate
+      size="100"
+      color="primary"
+    ></v-progress-circular>
   </v-row>
 
   <v-row v-else-if="isCompany && isChatEmpty">
@@ -44,7 +48,6 @@ import ChatAsside from "@/components/chat/ChatAsside";
 import ChatMessages from "@/components/chat/ChatMessages";
 import PublicProfile from "@/components/chat/PublicProfile";
 import ChatEmpty from "@/components/chat/ChatEmpty";
-import Spinner from "@/components/loaders/Spinner";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -119,7 +122,6 @@ export default {
     ChatMessages,
     ChatAsside,
     PublicProfile,
-    Spinner,
     ChatEmpty
   }
 };
