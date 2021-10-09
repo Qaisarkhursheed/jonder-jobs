@@ -25,6 +25,26 @@ export default {
       return types[type]
         .filter(i => ids.includes(parseInt(i.id)))
         .map(i => i[i18n.locale]);
+    },
+
+    getDocumentIcon(filePath) {
+      if (!filePath) {
+        return require(`@/assets/file-icons/_blank.png`);
+      }
+
+      let ext = filePath.split(".");
+
+      if (ext.length < 2) {
+        return require(`@/assets/file-icons/_blank.png`);
+      }
+
+      ext = ext.pop();
+
+      try {
+        return require(`@/assets/file-icons/${ext}.png`);
+      } catch (err) {
+        return require(`@/assets/file-icons/_blank.png`);
+      }
     }
   }
 };

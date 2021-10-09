@@ -285,7 +285,10 @@
               <div v-if="user.cv" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.cv" target="_blank">
-                    <img :src="require('@/assets/svg/pdf.svg')" />
+                    <img
+                      class="document-icon"
+                      :src="getDocumentIcon(user.cv)"
+                    />
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">
@@ -295,7 +298,10 @@
               <div v-if="user.qualifications" class="row mt-1">
                 <div class="col-auto">
                   <a :href="`${user.qualifications}`" target="_blank">
-                    <img :src="require('@/assets/svg/pdf.svg')" />
+                    <img
+                      class="document-icon"
+                      :src="getDocumentIcon(user.qualifications)"
+                    />
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">
@@ -306,7 +312,10 @@
               <div v-if="user.resume" class="row mt-1">
                 <div class="col-auto">
                   <a :href="user.resume" target="_blank">
-                    <img :src="require('@/assets/svg/pdf.svg')" />
+                    <img
+                      class="document-icon"
+                      :src="getDocumentIcon(user.resume)"
+                    />
                   </a>
                 </div>
                 <div class="col my-auto font-weight-bold">

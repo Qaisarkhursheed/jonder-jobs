@@ -141,7 +141,10 @@
             >
               <v-col cols="auto">
                 <a :href="document.link" target="_blank">
-                  <img :src="require('@/assets/svg/pdf.svg')" />
+                  <img
+                    class="document-icon"
+                    :src="getDocumentIcon(document.link)"
+                  />
                 </a>
               </v-col>
               <v-col cols="col" class="my-auto font-weight-bold">

@@ -19,9 +19,7 @@
     <template v-else>
       <div class="d-flex justify-space-between pt-4 pb-4">
         <div class="d-flex">
-          <img
-            :src="require(`@/assets/file-icons/${extension || '_blank'}.png`)"
-          />
+          <img class="document-icon" :src="getDocumentIcon(value.name)" />
           <div class="pl-3">
             <div class="pdf-name">{{ type }}</div>
             <!-- <div class="pdf-size" v-if="inputData[0].size">
@@ -73,11 +71,6 @@ export default {
       inputData: null
     };
   },
-  computed: {
-    extension() {
-      return this.value.name ? this.value.name.split(".").pop() : null;
-    }
-  },
   created() {
     if (this.value) {
       this.inputData = [
@@ -92,11 +85,6 @@ export default {
   methods: {
     handleAction(item) {
       if (item === "View") {
-        //   let t = this.type.toLowerCase();
-        //   if(t === 'cv') {
-        //     t = 'cvs'
-        //   }
-        //  const link = `https://dev.api.jonder.devla.dev/storage/${t}/${this.value.name}`
         const link = this.value.name;
         window.open(link, "_blank").focus();
       } else {
