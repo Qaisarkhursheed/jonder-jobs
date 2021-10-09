@@ -19,6 +19,8 @@
         :placeholder="$t('lookingForEmployementPlace')"
         outlined
         multiple
+        small-chips
+        deletable-chips
         append-icon="mdi-chevron-down"
         class="mt-1"
       />

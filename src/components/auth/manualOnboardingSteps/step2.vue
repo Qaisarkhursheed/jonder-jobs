@@ -42,6 +42,8 @@
         flat
         hide-no-data
         multiple
+        small-chips
+        deletable-chips
         :placeholder="$t('detailsAboutYouBranchesPlace')"
         class="mt-1"
         append-icon="mdi-chevron-down"
@@ -62,6 +64,8 @@
         :rules="[validations.required, validations.max.selection(5)]"
         v-clearable-autocomplete
         multiple
+        small-chips
+        deletable-chips
         outlined
         flat
         hide-no-data

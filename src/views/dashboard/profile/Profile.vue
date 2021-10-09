@@ -189,6 +189,8 @@
             cache
             outlined
             multiple
+            small-chips
+            deletable-chips
             hide-no-data
             hide-details="auto"
             append-icon="mdi-chevron-down"
@@ -211,6 +213,8 @@
             :rules="[validations.required]"
             multiple
             outlined
+            small-chips
+            deletable-chips
             hide-no-data
             hide-details="auto"
             append-icon="mdi-chevron-down"
@@ -273,6 +277,8 @@
             item-value="id"
             outlined
             multiple
+            small-chips
+            deletable-chips
             hide-details="auto"
             append-icon="mdi-chevron-down"
           />
