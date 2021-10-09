@@ -100,11 +100,8 @@
             <div class="title">
               {{ $t("searchStatus") }}
             </div>
-            <div class="content" v-if="!user.job_status">
-              Unemployed
-            </div>
-            <div class="content" v-else>
-              {{ user.job_status }}
+            <div class="content">
+              {{ user.job_search_status | jobSearchStatus }}
             </div>
           </div>
           <div class="section">
@@ -135,6 +132,8 @@
             {{ $t("certificates").toUpperCase() }}
           </div>
           <div class="content mt-2">
+            <i v-if="!documents.length">{{ $t("noDataAvailable") }}</i>
+
             <v-row
               v-for="(document, index) in documents"
               class="file"
