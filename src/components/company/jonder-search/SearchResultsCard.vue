@@ -55,7 +55,13 @@
             </span>
           </v-col>
           <v-col cols="col" class="text-right">
-            <span class="value">{{ candidate.training_studies }}</span>
+            <span class="value">
+              {{
+                candidate.education.length
+                  ? candidate.education[0].university_name
+                  : "-"
+              }}
+            </span>
           </v-col>
         </v-row>
 
@@ -69,7 +75,11 @@
             </span>
           </v-col>
           <v-col cols="col" class="text-right">
-            <span class="value">{{ candidate.your_qualification }}</span>
+            <span class="value">
+              {{
+                candidate.education.length ? candidate.education[0].study : "-"
+              }}
+            </span>
           </v-col>
         </v-row>
       </v-card-text>

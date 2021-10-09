@@ -33,10 +33,10 @@
         <div class="section experience">
           <div class="title">{{ $t("experiences") }}</div>
           <div class="content">
-            <i v-if="!experience.length">{{ $t("noDataAvailable") }}</i>
+            <i v-if="!user.experience.length">{{ $t("noDataAvailable") }}</i>
 
             <div
-              v-for="data in experience"
+              v-for="data in user.experience"
               :key="data.company"
               class="item pb-5 pt-5"
             >
@@ -67,10 +67,10 @@
         <div class="section experience mt-7">
           <div class="title">{{ $t("educationStudy") }}</div>
           <div class="content">
-            <i v-if="!education.length">{{ $t("noDataAvailable") }}</i>
+            <i v-if="!user.education.length">{{ $t("noDataAvailable") }}</i>
 
             <div
-              v-for="data in education"
+              v-for="data in user.education"
               :key="data.company"
               class="item pb-5 pt-5"
             >
@@ -169,8 +169,6 @@ export default {
 
   data() {
     return {
-      experience: [],
-      education: [],
       userManagementData: null
     };
   },
@@ -196,51 +194,10 @@ export default {
   },
 
   created() {
-    this.getExperience();
-    this.getEducation();
     this.getManagementSelection();
   },
 
   methods: {
-    getExperience() {
-      this.$http
-        .get(
-          `${process.env.VUE_APP_API_BASE}/jobseeker-experience?per_page=9999`
-        )
-        .then(res => {
-          let response = res.data.data.map(obj => {
-            return obj;
-          });
-          for (let i = 0; i < response.length; i++) {
-            if (res.data.data[i].user_id === this.user.id) {
-              this.experience.push(res.data.data[i]);
-            }
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    },
-    getEducation() {
-      this.$http
-        .get(
-          `${process.env.VUE_APP_API_BASE}/jobseeker-education?per_page=9999`
-        )
-        .then(res => {
-          let response = res.data.data.map(obj => {
-            return obj;
-          });
-          for (let i = 0; i < response.length; i++) {
-            if (res.data.data[i].user_id === this.user.id) {
-              this.education.push(res.data.data[i]);
-              console.log(this.education);
-            }
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    },
     getManagementSelection() {
       const usersList = this.$store.getters["company/selectionManagement"](
         "list"
