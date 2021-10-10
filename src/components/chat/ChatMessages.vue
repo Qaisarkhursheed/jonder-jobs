@@ -106,6 +106,7 @@
             <v-card-text>
               <!-- Text -->
               <div
+                class="message-text"
                 v-if="msg.type == 'text'"
                 v-text="msg.body"
                 style="text-align: left; white-space: pre-wrap"
@@ -127,6 +128,7 @@
 
               <!-- Time -->
               <small
+                class="message-time"
                 :title="
                   $options.filters.moment(msg.created_at, 'DD.MM.YYYY HH:mm')
                 "
@@ -329,8 +331,9 @@ export default {
   .my-message {
     background-color: #0253b3 !important;
 
-    .v-card__text {
-      color: white;
+    .message-text,
+    .message-time {
+      color: white !important;
     }
   }
 
