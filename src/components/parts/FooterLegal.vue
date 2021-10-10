@@ -51,11 +51,4 @@ export default {
 .default {
   border-top: 1px solid #c4c4c4;
 }
-.footer-links:not(:last-child) {
-  &:after {
-    content: "-";
-    position: absolute;
-    right: -5px;
-  }
-}
 </style>

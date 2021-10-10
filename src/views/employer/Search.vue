@@ -22,8 +22,6 @@ import SearchResults from "@/components/company/jonder-search/SearchResults";
 import SearchResultsLock from "@/components/company/jonder-search/SearchResultsLock";
 
 export default {
-  name: "CompanySearch",
-
   components: {
     SearchForm,
     SearchResults,
@@ -44,7 +42,7 @@ export default {
     };
   },
   beforeDestroy() {
-    if (this.$route.name !== "CompanyUserOverview") {
+    if (this.$route.name !== "EmployerUserOverview") {
       console.log("erase user results serach");
       store.commit("company/SET_SEARCH_RESULTS", []);
       store.commit("company/SET_SEARCH_META", {

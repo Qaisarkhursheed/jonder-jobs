@@ -13,7 +13,7 @@
     </v-col>
   </v-row>
 
-  <v-row v-else style="height: calc(100vh - 150px); min-height: 500px">
+  <v-row v-else style="height: calc(100vh - 100px); min-height: 500px">
     <v-col v-if="!chatFull" cols="col" class="full-h">
       <chat-asside
         class="full-h flex-grow-1 flex-shrink-1 overflow-list"

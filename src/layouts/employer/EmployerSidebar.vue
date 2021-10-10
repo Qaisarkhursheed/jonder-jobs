@@ -11,42 +11,42 @@
         mdi-menu
       </v-icon>
 
-      <router-link :to="{ name: 'CompanySearch' }">
-        <Loop :color="getNavIconColor('CompanySearch')" />
+      <router-link :to="{ name: 'EmployerSearch' }">
+        <Loop :color="getNavIconColor('EmployerSearch')" />
         <span class="nav-title">{{ $t("jonderSearch") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanySelectionManagement' }">
+      <router-link :to="{ name: 'EmployerSelectionManagement' }">
         <SelectManagement
-          :color="getNavIconColor('CompanySelectionManagement')"
+          :color="getNavIconColor('EmployerSelectionManagement')"
         />
         <span class="nav-title">{{ $t("selectionManagement") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanyMessages' }">
-        <Messages :color="getNavIconColor('CompanyMessages')" />
+      <router-link :to="{ name: 'EmployerMessages' }">
+        <Messages :color="getNavIconColor('EmployerMessages')" />
         <span class="nav-title">{{ $t("messages") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanyMessageTemplates' }">
-        <v-icon :color="getNavIconColor('CompanyMessageTemplates')">
+      <router-link :to="{ name: 'EmployerMessageTemplates' }">
+        <v-icon :color="getNavIconColor('EmployerMessageTemplates')">
           mdi-message-bulleted
         </v-icon>
         <span class="nav-title">{{ $t("messageTemplates") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanyTeamManagement' }">
-        <TeamManagement :color="getNavIconColor('CompanyTeamManagement')" />
+      <router-link :to="{ name: 'EmployerTeamManagement' }">
+        <TeamManagement :color="getNavIconColor('EmployerTeamManagement')" />
         <span class="nav-title">{{ $t("teamManagement") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanyPublicProfile' }">
-        <PublicCompany :color="getNavIconColor('CompanyPublicProfile')" />
+      <router-link :to="{ name: 'EmployerPublicProfile' }">
+        <PublicCompany :color="getNavIconColor('EmployerPublicProfile')" />
         <span class="nav-title">{{ $t("publicCompanyProfile") }}</span>
       </router-link>
 
-      <router-link :to="{ name: 'CompanyPackagesPricing' }">
-        <Pricing :color="getNavIconColor('CompanyPackagesPricing')" />
+      <router-link :to="{ name: 'EmployerPackagesPricing' }">
+        <Pricing :color="getNavIconColor('EmployerPackagesPricing')" />
         <span class="nav-title">{{ $t("packagesPricing") }}</span>
       </router-link>
     </nav>

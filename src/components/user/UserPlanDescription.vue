@@ -16,8 +16,8 @@
     <div class="payment-info mt-6 pt-4" v-if="paymentInfo || paymentAction">
       <span
         class="carten-abenden"
-        v-if="paymentInfo && $route.name !== 'CompanyPackagesPricing'"
-        @click="$router.push({ name: 'CompanyPackagesPricing' })"
+        v-if="paymentInfo && $route.name !== 'EmployerPackagesPricing'"
+        @click="$router.push({ name: 'EmployerPackagesPricing' })"
       >
         {{ $t("changePackage") }}
       </span>

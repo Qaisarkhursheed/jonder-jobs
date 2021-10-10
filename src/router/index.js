@@ -4,6 +4,7 @@ import store from "@/store";
 import Landing from "@/views/Landing.vue";
 import authRoutes from "./auth.routes";
 import jobseekerRoutes from "./jobseeker.routes";
+import employerRoutes from "./employer.routes";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,13 @@ const routes = [
     path: "/jobseeker",
     component: () => import("@/layouts/jobseeker/JobseekerLayout"),
     children: jobseekerRoutes
+  },
+
+  // Employer
+  {
+    path: "/employer",
+    component: () => import("@/layouts/employer/EmployerLayout"),
+    children: employerRoutes
   },
 
   {
@@ -105,128 +113,6 @@ const routes = [
     ]
   },
   {
-    path: "/company-dashboard/settings",
-    name: "CompanySettings",
-    component: () =>
-      import(/* webpackChunkName: "Settings" */ "@/views/company/Settings"),
-    props: true,
-    meta: {
-      requiresAuth: true,
-      requiresCompany: true
-    }
-  },
-  {
-    path: "/company-dashboard",
-    component: () =>
-      import(/* webpackChunkName: "CompanyLayout" */ "@/layouts/CompanyLayout"),
-    meta: {
-      requiresAuth: true,
-      requiresCompany: true
-    },
-
-    children: [
-      {
-        path: "",
-        name: "CompanySearch",
-        component: () =>
-          import(/* webpackChunkName: "Search" */ "@/views/company/Search"),
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "selection-management",
-        name: "CompanySelectionManagement",
-        component: () =>
-          import(
-            /* webpackChunkName: "SelectionManagement" */ "@/views/company/SelectionManagement"
-          ),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "messages",
-        name: "CompanyMessages",
-        component: () =>
-          import(/* webpackChunkName: "Messages" */ "@/views/company/Messages"),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "message-templates",
-        name: "CompanyMessageTemplates",
-        component: () =>
-          import(
-            /* webpackChunkName: "MessageTemplates" */ "@/views/company/MessageTemplates"
-          ),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "team-management",
-        name: "CompanyTeamManagement",
-        component: () =>
-          import(
-            /* webpackChunkName: "TeamManagement" */ "@/views/company/TeamManagement"
-          ),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "profile",
-        name: "CompanyPublicProfile",
-        component: () =>
-          import(
-            /* webpackChunkName: "PublicProfile" */ "@/views/company/PublicProfile"
-          ),
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-      {
-        path: "user/:id",
-        name: "CompanyUserOverview",
-        component: () =>
-          import(
-            /* webpackChunkName: "UserOverview" */ "@/views/company/UserOverview"
-          ),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      },
-
-      {
-        path: "packages",
-        name: "CompanyPackagesPricing",
-        component: () =>
-          import(
-            /* webpackChunkName: "PackagesPricing" */ "@/views/company/PackagesPricing"
-          ),
-        props: true,
-        meta: {
-          requiresAuth: true,
-          requiresCompany: true
-        }
-      }
-    ]
-  },
-  {
     path: "/protected",
     name: "Protected",
     component: () =>
@@ -267,7 +153,7 @@ const getDashboardRoute = () => {
     case "Employer":
     case "Employee":
       return {
-        name: "CompanySearch"
+        name: "EmployerSearch"
       };
     case "Admin":
       return {

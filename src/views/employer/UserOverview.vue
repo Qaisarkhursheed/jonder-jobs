@@ -153,7 +153,7 @@ export default {
         .dispatch("chat/startChat", this.profile.id)
         .then(() => {
           this.$router.push({
-            name: "CompanyMessages",
+            name: "EmployerMessages",
             params: {
               company: true
             }
@@ -184,11 +184,11 @@ export default {
     back() {
       if (this.$route.params.type && this.$route.params.type === "selection") {
         this.$router.push({
-          name: "CompanySelectionManagement"
+          name: "EmployerSelectionManagement"
         });
       } else {
         this.$router.push({
-          name: "CompanySearch"
+          name: "EmployerSearch"
         });
       }
     }

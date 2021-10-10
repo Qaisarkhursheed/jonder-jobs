@@ -11,7 +11,7 @@
       color="primary"
       height="48"
       class="px-10 mt-3"
-      @click="$router.push({ name: 'CompanySearch' })"
+      @click="$router.push({ name: 'EmployerSearch' })"
     >
       {{ $t("toJonderSearch") }}
     </v-btn>

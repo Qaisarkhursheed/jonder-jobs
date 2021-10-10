@@ -172,7 +172,7 @@ export default {
         .dispatch("chat/startChat", this.candidate.id)
         .then(() => {
           this.$router.push({
-            name: "CompanyMessages",
+            name: "EmployerMessages",
             params: {
               company: true
             }
@@ -206,7 +206,7 @@ export default {
           this.startConversation();
         } else {
           this.$router.push({
-            name: "CompanyUserOverview",
+            name: "EmployerUserOverview",
             params: { id: this.candidate.id }
           });
         }

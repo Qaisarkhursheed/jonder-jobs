@@ -17,7 +17,7 @@
           color="primary"
           height="58"
           class="full-w font-weight-medium dark-blue"
-          :to="{ name: 'CompanySearch' }"
+          :to="{ name: 'EmployerSearch' }"
         >
           {{ $t("finish") }}
         </v-btn>
@@ -30,9 +30,9 @@
 export default {
   props: {
     loading: Boolean,
-    nextScreen: Function,
+    nextScreen: Function
   },
-  name: "StepSucces",
+  name: "StepSucces"
 };
 </script>
 
