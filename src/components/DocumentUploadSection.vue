@@ -28,7 +28,7 @@
           </div>
         </div>
         <div>
-          <v-menu top right>
+          <v-menu top right attach>
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
                 <v-icon>mdi-dots-vertical</v-icon>
