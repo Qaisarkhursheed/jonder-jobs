@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import JobseekerLayout from "@/layouts/JobseekerLayout";
+import JobseekerLayout from "@/layouts/jobseeker/JobseekerLayout";
 
 export default {
   components: { JobseekerLayout },

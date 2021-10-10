@@ -460,15 +460,6 @@ html {
   }
 }
 
-.settings-title {
-  font-size: 32px;
-  font-weight: 600;
-  width: 100%;
-  line-height: 38px;
-  margin-bottom: 26px;
-  color: #222;
-}
-
 button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary {
   display: flex;
   justify-content: center;
@@ -476,45 +467,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   margin-bottom: 15px;
   padding: 20px;
   height: 48px;
-}
-
-.top-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  padding-top: 0px;
-  word-break: break-all;
-}
-
-.dash-name {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  width: 100%;
-  text-align: center;
-}
-
-.settings-link {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-  text-underline-offset: 3px;
-}
-
-.about-info {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  line-height: 14px;
-  color: $primary-blue-dark;
-  margin-bottom: 8px;
-}
-.about-text {
-  font-size: 16px;
-  line-height: 19px;
-  margin-bottom: 25px !important;
-  color: $dark-grey;
 }
 
 .company-ed {
@@ -525,33 +477,6 @@ button.back-btn.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--defa
   margin-bottom: 5px !important;
 }
 
-.profile-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  position: relative;
-  top: -60px;
-  margin: 0 auto -40px auto;
-
-  .v-image {
-    border-radius: 50px;
-    max-width: 5rem;
-    max-height: 5rem;
-  }
-  .profile-image-user {
-    height: 80px;
-    width: 80px;
-  }
-  .profile-image-badge-icons {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    right: -5px;
-    .profile-image-badge-icon {
-      max-width: 28px;
-    }
-  }
-}
 // end Dasboard Layout
 // Settings
 .v-application .dashboard-navigation {

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import store from "@/store";
 import Landing from "@/views/Landing.vue";
 import authRoutes from "./auth.routes";
+import jobseekerRoutes from "./jobseeker.routes";
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,13 @@ const routes = [
     path: "/auth",
     component: () => import("@/views/auth/Index"),
     children: authRoutes
+  },
+
+  // Jobseeker
+  {
+    path: "/jobseeker",
+    component: () => import("@/layouts/jobseeker/JobseekerLayout"),
+    children: jobseekerRoutes
   },
 
   {
@@ -37,100 +45,6 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },
-  {
-    path: "/dashboard",
-    component: () =>
-      import(/* webpackChunkName: "Dashboard" */ "@/views/Dashboard"),
-    meta: {
-      requiresAuth: true,
-      requiresUser: true,
-      isAdmin: false
-    },
-    children: [
-      {
-        path: "",
-        name: "Dashboard",
-        component: () =>
-          import(
-            /* webpackChunkName: "DashboardDashboard" */ "@/views/dashboard/Dashboard"
-          ),
-        meta: {
-          requiresAuth: true,
-          requiresUser: true,
-          isAdmin: false
-        }
-      },
-
-      {
-        path: "profile",
-        component: () =>
-          import(
-            /* webpackChunkName: "ProfileWrap" */ "@/views/dashboard/ProfileWrap"
-          ),
-        meta: {
-          requiresAuth: true,
-          requiresUser: true,
-          isAdmin: false
-        },
-        children: [
-          {
-            path: "",
-            name: "Profile",
-            component: () =>
-              import(
-                /* webpackChunkName: "Profile" */ "@/views/dashboard/profile/Profile"
-              ),
-            meta: {
-              requiresAuth: true,
-              requiresUser: true,
-              isAdmin: false
-            }
-          },
-
-          {
-            path: "*",
-            redirect: "/dashboard/profile"
-          }
-        ]
-      },
-      {
-        path: "chat",
-        name: "Chat",
-        component: () =>
-          import(/* webpackChunkName: "Chat" */ "@/views/dashboard/Chat"),
-        meta: {
-          requiresAuth: true,
-          isAdmin: false
-        }
-      },
-      {
-        path: "chat/:id/:type",
-        name: "ChatDetail",
-        component: () =>
-          import(/* webpackChunkName: "Chat" */ "@/views/dashboard/Chat"),
-        meta: {
-          requiresAuth: true,
-          isAdmin: false
-        }
-      },
-
-      {
-        path: "personality-test",
-        name: "PersonalityTestJobseeker",
-        component: () =>
-          import(
-            /* webpackChunkName: "PersonalityTestJobseeker" */ "@/views/dashboard/PersonalityTest"
-          ),
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: "*",
-        redirect: "/dashboard"
-      }
-    ]
   },
   {
     path: "/admin",
@@ -347,7 +261,7 @@ const getDashboardRoute = () => {
   switch (user.role) {
     case "Jobseeker":
       return {
-        name: "Dashboard"
+        name: "JobseekerHome"
       };
 
     case "Employer":

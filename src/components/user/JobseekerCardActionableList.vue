@@ -1,5 +1,7 @@
 <template>
   <div>
+    <i v-if="!items.length">{{ $t("noDataAvailable") }}</i>
+
     <div v-for="(item, i) in items" :key="i" style="margin-bottom: 10px">
       <CardActionable
         :actions="actions"

@@ -5,7 +5,7 @@
     flat
     outlined
   >
-    <v-menu bottom left>
+    <v-menu bottom left attach>
       <template v-slot:activator="{ on, attrs }" v-if="!viewOnly">
         <v-btn icon v-bind="attrs" v-on="on" class="menu-button">
           <v-icon>mdi-dots-vertical</v-icon>

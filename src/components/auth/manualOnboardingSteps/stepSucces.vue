@@ -17,7 +17,7 @@
           color="primary"
           height="58"
           class="full-w font-weight-medium dark-blue"
-          :to="{ name: 'Dashboard' }"
+          :to="{ name: 'JobseekerHome' }"
         >
           {{ $t("finish") }}
         </v-btn>
@@ -30,9 +30,9 @@
 export default {
   props: {
     nextScreen: Function,
-    formLoading: Boolean,
+    formLoading: Boolean
   },
-  name: "StepSucces",
+  name: "StepSucces"
 };
 </script>
 

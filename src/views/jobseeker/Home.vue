@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <v-row class="layout-content mt-4 flex-shrink-1 flex-grow-1" v-if="user">
-      <v-col cols="cols" v-if="messagesLoaded && conversations.length">
-        <Chat />
-      </v-col>
-      <v-col
-        cols="cols"
-        v-if="!$store.getters['chat/selectedConversation']"
-        :class="{ 'd-flex flex-column my-auto': !showUpgradeBox }"
-      >
+  <v-row class="mt-5">
+    <v-col sm="12" md="5" lg="4" xl="3" tag="aside">
+      <ProfileSidebar />
+    </v-col>
+
+    <v-col cols="col" v-if="messagesLoaded && conversations.length">
+      <Chat />
+    </v-col>
+
+    <v-col
+      cols="col"
+      v-if="!$store.getters['chat/selectedConversation']"
+      :class="{ 'mt-15': !showUpgradeBox }"
+    >
+      <div>
         <!-- Hello -->
         <div class="user-name">
-          {{ $t('hello') }},
+          {{ $t("hello") }},
           <span style="color:#0253B3;">
             {{ user.first_name }} {{ user.last_name }}
           </span>
@@ -20,14 +25,15 @@
         <!-- Messages text -->
         <div class="no-msg">
           {{
-            conversations.length
-              ? `${$t("openChat")}`
-              : `${$t("noMessages")}`
+            conversations.length ? `${$t("openChat")}` : `${$t("noMessages")}`
           }}
         </div>
 
         <!-- Upgrade box -->
-        <UpgradeAccountBox class="dashboard-upgrade-account-box" v-if="showUpgradeBox" />
+        <UpgradeAccountBox
+          class="dashboard-upgrade-account-box"
+          v-if="showUpgradeBox"
+        />
 
         <!-- Image -->
         <div class="mt-5">
@@ -36,21 +42,20 @@
             max-width="500"
           ></v-img>
         </div>
-      </v-col>
-    </v-row>
-  </div>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 import Chat from "@/views/dashboard/Chat";
+import ProfileSidebar from "@/components/jobseeker/ProfileSidebar";
 
 export default {
-  name: "Dashboard",
-  created() {
-    this.getAllConversations({ limit: 2 });
-  },
+  components: { Chat, UpgradeAccountBox, ProfileSidebar },
+
   computed: {
     ...mapGetters("user", ["user"]),
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
@@ -59,12 +64,13 @@ export default {
       return !(this.messagesLoaded && this.conversations.length);
     }
   },
+
+  created() {
+    this.getAllConversations({ limit: 2 });
+  },
+
   methods: {
     ...mapActions("chat", ["getAllConversations"])
-  },
-  components: {
-    Chat,
-    UpgradeAccountBox
   }
 };
 </script>

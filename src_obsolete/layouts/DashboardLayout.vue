@@ -55,6 +55,7 @@
         </div>
       </v-col>
     </v-row>
+
     <v-row v-if="profile">
       <v-col cols="12">
         <v-btn
