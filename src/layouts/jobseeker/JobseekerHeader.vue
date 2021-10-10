@@ -71,7 +71,6 @@ export default {
       return this.$store.getters["user/user"];
     },
     showBackButton() {
-      console.log(this.$route);
       return this.$route.meta.showBackButton;
     }
   }
