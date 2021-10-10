@@ -151,25 +151,6 @@ import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
 export default {
   components: { CardActionableList, DashboardActivePlan, UpgradeAccountBox },
 
-  data() {
-    return {
-      documents: [
-        {
-          text: "CV",
-          link: this.user.cv
-        },
-        {
-          text: this.$t("qualifications"),
-          link: this.user.qualifications
-        },
-        {
-          text: this.$t("curriculumVitae"),
-          link: this.user.resume
-        }
-      ]
-    };
-  },
-
   computed: {
     user() {
       return this.$store.getters["user/user"];
@@ -183,18 +164,24 @@ export default {
     conversations() {
       return this.$store.getters["chat/conversations"];
     },
-    documentsEmpty() {
-      if (!this.documents) {
-        return true;
-      }
-
-      this.documents.forEach(i => {
-        if (i.link) {
-          return false;
+    documents() {
+      return [
+        {
+          text: "CV",
+          link: this.user.cv
+        },
+        {
+          text: this.$t("qualifications"),
+          link: this.user.qualifications
+        },
+        {
+          text: this.$t("curriculumVitae"),
+          link: this.user.resume
         }
-      });
-
-      return true;
+      ];
+    },
+    documentsEmpty() {
+      return !this.user.cv && !this.user.qualifications && !this.user.resume;
     }
   }
 };
