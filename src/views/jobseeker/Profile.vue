@@ -503,6 +503,7 @@
                 :key="i"
               >
                 <div
+                  v-if="test && test.id"
                   @click="
                     $router.push({
                       name: 'PersonalityTestJobseekerResult',
