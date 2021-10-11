@@ -60,7 +60,6 @@
               clearable
               outlined
               flat
-              hide-no-data
               :hide-details="true"
               :placeholder="$t('enterIndustry')"
               append-icon="mdi-chevron-down"

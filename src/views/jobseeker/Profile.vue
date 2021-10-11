@@ -171,7 +171,6 @@
                 :item-text="$i18n.locale"
                 :rules="[validations.required]"
                 outlined
-                hide-no-data
                 hide-details="auto"
                 append-icon="mdi-chevron-down"
               >
@@ -197,7 +196,6 @@
                 multiple
                 small-chips
                 deletable-chips
-                hide-no-data
                 hide-details="auto"
                 append-icon="mdi-chevron-down"
               />
@@ -221,7 +219,6 @@
                 outlined
                 small-chips
                 deletable-chips
-                hide-no-data
                 hide-details="auto"
                 append-icon="mdi-chevron-down"
               ></v-autocomplete>
@@ -491,35 +488,43 @@
             {{ $t("personalityTest.description") }}
           </p>
           <div class="psy-img">
-            <v-img 
-              :src="require('@/assets/psychology.png')" 
+            <v-img
+              :src="require('@/assets/psychology.png')"
               max-height="55px"
               max-width="55px"
             />
           </div>
           <v-row>
             <v-col cols="12">
-              <div 
-                v-for="(test, i) in $store.getters['personalityTest/USER_TESTS']"
+              <div
+                v-for="(test, i) in $store.getters[
+                  'personalityTest/USER_TESTS'
+                ]"
                 :key="i"
               >
-              <div @click="$router.push({
-                name: 'PersonalityTestJobseekerResult',
-                params: {
-                  id: test.id
-                }
-              })">
-
-                {{ test.id }}
-              </div>
+                <div
+                  @click="
+                    $router.push({
+                      name: 'PersonalityTestJobseekerResult',
+                      params: {
+                        id: test.id
+                      }
+                    })
+                  "
+                >
+                  {{ test.id }}
+                </div>
               </div>
             </v-col>
             <v-col cols="12 mt-2">
-              <div 
-                @click="$router.push({
-                  name: 'PersonalityTestJobseeker'
-                })" 
-                class="d-flex">
+              <div
+                @click="
+                  $router.push({
+                    name: 'PersonalityTestJobseeker'
+                  })
+                "
+                class="d-flex"
+              >
                 <v-btn
                   rounded
                   outlined

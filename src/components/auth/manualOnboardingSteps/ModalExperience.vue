@@ -75,7 +75,6 @@
                   :rules="[validations.required]"
                   outlined
                   flat
-                  hide-no-data
                   :placeholder="$t('choose')"
                   append-icon="mdi-chevron-down"
                 ></v-autocomplete>

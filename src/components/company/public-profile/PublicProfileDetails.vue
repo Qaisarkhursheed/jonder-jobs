@@ -15,7 +15,6 @@
           :item-text="$i18n.locale"
           cache-items
           outlined
-          hide-no-data
           append-icon="mdi-chevron-down"
         />
       </div>

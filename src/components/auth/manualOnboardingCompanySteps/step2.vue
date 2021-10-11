@@ -19,7 +19,6 @@
         :item-text="$i18n.locale"
         outlined
         flat
-        hide-no-data
         append-icon="mdi-chevron-down"
         :placeholder="$t('choose')"
       />

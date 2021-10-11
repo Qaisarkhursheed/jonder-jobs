@@ -25,7 +25,6 @@
                   readonly
                 />
               </div>
-
             </v-col>
             <v-col>
               <div class="section">
@@ -47,11 +46,7 @@
                 <label class="section-label">
                   {{ $t("aboutMe") }}
                 </label>
-                <v-textarea
-                  v-model="user.about_me"
-                  outlined
-                  readonly
-                />
+                <v-textarea v-model="user.about_me" outlined readonly />
               </div>
             </v-col>
           </v-row>
@@ -72,23 +67,13 @@
             <label class="section-label">
               {{ $t("emailAddress") }}
             </label>
-            <v-text-field
-              v-model="user.email"
-              type="email"
-              outlined
-              readonly
-            />
+            <v-text-field v-model="user.email" type="email" outlined readonly />
           </div>
           <div class="section">
             <label class="section-label">
               {{ $t("phone") }}
             </label>
-            <v-text-field
-              v-model="user.phone"
-              type="text"
-              outlined
-              readonly
-            />
+            <v-text-field v-model="user.phone" type="text" outlined readonly />
           </div>
         </v-col>
       </v-row>
@@ -115,7 +100,6 @@
               :items="types.JOB_BRANCHE"
               outlined
               flat
-              hide-no-data
               multiple
               :placeholder="$t('detailsAboutYouBranchesPlace')"
               class="mt-1"
@@ -137,7 +121,6 @@
               multiple
               outlined
               flat
-              hide-no-data
               class="mt-1"
               readonly
             >
@@ -149,14 +132,14 @@
             </label>
             <v-select
               :attach="true"
-                v-model="user.looking_for_employment_type"
-                :items="types.EMPLOYEMENT_TYPE"
-                :placeholder="$t('lookingForEmployementPlace')"
-                outlined
-                multiple
-                readonly
-                class="mt-1"
-              >
+              v-model="user.looking_for_employment_type"
+              :items="types.EMPLOYEMENT_TYPE"
+              :placeholder="$t('lookingForEmployementPlace')"
+              outlined
+              multiple
+              readonly
+              class="mt-1"
+            >
             </v-select>
           </div>
         </v-col>
@@ -166,12 +149,10 @@
 </template>
 
 <script>
-
 import axios from "axios";
 import types from "@/types";
 
 export default {
-
   name: "JobseekerManagementUser",
 
   props: {
@@ -183,21 +164,18 @@ export default {
   data() {
     return {
       user: {}
-    }
+    };
   },
 
   created() {
-    axios
-      .get(`/users/${this.id}`)
-      .then(res => {
-        this.user = res.data.data;
-      })
+    axios.get(`/users/${this.id}`).then(res => {
+      this.user = res.data.data;
+    });
   },
   computed: {
     types() {
       return types;
     }
-  },
+  }
 };
-
 </script>

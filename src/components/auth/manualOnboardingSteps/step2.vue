@@ -19,7 +19,6 @@
         :item-text="$i18n.locale"
         outlined
         flat
-        hide-no-data
         :placeholder="$t('detailsAboutYouPositionPlace')"
         class="mt-1"
         append-icon="mdi-chevron-down"
@@ -40,7 +39,6 @@
         v-clearable-autocomplete
         outlined
         flat
-        hide-no-data
         multiple
         small-chips
         deletable-chips
@@ -68,7 +66,6 @@
         deletable-chips
         outlined
         flat
-        hide-no-data
         class="mt-1"
         append-icon="mdi-chevron-down"
       ></v-autocomplete>

@@ -16,22 +16,14 @@
             <label class="section-label">
               {{ $t("companyName") }}
             </label>
-            <v-text-field
-              v-model="company.company"
-              outlined
-              readonly
-            />
+            <v-text-field v-model="company.company" outlined readonly />
           </div>
 
           <div class="section">
             <label class="section-label">
               {{ $t("aboutCompany") }}
             </label>
-            <v-textarea
-              v-model="company.about_company"
-              outlined
-              readonly
-            />
+            <v-textarea v-model="company.about_company" outlined readonly />
           </div>
         </v-col>
         <v-col cols="6">
@@ -45,7 +37,6 @@
               :items="types.JOB_BRANCHE"
               cache-items
               outlined
-              hide-no-data
               readonly
             >
               <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
@@ -112,11 +103,7 @@
             <label class="section-label">
               {{ $t("phone") }}
             </label>
-            <v-text-field
-              v-model="company.company_phone"
-              outlined
-              readonly
-            />
+            <v-text-field v-model="company.company_phone" outlined readonly />
           </div>
 
           <!-- Address -->
@@ -124,11 +111,7 @@
             <label class="section-label">
               {{ $t("cityAndAddress") }}
             </label>
-            <v-text-field
-              v-model="company.address"
-              outlined
-              readonly
-            >
+            <v-text-field v-model="company.address" outlined readonly>
             </v-text-field>
           </div>
         </v-col>
@@ -138,7 +121,8 @@
             <label class="section-label">
               {{ $t("webUrl") }}
             </label>
-            <v-text-field v-model="company.web_url" outlined readonly> </v-text-field>
+            <v-text-field v-model="company.web_url" outlined readonly>
+            </v-text-field>
           </div>
 
           <!-- Social links -->
@@ -151,7 +135,12 @@
             <label class="section-label">
               {{ item }}
             </label>
-            <v-text-field v-model="company[item]" outlined hide-details readonly/>
+            <v-text-field
+              v-model="company[item]"
+              outlined
+              hide-details
+              readonly
+            />
           </div>
         </v-col>
       </v-row>
@@ -160,12 +149,10 @@
 </template>
 
 <script>
-
 import axios from "axios";
 import types from "@/types";
 
 export default {
-
   name: "CompanyManagementUser",
 
   props: {
@@ -178,21 +165,17 @@ export default {
     return {
       company: {},
       social: ["facebook", "instagram", "linkedin", "youtube", "twitter"]
-    }
+    };
   },
   created() {
-    axios
-      .get(`/copmanies/${this.id}`)
-      .then(res => {
-        this.company = res.data.data;
-      })
+    axios.get(`/copmanies/${this.id}`).then(res => {
+      this.company = res.data.data;
+    });
   },
   computed: {
     types() {
       return types;
     }
-  },
-
+  }
 };
-
 </script>

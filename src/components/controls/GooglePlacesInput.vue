@@ -14,7 +14,6 @@
     :small-chips="multiple"
     :deletable-chips="multiple"
     :clearable="clearable"
-    hide-no-data
     no-filter
     outlined
     append-icon="mdi-chevron-down"
