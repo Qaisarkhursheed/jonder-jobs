@@ -44,6 +44,10 @@ export default {
       padding-left: 10px;
       padding-right: 10px;
     }
+
+    .chat-wrap {
+      height: calc(100vh - 140px) !important;
+    }
   }
 }
 </style>
