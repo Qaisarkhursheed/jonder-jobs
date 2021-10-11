@@ -153,6 +153,24 @@
             </v-row>
           </div>
         </div>
+
+        <div class="section personality-test" v-if="user.personality_test">
+          <div class="title">{{ $t("personalityTest.title") }}</div>
+          <div 
+            class="d-flex align-center pointer"
+            @click="$router.push({
+              name: 'PersonalityTestResultEmployer',
+              id: user.personality_test.id
+            })"
+          >
+            <v-icon size="40" color="#4ab2e5" style="margin-left: -8px;">
+              mdi-head-cog
+            </v-icon>
+            <span class="font-weight-bold">
+              {{ $t("test") }}
+            </span>
+          </div>
+        </div>
       </v-col>
     </v-row>
   </div>

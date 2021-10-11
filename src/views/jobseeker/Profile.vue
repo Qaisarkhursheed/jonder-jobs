@@ -497,28 +497,29 @@
           </div>
           <v-row>
             <v-col cols="12">
-              <div
-                v-for="(test, i) in $store.getters[
-                  'personalityTest/USER_TESTS'
-                ]"
-                :key="i"
-              >
+              <div>
                 <div
-                  v-if="test && test.id"
+                  v-if="user.personality_test && user.personality_test.id"
                   @click="
                     $router.push({
                       name: 'PersonalityTestJobseekerResult',
                       params: {
-                        id: test.id
+                        id: user.personality_test.id
                       }
                     })
                   "
                 >
-                  {{ test.id }}
+                  <v-chip class="pointer" color="#0253B3" label outlined>
+                    {{ $t("test") }} |
+                    {{
+                      user.personality_test.created_at
+                        | moment("DD.MM.YYYY / HH:mm")
+                    }}
+                  </v-chip>
                 </div>
               </div>
             </v-col>
-            <v-col cols="12 mt-2">
+            <v-col cols="12">
               <div
                 @click="
                   $router.push({
@@ -871,7 +872,7 @@ export default {
 
   created() {
     this.resetFormData(this.user);
-    this.$store.dispatch("personalityTest/FETCH_USER_TESTS", this.user.id);
+    // this.$store.dispatch("personalityTest/FETCH_USER_TESTS", this.user.id);
     this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
       this.invoices = this.invoices.filter(i => i.status === "complete");

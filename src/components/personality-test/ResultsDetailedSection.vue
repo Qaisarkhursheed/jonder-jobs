@@ -9,7 +9,7 @@
       </span>
     </a>
     <p class="subheading grey--text text--darken-1">
-      {{ $t('results.score') }}: {{ domain.score }} - {{ domain.scoreText }}
+      {{ $t('personalityTest.score') }}: {{ domain.score }} - {{ domain.scoreText }}
     </p>
     <p>{{ domain.shortDescription }}</p>
     <ResultsChart :data="domain.facets" />
@@ -25,7 +25,7 @@
           {{ facet.title }}
         </span></a>
       <p class="subheading grey--text text--darken-1">
-        {{ $t('results.score') }}: {{ facet.score }} - {{ facet.scoreText }}
+        {{ $t('personalityTest.score') }}: {{ facet.score }} - {{ facet.scoreText }}
       </p>
       <p v-html="facet.text" />
     </div>

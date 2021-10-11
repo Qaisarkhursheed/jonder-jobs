@@ -97,5 +97,14 @@ export default [
       requiresCompany: true,
       sidebar: true
     }
-  }
+  },
+  {
+    path: "jobseeker/:id/personality-test/:id",
+    name: "PersonalityTestResultEmployer",
+    component: () => import("@/views/jobseeker/PersonalityTestResult"),
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
 ];

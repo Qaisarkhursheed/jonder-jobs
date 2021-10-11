@@ -493,6 +493,7 @@
   "contentOfNote": "Content of Note",
   "writeContent": "Write content",
   "statusOfCandidate": "Status of candidate",
+  "test": "Test",
   "personalityTest": {
     "title": "Personality test",
     "description": "Take personality test",
@@ -500,6 +501,7 @@
     "back": "Back",
     "next": "Next",
     "submit": "Submit test",
+    "score": "Score",
     "results": "Results",
     "question1": "Worry about things",
     "question2": "Make friends easily",

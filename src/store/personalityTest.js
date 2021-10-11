@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 import axios from "axios";
 import types from "@/types";
 import router from "@/router";
@@ -16,7 +16,7 @@ export default {
   namespaced: true,
 
   state: {
-    development: process.env.NODE_ENV === 'development',
+    development: process.env.NODE_ENV === "development",
     slide: 0,
     loading: false,
     result: false,
@@ -31,7 +31,7 @@ export default {
       invalid: false,
       inProgress: false
     },
-    userTests: [],
+    userTests: []
   },
 
   getters: {
@@ -138,22 +138,23 @@ export default {
   },
 
   actions: {
-    async SUBMIT_TEST (context) {
+    async SUBMIT_TEST(context) {
       try {
-        context.commit('SET_LOADING', true);
+        context.commit("SET_LOADING", true);
         const answers = context.state.test.answers;
-  
+
         const result = {
           invalid: context.state.test.invalid,
           answers: Object.keys(answers).map(key => answers[key]),
-          timeElapsed: context.state.test.elapsedTime,// elapsedTimeInSeconds(context.state.test.testStart),
+          timeElapsed: context.state.test.elapsedTime,
           dateStamp: Date.now()
         };
 
         let parsed = results.calculateResultScore(result);
         axios
           .post("/personality-test", {
-            results: parsed
+            results: parsed,
+            time_elapsed: context.state.test.elapsedTime
           })
           .then(res => {
             router.push({
@@ -163,25 +164,20 @@ export default {
               }
             });
             // context.commit('SET_RESULT', parsed);
-            context.commit('SET_LOADING', false)
+            context.commit("SET_LOADING", false);
           });
-  
         // context.commit('RESET_STATE')
       } catch (error) {
-        context.commit('SET_LOADING', false);
+        context.commit("SET_LOADING", false);
       }
     },
-    async FETCH_USER_TESTS ({ commit }, id) {
-      axios
-        .get(`/personality-test?user_id=${id}`)
-        .then(res => {
-          console.log('tests', res.data.data);
-          commit('SET_USER_TESTS', res.data.data);
-        })
+    async FETCH_USER_TESTS({ commit }, id) {
+      axios.get(`/personality-test?user_id=${id}`).then(res => {
+        commit("SET_USER_TESTS", res.data.data);
+      });
     },
-    FETCH_RESULT (context, id) {
-      return axios
-        .get(`/personality-test/${id}`);
+    FETCH_RESULT(context, id) {
+      return axios.get(`/personality-test/${id}`);
     }
-  },
+  }
 };

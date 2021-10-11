@@ -490,6 +490,7 @@
   "contentOfNote": "Contenu de la note",
   "writeContent": "Écrire du contenu",
   "statusOfCandidate": "Statut de candidat",
+  "test": "Test",
   "personalityTest": {
     "title": "Test de personnalité",
     "description": "Take personality test",
@@ -497,6 +498,7 @@
     "back": "Arrière",
     "next": "Suivant",
     "submit": "Soumettre un test",
+    "score": "But",
     "results": "Résultats",
     "question1": "Je m'inquiète à propos de choses",
     "question2": "Je me fais des amis facilement",

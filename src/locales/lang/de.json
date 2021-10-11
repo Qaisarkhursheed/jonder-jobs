@@ -493,6 +493,7 @@
   "contentOfNote": "Inhalt der notiz",
   "writeContent": "Inhalt schreiben",
   "statusOfCandidate": "Status des Kandidaten",
+  "test": "Prüfung",
   "personalityTest": {
     "title": "Persönlichkeitstest",
     "description": "Take personality test",
@@ -500,6 +501,7 @@
     "back": "Zurück",
     "next": "Nächste",
     "submit": "Test einreichen",
+    "score": "Spielstand",
     "results": "Ergebnisse",
     "question1": "Ich mache mir oft Sorgen",
     "question2": "Ich gewinne leicht Freunde",
