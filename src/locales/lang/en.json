@@ -494,6 +494,13 @@
   "writeContent": "Write content",
   "statusOfCandidate": "Status of candidate",
   "personalityTest": {
+    "title": "Personality test",
+    "description": "Take personality test",
+    "start": "Start personality test",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit test",
+    "results": "Results",
     "question1": "Worry about things",
     "question2": "Make friends easily",
     "question3": "Have a vivid imagination",

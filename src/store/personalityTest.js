@@ -1,7 +1,8 @@
 import Vue from 'vue';
+import axios from "axios";
 import types from "@/types";
-import calculateResult from "@/types/calculations";
-
+import router from "@/router";
+import results from "@/types/calculations";
 const getTestData = () => {
   let questions = types.PERSONALITY_QUESTIONS;
   let choices = types.PERSONALITY_QUESTION_CHOICES;
@@ -20,11 +21,6 @@ export default {
     loading: false,
     result: false,
     compareResult: false,
-    snackbar: {
-      active: false,
-      message: false,
-      type: false
-    },
     test: {
       testStart: 0,
       itemsPerPage: 3,
@@ -34,7 +30,8 @@ export default {
       done: false,
       invalid: false,
       inProgress: false
-    }
+    },
+    userTests: [],
   },
 
   getters: {
@@ -57,13 +54,25 @@ export default {
     },
     GET_RESULTS: state => {
       return state.result;
+    },
+    USER_TESTS: state => {
+      return state.userTests;
     }
   },
 
   mutations: {
-    // RESET_STATE: state => {
-    //   Object.assign(state, getDefaultState());
-    // },
+    RESET_TEST: state => {
+      state.test = {
+        testStart: 0,
+        itemsPerPage: 3,
+        answers: [],
+        inventory: [],
+        position: 0,
+        done: false,
+        invalid: false,
+        inProgress: false
+      };
+    },
     INIT_TEST: state => {
       state.test.inventory = getTestData();
       state.test.testStart = Date.now();
@@ -111,6 +120,9 @@ export default {
     PREVIOUS_QUESTIONS: ({ test }) => {
       test.position -= test.itemsPerPage;
     },
+    SET_ELAPSED_TIME: ({ state, time }) => {
+      state.test.elapsedTime = time;
+    },
     SET_RESULT: (state, payload) => {
       state.result = payload;
     },
@@ -120,6 +132,9 @@ export default {
     SET_LOADING: (state, payload) => {
       state.loading = payload;
     },
+    SET_USER_TESTS: (state, payload) =>  {
+      state.userTests = [payload[payload.length - 1]];
+    }
   },
 
   actions: {
@@ -129,23 +144,44 @@ export default {
         const answers = context.state.test.answers;
   
         const result = {
-          // testId: getInfo.shortId,
           invalid: context.state.test.invalid,
           answers: Object.keys(answers).map(key => answers[key]),
-          timeElapsed: 532,// elapsedTimeInSeconds(context.state.test.testStart),
+          timeElapsed: context.state.test.elapsedTime,// elapsedTimeInSeconds(context.state.test.testStart),
           dateStamp: Date.now()
         };
 
-        let parsed = calculateResult(result);
-        context.commit('SET_RESULT', parsed);
-        // localStorage.setItem('resultId', id);
+        let parsed = results.calculateResultScore(result);
+        axios
+          .post("/personality-test", {
+            results: parsed
+          })
+          .then(res => {
+            router.push({
+              name: "PersonalityTestJobseekerResult",
+              params: {
+                id: res.data.data.id
+              }
+            });
+            // context.commit('SET_RESULT', parsed);
+            context.commit('SET_LOADING', false)
+          });
   
         // context.commit('RESET_STATE')
-        // context.commit('SET_LOADING', false)
       } catch (error) {
-        // context.commit('SET_SNACKBAR', { msg: error.message, type: 'error' })
         context.commit('SET_LOADING', false);
       }
+    },
+    async FETCH_USER_TESTS ({ commit }, id) {
+      axios
+        .get(`/personality-test?user_id=${id}`)
+        .then(res => {
+          console.log('tests', res.data.data);
+          commit('SET_USER_TESTS', res.data.data);
+        })
+    },
+    FETCH_RESULT (context, id) {
+      return axios
+        .get(`/personality-test/${id}`);
     }
   },
 };

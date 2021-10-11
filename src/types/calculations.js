@@ -69,19 +69,32 @@ const generateResult = (answers, template) => {
   return domainResults
 };
 
+const calculateResultScore = (data) => {
+  let score = calculateScore({ answers: data.answers, calculateResult: data.calculateResult });
+  return score;
+};
+
 const calculateResult = (data) => {
   let score = calculateScore({ answers: data.answers, calculateResult: data.calculateResult });
   let result = generateResult(score, result_text[store.getters['user/user'].locale]);
   return result;
 };
+const generateResultData = (data) => {
+  let nest = generateResult(data, result_text[store.getters['user/user'].locale]); 
+  return nest;
+};
 
-export default calculateResult;
+export default {
+  calculateResult,
+  calculateResultScore,
+  generateResultData
+}
 
 /**
 const RES = [
   {
     count: 24,
-    description: "Freud originally used the term neurosis to describe a\ncondition marked by mental distress, emotional suffering, and an\ninability to cope effectively with the normal demands of life. He\nsuggested that everyone shows some signs of neurosis, but that we\ndiffer in our degree of suffering and our specific symptoms of\ndistress. Today neuroticism refers to the tendency to experience\nnegative feelings. <br /><br />Those who score high on Neuroticism may\nexperience primarily one specific negative feeling such as anxiety,\nanger, or depression, but are likely to experience several of these\nemotions. <br /><br />People high in neuroticism are emotionally reactive. They\nrespond emotionally to events that would not affect most people, and\ntheir reactions tend to be more intense than normal. They are more\nlikely to interpret ordinary situations as threatening, and minor\nfrustrations as hopelessly difficult. <br /><br />Their negative emotional\nreactions tend to persist for unusually long periods of time, which\nmeans they are often in a bad mood. These problems in emotional\nregulation can diminish a neurotic's ability to think clearly, make\ndecisions, and cope effectively with stress.",
+    description: Freud originally used the term neurosis to describe a\ncondition marked by mental distress, emotional suffering, and an\ninability to cope effectively with the normal demands of life. He\nsuggested that everyone shows some signs of neurosis, but that we\ndiffer in our degree of suffering and our specific symptoms of\ndistress. Today neuroticism refers to the tendency to experience\nnegative feelings. <br /><br />Those who score high on Neuroticism may\nexperience primarily one specific negative feeling such as anxiety,\nanger, or depression, but are likely to experience several of these\nemotions. <br /><br />People high in neuroticism are emotionally reactive. They\nrespond emotionally to events that would not affect most people, and\ntheir reactions tend to be more intense than normal. They are more\nlikely to interpret ordinary situations as threatening, and minor\nfrustrations as hopelessly difficult. <br /><br />Their negative emotional\nreactions tend to persist for unusually long periods of time, which\nmeans they are often in a bad mood. These problems in emotional\nregulation can diminish a neurotic's ability to think clearly, make\ndecisions, and cope effectively with stress.",
     domain: "N",
     facets: [
       {

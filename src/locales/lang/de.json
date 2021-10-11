@@ -494,6 +494,13 @@
   "writeContent": "Inhalt schreiben",
   "statusOfCandidate": "Status des Kandidaten",
   "personalityTest": {
+    "title": "Persönlichkeitstest",
+    "description": "Take personality test",
+    "start": "Persönlichkeitstest starten",
+    "back": "Zurück",
+    "next": "Nächste",
+    "submit": "Test einreichen",
+    "results": "Ergebnisse",
     "question1": "Ich mache mir oft Sorgen",
     "question2": "Ich gewinne leicht Freunde",
     "question3": "Ich habe eine blühende Fantasie",

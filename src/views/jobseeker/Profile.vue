@@ -483,6 +483,65 @@
           </v-row>
         </v-card>
 
+        <v-card flat id="personalityTest" class="profile-section mb-10">
+          <h2 class="profile-title">
+            {{ $t("personalityTest.title") }}
+          </h2>
+          <p class="profile-subtitle">
+            {{ $t("personalityTest.description") }}
+          </p>
+          <div class="psy-img">
+            <v-img 
+              :src="require('@/assets/psychology.png')" 
+              max-height="55px"
+              max-width="55px"
+            />
+          </div>
+          <v-row>
+            <v-col cols="12">
+              <div 
+                v-for="(test, i) in $store.getters['personalityTest/USER_TESTS']"
+                :key="i"
+              >
+              <div @click="$router.push({
+                name: 'PersonalityTestJobseekerResult',
+                params: {
+                  id: test.id
+                }
+              })">
+
+                {{ test.id }}
+              </div>
+              </div>
+            </v-col>
+            <v-col cols="12 mt-2">
+              <div 
+                @click="$router.push({
+                  name: 'PersonalityTestJobseeker'
+                })" 
+                class="d-flex">
+                <v-btn
+                  rounded
+                  outlined
+                  color="#0253B3"
+                  height="26"
+                  width="26"
+                  style="cursor: pointer;"
+                  fab
+                >
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
+                <div
+                  class="ml-1"
+                  style="cursor: pointer; color: #0253B3; font-weight:600"
+                >
+                  {{ $t("personalityTest.start") }}
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-card>
+
         <v-card flat id="invoices" class="profile-section mb-10">
           <h2 class="profile-title">
             {{ $t("billingInvoices") }}
@@ -807,6 +866,7 @@ export default {
 
   created() {
     this.resetFormData(this.user);
+    this.$store.dispatch("personalityTest/FETCH_USER_TESTS", this.user.id);
     this.$store.dispatch("invoices/fetchInvoices").then(resp => {
       this.invoices = resp.data.data;
       this.invoices = this.invoices.filter(i => i.status === "complete");
@@ -937,6 +997,16 @@ export default {
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
+  }
+
+  #personality-test {
+    position: relative;
+  }
+
+  .psy-img {
+    position: absolute;
+    top: 28px;
+    right: 28px;
   }
 }
 </style>
