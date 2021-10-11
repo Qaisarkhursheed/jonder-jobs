@@ -47,12 +47,12 @@
         {{ $t("whenToStart") }}
         <span style="color: red;">*</span>
       </label>
-      <Calendar
-        v-if="!dontKnowWhenToStart"
-        @setDate="value.ready_for_work = $event"
-        :rules="[validations.required]"
-        type="date"
-        :fromToday="true"
+      <DatePicker
+        v-model="value.ready_for_work"
+        :rules="!dontKnowWhenToStart ? [validations.required] : []"
+        :disabled="dontKnowWhenToStart"
+        min-this-month
+        type="month"
         hide-details="auto"
       />
 
@@ -98,17 +98,17 @@
 
 <script>
 import types from "@/types";
-import Calendar from "@/components/Calendar";
 import SliderRangeInput from "../../SliderRangeInput";
 import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
+import DatePicker from "@/components/controls/DatePicker";
 
 export default {
   name: "Step3",
 
   components: {
     SliderRangeInput,
-    Calendar,
-    GooglePlacesInput
+    GooglePlacesInput,
+    DatePicker
   },
 
   props: {

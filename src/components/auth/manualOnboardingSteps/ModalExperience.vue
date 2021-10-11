@@ -43,20 +43,22 @@
             <v-row>
               <v-col cols="12" sm="6" class="mt-1">
                 <label>{{ $t("startDate") }}</label>
-                <Calendar
-                  @setDate="form.start_time = $event"
-                  :value="form.start_time"
+                <DatePicker
+                  v-model="form.start_time"
                   :rules="[validations.required]"
+                  :hide-details="false"
+                  type="month"
                 />
               </v-col>
 
               <v-col cols="12" sm="6" class="mt-1" v-if="!form.working_here">
                 <label>{{ $t("endDate") }}</label>
-                <Calendar
-                  @setDate="form.end_time = $event"
-                  :value="form.end_time"
+                <DatePicker
+                  v-model="form.end_time"
                   :rules="form.working_here ? [] : [validations.required]"
                   :disabled="!!form.working_here"
+                  :hide-details="false"
+                  type="month"
                 />
               </v-col>
             </v-row>
@@ -148,15 +150,14 @@
 
 <script>
 import types from "@/types";
-// Move to generic global component if needed
-import Calendar from "@/components/Calendar";
+import DatePicker from "@/components/controls/DatePicker";
 import { debounce } from "lodash";
 
 export default {
   name: "ModalExperience",
 
   components: {
-    Calendar
+    DatePicker
   },
 
   props: {

@@ -311,11 +311,12 @@
               <label class="profile-label">
                 {{ $t("whenCanYouStart") }}
               </label>
-              <Calendar
-                @setDate="formData.ready_for_work = $event"
-                :value="formData.ready_for_work"
+              <DatePicker
+                v-model="formData.ready_for_work"
                 :rules="!dontKnowWhenToStart ? [validations.required] : []"
                 :disabled="dontKnowWhenToStart"
+                min-this-month
+                type="month"
                 hide-details="auto"
               />
             </v-col>
@@ -739,7 +740,7 @@ import { mapActions, mapGetters } from "vuex";
 import types from "@/types";
 import CardActionableList from "@/components/user/JobseekerCardActionableList";
 import UpgradePlanModal from "@/views/dashboard/UpgradePlanModal";
-import Calendar from "@/components/Calendar";
+// import Calendar from "@/components/Calendar";
 import AddNewCard from "@/views/dashboard/AddNewCard";
 import ResponseAlert from "@/components/ResponseAlert";
 import ModalEducation from "@/components/auth/manualOnboardingSteps/ModalEducation";
@@ -754,6 +755,7 @@ import AvatarInput from "@/components/controls/AvatarInput";
 import InvoicesListing from "@/components/InvoicesListing";
 import GooglePlacesInput from "@/components/controls/GooglePlacesInput";
 import NavigationSidebar from "@/components/jobseeker/NavigationSidebar";
+import DatePicker from "@/components/controls/DatePicker";
 
 export default {
   components: {
@@ -762,7 +764,7 @@ export default {
     UserPlanDescription,
     UpgradePlanModal,
     CardActionableList,
-    Calendar,
+    // Calendar,
     AddNewCard,
     ResponseAlert,
     ModalEducation,
@@ -773,7 +775,8 @@ export default {
     AvatarInput,
     InvoicesListing,
     GooglePlacesInput,
-    NavigationSidebar
+    NavigationSidebar,
+    DatePicker
   },
 
   data: () => ({

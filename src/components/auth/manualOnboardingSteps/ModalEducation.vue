@@ -35,19 +35,21 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <label>{{ $t("startDate") }}</label>
-                <Calendar
-                  @setDate="form.start_time = $event"
-                  :value="form.start_time"
+                <DatePicker
+                  v-model="form.start_time"
                   :rules="[validations.required]"
+                  :hide-details="false"
+                  type="month"
                 />
               </v-col>
               <v-col cols="12" sm="6" v-if="!form.study_here">
                 <label>{{ $t("endDate") }}</label>
-                <Calendar
-                  @setDate="form.end_time = $event"
-                  :value="form.end_time"
+                <DatePicker
+                  v-model="form.end_time"
                   :rules="form.study_here ? [] : [validations.required]"
                   :disabled="!!form.study_here"
+                  :hide-details="false"
+                  type="month"
                 />
               </v-col>
             </v-row>
@@ -120,14 +122,13 @@
 </template>
 
 <script>
-// Move to generic global component if needed
-import Calendar from "@/components/Calendar";
+import DatePicker from "@/components/controls/DatePicker";
 
 export default {
   name: "ModalEducation",
 
   components: {
-    Calendar
+    DatePicker
   },
 
   props: {

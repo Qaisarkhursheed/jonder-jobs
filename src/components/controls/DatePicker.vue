@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    attach
     v-model="menu"
     :close-on-content-click="false"
     :nudge-right="40"
@@ -9,11 +10,12 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        v-model="date"
+        v-model="dateFormatted"
         v-bind="attrs"
         v-on="on"
         :prepend-icon="prependIcon"
-        :readonly="readonly"
+        :disabled="disabled"
+        :readonly="true"
         :rules="rules"
         :hide-details="hideDetails"
         :style="textFieldStyle"
@@ -23,13 +25,16 @@
     <v-date-picker
       v-model="date"
       @input="menu = false"
-      :min="min"
+      :type="type"
+      :min="min || minLocal"
       :max="max"
     ></v-date-picker>
   </v-menu>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   props: {
     value: {
@@ -41,6 +46,10 @@ export default {
       type: [String, Object],
       default: null
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     hideDetails: {
       type: [Boolean, String],
       default: "auto"
@@ -49,16 +58,20 @@ export default {
       type: String,
       required: false
     },
-    readonly: {
-      type: Boolean,
-      default: true
-    },
+    // readonly: {
+    //   type: Boolean,
+    //   default: true
+    // },
     rules: {
       type: Array,
       default: () => []
     },
 
     // DatePicker
+    type: {
+      type: String,
+      default: "date"
+    },
     min: {
       type: String,
       required: false
@@ -66,27 +79,56 @@ export default {
     max: {
       type: String,
       required: false
+    },
+    minThisMonth: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
-      date: "",
-      menu: false
+      menu: false,
+      minLocal: null
     };
   },
 
-  watch: {
-    value(val) {
-      this.date = val;
+  computed: {
+    date: {
+      get: function() {
+        if (this.type == "month" && this.value) {
+          return this.value.substr(0, 7);
+        }
+
+        return this.value;
+      },
+      set: function(newVal) {
+        if (this.type == "month") {
+          newVal += "-01";
+        }
+
+        this.$emit("input", newVal);
+      }
     },
-    date(val) {
-      this.$emit("input", val);
+    dateFormatted() {
+      if (!this.date) {
+        return null;
+      }
+
+      if (this.type == "date") {
+        return moment(this.date).format("MM.DD.YYYY");
+      } else {
+        return moment(this.date).format("MMMM, YYYY");
+      }
     }
   },
 
   created() {
-    this.date = this.value;
+    if (this.minThisMonth) {
+      this.minLocal = moment()
+        .startOf("month")
+        .format("YYYY-MM-DD");
+    }
   }
 };
 </script>
