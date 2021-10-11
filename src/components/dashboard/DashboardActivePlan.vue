@@ -3,13 +3,13 @@
     <div class="image-wrapper">
       <v-img
         class="img-icon"
-        :src="
-          require(`@/assets/icons/${userPlan.id === 11 ? 'top-rated' : 'medal'}.svg`)
-        "
+        :src="require(`@/assets/plan-icons/${userPlan.plan_slug}.svg`)"
       ></v-img>
     </div>
     <div class="info-wrapper">
-      <div class="info-title" v-if="userPlan.id === 11">{{ remainingDays }} {{ $t("remainingDays") }}</div>
+      <div class="info-title" v-if="userPlan.id === 11">
+        {{ remainingDays }} {{ $t("remainingDays") }}
+      </div>
       <div class="info-title" v-else>{{ $t("success") }}!</div>
       <div class="info-desscription">
         {{ userPlan.plan_description }}
@@ -24,7 +24,7 @@ export default {
   props: {
     userPlan: {
       type: Object,
-      required: true,
+      required: true
     }
   },
   computed: {

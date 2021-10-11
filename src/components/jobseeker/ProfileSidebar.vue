@@ -20,11 +20,7 @@
             :key="index"
             class="profile-image-badge-icon"
             :style="[userPlan.length > 1 ? { margin: '0 -5px' } : null]"
-            :src="
-              require(`@/assets/icons/${
-                plan.id === 11 ? 'top-rated' : 'medal'
-              }.svg`)
-            "
+            :src="require(`@/assets/plan-icons/${plan.plan_slug}.svg`)"
           ></v-img>
         </div>
       </div>

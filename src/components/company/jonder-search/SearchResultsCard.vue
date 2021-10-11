@@ -159,7 +159,13 @@ export default {
 
   computed: {
     highlighted() {
-      return this.candidate.plan[0]?.plan_slug === "highlighted";
+      if (!this.candidate.plan || !this.candidate.plan.length) {
+        return false;
+      }
+
+      return ["highlighted", "search_featured"].includes(
+        this.candidate.plan[0].plan_slug
+      );
     }
   },
 

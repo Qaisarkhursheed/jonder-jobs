@@ -11,7 +11,7 @@
     <div class="upgrade-box">
       <v-img
         class="badge"
-        :src="require('@/assets/icons/top-rated.svg')"
+        :src="require('@/assets/plan-icons/search_featured.svg')"
         :width="small ? '40' : null"
       ></v-img>
       <div

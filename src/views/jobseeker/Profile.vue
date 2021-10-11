@@ -682,11 +682,7 @@
                           ? 2
                           : 1
                     }"
-                    :src="
-                      require(`@/assets/icons/${
-                        index === 0 ? 'top-rated' : 'medal'
-                      }.svg`)
-                    "
+                    :src="require(`@/assets/plan-icons/${plan.plan_slug}.svg`)"
                   ></v-img>
 
                   <div

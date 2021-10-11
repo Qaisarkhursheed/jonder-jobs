@@ -19,7 +19,7 @@
           deactive: userPlan.length && isPlanActive(plan.id),
           active: form.active_plan === plan.id
         }"
-        v-for="(plan, index) in data"
+        v-for="plan in data"
         :key="plan.id"
       >
         <v-btn
@@ -33,11 +33,7 @@
             <v-col cols="auto">
               <v-img
                 class="upgrade-icon mr-0"
-                :src="
-                  require(`@/assets/icons/${
-                    index === 0 ? 'top-rated' : 'medal'
-                  }.svg`)
-                "
+                :src="require(`@/assets/plan-icons/${plan.plan_slug}.svg`)"
               ></v-img>
             </v-col>
 
