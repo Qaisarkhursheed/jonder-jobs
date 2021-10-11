@@ -12,26 +12,23 @@
 
 <script>
 
-import ResultsDetailed from "@/components/personality_test/ResultsDetailed";
-import ResultsChart from "@/components/personality_test/ResultsChart";
-import store from '@/store'
+import ResultsDetailed from "@/components/personality-test/ResultsDetailed";
+import ResultsChart from "@/components/personality-test/ResultsChart";
 
 export default {
 
   name: "Results",
 
+  props: {
+    results: {
+      type: [Object, Array, Boolean]
+    }
+  },
+
   components: {
     ResultsDetailed,
     ResultsChart
   },
-  data() {
-    return {
-      results: null
-    }
-  },
-  created() {
-    this.results = store.getters["personalityTest/GET_RESULTS"];
-  }
 
 };
 </script>

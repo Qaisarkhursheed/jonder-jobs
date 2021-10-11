@@ -49,6 +49,10 @@ export default {
           text: this.$t("documents"),
           scrollId: "documents"
         },
+        {
+          text: this.$t("personalityTest.title"),
+          scrollId: "personalityTest"
+        },
         // {
         //   text: this.$t("billing"),
         //   scrollId: "paymentMethod"

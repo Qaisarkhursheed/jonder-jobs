@@ -1,22 +1,14 @@
 <template>
   <div class="personality-test-jobseeker">
     <div style="width: 80%; margin: 0 auto;">
-      <template v-if="!results">
-        <Test  />
-      </template>
-      <template v-else>
-        <Results />
-      </template>
-
+      <Test />
     </div>
   </div>
 </template>
 
 <script>
 
-import Test from "@/components/personality_test/Test";
-import Results from "@/components/personality_test/Results";
-import store from "@/store";
+import Test from "@/components/personality-test/Test";
 
 export default {
   
@@ -24,13 +16,9 @@ export default {
 
   components: {
     Test,
-    Results
   },
 
   computed: {
-    results() {
-      return store.getters["personalityTest/GET_RESULTS"]
-    }
   }
 };
 

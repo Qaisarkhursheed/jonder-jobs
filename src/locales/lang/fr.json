@@ -491,6 +491,13 @@
   "writeContent": "Écrire du contenu",
   "statusOfCandidate": "Statut de candidat",
   "personalityTest": {
+    "title": "Test de personnalité",
+    "description": "Take personality test",
+    "start": "Commencer le test de personnalité",
+    "back": "Arrière",
+    "next": "Suivant",
+    "submit": "Soumettre un test",
+    "results": "Résultats",
     "question1": "Je m'inquiète à propos de choses",
     "question2": "Je me fais des amis facilement",
     "question3": "J'ai une imagination débordante",

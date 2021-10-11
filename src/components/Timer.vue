@@ -27,6 +27,7 @@ export default {
   methods: {
     tick () {
       this.elapsed = new Date() - this.time;
+      this.$emit('timer-tick', this.elapsed);
     },
     secToMin(seconds) {
       const minuteDivisor = seconds % (60 * 60)
