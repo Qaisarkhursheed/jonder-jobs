@@ -6,7 +6,8 @@ export default {
   state: {
     users: [],
     totalUsers: 0,
-    loading: false
+    loading: false,
+    paramsCache: {}
   },
 
   getters: {
@@ -34,7 +35,7 @@ export default {
   },
 
   actions: {
-    async fetchUsers({ commit }, params) {
+    async fetchUsers({ state, commit }, params) {
       try {
         commit("SET_LOADING", true);
         const resp = await axios.get("/team-managment", { params });
@@ -44,6 +45,7 @@ export default {
         }
         commit("SET_USERS", users);
         commit("SET_TOTAL_USERS", resp.data.meta.total);
+        state.paramsCache = params;
         return resp;
       } catch (error) {
         return Promise.reject(error.response);
@@ -52,20 +54,20 @@ export default {
       }
     },
 
-    async inviteUser({ dispatch }, data) {
+    async inviteUser({ dispatch, state }, data) {
       try {
         const resp = await axios.post("/team/proccess", data);
-        dispatch("fetchUsers");
+        dispatch("fetchUsers", state.paramsCache);
         return resp;
       } catch (error) {
         return Promise.reject(error.response);
       }
     },
 
-    async deleteUser({ dispatch }, id) {
+    async deleteUser({ dispatch, state }, id) {
       try {
         const resp = await axios.delete("/team-managment/" + id);
-        dispatch("fetchUsers");
+        dispatch("fetchUsers", state.paramsCache);
         return resp;
       } catch (error) {
         return Promise.reject(error.response);

@@ -17,7 +17,7 @@
   >
     <template v-slot:item.data-table-select="{ item, isSelected, select }">
       <v-simple-checkbox
-        v-if="item.type !== 'Owner'"
+        v-if="!isOwner(item)"
         :value="isSelected"
         v-ripple="false"
         color="primary"
@@ -26,7 +26,7 @@
     </template>
     <template v-slot:[`item.actions`]="{ item }">
       <TeamManagementDeleteUser
-        v-if="item.type !== 'Owner'"
+        v-if="!isOwner(item)"
         :user="item"
       ></TeamManagementDeleteUser>
     </template>
@@ -86,6 +86,9 @@ export default {
   methods: {
     fetchData() {
       this.$store.dispatch("teamManagement/fetchUsers", this.params);
+    },
+    isOwner(item) {
+      return item.type && item.type === "Owner";
     }
   }
 };
