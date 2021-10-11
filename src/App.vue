@@ -386,7 +386,8 @@ export default {
       loaded: false
     };
   },
-  created: function() {
+
+  created() {
     var Tawk_API = Tawk_API || {};
     var s1 = document.createElement("script"),
       s0 = document.getElementsByTagName("script")[0];
@@ -400,6 +401,18 @@ export default {
       types.initData(res.data.data[0]);
       this.loaded = true;
     });
+  },
+
+  mounted() {
+    const adjustTawk = setInterval(() => {
+      const tawkIframe = document.querySelector(`iframe[src="about:blank"]`);
+
+      if (tawkIframe) {
+        tawkIframe.style.bottom = "5px";
+        tawkIframe.style.right = "5px";
+        clearInterval(adjustTawk);
+      }
+    }, 500);
   }
 };
 </script>
