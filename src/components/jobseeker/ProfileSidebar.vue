@@ -2,15 +2,17 @@
   <v-card flat class="profile-sidebar">
     <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
       <!-- Avatar -->
-      <v-avatar class="profile-image" color="primary" size="80">
-        <v-img
-          v-if="user.profile_img"
-          :src="user.profile_img"
-          class="profile-image-user"
-        ></v-img>
-        <span v-else class="white--text text-h4">
-          {{ user | initials }}
-        </span>
+      <div class="profile-image">
+        <v-avatar color="primary" size="80">
+          <v-img
+            v-if="user.profile_img"
+            :src="user.profile_img"
+            class="profile-image-user"
+          ></v-img>
+          <span v-else class="white--text text-h4">
+            {{ user | initials }}
+          </span>
+        </v-avatar>
 
         <div class="profile-image-badge-icons" v-if="userPlan.length">
           <v-img
@@ -25,7 +27,7 @@
             "
           ></v-img>
         </div>
-      </v-avatar>
+      </div>
 
       <!-- Full name -->
       <span class="dash-name">{{ user | fullname }}</span>
