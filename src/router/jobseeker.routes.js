@@ -27,5 +27,14 @@ export default [
       requiresAuth: true,
       requiresUser: true
     }
-  }
+  },
+  {
+    path: "personality-test/:id",
+    name: "PersonalityTestJobseekerResult",
+    component: () => import("@/views/jobseeker/PersonalityTestResult"),
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
 ];
