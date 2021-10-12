@@ -285,11 +285,21 @@ export default {
       return Promise.reject(err.response);
     }
   },
-  fetchPlans({ commit }) {
-    const baseURI = `/plans/0/100`;
-    axios.get(baseURI).then(res => {
-      commit("SET_PLANS", res.data.plans);
-    });
+
+  async fetchPlans({ state, commit }) {
+    try {
+      const resp = await axios.get(`/plan-packages`, {
+        params: {
+          per_page: 999,
+          plan_type:
+            state.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan"
+        }
+      });
+      commit("SET_PLANS", resp.data.data);
+      return resp;
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
   },
 
   async cancelSubscription({ commit, getters }, payload) {
