@@ -100,7 +100,7 @@ export default {
   border-top: none;
   border-left: none;
   border-right: none;
-  border-radius: 0;
+  border-radius: 0 !important;
   padding: 0 !important;
   padding-bottom: 10px !important;
 

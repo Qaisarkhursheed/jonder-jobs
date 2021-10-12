@@ -115,7 +115,7 @@ export default {
 <style lang="scss" scoped>
 .company-selection-management {
   overflow: auto;
-  height: 98%;
+  // height: 98%;
 }
 .selection-mgmt-header {
   align-items: center;

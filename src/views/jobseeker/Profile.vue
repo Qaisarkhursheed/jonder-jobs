@@ -297,6 +297,7 @@
                 v-model="formData.address_to_work"
                 :types="['(cities)']"
                 :rules="[validations.min.selection(1)]"
+                hide-details="auto"
                 multiple
               />
               <v-checkbox
@@ -394,7 +395,7 @@
                 type="Experience"
                 @edit="activateEdit('experience', $event)"
               />
-              <div @click="toggleModal('experience')" class="d-flex">
+              <div @click="toggleModal('experience')" class="d-flex mt-4">
                 <v-btn
                   rounded
                   outlined
@@ -422,7 +423,7 @@
                 type="Education"
                 @edit="activateEdit('education', $event)"
               />
-              <div @click="toggleModal('education')" class="d-flex">
+              <div @click="toggleModal('education')" class="d-flex mt-4">
                 <v-btn
                   rounded
                   outlined

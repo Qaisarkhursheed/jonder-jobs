@@ -191,9 +191,12 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    padding-top: 0px;
+    padding-bottom: 20px;
     word-break: break-all;
+
+    &:last-of-type {
+      padding-bottom: 0px;
+    }
   }
 
   .profile-image {
