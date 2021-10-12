@@ -856,7 +856,7 @@ export default {
       return types;
     },
     plansData() {
-      return this.plans("jobseeker_paln");
+      return this.plans("jobseeker_plan");
     },
     getMonthlySalary() {
       const monthly_salary = this.formData.monthly_salary;

@@ -23,7 +23,7 @@
         :key="plan.id"
       >
         <v-btn
-          v-if="plan.plan_type === 'jobseeker_paln'"
+          v-if="plan.plan_type === 'jobseeker_plan'"
           @click="selectPlan(plan)"
           min-height="104"
           class="upgrade-option text-left pa-5"
@@ -122,7 +122,7 @@ export default {
     if (this.edit) {
       this.populate();
     }
-    this.data = this.$store.getters["user/plans"]("jobseeker_paln");
+    this.data = this.$store.getters["user/plans"]("jobseeker_plan");
   },
 
   methods: {

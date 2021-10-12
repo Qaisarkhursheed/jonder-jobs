@@ -31,7 +31,7 @@ export default {
       try {
         const resp = await axios.get("/plan-packages", {
           params: {
-            plan_type: "jobseeker_paln"
+            plan_type: "jobseeker_plan"
           }
         });
         commit("SET_USER_PLANS", resp.data.data);
@@ -49,7 +49,7 @@ export default {
       try {
         const resp = await axios.get("/plan-packages", {
           params: {
-            plan_type: "employer_paln"
+            plan_type: "employer_plan"
           }
         });
         commit("SET_COMPANY_PLANS", resp.data.data);
