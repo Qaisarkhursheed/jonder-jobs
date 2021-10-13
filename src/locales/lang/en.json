@@ -491,6 +491,8 @@
   "writeContent": "Write content",
   "statusOfCandidate": "Status of candidate",
   "test": "Test",
+  "personalityTestCTATitle": "Complete a Personality test in order for Employers to get a better feeling for you.",
+  "personalityTestCTASubtitle": "Take the free personality test now.",
   "personalityTest": {
     "title": "Personality test",
     "description": "Take personality test",

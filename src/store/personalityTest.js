@@ -160,7 +160,7 @@ export default {
             router.push({
               name: "PersonalityTestJobseekerResult",
               params: {
-                id: res.data.data.id
+                testid: res.data.data.id
               }
             });
             // context.commit('SET_RESULT', parsed);

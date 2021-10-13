@@ -99,7 +99,7 @@ export default [
     }
   },
   {
-    path: "jobseeker/:id/personality-test/:id",
+    path: "jobseeker/:id/personality-test/:testid",
     name: "PersonalityTestResultEmployer",
     component: () => import("@/views/jobseeker/PersonalityTestResult"),
     props: true,

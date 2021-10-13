@@ -1,5 +1,5 @@
 <template>
-  <div class="full-w">
+  <div class="full-w full-h">
     <UpgradePlanModal
       v-if="modals.UpgradePlan.active"
       :active="modals.UpgradePlan.active"
@@ -8,7 +8,7 @@
     />
 
     <!-- Upgrade box -->
-    <div class="upgrade-box">
+    <div class="upgrade-box full-h">
       <v-img
         class="badge"
         :src="require('@/assets/plan-icons/search_featured.svg')"

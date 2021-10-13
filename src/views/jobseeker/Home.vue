@@ -30,10 +30,17 @@
         </div>
 
         <!-- Upgrade box -->
-        <UpgradeAccountBox
-          class="dashboard-upgrade-account-box"
-          v-if="showUpgradeBox"
-        />
+        <v-row>
+          <v-col :cols="ctaBoxesWidth" v-if="showUpgradeBox" >
+            <UpgradeAccountBox
+              class="dashboard-upgrade-account-box"
+              v-if="showUpgradeBox"
+            />
+          </v-col>
+          <v-col :cols="ctaBoxesWidth" v-if="!user.personality_test">
+            <PersonalityTestCTABox class="dashboard-upgrade-account-box" />
+          </v-col>
+        </v-row>
 
         <!-- Image -->
         <div class="mt-5">
@@ -50,11 +57,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import UpgradeAccountBox from "@/components/user/UpgradeAccountBox";
+import PersonalityTestCTABox from "@/components/personality-test/CTABox";
 import Chat from "@/views/dashboard/Chat";
 import ProfileSidebar from "@/components/jobseeker/ProfileSidebar";
 
 export default {
-  components: { Chat, UpgradeAccountBox, ProfileSidebar },
+  components: { Chat, UpgradeAccountBox, ProfileSidebar, PersonalityTestCTABox },
 
   computed: {
     ...mapGetters("user", ["user"]),
@@ -62,6 +70,10 @@ export default {
 
     showUpgradeBox() {
       return !(this.messagesLoaded && this.conversations.length);
+    },
+
+    ctaBoxesWidth() {
+      return this.showUpgradeBox && this.user.personality_test ? '6' : '12'
     }
   },
 
@@ -71,6 +83,6 @@ export default {
 
   methods: {
     ...mapActions("chat", ["getAllConversations"])
-  }
+  },
 };
 </script>
