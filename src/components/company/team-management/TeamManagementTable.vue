@@ -10,7 +10,7 @@
     :single-select="true"
     @update:page="fetchData()"
     @update:items-per-page="fetchData()"
-    item-key="name"
+    item-key="id"
     flat
     class="team-management-table"
   >
