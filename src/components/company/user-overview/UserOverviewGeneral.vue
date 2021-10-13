@@ -158,10 +158,7 @@
           <div class="title">{{ $t("personalityTest.title") }}</div>
           <div 
             class="d-flex align-center pointer"
-            @click="$router.push({
-              name: 'PersonalityTestResultEmployer',
-              id: user.personality_test.id
-            })"
+            @click="goToPersonalityTest(user.personality_test.id)"
           >
             <v-icon size="40" color="#4ab2e5" style="margin-left: -8px;">
               mdi-head-cog
@@ -234,6 +231,15 @@ export default {
           managment_status: change
         }
       });
+    },
+    goToPersonalityTest(id) {
+      let route = this.$router.resolve({ 
+        name: "PersonalityTestResultEmployer",
+        params: {
+          testid: id
+        }
+      });
+      window.open(route.href);
     }
   }
 };

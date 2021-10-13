@@ -19,7 +19,7 @@ export default {
   name: "PersonalityTestJobseekerResult",
 
   props: {
-    id: {
+    testid: {
       type: [String, Number]
     },
     detailed: {
@@ -40,7 +40,7 @@ export default {
 
   created() {
     store
-      .dispatch("personalityTest/FETCH_RESULT", this.id)
+      .dispatch("personalityTest/FETCH_RESULT", this.testid)
       .then(res => {
         this.results = results.generateResultData(res.data.data.results);
       })

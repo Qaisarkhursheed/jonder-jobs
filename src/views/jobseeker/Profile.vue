@@ -501,14 +501,7 @@
               <div>
                 <div
                   v-if="user.personality_test && user.personality_test.id"
-                  @click="
-                    $router.push({
-                      name: 'PersonalityTestJobseekerResult',
-                      params: {
-                        id: user.personality_test.id
-                      }
-                    })
-                  "
+                  @click="goToPersonalityTestResult(user.personality_test.id)"
                 >
                   <v-chip class="pointer" color="#0253B3" label outlined>
                     {{ $t("test") }} |
@@ -982,6 +975,15 @@ export default {
     getUserPlanId(id, name) {
       const plan = this.getUserPlan(id)[0];
       return plan ? plan[name] : null;
+    },
+    goToPersonalityTestResult(id) {
+      let route = this.$router.resolve({ 
+        name: "PersonalityTestJobseekerResult",
+        params: {
+          testid: id
+        }
+      });
+      window.open(route.href);
     }
   }
 };
