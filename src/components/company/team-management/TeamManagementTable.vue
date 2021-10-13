@@ -11,7 +11,6 @@
     @update:page="fetchData()"
     @update:items-per-page="fetchData()"
     item-key="name"
-    show-select
     flat
     class="team-management-table"
   >
