@@ -1,5 +1,17 @@
 <template>
-  <div class="pb-7">
+  <div
+    v-if="$store.getters['plans/companyPlansLoading']"
+    class="d-flex full-h justify-center align-center"
+  >
+    <v-progress-circular
+      v-if="true"
+      indeterminate
+      size="150"
+      color="primary"
+    ></v-progress-circular>
+  </div>
+
+  <div v-else class="pb-7">
     <div class="page-heading mb-6">
       <div class="title">
         {{ $t("upradeYourCompany") }}

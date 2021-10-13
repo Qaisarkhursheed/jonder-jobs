@@ -5,20 +5,30 @@ export default {
 
   state: {
     userPlans: null,
-    companyPlans: null
+    userPlansLoading: false,
+    companyPlans: null,
+    companyPlansLoading: false
   },
 
   getters: {
     userPlans: state => state.userPlans,
-    companyPlans: state => state.companyPlans
+    userPlansLoading: state => state.userPlanLoading,
+    companyPlans: state => state.companyPlans,
+    companyPlansLoading: state => state.companyPlansLoading
   },
 
   mutations: {
     SET_USER_PLANS(state, value) {
       state.userPlans = value;
     },
+    SET_USER_PLANS_LOADING(state, value) {
+      state.userPlansLoading = value;
+    },
     SET_COMPANY_PLANS(state, value) {
       state.companyPlans = value;
+    },
+    SET_COMPANY_PLANS_LOADING(state, value) {
+      state.companyPlansLoading = value;
     }
   },
 
@@ -29,6 +39,7 @@ export default {
       }
 
       try {
+        commit("SET_USER_PLANS_LOADING", true);
         const resp = await axios.get("/plan-packages", {
           params: {
             plan_type: "jobseeker_plan"
@@ -38,6 +49,8 @@ export default {
         return resp;
       } catch (err) {
         return Promise.reject(err.response);
+      } finally {
+        commit("SET_USER_PLANS_LOADING", false);
       }
     },
 
@@ -47,6 +60,7 @@ export default {
       }
 
       try {
+        commit("SET_COMPANY_PLANS_LOADING", true);
         const resp = await axios.get("/plan-packages", {
           params: {
             plan_type: "employer_plan"
@@ -56,6 +70,8 @@ export default {
         return resp;
       } catch (err) {
         return Promise.reject(err.response);
+      } finally {
+        commit("SET_COMPANY_PLANS_LOADING", false);
       }
     }
   }

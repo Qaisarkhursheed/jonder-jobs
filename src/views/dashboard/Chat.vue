@@ -2,7 +2,7 @@
   <v-row v-if="chatLoading" class="full-h d-flex justify-center align-center">
     <v-progress-circular
       indeterminate
-      size="100"
+      size="150"
       color="primary"
     ></v-progress-circular>
   </v-row>

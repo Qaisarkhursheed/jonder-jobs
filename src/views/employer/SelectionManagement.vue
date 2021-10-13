@@ -1,5 +1,14 @@
 <template>
-  <div class="company-selection-management">
+  <div v-if="isLoading" class="d-flex full-h justify-center align-center">
+    <v-progress-circular
+      v-if="true"
+      indeterminate
+      size="150"
+      color="primary"
+    ></v-progress-circular>
+  </div>
+
+  <div v-else class="company-selection-management">
     <div class="selection-mgmt-header">
       <div class="search-bar-wrapper">
         <em class="icon"></em>
