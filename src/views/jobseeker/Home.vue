@@ -73,7 +73,7 @@ export default {
     },
 
     ctaBoxesWidth() {
-      return this.showUpgradeBox && this.user.personality_test ? '6' : '12'
+      return this.showUpgradeBox && !this.user.personality_test ? '6' : '12';
     }
   },
 
