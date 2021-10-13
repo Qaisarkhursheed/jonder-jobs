@@ -491,6 +491,8 @@
   "writeContent": "Écrire du contenu",
   "statusOfCandidate": "Statut de candidat",
   "test": "Test",
+  "personalityTestCTATitle": "Complétez un test de personnalité afin que les employeurs aient une meilleure idée de vous.",
+  "personalityTestCTASubtitle": "Faites le test de personnalité gratuit maintenant.",
   "personalityTest": {
     "title": "Test de personnalité",
     "description": "Take personality test",
