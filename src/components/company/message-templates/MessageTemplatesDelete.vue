@@ -30,23 +30,23 @@
         <div class="text-center mt-3">
           <v-btn
             height="48"
-            class="font-weight-medium "
+            text
             @click="
               dialog = false;
               $refs.form.reset();
             "
           >
-            {{ $t("cancelOption") }}
+            {{ $t("cancel") }}
           </v-btn>
           <v-btn
             type="submit"
             :loading="$store.getters['messageTemplates/loadingDelete']"
             color="primary"
             height="48"
-            class="ml-3 font-weight-medium "
+            class="ml-3"
             :disabled="!isValid"
           >
-            {{ $t("confirmOption") }}
+            {{ $t("confirm") }}
           </v-btn>
         </div>
       </v-form>
