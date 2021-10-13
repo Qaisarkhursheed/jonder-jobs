@@ -4,8 +4,8 @@ import i18n from "@/locales";
 import { findIndex } from "lodash";
 
 export default {
-  me({ state, commit, dispatch }) {
-    if (state.user) {
+  me({ state, commit, dispatch }, force = false) {
+    if (state.user && !force) {
       return new Promise(resolve => resolve(state.user));
     }
 

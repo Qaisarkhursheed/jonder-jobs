@@ -64,7 +64,9 @@ export default {
   methods: {
     changeLanguage(locale) {
       if (this.$store.getters["user/user"]) {
-        this.$store.dispatch("user/setLocale", locale);
+        this.$store.dispatch("user/setLocale", locale).then(() => {
+          this.$store.dispatch("user/me", true);
+        });
       }
 
       this.$i18n.locale = locale;
