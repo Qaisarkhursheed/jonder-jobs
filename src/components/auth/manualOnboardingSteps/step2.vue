@@ -33,7 +33,7 @@
         :attach="true"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
-        :rules="[validations.required, validations.max.selection(3)]"
+        :rules="[validations.min.selection(1), validations.max.selection(3)]"
         item-value="id"
         :item-text="$i18n.locale"
         v-clearable-autocomplete
@@ -47,7 +47,7 @@
         append-icon="mdi-chevron-down"
       />
 
-      <!-- Looking for role -->
+      <!-- Looking for position -->
       <label class="profile-label">
         {{ $t("detailsAboutYouRole") }}
         <span style="color: red;">*</span>
@@ -59,7 +59,7 @@
         item-value="id"
         :item-text="$i18n.locale"
         :placeholder="$t('detailsAboutYouRolePlace')"
-        :rules="[validations.required, validations.max.selection(5)]"
+        :rules="[validations.min.selection(1), validations.max.selection(5)]"
         v-clearable-autocomplete
         multiple
         small-chips

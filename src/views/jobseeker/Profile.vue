@@ -123,7 +123,7 @@
                 <span style="visibility: hidden">.</span>
               </label>
               <v-checkbox
-                class="mb-0 mt-0"
+                class="mb-0 mt-2"
                 :label="$t('showLocation')"
                 hide-details="auto"
                 v-model="formData.location_show"
@@ -190,7 +190,10 @@
                 item-value="id"
                 :item-text="$i18n.locale"
                 :items="types.JOB_BRANCHE"
-                :rules="[validations.required]"
+                :rules="[
+                  validations.min.selection(1),
+                  validations.max.selection(3)
+                ]"
                 cache
                 outlined
                 multiple
@@ -214,7 +217,10 @@
                 :items="types.JOB_POSITION"
                 item-value="id"
                 :item-text="$i18n.locale"
-                :rules="[validations.required]"
+                :rules="[
+                  validations.min.selection(1),
+                  validations.max.selection(5)
+                ]"
                 multiple
                 outlined
                 small-chips
@@ -275,7 +281,7 @@
                 :attach="true"
                 v-model="formData.looking_for_employment_type"
                 :items="types.EMPLOYEMENT_TYPE"
-                :rules="[validations.required]"
+                :rules="[validations.min.selection(1)]"
                 :item-text="$i18n.locale"
                 item-value="id"
                 outlined
@@ -296,7 +302,10 @@
               <GooglePlacesInput
                 v-model="formData.address_to_work"
                 :types="['(cities)']"
-                :rules="[validations.min.selection(1)]"
+                :rules="[
+                  validations.min.selection(1),
+                  validations.max.selection(5)
+                ]"
                 hide-details="auto"
                 multiple
               />
@@ -330,7 +339,8 @@
               <v-checkbox
                 v-model="dontKnowWhenToStart"
                 :label="$t('iDontKnow')"
-                hide-details
+                hide-details="auto"
+                class="mb-0 mt-2"
               ></v-checkbox>
             </v-col>
 
@@ -977,7 +987,7 @@ export default {
       return plan ? plan[name] : null;
     },
     goToPersonalityTestResult(id) {
-      let route = this.$router.resolve({ 
+      let route = this.$router.resolve({
         name: "PersonalityTestJobseekerResult",
         params: {
           testid: id

@@ -13,7 +13,7 @@
         :attach="true"
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
-        :rules="[validations.required]"
+        :rules="[validations.min.selection(1)]"
         :item-text="$i18n.locale"
         item-value="id"
         :placeholder="$t('lookingForEmployementPlace')"
@@ -32,7 +32,7 @@
       <GooglePlacesInput
         v-model="value.address_to_work"
         :types="['(cities)']"
-        :rules="[validations.required]"
+        :rules="[validations.min.selection(1), validations.max.selection(5)]"
         multiple
       />
 
