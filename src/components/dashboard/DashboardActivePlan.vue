@@ -62,6 +62,8 @@ export default {
     }
   }
   .info-wrapper {
+    word-wrap: break-word;
+
     .info-title {
       font-weight: 700;
     }
