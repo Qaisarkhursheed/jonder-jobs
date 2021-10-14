@@ -32,6 +32,9 @@
     <template v-slot:[`item.created_at`]="{ item }">
       {{ item.created_at | moment("MMM DD, HH:mm") }}
     </template>
+    <template v-slot:[`item.status`]="{ item }">
+      {{ $t(item.status) }}
+    </template>
   </v-data-table>
 </template>
 

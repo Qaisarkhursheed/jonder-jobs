@@ -1,4 +1,6 @@
 {
+  "Active": "Active",
+  "Pending": "Pending",
   "accept": "Accept",
   "decline": "Decline",
   "file": "File",
