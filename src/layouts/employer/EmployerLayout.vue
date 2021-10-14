@@ -63,7 +63,7 @@ export default {
   .main-wrap {
     .main-panel-wrap {
       height: 100%;
-      overflow: auto;
+      // overflow: auto;
     }
   }
 
@@ -71,6 +71,7 @@ export default {
     .main-panel-wrap {
       height: calc(100vh - 81px) !important;
       overflow: auto;
+      padding-bottom: 20px;
     }
   }
 }

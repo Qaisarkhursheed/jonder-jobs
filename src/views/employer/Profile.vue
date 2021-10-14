@@ -8,9 +8,9 @@
     />
 
     <!-- Main -->
-    <v-row class="main ma-0">
+    <v-row class="main mb-3">
       <!-- Left nav -->
-      <v-col sm="12" md="4" lg="3">
+      <v-col cols="12" md="4" lg="3">
         <v-card flat class="sidebar-nav" tag="nav">
           <div class="settings-title">
             {{ $t("profileSettings") }}
@@ -18,15 +18,27 @@
           <div class="submenu">
             <div @click="scrollToSection('personalInfo')" class="nav-item">
               {{ $t("personalInformation") }}
+              <v-icon>
+                mdi-chevron-right
+              </v-icon>
             </div>
             <div @click="scrollToSection('invoices')" class="nav-item">
               {{ $t("billingInvoices") }}
+              <v-icon>
+                mdi-chevron-right
+              </v-icon>
             </div>
             <!-- <div @click="scrollToSection('payment')" class="nav-item">
               {{ $t("billing") }}
+              <v-icon>
+                mdi-chevron-right
+              </v-icon>
             </div> -->
             <div @click="scrollToSection('changePassword')" class="nav-item">
               {{ $t("changePassword") }}
+              <v-icon>
+                mdi-chevron-right
+              </v-icon>
             </div>
           </div>
         </v-card>
@@ -364,7 +376,7 @@ export default {
 .employer-profile {
   .sidebar-nav {
     position: sticky;
-    top: 13px;
+    top: 20px;
 
     .nav-item {
       display: flex;
