@@ -1,7 +1,7 @@
 <template>
   <div class="packages">
     <v-row>
-      <v-col cols="12" md="6" lg="4" v-for="(item, i) in packages" :key="i">
+      <v-col cols="12" md="6" v-for="(item, i) in packages" :key="i">
         <CompanyPlan :plan="item" :color="packagesBranding[i]" />
       </v-col>
     </v-row>
@@ -29,7 +29,9 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("plans/fetchCompanyPlans");
+    if (this.packages == null) {
+      this.$store.dispatch("plans/fetchCompanyPlans");
+    }
   }
 };
 </script>
