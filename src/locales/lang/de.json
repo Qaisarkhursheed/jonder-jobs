@@ -470,6 +470,7 @@
   "jobseekingStatus": "Stellensuche-Status",
   "web": "Web",
   "myCompany": "Meine Firma",
+  "noActivePlan": "Keine aktiven Pläne.",
   "chooseYourPlan": "Wählen Sie Ihren Plan",
   "chooseYourPaymentMethod": "Wähle deine Zahlungsmethode",
   "paymentDetails": "Zahlungsdetails",
