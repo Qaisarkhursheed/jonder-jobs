@@ -13,7 +13,7 @@
           </template>
         </v-avatar>
       </div>
-      <div class="pl-4">
+      <div class="pl-4 mt-3">
         <div class="heading-title">{{ user | fullname(true) }}</div>
         <div class="heading-subtitle">{{ user.city }} {{ user.address }}</div>
       </div>
@@ -30,7 +30,7 @@
       </div>
 
       <v-row class="mb-8">
-        <v-col cols="4">
+        <v-col cols="col">
           <label class="section-label">
             {{ $t("employees") }}
           </label>
@@ -38,7 +38,7 @@
             {{ idToString("EMPLOYEE_NUMBER", user.company_employees) }}
           </div>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="col">
           <label class="section-label">
             {{ $t("branch") }}
           </label>
@@ -50,9 +50,22 @@
     </div>
 
     <div v-else>
+      <div class="section-mb-8">
+        <v-row class="mb-8">
+          <v-col cols="col">
+            <label class="section-label">
+              {{ $t("aboutMe") }}
+            </label>
+            <div class="section-value">
+              {{ user.about_me }}
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+
       <div class="section mb-8">
         <v-row class="mb-8">
-          <v-col cols="4">
+          <v-col cols="col">
             <label class="section-label">
               {{ $t("jobseekingStatus") }}
             </label>
@@ -60,7 +73,7 @@
               {{ user.job_search_status | jobSearchStatus }}
             </div>
           </v-col>
-          <v-col cols="5">
+          <v-col cols="col">
             <label class="section-label">
               {{ $t("position") }}
             </label>
@@ -72,22 +85,22 @@
       </div>
 
       <v-row class="mb-8">
-        <v-col cols="4">
+        <v-col cols="col">
           <label class="section-label">
             {{ $t("currentIndustry") }}
           </label>
           <div class="section-value">
-            {{ idToString("JOB_BRANCHE", user.branche) }}
+            {{ idsToArray("JOB_BRANCHE", user.branche).join(", ") }}
           </div>
         </v-col>
-        <v-col cols="5">
+        <!-- <v-col cols="col">
           <label class="section-label">
             {{ $t("city") }} and {{ $t("address") }}
           </label>
           <div class="section-value">
             {{ user.city }}
           </div>
-        </v-col>
+        </v-col> -->
       </v-row>
     </div>
 
