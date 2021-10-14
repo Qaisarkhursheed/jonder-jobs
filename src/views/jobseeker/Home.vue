@@ -4,7 +4,7 @@
       <ProfileSidebar />
     </v-col>
 
-    <v-col cols="col" v-if="messagesLoaded && conversations.length">
+    <v-col cols="col" v-show="messagesLoaded && conversations.length">
       <Chat />
     </v-col>
 
@@ -31,7 +31,7 @@
 
         <!-- Upgrade box -->
         <v-row>
-          <v-col :cols="ctaBoxesWidth" v-if="showUpgradeBox" >
+          <v-col :cols="ctaBoxesWidth" v-if="showUpgradeBox">
             <UpgradeAccountBox
               class="dashboard-upgrade-account-box"
               v-if="showUpgradeBox"
@@ -62,7 +62,12 @@ import Chat from "@/views/dashboard/Chat";
 import ProfileSidebar from "@/components/jobseeker/ProfileSidebar";
 
 export default {
-  components: { Chat, UpgradeAccountBox, ProfileSidebar, PersonalityTestCTABox },
+  components: {
+    Chat,
+    UpgradeAccountBox,
+    ProfileSidebar,
+    PersonalityTestCTABox
+  },
 
   computed: {
     ...mapGetters("user", ["user"]),
@@ -73,7 +78,7 @@ export default {
     },
 
     ctaBoxesWidth() {
-      return this.showUpgradeBox && !this.user.personality_test ? '6' : '12';
+      return this.showUpgradeBox && !this.user.personality_test ? "6" : "12";
     }
   },
 
@@ -83,6 +88,6 @@ export default {
 
   methods: {
     ...mapActions("chat", ["getAllConversations"])
-  },
+  }
 };
 </script>

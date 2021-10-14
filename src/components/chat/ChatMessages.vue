@@ -171,9 +171,19 @@
 
       <MessageTemplatesPicker @submit="msg => send(msg)" />
 
-      <v-icon :disabled="sending" size="30" @click="send(null)" class="ml-2">
-        mdi-send-circle
-      </v-icon>
+      <v-btn
+        color="primary"
+        icon
+        :loading="sending"
+        width="30"
+        class="ml-2"
+        elevation="0"
+        @click="send(null)"
+      >
+        <v-icon size="30" color="primary">
+          mdi-send-circle
+        </v-icon>
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

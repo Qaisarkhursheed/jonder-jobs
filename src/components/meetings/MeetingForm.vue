@@ -10,7 +10,7 @@
     <template v-slot:activator="{ on, attrs }">
       <div v-bind="attrs" v-on="on" class="d-inline meeting-form-button">
         <slot>
-          <v-icon size="33" class="ml-2">
+          <v-icon size="33" class="ml-2 pb-1">
             mdi-video-plus-outline
           </v-icon>
         </slot>
