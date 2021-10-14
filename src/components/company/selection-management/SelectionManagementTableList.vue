@@ -20,14 +20,14 @@
         :key="index"
         @click="updateActiveProfile(item.jobseeker.id)"
       >
-        <v-col cols="auto" class="d-flex align-center full-h" @click.stop>
+        <!-- <v-col cols="auto" class="d-flex align-center full-h" @click.stop>
           <v-checkbox
             v-model="selectionCheckers[item.id]"
             dense
             hide-details
             class="ma-0 pa-0"
           />
-        </v-col>
+        </v-col> -->
 
         <v-col cols="auto" class="d-flex align-center full-h">
           <v-avatar color="primary" size="35">
