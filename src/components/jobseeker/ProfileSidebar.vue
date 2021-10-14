@@ -192,7 +192,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
-    word-break: break-all;
+    word-break: break-word;
 
     &:last-of-type {
       padding-bottom: 0px;

@@ -198,7 +198,7 @@
                   color="#fff"
                   height="58"
                   elevation="0"
-                  class="full-w mt-md-16 font-weight-medium white"
+                  class="full-w mt-md-5 font-weight-medium white"
                   @click="searchSave"
                   :disabled="!isSaveable"
                 >
@@ -215,7 +215,7 @@
                   height="58"
                   elevation="0"
                   :class="[
-                    'advanced-search-btn full-w mt-md-16 white font-weight-medium',
+                    'advanced-search-btn full-w mt-md-5 white font-weight-medium',
                     { active: advancedSearch }
                   ]"
                   color="#fff"
@@ -230,7 +230,7 @@
                   :loading="searchLoading"
                   color="primary"
                   height="58"
-                  class="full-w mt-md-16 search-btn"
+                  class="full-w mt-md-5 search-btn"
                   @click="search"
                 >
                   <v-icon left>
@@ -249,11 +249,7 @@
         </v-row>
       </v-card-actions>
 
-      <ResponseAlert
-        class="mt-3"
-        style="max-width: 500px"
-        :response="formResponse"
-      />
+      <ResponseAlert class="mt-8" :response="formResponse" />
     </v-card>
   </div>
 </template>

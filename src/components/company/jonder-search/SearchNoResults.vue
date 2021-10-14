@@ -1,15 +1,14 @@
 <template>
-  <div class="search-no-results d-flex align-center flex-column pt-16 pb-16">
-    <img :src="require('@/assets/searchnoresults.png')" class="image">
+  <div class="search-no-results d-flex align-center flex-column">
+    <img :src="require('@/assets/searchnoresults.png')" class="image" />
     <div class="message-title pt-4">{{ $t("thereAreNoResults") }}</div>
     <div class="message-subtitle">{{ $t("changeFiltersAndTryAgain") }}</div>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'SearchNoResults',
+  name: "SearchNoResults"
 };
 </script>
 
@@ -27,6 +26,7 @@ export default {
   color: #222222;
 }
 .image {
-  width: 60%;
+  max-width: 500px;
+  // width: 60%;
 }
 </style>

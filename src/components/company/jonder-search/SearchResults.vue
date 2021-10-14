@@ -34,7 +34,7 @@
         </div>
       </v-row>
     </template>
-    <template v-else>
+    <template v-else-if="!$store.getters['company/searchInProgress']">
       <SearchNoResults />
     </template>
   </div>

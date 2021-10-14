@@ -135,7 +135,6 @@ export default {
       .post("/company/search/", obj)
       .then(res => {
         if (res.status === 200) {
-          commit("SET_SEARCH_INPROGRESS", false);
           commit("SET_SEARCH_RESULTS", res.data.data);
           commit("SET_SEARCH_META", {
             current_page: res.data.meta.current_page,
@@ -146,13 +145,12 @@ export default {
         }
       })
       .catch(err => {
-        if (
-          JSON.parse(err.request.response).message ==
-          "Upgrade your plan to use this action."
-        ) {
-          commit("SET_SEARCH_INPROGRESS", false);
+        if (err.response.data.error == "upgrade_plan") {
           commit("SET_SEARCH_STATUS", "limited");
         }
+      })
+      .finally(() => {
+        commit("SET_SEARCH_INPROGRESS", false);
       });
   },
   searchJobseekerPagination({ commit, getters }, page) {
@@ -175,8 +173,13 @@ export default {
       }
     });
   },
-  async presearchJobseekers(context, payload) {
+  async presearchJobseekers({ rootGetters }, payload) {
     try {
+      const user = rootGetters["user/user"];
+      if (!user.plan || !user.plan.id) {
+        throw new Error();
+      }
+
       const resp = await axios.post("/company/search/?presearch=1", payload);
       return resp;
     } catch (err) {

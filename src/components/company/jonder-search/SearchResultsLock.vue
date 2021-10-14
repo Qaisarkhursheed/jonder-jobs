@@ -1,6 +1,6 @@
 <template>
   <div class="search-results-lock">
-    <div class="message d-flex align-center flex-column pt-10 pb-10">
+    <div class="message d-flex align-center flex-column pb-10">
       <v-icon size="45" color="#0253B3" class="pb-6">
         mdi-lock
       </v-icon>
