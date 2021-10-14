@@ -1,5 +1,9 @@
 <template>
-  <v-row v-if="chatLoading" class="full-h d-flex justify-center align-center">
+  <v-row
+    v-if="chatLoading"
+    class="d-flex justify-center align-center"
+    style="height: calc(100vh - 100px)"
+  >
     <v-progress-circular
       indeterminate
       size="150"
