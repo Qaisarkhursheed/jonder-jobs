@@ -66,9 +66,8 @@
               </template>
             </v-tab-item>
           </v-tabs-items>
+          <ResponseAlert class="mt-5 mb-0" :response="formResponse" />
         </v-card>
-
-        <ResponseAlert class="mt-3" :response="formResponse" />
       </v-col>
     </v-row>
   </div>
@@ -118,16 +117,14 @@ export default {
     handleUpdate(input) {
       this.$store
         .dispatch("user/updateCompany", input)
-        .then(() => {
-          this.formResponse = { success: true, message: this.$t("success") };
+        .then(resp => {
+          this.formResponse = resp.data;
+          setTimeout(() => {
+            this.formResponse = {};
+          }, 5000);
         })
         .catch(err => {
           this.formResponse = err.data;
-        })
-        .finally(() => {
-          setTimeout(() => {
-            this.formResponse = {};
-          }, 3000);
         });
     }
   }

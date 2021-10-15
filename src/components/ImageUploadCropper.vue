@@ -134,7 +134,7 @@ export default {
 
 <style lang="scss">
 .cropper-dialog {
-  overflow: hidden;
+  overflow: hidden !important;
   width: unset !important;
   min-width: 350px;
 
