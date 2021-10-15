@@ -4,7 +4,7 @@
     class="messages-holder full-h d-flex flex-column pa-0"
     v-if="conversationDetails"
   >
-    <v-card-title class="flex-grow-0 flex-shrink-0 pb-5 pt-5">
+    <v-card-title class="flex-grow-0 flex-shrink-0 py-5">
       <v-list-item class="grow">
         <v-list-item-avatar color="primary">
           <v-img
@@ -64,7 +64,8 @@
         </v-row>
       </v-list-item>
     </v-card-title>
-    <div class="pl-5 pr-5 flex-grow-1 flex-shrink-1 overflow-list">
+
+    <div class="px-5 flex-grow-1 flex-shrink-1 overflow-list">
       <v-card-text
         class="messages-content pa-5 full-h flex-grow-1 flex-shrink-1 overflow-list"
         id="messageList"
@@ -91,7 +92,7 @@
             class="mx-auto mb-4"
             style="max-width: 360px"
             :meeting="JSON.parse(msg.body)"
-            :reciever="$store.getters['user/user'].role.toLowerCase()"
+            :reciever="user.role.toLowerCase()"
           />
 
           <v-card
@@ -141,50 +142,61 @@
       </v-card-text>
     </div>
 
-    <v-card-actions class="flex-grow-0 flex-shrink-0 pa-5 message-type-new">
-      <v-file-input
-        v-model="newFile"
-        class="pa-0"
-        :class="{ 'file-set': newFile }"
-        hide-input
-      ></v-file-input>
+    <v-row no-gutters class="pa-5 message-type-new">
+      <v-col cols="auto" class="d-flex align-center">
+        <v-file-input
+          v-model="newFile"
+          class="pa-0"
+          :class="{ 'file-set': newFile }"
+          hide-input
+        ></v-file-input>
+      </v-col>
 
-      <v-textarea
-        v-model="newMessage"
-        style="width: 100%; border-radius: 30px"
-        :label="$t('messageNow')"
-        outlined
-        solo
-        flat
-        hide-details
-        background-color="white"
-        rows="1"
-        auto-grow
-        @drop.prevent="handleTextareaDrop"
-        >{{ $t("message") }}
-      </v-textarea>
+      <v-col class="d-flex align-center">
+        <v-textarea
+          v-model="newMessage"
+          style="width: 100%; border-radius: 30px"
+          :label="$t('messageNow')"
+          outlined
+          solo
+          flat
+          hide-details
+          background-color="white"
+          rows="1"
+          auto-grow
+          @drop.prevent="handleTextareaDrop"
+          >{{ $t("message") }}
+        </v-textarea>
+      </v-col>
 
-      <MeetingForm
-        v-if="$store.getters['user/user'].role == 'Employer'"
-        :jobseeker="conversationDetails.user"
-      />
-
-      <MessageTemplatesPicker @submit="msg => send(msg)" />
-
-      <v-btn
-        color="primary"
-        icon
-        :loading="sending"
-        width="30"
-        class="ml-2"
-        elevation="0"
-        @click="send(null)"
+      <v-col
+        :cols="user.role != 'Jobseeker' ? 12 : 'auto'"
+        sm="auto"
+        class="d-flex align-center justify-center"
+        :class="{ 'mt-3 mt-sm-0': user.role != 'Jobseeker' }"
       >
-        <v-icon size="30" color="primary">
-          mdi-send-circle
-        </v-icon>
-      </v-btn>
-    </v-card-actions>
+        <MeetingForm
+          v-if="user.role == 'Employer'"
+          :jobseeker="conversationDetails.user"
+        />
+
+        <MessageTemplatesPicker @submit="msg => send(msg)" />
+
+        <v-btn
+          color="primary"
+          icon
+          :loading="sending"
+          width="30"
+          class="ml-2"
+          elevation="0"
+          @click="send(null)"
+        >
+          <v-icon size="30" color="primary">
+            mdi-send-circle
+          </v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 
@@ -212,6 +224,11 @@ export default {
     sending: false,
     chatFull: false
   }),
+  computed: {
+    user() {
+      return this.$store.getters["user/user"];
+    }
+  },
   mounted() {
     this.scrollToBottom();
     console.log("this.conversationDetails", this.conversationDetails);

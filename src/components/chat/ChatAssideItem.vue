@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     :key="`id-${conversation.id}`"
-    class="pt-3 pb-3 pl-7 pr-7"
+    class="py-3 px-3 px-sm-7"
     :class="{
       'v-list-item--active':
         conversation.id == $store.getters['chat/conversationDetails'].id

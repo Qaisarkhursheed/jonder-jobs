@@ -6,7 +6,7 @@
     flat
   >
     <div @click="proceedClick" class="flex-grow-1 d-flex flex-column">
-      <v-card-text class="d-flex align-center pa-6 pb-5">
+      <v-card-text class="d-flex align-center pa-5">
         <v-avatar color="primary" size="64">
           <v-img v-if="candidate.profile_img" :src="candidate.profile_img" />
           <span v-else class="white--text display-1">
@@ -28,7 +28,7 @@
         </div>
       </v-card-text>
 
-      <v-card-text class="candidate-details flex-grow-1">
+      <v-card-text class="candidate-details flex-grow-1 pa-5">
         <v-row class="no-gutters">
           <v-col cols="5">
             <v-icon class="pr-1" color="#0253B3">
@@ -106,7 +106,7 @@
       </v-card-text>
     </div>
 
-    <v-card-actions class="pa-6 pt-2 ma-0">
+    <v-card-actions class="pa-5 pt-2 ma-0">
       <v-row>
         <v-col cols="auto">
           <div class="star-btn" @click="handleStarIconClick">

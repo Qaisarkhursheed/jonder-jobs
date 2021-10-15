@@ -131,30 +131,40 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.public-profile-sidebar {
-  position: sticky;
-  top: 0px;
+<style lang="scss">
+.public-profile {
+  .public-profile-sidebar {
+    position: sticky;
+    top: 0px;
 
-  .v-tab {
-    min-width: 300px;
-    font-size: 18px;
-    height: unset;
-    border-bottom: 0.5px solid #cacaca;
-    text-transform: unset;
-    letter-spacing: unset;
-    justify-content: space-between;
-
-    // &.v-tab--active {
-    //   border-color: #0253b3;
-    // }
-
-    &:last-of-type {
-      border: none;
+    .v-slide-group__wrapper {
+      border-radius: inherit;
     }
 
-    &:not(&.v-tab--active) {
-      color: black;
+    .v-tabs-slider-wrapper {
+      display: none;
+    }
+
+    .v-tab {
+      min-width: 300px;
+      font-size: 18px;
+      height: unset;
+      border-bottom: 0.5px solid #cacaca;
+      text-transform: unset;
+      letter-spacing: unset;
+      justify-content: space-between;
+
+      &:last-of-type {
+        border: none;
+      }
+
+      &:not(&.v-tab--active) {
+        color: black;
+      }
+
+      &:hover {
+        background-color: #e3f2fb !important;
+      }
     }
   }
 }

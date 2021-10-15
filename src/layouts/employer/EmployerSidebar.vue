@@ -177,6 +177,8 @@ export default {
 
     .mini & {
       padding: 14px 10px;
+      margin: 0 auto;
+      margin-bottom: 10px;
 
       span {
         display: none;
