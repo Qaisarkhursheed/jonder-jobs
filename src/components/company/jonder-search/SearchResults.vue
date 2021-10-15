@@ -1,5 +1,5 @@
 <template>
-  <div class="search-results">
+  <div id="search-results" class="search-results">
     <v-dialog
       v-model="blockModalActive"
       style="z-index: 2222"
@@ -70,7 +70,11 @@ export default {
   methods: {
     pageChange(ind) {
       this.page = ind;
-      store.dispatch("company/searchJobseekerPagination", ind);
+      store.dispatch("company/searchJobseekerPagination", ind).then(() => {
+        document
+          .getElementById("search-results")
+          .scrollIntoView({ behavior: "smooth" });
+      });
     },
     toggleModal() {
       this.blockModalActive = !this.blockModalActive;
