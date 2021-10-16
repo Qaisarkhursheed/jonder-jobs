@@ -35,6 +35,7 @@
         "
         height="48"
         block
+        :disabled="isButtonDisabled"
         :loading="isLoading"
         @click="
           !userPlan.length || userPlan[0].id !== plan.id ? getTokenId() : null
@@ -100,10 +101,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userPlan: "user/userPlan"
+      userPlan: "user/userPlan",
+      user: "user/user"
     }),
     features() {
       return JSON.parse(this.plan.benefits);
+    },
+    isButtonDisabled() {
+      return this.user.plan?.plan_slug == "premium";
     }
   }
 };
