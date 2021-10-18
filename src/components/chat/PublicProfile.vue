@@ -19,13 +19,7 @@
       </v-col>
 
       <v-col cols="auto" class="d-flex my-auto">
-        <v-icon
-          color="black"
-          @click="
-            $store.commit('chat/CLEAR_SINGLE_CONVERSATION');
-            $emit('chat-full', false);
-          "
-        >
+        <v-icon color="black" @click="$emit('close')">
           mdi-close
         </v-icon>
       </v-col>

@@ -142,7 +142,7 @@
       </v-card-text>
     </div>
 
-    <v-row no-gutters class="pa-5 message-type-new">
+    <v-row no-gutters class="pa-5 message-type-new flex-grow-0">
       <v-col cols="auto" class="d-flex align-center">
         <v-file-input
           v-model="newFile"
@@ -231,7 +231,7 @@ export default {
   },
   mounted() {
     this.scrollToBottom();
-    console.log("this.conversationDetails", this.conversationDetails);
+    // console.log("this.conversationDetails", this.conversationDetails);
   },
   methods: {
     ...mapActions("chat", ["sendMessage", "getSingleConversation"]),

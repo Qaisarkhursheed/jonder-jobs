@@ -32,9 +32,11 @@
     <v-col
       cols="col"
       class="full-h"
-      v-if="selectedConversation && conversationDetails"
+      v-if="
+        selectedConversation && conversationDetails && conversationDetails.user
+      "
     >
-      <chat-messages
+      <ChatMessages
         v-if="!showProfile"
         @chat-full="chatFull = $event"
         @show-profile="showProfile = true"
@@ -45,6 +47,11 @@
       <PublicProfile
         v-else
         @back="showProfile = false"
+        @close="
+          showProfile = false;
+          chatFull = false;
+          $store.commit('chat/CLEAR_SINGLE_CONVERSATION');
+        "
         style="overflow-y: auto"
       />
     </v-col>
