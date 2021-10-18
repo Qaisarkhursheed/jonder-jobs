@@ -163,9 +163,13 @@ export default {
         return false;
       }
 
-      return ["highlighted", "search_featured"].includes(
-        this.candidate.plan[0].plan_slug
-      );
+      for (const plan of this.candidate.plan) {
+        if (plan.plan_slug == "highlighted") {
+          return true;
+        }
+      }
+
+      return false;
     }
   },
 

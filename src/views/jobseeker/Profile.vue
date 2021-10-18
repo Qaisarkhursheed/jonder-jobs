@@ -669,7 +669,7 @@
                 :class="{ deactive: userPlan.length && isPlanActive(plan.id) }"
                 @click="
                   !userPlan.length || !isPlanActive(plan.id)
-                    ? toggleModal('UpgradePlan')
+                    ? activateEdit('UpgradePlan', { active_plan: plan.id })
                     : null
                 "
               >

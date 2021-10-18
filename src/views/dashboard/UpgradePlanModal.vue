@@ -176,6 +176,7 @@ export default {
     },
     populate() {
       this.form.active_plan = this.edit.active_plan;
+      this.planId = this.edit.active_plan;
     }
   },
   computed: {
@@ -216,6 +217,8 @@ export default {
   }
 
   .upgrade-title {
+    font-size: 16px;
+    font-weight: 700;
     white-space: normal;
   }
 
