@@ -5,8 +5,8 @@
         <router-link to="/" class="logo">
           <v-img
             :src="require('@/assets/jonder-logo.svg')"
-            max-width="128px"
-            max-height="42px"
+            width="128"
+            height="42"
           />
         </router-link>
       </v-col>
