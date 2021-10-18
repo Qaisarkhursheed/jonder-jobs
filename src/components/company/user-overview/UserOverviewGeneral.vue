@@ -117,7 +117,7 @@
         <div class="section mb-7 branche-section">
           <div class="title">{{ $t("currentIndustry") }}</div>
           <div class="content" v-if="user.branche">
-            {{ idToString("JOB_BRANCHE", user.branche) }}
+            {{ idsToArray("JOB_BRANCHE", user.branche).join(", ") }}
           </div>
         </div>
 
@@ -156,7 +156,7 @@
 
         <div class="section personality-test" v-if="user.personality_test">
           <div class="title">{{ $t("personalityTest.title") }}</div>
-          <div 
+          <div
             class="d-flex align-center pointer"
             @click="goToPersonalityTest(user.personality_test.id)"
           >
@@ -233,7 +233,7 @@ export default {
       });
     },
     goToPersonalityTest(id) {
-      let route = this.$router.resolve({ 
+      let route = this.$router.resolve({
         name: "PersonalityTestResultEmployer",
         params: {
           testid: id
