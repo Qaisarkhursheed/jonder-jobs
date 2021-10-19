@@ -74,7 +74,8 @@ export default {
     ...mapGetters("chat", ["conversations", "messagesLoaded"]),
 
     showUpgradeBox() {
-      return !(this.messagesLoaded && this.conversations.length);
+      return this.user.plan.length ? false : !(this.messagesLoaded && this.conversations.length);
+      // return !(this.messagesLoaded && this.conversations.length && this.user.plan);
     },
 
     ctaBoxesWidth() {

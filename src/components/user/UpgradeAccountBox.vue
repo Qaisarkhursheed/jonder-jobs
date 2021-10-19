@@ -93,7 +93,8 @@ export default {
   .upgrade-box {
     display: flex;
     justify-content: space-between;
-    max-width: 400px;
+    // max-width: 400px;
+    max-width: 600px;
   }
   .title-description-wrapper {
     display: flex;
