@@ -28,8 +28,6 @@
             :length="pagination"
             :total-visible="7"
             @input="pageChange"
-            @next="pageChange"
-            @previous="pageChange"
           ></v-pagination>
         </div>
       </v-row>
