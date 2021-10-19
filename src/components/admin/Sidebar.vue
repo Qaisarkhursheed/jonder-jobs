@@ -44,10 +44,10 @@
           </template>
           <v-list class="nav">
             <v-list-item>
-              {{ $t("general.profile") }}
+              {{ $t("profile") }}
             </v-list-item>
             <v-list-item @click="$router.push({ name: 'Logout' })">
-              {{ $t("general.logout") }}
+              {{ $t("logout") }}
             </v-list-item>
           </v-list>
         </v-menu>

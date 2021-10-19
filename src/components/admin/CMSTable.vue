@@ -39,8 +39,8 @@
                     cols="2"
                   >
                     <v-text-field
-                      v-model="editedItem.id"
-                      solo
+                      height="30px"
+                      v-model="editedItem.id" 
                       disabled
                       label="ID"
                     ></v-text-field>
@@ -49,27 +49,27 @@
                     cols="12"
                   >
                     <v-text-field
-                      v-model="editedItem.en"
-                      solo
+                      v-model="editedItem.en" 
                       label="En"
+                      height="30px"
                     ></v-text-field>
                   </v-col>
                   <v-col
                     cols="12"
                   >
                     <v-text-field
-                      v-model="editedItem.de"
-                      solo
+                      v-model="editedItem.de" 
                       label="De"
+                      height="30px"
                     ></v-text-field>
                   </v-col>
                   <v-col
                     cols="12"
                   >
                     <v-text-field
-                      v-model="editedItem.fr"
-                      solo
+                      v-model="editedItem.fr" 
                       label="Fr"
+                      height="30px"
                     ></v-text-field>
                   </v-col>
                 </v-row>

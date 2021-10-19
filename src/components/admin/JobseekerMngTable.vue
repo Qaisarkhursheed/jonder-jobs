@@ -12,11 +12,16 @@
       show-select
       :single-select="true"
     >
-    <template #item.name="{ item }">
+      <template #item.name="{ item }">
         <v-avatar color="primary" size="30" class="mr-2">
           <img v-if="item.profile_img" :src="item.profile_img" />
         </v-avatar>
         {{ item.first_name }} {{ item.last_name }}
+      </template>
+       <template #item.current_position="{ item }">
+        <span>
+          {{ idToString("JOB_POSITION", item.current_position) }}
+        </span>
       </template>
     </v-data-table>
   </div>

@@ -35,18 +35,12 @@
               :attach="true"
               v-model="company.branche"
               :items="types.JOB_BRANCHE"
+              item-value="id"
+              :item-text="$i18n.locale"
               cache-items
               outlined
               readonly
             >
-              <template v-slot:selection="{ item }"> {{ $t(item) }} </template>
-              <template v-slot:item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ $t(item) }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </template>
             </v-autocomplete>
           </div>
           <div class="section">

@@ -29,6 +29,11 @@
             {{ item.plan.name }}
           </v-chip>
       </template>
+      <template #item.branche="{ item }">
+        <span>
+          {{ idToString("JOB_BRANCHE", item.branche) }}
+        </span>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -107,7 +112,6 @@ export default {
       });
     }
   },
-
 };
 </script>
 

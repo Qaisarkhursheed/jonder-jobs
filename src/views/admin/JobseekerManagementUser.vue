@@ -83,8 +83,11 @@
             <label class="section-label">
               {{ $t("currentPosition") }}
             </label>
-            <v-text-field
+            <v-autocomplete
               v-model="user.current_position"
+              :items="types.JOB_POSITION"
+              item-value="id"
+              :item-text="$i18n.locale"
               type="text"
               outlined
               readonly
@@ -97,6 +100,8 @@
             <v-autocomplete
               :attach="true"
               v-model="user.branche"
+              item-value="id"
+              :item-text="$i18n.locale"
               :items="types.JOB_BRANCHE"
               outlined
               flat
@@ -116,7 +121,9 @@
             <v-autocomplete
               :attach="true"
               v-model="user.looking_for_position"
-              :items="$store.getters['professions/items']"
+              :items="types.JOB_POSITION"
+              item-value="id"
+              :item-text="$i18n.locale"
               :placeholder="$t('detailsAboutYouRolePlace')"
               multiple
               outlined
@@ -134,6 +141,8 @@
               :attach="true"
               v-model="user.looking_for_employment_type"
               :items="types.EMPLOYEMENT_TYPE"
+              :item-text="$i18n.locale"
+              item-value="id"
               :placeholder="$t('lookingForEmployementPlace')"
               outlined
               multiple
