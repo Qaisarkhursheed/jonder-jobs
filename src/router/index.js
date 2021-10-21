@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-import Landing from "@/views/Landing.vue";
+// import Landing from "@/views/Landing.vue";
 import authRoutes from "./auth.routes";
 import jobseekerRoutes from "./jobseeker.routes";
 import employerRoutes from "./employer.routes";
@@ -30,14 +30,6 @@ const routes = [
     children: employerRoutes
   },
 
-  {
-    path: "/",
-    name: "Home",
-    component: Landing,
-    meta: {
-      guest: true
-    }
-  },
   {
     path: "/faq",
     name: "FAQ",
@@ -125,7 +117,7 @@ const routes = [
   {
     // will match everything
     path: "*",
-    redirect: { name: "Home" }
+    redirect: { name: "Login" }
   }
 ];
 
@@ -179,7 +171,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.name === "Logout") {
     store.dispatch("auth/logout").finally(() => {
       store.commit("chat/CLEAR_SINGLE_CONVERSATION");
-      router.replace({ name: "Home" });
+      router.replace({ name: "Login" });
     });
   }
 
@@ -207,7 +199,7 @@ router.beforeEach(async (to, from, next) => {
       user.role !== "Employee") ||
     (to.meta.requiresUser && user.role !== "Jobseeker")
   ) {
-    return next({ name: "Home" });
+    return next({ name: "Login" });
   }
 
   if (
