@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-// import Landing from "@/views/Landing.vue";
+// eslint-disable-next-line no-unused-vars
+import Landing from "@/views/Landing.vue";
 import authRoutes from "./auth.routes";
 import jobseekerRoutes from "./jobseeker.routes";
 import employerRoutes from "./employer.routes";
