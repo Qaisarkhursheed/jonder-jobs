@@ -1,10 +1,16 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="items"
-    sort-by="calories"
+    :items="$store.getters['admin/cmsLists'][type].items"
+    :server-items-length="$store.getters['admin/cmsLists'][type].meta.total"
+    :items-per-page.sync="params.per_page"
+    :page.sync="params.page"
+    @update:page="fetchListType()"
+    @update:items-per-page="fetchListType()"
+    :loading="!$store.getters['admin/cmsLists'][type].items"
     class="elevation-1"
   >
+
     <template v-slot:top>
       <v-toolbar
         flat
@@ -147,13 +153,15 @@ export default {
       type: String,
       default: ""
     },
-    list: {
-      type: [Array, Object],
-    }
   },
 
   data() {
     return {
+      params: {
+        page: 1,
+        per_page: 10,
+        type: ""
+      },
       dialog: false,
       dialogDelete: false,
       headers: [
@@ -169,8 +177,8 @@ export default {
         { text: "Fr", value: 'fr' },
         { text: 'Actions', value: 'actions', width: "15%" ,sortable: false },
       ],
+      editing: false,
       items: [],
-      editedIndex: -1,
       editedItem: {
         id: '',
         en: '',
@@ -210,58 +218,69 @@ export default {
   },
 
   created () {
-    this.initialize()
+    this.initialize();
+    this.$store.dispatch('admin/cmsFetchListType', this.params);
   },
 
   methods: {
     initialize () {
-      this.items = this.list;
+      this.items = this.$store.getters['admin/cmsLists'][this.type].items;
+      this.params.type = this.type;
     },
 
     editItem (item) {
-      this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialog = true
+      this.editing = true;
+      this.dialog = true;
     },
 
     deleteItem (item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
+      this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm () {
-      store.dispatch("admin/cmsDeleteListItem", this.editedItem);
+      store.dispatch("admin/cmsDeleteListItem", {
+        item: this.editedItem,
+        params: this.params 
+      });
       this.closeDelete();
     },
 
     close () {
-      this.dialog = false
+      this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      })
+        this.editing = false;
+      });
     },
 
     closeDelete () {
-      this.dialogDelete = false
+      this.dialogDelete = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      })
+      });
     },
 
     save () {
-      if (this.editedIndex > -1) {
-        store.dispatch("admin/cmsUpdateListItem", this.editedItem);
+      if (this.editing) {
+        store.dispatch("admin/cmsUpdateListItem", {
+          item: this.editedItem,
+          params: this.params 
+        });
 
       } else {
-        store.dispatch("admin/cmsAddListItem",
-          { ...this.editedItem, type: this.type }
-        );
+        store.dispatch("admin/cmsAddListItem", {
+          item: { ...this.editedItem, type: this.type },
+          params: this.params 
+        });
       }
       this.close();
     },
+
+    fetchListType() {
+      this.$store.dispatch('admin/cmsFetchListType', this.params);
+    }
   },
 
 };

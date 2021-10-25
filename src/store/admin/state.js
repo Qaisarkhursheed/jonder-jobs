@@ -1,9 +1,21 @@
 export default {
   cms: {
-    employement_type: [],
-    job_branches: [],
-    job_positions: [],
-    employee_number: []
+    employement_type: {
+      meta: {},
+      items: []
+    },
+    job_branches: {
+      meta: {},
+      items: []
+    },
+    job_positions: {
+      meta: {},
+      items: []
+    },
+    employee_number: {
+      meta: {},
+      items: []
+    }
   },
   jobseeker_management: {
     users: [],

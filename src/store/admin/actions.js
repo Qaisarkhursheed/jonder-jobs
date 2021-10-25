@@ -12,13 +12,16 @@ export default {
       });
   },
 
-   cmsFetchListType({ commit }, type) {
+   cmsFetchListType({ commit }, params) {
     return axios
-      .get(`/admin/lists?type=${type}`)
+      .get(`/admin/lists`, { params })
       .then(res => {
         commit("SET_CMS_LIST_TYPE", {
           type: res.data.data[0].type,
-          data: res.data.data
+          data: {
+            items: res.data.data,
+            meta: res.data.meta
+          }
         });
       })
       .catch(err => {
@@ -28,9 +31,9 @@ export default {
 
   cmsAddListItem({ dispatch }, payload) {
     return axios
-      .post("/admin/lists", payload)
+      .post("/admin/lists", payload.item)
       .then(() => {
-        dispatch("cmsFetchListType", payload.type);
+        dispatch("cmsFetchListType", payload.params);
       })
       .catch(err => {
         console.log(err);
@@ -39,9 +42,9 @@ export default {
 
   cmsUpdateListItem({ dispatch }, payload) {
     return axios
-      .patch(`/admin/lists/${payload.id}`, payload)
+      .patch(`/admin/lists/${payload.item.id}`, payload.item)
       .then(() => {
-        dispatch("cmsFetchListType", payload.type);
+        dispatch("cmsFetchListType", payload.params);
       })
       .catch(err => {
         console.log(err);
@@ -50,9 +53,9 @@ export default {
 
   cmsDeleteListItem({ dispatch }, payload) {
     return axios
-      .delete(`/admin/lists/${payload.id}`)
+      .delete(`/admin/lists/${payload.item.id}`)
       .then(() => {
-        dispatch("cmsFetchListType", payload.type);
+        dispatch("cmsFetchListType", payload.params);
       })
       .catch(err => {
         console.log(err);

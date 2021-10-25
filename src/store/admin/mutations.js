@@ -2,9 +2,9 @@ export default {
   SET_CMS_LISTS(state, value) {
     state.cms = {...state.cms, ...value};
   },
-
   SET_CMS_LIST_TYPE(state, value) {
-    state.cms[value.type] = value.data;
+    state.cms[value.type].meta = value.data.meta;
+    state.cms[value.type].items = value.data.items;
   },
   SET_COMPANIES(state, value) {
     state.company_management.users = value;

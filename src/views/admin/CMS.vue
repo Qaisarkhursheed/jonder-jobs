@@ -6,7 +6,6 @@
         <v-col cols="6" v-for="(list, type) in $store.getters['admin/cmsLists']" :key="type" >
           <CMSTable 
             :type="type"
-            :list="list || []"
           />
         </v-col>
       </div>
@@ -18,7 +17,6 @@
 
 import PageHeader from "@/components/admin/PageHeader";
 import CMSTable from "@/components/admin/CMSTable";
-import store from "@/store";
 
 export default {
 
@@ -27,16 +25,6 @@ export default {
   components: {
     PageHeader,
     CMSTable
-  },
-  
-  created() {
-    },
-  beforeRouteEnter(to, from, next) {
-    store
-      .dispatch("admin/cmsFetchLists")
-      .then(() => {
-          next();
-      });
   },
 };
 </script>
