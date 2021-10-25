@@ -8,7 +8,6 @@
 html {
   overflow: hidden !important;
 }
-
 #app {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
