@@ -122,7 +122,12 @@
                 />
 
                 <!-- Document -->
-                <a v-else :href="getFileData(msg).url" target="_blank">
+                <a
+                  v-else
+                  :href="getFileData(msg).url"
+                  target="_blank"
+                  class="message-text"
+                >
                   {{ getFileData(msg).name }}
                 </a>
               </div>
