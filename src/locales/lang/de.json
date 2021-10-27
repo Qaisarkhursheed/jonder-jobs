@@ -646,7 +646,8 @@
     "url": "Muss eine gültige URL sein.",
     "max": {
       "string": "Maximal {n} Zeichen.",
-      "selection": "Maximale {n} Auswahl."
+      "selection": "Maximale {n} Auswahl.",
+      "words": "Maximal {n} Wörter."
     },
     "min": {
       "string": "Mindestens {n} Zeichen.",

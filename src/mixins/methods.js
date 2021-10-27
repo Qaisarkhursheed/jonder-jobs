@@ -45,6 +45,12 @@ export default {
       } catch (err) {
         return require(`@/assets/file-icons/_blank.png`);
       }
+    },
+
+    countWords(str) {
+      return str.split(" ").filter(function(n) {
+        return n != "";
+      }).length;
     }
   }
 };

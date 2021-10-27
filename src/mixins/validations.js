@@ -9,6 +9,12 @@ const isValidPhoneNumber = number => {
   }
 };
 
+function countWords(str) {
+  return str.split(" ").filter(function(n) {
+    return n != "";
+  }).length;
+}
+
 export default {
   computed: {
     validations() {
@@ -62,7 +68,9 @@ export default {
           string: n => v =>
             !v || v.length <= n || i18n.t("validations.max.string", { n }),
           selection: n => v =>
-            !v || v.length <= n || i18n.t("validations.max.selection", { n })
+            !v || v.length <= n || i18n.t("validations.max.selection", { n }),
+          words: n => v =>
+            !v || countWords(v) <= n || i18n.t("validations.max.words", { n })
         },
 
         min: {
