@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <v-row class="mb-8">
+      <v-row class="mb-5">
         <v-col cols="col">
           <label class="section-label">
             {{ $t("employees") }}
@@ -172,6 +172,22 @@
             </div>
           </div>
         </div>
+
+        <div class="contact-section d-flex justify-start pb-3">
+          <template v-for="social in socialLinks">
+            <v-btn
+              v-if="social.value && social.value != 'null'"
+              :key="social.name"
+              icon
+              class="icon-wrap mr-4"
+              link
+              target="_blank"
+              :href="'//' + social.value"
+            >
+              <v-icon color="#fff"> mdi-{{ social.name }} </v-icon>
+            </v-btn>
+          </template>
+        </div>
       </div>
     </div>
 
@@ -275,6 +291,16 @@ export default {
     googleMapsLink() {
       const address = encodeURIComponent(this.address);
       return `https://www.google.com/maps/search/${address}`;
+    },
+
+    socialLinks() {
+      return [
+        { name: "facebook", value: this.user.facebook },
+        { name: "instagram", value: this.user.instagram },
+        { name: "linkedin", value: this.user.linkedin },
+        { name: "twitter", value: this.user.twitter },
+        { name: "youtube", value: this.user.youtube }
+      ];
     }
   }
 };

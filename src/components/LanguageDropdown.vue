@@ -16,7 +16,7 @@
           class="rounded-circle mr-3"
           :src="require('@/assets/flags/' + item.value + '.svg')"
         />
-        {{ $t(item.text) }}
+        {{ item.text }}
       </template>
       <template v-slot:item="{ item }">
         <img
@@ -24,7 +24,7 @@
           class="rounded-circle mr-3"
           :src="require('@/assets/flags/' + item.value + '.svg')"
         />
-        {{ $t(item.text) }}
+        {{ item.text }}
       </template>
     </v-select>
   </div>
@@ -36,15 +36,15 @@ export default {
     return {
       items: [
         {
-          text: "english",
+          text: "English",
           value: "en"
         },
         {
-          text: "german",
+          text: "Deutsch",
           value: "de"
         },
         {
-          text: "french",
+          text: "Français",
           value: "fr"
         }
       ]

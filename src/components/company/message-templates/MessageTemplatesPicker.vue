@@ -91,7 +91,7 @@
                 color="primary"
                 height="48"
               >
-                {{ $t("send") }}
+                {{ $t("confirm") }}
               </v-btn>
             </div>
           </v-form>

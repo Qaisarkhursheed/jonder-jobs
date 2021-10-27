@@ -108,7 +108,7 @@ export default {
       return JSON.parse(this.plan.benefits);
     },
     isButtonDisabled() {
-      return this.user.plan?.plan_slug == "premium";
+      return this.user.plan?.plan_slug == "premium" && this.user.plan.renewal;
     }
   }
 };

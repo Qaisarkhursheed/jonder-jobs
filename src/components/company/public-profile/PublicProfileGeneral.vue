@@ -26,10 +26,10 @@
         </label>
         <v-textarea
           v-model="formData.about_company"
-          :rules="[validations.required, validations.max.string(250)]"
+          :rules="[validations.required, validations.max.words(250)]"
           outlined
           counter="250"
-          maxlength="250"
+          :counter-value="s => countWords(s)"
         />
       </div>
     </v-form>

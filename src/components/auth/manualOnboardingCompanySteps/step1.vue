@@ -25,8 +25,9 @@
         outlined
         background-color="white"
         counter="250"
+        :counter-value="s => countWords(s)"
         maxlength="250"
-        :rules="[validations.required, validations.max.string(250)]"
+        :rules="[validations.required, validations.max.words(250)]"
         v-model="value.about_company"
       ></v-textarea>
 
