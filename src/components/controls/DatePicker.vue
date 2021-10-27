@@ -1,6 +1,6 @@
 <template>
   <v-menu
-    attach
+    :attach="attach"
     v-model="menu"
     :close-on-content-click="false"
     :nudge-right="40"
@@ -39,6 +39,11 @@ export default {
   props: {
     value: {
       type: String
+    },
+
+    attach: {
+      type: Boolean,
+      default: true
     },
 
     // TextField

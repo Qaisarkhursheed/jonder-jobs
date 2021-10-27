@@ -9,7 +9,7 @@
     overlay-color="#0253B3"
     overlay-opacity="0.3"
   >
-    <v-card flat class="rounded-lg wrap onboarding-dialog">
+    <v-card flat class="wrap onboarding-dialog">
       <p class="text-left font-weight-bold mb-5 font-size-16 header">
         {{ $t("addExperience") }}
       </p>
@@ -45,6 +45,7 @@
                 <label>{{ $t("startDate") }}</label>
                 <DatePicker
                   v-model="form.start_time"
+                  :attach="false"
                   :rules="[validations.required]"
                   :hide-details="false"
                   type="month"
@@ -55,6 +56,7 @@
                 <label>{{ $t("endDate") }}</label>
                 <DatePicker
                   v-model="form.end_time"
+                  :attach="false"
                   :rules="form.working_here ? [] : [validations.required]"
                   :disabled="!!form.working_here"
                   :hide-details="false"
@@ -68,18 +70,13 @@
             <v-row>
               <v-col>
                 <label>{{ $t("position") }}</label>
-                <v-autocomplete
-                  :attach="true"
+                <v-text-field
                   v-model="form.position"
-                  :items="types.JOB_POSITION"
-                  :item-text="$i18n.locale"
-                  item-value="id"
                   :rules="[validations.required]"
+                  :placeholder="$t('enter')"
                   outlined
-                  flat
-                  :placeholder="$t('choose')"
-                  append-icon="mdi-chevron-down"
-                ></v-autocomplete>
+                  solo
+                />
               </v-col>
             </v-row>
 
