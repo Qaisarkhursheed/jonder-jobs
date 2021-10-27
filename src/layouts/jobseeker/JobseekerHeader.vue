@@ -56,8 +56,13 @@
       style="border-top: 1px solid #e5e5e5"
     >
       <v-col cols="auto" class="pb-1">
-        <v-btn color="primary" height="48" @click="$router.push('/jobseeker')">
+        <v-btn color="primary" height="48" @click="routeTo">
+        <template v-if="this.$route.meta.backButtonAction">
+          {{ $t("back") }}
+        </template>
+        <template v-else>
           {{ $t("backToHome") }}
+        </template>
         </v-btn>
       </v-col>
     </v-row>
@@ -66,6 +71,16 @@
 
 <script>
 export default {
+
+  methods: {
+    routeTo() {
+      if(this.$route.meta.backButtonAction) {
+        this.$router.push({ name: this.$route.meta.backButtonAction });
+      } else {
+        this.$router.push('/jobseeker');
+      }
+    }
+  },
   computed: {
     user() {
       return this.$store.getters["user/user"];
