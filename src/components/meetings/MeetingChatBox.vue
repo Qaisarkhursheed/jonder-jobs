@@ -11,7 +11,7 @@
       :style="{ opacity: meetingLocal.status == 'declined' ? 0.5 : 1 }"
     >
       <!-- Date -->
-      {{ meetingLocal.date_start | moment("dddd, MMMM DD") }}
+      {{ meetingLocal.date_start | moment("dddd, MM.DD.YYYY") }}
 
       <v-icon color="primary" size="15" style="vertical-align: -1px">
         {{ "mdi-circle-medium" }}
