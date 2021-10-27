@@ -36,7 +36,7 @@
 
     <div class="text-right">
       <v-btn color="primary" :disabled="!formValid" height="55" @click="save">
-        {{ $t("saveChanges") }}
+        {{ $t("save") }}
       </v-btn>
     </div>
   </div>

@@ -88,7 +88,7 @@
         <v-col cols="6" class="experience">
           <div class="label">{{ $t("experiences") }}</div>
           <div class="value">
-            {{ candidate.working_experience }} {{ $t("years") }}
+            {{ candidate.working_experience }} {{ candidate.working_experience > 10 ? $t("years") : $t("yearsSingular") }}
           </div>
         </v-col>
         <v-col cols="6" class="wage">

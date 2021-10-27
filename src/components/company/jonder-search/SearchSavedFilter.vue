@@ -153,11 +153,11 @@ export default {
       actions: [
         {
           type: "delete",
-          label: "Delete"
+          label: this.$t("delete"),
         },
         {
           type: "use",
-          label: "Use filter"
+          label: this.$t("useFilter")
         }
       ]
     };

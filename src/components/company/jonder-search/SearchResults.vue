@@ -14,7 +14,7 @@
 
     <template v-if="results.length">
       <div class="heading pb-4">
-        {{ searchMeta.total }} {{ $t("searchResults") }}
+        {{ searchMeta.total }} {{ searchMeta.total > 10 ? $t("searchResults") : $t("searchResultsSingular") }}
       </div>
       <v-row>
         <v-col cols="12" md="6" lg="4" v-for="(result, i) in results" :key="i">

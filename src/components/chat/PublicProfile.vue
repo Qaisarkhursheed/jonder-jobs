@@ -15,7 +15,7 @@
       </v-col>
 
       <v-col class="d-flex my-auto">
-        <h2 style="font-weight: 600;font-size: 17px;">Profile</h2>
+        <h2 style="font-weight: 600;font-size: 17px;">{{ $t("profile") }}</h2>
       </v-col>
 
       <v-col cols="auto" class="d-flex my-auto">

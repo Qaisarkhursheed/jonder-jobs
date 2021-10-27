@@ -148,7 +148,7 @@
             </v-icon>
           </div>
           <div class="pl-4">
-            <div class="label">{{ $t("city") }} and {{ $t("address") }}</div>
+            <div class="label">{{ $t("city") }} {{ $t("and") }} {{ $t("address") }}</div>
             <div class="value">
               <a :href="googleMapsLink" target="_blank">
                 {{ address }}
