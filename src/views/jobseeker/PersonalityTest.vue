@@ -1,6 +1,6 @@
 <template>
   <div class="personality-test-jobseeker">
-    <div style="width: 80%; margin: 0 auto;">
+    <div style="width: 80%; margin: 0 auto; max-width: 900px">
       <Test />
     </div>
   </div>
