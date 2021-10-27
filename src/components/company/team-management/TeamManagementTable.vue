@@ -12,6 +12,7 @@
     @update:items-per-page="fetchData()"
     item-key="id"
     flat
+    disable-sort
     class="team-management-table"
   >
     <template v-slot:item.data-table-select="{ item, isSelected, select }">
@@ -98,7 +99,7 @@ export default {
 
 <style lang="scss">
 .team-management-table {
-  tr td:first-of-type {
+  tr td:first-of-type:not(.v-data-table__mobile-row) {
     width: 1% !important;
     padding-right: 0 !important;
   }
