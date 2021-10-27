@@ -21,36 +21,38 @@
 </template>
 
 <script>
+import i18n from "@/locales";
+
 export default {
-  data() {
-    return {
-      items: [
+  computed: {
+    items() {
+      return [
         {
-          text: this.$t("personalInformation"),
+          text: i18n.t("personalInformation"),
           scrollId: "personalInfo"
         },
         {
-          text: this.$t("positionAndIndustry"),
+          text: i18n.t("positionAndIndustry"),
           scrollId: "roleAndBranche"
         },
         {
-          text: this.$t("yourStatus"),
+          text: i18n.t("yourStatus"),
           scrollId: "status"
         },
         {
-          text: this.$t("searchingFor"),
+          text: i18n.t("searchingFor"),
           scrollId: "lookingFor"
         },
         {
-          text: this.$t("experienceAndEducation"),
+          text: i18n.t("experienceAndEducation"),
           scrollId: "experienceAndEducation"
         },
         {
-          text: this.$t("documents"),
+          text: i18n.t("documents"),
           scrollId: "documents"
         },
         {
-          text: this.$t("personalityTest.title"),
+          text: i18n.t("personalityTest.title"),
           scrollId: "personalityTest"
         },
         // {
@@ -58,19 +60,19 @@ export default {
         //   scrollId: "paymentMethod"
         // },
         {
-          text: this.$t("billingInvoices"),
+          text: i18n.t("billingInvoices"),
           scrollId: "invoices"
         },
         {
-          text: this.$t("changePassword"),
+          text: i18n.t("changePassword"),
           scrollId: "changePassword"
         },
         {
-          text: this.$t("upgradeAccount"),
+          text: i18n.t("upgradeAccount"),
           scrollId: "upgradeAccount"
         }
-      ]
-    };
+      ];
+    }
   },
   methods: {
     scrollToSection(id) {
