@@ -31,13 +31,13 @@
 
         <!-- Upgrade box -->
         <v-row>
-          <v-col :cols="ctaBoxesWidth" v-if="showUpgradeBox">
+          <v-col cols="12" :sm="ctaBoxesWidth" v-if="showUpgradeBox">
             <UpgradeAccountBox
               class="dashboard-upgrade-account-box"
               v-if="showUpgradeBox"
             />
           </v-col>
-          <v-col :cols="ctaBoxesWidth" v-if="!user.personality_test">
+          <v-col cols="12" :sm="ctaBoxesWidth" v-if="!user.personality_test">
             <PersonalityTestCTABox class="dashboard-upgrade-account-box" />
           </v-col>
         </v-row>
