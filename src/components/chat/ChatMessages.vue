@@ -169,6 +169,7 @@
           background-color="white"
           rows="1"
           auto-grow
+          ref="newMessage"
           @drop.prevent="handleTextareaDrop"
           >{{ $t("message") }}
         </v-textarea>
@@ -185,7 +186,9 @@
           :jobseeker="conversationDetails.user"
         />
 
-        <MessageTemplatesPicker @submit="msg => send(msg)" />
+        <MessageTemplatesPicker
+          @submit="msg => handleMessageTemplatePicker(msg)"
+        />
 
         <v-btn
           color="primary"
@@ -335,6 +338,10 @@ export default {
           break;
         }
       }
+    },
+    handleMessageTemplatePicker(msg) {
+      this.newMessage = msg;
+      this.$refs.newMessage.focus();
     }
   },
   watch: {
