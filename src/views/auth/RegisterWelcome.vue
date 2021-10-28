@@ -30,6 +30,7 @@
           <p style="color: #222222; font-size: 17px">
             {{ $t("jonderWelcomeDescription") }}
           </p>
+          <LanguageDropdown :attach="false" class="mb-5" />
           <v-btn
             class="dark-blue"
             @click="
@@ -157,11 +158,13 @@
 <script>
 import AuthWrap from "@/components/auth/AuthWrap.vue";
 import JonderTitle from "@/components/parts/JonderTitle.vue";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   components: {
     AuthWrap,
-    JonderTitle
+    JonderTitle,
+    LanguageDropdown
   },
   data: () => ({
     img: 1,

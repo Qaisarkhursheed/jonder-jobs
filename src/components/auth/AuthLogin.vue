@@ -70,6 +70,8 @@
         <!-- Response alert -->
         <response-alert :response="formResponse"></response-alert>
 
+        <LanguageDropdown :attach="false" class="mb-3" />
+
         <v-btn
           link
           href="https://dev.api.jonder.devla.dev/api/v1/auth/google"
@@ -119,12 +121,14 @@
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
 import ResponseAlert from "@/components/ResponseAlert";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
+    LanguageDropdown
   },
   data() {
     return {

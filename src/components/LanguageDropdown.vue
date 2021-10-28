@@ -5,7 +5,7 @@
       :items="items"
       @change="changeLanguage"
       outlined
-      :attach="true"
+      :attach="attach"
       background-color="white"
       hide-details
       append-icon="mdi-chevron-down"
@@ -32,6 +32,13 @@
 
 <script>
 export default {
+  props: {
+    attach: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   data() {
     return {
       items: [
