@@ -70,8 +70,6 @@
         <!-- Response alert -->
         <response-alert :response="formResponse"></response-alert>
 
-        <LanguageDropdown :attach="false" class="mb-3" />
-
         <v-btn
           link
           href="https://dev.api.jonder.devla.dev/api/v1/auth/google"
@@ -115,6 +113,12 @@
         {{ $t("register") }}
       </router-link>
     </p>
+
+    <LanguageDropdown
+      :attach="false"
+      class="mt-5 mx-auto"
+      style="max-width: 260px"
+    />
   </v-container>
 </template>
 

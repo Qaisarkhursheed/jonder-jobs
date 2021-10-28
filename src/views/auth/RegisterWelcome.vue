@@ -30,7 +30,6 @@
           <p style="color: #222222; font-size: 17px">
             {{ $t("jonderWelcomeDescription") }}
           </p>
-          <LanguageDropdown :attach="false" class="mb-5" />
           <v-btn
             class="dark-blue"
             @click="
@@ -151,6 +150,13 @@
           </b>
         </router-link>
       </div>
+
+      <LanguageDropdown
+        v-if="step == 1"
+        :attach="false"
+        class="mt-5 mx-auto"
+        style="max-width: 300px"
+      />
     </v-stepper>
   </auth-wrap>
 </template>
