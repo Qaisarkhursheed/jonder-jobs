@@ -150,6 +150,13 @@
           </b>
         </router-link>
       </div>
+
+      <LanguageDropdown
+        v-if="step == 1"
+        :attach="false"
+        class="mt-5 mx-auto"
+        style="max-width: 300px"
+      />
     </v-stepper>
   </auth-wrap>
 </template>
@@ -157,11 +164,13 @@
 <script>
 import AuthWrap from "@/components/auth/AuthWrap.vue";
 import JonderTitle from "@/components/parts/JonderTitle.vue";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   components: {
     AuthWrap,
-    JonderTitle
+    JonderTitle,
+    LanguageDropdown
   },
   data: () => ({
     img: 1,

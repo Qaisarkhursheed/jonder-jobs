@@ -113,18 +113,26 @@
         {{ $t("register") }}
       </router-link>
     </p>
+
+    <LanguageDropdown
+      :attach="false"
+      class="mt-5 mx-auto"
+      style="max-width: 260px"
+    />
   </v-container>
 </template>
 
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
 import ResponseAlert from "@/components/ResponseAlert";
+import LanguageDropdown from "@/components/LanguageDropdown";
 
 export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
+    LanguageDropdown
   },
   data() {
     return {
