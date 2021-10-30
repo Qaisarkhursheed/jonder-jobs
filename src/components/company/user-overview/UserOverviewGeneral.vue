@@ -155,18 +155,35 @@
         </div>
 
         <div class="section personality-test" v-if="user.personality_test">
+          
           <div class="title">{{ $t("personalityTest.title") }}</div>
-          <div
-            class="d-flex align-center pointer"
-            @click="goToPersonalityTest(user.personality_test.id)"
+          <v-dialog
+            v-model="ptDialog"
+            class="dialog"
+            overlay-color="#0253B3"
+            overlay-opacity="0.3"
+            max-width="1000px"
           >
-            <v-icon size="40" color="#4ab2e5" style="margin-left: -8px;">
-              mdi-head-cog
-            </v-icon>
-            <span class="font-weight-bold">
-              {{ $t("test") }}
-            </span>
-          </div>
+            <template v-slot:activator="{ on, attrs }">
+              <div
+                class="d-flex align-center pointer"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon size="40" color="#4ab2e5" style="margin-left: -8px;">
+                  mdi-head-cog
+                </v-icon>
+                <span class="font-weight-bold">
+                  {{ $t("test") }}
+                </span>
+              </div>
+            </template>
+
+            <v-card class="pa-8">
+              <PersonalityTestResult :testid="user.personality_test.id" />
+            </v-card>
+
+          </v-dialog>
         </div>
       </v-col>
     </v-row>
@@ -176,6 +193,7 @@
 <script>
 import { filter } from "lodash";
 import types from "@/types";
+import PersonalityTestResult from "@/views/jobseeker/PersonalityTestResult";
 
 export default {
   props: {
@@ -184,9 +202,14 @@ export default {
     }
   },
 
+  components: {
+    PersonalityTestResult
+  },
+
   data() {
     return {
-      userManagementData: null
+      userManagementData: null,
+      ptDialog: false
     };
   },
 
@@ -233,6 +256,7 @@ export default {
       });
     },
     goToPersonalityTest(id) {
+
       let route = this.$router.resolve({
         name: "PersonalityTestResultEmployer",
         params: {
