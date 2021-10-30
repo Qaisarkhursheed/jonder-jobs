@@ -31,7 +31,7 @@
         {{ $t("jobSearchStatusPassive") }}
       </v-btn>
 
-      <v-btn
+      <!-- <v-btn
         block
         color="#0253b3"
         class="mb-4"
@@ -42,7 +42,7 @@
         }"
       >
         {{ $t("jobSearchStatusCurious") }}
-      </v-btn>
+      </v-btn> -->
 
       <v-row class="mt-5">
         <v-col>

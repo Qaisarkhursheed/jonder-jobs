@@ -20,11 +20,11 @@ const JOB_SEARCH_STATUS = [
   {
     text: "jobSearchStatusPassive",
     value: "passive"
-  },
-  {
-    text: "jobSearchStatusCurious",
-    value: "curious"
   }
+  // {
+  //   text: "jobSearchStatusCurious",
+  //   value: "curious"
+  // }
 ];
 
 let initData = data => {
