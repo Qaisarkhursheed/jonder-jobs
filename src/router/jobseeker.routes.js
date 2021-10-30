@@ -36,7 +36,9 @@ export default [
     component: () => import("@/views/jobseeker/PersonalityTestResult"),
     props: true,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      showBackButton: true,
+      backButtonAction: 'JobseekerProfile'
     }
   },
 ];

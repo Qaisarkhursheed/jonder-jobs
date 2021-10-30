@@ -1,9 +1,9 @@
 <template>
-    <div class="personality-test-jobseeker-result">
+    <div class="personality-test-jobseeker-result" v-if="results">
       <h2 class="text-center mb-3">
         {{ $t("personalityTest.results") }}
       </h2>
-      <div style="width: 80%; margin: 0 auto;" v-if="results">
+      <div style="width: 80%; max-width: 1000px; margin: 0 auto;">
         <Results :results="results"/>
       </div>
     </div>
