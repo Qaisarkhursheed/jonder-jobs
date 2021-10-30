@@ -987,13 +987,12 @@ export default {
       return plan ? plan[name] : null;
     },
     goToPersonalityTestResult(id) {
-      let route = this.$router.resolve({
+      this.$router.push({
         name: "PersonalityTestJobseekerResult",
         params: {
           testid: id
         }
       });
-      window.open(route.href);
     }
   }
 };
