@@ -30,7 +30,6 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
-        :attach="true"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
         :rules="[validations.min.selection(1), validations.max.selection(3)]"
@@ -53,7 +52,6 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
-        :attach="true"
         v-model="value.looking_for_position"
         :items="types.JOB_POSITION"
         item-value="id"
@@ -75,6 +73,7 @@
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesInput
+        :attach="false"
         v-model="value.city"
         :rules="[validations.required]"
         :types="['(cities)']"

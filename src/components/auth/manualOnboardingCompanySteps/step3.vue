@@ -42,6 +42,7 @@
       </label>
       <GooglePlacesInput
         v-model="value.address"
+        :attach="false"
         :types="['geocode']"
         :placeholder="$t('companyCityandAdressPlaceholder')"
         :rules="[validations.required]"

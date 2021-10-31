@@ -18,7 +18,7 @@
         <span style="color: red;">*</span>
       </label>
       <v-textarea
-        class="mt-3"
+        class="mt-1"
         dense
         height="150"
         :placeholder="$t('aboutCompanyPlaceholder')"

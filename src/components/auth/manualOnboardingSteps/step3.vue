@@ -10,7 +10,6 @@
         <span style="color: red;">*</span>
       </label>
       <v-select
-        :attach="true"
         v-model="value.looking_for_employment_type"
         :items="types.EMPLOYEMENT_TYPE"
         :rules="[validations.min.selection(1)]"
@@ -30,6 +29,7 @@
         <span style="color: red;">*</span>
       </label>
       <GooglePlacesInput
+        :attach="false"
         v-model="value.address_to_work"
         :types="['(cities)']"
         :rules="[validations.min.selection(1), validations.max.selection(5)]"
@@ -48,6 +48,7 @@
         <span style="color: red;">*</span>
       </label>
       <DatePicker
+        :attach="false"
         v-model="value.ready_for_work"
         :rules="!dontKnowWhenToStart ? [validations.required] : []"
         :disabled="dontKnowWhenToStart"

@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    :attach="true"
+    :attach="attach"
     v-model="valueLocal"
     :search-input.sync="searchInput"
     @update:search-input="fetchSuggestions($event)"
@@ -27,6 +27,10 @@ export default {
   props: {
     value: {
       type: [Array, String]
+    },
+    attach: {
+      type: Boolean,
+      default: true
     },
     clearable: {
       type: Boolean,

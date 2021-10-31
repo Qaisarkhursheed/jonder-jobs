@@ -258,10 +258,6 @@ export default {
 .stepper-wrap {
   width: 450px;
 }
-.mo-step-3 {
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
 @media (max-width: 600px) {
   .stepper-wrap {
     width: 100%;
