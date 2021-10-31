@@ -2,6 +2,7 @@
   <v-autocomplete
     :attach="true"
     v-model="valueLocal"
+    :search-input.sync="searchInput"
     @update:search-input="fetchSuggestions($event)"
     @change="$refs[ref].lazySearch = ''"
     :items="items"
@@ -14,6 +15,7 @@
     :small-chips="multiple"
     :deletable-chips="multiple"
     :clearable="clearable"
+    :no-data-text="noDataText"
     no-filter
     outlined
     append-icon="mdi-chevron-down"
@@ -58,7 +60,8 @@ export default {
       suggestions: [],
       ref: "googlePlacesInput" + new Date().getTime(),
       loading: false,
-      skipFetch: true
+      skipFetch: true,
+      searchInput: ""
     };
   },
 
@@ -76,6 +79,13 @@ export default {
         return this.valueLocal ? this.valueLocal : [];
       } else {
         return this.valueLocal ? [this.valueLocal] : [];
+      }
+    },
+    noDataText() {
+      if (this.searchInput) {
+        return this.$t("noDataAvailable");
+      } else {
+        return this.$t("enterCityInTheField");
       }
     }
   },
