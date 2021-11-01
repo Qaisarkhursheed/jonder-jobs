@@ -176,7 +176,9 @@ export default {
               }
             });
           } else {
-            this.formResponse = err.data;
+            this.formResponse = {
+              message: this.$t("loginFailed")
+            };
           }
         })
         .finally(() => {
