@@ -10,7 +10,6 @@
         <span style="color: red;">*</span>
       </label>
       <v-autocomplete
-        :attach="true"
         class="mt-1"
         v-model="value.branche"
         :items="types.JOB_BRANCHE"
@@ -28,7 +27,6 @@
         <span style="color: red;">*</span>
       </label>
       <v-select
-        :attach="true"
         class="mt-1"
         v-model="value.company_employees"
         :items="types.EMPLOYEE_NUMBER"

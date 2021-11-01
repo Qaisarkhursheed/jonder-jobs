@@ -157,7 +157,7 @@
         ></v-file-input>
       </v-col>
 
-      <v-col class="d-flex align-center">
+      <v-col class="d-flex flex-column">
         <v-textarea
           v-model="newMessage"
           style="width: 100%; border-radius: 30px"
@@ -173,6 +173,12 @@
           @drop.prevent="handleTextareaDrop"
           >{{ $t("message") }}
         </v-textarea>
+        <small
+          class="d-block text--secondary"
+          style="position: absolute; bottom: 2px;"
+        >
+          {{ fileAttachedText }}
+        </small>
       </v-col>
 
       <v-col
@@ -235,6 +241,13 @@ export default {
   computed: {
     user() {
       return this.$store.getters["user/user"];
+    },
+    fileAttachedText() {
+      if (!this.newFile) {
+        return null;
+      }
+
+      return this.$t("fileAttached", { name: this.newFile.name });
     }
   },
   mounted() {

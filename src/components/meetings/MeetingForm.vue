@@ -33,6 +33,7 @@
           </v-col>
           <v-col cols="col">
             <DatePicker
+              :attach="false"
               v-model="formData.date"
               :rules="[validations.required]"
               :min="new Date() | moment('YYYY-MM-DD')"

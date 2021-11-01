@@ -115,7 +115,7 @@
     </p>
 
     <LanguageDropdown
-      :attach="false"
+      :attach="true"
       class="mt-5 mx-auto"
       style="max-width: 260px"
     />
