@@ -9,7 +9,10 @@ export default {
       return new Promise(resolve => resolve(state.user));
     }
 
-    if (!localStorage.getItem("user-token")) {
+    if (
+      !localStorage.getItem("user-token") ||
+      !new URLSearchParams(window.location.search).get("token")
+    ) {
       return;
     }
 
