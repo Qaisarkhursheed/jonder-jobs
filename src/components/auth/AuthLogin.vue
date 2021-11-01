@@ -76,6 +76,7 @@
           outlined
           color="primary"
           class="full-w mt-2"
+          :disabled="!captchaValid"
         >
           <v-icon left>mdi-google</v-icon>
           {{ $t("continueWithGoogle") }}
@@ -87,6 +88,7 @@
           outlined
           color="primary"
           class="full-w mt-4"
+          :disabled="!captchaValid"
         >
           <v-icon left>mdi-facebook</v-icon>
           {{ $t("continueWithFacebook") }}
@@ -100,6 +102,12 @@
         >
           {{ $t("login") }}
         </v-btn>
+        <v-text-field 
+          v-model="captchaValid" 
+          class="d-none"
+          :rules="[()=> captchaValid]"
+        >
+        </v-text-field>
       </v-form>
     </div>
 
@@ -113,12 +121,26 @@
         {{ $t("register") }}
       </router-link>
     </p>
+      <div :class="{ 'd-none': captchaValid }">
+        <vue-recaptcha 
+          :class="['d-flex justify-center']"
+          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          @verify="captchaValid = true"
+          @expired="captchaValid = false"
+          @render="captchaValid = false"
+        >
+        </vue-recaptcha>
+      </div>
+      <div>
+        <LanguageDropdown
+          :attach="true"
+          class="mt-5 mx-auto"
+          style="max-width: 260px"
+        />
+      </div>
 
-    <LanguageDropdown
-      :attach="true"
-      class="mt-5 mx-auto"
-      style="max-width: 260px"
-    />
+    <!--prod 6LcSMAsdAAAAADMlIjaGtjfG2Z6SNfE1BDxuTorO -->
+
   </v-container>
 </template>
 
@@ -126,13 +148,15 @@
 import JonderTitle from "../parts/JonderTitle.vue";
 import ResponseAlert from "@/components/ResponseAlert";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   name: "AuthLogin",
   components: {
     JonderTitle,
     ResponseAlert,
-    LanguageDropdown
+    LanguageDropdown,
+    VueRecaptcha
   },
   data() {
     return {
@@ -147,7 +171,8 @@ export default {
       },
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
+      captchaValid: false
     };
   },
   methods: {
