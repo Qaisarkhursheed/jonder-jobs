@@ -10,6 +10,7 @@
         :prepend-icon="null"
         prepend-inner-icon="mdi-cloud-upload"
         class="file-input-jonder "
+        accept=".pdf, .doc, .docx"
       >
         <template v-slot:selection="{ text }">
           <v-chip small label color="primary"> {{ text }} </v-chip>
