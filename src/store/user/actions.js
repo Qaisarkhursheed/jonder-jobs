@@ -9,6 +9,10 @@ export default {
       return new Promise(resolve => resolve(state.user));
     }
 
+    if (!localStorage.getItem("user-token")) {
+      return;
+    }
+
     return axios
       .get("/me")
       .then(response => {

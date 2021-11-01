@@ -47,6 +47,18 @@ export default {
 
     .chat-wrap {
       height: calc(100vh - 140px) !important;
+      overflow: auto;
+    }
+
+    .profile-sidebar {
+      height: calc(100vh - 140px - 24px) !important;
+      overflow: visible;
+
+      @media screen and (max-width: 425px) {
+        & {
+          height: calc(100vh) !important;
+        }
+      }
     }
   }
 }

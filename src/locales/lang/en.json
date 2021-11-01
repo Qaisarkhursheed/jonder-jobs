@@ -79,6 +79,7 @@
   "getStartedNow": "Get started now",
   "areYouMember": "Are you already a member?",
   "loginHere": "Log in here",
+  "loginFailed": "Invalid email or password.",
   "messageNow": "Message now",
   "fileAttached": "File attached: {name}",
   "headingTitle": "Find your dream employee. With the help of the Jonder employee search.",

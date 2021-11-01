@@ -79,6 +79,7 @@
   "getStartedNow": "Jetzt durchstarten",
   "areYouMember": "Du bist bereits Mitglied?",
   "loginHere": "Hier einloggen",
+  "loginFailed": "Ungültige E-Mail oder Passwort.",
   "messageNow": "Nachricht senden",
   "fileAttached": "Datei angehängt: {name}",
   "headingTitle": "Finden Sie Ihren Traummitarbeiter mit Hilfe der Jonder Mitarbeitersuche.",

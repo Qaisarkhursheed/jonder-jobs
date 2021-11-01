@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="profile-sidebar">
+  <v-card flat class="profile-sidebar d-flex flex-column">
     <div class="top-info pb-0" style="border-bottom: 1px solid #E9E9E9">
       <!-- Avatar -->
       <div class="profile-image">
@@ -43,100 +43,104 @@
       </template>
     </div>
 
-    <UpgradeAccountBox
-      class="mt-7"
-      v-if="messagesLoaded && conversations.length && !userPlan.length"
-      small
-    />
+    <div class="bottom-info" style="overflow: auto">
+      <UpgradeAccountBox
+        class="mt-7"
+        v-if="messagesLoaded && conversations.length && !userPlan.length"
+        small
+      />
 
-    <!-- Fields -->
-    <div class="top-info mt-7">
-      <span class="about-info">{{ $t("position") }}</span>
-      <p class="about-text">
-        {{ idToString("JOB_POSITION", user.current_position) }}
-      </p>
+      <!-- Fields -->
+      <div class="top-info mt-7">
+        <span class="about-info">{{ $t("position") }}</span>
+        <p class="about-text">
+          {{ idToString("JOB_POSITION", user.current_position) }}
+        </p>
 
-      <span class="about-info">{{ $t("currentIndustry") }}</span>
-      <div class="about-text">
-        <v-chip
-          class="py-1 mr-1 mb-1"
-          v-for="(item, i) in idsToArray('JOB_BRANCHE', user.branche)"
-          :key="i"
-        >
-          {{ item }}
-        </v-chip>
-      </div>
+        <span class="about-info">{{ $t("currentIndustry") }}</span>
+        <div class="about-text">
+          <v-chip
+            class="py-1 mr-1 mb-1"
+            v-for="(item, i) in idsToArray('JOB_BRANCHE', user.branche)"
+            :key="i"
+          >
+            {{ item }}
+          </v-chip>
+        </div>
 
-      <span class="about-info">{{ $t("whatPosition") }}</span>
-      <div class="about-text">
-        <v-chip
-          class="py-1 mr-1 mb-1"
-          v-for="(item, i) in idsToArray(
-            'JOB_POSITION',
-            user.looking_for_position
-          )"
-          :key="i"
-        >
-          {{ item }}
-        </v-chip>
-      </div>
+        <span class="about-info">{{ $t("whatPosition") }}</span>
+        <div class="about-text">
+          <v-chip
+            class="py-1 mr-1 mb-1"
+            v-for="(item, i) in idsToArray(
+              'JOB_POSITION',
+              user.looking_for_position
+            )"
+            :key="i"
+          >
+            {{ item }}
+          </v-chip>
+        </div>
 
-      <span class="about-info">{{ $t("searchStatus") }}</span>
-      <p class="about-text">
-        {{ user.job_search_status | jobSearchStatus }}
-      </p>
+        <span class="about-info">{{ $t("searchStatus") }}</span>
+        <p class="about-text">
+          {{ user.job_search_status | jobSearchStatus }}
+        </p>
 
-      <span class="about-info">{{ $t("lookingForType") }}</span>
-      <div class="about-text">
-        <v-chip
-          class="py-1 mr-1 mb-1"
-          v-for="(item, i) in idsToArray(
-            'EMPLOYEMENT_TYPE',
-            user.looking_for_employment_type
-          )"
-          :key="i"
-        >
-          {{ item }}
-        </v-chip>
-      </div>
+        <span class="about-info">{{ $t("lookingForType") }}</span>
+        <div class="about-text">
+          <v-chip
+            class="py-1 mr-1 mb-1"
+            v-for="(item, i) in idsToArray(
+              'EMPLOYEMENT_TYPE',
+              user.looking_for_employment_type
+            )"
+            :key="i"
+          >
+            {{ item }}
+          </v-chip>
+        </div>
 
-      <!-- <span class="about-info">{{ $t("cityAndAddress") }} </span>
+        <!-- <span class="about-info">{{ $t("cityAndAddress") }} </span>
               <p class="about-text">{{ user.city }}</p> -->
 
-      <span class="about-info">{{ $t("experienceInYears") }}</span>
-      <p class="about-text">{{ user.working_experience }} {{ $t("years") }}</p>
+        <span class="about-info">{{ $t("experienceInYears") }}</span>
+        <p class="about-text">
+          {{ user.working_experience }} {{ $t("years") }}
+        </p>
 
-      <span class="about-info">
-        {{ $t("experiences") }}
-      </span>
-      <CardActionableList type="Experience" view-only class="mb-5" />
+        <span class="about-info">
+          {{ $t("experiences") }}
+        </span>
+        <CardActionableList type="Experience" view-only class="mb-5" />
 
-      <span class="about-info">
-        {{ $t("education") }}
-      </span>
-      <CardActionableList type="Education" view-only />
-    </div>
+        <span class="about-info">
+          {{ $t("education") }}
+        </span>
+        <CardActionableList type="Education" view-only />
+      </div>
 
-    <!-- Documents -->
-    <div class="top-info">
-      <span class="about-info">
-        {{ $t("documents") }}
-      </span>
+      <!-- Documents -->
+      <div class="top-info">
+        <span class="about-info">
+          {{ $t("documents") }}
+        </span>
 
-      <i v-if="documentsEmpty">{{ $t("noDataAvailable") }}</i>
+        <i v-if="documentsEmpty">{{ $t("noDataAvailable") }}</i>
 
-      <template v-for="item in documents">
-        <div v-if="item.link" :key="item.text" class="row mt-1">
-          <div class="col-auto">
-            <a :href="item.link" target="_blank">
-              <img class="document-icon" :src="getDocumentIcon(item.link)" />
-            </a>
+        <template v-for="item in documents">
+          <div v-if="item.link" :key="item.text" class="row mt-1">
+            <div class="col-auto">
+              <a :href="item.link" target="_blank">
+                <img class="document-icon" :src="getDocumentIcon(item.link)" />
+              </a>
+            </div>
+            <div class="col my-auto font-weight-bold">
+              {{ item.text }}
+            </div>
           </div>
-          <div class="col my-auto font-weight-bold">
-            {{ item.text }}
-          </div>
-        </div>
-      </template>
+        </template>
+      </div>
     </div>
   </v-card>
 </template>

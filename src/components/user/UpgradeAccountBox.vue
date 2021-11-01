@@ -1,5 +1,5 @@
 <template>
-  <div class="full-w full-h">
+  <div class="full-w">
     <UpgradePlanModal
       v-if="modals.UpgradePlan.active"
       :active="modals.UpgradePlan.active"
