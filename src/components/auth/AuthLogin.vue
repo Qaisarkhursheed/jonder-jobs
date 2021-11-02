@@ -124,7 +124,7 @@
       <div :class="{ 'd-none': captchaValid }">
         <vue-recaptcha 
           :class="['d-flex justify-center']"
-          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          :sitekey="getCaptchaKey()"
           @verify="captchaValid = true"
           @expired="captchaValid = false"
           @render="captchaValid = false"
@@ -138,9 +138,6 @@
           style="max-width: 260px"
         />
       </div>
-
-    <!--prod 6LcSMAsdAAAAADMlIjaGtjfG2Z6SNfE1BDxuTorO -->
-
   </v-container>
 </template>
 

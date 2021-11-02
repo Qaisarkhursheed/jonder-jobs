@@ -152,7 +152,7 @@
       <div :class="{ 'd-none': captchaValid }">
         <vue-recaptcha 
           :class="['d-flex justify-center mt-4']"
-          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          :sitekey="getCaptchaKey()"
           @verify="captchaValid = true"
           @expired="captchaValid = false"
           @render="captchaValid = false"
