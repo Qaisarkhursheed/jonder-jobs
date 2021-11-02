@@ -121,7 +121,7 @@ export default {
       }
 
       if (this.type == "date") {
-        return moment(this.date).format("MM.DD.YYYY");
+        return moment(this.date).format("DD.MM.YYYY");
       } else {
         return moment(this.date).format("MMMM, YYYY");
       }
