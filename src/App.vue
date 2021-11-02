@@ -374,6 +374,47 @@ html {
   height: 100vh;
   overflow: auto;
 }
+
+// Privacy policy
+#freeprivacypolicy-com---nb {
+  max-width: 100%;
+
+  .cc-nb-main-container {
+    background-color: $primary-blue-light;
+    padding: 2rem;
+
+    button {
+      border-radius: 10px;
+    }
+
+    .cc-nb-okagree {
+      background-color: $primary-blue-dark;
+    }
+
+    .cc-nb-reject {
+      background-color: $medium-grey;
+    }
+  }
+}
+
+#freeprivacypolicy-com---preferences-center {
+  button {
+    border-radius: 10px;
+  }
+
+  .freeprivacypolicy-com---pc-dialog
+    input[type="checkbox"].cc-custom-checkbox:checked
+    + label:before {
+    background: $primary-blue-dark;
+  }
+
+  .cc-pc-container {
+    .cc-cp-foot-save {
+      background-color: $primary-blue-dark;
+    }
+  }
+}
+// end privacy policy
 </style>
 <script>
 import axios from "axios";
