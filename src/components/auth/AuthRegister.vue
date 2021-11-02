@@ -144,6 +144,12 @@
 
       <!-- ResponseAlert -->
       <ResponseAlert :response="formResponse" />
+      <v-text-field 
+        v-model="captchaValid" 
+        class="d-none"
+        :rules="[()=> captchaValid]"
+      >
+      </v-text-field>
 
       <!-- Submit button -->
       <v-btn
@@ -157,6 +163,16 @@
         {{ $t("registerForFree") }}
       </v-btn>
 
+      <div :class="{ 'd-none': captchaValid }">
+        <vue-recaptcha 
+          :class="['d-flex justify-center mt-4']"
+          :sitekey="getCaptchaKey()"
+          @verify="captchaValid = true"
+          @expired="captchaValid = false"
+          @render="captchaValid = false"
+        >
+        </vue-recaptcha>
+      </div>
       <div class="text-medium mt-5 text-center">
         {{ $t("areYouMember") }}
 
@@ -171,9 +187,10 @@
 <script>
 import JonderTitle from "../parts/JonderTitle.vue";
 import AvatarInput from "@/components/controls/AvatarInput";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
-  components: { JonderTitle, AvatarInput },
+  components: { JonderTitle, AvatarInput, VueRecaptcha },
   data() {
     return {
       formData: {
@@ -191,7 +208,8 @@ export default {
       showPassConfirm: false,
       formLoading: false,
       formResponse: {},
-      formValid: false
+      formValid: false,
+      captchaValid: false
     };
   },
   methods: {

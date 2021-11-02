@@ -143,6 +143,23 @@
         {{ $t("registerForFree") }}
       </v-btn>
 
+      <v-text-field 
+        v-model="captchaValid" 
+        class="d-none"
+        :rules="[()=> captchaValid]"
+      >
+      </v-text-field>
+      <div :class="{ 'd-none': captchaValid }">
+        <vue-recaptcha 
+          :class="['d-flex justify-center mt-4']"
+          :sitekey="getCaptchaKey()"
+          @verify="captchaValid = true"
+          @expired="captchaValid = false"
+          @render="captchaValid = false"
+        >
+        </vue-recaptcha>
+      </div>
+
       <!-- Login link -->
       <div class="login-caption mt-3 text-center">
         {{ $t("areYouMember") }}
@@ -161,13 +178,15 @@ import JonderTitle from "../parts/JonderTitle.vue";
 import { mapActions } from "vuex";
 import ResponseAlert from "@/components/ResponseAlert";
 import { debounce } from "lodash";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   name: "AuthRegisterCompany",
   mixins: [Validations],
   components: {
     JonderTitle,
-    ResponseAlert
+    ResponseAlert,
+    VueRecaptcha
   },
   data() {
     return {
@@ -187,7 +206,8 @@ export default {
       isLoading: false,
       isValid: false,
       showPass: false,
-      showPassConfirm: false
+      showPassConfirm: false,
+      captchaValid: false
     };
   },
   methods: {

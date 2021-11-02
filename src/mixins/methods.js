@@ -51,6 +51,10 @@ export default {
       return str.split(" ").filter(function(n) {
         return n != "";
       }).length;
+    },
+
+    getCaptchaKey() {
+      return process.env.VUE_APP_CAPTCHA_KEY;
     }
   }
 };
