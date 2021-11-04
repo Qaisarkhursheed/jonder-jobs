@@ -78,6 +78,14 @@ export default {
         commit(`SET_JOBSEEKERS`, res.data.data);
         commit(`SET_JOBSEEKERS_TOTAL`, res.data.meta.total);
       })
+  },
+
+  importUsers(context, file) {
+    let data = new FormData();
+    data.append('csv_file', file);
+
+    return axios
+      .post("/admin/bulk-register", data);
   }
 
 };
