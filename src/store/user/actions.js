@@ -10,7 +10,7 @@ export default {
     }
 
     if (
-      !localStorage.getItem("user-token") ||
+      !localStorage.getItem("user-token") &&
       !new URLSearchParams(window.location.search).get("token")
     ) {
       return;
