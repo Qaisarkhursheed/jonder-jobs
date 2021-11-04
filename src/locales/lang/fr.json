@@ -662,5 +662,6 @@
     }
   },
   "user": "Usager",
-  "areYouSureCancelSubscription": "Êtes-vous sûr de vouloir annuler l'abonnement?"
+  "areYouSureCancelSubscription": "Êtes-vous sûr de vouloir annuler l'abonnement?",
+  "supportedFileTypes": "Types de fichiers pris en charge"
 }

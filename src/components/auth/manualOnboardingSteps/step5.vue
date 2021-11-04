@@ -4,6 +4,14 @@
       {{ $t("uploadDocuments") }}
     </p>
 
+    <v-alert
+      dense
+      text
+      type="success"
+    > 
+        {{ $t('supportedFileTypes') }}: <strong>.pdf, .png, .jpg, .jpeg</strong> (10 MB max)
+    </v-alert>
+
     <v-form v-model="formValid" @submit.prevent="nextScreen">
       <DocumentUploadSection @change="e => (cv = e)" type="Cv" />
 

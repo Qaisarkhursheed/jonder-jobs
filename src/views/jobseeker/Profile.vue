@@ -468,6 +468,12 @@
             <!-- Documents -->
             <v-col cols="12">
               <div class="document-wrap">
+                <v-alert
+                  dense
+                  text
+                  type="success">
+                    {{ $t('supportedFileTypes') }}: <strong>.pdf, .png, .jpg, .jpeg</strong> (10 MB max)
+                </v-alert>
                 <DocumentUploadSection
                   @change="e => (formData.cv = e[0])"
                   type="Cv"
