@@ -50,19 +50,34 @@
       <DatePicker
         :attach="false"
         v-model="value.ready_for_work"
-        :rules="!dontKnowWhenToStart ? [validations.required] : []"
+        :rules="
+          dontKnowWhenToStart || value.ready_for_work_now
+            ? []
+            : [validations.required]
+        "
         :disabled="dontKnowWhenToStart"
         min-this-month
         type="month"
         hide-details="auto"
       />
 
-      <v-checkbox
-        v-model="dontKnowWhenToStart"
-        :label="$t('iDontKnow')"
-        class="mt-2 mb-3"
-        hide-details
-      ></v-checkbox>
+      <div class="d-flex">
+        <v-checkbox
+          v-model="dontKnowWhenToStart"
+          :label="$t('iDontKnow')"
+          :disabled="!!value.ready_for_work_now"
+          class="mt-2 mb-3 mr-5"
+          hide-details
+        ></v-checkbox>
+
+        <v-checkbox
+          v-model="value.ready_for_work_now"
+          :label="$t('imAlreadyAvailable')"
+          :disabled="dontKnowWhenToStart"
+          class="mt-2 mb-3"
+          hide-details
+        ></v-checkbox>
+      </div>
 
       <div class="profile-label mb-3 mt-6">
         {{ $t("monthlySalary") }}
