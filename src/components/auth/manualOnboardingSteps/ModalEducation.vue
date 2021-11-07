@@ -28,6 +28,7 @@
                   :loading="loadingUniversities"
                   :search-input.sync="universitySearch"
                   @update:search-input="fetchUniversitySuggestions"
+                  append-icon=""
                   no-filter
                   solo
                   outlined
