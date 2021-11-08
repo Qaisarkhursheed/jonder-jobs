@@ -663,5 +663,8 @@
   },
   "user": "Usager",
   "areYouSureCancelSubscription": "Êtes-vous sûr de vouloir annuler l'abonnement?",
-  "supportedFileTypes": "Types de fichiers pris en charge"
+  "supportedFileTypes": "Types de fichiers pris en charge",
+  "duplicatedUsersManagement": "Gestion des utilisateurs en double",
+  "refresh": "Rafraîchir",
+  "bulkUploadUsers": "Téléchargement groupé d'utilisateurs"
 }

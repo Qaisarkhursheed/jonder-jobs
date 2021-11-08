@@ -86,6 +86,22 @@ export default {
 
     return axios
       .post("/admin/bulk-register", data);
+  },
+
+  checkDuplicateUsers({ commit }) {
+    return axios
+      .get("/admin/check-duplicates")
+      .then(res => {
+        commit("SET_DUPLICATE_USERS", res.data.result)
+      })
+  },
+
+  deleteUser({ dispatch }, id) {
+    return axios
+      .delete(`/users/${id}`)
+      .then(() => {
+        dispatch('checkDuplicateUsers');
+      });
   }
 
 };

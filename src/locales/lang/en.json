@@ -663,5 +663,8 @@
   },
   "user": "User",
   "areYouSureCancelSubscription": "Are you sure that you want to cancel subscription?",
-  "supportedFileTypes": "Supported file types"
+  "supportedFileTypes": "Supported file types",
+  "duplicatedUsersManagement": "Duplicated Users Management",
+  "refresh": "Refresh",
+  "bulkUploadUsers": "Bulk upload users"
 }

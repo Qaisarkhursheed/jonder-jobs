@@ -24,5 +24,9 @@ export default {
   company_management: {
     users: [],
     total: 0
+  },
+  duplicateUsers: {
+    items: [],
+    meta: {}
   }
 };

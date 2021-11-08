@@ -5,7 +5,7 @@
       <v-col cols="6">
         <v-card flat class="pa-8">
           <v-card-title class="pa-0 pb-4">
-            Bulk upload users
+            {{ $t('bulkUploadUsers') }}
           </v-card-title>
           <v-file-input
             v-model="csv"
@@ -36,6 +36,47 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12">
+         <v-card flat class="pa-8">
+          <div class="d-flex justify-space-between mb-3">
+            <div>
+              <v-card-title class="pa-0 pb-4">
+                {{ $t("duplicatedUsersManagement") }}
+              </v-card-title>
+            </div>
+            <div>
+              <v-btn
+                depressed
+                color="primary"
+                class="px-10"
+                height="48"
+                @click="$store.dispatch('admin/checkDuplicateUsers')"
+              >
+              {{ $t("refresh") }}
+              </v-btn>
+            </div>
+          </div>
+          <div>
+            <v-data-table
+              :headers="duplicateUsers.headers"
+              :items="$store.getters['admin/duplicateUsers']"
+              :single-select="true"
+            >
+            <template v-slot:item.action="{ item }">
+              <v-icon
+                small
+                @click="$store.dispatch('admin/deleteUser', item.id)"
+              >
+                mdi-delete
+              </v-icon>
+            </template>
+            </v-data-table>
+          </div>
+         </v-card>
+      </v-col>
+
+    </v-row>
   </div>
 </template>
 
@@ -56,7 +97,36 @@ export default {
   data() {
     return {
       csv: null,
-      response:{}
+      response: {},
+      duplicateUsers: {
+        headers: [
+          {
+            text: "ID",
+            value: "id",
+            width: "10%"
+          },
+          {
+            text: this.$t('email'),
+            value: "email",
+            width: "30%"
+          },
+          {
+            text: this.$t('createdAt'),
+            value: "created_at",
+            width: "30%"
+          },
+          {
+            text: this.$t('type'),
+            value: "role",
+            width: "20%"
+          },
+          {
+            text: this.$t('delete'),
+            value: "action",
+            width: "10%"
+          }
+        ]
+      },
     }
   },
 

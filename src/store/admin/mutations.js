@@ -17,5 +17,8 @@ export default {
   },
   SET_JOBSEEKERS_TOTAL(state, value) {
     state.jobseeker_management.total = value;
+  },
+  SET_DUPLICATE_USERS(state, value) {
+    state.duplicateUsers.items = value;
   }
 };

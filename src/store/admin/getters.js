@@ -13,5 +13,8 @@ export default {
   },
   jobseekersTotal(state) {
     return state.jobseeker_management.total;
+  },
+  duplicateUsers(state) {
+    return state.duplicateUsers.items;
   }
 };
