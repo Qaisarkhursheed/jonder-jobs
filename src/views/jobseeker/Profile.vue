@@ -474,11 +474,20 @@
                   type="success">
                     {{ $t('supportedFileTypes') }}: <strong>.pdf, .png, .jpg, .jpeg</strong> (10 MB max)
                 </v-alert>
-                <DocumentUploadSection
-                  @change="e => (formData.cv = e[0])"
-                  type="Cv"
-                  :value="formData.cv"
-                />
+                <template v-if="formData.cvmaker_file">
+                  <DocumentUploadSection
+                    @change="e => (formData.cvmaker_file = e[0])"
+                    type="Cv"
+                    :value="formData.cvmaker_file"
+                  />
+                </template>
+                <template v-else>
+                  <DocumentUploadSection
+                    @change="e => (formData.cv = e[0])"
+                    type="Cv"
+                    :value="formData.cv"
+                  />
+                </template>
               </div>
               <div class="document-wrap">
                 <DocumentUploadSection
@@ -808,6 +817,7 @@ export default {
       working_experience: "",
       job_search_status: "",
       cv: null,
+      cvmaker_file: null,
       qualifications: null,
       resume: null,
       location_show: false,
@@ -910,6 +920,7 @@ export default {
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.working_experience = user.working_experience;
       this.formData.cv = user.cv;
+      this.formData.cvmaker_file = user.cvmaker_file || null;
       this.formData.qualifications = user.qualifications;
       this.formData.resume = user.resume;
       this.formData.job_search_status = user.job_search_status;
@@ -931,8 +942,8 @@ export default {
         delete formDataCopy.profile_img;
       }
 
-      ["cv", "resume", "qualifications"].forEach(key => {
-        if (!(this.formData[key] instanceof File)) {
+      ["cv", "resume", "qualifications", "cvmaker_file"].forEach(key => {
+        if ((!(this.formData[key] instanceof File))) {
           delete formDataCopy[key];
         }
       });
