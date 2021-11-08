@@ -317,13 +317,17 @@
             </v-col>
 
             <!-- ready_for_work -->
-            <v-col cols="6">
+            <v-col cols="12" md="5">
               <label class="profile-label">
                 {{ $t("whenCanYouStart") }}
               </label>
               <DatePicker
                 v-model="formData.ready_for_work"
-                :rules="!dontKnowWhenToStart ? [validations.required] : []"
+                :rules="
+                  dontKnowWhenToStart || formData.ready_for_work_now
+                    ? []
+                    : [validations.required]
+                "
                 :disabled="dontKnowWhenToStart"
                 min-this-month
                 type="month"
@@ -332,16 +336,23 @@
             </v-col>
 
             <!-- ready_for_work checkbox -->
-            <v-col cols="6">
-              <label class="profile-label">
-                <span style="visibility: hidden">.</span>
-              </label>
-              <v-checkbox
-                v-model="dontKnowWhenToStart"
-                :label="$t('iDontKnow')"
-                hide-details="auto"
-                class="mb-0 mt-2"
-              ></v-checkbox>
+            <v-col cols="12" md="7">
+              <div class="d-flex">
+                <v-checkbox
+                  v-model="dontKnowWhenToStart"
+                  :label="$t('iDontKnow')"
+                  :disabled="!!formData.ready_for_work_now"
+                  hide-details="auto"
+                  class="mr-5 mt-0 mt-md-9"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="formData.ready_for_work_now"
+                  :label="$t('imAlreadyAvailable')"
+                  :disabled="dontKnowWhenToStart"
+                  hide-details="auto"
+                  class="mt-0 mt-md-9"
+                ></v-checkbox>
+              </div>
             </v-col>
 
             <!-- Monthly salary slider -->
@@ -468,11 +479,9 @@
             <!-- Documents -->
             <v-col cols="12">
               <div class="document-wrap">
-                <v-alert
-                  dense
-                  text
-                  type="success">
-                    {{ $t('supportedFileTypes') }}: <strong>.pdf, .png, .jpg, .jpeg</strong> (10 MB max)
+                <v-alert dense text type="success">
+                  {{ $t("supportedFileTypes") }}:
+                  <strong>.pdf, .png, .jpg, .jpeg</strong> (10 MB max)
                 </v-alert>
                 <template v-if="formData.cvmaker_file">
                   <DocumentUploadSection
@@ -813,6 +822,7 @@ export default {
       looking_for_employment_type: "",
       address_to_work: [],
       ready_for_work: "",
+      ready_for_work_now: false,
       monthly_salary: null,
       working_experience: "",
       job_search_status: "",
@@ -917,6 +927,7 @@ export default {
         user.looking_for_employment_type;
       this.formData.address_to_work = user.address_to_work || [];
       this.formData.ready_for_work = user.ready_for_work;
+      this.formData.ready_for_work_now = user.ready_for_work_now;
       this.formData.monthly_salary = user.monthly_salary;
       this.formData.working_experience = user.working_experience;
       this.formData.cv = user.cv;
@@ -926,7 +937,8 @@ export default {
       this.formData.job_search_status = user.job_search_status;
       this.formData.location_show = user.location_show;
       this.formData.work_remotely = user.work_remotely;
-      this.dontKnowWhenToStart = !user.ready_for_work;
+      this.dontKnowWhenToStart =
+        !user.ready_for_work && !user.ready_for_work_now;
     },
     handleUpdate() {
       this.formResponse = {};
@@ -935,7 +947,7 @@ export default {
       };
 
       if (this.dontKnowWhenToStart) {
-        this.formData.ready_for_work = null;
+        formDataCopy.ready_for_work = null;
       }
 
       if (!(formDataCopy.profile_img instanceof File)) {

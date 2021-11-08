@@ -20,15 +20,20 @@
             <v-row>
               <v-col>
                 <label>{{ $t("university") }}</label>
-                <v-text-field
+                <v-combobox
                   v-model="form.university_name"
+                  :placeholder="$t('enter')"
                   :rules="[validations.required]"
-                  type="text"
+                  :items="universitySuggestions"
+                  :loading="loadingUniversities"
+                  :search-input.sync="universitySearch"
+                  @update:search-input="fetchUniversitySuggestions"
+                  append-icon=""
+                  no-filter
                   solo
                   outlined
-                  :placeholder="$t('enter')"
                 >
-                </v-text-field>
+                </v-combobox>
               </v-col>
             </v-row>
 
@@ -39,6 +44,7 @@
                   v-model="form.start_time"
                   :rules="[validations.required]"
                   :hide-details="false"
+                  :attach="false"
                   type="month"
                 />
               </v-col>
@@ -49,6 +55,7 @@
                   :rules="form.study_here ? [] : [validations.required]"
                   :disabled="!!form.study_here"
                   :hide-details="false"
+                  :attach="false"
                   type="month"
                 />
               </v-col>
@@ -75,7 +82,7 @@
             <v-row>
               <v-col>
                 <v-checkbox
-                  class="mt-5 pt-5"
+                  class="mt-md-12"
                   v-model="form.study_here"
                   label="Currently attending here"
                 ></v-checkbox>
@@ -123,6 +130,7 @@
 
 <script>
 import DatePicker from "@/components/controls/DatePicker";
+import axios from "axios";
 
 export default {
   name: "ModalEducation",
@@ -158,7 +166,10 @@ export default {
         start_time: "",
         end_time: "",
         study_here: 0
-      }
+      },
+      universitySearch: "",
+      universitySuggestions: [],
+      loadingUniversities: false
     };
   },
   created() {
@@ -213,6 +224,25 @@ export default {
       this.form.start_time = this.edit.start_time;
       this.form.end_time = this.edit.end_time;
       this.form.study_here = this.edit.study_here;
+    },
+    fetchUniversitySuggestions() {
+      if (this.universitySearch.length < 3) {
+        return;
+      }
+
+      this.loadingUniversities = true;
+      axios
+        .create()
+        .get(
+          "http://universities.hipolabs.com/search?name=" +
+            this.universitySearch
+        )
+        .then(resp => {
+          this.universitySuggestions = resp.data.map(i => i.name);
+        })
+        .finally(() => {
+          this.loadingUniversities = false;
+        });
     }
   }
 };

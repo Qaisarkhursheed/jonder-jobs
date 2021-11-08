@@ -70,10 +70,14 @@
             <v-row>
               <v-col>
                 <label>{{ $t("position") }}</label>
-                <v-text-field
+                <v-combobox
                   v-model="form.position"
                   :rules="[validations.required]"
                   :placeholder="$t('enter')"
+                  :items="types.JOB_POSITION.map(i => i[$i18n.locale])"
+                  :item-value="$i18n.locale"
+                  :item-text="$i18n.locale"
+                  append-icon=""
                   outlined
                   solo
                 />
