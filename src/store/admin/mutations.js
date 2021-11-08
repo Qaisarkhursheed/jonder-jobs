@@ -20,5 +20,8 @@ export default {
   },
   SET_DUPLICATE_USERS(state, value) {
     state.duplicateUsers.items = value;
+  },
+  SET_DUPLICATE_USERS_TOTAL(state, value) {
+    state.duplicateUsers.meta = value;
   }
 };

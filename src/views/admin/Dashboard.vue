@@ -61,6 +61,11 @@
             <v-data-table
               :headers="duplicateUsers.headers"
               :items="$store.getters['admin/duplicateUsers']"
+              :server-items-length="$store.getters['admin/duplicateUsersMeta'].total"
+              :items-per-page.sync="duplicateUsers.params.per_page"
+              :page.sync="duplicateUsers.params.page"
+              @update:page="fetchDuplicateUsers()"
+              @update:items-per-page="fetchDuplicateUsers()"
               :single-select="true"
             >
             <template v-slot:item.action="{ item }">
@@ -99,6 +104,10 @@ export default {
       csv: null,
       response: {},
       duplicateUsers: {
+         params: {
+          page: 1,
+          per_page: 10
+        },
         headers: [
           {
             text: "ID",
@@ -142,6 +151,9 @@ export default {
         .catch(err => {
           this.response = err.data;
         });
+    },
+    fetchDuplicateUsers() {
+      this.$store.dispatch("admin/checkDuplicateUsers", this.duplicateUsers.params);
     }
   }
   

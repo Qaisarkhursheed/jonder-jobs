@@ -16,5 +16,8 @@ export default {
   },
   duplicateUsers(state) {
     return state.duplicateUsers.items;
+  },
+  duplicateUsersMeta(state) {
+    return state.duplicateUsers.meta;
   }
 };

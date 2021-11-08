@@ -88,11 +88,16 @@ export default {
       .post("/admin/bulk-register", data);
   },
 
-  checkDuplicateUsers({ commit }) {
+  checkDuplicateUsers({ commit }, params) {
     return axios
-      .get("/admin/check-duplicates")
+      .get("/admin/check-duplicates", { params })
       .then(res => {
-        commit("SET_DUPLICATE_USERS", res.data.result)
+        commit("SET_DUPLICATE_USERS", res.data.data);
+        commit("SET_DUPLICATE_USERS_TOTAL", {
+          current_page: res.data.current_page,
+          total: res.data.total,
+          per_page: res.data.per_page
+        });
       })
   },
 
