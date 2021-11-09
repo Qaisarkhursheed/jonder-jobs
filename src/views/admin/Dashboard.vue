@@ -112,27 +112,38 @@ export default {
           {
             text: "ID",
             value: "id",
-            width: "10%"
+            width: "5%",
+            sortable: false
+          },
+          {
+            text: this.$t('firstName'),
+            value: 'first_name',
+            width: "25%",
+            sortable: false
+          },
+          {
+            text: this.$t('lastName'),
+            value: 'last_name',
+            width: "25%",
+            sortable: false
           },
           {
             text: this.$t('email'),
             value: "email",
-            width: "30%"
-          },
-          {
-            text: this.$t('createdAt'),
-            value: "created_at",
-            width: "30%"
+            width: "20%",
+            sortable: false
           },
           {
             text: this.$t('type'),
             value: "role",
-            width: "20%"
+            width: "20%",
+            sortable: false
           },
           {
             text: this.$t('delete'),
             value: "action",
-            width: "10%"
+            width: "5%",
+            sortable: false
           }
         ]
       },
