@@ -65,7 +65,14 @@
       ></v-text-field>
 
       <!-- Phone : TO BE REMOVED -->
-      <v-text-field
+      <div class="mb-7">
+        <vue-phone-number-input
+          v-model="phoneModel"
+          default-country-code="DE"
+          @update="e => formData.phone = e.formattedNumber"
+        />
+      </div>
+      <!-- <v-text-field
         v-model="formData.phone"
         placeholder="Telefonnummer"
         :rules="[validations.required, validations.phone]"
@@ -74,7 +81,7 @@
         dense
         outlined
         background-color="white"
-      ></v-text-field>
+      ></v-text-field> -->
 
       <!-- Password -->
       <v-text-field
@@ -209,7 +216,8 @@ export default {
       formLoading: false,
       formResponse: {},
       formValid: false,
-      captchaValid: false
+      captchaValid: false,
+      phoneModel: null
     };
   },
   methods: {

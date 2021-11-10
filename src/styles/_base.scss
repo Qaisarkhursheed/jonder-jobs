@@ -668,3 +668,19 @@ label {
     clear: both;
   }
 }
+
+.input-tel__input{
+  border-radius: 10px !important;
+  border: 1px solid #d4d4d4 !important;
+}
+
+.country-selector__input {
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  border: 1px solid #d4d4d4 !important;
+}
+
+.input-tel__input,
+.country-selector__input {
+  height: 48px !important;
+}

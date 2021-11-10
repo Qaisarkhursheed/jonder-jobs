@@ -60,13 +60,20 @@
       ></v-text-field>
 
       <!-- Phone number -->
-      <v-text-field
+      <div class="mb-7">
+        <vue-phone-number-input
+          v-model="phoneModel"
+          default-country-code="DE"
+          @update="e => formData.phone = e.formattedNumber"
+        />
+      </div>
+      <!-- <v-text-field
         v-model="formData.phone"
         placeholder="Telefonnummer"
         :rules="[validations.required, validations.phone]"
         hide-details="auto"
         outlined
-      ></v-text-field>
+      ></v-text-field> -->
 
       <!-- Password -->
       <v-text-field
@@ -207,7 +214,8 @@ export default {
       isValid: false,
       showPass: false,
       showPassConfirm: false,
-      captchaValid: false
+      captchaValid: false,
+      phoneModel: null
     };
   },
   methods: {
