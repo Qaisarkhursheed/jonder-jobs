@@ -95,6 +95,18 @@
         </v-btn>
 
         <v-btn
+          link
+          href="https://dev.api.jonder.devla.dev/api/v1/auth/linkedin"
+          outlined
+          color="primary"
+          class="full-w mt-4"
+          :disabled="!captchaValid"
+        >
+          <v-icon left>mdi-linkedin</v-icon>
+          {{ $t("continueWithLinkedin") }}
+        </v-btn>
+
+        <v-btn
           type="submit"
           class="full-w mt-5 dark-blue"
           :disabled="!formValid"
@@ -102,10 +114,10 @@
         >
           {{ $t("login") }}
         </v-btn>
-        <v-text-field 
-          v-model="captchaValid" 
+        <v-text-field
+          v-model="captchaValid"
           class="d-none"
-          :rules="[()=> captchaValid]"
+          :rules="[() => captchaValid]"
         >
         </v-text-field>
       </v-form>
@@ -121,23 +133,23 @@
         {{ $t("register") }}
       </router-link>
     </p>
-      <div :class="{ 'd-none': captchaValid }">
-        <vue-recaptcha 
-          :class="['d-flex justify-center']"
-          :sitekey="getCaptchaKey()"
-          @verify="captchaValid = true"
-          @expired="captchaValid = false"
-          @render="captchaValid = false"
-        >
-        </vue-recaptcha>
-      </div>
-      <div>
-        <LanguageDropdown
-          :attach="true"
-          class="mt-5 mx-auto"
-          style="max-width: 260px"
-        />
-      </div>
+    <div :class="{ 'd-none': captchaValid }">
+      <vue-recaptcha
+        :class="['d-flex justify-center']"
+        :sitekey="getCaptchaKey()"
+        @verify="captchaValid = true"
+        @expired="captchaValid = false"
+        @render="captchaValid = false"
+      >
+      </vue-recaptcha>
+    </div>
+    <div>
+      <LanguageDropdown
+        :attach="true"
+        class="mt-5 mx-auto"
+        style="max-width: 260px"
+      />
+    </div>
   </v-container>
 </template>
 
@@ -145,7 +157,7 @@
 import JonderTitle from "../parts/JonderTitle.vue";
 import ResponseAlert from "@/components/ResponseAlert";
 import LanguageDropdown from "@/components/LanguageDropdown";
-import VueRecaptcha from 'vue-recaptcha';
+import VueRecaptcha from "vue-recaptcha";
 
 export default {
   name: "AuthLogin",

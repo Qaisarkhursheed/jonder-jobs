@@ -127,6 +127,21 @@
           </v-btn>
 
           <v-btn
+            class="mb-3"
+            type="button"
+            color="primary"
+            height="55"
+            outlined
+            block
+            large
+            link
+            :href="linkedinUrl"
+          >
+            <v-icon left>mdi-linkedin</v-icon>
+            {{ $t("continueWithLinkedin") }}
+          </v-btn>
+
+          <v-btn
             @click="submit"
             type="button"
             color="primary"
@@ -187,6 +202,12 @@ export default {
     googleUrl() {
       const urlNumber = this.accountType === "jobseeker" ? 1 : 2;
       const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/google`;
+
+      return url;
+    },
+    linkedinUrl() {
+      const urlNumber = this.accountType === "jobseeker" ? 1 : 2;
+      const url = `${process.env.VUE_APP_API_BASE}/auth/${urlNumber}/linkedin`;
 
       return url;
     }
