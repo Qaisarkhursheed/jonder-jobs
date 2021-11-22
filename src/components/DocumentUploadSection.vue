@@ -90,6 +90,7 @@ export default {
         window.open(link, "_blank").focus();
       } else {
         this.inputData = null;
+        this.$emit('delete');
       }
     }
   },

@@ -333,6 +333,16 @@ export default {
     } catch (err) {
       return Promise.reject(err.response);
     }
+  },
+  async removeDocument(context, payload) {
+    try {
+      const resp = axios.patch(`/user/reset-docs/${payload.user}`, payload.documentType);
+      return resp;
+
+    } catch (err) {
+      return Promise.reject(err.response);
+    }
+
   }
 };
 

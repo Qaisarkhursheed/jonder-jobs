@@ -486,6 +486,7 @@
                 <template v-if="formData.cvmaker_file">
                   <DocumentUploadSection
                     @change="e => (formData.cvmaker_file = e[0])"
+                    @delete="removeDocument('cvmaker_file')"
                     type="Cv"
                     :value="formData.cvmaker_file"
                   />
@@ -493,6 +494,7 @@
                 <template v-else>
                   <DocumentUploadSection
                     @change="e => (formData.cv = e[0])"
+                    @delete="removeDocument('cv')"
                     type="Cv"
                     :value="formData.cv"
                   />
@@ -501,6 +503,7 @@
               <div class="document-wrap">
                 <DocumentUploadSection
                   @change="e => (formData.qualifications = e[0])"
+                  @delete="removeDocument('qualifications')"
                   type="Qualifications"
                   :value="formData.qualifications"
                 />
@@ -508,6 +511,7 @@
               <div class="document-wrap">
                 <DocumentUploadSection
                   @change="e => (formData.resume = e[0])"
+                  @delete="removeDocument('resume')"
                   type="Resume"
                   :value="formData.resume"
                 />
@@ -1021,6 +1025,12 @@ export default {
         params: {
           testid: id
         }
+      });
+    },
+    removeDocument(type) {
+      this.$store.dispatch('user/removeDocument', {
+        user: this.user.id,
+        documentType: type
       });
     }
   }
