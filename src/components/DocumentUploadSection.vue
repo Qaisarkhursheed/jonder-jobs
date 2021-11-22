@@ -43,7 +43,7 @@
                 @click="handleAction(item)"
               >
                 <v-list-item-title class="list-item">
-                  {{ item }}
+                  {{ $t(item.toLowerCase()) }}
                 </v-list-item-title>
               </v-list-item>
             </v-list>

@@ -668,5 +668,6 @@
   "supportedFileTypes": "Supported file types",
   "duplicatedUsersManagement": "Duplicated Users Management",
   "refresh": "Refresh",
-  "bulkUploadUsers": "Bulk upload users"
+  "bulkUploadUsers": "Bulk upload users",
+  "view": "View"
 }
