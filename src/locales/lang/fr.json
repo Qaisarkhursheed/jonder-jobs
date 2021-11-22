@@ -668,5 +668,6 @@
   "supportedFileTypes": "Types de fichiers pris en charge",
   "duplicatedUsersManagement": "Gestion des utilisateurs en double",
   "refresh": "Rafraîchir",
-  "bulkUploadUsers": "Téléchargement groupé d'utilisateurs"
+  "bulkUploadUsers": "Téléchargement groupé d'utilisateurs",
+  "view": "Vue"
 }

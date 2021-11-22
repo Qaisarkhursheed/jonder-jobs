@@ -669,5 +669,6 @@
   "supportedFileTypes": "Unterstützte Dateitypen",
   "duplicatedUsersManagement": "Verwaltung duplizierter Benutzer",
   "refresh": "Aktualisierung",
-  "bulkUploadUsers": "Bulk-Upload-Benutzer"
+  "bulkUploadUsers": "Bulk-Upload-Benutzer",
+  "view": "Ansehen"
 }
