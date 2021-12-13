@@ -23,6 +23,21 @@
           {{ idToString("JOB_POSITION", item.current_position) }}
         </span>
       </template>
+      <template #item.plan="{ item }">
+        <div 
+        v-for='plan in item.plan'
+        :key='plan.id'
+        >
+          <v-chip
+            v-if="plan"
+            class="pl-5 pr-5"
+            :color="plans[plan.plan_slug] && plans[plan.plan_slug].color ? plans[plan.plan_slug].color : '#ffffff'"
+            :text-color="plans[plan.plan_slug] && plans[plan.plan_slug].text ? plans[plan.plan_slug].text : '#000000'"
+          >
+            {{ plan && plan.name ? plan.name : '-'}}
+          </v-chip>
+        </div>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -46,19 +61,42 @@ export default {
         {
           text: this.$t('name'),
           value: "name",
-          width: "35%"
+          width: "30%"
         },
         {
           text: this.$t('address'),
           value: "address",
-          width: "35%"
+          width: "30%"
         },
         {
           text: this.$t('position'),
           value: "current_position",
-          width: "30%"
+          width: "20%"
         },
-      ]
+        {
+          text: this.$t('plan'),
+          value: "plan",
+          width: "20%"
+        },
+      ],
+      plans: {
+        basic: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        highlighted: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        "all-inclusive": {
+          color: "#E1F5FD",
+          text: "#4A4DE6",
+        },
+        premium: {
+          color: "#FBEDE7",
+          text: "#FF6422",
+        }
+      }
     }
   },
 

@@ -153,6 +153,62 @@
           </div>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <h3>{{ $t("subscriptionPlan") }}</h3>
+          <h4>{{ $t("activePlans") }}</h4>
+          <div class="mt-5" 
+        v-for='plan in user.plan'
+        :key='plan.id'
+        >
+          <v-chip
+            v-if="plan"
+            class="pl-5 pr-5"
+            :color="'#ffffff'"
+            :text-color="'#000000'"
+          >
+            {{ plan && plan.name ? plan.name : '-'}}
+          </v-chip>
+          <v-btn
+                :loading="formLoading"
+                depressed
+                color="primary"
+                class="px-5"
+                height="28"
+                @click="handlePlanRemove(plan.id)"
+                >{{ $t("cancelSubscription") }}
+              </v-btn>
+        </div>
+        <div class="mt-5">
+          <h3>Select new plan</h3>
+          <div>
+            <v-select
+              v-model="selectedNewPlan"
+              :items="plans"
+              :item-text="'name'"
+              :item-value="'id'"
+              v-on:change="changePlan"
+              label="Select new plan"
+              outlined
+              class="mt-1"
+            >
+            </v-select>
+          </div>
+          <div>
+            <v-btn
+                :loading="formLoading"
+                depressed
+                color="primary"
+                class="px-10"
+                height="48"
+                @click="handlePlanChange"
+                >{{ $t("save") }}
+              </v-btn>
+          </div>
+        </div>
+        </v-col>
+      </v-row>
+
     </v-card>
   </div>
 </template>
@@ -160,7 +216,7 @@
 <script>
 import axios from "axios";
 import types from "@/types";
-
+import { mapActions } from "vuex";
 export default {
   name: "JobseekerManagementUser",
 
@@ -172,14 +228,121 @@ export default {
 
   data() {
     return {
-      user: {}
+      selectedNewPlan: null,
+      user: {},
+      formLoading: false,
+      formResponse: {},
+      plans: [],
+      planColors: {
+        basic: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        highlighted: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        "all-inclusive": {
+          color: "#E1F5FD",
+          text: "#4A4DE6",
+        },
+        premium: {
+          color: "#FBEDE7",
+          text: "#FF6422",
+        }
+      }
     };
   },
 
   created() {
     axios.get(`/users/${this.id}`).then(res => {
       this.user = res.data.data;
+
+
+      axios.get(`/plan-packages`, {
+        params: {
+          per_page: 999,
+          plan_type:
+            this.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan"
+        }}).then(resPlans => {
+        this.plans = resPlans.data.data;
+      });
+      
     });
+  },
+  methods: {
+    ...mapActions("user", ["updateUserPlan"]),
+    changePlan(){
+      //console.log("changed plan", this.selectedNewPlan);
+    },
+    handlePlanRemove(planId) {
+      if (confirm('Are you sure you want to remove this subscription?')) {
+        this.formResponse = {};
+      let formData = {
+        user_id: parseInt(this.id),
+        plan_id: planId,
+        remove_plan: 1
+      }
+
+      
+      this.formLoading = true;
+      this.updateUserPlan(formData)
+        .then(resp => {
+          this.user = resp.data.data;
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
+        
+      }
+    },
+    handlePlanChange() {
+      if(!(this.selectedNewPlan > 0)){
+        alert("Please select the new plan for user!");
+      }else{
+        let blnActivePlan = false;
+        console.log(this.user);
+        if(this.user.plan){
+          let index = this.user.plan.findIndex((item) => {
+            return item.id === this.selectedNewPlan
+          });
+          if(index === -1){
+            blnActivePlan = false;
+          }else{
+            blnActivePlan = true;
+          }
+          console.log(index + " index");
+        }
+
+
+        if(blnActivePlan){
+          alert("Selected user is already using this plan!");
+        }else{
+      this.formResponse = {};
+      let formData = {
+        user_id: parseInt(this.id),
+        plan_id: this.selectedNewPlan
+      }
+
+      
+      this.formLoading = true;
+      this.updateUserPlan(formData)
+        .then(resp => {
+          this.user = resp.data.data;
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
+        
+      }
+      }
+    },
   },
   computed: {
     types() {
