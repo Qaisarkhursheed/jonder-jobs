@@ -6,7 +6,7 @@ import { findIndex } from "lodash";
 export default {
   me({ state, commit, dispatch }, force = false) {
     if (state.user && !force) {
-      return new Promise(resolve => resolve(state.user));
+      return new Promise((resolve) => resolve(state.user));
     }
 
     if (
@@ -18,7 +18,7 @@ export default {
 
     return axios
       .get("/me")
-      .then(response => {
+      .then((response) => {
         const user = response.data;
 
         if (user.locale) {
@@ -39,7 +39,7 @@ export default {
 
   async postOnboardingCompany({ commit, state }, data) {
     let formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] || data[key] == 0) {
         formData.append(key, data[key]);
       }
@@ -81,11 +81,11 @@ export default {
   getUser({ commit }, userId) {
     return axios
       .get("/users/" + userId)
-      .then(resp => {
+      .then((resp) => {
         if (resp.data) commit("SET_USER_DETAILS", resp.data);
         return resp;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting user details:", err);
       });
   },
@@ -106,13 +106,25 @@ export default {
       return Promise.reject(error.response);
     }
   },
+  async updateUserPlan({ commit }, data) {
+    let formData = serialize(data, { booleansAsIntegers: true });
+    //formData.append("_method", "PATCH");
+
+    try {
+      const resp = await axios.post("/admin/update-plan/", formData);
+      commit("SET_USER", resp.data.data);
+      return resp;
+    } catch (error) {
+      return Promise.reject(error.response);
+    }
+  },
   async changePassword(context, payload) {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -133,9 +145,9 @@ export default {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -156,9 +168,9 @@ export default {
     let formData = new FormData();
     let data = payload;
     if (data.data) data = data.data;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach(el => {
+        data[key].forEach((el) => {
           if (el && el !== null) formData.append(key + "[]", el);
         });
       } else {
@@ -177,12 +189,12 @@ export default {
   searchUsers({ dispatch }, payload) {
     return axios
       .get("/search/0/10?data=" + payload)
-      .then(res => {
+      .then((res) => {
         if (res.data.success)
-          return res.data.data.map(i => transformSearchResult(i, dispatch));
+          return res.data.data.map((i) => transformSearchResult(i, dispatch));
         return [];
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error getting search results: ", err);
         return [];
       });
@@ -299,8 +311,8 @@ export default {
         params: {
           per_page: 999,
           plan_type:
-            state.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan"
-        }
+            state.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan",
+        },
       });
       commit("SET_PLANS", resp.data.data);
       return resp;
@@ -318,7 +330,7 @@ export default {
       if (user.role === "Employer") {
         commit("SET_USER_SUBSCRIPTION_RENEWAL");
       } else {
-        const index = findIndex(user.plan, plan => plan.id === payload);
+        const index = findIndex(user.plan, (plan) => plan.id === payload);
         if (index >= 0) {
           commit("SET_USER_SUBSCRIPTION_RENEWAL", index);
         }
@@ -336,14 +348,15 @@ export default {
   },
   async removeDocument(context, payload) {
     try {
-      const resp = axios.patch(`/user/reset-docs/${payload.user}`, payload.documentType);
+      const resp = axios.patch(
+        `/user/reset-docs/${payload.user}`,
+        payload.documentType
+      );
       return resp;
-
     } catch (err) {
       return Promise.reject(err.response);
     }
-
-  }
+  },
 };
 
 const transformSearchResult = (user, dispatch) => {
@@ -353,6 +366,6 @@ const transformSearchResult = (user, dispatch) => {
       user.role === "user"
         ? user.first_name + " " + user.last_name
         : user.company,
-    id: user.id
+    id: user.id,
   };
 };
