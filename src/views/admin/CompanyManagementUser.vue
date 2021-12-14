@@ -108,6 +108,67 @@
             <v-text-field v-model="company.address" outlined readonly>
             </v-text-field>
           </div>
+      <div class="section" v-if="company.plan">
+            <label class="section-label">
+              {{ $t("subscriptionPlan") }}
+            </label>
+        <div class="d-flex justify-space-between">
+              <v-chip
+                v-if="company.plan"
+                class="pl-5 pr-5 font-weight-bold"
+                style="font-size: 16px;"
+                :color="'#ffffff'"
+                :text-color="'#000000'"
+              >
+                {{ company && company.plan && company.plan.name ? company.plan.name : '-'}}
+              </v-chip>
+              <p class="mt-1 mx-5"> 
+                {{ $t("price") }}:
+                {{ company && company.plan && company.plan.price }} €
+              </p>
+              <p class="mt-1 mx-5"> 
+                {{ $t("validUntil") }}:
+                {{ company && company.plan && company.plan.end_timestamp | moment("DD MMM, YYYY") }}
+              </p>
+              <v-btn
+                :loading="formLoading"
+                depressed
+                color="primary"
+                class="px-5 mt-1"
+                height="28"
+                @click="handlePlanRemove(company && company.plan && company.plan.id)"
+              >
+                {{ $t("cancelSubscription") }}
+              </v-btn>
+        </div>
+      </div>
+          <div class="mt-5">
+          <h3>{{ $t("selectNewPlan") }}</h3>
+          <div>
+            <v-select
+              v-model="selectedNewPlan"
+              :items="plans"
+              :item-text="'name'"
+              :item-value="'id'"
+              v-on:change="changePlan"
+              :label="$t('selectNewPlan')"
+              outlined
+              class="mt-1"
+            >
+            </v-select>
+          </div>
+          <div>
+            <v-btn
+                :loading="formLoading"
+                depressed
+                color="primary"
+                class="px-10"
+                height="48"
+                @click="handlePlanChange"
+                >{{ $t("save") }}
+              </v-btn>
+          </div>
+        </div>
         </v-col>
         <v-col cols="6">
           <!-- Web -->
@@ -145,7 +206,7 @@
 <script>
 import axios from "axios";
 import types from "@/types";
-
+import { mapActions } from "vuex";
 export default {
   name: "CompanyManagementUser",
 
@@ -158,14 +219,125 @@ export default {
   data() {
     return {
       company: {},
-      social: ["facebook", "instagram", "linkedin", "youtube", "twitter"]
+      social: ["facebook", "instagram", "linkedin", "youtube", "twitter"],
+      selectedNewPlan: null,
+      user: {},
+      formLoading: false,
+      formResponse: {},
+      plans: [],
+      planColors: {
+        basic: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        highlighted: {
+          color: "#F2E7FC",
+          text: "#8C18E2"
+        },
+        "all-inclusive": {
+          color: "#E1F5FD",
+          text: "#4A4DE6",
+        },
+        premium: {
+          color: "#FBEDE7",
+          text: "#FF6422",
+        }
+      }
+
     };
   },
   created() {
     axios.get(`/copmanies/${this.id}`).then(res => {
       this.company = res.data.data;
+      console.log("THis company", this.company)
+      // console.log("THis company id", this.company.plan.id)
+      // console.log("THis company name", this.company.plan.name)
+    axios.get(`/plan-packages`, {
+        params: {
+          per_page: 999,
+          plan_type:
+            this.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan"
+        }}).then(resPlans => {
+        this.plans = resPlans.data.data;
+      });
+
     });
   },
+  methods: {
+    ...mapActions("user", ["updateUserPlan"]),
+   changePlan(){
+      //console.log("changed plan", this.selectedNewPlan);
+    },
+    handlePlanRemove(planId) {
+      if (confirm('Are you sure you want to remove this subscription?')) {
+        this.formResponse = {};
+      let formData = {
+        user_id: parseInt(this.id),
+        plan_id: planId,
+        remove_plan: 1
+      }
+
+      
+      this.formLoading = true;
+      this.updateUserPlan(formData)
+        .then(resp => {
+          this.user = resp.data.data;
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
+        
+      }
+    },
+    handlePlanChange() {
+      if(!(this.selectedNewPlan > 0)){
+        alert("Please select the new plan for user!");
+      }else{
+        let blnActivePlan = false;
+        console.log(this.user);
+        if(this.user.plan){
+          let index = this.user.plan.findIndex((item) => {
+            return item.id === this.selectedNewPlan
+          });
+          if(index === -1){
+            blnActivePlan = false;
+          }else{
+            blnActivePlan = true;
+          }
+          console.log(index + " index");
+        }
+
+
+        if(blnActivePlan){
+          alert("Selected user is already using this plan!");
+        }else{
+      this.formResponse = {};
+      let formData = {
+        user_id: parseInt(this.id),
+        plan_id: this.selectedNewPlan
+      }
+
+      
+      this.formLoading = true;
+      this.updateUserPlan(formData)
+        .then(resp => {
+          this.user = resp.data.data;
+        })
+        .catch(err => {
+          this.formResponse = err.data;
+        })
+        .finally(() => {
+          this.formLoading = false;
+        });
+        
+      }
+      }
+    },
+  },
+
   computed: {
     types() {
       return types;

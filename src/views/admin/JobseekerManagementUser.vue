@@ -157,30 +157,35 @@
         <v-col cols="12">
           <h3>{{ $t("subscriptionPlan") }}</h3>
           <h4>{{ $t("activePlans") }}</h4>
-          <div class="mt-5" 
-        v-for='plan in user.plan'
-        :key='plan.id'
-        >
-          <v-chip
-            v-if="plan"
-            class="pl-5 pr-5"
-            :color="'#ffffff'"
-            :text-color="'#000000'"
+          <div class="mt-5 d-flex justify-space-between" 
+            v-for='plan in user.plan'
+            :key='plan.id'
           >
+              <v-chip
+                v-if="plan"
+                class="pl-5 pr-5 font-weight-bold"
+                style="font-size: 16px;"
+                :color="'#ffffff'"
+                :text-color="'#000000'"
+              >
             {{ plan && plan.name ? plan.name : '-'}}
           </v-chip>
+          <p class="mt-1 mx-5"> {{ $t("price") }}:
+          {{ plan.price }} €</p>
+          <p class="mt-1 mx-5"> {{ $t("validUntil") }}
+          {{ plan.end_timestamp | moment("DD MMM, YYYY") }}</p>
           <v-btn
                 :loading="formLoading"
                 depressed
                 color="primary"
-                class="px-5"
+                class="px-5 mt-1"
                 height="28"
                 @click="handlePlanRemove(plan.id)"
                 >{{ $t("cancelSubscription") }}
               </v-btn>
         </div>
         <div class="mt-5">
-          <h3>Select new plan</h3>
+          <h3>{{ $t("selectNewPlan") }}</h3>
           <div>
             <v-select
               v-model="selectedNewPlan"
@@ -188,7 +193,7 @@
               :item-text="'name'"
               :item-value="'id'"
               v-on:change="changePlan"
-              label="Select new plan"
+              :label="$t('selectNewPlan')"
               outlined
               class="mt-1"
             >
@@ -284,7 +289,7 @@ export default {
         remove_plan: 1
       }
 
-      
+
       this.formLoading = true;
       this.updateUserPlan(formData)
         .then(resp => {
@@ -296,7 +301,6 @@ export default {
         .finally(() => {
           this.formLoading = false;
         });
-        
       }
     },
     handlePlanChange() {
