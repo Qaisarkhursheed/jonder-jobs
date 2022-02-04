@@ -670,7 +670,9 @@
   "areYouSureCancelSubscription": "Are you sure that you want to cancel subscription?",
   "supportedFileTypes": "Supported file types",
   "duplicatedUsersManagement": "Duplicated Users Management",
+  "duplicatedJobBranchesManagement": "Duplicated Job Branches",
   "refresh": "Refresh",
   "bulkUploadUsers": "Bulk upload users",
+  "bulkUploadJobBranches": "Bulk-Upload-Job-Branches",
   "view": "View"
 }

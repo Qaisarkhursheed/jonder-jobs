@@ -1,6 +1,6 @@
 export default {
   SET_CMS_LISTS(state, value) {
-    state.cms = {...state.cms, ...value};
+    state.cms = { ...state.cms, ...value };
   },
   SET_CMS_LIST_TYPE(state, value) {
     state.cms[value.type].meta = value.data.meta;
@@ -23,5 +23,11 @@ export default {
   },
   SET_DUPLICATE_USERS_TOTAL(state, value) {
     state.duplicateUsers.meta = value;
-  }
+  },
+  SET_DUPLICATE_JOB_BRANCHES(state, value) {
+    state.duplicateJobBranches.items = value;
+  },
+  SET_DUPLICATE_JOB_BRANCHES_TOTAL(state, value) {
+    state.duplicateJobBranches.meta = value;
+  },
 };

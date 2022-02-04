@@ -670,7 +670,9 @@
   "areYouSureCancelSubscription": "Êtes-vous sûr de vouloir annuler l'abonnement?",
   "supportedFileTypes": "Types de fichiers pris en charge",
   "duplicatedUsersManagement": "Gestion des utilisateurs en double",
+  "duplicatedJobBranchesManagement": "Verwaltung duplizierter Job Branchen",
   "refresh": "Rafraîchir",
   "bulkUploadUsers": "Téléchargement groupé d'utilisateurs",
+  "bulkUploadJobBranches": "Bulk-Upload-Job-Branches",
   "view": "Vue"
 }

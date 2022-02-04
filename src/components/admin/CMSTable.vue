@@ -1,9 +1,13 @@
 <template>
   <v-data-table
+    v-model="selected"
+    @input="enterSelect()"
     :headers="headers"
     :items="$store.getters['admin/cmsLists'][type].items"
     :server-items-length="$store.getters['admin/cmsLists'][type].meta.total"
     :items-per-page.sync="params.per_page"
+    show-select
+    :single-select="false"
     :page.sync="params.page"
     @update:page="fetchListType()"
     @update:items-per-page="fetchListType()"
@@ -19,6 +23,17 @@
           {{ cardTitle }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
+
+        <v-btn
+        v-if="selected.length > 0" 
+              color="primary"
+              dark
+              v-on:click="removeSelected"
+            >
+              Remove selected
+            </v-btn>
+        <v-spacer></v-spacer>
+
         <v-dialog
           v-model="dialog"
           max-width="500px"
@@ -33,6 +48,7 @@
               New Item
             </v-btn>
           </template>
+          
           <v-card>
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
@@ -112,6 +128,17 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogDeleteSelected" max-width="500px">
+          <v-card>
+            <v-card-title class="text-h5">{{ $t("deleteThisItem") }}</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="closeDeleteSelected">{{ $t("cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteSelectedItemConfirm">{{ $t("ok") }}</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -164,6 +191,9 @@ export default {
       },
       dialog: false,
       dialogDelete: false,
+      dialogDeleteSelected: false,
+      singleSelect: false,
+      selected: [],
       headers: [
         {
           text: 'ID',
@@ -212,6 +242,9 @@ export default {
     dialogDelete (val) {
       val || this.closeDelete()
     },
+    dialogDeleteSelected (val) {
+      val || this.closeDeleteSelected()
+    },
     list(val) {
       this.items = val || [];
     }
@@ -223,11 +256,24 @@ export default {
   },
 
   methods: {
+
+    removeSelected: function () {
+    this.dialogDeleteSelected = true;  
+    },
     initialize () {
       this.items = this.$store.getters['admin/cmsLists'][this.type].items;
       this.params.type = this.type;
     },
+enterSelect() {
 
+/*
+  console.log(this.selected);
+  console.log(this.items.length);
+    if (this.selected.length == this.items.length) {
+      alert('selected all')
+    }
+    */
+  },
     editItem (item) {
       this.editedItem = Object.assign({}, item);
       this.editing = true;
@@ -246,6 +292,20 @@ export default {
       });
       this.closeDelete();
     },
+    deleteSelectedItemConfirm () {
+      let selected = [];
+      this.selected.map((e)=>{
+        selected.push(e.id);
+      })
+      
+      store.dispatch("admin/cmsDeleteSelectedListItem", {
+        items: selected,
+        params: this.params 
+      });
+      
+      this.closeDeleteSelected();
+    },
+    
 
     close () {
       this.dialog = false;
@@ -260,6 +320,9 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
       });
+    },
+    closeDeleteSelected () {
+      this.dialogDeleteSelected = false;
     },
 
     save () {
