@@ -2,31 +2,35 @@ export default {
   cms: {
     employement_type: {
       meta: {},
-      items: []
+      items: [],
     },
     job_branches: {
       meta: {},
-      items: []
+      items: [],
     },
     job_positions: {
       meta: {},
-      items: []
+      items: [],
     },
     employee_number: {
       meta: {},
-      items: []
-    }
+      items: [],
+    },
   },
   jobseeker_management: {
     users: [],
-    total: 0
+    total: 0,
   },
   company_management: {
     users: [],
-    total: 0
+    total: 0,
   },
   duplicateUsers: {
     items: [],
-    meta: {}
-  }
+    meta: {},
+  },
+  duplicateJobBranches: {
+    items: [],
+    meta: {},
+  },
 };

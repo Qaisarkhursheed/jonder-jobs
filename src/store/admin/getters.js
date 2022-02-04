@@ -1,6 +1,6 @@
 export default {
   cmsLists(state) {
-    return state.cms; 
+    return state.cms;
   },
   companies(state) {
     return state.company_management.users;
@@ -19,5 +19,11 @@ export default {
   },
   duplicateUsersMeta(state) {
     return state.duplicateUsers.meta;
-  }
+  },
+  duplicateJobBranches(state) {
+    return state.duplicateJobBranches.items;
+  },
+  duplicateJobBranchesMeta(state) {
+    return state.duplicateJobBranches.meta;
+  },
 };

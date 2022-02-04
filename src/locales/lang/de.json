@@ -671,7 +671,9 @@
   "areYouSureCancelSubscription": "Sind Sie sicher, dass Sie das Abonnement kündigen möchten?",
   "supportedFileTypes": "Unterstützte Dateitypen",
   "duplicatedUsersManagement": "Verwaltung duplizierter Benutzer",
+  "duplicatedJobBranchesManagement": "Verwaltung duplizierter Job Branchen",
   "refresh": "Aktualisierung",
   "bulkUploadUsers": "Bulk-Upload-Benutzer",
+  "bulkUploadJobBranches": "Bulk-Upload-Job-Branches",
   "view": "Ansehen"
 }
