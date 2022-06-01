@@ -72,7 +72,7 @@
 
         <v-btn
           link
-          href="https://dev.api.jonder.devla.dev/api/v1/auth/google"
+          href="https://api.jonder.jobs/api/v1/auth/google"
           outlined
           color="primary"
           class="full-w mt-2"
@@ -84,7 +84,7 @@
 
         <v-btn
           link
-          href="https://dev.api.jonder.devla.dev/api/v1/auth/facebook"
+          href="https://api.jonder.jobs/api/v1/auth/facebook"
           outlined
           color="primary"
           class="full-w mt-4"
@@ -96,7 +96,7 @@
 
         <v-btn
           link
-          href="https://dev.api.jonder.devla.dev/api/v1/auth/linkedin"
+          href="https://api.jonder.jobs/api/v1/auth/linkedin"
           outlined
           color="primary"
           class="full-w mt-4"
