@@ -22,7 +22,7 @@
                   v-model="user.first_name"
                   type="text"
                   outlined
-                  readonly
+                  
                 />
               </div>
             </v-col>
@@ -35,7 +35,7 @@
                   v-model="user.last_name"
                   type="text"
                   outlined
-                  readonly
+                  
                 />
               </div>
             </v-col>
@@ -46,7 +46,7 @@
                 <label class="section-label">
                   {{ $t("aboutMe") }}
                 </label>
-                <v-textarea v-model="user.about_me" outlined readonly />
+                <v-textarea v-model="user.about_me" outlined  />
               </div>
             </v-col>
           </v-row>
@@ -60,20 +60,20 @@
               v-model="user.address"
               type="text"
               outlined
-              readonly
+              
             />
           </div>
           <div class="section">
             <label class="section-label">
               {{ $t("emailAddress") }}
             </label>
-            <v-text-field v-model="user.email" type="email" outlined readonly />
+            <v-text-field v-model="user.email" type="email" outlined  />
           </div>
           <div class="section">
             <label class="section-label">
               {{ $t("phone") }}
             </label>
-            <v-text-field v-model="user.phone" type="text" outlined readonly />
+            <v-text-field v-model="user.phone" type="text" outlined  />
           </div>
         </v-col>
       </v-row>
@@ -90,7 +90,7 @@
               :item-text="$i18n.locale"
               type="text"
               outlined
-              readonly
+              
             />
           </div>
           <div class="section">
@@ -108,7 +108,7 @@
               multiple
               :placeholder="$t('detailsAboutYouBranchesPlace')"
               class="mt-1"
-              readonly
+              
             >
             </v-autocomplete>
           </div>
@@ -129,7 +129,7 @@
               outlined
               flat
               class="mt-1"
-              readonly
+              
             >
             </v-autocomplete>
           </div>
@@ -146,7 +146,7 @@
               :placeholder="$t('lookingForEmployementPlace')"
               outlined
               multiple
-              readonly
+              
               class="mt-1"
             >
             </v-select>
@@ -190,6 +190,7 @@
             <v-select
               v-model="selectedNewPlan"
               :items="plans"
+              :selectable="() => selectedNewPlan ==null ? true : false"
               :item-text="'name'"
               :item-value="'id'"
               v-on:change="changePlan"
@@ -271,6 +272,7 @@ export default {
             this.user.role == "Jobseeker" ? "jobseeker_plan" : "employer_plan"
         }}).then(resPlans => {
         this.plans = resPlans.data.data;
+        console.log(this.plans, 'this.plans')
       });
       
     });
@@ -328,7 +330,8 @@ export default {
       this.formResponse = {};
       let formData = {
         user_id: parseInt(this.id),
-        plan_id: this.selectedNewPlan
+        plan_id: this.selectedNewPlan,
+        user: this.user
       }
 
       
